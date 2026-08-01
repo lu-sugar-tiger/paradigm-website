@@ -1,0 +1,139 @@
+/* Header */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 48px 16px 0px;
+gap: 10px;
+
+position: relative;
+width: 402px;
+height: 100px;
+
+background: #FFFFFF;
+
+
+/* PARADIGM */
+
+width: 268px;
+height: 23px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 800;
+font-size: 20px;
+line-height: 23px;
+display: flex;
+align-items: center;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* search */
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Bounding box */
+
+position: absolute;
+width: 24px;
+height: 24px;
+left: 294px;
+top: 62px;
+
+background: #D9D9D9;
+
+
+/* search */
+
+position: absolute;
+left: 73.98%;
+right: 21.74%;
+top: 65.38%;
+bottom: 17.42%;
+
+background: #000000;
+
+
+/* shopping_bag */
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Bounding box */
+
+position: absolute;
+width: 24px;
+height: 24px;
+left: 328px;
+top: 62px;
+
+background: #D9D9D9;
+
+
+/* shopping_bag */
+
+position: absolute;
+left: 82.71%;
+right: 13.56%;
+top: 64.5%;
+bottom: 16.5%;
+
+background: #000000;
+
+
+/* menu */
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Bounding box */
+
+position: absolute;
+width: 24px;
+height: 24px;
+left: 362px;
+top: 62px;
+
+background: #D9D9D9;
+
+
+/* menu */
+
+position: absolute;
+left: 90.92%;
+right: 4.85%;
+top: 68.37%;
+bottom: 20.37%;
+
+background: #000000;

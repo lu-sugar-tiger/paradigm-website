@@ -1,0 +1,52 @@
+:root {
+  --color-bg: #f5f3ef;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f0efec;
+  --color-text: #171717;
+  --color-text-muted: #7f7f7f;
+  --color-border: #ddd8d0;
+  --color-border-strong: #a9a39b;
+  --color-footer: #434343;
+  --color-footer-text: #f7f4ef;
+  --color-accent: #2d231d;
+  --color-accent-soft: #ded6cb;
+  --color-shadow: rgba(25, 25, 25, 0.08);
+
+  --font-sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --font-brand: "Roboto", "Noto Sans TC", sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.375rem;
+  --text-xl: clamp(2.2rem, 7vw, 3.5rem);
+  --text-hero: clamp(2.8rem, 11vw, 5rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.75rem;
+  --radius-pill: 999px;
+
+  --border-hairline: 1px solid var(--color-border);
+  --shadow-card: 0 20px 40px var(--color-shadow);
+
+  --content-width: 72rem;
+  --content-narrow: 58rem;
+  --header-height: 6.25rem;
+  --transition-base: 180ms ease;
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --header-height: 6.75rem;
+  }
+}
