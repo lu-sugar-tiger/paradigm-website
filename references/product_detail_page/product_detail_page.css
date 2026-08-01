@@ -1,0 +1,2136 @@
+/* Paste Figma-exported CSS for product_detail_page here. */
+/* iPhone 17 - 2 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+isolation: isolate;
+
+position: relative;
+width: 402px;
+height: 2396px;
+overflow-y: scroll;
+
+background: #F7F7F7;
+
+
+/* Header */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 48px 16px 0px;
+gap: 10px;
+
+width: 402px;
+height: 100px;
+
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+z-index: 5;
+
+
+/* PARADIGM */
+
+width: 268px;
+height: 23px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 800;
+font-size: 20px;
+line-height: 23px;
+display: flex;
+align-items: center;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* search */
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Bounding box */
+
+position: absolute;
+width: 24px;
+height: 24px;
+left: 294px;
+top: 62px;
+
+background: #D9D9D9;
+
+
+/* search */
+
+position: absolute;
+left: 73.98%;
+right: 21.74%;
+top: 65.38%;
+bottom: 17.42%;
+
+background: #000000;
+
+
+/* shopping_bag */
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Bounding box */
+
+position: absolute;
+width: 24px;
+height: 24px;
+left: 328px;
+top: 62px;
+
+background: #D9D9D9;
+
+
+/* shopping_bag */
+
+position: absolute;
+left: 82.71%;
+right: 13.56%;
+top: 64.5%;
+bottom: 16.5%;
+
+background: #000000;
+
+
+/* menu */
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Bounding box */
+
+position: absolute;
+width: 24px;
+height: 24px;
+left: 362px;
+top: 62px;
+
+background: #D9D9D9;
+
+
+/* menu */
+
+position: absolute;
+left: 90.92%;
+right: 4.85%;
+top: 68.37%;
+bottom: 20.37%;
+
+background: #000000;
+
+
+/* Item Headline */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 16px;
+gap: 8px;
+
+width: 402px;
+height: 48px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+z-index: 4;
+
+
+/* All */
+
+width: 15px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+
+color: #808080;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* > */
+
+width: 7px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+
+color: #808080;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* AW Tops */
+
+width: 48px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+
+color: #808080;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* > */
+
+width: 7px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+
+color: #808080;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Hoodie */
+
+width: 41px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+
+color: #808080;
+
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+flex-grow: 0;
+
+
+/* Product Post */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+width: 402px;
+height: 1651px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+z-index: 3;
+
+
+/* Product Photo Carousel */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+
+width: 402px;
+height: 402px;
+overflow-x: scroll;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Rectangle 3 */
+
+width: 402px;
+height: 402px;
+
+background: url(#BD24021-C61_Mockups_1-Front@1440px.jpg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Rectangle 4 */
+
+width: 402px;
+height: 402px;
+
+background: url(#BD24021-C61_Mockups_2-Back@1440px.jpg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Rectangle 5 */
+
+width: 402px;
+height: 402px;
+
+background: url(#BD24021-C61_Mockups_3-Detail@1440px.jpg);
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Rectangle 6 */
+
+width: 402px;
+height: 402px;
+
+background: url(#BD24021-C61_Mockups_4-Detail@1440px.jpg);
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Rectangle 7 */
+
+width: 402px;
+height: 402px;
+
+background: url(DSC09076[1.0.0]_Square@1440px.jpg);
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+flex-grow: 0;
+
+
+/* Rectangle 8 */
+
+width: 402px;
+height: 402px;
+
+background: url(DSC09079[1.0.0]_Square@1440px.jpg);
+
+/* Inside auto layout */
+flex: none;
+order: 5;
+flex-grow: 0;
+
+
+/* Rectangle 9 */
+
+width: 402px;
+height: 402px;
+
+background: url(DSC09083[1.0.0]_Square@1440px.jpg);
+
+/* Inside auto layout */
+flex: none;
+order: 6;
+flex-grow: 0;
+
+
+/* Product Description */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 16px;
+gap: 16px;
+
+width: 402px;
+height: 1249px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Product Name & Product Price */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+
+width: 370px;
+height: 17px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* PRDM Cosmos Hoodie */
+
+width: 320px;
+height: 17px;
+
+/* Paradigm/Title/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 17px;
+/* identical to box height */
+display: flex;
+align-items: center;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* NT$1380 */
+
+width: 50px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+text-align: right;
+
+color: #808080;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Product Color */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 8px;
+
+width: 370px;
+height: 56px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* 61 Midnight */
+
+width: 370px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+
+color: #808080;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Product Color Circle */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-end;
+padding: 0px;
+gap: 8px;
+
+width: 370px;
+height: 32px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Product Color */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 4px;
+gap: 10px;
+
+width: 32px;
+height: 32px;
+
+border: 1px solid #BFBFBF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Rectangle 8 */
+
+margin: 0 auto;
+width: 24px;
+height: 24px;
+
+background: #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Product Color */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 4px;
+gap: 10px;
+
+width: 32px;
+height: 32px;
+
+border: 1px solid #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Rectangle 8 */
+
+margin: 0 auto;
+width: 24px;
+height: 24px;
+
+background: #000E57;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Product Color */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 4px;
+gap: 10px;
+
+width: 32px;
+height: 32px;
+
+background: #DFDFDF;
+border: 1px solid #DFDFDF;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Rectangle 8 */
+
+margin: 0 auto;
+width: 24px;
+height: 24px;
+
+background: #808080;
+opacity: 0.5;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Product Color */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 4px;
+gap: 10px;
+
+width: 32px;
+height: 32px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Rectangle 8 */
+
+margin: 0 auto;
+width: 24px;
+height: 24px;
+
+opacity: 0.5;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Product Color */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 4px;
+gap: 10px;
+
+width: 32px;
+height: 32px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+flex-grow: 0;
+
+
+/* Rectangle 8 */
+
+margin: 0 auto;
+width: 24px;
+height: 24px;
+
+opacity: 0.5;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Product Size */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 16px 0px 0px;
+gap: 8px;
+
+width: 370px;
+height: 48px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Product Size */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+padding: 0px;
+
+width: 67.6px;
+height: 32px;
+
+border: 1px solid #BFBFBF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* M */
+
+margin: 0 auto;
+width: 67.6px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Product Size */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+padding: 0px;
+
+width: 67.6px;
+height: 32px;
+
+border: 1px solid #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 1;
+
+
+/* M */
+
+margin: 0 auto;
+width: 67.6px;
+height: 16px;
+
+/* Paradigm/Body/Bold */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 700;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Product Size */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+padding: 0px;
+
+width: 67.6px;
+height: 32px;
+
+background: #DFDFDF;
+border: 1px solid #DFDFDF;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 1;
+
+
+/* M */
+
+margin: 0 auto;
+width: 67.6px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #808080;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Product Size */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+padding: 0px;
+
+width: 67.6px;
+height: 32px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 1;
+
+
+/* M */
+
+margin: 0 auto;
+width: 67.6px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+text-align: center;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Product Size */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+padding: 0px;
+
+width: 67.6px;
+height: 32px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+flex-grow: 1;
+
+
+/* M */
+
+margin: 0 auto;
+width: 67.6px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+text-align: center;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Product Description */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 16px 0px;
+
+width: 370px;
+height: 1048px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Product Description */
+
+width: 370px;
+height: 1016px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* or 133% */
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Bundle Product Carousel */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 2px;
+
+width: 402px;
+height: 257px;
+overflow-x: scroll;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+align-self: stretch;
+flex-grow: 0;
+z-index: 2;
+
+
+/* Product Card */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 8px;
+gap: 8px;
+
+width: 200px;
+height: 257px;
+
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Product Photo */
+
+width: 184px;
+height: 184px;
+
+background: url(#GM42023-C22_ProductPhoto_1-Front[1.1.0]@1440px.jpg);
+border-radius: 0px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Product Name & Product Price */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px 8px 8px;
+gap: 8px;
+
+width: 184px;
+height: 49px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Everyday Tee */
+
+width: 168px;
+height: 17px;
+
+/* Paradigm/Title/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 17px;
+/* identical to box height */
+display: flex;
+align-items: center;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* NT$590 */
+
+width: 168px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+text-align: right;
+
+color: #808080;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Product Card */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 8px;
+gap: 8px;
+
+width: 200px;
+height: 257px;
+
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Product Photo */
+
+width: 184px;
+height: 184px;
+
+background: url(#AE14008-C0109_Mockups@2250px.jpg);
+border-radius: 0px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Product Name & Product Price */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px 8px 8px;
+gap: 8px;
+
+width: 184px;
+height: 49px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Everyday Tee */
+
+width: 168px;
+height: 17px;
+
+/* Paradigm/Title/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 17px;
+/* identical to box height */
+display: flex;
+align-items: center;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* NT$590 */
+
+width: 168px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+text-align: right;
+
+color: #808080;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Product Card */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 8px;
+gap: 8px;
+
+width: 200px;
+height: 257px;
+
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Product Photo */
+
+width: 184px;
+height: 184px;
+
+background: url(#BT24020-C0161_Mockups@1440px.jpg);
+border-radius: 0px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Product Name & Product Price */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px 8px 8px;
+gap: 8px;
+
+width: 184px;
+height: 49px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Everyday Tee */
+
+width: 168px;
+height: 17px;
+
+/* Paradigm/Title/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 17px;
+/* identical to box height */
+display: flex;
+align-items: center;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* NT$590 */
+
+width: 168px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+text-align: right;
+
+color: #808080;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Product Card */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 8px;
+gap: 8px;
+
+width: 200px;
+height: 257px;
+
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Product Photo */
+
+width: 184px;
+height: 184px;
+
+background: url(#GM42023-C22_ProductPhoto_1-Front[1.1.0]@1440px.jpg);
+border-radius: 0px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Product Name & Product Price */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px 8px 8px;
+gap: 8px;
+
+width: 184px;
+height: 49px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Everyday Tee */
+
+width: 168px;
+height: 17px;
+
+/* Paradigm/Title/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 17px;
+/* identical to box height */
+display: flex;
+align-items: center;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* NT$590 */
+
+width: 168px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+text-align: right;
+
+color: #808080;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Product Card */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 8px;
+gap: 8px;
+
+width: 200px;
+height: 257px;
+
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+flex-grow: 0;
+
+
+/* Product Photo */
+
+width: 184px;
+height: 184px;
+
+background: url(#AE14008-C0109_Mockups@2250px.jpg);
+border-radius: 0px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Product Name & Product Price */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px 8px 8px;
+gap: 8px;
+
+width: 184px;
+height: 49px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Everyday Tee */
+
+width: 168px;
+height: 17px;
+
+/* Paradigm/Title/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 17px;
+/* identical to box height */
+display: flex;
+align-items: center;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* NT$590 */
+
+width: 168px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+text-align: right;
+
+color: #808080;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Footer */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+align-items: center;
+padding: 64px 0px 0px;
+gap: 32px;
+
+width: 402px;
+height: 340px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+align-self: stretch;
+flex-grow: 0;
+z-index: 1;
+
+
+/* Frame 5 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 64px;
+gap: 32px;
+
+width: 402px;
+height: 276px;
+
+background: #404040;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Frame 3 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 16px;
+
+width: 274px;
+height: 80px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Frame 1 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 16px;
+
+width: 173px;
+height: 80px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* Privacy Policy */
+
+width: 78px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Term of Use */
+
+width: 66px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Sales and Refunds */
+
+width: 103px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Frame 4 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 16px;
+
+width: 85px;
+height: 80px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Frame 2 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 8px;
+
+width: 85px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* globe */
+
+width: 20px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Bounding box */
+
+position: absolute;
+width: 20px;
+height: 20px;
+left: 0px;
+top: -2px;
+
+background: #D9D9D9;
+
+
+/* globe */
+
+position: absolute;
+left: 2.84%;
+right: 79.31%;
+top: 2.6%;
+bottom: 2.6%;
+
+background: #FFFFFF;
+
+
+/* Shopee */
+
+width: 43px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 3 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 8px;
+
+width: 85px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* globe_asia */
+
+width: 20px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Bounding box */
+
+position: absolute;
+width: 20px;
+height: 20px;
+left: 0px;
+top: -2px;
+
+background: #D9D9D9;
+
+
+/* globe_asia */
+
+position: absolute;
+left: 2.77%;
+right: 79.39%;
+top: 2.6%;
+bottom: 2.6%;
+
+background: #FFFFFF;
+
+
+/* Instagram */
+
+width: 57px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 4 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 8px;
+
+width: 85px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* globe_uk */
+
+width: 20px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Bounding box */
+
+position: absolute;
+width: 20px;
+height: 20px;
+left: 0px;
+top: -2px;
+
+background: #D9D9D9;
+
+
+/* globe_uk */
+
+position: absolute;
+left: 2.84%;
+right: 79.31%;
+top: 2.6%;
+bottom: 2.6%;
+
+background: #FFFFFF;
+
+
+/* Discord */
+
+width: 43px;
+height: 16px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* PARADIGM Co., Ltd. Copyright © 2026　All Rights Reserved. */
+
+width: 274px;
+height: 36px;
+
+/* Paradigm/Body/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+/* or 133% */
+display: flex;
+align-items: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Button */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 16px 32px;
+gap: 8px;
+
+position: absolute;
+height: 52px;
+left: 0px;
+right: 0px;
+bottom: 0px;
+
+background: #202020;
+
+/* Inside auto layout */
+flex: none;
+order: 5;
+flex-grow: 0;
+z-index: 0;
+
+
+/* shopping_bag */
+
+width: 20px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Bounding box */
+
+position: absolute;
+width: 20px;
+height: 20px;
+left: 135.5px;
+top: 16px;
+
+background: #D9D9D9;
+
+
+/* shopping_bag */
+
+position: absolute;
+left: 34.81%;
+right: 62.42%;
+top: 35.42%;
+bottom: 35.42%;
+
+background: #FFFFFF;
+
+
+/* Label */
+
+width: 103px;
+height: 17px;
+
+/* Paradigm/Label/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 17px;
+/* identical to box height */
+display: flex;
+align-items: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;

@@ -1,0 +1,351 @@
+/* Paste Figma-exported CSS for side_menu here. */
+/* iPhone 17 - 3 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px;
+
+position: relative;
+width: 402px;
+height: 874px;
+
+background: #FFFFFF;
+
+
+/* Header */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 48px 16px 0px;
+gap: 10px;
+
+width: 402px;
+height: 100px;
+
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* PARADIGM */
+
+width: 268px;
+height: 23px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 800;
+font-size: 20px;
+line-height: 23px;
+display: flex;
+align-items: center;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* search */
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Bounding box */
+
+position: absolute;
+width: 24px;
+height: 24px;
+left: 294px;
+top: 62px;
+
+background: #D9D9D9;
+
+
+/* search */
+
+position: absolute;
+left: 73.98%;
+right: 21.74%;
+top: 65.38%;
+bottom: 17.42%;
+
+
+
+/* shopping_bag */
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Bounding box */
+
+position: absolute;
+width: 24px;
+height: 24px;
+left: 328px;
+top: 62px;
+
+background: #D9D9D9;
+
+
+/* shopping_bag */
+
+position: absolute;
+left: 82.71%;
+right: 13.56%;
+top: 64.5%;
+bottom: 16.5%;
+
+
+
+/* close */
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Bounding box */
+
+position: absolute;
+width: 24px;
+height: 24px;
+left: 362px;
+top: 62px;
+
+background: #D9D9D9;
+
+
+/* close */
+
+position: absolute;
+left: 91.38%;
+right: 5.31%;
+top: 67.35%;
+bottom: 19.35%;
+
+background: #000000;
+
+
+/* Frame 6 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 32px;
+gap: 32px;
+
+width: 402px;
+height: 444px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Products */
+
+width: 338px;
+height: 26px;
+
+/* Paradigm/Display/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 700;
+font-size: 22px;
+line-height: 26px;
+display: flex;
+align-items: center;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* SS Tops */
+
+width: 338px;
+height: 26px;
+
+/* Paradigm/Display/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 700;
+font-size: 22px;
+line-height: 26px;
+display: flex;
+align-items: center;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* AW Tops */
+
+width: 338px;
+height: 26px;
+
+/* Paradigm/Display/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 700;
+font-size: 22px;
+line-height: 26px;
+display: flex;
+align-items: center;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Outerwear */
+
+width: 338px;
+height: 26px;
+
+/* Paradigm/Display/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 700;
+font-size: 22px;
+line-height: 26px;
+display: flex;
+align-items: center;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Bottoms */
+
+width: 338px;
+height: 26px;
+
+/* Paradigm/Display/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 700;
+font-size: 22px;
+line-height: 26px;
+display: flex;
+align-items: center;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Segment */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 16px 0px;
+
+width: 338px;
+height: 32px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 5;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Line 2 */
+
+width: 338px;
+height: 0px;
+
+border: 1px solid #808080;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Teamwear */
+
+width: 338px;
+height: 26px;
+
+/* Paradigm/Display/Normal */
+font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 700;
+font-size: 22px;
+line-height: 26px;
+display: flex;
+align-items: center;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 6;
+align-self: stretch;
+flex-grow: 0;

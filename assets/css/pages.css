@@ -1,0 +1,221 @@
+.home-hero .hero__visual {
+  padding: 1rem;
+}
+
+.home-collection-grid .product-card__media {
+  aspect-ratio: 1 / 1.05;
+}
+
+.teamwear-hero {
+  padding-top: 3rem;
+}
+
+.teamwear-hero .hero__title {
+  max-width: 10ch;
+  font-size: clamp(2.5rem, 11vw, 5rem);
+  color: var(--color-accent);
+}
+
+.teamwear-hero .hero__visual {
+  background:
+    radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.88), transparent 26%),
+    linear-gradient(180deg, #f7f3ed 8%, #cfc3b4 58%, #3f403a 100%);
+}
+
+.teamwear-caption {
+  margin-bottom: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.product-page .product-grid .product-card__media {
+  aspect-ratio: 1 / 1.05;
+}
+
+.about-copy {
+  max-width: 42rem;
+  display: grid;
+  gap: var(--space-4);
+  color: var(--color-text-muted);
+}
+
+.reference-page {
+  background: #f7f7f7;
+}
+
+.reference-page .page {
+  width: min(100%, 402px);
+  margin: 0 auto;
+  background: #f7f7f7;
+}
+
+.reference-page .site-header {
+  left: 50%;
+  width: min(100%, 402px);
+  transform: translateX(-50%);
+}
+
+.reference-page .site-footer {
+  width: min(100%, 402px);
+  margin-inline: auto;
+}
+
+.product-page .section--tight {
+  padding: 0;
+}
+
+.product-page .auto-grid {
+  gap: 1px;
+  background: #dfdfdf;
+}
+
+.reference-page--detail .page-headline,
+.reference-page--teamwear .page-headline {
+  background: #f7f7f7;
+}
+
+.reference-page--detail .breadcrumb,
+.reference-page--teamwear .teamwear-caption {
+  min-height: 48px;
+  padding: 16px;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.reference-page--detail .section-heading,
+.reference-page--teamwear .section-heading {
+  margin-bottom: 16px;
+}
+
+.reference-page--detail .section.section--tight {
+  padding-block: 0;
+}
+
+.reference-page--detail .section-heading__eyebrow,
+.reference-page--teamwear .section-heading__eyebrow {
+  font-size: 12px;
+  line-height: 16px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.reference-page--detail .section-heading h2,
+.reference-page--teamwear .section-heading h2 {
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.reference-page--detail .product-detail__summary .stack-md,
+.reference-page--detail .product-copy {
+  gap: 16px;
+}
+
+.reference-page--detail [data-product-category] {
+  display: none;
+}
+
+.reference-page--detail .product-detail__summary {
+  background: #f7f7f7;
+}
+
+.reference-page--detail .product-detail__gallery,
+.reference-page--detail .product-detail__gallery img {
+  background: #fff;
+}
+
+.reference-page--detail .size-table {
+  margin-top: -2px;
+}
+
+.reference-page--detail .marquee-strip {
+  width: 402px;
+}
+
+.reference-page--teamwear .hero {
+  padding: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, #f7f7f7 0%, #f1f0eb 36%, #1d2a2d 100%);
+}
+
+.reference-page--teamwear .hero::before {
+  display: none;
+}
+
+.reference-page--teamwear .hero__content {
+  gap: 0;
+}
+
+.reference-page--teamwear .hero__visual {
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.reference-page--teamwear .hero__visual img {
+  border-radius: 0;
+}
+
+.reference-page--teamwear .teamwear-hero .stack-md {
+  gap: 8px;
+  padding: 16px 16px 0;
+}
+
+.reference-page--teamwear .teamwear-hero .hero__title {
+  max-width: 7ch;
+  color: #3d2d22;
+  font-size: 28px;
+  line-height: 0.94;
+}
+
+.reference-page--teamwear .teamwear-hero .hero__copy {
+  max-width: 220px;
+  color: #6f6861;
+  font-size: 9px;
+  line-height: 11px;
+}
+
+.reference-page--teamwear .teamwear-hero .hero__visual {
+  margin-top: -18px;
+}
+
+.reference-page--teamwear .teamwear-hero .hero__visual img {
+  display: block;
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: 402 / 612;
+  object-fit: contain;
+  object-position: center top;
+}
+
+.reference-page--teamwear .section.section--tight {
+  padding-top: 32px;
+}
+
+.reference-page--teamwear .section-heading {
+  display: grid;
+  justify-content: center;
+  text-align: center;
+  gap: 4px;
+}
+
+.reference-page--teamwear .section-heading p {
+  max-width: none;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.reference-page--teamwear .spec-list,
+.reference-page--teamwear .faq-card {
+  background: #f7f7f7;
+}
+
+.reference-page--teamwear .feature-panel,
+.reference-page--teamwear .cta-panel,
+.reference-page--teamwear .faq-card,
+.reference-page--teamwear .spec-card {
+  border-radius: 0;
+}
