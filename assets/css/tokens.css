@@ -1,13 +1,13 @@
 :root {
-  --color-bg: #f5f3ef;
+  --color-bg: #f7f7f7;
   --color-surface: #ffffff;
-  --color-surface-muted: #f0efec;
-  --color-text: #171717;
-  --color-text-muted: #7f7f7f;
-  --color-border: #ddd8d0;
-  --color-border-strong: #a9a39b;
-  --color-footer: #434343;
-  --color-footer-text: #f7f4ef;
+  --color-surface-muted: #dfdfdf;
+  --color-text: #000000;
+  --color-text-muted: #808080;
+  --color-border: #dfdfdf;
+  --color-border-strong: #bfbfbf;
+  --color-footer: #404040;
+  --color-footer-text: #ffffff;
   --color-accent: #2d231d;
   --color-accent-soft: #ded6cb;
   --color-shadow: rgba(25, 25, 25, 0.08);
@@ -31,7 +31,7 @@
   --space-7: 3rem;
   --space-8: 4rem;
 
-  --radius-sm: 0.5rem;
+  --radius-sm: 0.25rem;
   --radius-md: 1rem;
   --radius-lg: 1.75rem;
   --radius-pill: 999px;
@@ -39,7 +39,7 @@
   --border-hairline: 1px solid var(--color-border);
   --shadow-card: 0 20px 40px var(--color-shadow);
 
-  --content-width: 72rem;
+  --content-width: 75rem;
   --content-narrow: 58rem;
   --header-height: 6.25rem;
   --transition-base: 180ms ease;
@@ -47,6 +47,6 @@
 
 @media (min-width: 64rem) {
   :root {
-    --header-height: 6.75rem;
+    --header-height: 5rem;
   }
 }

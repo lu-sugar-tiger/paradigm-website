@@ -1,11 +1,15 @@
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   min-height: 100vh;
   overflow-x: clip;
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans);
-  line-height: 1.45;
-  letter-spacing: -0.02em;
+  line-height: 1.3333;
+  letter-spacing: 0;
 }
 
 main {

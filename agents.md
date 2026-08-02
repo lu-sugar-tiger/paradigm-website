@@ -32,7 +32,7 @@ The current goal is to build a low-cost, maintainable, Shopify-ready frontend wi
 
 The website should support:
 
-- homepage editorial content
+- collection-led editorial content
 - collections
 - products
 - product detail pages
@@ -61,7 +61,7 @@ Use component boundaries that map naturally to Shopify concepts:
 
 - Header → section
 - Footer → section
-- Hero → section
+- Collection headline → section
 - Editorial content block → section
 - Product grid → section
 - Product card → snippet
@@ -74,16 +74,16 @@ Do not introduce complexity only for a possible future migration. Prioritize cle
 
 # Information architecture
 
-Prefer URL structures that can later map cleanly to Shopify:
+Use these stable public URL structures so they can later map cleanly to Shopify:
 
-- `/`
-- `/collections/`
-- `/collections/{collection-slug}/`
-- `/products/{product-slug}/`
+- `/` redirects to `/collections/all`
+- `/collections/{collection-name}`
+- `/products/{product-number}`
 - `/lookbook/`
 - `/lookbook/{collection-slug}/`
-- `/pages/teamwear/`
-- `/pages/about/`
+- `/teamwear`
+
+Do not include `index.html` in public links, canonical URLs, or navigation. The static files may still use directory-level `index.html` files internally.
 
 Avoid unnecessary URL changes once pages are published.
 
@@ -94,6 +94,7 @@ Avoid unnecessary URL changes once pages are published.
 - Do not duplicate the same product data across multiple HTML files.
 - Each product should support:
   - slug
+  - product number
   - title
   - category
   - price
@@ -125,7 +126,6 @@ Prefer reusable structures and consistent class names for:
 - header
 - desktop navigation
 - mobile navigation drawer
-- hero
 - collection headline
 - product grid
 - product card
@@ -227,10 +227,9 @@ Prioritize:
 4. footer
 5. reusable editorial sections
 6. product grid and product cards
-7. homepage shell
-8. collection page shell
-9. product detail page shell
-10. Teamwear page shell
+7. collection page shell
+8. product detail page shell
+9. Teamwear page shell
 
 Use placeholder images and content where final material is unavailable.
 

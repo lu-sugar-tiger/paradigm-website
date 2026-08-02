@@ -1,11 +1,3 @@
-.home-hero .hero__visual {
-  padding: 1rem;
-}
-
-.home-collection-grid .product-card__media {
-  aspect-ratio: 1 / 1.05;
-}
-
 .teamwear-hero {
   padding-top: 3rem;
 }
@@ -30,10 +22,6 @@
   letter-spacing: 0.1em;
 }
 
-.product-page .product-grid .product-card__media {
-  aspect-ratio: 1 / 1.05;
-}
-
 .about-copy {
   max-width: 42rem;
   display: grid;
@@ -46,20 +34,17 @@
 }
 
 .reference-page .page {
-  width: min(100%, 402px);
+  width: min(100%, var(--content-width));
   margin: 0 auto;
   background: #f7f7f7;
 }
 
 .reference-page .site-header {
-  left: 50%;
-  width: min(100%, 402px);
-  transform: translateX(-50%);
+  width: 100%;
 }
 
 .reference-page .site-footer {
-  width: min(100%, 402px);
-  margin-inline: auto;
+  width: 100%;
 }
 
 .product-page .section--tight {
@@ -67,7 +52,7 @@
 }
 
 .product-page .auto-grid {
-  gap: 1px;
+  gap: 2px;
   background: #dfdfdf;
 }
 
@@ -112,12 +97,30 @@
   gap: 16px;
 }
 
+.reference-page--detail .product-detail__summary .stack-md > div:last-child > .product-detail__label {
+  display: none;
+}
+
+.reference-page--detail .product-detail__summary > .stack-md > .product-detail__label {
+  display: none;
+}
+
+.reference-page--detail .size-row {
+  padding-top: 16px;
+}
+
 .reference-page--detail [data-product-category] {
   display: none;
 }
 
 .reference-page--detail .product-detail__summary {
+  align-content: start;
+  min-height: 1249px;
   background: #f7f7f7;
+}
+
+.reference-page--detail .size-table thead th:first-child {
+  color: transparent;
 }
 
 .reference-page--detail .product-detail__gallery,
@@ -130,7 +133,7 @@
 }
 
 .reference-page--detail .marquee-strip {
-  width: 402px;
+  width: 100%;
 }
 
 .reference-page--teamwear .hero {
@@ -185,10 +188,9 @@
 .reference-page--teamwear .teamwear-hero .hero__visual img {
   display: block;
   width: 100%;
-  min-height: 0;
-  aspect-ratio: 402 / 612;
-  object-fit: contain;
-  object-position: center top;
+  height: 520px;
+  object-fit: cover;
+  object-position: center bottom;
 }
 
 .reference-page--teamwear .section.section--tight {
@@ -218,4 +220,60 @@
 .reference-page--teamwear .faq-card,
 .reference-page--teamwear .spec-card {
   border-radius: 0;
+}
+
+@media (min-width: 48rem) {
+  .reference-page {
+    background: #ececea;
+  }
+
+  .reference-page .page {
+    box-shadow: 0 0 0 1px rgba(23, 23, 23, 0.035);
+  }
+
+  .reference-page--detail .product-detail__panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(20rem, 0.92fr);
+    align-items: start;
+    background: var(--color-surface);
+  }
+
+  .reference-page--detail .product-detail__gallery {
+    position: sticky;
+    top: var(--header-height);
+  }
+
+  .reference-page--detail .product-detail__summary {
+    min-height: 100%;
+    padding: 32px;
+  }
+
+  .reference-page--teamwear .hero__content {
+    grid-template-columns: minmax(16rem, 0.72fr) minmax(0, 1.28fr);
+    align-items: center;
+  }
+
+  .reference-page--teamwear .teamwear-hero .stack-md {
+    padding: 48px 0 48px 48px;
+  }
+
+  .reference-page--teamwear .teamwear-hero .hero__title {
+    max-width: 9ch;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  .reference-page--teamwear .teamwear-hero .hero__copy {
+    max-width: 28rem;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .reference-page--teamwear .teamwear-hero .hero__visual {
+    margin-top: 0;
+  }
+
+  .reference-page--teamwear .teamwear-hero .hero__visual img {
+    height: min(65vw, 760px);
+    object-position: center 74%;
+  }
 }

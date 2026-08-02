@@ -1,8 +1,11 @@
 .site-shell {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .page {
+  flex: 1 0 auto;
   padding-top: var(--header-height);
 }
 
@@ -42,7 +45,7 @@
 
 .reference-page .container,
 .reference-page .container--narrow {
-  width: min(100%, 402px);
+  width: min(100%, var(--content-width));
 }
 
 .split {

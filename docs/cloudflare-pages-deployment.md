@@ -45,17 +45,20 @@ http://localhost:8000/
 至少檢查這些頁面：
 
 - `http://localhost:8000/`
-- `http://localhost:8000/collections/`
-- `http://localhost:8000/products/prdm-cosmos-hoodie/`
-- `http://localhost:8000/pages/teamwear/`
-- `http://localhost:8000/pages/about/`
+- `http://localhost:8000/collections/all/`
+- `http://localhost:8000/collections/core/`
+- `http://localhost:8000/collections/capsule/`
+- `http://localhost:8000/products/BD24021/`
+- `http://localhost:8000/teamwear/`
+
+根網址應導向 `/collections/all`，且瀏覽器網址不應包含 `index.html`。
 
 確認後把要上線的內容 commit 並 push 到 GitHub。
 
 建議正式部署 branch 使用：
 
 ```text
-master
+main
 ```
 
 ## Cloudflare Pages 建立專案
@@ -69,7 +72,7 @@ Workers & Pages → Create application → Pages → Connect to Git
 選擇 GitHub repository：
 
 ```text
-Risetto-Kao/paradigm
+lu-sugar-tiger/paradigm-website
 ```
 
 如果 Cloudflare 還沒有 GitHub 權限，授權時建議只允許存取這個 repository。
@@ -79,8 +82,8 @@ Risetto-Kao/paradigm
 因為這個專案沒有 build tool，Cloudflare Pages 設定如下：
 
 ```text
-Project name: paradigm
-Production branch: master
+Project name: paradigm-website（新專案建議；既有 Cloudflare project 可保留原名）
+Production branch: main
 Framework preset: None
 Build command: 留空
 Build output directory: /
@@ -108,8 +111,10 @@ Cloudflare Pages project 建立完成後，先確認 Cloudflare 提供的預覽�
 預覽網址通常類似：
 
 ```text
-https://paradigm.pages.dev
+https://paradigm-website.pages.dev
 ```
+
+既有 Cloudflare Pages project 的 `pages.dev` 網址不會因 GitHub repository 改名而自動變更；請以 Dashboard 顯示的網址為準。
 
 確認可正常開啟後，到 Pages project 裡新增自訂網域：
 
@@ -130,7 +135,7 @@ Cloudflare 會自動建立或提示需要的 DNS record。
 ```text
 Type: CNAME
 Name: prdm.tw
-Target: paradigm.pages.dev
+Target: <Cloudflare Pages project>.pages.dev
 Proxy status: Proxied
 ```
 
@@ -151,7 +156,7 @@ www.prdm.tw
 位置：
 
 ```text
-GitHub → Risetto-Kao/paradigm → Settings → Pages
+GitHub → lu-sugar-tiger/paradigm-website → Settings → Pages
 ```
 
 如果 GitHub Pages 已經因 private repository billing limitation 被停用，不需要額外處理。
@@ -164,11 +169,14 @@ Cloudflare Pages 部署完成後，檢查：
 
 ```text
 https://prdm.tw/
-https://prdm.tw/collections/
-https://prdm.tw/products/prdm-cosmos-hoodie/
-https://prdm.tw/pages/teamwear/
-https://prdm.tw/pages/about/
+https://prdm.tw/collections/all
+https://prdm.tw/collections/core
+https://prdm.tw/collections/capsule
+https://prdm.tw/products/BD24021
+https://prdm.tw/teamwear
 ```
+
+`https://prdm.tw/` 應回應永久 redirect 到 `https://prdm.tw/collections/all`。其他對外網址也不應包含 `index.html`。
 
 也可以用 terminal 檢查 response header：
 
@@ -192,7 +200,7 @@ x-github-edge-region
 1. 在本機修改 HTML、CSS、JS 或圖片
 2. 用 `python3 -m http.server 8000` 本機檢查
 3. commit 變更
-4. push 到 `master`
+4. push 到 `main`
 5. Cloudflare Pages 自動部署
 6. 到 Cloudflare Pages deployment 頁面確認狀態成功
 7. 開啟 `https://prdm.tw/` 檢查正式站
@@ -202,7 +210,7 @@ x-github-edge-region
 如果部署後發現問題，可以到：
 
 ```text
-Cloudflare Dashboard → Workers & Pages → paradigm → Deployments
+Cloudflare Dashboard → Workers & Pages → 目前的 Paradigm project → Deployments
 ```
 
 選擇上一個正常版本，執行 rollback。
