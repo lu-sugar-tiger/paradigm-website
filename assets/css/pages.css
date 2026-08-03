@@ -30,13 +30,13 @@
 }
 
 .reference-page {
-  background: #f7f7f7;
+  background: var(--color-background-mid);
 }
 
 .reference-page .page {
-  width: min(100%, var(--content-width));
-  margin: 0 auto;
-  background: #f7f7f7;
+  width: 100%;
+  margin: 0;
+  background: var(--color-background-mid);
 }
 
 .reference-page .site-header {
@@ -53,12 +53,12 @@
 
 .product-page .auto-grid {
   gap: 2px;
-  background: #dfdfdf;
+  background: var(--color-outline-low);
 }
 
 .reference-page--detail .page-headline,
 .reference-page--teamwear .page-headline {
-  background: #f7f7f7;
+  background: var(--color-background-mid);
 }
 
 .reference-page--detail .breadcrumb,
@@ -116,20 +116,16 @@
 .reference-page--detail .product-detail__summary {
   align-content: start;
   min-height: 1249px;
-  background: #f7f7f7;
-}
-
-.reference-page--detail .size-table thead th:first-child {
-  color: transparent;
+  background: var(--color-surface-mid);
 }
 
 .reference-page--detail .product-detail__gallery,
 .reference-page--detail .product-detail__gallery img {
-  background: #fff;
+  background: var(--color-surface-high);
 }
 
 .reference-page--detail .size-table {
-  margin-top: -2px;
+  margin-top: 0;
 }
 
 .reference-page--detail .marquee-strip {
@@ -212,7 +208,7 @@
 
 .reference-page--teamwear .spec-list,
 .reference-page--teamwear .faq-card {
-  background: #f7f7f7;
+  background: var(--color-surface-mid);
 }
 
 .reference-page--teamwear .feature-panel,
@@ -223,29 +219,40 @@
 }
 
 @media (min-width: 48rem) {
-  .reference-page {
-    background: #ececea;
-  }
-
-  .reference-page .page {
-    box-shadow: 0 0 0 1px rgba(23, 23, 23, 0.035);
-  }
-
   .reference-page--detail .product-detail__panel {
     display: grid;
-    grid-template-columns: minmax(0, 1.08fr) minmax(20rem, 0.92fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: start;
     background: var(--color-surface);
   }
 
   .reference-page--detail .product-detail__gallery {
-    position: sticky;
-    top: var(--header-height);
+    position: static;
+    display: grid;
+    gap: 0;
+    aspect-ratio: auto;
+    overflow: visible;
+    scroll-snap-type: none;
+    overscroll-behavior-inline: auto;
+  }
+
+  .reference-page--detail .product-detail__gallery img {
+    flex: none;
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
   }
 
   .reference-page--detail .product-detail__summary {
     min-height: 100%;
     padding: 32px;
+  }
+
+  .reference-page--detail .product-detail__actions {
+    position: static;
   }
 
   .reference-page--teamwear .hero__content {

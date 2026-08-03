@@ -19,7 +19,7 @@
 <body class="site-shell reference-page reference-page--detail" data-root="../..">
   <header class="site-header">
     <div class="container site-header__inner">
-      <a class="site-logo" href="/collections/all" aria-label="Browse all Paradigm products">PARADIGM</a>
+      <a class="site-logo" href="/" aria-label="Paradigm home">PARADIGM</a>
       <div class="site-actions" aria-label="Quick actions">
         <button class="icon-button" type="button" aria-label="Search">
           <svg aria-hidden="true" viewBox="0 0 24 24">
@@ -51,9 +51,14 @@
       </button>
       <nav class="drawer-nav" aria-label="Mobile navigation">
         <ul role="list">
-          <li><a href="/collections/all">All Products</a></li>
-          <li><a href="/collections/core">Core</a></li>
-          <li><a href="/collections/capsule">Capsule</a></li>
+          <li>
+            <a href="/collections/all">All</a>
+            <ul class="drawer-nav__subcollections" role="list">
+              <li><a href="/collections/ss-tops">SS Tops</a></li>
+              <li><a href="/collections/aw-tops">AW Tops</a></li>
+              <li><a href="/collections/bottoms">Bottoms</a></li>
+            </ul>
+          </li>
         </ul>
         <div class="drawer-nav__divider"></div>
         <ul role="list">
@@ -69,7 +74,7 @@
         <nav class="breadcrumb" aria-label="Breadcrumb">
           <a href="/collections/all">All</a>
           <span>&gt;</span>
-          <a href="/collections/all?category=AW%20Tops" data-product-breadcrumb-category>AW Tops</a>
+          <a href="/collections/aw-tops" data-product-breadcrumb-category>AW Tops</a>
           <span>&gt;</span>
           <span data-product-breadcrumb-title>Intelligence Hoodie</span>
         </nav>
@@ -102,33 +107,38 @@
               </div>
             </div>
 
-            <div class="product-copy">
-              <ul data-product-bullets></ul>
-              <div data-product-description></div>
-            </div>
-
-            <div class="stack-md">
-              <p class="product-detail__label">Measurement (cm)</p>
-              <table class="size-table">
-                <thead>
-                  <tr>
-                    <th scope="col">Size</th>
-                    <th scope="col">M</th>
-                    <th scope="col">L</th>
-                    <th scope="col">XL</th>
-                  </tr>
-                </thead>
-                <tbody data-product-measurements></tbody>
-              </table>
-            </div>
-
-            <div class="product-fit-guide" data-product-fit-guide></div>
-            <p class="product-code" data-product-code>#PL-003</p>
             <div class="button-row product-detail__actions">
               <a class="button" href="https://shopee.tw/" target="_blank" rel="noopener noreferrer" data-product-shopee>
                 <span data-product-shopee-label>Buy on Shopee</span>
                 <svg aria-hidden="true"><use href="../../assets/svg/icons.svg#icon-external"></use></svg>
               </a>
+            </div>
+
+            <div class="product-copy">
+              <div data-product-bullets></div>
+              <div class="product-copy__line product-copy__blank-line">&nbsp;</div>
+              <div data-product-description></div>
+              <div class="product-copy__line product-copy__blank-line">&nbsp;</div>
+              <div class="product-copy__line product-copy__separator">-</div>
+              <div class="product-copy__line product-copy__blank-line">&nbsp;</div>
+              <div class="product-copy__measurements">
+                <table class="size-table">
+                  <thead>
+                    <tr>
+                      <th scope="col" aria-label="Measurement"></th>
+                      <th scope="col">M</th>
+                      <th scope="col">L</th>
+                      <th scope="col">XL</th>
+                      <th scope="col" aria-label="Unit"></th>
+                    </tr>
+                  </thead>
+                  <tbody data-product-measurements></tbody>
+                </table>
+              </div>
+              <div class="product-copy__line product-copy__blank-line">&nbsp;</div>
+              <div class="product-fit-guide" data-product-fit-guide></div>
+              <div class="product-copy__line product-copy__blank-line">&nbsp;</div>
+              <div class="product-code product-copy__line" data-product-code>#PL-003</div>
             </div>
           </article>
         </div>

@@ -46,12 +46,13 @@ http://localhost:8000/
 
 - `http://localhost:8000/`
 - `http://localhost:8000/collections/all/`
-- `http://localhost:8000/collections/core/`
-- `http://localhost:8000/collections/capsule/`
+- `http://localhost:8000/collections/ss-tops/`
+- `http://localhost:8000/collections/aw-tops/`
+- `http://localhost:8000/collections/bottoms/`
 - `http://localhost:8000/products/BD24021/`
 - `http://localhost:8000/teamwear/`
 
-根網址應導向 `/collections/all`，且瀏覽器網址不應包含 `index.html`。
+根網址應直接顯示與 `/collections/all` 相同的全部商品內容，不應重新導向，且瀏覽器網址不應包含 `index.html`。
 
 確認後把要上線的內容 commit 並 push 到 GitHub。
 
@@ -170,13 +171,14 @@ Cloudflare Pages 部署完成後，檢查：
 ```text
 https://prdm.tw/
 https://prdm.tw/collections/all
-https://prdm.tw/collections/core
-https://prdm.tw/collections/capsule
+https://prdm.tw/collections/ss-tops
+https://prdm.tw/collections/aw-tops
+https://prdm.tw/collections/bottoms
 https://prdm.tw/products/BD24021
 https://prdm.tw/teamwear
 ```
 
-`https://prdm.tw/` 應回應永久 redirect 到 `https://prdm.tw/collections/all`。其他對外網址也不應包含 `index.html`。
+`https://prdm.tw/` 應直接回應全部商品頁並保留根網址；`https://prdm.tw/collections/all` 也應提供相同內容。其他對外網址不應包含 `index.html`。
 
 也可以用 terminal 檢查 response header：
 

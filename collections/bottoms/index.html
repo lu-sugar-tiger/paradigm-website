@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Paradigm | Core Collection</title>
-  <meta name="description" content="Browse the Paradigm Core collection.">
-  <link rel="canonical" href="https://prdm.tw/collections/core">
+  <title>Paradigm | Bottoms</title>
+  <meta name="description" content="Browse Paradigm Bottoms.">
+  <link rel="canonical" href="https://prdm.tw/collections/bottoms">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/tokens.css">
   <link rel="stylesheet" href="../../assets/css/reset.css">
@@ -19,7 +19,7 @@
 <body class="site-shell reference-page product-page" data-root="../..">
   <header class="site-header">
     <div class="container site-header__inner">
-      <a class="site-logo" href="/collections/all" aria-label="Browse all Paradigm products">PARADIGM</a>
+      <a class="site-logo" href="/" aria-label="Paradigm home">PARADIGM</a>
       <div class="site-actions" aria-label="Quick actions">
         <button class="icon-button" type="button" aria-label="Search">
           <svg aria-hidden="true" viewBox="0 0 24 24">
@@ -51,9 +51,14 @@
       </button>
       <nav class="drawer-nav" aria-label="Mobile navigation">
         <ul role="list">
-          <li><a href="/collections/all">All Products</a></li>
-          <li><a href="/collections/core" aria-current="page">Core</a></li>
-          <li><a href="/collections/capsule">Capsule</a></li>
+          <li>
+            <a href="/collections/all">All</a>
+            <ul class="drawer-nav__subcollections" role="list">
+              <li><a href="/collections/ss-tops">SS Tops</a></li>
+              <li><a href="/collections/aw-tops">AW Tops</a></li>
+              <li><a href="/collections/bottoms" aria-current="page">Bottoms</a></li>
+            </ul>
+          </li>
         </ul>
         <div class="drawer-nav__divider"></div>
         <ul role="list">
@@ -67,7 +72,11 @@
     <section class="page-headline">
       <div class="container">
         <div class="filter-bar">
-          <h1>Core collection</h1>
+          <nav class="breadcrumb collection-breadcrumb" aria-label="Breadcrumb">
+            <a href="/collections/all">All</a>
+            <span aria-hidden="true">&gt;</span>
+            <h1>Bottoms</h1>
+          </nav>
           <button class="filter-button" type="button" aria-label="Filter products">
             <svg aria-hidden="true" viewBox="0 0 24 24">
               <path d="M4 6h16M7 12h10M10 18h4"></path>
@@ -82,8 +91,8 @@
 
     <section class="section section--tight">
       <div class="container">
-        <div class="auto-grid product-grid" data-product-grid data-collection="core"></div>
-        <noscript><p class="noscript-note">請啟用 JavaScript 以載入商品卡片。</p></noscript>
+        <div class="auto-grid product-grid" data-product-grid data-category="Bottoms"></div>
+        <noscript><p class="noscript-note">Enable JavaScript to view the product catalog.</p></noscript>
       </div>
     </section>
   </main>

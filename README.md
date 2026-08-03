@@ -4,8 +4,9 @@ Paradigm 是一個純靜態的品牌商品網站，使用 HTML、CSS 與 Vanilla
 
 目前網站以商品瀏覽為核心：
 
-- 根網址 `/` 會導向 `/collections/all`
+- 根網址 `/` 直接顯示與 `/collections/all` 相同的全部商品頁，不改寫瀏覽器網址
 - Collection 頁面展示全部商品或指定系列
+- `All` 是商品目錄的上層；`SS Tops`、`AW Tops`、`Bottoms` 均提供直接返回 `All` 的導覽
 - Product 頁面以商品編號作為穩定網址
 - Teamwear 頁面介紹團隊服服務並導向外部詢問管道
 - 購買按鈕導向 Shopee，不在網站內處理交易
@@ -17,10 +18,11 @@ Paradigm 是一個純靜態的品牌商品網站，使用 HTML、CSS 與 Vanilla
 正式公開網址不包含 `index.html`：
 
 ```text
-https://prdm.tw/                         → /collections/all
+https://prdm.tw/                         （全部商品首頁）
 https://prdm.tw/collections/all
-https://prdm.tw/collections/core
-https://prdm.tw/collections/capsule
+https://prdm.tw/collections/ss-tops
+https://prdm.tw/collections/aw-tops
+https://prdm.tw/collections/bottoms
 https://prdm.tw/products/BD24021
 https://prdm.tw/products/PL-002
 https://prdm.tw/teamwear
@@ -28,7 +30,7 @@ https://prdm.tw/teamwear
 
 Collection 使用系列名稱，Product 使用不含 `#` 的商品編號。`#` 在網址中代表 fragment，因此只保留在畫面顯示的商品代碼中。
 
-每個資料夾內的 `index.html` 是靜態 hosting 的實作方式，不應出現在網站導覽、canonical URL 或對外分享連結中。Cloudflare Pages 的 `_redirects` 會把根網址與舊網址導向新的 canonical route。
+每個資料夾內的 `index.html` 是靜態 hosting 的實作方式，不應出現在網站導覽、canonical URL 或對外分享連結中。根網址會直接提供全部商品內容；Cloudflare Pages 的 `_redirects` 只用於整理舊網址與含有 `index.html` 的網址。
 
 ## 本機開啟方式
 
@@ -45,11 +47,12 @@ cd paradigm-website
 python -m http.server 8000
 ```
 
-打開 `http://localhost:8000/` 後，瀏覽器會導向商品列表。常用頁面：
+打開 `http://localhost:8000/` 後即可看到商品列表，且根網址會保持不變。常用頁面：
 
 - 全部商品：`http://localhost:8000/collections/all/`
-- Core 系列：`http://localhost:8000/collections/core/`
-- Capsule 系列：`http://localhost:8000/collections/capsule/`
+- SS Tops：`http://localhost:8000/collections/ss-tops/`
+- AW Tops：`http://localhost:8000/collections/aw-tops/`
+- Bottoms：`http://localhost:8000/collections/bottoms/`
 - 商品詳情：`http://localhost:8000/products/BD24021/`
 - Teamwear：`http://localhost:8000/teamwear/`
 
@@ -59,12 +62,13 @@ python -m http.server 8000
 
 ```text
 .
-├── index.html                  # 根網址的 fallback redirect
+├── index.html                  # 根網址的全部商品頁
 ├── _redirects                 # Cloudflare Pages redirects
 ├── collections/
 │   ├── all/index.html
-│   ├── core/index.html
-│   └── capsule/index.html
+│   ├── ss-tops/index.html
+│   ├── aw-tops/index.html
+│   └── bottoms/index.html
 ├── products/
 │   ├── BD24021/index.html
 │   ├── PL-002/index.html
@@ -88,7 +92,6 @@ python -m http.server 8000
   productNumber: "PL-002",
   title: "Training Shorts",
   category: "Bottoms",
-  collection: "Core",
   price: "NT$1180",
   image: "assets/svg/shorts.svg",
   alt: "Dark training shorts placeholder artwork",
@@ -106,7 +109,7 @@ python -m http.server 8000
 常用欄位：
 
 - `productNumber`：網址與資料查找使用的商品編號，不含 `#`
-- `title`、`category`、`collection`、`price`：商品基本資料
+- `title`、`category`、`price`：商品基本資料
 - `image`、`alt`：商品圖片與替代文字
 - `colors`、`sizes`、`measurements`、`fitGuide`：款式與尺寸資料
 - `bullets`、`description`：商品內容
@@ -150,7 +153,7 @@ Repository：`https://github.com/lu-sugar-tiger/paradigm-website`
 
 ## 上線前檢查
 
-- `/` 會導向 `/collections/all`
+- `/` 與 `/collections/all` 會顯示相同的全部商品內容，且 `/` 不會重新導向
 - Collection、每個 Product 與 Teamwear 頁面都可正常開啟
 - 網站內沒有導向 `index.html`、舊 `/pages/...` 或 query-string 商品網址的連結
 - 手機與桌面寬度沒有水平捲動

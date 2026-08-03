@@ -76,12 +76,17 @@ Do not introduce complexity only for a possible future migration. Prioritize cle
 
 Use these stable public URL structures so they can later map cleanly to Shopify:
 
-- `/` redirects to `/collections/all`
-- `/collections/{collection-name}`
+- `/` displays the same all-products catalog as `/collections/all` without redirecting
+- `/collections/all`
+- `/collections/ss-tops`
+- `/collections/aw-tops`
+- `/collections/bottoms`
 - `/products/{product-number}`
 - `/lookbook/`
 - `/lookbook/{collection-slug}/`
 - `/teamwear`
+
+Treat `All` as the parent catalog view. `SS Tops`, `AW Tops`, and `Bottoms` are subcollections and should provide a direct path back to `/collections/all`.
 
 Do not include `index.html` in public links, canonical URLs, or navigation. The static files may still use directory-level `index.html` files internally.
 

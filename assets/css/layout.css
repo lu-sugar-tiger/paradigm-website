@@ -7,6 +7,7 @@
 .page {
   flex: 1 0 auto;
   padding-top: var(--header-height);
+  background: var(--color-background-mid);
 }
 
 .container {

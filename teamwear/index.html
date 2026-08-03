@@ -19,7 +19,7 @@
 <body class="site-shell reference-page reference-page--teamwear" data-root="..">
   <header class="site-header">
     <div class="container site-header__inner">
-      <a class="site-logo" href="/collections/all" aria-label="Browse all Paradigm products">PARADIGM</a>
+      <a class="site-logo" href="/" aria-label="Paradigm home">PARADIGM</a>
       <div class="site-actions" aria-label="Quick actions">
         <button class="icon-button" type="button" aria-label="Search">
           <svg aria-hidden="true" viewBox="0 0 24 24">
@@ -51,9 +51,14 @@
       </button>
       <nav class="drawer-nav" aria-label="Mobile navigation">
         <ul role="list">
-          <li><a href="/collections/all">All Products</a></li>
-          <li><a href="/collections/core">Core</a></li>
-          <li><a href="/collections/capsule">Capsule</a></li>
+          <li>
+            <a href="/collections/all">All</a>
+            <ul class="drawer-nav__subcollections" role="list">
+              <li><a href="/collections/ss-tops">SS Tops</a></li>
+              <li><a href="/collections/aw-tops">AW Tops</a></li>
+              <li><a href="/collections/bottoms">Bottoms</a></li>
+            </ul>
+          </li>
         </ul>
         <div class="drawer-nav__divider"></div>
         <ul role="list">

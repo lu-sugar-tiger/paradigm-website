@@ -3,6 +3,24 @@
   const catalog = window.PARADIGM_CATALOG || { products: [] };
   let lastFocusedElement = null;
 
+  document.documentElement.dataset.inputModality = "pointer";
+  document.addEventListener(
+    "pointerdown",
+    () => {
+      document.documentElement.dataset.inputModality = "pointer";
+    },
+    true
+  );
+  document.addEventListener(
+    "keydown",
+    (event) => {
+      if (!["Alt", "Control", "Meta", "Shift"].includes(event.key)) {
+        document.documentElement.dataset.inputModality = "keyboard";
+      }
+    },
+    true
+  );
+
   function asset(path) {
     return `${rootPath}/${path}`.replace(/\/\.\//g, "/").replace(/([^:])\/{2,}/g, "$1/");
   }
@@ -17,6 +35,12 @@
         'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
       )
     ).filter((node) => !node.hasAttribute("hidden"));
+  }
+
+  function setPageInert(isInert) {
+    document.querySelectorAll("main, footer").forEach((node) => {
+      node.toggleAttribute("inert", isInert);
+    });
   }
 
   function openDrawer() {
@@ -37,6 +61,7 @@
     toggle.setAttribute("aria-label", "Close navigation");
     document.body.classList.add("nav-open");
     document.body.style.overflow = "hidden";
+    setPageInert(true);
 
     const toggleIcon = toggle.querySelector("img");
     if (toggleIcon) {
@@ -59,6 +84,7 @@
     document.body.classList.remove("nav-open");
     document.body.style.removeProperty("--scrollbar-compensation");
     document.body.style.overflow = "";
+    setPageInert(false);
 
     const toggleIcon = toggle.querySelector("img");
     if (toggleIcon) {
@@ -94,15 +120,32 @@
       return;
     }
 
-    const isTeamwear = window.location.pathname.replace(/\/$/, "") === "/teamwear";
-    const categoryLinks = ["SS Tops", "AW Tops", "Outerwear", "Bottoms"]
-      .map((category) => `<li><a href="/collections/all?category=${encodeURIComponent(category)}">${category}</a></li>`)
+    nav.setAttribute("aria-label", "Navigation");
+
+    const currentPath = window.location.pathname.replace(/\/$/, "") || "/";
+    const isTeamwear = currentPath === "/teamwear";
+    const allCollection = { label: "All", path: "/collections/all", aliases: ["/"] };
+    const subcollections = [
+      { label: "SS Tops", path: "/collections/ss-tops" },
+      { label: "AW Tops", path: "/collections/aw-tops" },
+      { label: "Bottoms", path: "/collections/bottoms" }
+    ];
+    const allIsCurrent = currentPath === allCollection.path || allCollection.aliases.includes(currentPath);
+    const subcollectionLinks = subcollections
+      .map(({ label, path, aliases = [] }) => {
+        const isCurrent = currentPath === path || aliases.includes(currentPath);
+        return `<li><a href="${path}"${isCurrent ? ' aria-current="page"' : ""}>${label}</a></li>`;
+      })
       .join("");
 
     nav.innerHTML = `
       <ul role="list">
-        <li><a href="/collections/all"${isTeamwear ? "" : ' aria-current="page"'}>Products</a></li>
-        ${categoryLinks}
+        <li>
+          <a href="${allCollection.path}"${allIsCurrent ? ' aria-current="page"' : ""}>${allCollection.label}</a>
+          <ul class="drawer-nav__subcollections" role="list">
+            ${subcollectionLinks}
+          </ul>
+        </li>
       </ul>
       <div class="drawer-nav__divider"></div>
       <ul role="list">
@@ -171,28 +214,16 @@
     document.querySelectorAll("[data-product-grid]").forEach((grid) => {
       const limit = Number.parseInt(grid.dataset.limit || "", 10);
       const exclude = grid.dataset.exclude;
-      const collection = grid.dataset.collection;
+      const category = grid.dataset.category;
       const excludeCurrent = grid.hasAttribute("data-exclude-current") ? currentProductNumber : null;
-      const requestedCategory = grid.dataset.collection?.toLowerCase() === "all"
-        ? new URLSearchParams(window.location.search).get("category")
-        : null;
       let items = catalog.products.slice();
 
       if (exclude) {
         items = items.filter((product) => product.slug !== exclude);
       }
 
-      if (collection && collection.toLowerCase() !== "all") {
-        items = items.filter((product) => product.collection.toLowerCase() === collection.toLowerCase());
-      }
-
-      if (requestedCategory) {
-        items = items.filter((product) => product.category.toLowerCase() === requestedCategory.toLowerCase());
-
-        const headline = document.querySelector(".filter-bar h1");
-        if (headline) {
-          headline.textContent = requestedCategory;
-        }
+      if (category && category.toLowerCase() !== "all") {
+        items = items.filter((product) => product.category.toLowerCase() === category.toLowerCase());
       }
 
       if (excludeCurrent) {
@@ -269,7 +300,13 @@
         breadcrumbCategory = categoryLink;
       }
       breadcrumbCategory.textContent = product.category;
-      breadcrumbCategory.href = `/collections/all?category=${encodeURIComponent(product.category)}`;
+      const categoryRoutes = {
+        "SS Tops": "/collections/ss-tops",
+        "AW Tops": "/collections/aw-tops",
+        Bottoms: "/collections/bottoms",
+        Teamwear: "/teamwear"
+      };
+      breadcrumbCategory.href = categoryRoutes[product.category] || "/collections/all";
     }
     if (breadcrumbTitle) {
       breadcrumbTitle.textContent = product.title.split(" ").pop();
@@ -287,7 +324,17 @@
       gallery.innerHTML = "";
       gallery.setAttribute("role", "region");
       gallery.setAttribute("aria-label", `${product.title} images`);
-      gallery.tabIndex = 0;
+      const mobileGalleryQuery = window.matchMedia("(max-width: 47.999rem)");
+      const updateGalleryTabStop = () => {
+        if (mobileGalleryQuery.matches) {
+          gallery.tabIndex = 0;
+        } else {
+          gallery.removeAttribute("tabindex");
+        }
+      };
+
+      updateGalleryTabStop();
+      mobileGalleryQuery.addEventListener("change", updateGalleryTabStop);
       gallerySources.forEach((source, index) => {
         const galleryImage = document.createElement("img");
         galleryImage.src = asset(source);
@@ -301,7 +348,10 @@
       });
 
       gallery.addEventListener("keydown", (event) => {
-        if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        if (
+          mobileGalleryQuery.matches &&
+          (event.key === "ArrowLeft" || event.key === "ArrowRight")
+        ) {
           event.preventDefault();
           gallery.scrollBy({
             left: event.key === "ArrowRight" ? gallery.clientWidth : -gallery.clientWidth,
@@ -408,18 +458,28 @@
     if (bullets) {
       bullets.innerHTML = "";
       productBullets.forEach((item) => {
-        const li = document.createElement("li");
-        li.textContent = item;
-        bullets.appendChild(li);
+        const line = document.createElement("div");
+        line.className = "product-copy__line";
+        line.textContent = item.startsWith("•") ? item : `• ${item}`;
+        bullets.appendChild(line);
       });
     }
 
     const description = detail.querySelector("[data-product-description]");
     if (description) {
       description.innerHTML = "";
-      productDescription.forEach((paragraph) => {
-        const p = document.createElement("p");
-        p.textContent = paragraph.trim() ? paragraph : "\u00a0";
+      productDescription.forEach((line) => {
+        if (line.trim() === "-") {
+          const separator = document.createElement("div");
+          separator.className = "product-copy__line product-copy__separator";
+          separator.textContent = "-";
+          description.appendChild(separator);
+          return;
+        }
+
+        const p = document.createElement("div");
+        p.className = line.trim() ? "product-copy__line" : "product-copy__line product-copy__blank-line";
+        p.textContent = line.trim() ? line : "\u00a0";
         description.appendChild(p);
       });
     }
@@ -427,9 +487,10 @@
     const rows = detail.querySelector("[data-product-measurements]");
     if (rows) {
       rows.innerHTML = "";
-      productMeasurements.forEach((cells) => {
+      productMeasurements.forEach((cells, index) => {
         const tr = document.createElement("tr");
-        tr.innerHTML = `<th scope="row">${cells[0]}</th><td>${cells[1]}</td><td>${cells[2]}</td><td>${cells[3]}</td>`;
+        const unit = index === productMeasurements.length - 1 ? "(cm)" : "";
+        tr.innerHTML = `<th scope="row">${cells[0]}</th><td>${cells[1]}</td><td>${cells[2]}</td><td>${cells[3]}</td><td class="size-table__unit">${unit}</td>`;
         rows.appendChild(tr);
       });
     }
@@ -438,7 +499,8 @@
     if (fitGuide) {
       fitGuide.innerHTML = "";
       (product.fitGuide || []).forEach((line) => {
-        const p = document.createElement("p");
+        const p = document.createElement("div");
+        p.className = "product-copy__line";
         p.textContent = line;
         fitGuide.appendChild(p);
       });

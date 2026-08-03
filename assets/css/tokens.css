@@ -1,19 +1,71 @@
 :root {
-  --color-bg: #f7f7f7;
-  --color-surface: #ffffff;
-  --color-surface-muted: #dfdfdf;
-  --color-text: #000000;
-  --color-text-muted: #808080;
-  --color-border: #dfdfdf;
-  --color-border-strong: #bfbfbf;
-  --color-footer: #404040;
-  --color-footer-text: #ffffff;
+  /*
+   * One-to-one mirrors of Figma Variables > Paradigm > Color Styles.
+   * The separate `material-theme` collection is intentionally excluded.
+   */
+  --color-brand: #a6192e;
+  --color-white: #ffffff;
+  --color-grey: #808080;
+  --color-black: #000000;
+
+  --color-background-high: #ffffff;
+  --color-background-mid: #f7f7f7;
+  --color-background-low: #efefef;
+  --color-on-background-high: #000000;
+  --color-on-background-mid: #404040;
+  --color-on-background-low: #808080;
+
+  --color-surface-high: #ffffff;
+  --color-surface-mid: #f7f7f7;
+  --color-surface-low: #efefef;
+  --color-on-surface-high: #000000;
+  --color-on-surface-mid: #404040;
+  --color-on-surface-low: #808080;
+
+  --color-outline-high: #000000;
+  --color-outline-mid: #bfbfbf;
+  --color-outline-low: #dfdfdf;
+
+  --color-container-high: #202020;
+  --color-container-mid: #404040;
+  --color-container-low: #dfdfdf;
+  --color-on-container-high: #ffffff;
+  --color-on-container-mid: #ffffff;
+  --color-on-container-low: #808080;
+
+  /* Website aliases preserve existing component contracts. */
+  --color-bg: var(--color-background-mid);
+  --color-surface: var(--color-surface-high);
+  --color-surface-subtle: var(--color-surface-mid);
+  --color-surface-muted: var(--color-surface-low);
+  --color-text: var(--color-on-background-high);
+  --color-text-muted: var(--color-on-background-low);
+  --color-border: var(--color-outline-low);
+  --color-border-strong: var(--color-outline-mid);
+  --color-divider-strong: var(--color-outline-mid);
+  --color-action: var(--color-container-high);
+  --color-action-secondary: var(--color-container-mid);
+  --color-footer: var(--color-container-mid);
+  --color-footer-text: var(--color-on-container-mid);
+  --color-focus-ring: var(--color-outline-high);
+  --color-selection: rgb(166 25 46 / 12%);
+
+  /* Content values are not semantic UI states. */
+  --color-product-navy: #000e57;
+
+  /* Existing Teamwear editorial placeholders; not part of Figma Color Styles. */
   --color-accent: #2d231d;
   --color-accent-soft: #ded6cb;
   --color-shadow: rgba(25, 25, 25, 0.08);
 
-  --font-sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
-  --font-brand: "Roboto", "Noto Sans TC", sans-serif;
+  /* Use the visitor's browser/OS default until a webfont is licensed. */
+  --font-sans: sans-serif;
+  --font-brand: sans-serif;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-weight-extra-bold: 800;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -21,6 +73,16 @@
   --text-lg: 1.375rem;
   --text-xl: clamp(2.2rem, 7vw, 3.5rem);
   --text-hero: clamp(2.8rem, 11vw, 5rem);
+
+  /* Figma text roles: Body 12/16, Title 14/17, navigation 22/26. */
+  --type-body-size: 0.75rem;
+  --type-body-line-height: 1rem;
+  --type-title-size: 0.875rem;
+  --type-title-line-height: 1.0625rem;
+  --type-nav-size: 1.375rem;
+  --type-nav-line-height: 1.625rem;
+  --type-brand-size: 1.25rem;
+  --type-brand-line-height: 1.4375rem;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -31,17 +93,27 @@
   --space-7: 3rem;
   --space-8: 4rem;
 
+  --radius-none: 0;
   --radius-sm: 0.25rem;
+  --radius-card: 0.5rem;
   --radius-md: 1rem;
   --radius-lg: 1.75rem;
   --radius-pill: 999px;
 
   --border-hairline: 1px solid var(--color-border);
+  --border-control: 1px solid var(--color-border-strong);
   --shadow-card: 0 20px 40px var(--color-shadow);
 
   --content-width: 75rem;
   --content-narrow: 58rem;
   --header-height: 6.25rem;
+  --icon-size: 1.5rem;
+  --choice-size: 2rem;
+  --button-height: 3.25rem;
+  --product-card-rail-width: 12.5rem;
+  --product-card-rail-height: 16.0625rem;
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 3px;
   --transition-base: 180ms ease;
 }
 
