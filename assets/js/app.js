@@ -97,15 +97,23 @@
     const link = document.createElement("a");
     link.className = "product-card";
     link.href = productUrl(product);
+    const placeholderNote = product.imageSource === "placeholder"
+      ? '<span class="product-card__placeholder">Placeholder image</span>'
+      : "";
+    const availability = product.soldOut
+      ? '<span class="product-card__availability">Sold out</span>'
+      : "";
 
     link.innerHTML = `
       <div class="product-card__media">
         <img src="${asset(product.image)}" alt="${product.alt}" loading="lazy" width="400" height="460">
+        ${placeholderNote}
       </div>
       <div class="product-card__body">
         <h3 class="product-card__title">${product.title}</h3>
         <div class="product-card__footer">
           <span class="product-card__price">${product.price}</span>
+          ${availability}
         </div>
       </div>
     `;
@@ -282,6 +290,15 @@
     const productBullets = Array.isArray(product.bullets) ? product.bullets : [];
     const productDescription = Array.isArray(product.description) ? product.description : [];
     const productMeasurements = Array.isArray(product.measurements) ? product.measurements : [];
+    const measurementSizes = Array.isArray(product.measurementSizes) ? product.measurementSizes : productSizes;
+    const productVariants = Array.isArray(product.variants) ? product.variants : [];
+    const optionIsSoldOut = (field, value) => {
+      const matchingVariants = productVariants.filter(
+        (variant) => variant.visible && variant[field] === value
+      );
+
+      return matchingVariants.length > 0 && matchingVariants.every((variant) => variant.soldOut);
+    };
 
     document.title = `Paradigm | ${product.title}`;
 
@@ -346,6 +363,12 @@
         }
         gallery.appendChild(galleryImage);
       });
+      if (product.imageSource === "placeholder") {
+        const placeholderNote = document.createElement("span");
+        placeholderNote.className = "product-media-note";
+        placeholderNote.textContent = "Placeholder image";
+        gallery.appendChild(placeholderNote);
+      }
 
       gallery.addEventListener("keydown", (event) => {
         if (
@@ -376,8 +399,12 @@
       category.textContent = product.category;
     }
     const colorLabel = detail.querySelector("[data-product-color-label]");
+    const activeColorIndex = Math.max(
+      0,
+      colors.findIndex((color) => !optionIsSoldOut("color", color.label))
+    );
     if (colorLabel) {
-      colorLabel.textContent = colors[1]?.label || colors[0]?.label || "Color details pending";
+      colorLabel.textContent = colors[activeColorIndex]?.label || "Color details pending";
     }
 
     const swatches = detail.querySelector("[data-product-colors]");
@@ -385,14 +412,15 @@
       swatches.innerHTML = "";
       colors.forEach((color, index) => {
         const swatch = document.createElement("button");
-        const isActive = index === Math.min(1, colors.length - 1);
+        const isSoldOut = optionIsSoldOut("color", color.label);
+        const isActive = index === activeColorIndex && !isSoldOut;
         swatch.type = "button";
         swatch.className = isActive ? "swatch is-active" : "swatch";
         swatch.style.backgroundColor = color.hex;
         swatch.setAttribute("title", color.label);
-        swatch.setAttribute("aria-label", color.label);
+        swatch.setAttribute("aria-label", isSoldOut ? `${color.label} — sold out` : color.label);
         swatch.setAttribute("aria-pressed", String(isActive));
-        if (index === colors.length - 1) {
+        if (isSoldOut) {
           swatch.classList.add("is-muted");
           swatch.disabled = true;
         } else {
@@ -422,14 +450,19 @@
     const sizes = detail.querySelector("[data-product-sizes]");
     if (sizes) {
       sizes.innerHTML = "";
+      const activeSizeIndex = Math.max(
+        0,
+        productSizes.findIndex((size) => !optionIsSoldOut("size", size))
+      );
       productSizes.forEach((size, index) => {
         const chip = document.createElement("button");
-        const isActive = index === Math.min(1, productSizes.length - 1);
+        const isSoldOut = optionIsSoldOut("size", size);
+        const isActive = index === activeSizeIndex && !isSoldOut;
         chip.type = "button";
         chip.className = isActive ? "size-chip is-active" : "size-chip";
-        chip.setAttribute("aria-label", `Select size ${size}`);
+        chip.setAttribute("aria-label", isSoldOut ? `Size ${size} — sold out` : `Select size ${size}`);
         chip.setAttribute("aria-pressed", String(isActive));
-        if (index === productSizes.length - 1) {
+        if (isSoldOut) {
           chip.classList.add("is-muted");
           chip.disabled = true;
         } else {
@@ -485,12 +518,42 @@
     }
 
     const rows = detail.querySelector("[data-product-measurements]");
+    const measurementHead = detail.querySelector("[data-product-measurement-head]");
+    if (measurementHead) {
+      measurementHead.innerHTML = "";
+      const labelHeading = document.createElement("th");
+      labelHeading.scope = "col";
+      labelHeading.setAttribute("aria-label", "Measurement");
+      measurementHead.appendChild(labelHeading);
+      measurementSizes.forEach((size) => {
+        const heading = document.createElement("th");
+        heading.scope = "col";
+        heading.textContent = size;
+        measurementHead.appendChild(heading);
+      });
+      const unitHeading = document.createElement("th");
+      unitHeading.scope = "col";
+      unitHeading.setAttribute("aria-label", "Unit");
+      measurementHead.appendChild(unitHeading);
+    }
     if (rows) {
       rows.innerHTML = "";
       productMeasurements.forEach((cells, index) => {
         const tr = document.createElement("tr");
         const unit = index === productMeasurements.length - 1 ? "(cm)" : "";
-        tr.innerHTML = `<th scope="row">${cells[0]}</th><td>${cells[1]}</td><td>${cells[2]}</td><td>${cells[3]}</td><td class="size-table__unit">${unit}</td>`;
+        const label = document.createElement("th");
+        label.scope = "row";
+        label.textContent = cells[0];
+        tr.appendChild(label);
+        cells.slice(1).forEach((value) => {
+          const cell = document.createElement("td");
+          cell.textContent = value;
+          tr.appendChild(cell);
+        });
+        const unitCell = document.createElement("td");
+        unitCell.className = "size-table__unit";
+        unitCell.textContent = unit;
+        tr.appendChild(unitCell);
         rows.appendChild(tr);
       });
     }
@@ -513,12 +576,25 @@
 
     const shopeeLink = detail.querySelector("[data-product-shopee]");
     if (shopeeLink) {
-      shopeeLink.href = product.shopeeUrl || "https://shopee.tw/";
-      shopeeLink.setAttribute("aria-label", `${product.title} on Shopee — opens an external site`);
+      if (product.soldOut) {
+        shopeeLink.removeAttribute("href");
+        shopeeLink.removeAttribute("target");
+        shopeeLink.removeAttribute("rel");
+        shopeeLink.setAttribute("aria-disabled", "true");
+        shopeeLink.tabIndex = -1;
+        shopeeLink.setAttribute("aria-label", `${product.title} — sold out`);
+      } else {
+        shopeeLink.href = product.shopeeUrl || "https://shopee.tw/";
+        shopeeLink.target = "_blank";
+        shopeeLink.rel = "noopener noreferrer";
+        shopeeLink.removeAttribute("aria-disabled");
+        shopeeLink.removeAttribute("tabindex");
+        shopeeLink.setAttribute("aria-label", `${product.title} on Shopee — opens an external site`);
+      }
 
       const shopeeLabel = shopeeLink.querySelector("[data-product-shopee-label]");
       if (shopeeLabel) {
-        shopeeLabel.textContent = "Buy on Shopee";
+        shopeeLabel.textContent = product.soldOut ? "Sold out" : "Buy on Shopee";
       }
     }
   }

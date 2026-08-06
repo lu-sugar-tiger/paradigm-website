@@ -1,0 +1,1293 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "spreadsheetId": "1vt4wTxgUujj6L_p_I-zqzcpWvWZwACp4O1JRQlf2t9M",
+    "spreadsheetUrl": "https://docs.google.com/spreadsheets/d/1vt4wTxgUujj6L_p_I-zqzcpWvWZwACp4O1JRQlf2t9M/edit",
+    "sheetName": "網站參照",
+    "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
+    "syncedAt": "2026-08-06T15:17:48.7580438+08:00"
+  },
+  "products": [
+    {
+      "productNumber": "ED14001",
+      "title": "PRDM Everyday Tee",
+      "price": 590,
+      "shopeeUrl": "https://shopee.tw/product/74187402/19381601041",
+      "variants": [
+        {
+          "color": "Black",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": false,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "L",
+          "visible": false,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "L",
+          "visible": false,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        }
+      ],
+      "document": {
+        "id": "1r5QyrbtyNySj0rJYbG9k3lW_sPFP4FfUgZNRnEBta5w",
+        "title": "#ED14001-S13_Copy_Instagram",
+        "modifiedTime": "2023-07-08T08:21:32.098Z",
+        "content": "﻿@prdm.tw ®\r\n\r\n\r\nPRDM Loose-Fitting Everyday Tee\r\n\r\n\r\nColor : Black, Grey, White\r\nSize : M, L\r\nPrice : NT$590\r\n\r\n\r\n• 100% combed cotton of 230 g/sqm\r\n• Loose fit and longer-back cutting\r\n• Signature tab on sleeve\r\n\r\n\r\n-\r\n\r\n\r\n這是一款略微寬鬆的重磅短 T\r\n為了將流行元素和不變的經典結合\r\n我們做了超多次的調整甚至重新設定\r\n最終打造出這款適合約會也適合日常的寬鬆短 T\r\n\r\n\r\n基於輪廓立體度和透氣性的考量\r\n採用手感紮實的重磅精梳棉製成\r\n營造份量感同時帶來優異的穿著體驗\r\n\r\n\r\n為了高質感的寬鬆風格並兼顧身材比例的修飾\r\n以自然的寬大輪廓配合前短後長的下襬設定\r\n同時還能提升活動的方便性\r\n\r\n\r\n因為對於耐用性的追求\r\n我們嘗試了多種不同的領口工法\r\n最終選擇較費工的 20mm 羅紋包邊領口\r\n這樣最耐穿而且也增強了領口處的層次感\r\n\r\n\r\n左側袖口以品牌小紅標點綴\r\n讓整體設計簡約俐落但不單調\r\n\r\n\r\n上等的面料配合誰穿誰帥的版型\r\n等你實際穿上就能立刻感受到它的獨特魅力\r\n\r\n\r\n-\r\n\r\n\r\n     M   L\r\n肩寬 50.0 51.5\r\n胸寬 55.5 57.5\r\n袖長 25.5 27.5\r\n衣長 72.0 76.0 (cm)\r\n\r\n\r\n建議身高 ≤ 176 拿 M\r\n建議身高 ≥ 176 拿 L (cm)\r\n\r\n\r\n#ED14001-S13"
+      },
+      "images": [],
+      "localImages": [
+        "assets/images/products/everyday-tee.webp"
+      ],
+      "imageSource": "preserved-existing"
+    },
+    {
+      "productNumber": "ED23002",
+      "title": "PRDM Everyday Crewneck",
+      "price": 990,
+      "shopeeUrl": "https://shopee.tw/product/74187402/23447622978",
+      "variants": [
+        {
+          "color": "Black",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": false,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "L",
+          "visible": false,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        }
+      ],
+      "document": {
+        "id": "1UjbimaxbdT0idlUXEWtChAMq9-n2gDXcsZSHhf5XOPc",
+        "title": "#ED23002-S13_Copy_Instagram",
+        "modifiedTime": "2023-10-30T16:19:32.433Z",
+        "content": "﻿@prdm.tw ®\r\n\r\n\r\nPRDM Loose-Fitting Everyday Crewneck\r\n\r\n\r\nColor : Black, Grey\r\nSize : M, L\r\nPrice : NT$990\r\n\r\n\r\n• 100% cotton loopback jersey of 350 g/sqm\r\n• Loose fit and longer-back cutting\r\n• Signature tab on sleeve\r\n\r\n\r\n-\r\n\r\n\r\n這是一款略微寬鬆的重磅毛圈布大學 T\r\n考量到台灣的冬季極為短暫\r\n特別選用手感紮實的重磅毛圈布來製作\r\n重磅毛圈布比起刷毛內裏更加實穿\r\n同時也能改善一般毛圈布輕薄、柔軟的缺點\r\n\r\n\r\n為了呈現自然的寬大輪廓並修飾身材比例\r\n我們設計出較寬鬆的袖攏與前短後長的下襬\r\n單穿之外也適合在內側搭配一件白 T\r\n在領口與下擺處完美露出、點綴整體風格\r\n\r\n\r\n因為對於最初功能性的追求\r\n在領口處以較寬的復古羅紋包邊\r\n疊加於最費工的鑲嵌型羅紋裁片\r\n加強領口彈性、壽命及層次感\r\n\r\n\r\n左側袖口以品牌小紅標點綴\r\n讓整體設計簡約俐落但不單調\r\n\r\n\r\n最實穿的重磅毛圈布面料搭配寬鬆輪廓\r\n為你營造兼顧質感與舒適的日常\r\n\r\n\r\n-\r\n\r\n\r\n     M   L\r\n肩寬 60.0 61.5\r\n胸寬 66.0 68.5\r\n袖長 56.0 58.0\r\n衣長 71.0 75.0 (cm)\r\n\r\n\r\n建議身高 ≤ 176 拿 M\r\n建議身高 ≥ 176 拿 L (cm)\r\n\r\n\r\n#ED23002-S13"
+      },
+      "images": [],
+      "localImages": [
+        "assets/svg/crewneck.svg"
+      ],
+      "imageSource": "placeholder"
+    },
+    {
+      "productNumber": "PD23006",
+      "title": "PRDM Paradigm Crewneck",
+      "price": 1180,
+      "shopeeUrl": "https://shopee.tw/product/74187402/22073115003",
+      "variants": [
+        {
+          "color": "Black",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": false,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "L",
+          "visible": false,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        }
+      ],
+      "document": {
+        "id": "1RiakemYNGRFtFiwIBMcc7lXKclykfWhh7-RbFHYxJM4",
+        "title": "#PD23006_Copy_Instagram",
+        "modifiedTime": "2023-11-14T14:08:06.091Z",
+        "content": "﻿@prdm.tw ®\r\n\r\n\r\nPRDM Paradigm Crewneck\r\n\r\n\r\nColor : Black, Grey\r\nSize : M, L, XL\r\nPrice : NT$1180\r\n\r\n\r\n• Printed graphics on front and back\r\n• 100% cotton loopback jersey of 350 g/sqm\r\n• Wide silhouette and longer-back cutting\r\n• Signature tab on sleeve\r\n\r\n\r\n-\r\n\r\n\r\nParadigm 款式是我們的定番系列\r\n印有象徵著品牌經典的圖樣\r\n為了忠實傳達品牌信念\r\n我們採用最純粹、不張揚的字體呈現\r\n成為語言與思想的透明載體\r\n\r\n\r\n這款印花大學 T 的面料設定\r\n同樣是優秀的重磅毛圈布\r\n兼顧外觀的立體度以及在台灣的實穿性\r\n\r\n\r\n寬鬆的袖管讓整體輪廓的寬鬆感更自然\r\n領口是最費工的鑲嵌型羅紋裁片\r\n加強領口彈性、壽命及層次感\r\n\r\n\r\n我們在每個細節上的雕琢\r\n都是為了讓你在低調中感受美好\r\n\r\n\r\n-\r\n\r\n\r\n     M   L   XL\r\n肩寬 60.0 63.0 64.5\r\n胸寬 66.0 71.0 73.5\r\n袖長 56.0 57.0 59.0\r\n衣長 71.0 73.0 77.0 (cm)\r\n\r\n\r\n建議身高 ≤ 173 拿 M\r\n建議身高∊173~178 拿 L\r\n建議身高 ≥ 178 拿 XL (cm)\r\n\r\n\r\n#PD23006"
+      },
+      "images": [],
+      "localImages": [
+        "assets/svg/crewneck.svg"
+      ],
+      "imageSource": "placeholder"
+    },
+    {
+      "productNumber": "PD14007",
+      "title": "PRDM Paradigm Tee",
+      "price": 790,
+      "shopeeUrl": "https://shopee.tw/product/74187402/19981596028",
+      "variants": [
+        {
+          "color": "Black",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": false,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "L",
+          "visible": false,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "L",
+          "visible": false,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        }
+      ],
+      "document": {
+        "id": "1alwdm9Z8eezPMx2qso12CGBoK7nnFPirlpqxgjdVXl8",
+        "title": "#PD14007_Copy_Instagram",
+        "modifiedTime": "2024-10-06T10:09:03.462Z",
+        "content": "﻿@prdm.tw ®\r\n\r\n\r\nPRDM Paradigm Tee\r\n\r\n\r\nColor : Black, Grey, White\r\nSize : M, L, XL\r\nPrice : NT$790\r\n\r\n\r\n• Printed graphics on front and back\r\n• 100% combed cotton of 230 g/sqm\r\n• Wide silhouette and longer-back cutting\r\n• Signature tab on sleeve\r\n\r\n\r\n-\r\n\r\n\r\n這是一款象徵著品牌經典的印花短 T\r\nParadigm 是典範的意思\r\n在科學史的範疇中用來描述群體對世界運行的共同認知\r\n典範並非單一或不變的\r\n當主流理論不再能解釋科學現象\r\n另類科學家就會推動世界進入革命科學期\r\n原本的另類科學理論贏得共識成為新的典範\r\n這就是科學發展中典範轉移的過程\r\n\r\n\r\n為了忠實傳遞品牌的信念\r\n我們採用最純粹的手法\r\n以毫不張揚的字體作為語言與思想單純的載體\r\n在細節處不斷雕琢只為了完美融合其形態與機能\r\n讓人專注於其真意而避免任何多餘的思考\r\n這樣的信念未來還會繼續體現在更多作品上\r\n\r\n\r\n這款印花短 T 的材質、版型、細節設定\r\n同樣採用手感優異的重磅精梳棉、\r\n自然的寬大輪廓與前短後長的剪裁、\r\n極度耐穿的領口與左側袖口的品牌小紅標\r\n\r\n\r\n看似平凡實則細節出色\r\n這樣低調的美好正是我們最想要帶給你的\r\n\r\n\r\n-\r\n\r\n\r\n     M   L   XL\r\n肩寬 50.0 53.0 54.5\r\n胸寬 55.5 60.0 62.5\r\n袖長 25.5 26.5 28.5\r\n衣長 72.0 74.0 78.0 (cm)\r\n\r\n\r\n建議身高 ≤ 173 拿 M\r\n建議身高∊173~178 拿 L\r\n建議身高 ≥ 178 拿 XL (cm)\r\n\r\n\r\n#PD14007"
+      },
+      "images": [],
+      "localImages": [
+        "assets/svg/tee.svg"
+      ],
+      "imageSource": "placeholder"
+    },
+    {
+      "productNumber": "AE14008",
+      "title": "PRDM Aesthetics Tee",
+      "price": 790,
+      "shopeeUrl": "https://shopee.tw/product/74187402/23547627231",
+      "variants": [
+        {
+          "color": "Black",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": false,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "L",
+          "visible": false,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        }
+      ],
+      "document": {
+        "id": "1ZTYOjqKVtN6kTEyBGZvSVm4JBtvqm5iecBDcQTGTMc4",
+        "title": "#AE14008_Copy_Instagram",
+        "modifiedTime": "2023-07-09T10:35:20.364Z",
+        "content": "﻿@prdm.tw ®\r\n\r\n\r\nPRDM Aesthetics Tee\r\n\r\n\r\nColor : Black, White\r\nSize : M, L, XL\r\nPrice : NT$790\r\n\r\n\r\n• Printed graphics on front and back\r\n• 100% combed cotton of 230 g/sqm\r\n• Wide silhouette and longer-back cutting\r\n• Signature tab on sleeve\r\n\r\n\r\n-\r\n\r\n\r\n這是一款彰顯品牌美學的印花短 T\r\nAesthetics 是美學及審美的意思\r\n探討著人對美與藝術的評價，例如：\r\n具象主義，強調作品模仿真實世界而形塑寫實的美\r\n形式主義，注重作品的構圖與手法是否符合美的原則\r\n表現主義，重視作品為觀看者帶來的情緒反應……\r\n\r\n\r\n為了體現品牌高雅的美學\r\n我們採用精緻的書寫體呈現美學系列 Logo\r\n首波系列作品選用珊瑚粉與寶藍的配色\r\n每一處細節都嘗試著詮釋美學的多重觀點\r\n\r\n\r\n這款印花短 T 的材質、版型、細節設定\r\n同樣採用手感優異的重磅精梳棉、\r\n自然的寬大輪廓與前短後長的剪裁、\r\n極度耐穿的領口與左側袖口的品牌小紅標\r\n\r\n\r\n衣服本身優異的設定配合好的圖樣設計\r\n吸引你的注意力並引起愉悅的情緒\r\n這就是我們所要追求的審美體驗\r\n\r\n\r\n-\r\n\r\n\r\n     M   L   XL\r\n肩寬 50.0 53.0 54.5\r\n胸寬 55.5 60.0 62.5\r\n袖長 25.5 26.5 28.5\r\n衣長 72.0 74.0 78.0 (cm)\r\n\r\n\r\n建議身高 ≤ 173 拿 M\r\n建議身高∊173~178 拿 L\r\n建議身高 ≥ 178 拿 XL (cm)\r\n\r\n\r\n#AE14008"
+      },
+      "images": [],
+      "localImages": [
+        "assets/images/products/aesthetics-tee.webp"
+      ],
+      "imageSource": "preserved-existing"
+    },
+    {
+      "productNumber": "TL14009",
+      "title": "PRDM Timeless Tee",
+      "price": 790,
+      "shopeeUrl": "https://shopee.tw/product/74187402/10299499306",
+      "variants": [
+        {
+          "color": "Black",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": false,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "L",
+          "visible": false,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        }
+      ],
+      "document": {
+        "id": "1uvVHm8KEXhkbwuPISepZ_mgYtSYbQJP2WZT47oej2q0",
+        "title": "#TL14009_Copy_Instagram",
+        "modifiedTime": "2023-08-04T19:43:16.186Z",
+        "content": "﻿@prdm.tw ®\r\n\r\n\r\nPRDM Timeless Tee\r\n\r\n\r\nColor : Black, White\r\nSize : M, L, XL\r\nPrice : NT$790\r\n\r\n\r\n• Printed graphics on front and back\r\n• 100% combed cotton of 230 g/sqm\r\n• Wide silhouette and longer-back cutting\r\n• Signature tab on sleeve\r\n\r\n\r\n-\r\n\r\n\r\n這是一款在探討品牌理念的印花短 T\r\nTimeless 一般翻作永恆\r\n是一個超越時間性的概念\r\n正如我們所追求的創作境界\r\n就是在時間的維度之外\r\n也能有當代藝術性的展現\r\n\r\n\r\n我們從不追求浮誇的剪裁與結構\r\n而是回歸最本質性的原型\r\n改良成現在流行而未來也不會過時的型態\r\n同時技巧性地融入當季創意來創造變化\r\n\r\n\r\n這款印花短 T 的材質、版型、細節設定\r\n同樣採用手感優異的重磅精梳棉、\r\n自然的寬大輪廓與前短後長的剪裁、\r\n極度耐穿的領口與左側袖口的品牌小紅標\r\n\r\n\r\n將基礎的短 T 版型改良成現在流行的自然寬大輪廓\r\n配合低調又超好看的復古科技感圖樣設計\r\n相信你很快就能理解我們所謂的品牌理念\r\n\r\n\r\n-\r\n\r\n\r\n     M   L   XL\r\n肩寬 50.0 53.0 54.5\r\n胸寬 55.5 60.0 62.5\r\n袖長 25.5 26.5 28.5\r\n衣長 72.0 74.0 78.0 (cm)\r\n\r\n\r\n建議身高 ≤ 173 拿 M\r\n建議身高∊173~178 拿 L\r\n建議身高 ≥ 178 拿 XL (cm)\r\n\r\n\r\n#TL14009"
+      },
+      "images": [],
+      "localImages": [
+        "assets/svg/tee.svg"
+      ],
+      "imageSource": "placeholder"
+    },
+    {
+      "productNumber": "PH14010",
+      "title": "PRDM Partnership Football Jersey",
+      "price": 990,
+      "shopeeUrl": "https://shopee.tw/product/74187402/23179857649",
+      "variants": [
+        {
+          "color": "Black",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Cardinal",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Cardinal",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Cardinal",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        }
+      ],
+      "document": {
+        "id": "1kMpoFwEuRWvOvXjbZ8zTKJgfyjytFuZtX6_W9lPle3Y",
+        "title": "#PH14010_Copy_Instagram",
+        "modifiedTime": "2023-09-06T13:31:58.241Z",
+        "content": "﻿@prdm.tw ®\r\n\r\n\r\nPRDM Partnership Football Jersey\r\n\r\n\r\nColor : Black, White, Cardinal\r\nSize : M, L, XL\r\nPrice : NT$990\r\n\r\n\r\n• Printed graphics, embroidery and all-over pattern\r\n• 100% premium polyester\r\n• Wide silhouette and striped ribbing\r\n• Signature tab on sleeve\r\n\r\n\r\n-\r\n\r\n\r\n這是一款全新的運動休閒短 T\r\n為了結合運動服飾的機能與休閒服飾的質感\r\n我們選擇從足球衣的型態切入\r\n打造現代生活必備的運動休閒系列\r\n\r\n\r\n對於運動型態與休閒型態的權衡\r\n採用手感紮實的重磅面料來中和運動氣息\r\n同時加入特殊涼感纖維以維持必備機能\r\n\r\n\r\n為了兼顧不同穿著風格的需求\r\n正常尺寸的版型設定為歐美流行的合身輪廓\r\n拿大一號則可以穿出亞洲持續延燒的寬鬆風格\r\n\r\n\r\n因為要在休閒場合享受運動服飾的舒適\r\n也要在運動時追求休閒服飾的風格與魅力\r\n我們自各項賽事的復古球衣汲取靈感\r\n在領口及袖口都採用厚實的羅紋滾邊\r\n\r\n\r\nAthleisure、Blokecore、Clean Fit 的流行都有段時間了\r\n我們推出運動休閒系列不是要追逐潮流\r\n而是要結合時代中最單純的形式與機能\r\n這樣的美學曾是新潮的象徵\r\n也將成為永恆的趨勢\r\n\r\n\r\n-\r\n\r\n\r\n     M   L   XL\r\n肩寬 53.0 54.5 56.0\r\n胸寬 56.5 59.0 61.5\r\n袖長 23.5 24.5 25.5\r\n衣長 71.0 73.0 75.0 (cm)\r\n\r\n\r\n建議身高 ≤ 173 拿 M\r\n建議身高∊173~178 拿 L\r\n建議身高 ≥ 178 拿 XL (cm)\r\n\r\n\r\n#PH14010"
+      },
+      "images": [],
+      "localImages": [
+        "assets/images/products/partnership-football-jersey.webp"
+      ],
+      "imageSource": "preserved-existing"
+    },
+    {
+      "productNumber": "PH14011",
+      "title": "PRDM Sponsorship Football Jersey",
+      "price": 990,
+      "shopeeUrl": "https://shopee.tw/product/74187402/20584010303",
+      "variants": [
+        {
+          "color": "Black",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Cardinal",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Cardinal",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Cardinal",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        }
+      ],
+      "document": {
+        "id": "1ZAaP4MaDIt0A9fR2qJm9PTLemTWdX_qLPXVR5KvmvNQ",
+        "title": "#PH14011_Copy_Instagram",
+        "modifiedTime": "2023-09-10T13:55:34.875Z",
+        "content": "﻿@prdm.tw ®\r\n\r\n\r\nPRDM Sponsorship Football Jersey\r\n\r\n\r\nColor : Black, White, Cardinal\r\nSize : M, L, XL\r\nPrice : NT$990\r\n\r\n\r\n• Printed graphics and all-over pattern\r\n• Premium polyester and striped ribbing\r\n• Moderately wide silhouette\r\n• Signature tab on sleeve\r\n\r\n\r\n-\r\n\r\n\r\n這是一款全新的運動休閒短 T\r\n為了結合運動服飾的機能與休閒服飾的質感\r\n我們選擇從足球衣的型態切入\r\n打造現代生活必備的運動休閒系列\r\n\r\n\r\n對於運動型態與休閒型態的權衡\r\n採用手感紮實的重磅面料來中和運動氣息\r\n同時加入特殊涼感纖維以維持必備機能\r\n\r\n\r\n為了兼顧不同穿著風格的需求\r\n正常尺寸的版型設定為歐美流行的合身輪廓\r\n拿大一號則可以穿出亞洲持續延燒的寬鬆風格\r\n\r\n\r\n因為要在休閒場合享受運動服飾的舒適\r\n也要在運動時追求休閒服飾的風格與魅力\r\n我們自各項賽事的復古球衣汲取靈感\r\n在領口及袖口都採用厚實的羅紋滾邊\r\n\r\n\r\nAthleisure、Blokecore、Clean Fit 的流行都有段時間了\r\n我們推出運動休閒系列不是要追逐潮流\r\n而是要結合時代中最單純的形式與機能\r\n這樣的美學曾是新潮的象徵\r\n也將成為永恆的趨勢\r\n\r\n\r\n-\r\n\r\n\r\n     M   L   XL\r\n肩寬 53.0 54.5 56.0\r\n胸寬 56.5 59.0 61.5\r\n袖長 23.5 24.5 25.5\r\n衣長 71.0 73.0 75.0 (cm)\r\n\r\n\r\n建議身高 ≤ 173 拿 M\r\n建議身高∊173~178 拿 L\r\n建議身高 ≥ 178 拿 XL (cm)\r\n\r\n\r\n#PH14011"
+      },
+      "images": [],
+      "localImages": [
+        "assets/svg/jersey.svg"
+      ],
+      "imageSource": "placeholder"
+    },
+    {
+      "productNumber": "ED24014",
+      "title": "PRDM Everyday Hoodie",
+      "price": 1180,
+      "shopeeUrl": "https://shopee.tw/product/74187402/16896877458",
+      "variants": [
+        {
+          "color": "Black",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Midnight",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Midnight",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Midnight",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        }
+      ],
+      "document": {
+        "id": "1ol0PufPtJbophXjd6Bg7jCvSVy3ETyUGaTzA2BTYwpo",
+        "title": "#ED24014_Copy_Instagram",
+        "modifiedTime": "2023-12-14T13:14:36.190Z",
+        "content": "﻿@prdm.tw ®\r\n\r\n\r\nPRDM Everyday Hoodie\r\n\r\n\r\nColor : Black, Midnight\r\nSize : M, L, XL\r\nPrice : NT$1180\r\n\r\n\r\n• 100% cotton loopback jersey of 350 g/sqm\r\n• Boxy silhouette and longer-back cutting\r\n• Watch pocket inside the kangaroo pocket\r\n• Signature tab on sleeve\r\n\r\n\r\n-\r\n\r\n\r\n這是一款寬鬆、微短版的重磅毛圈布帽 T\r\n考量到台灣的副熱帶氣候、日益嚴重的全球暖化\r\n特別選用手感紮實的重磅毛圈布來製作\r\n重磅毛圈布比起刷毛內裏更加實穿\r\n同時也能改善一般毛圈布輕薄、柔軟的缺點\r\n\r\n\r\n目前 Paradigm® 的基礎款式仍秉持 Mono-Material 的原則\r\n面料與輔料皆採用單一天然素材製成\r\n純棉面料有著最好的親膚性、透氣性\r\n因此能帶來最舒適的穿著感受\r\n\r\n\r\n為了呈現連貫的寬鬆感\r\n我們採用垂墜感優異的面料與極寬鬆的袖管設定\r\n微短版的衣長有助於修飾身形比例\r\n如果你想要追求更短版的效果\r\n也可以選擇著用小一號的尺寸\r\n\r\n\r\n因為我們在極簡外觀下仍對功能性有所追求\r\n在口袋內側額外增加了隱藏小口袋\r\n便於放置零錢或是鑰匙、卡片、耳機……\r\n這樣的設定也會延續到我們未來的單品\r\n\r\n\r\n最實穿的重磅毛圈布、寬短版輪廓、隱藏小口袋\r\n為你顧及冬季的每個日常細節\r\n\r\n\r\n-\r\n\r\n\r\n     M   L   XL\r\n肩寬 60.0 62.5 65.0\r\n胸寬 63.0 65.5 68.0\r\n袖長 60.0 61.5 63.0\r\n衣長 68.5 71.0 73.5 (cm)\r\n\r\n\r\n建議身高 ≤ 173 拿 M\r\n建議身高∊173~178 拿 L\r\n建議身高 ≥ 178 拿 XL (cm)\r\n\r\n\r\n#ED24014"
+      },
+      "images": [],
+      "localImages": [
+        "assets/svg/hoodie.svg"
+      ],
+      "imageSource": "placeholder"
+    },
+    {
+      "productNumber": "PD24015",
+      "title": "PRDM Paradigm Hoodie",
+      "price": 1380,
+      "shopeeUrl": "https://shopee.tw/product/74187402/24954802571",
+      "variants": [
+        {
+          "color": "Black",
+          "size": "M",
+          "visible": true,
+          "soldOut": true
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": true,
+          "soldOut": true
+        },
+        {
+          "color": "Black",
+          "size": "XL",
+          "visible": true,
+          "soldOut": true
+        },
+        {
+          "color": "Midnight",
+          "size": "M",
+          "visible": true,
+          "soldOut": true
+        },
+        {
+          "color": "Midnight",
+          "size": "L",
+          "visible": true,
+          "soldOut": true
+        },
+        {
+          "color": "Midnight",
+          "size": "XL",
+          "visible": true,
+          "soldOut": true
+        }
+      ],
+      "document": {
+        "id": "1KQSh_asCWjez3inG646Y_t3afxyfbdaaZBryy88opuw",
+        "title": "#PD24015_Copy_Instagram",
+        "modifiedTime": "2023-12-17T13:43:01.981Z",
+        "content": "﻿@prdm.tw ®\r\n\r\n\r\nPRDM Paradigm Hoodie\r\n\r\n\r\nColor : Black, Midnight\r\nSize : M, L, XL\r\nPrice : NT$1380\r\n\r\n\r\n• Printed graphics on front and back\r\n• 100% cotton loopback jersey of 350 g/sqm\r\n• Boxy silhouette and longer-back cutting\r\n• Watch pocket inside the kangaroo pocket\r\n• Signature tab on sleeve\r\n\r\n\r\n-\r\n\r\n\r\nParadigm 款式是我們的定番系列\r\n印有象徵著品牌經典的圖樣\r\n為了忠實傳達品牌信念\r\n我們採用最純粹、不張揚的字體呈現\r\n成為語言與思想的透明載體\r\n\r\n\r\n這款印花帽 T 的面料設定\r\n同樣是最適合台灣的重磅毛圈布\r\n兼顧外觀的立體度以及優異的舒適度、實穿性\r\n\r\n\r\n極寬的袖管讓整體輪廓的寬鬆感更一致\r\n微短版的衣長有助於修飾身形比例\r\n選擇小一號的尺寸可以穿出更短版的效果\r\n我們在口袋內側額外增加了隱藏小口袋\r\n便於放置零錢或是鑰匙、卡片、耳機……\r\n\r\n\r\n我們在面料、版型、機能上努力\r\n就是要為你打造這款最強帽 T\r\n\r\n\r\n-\r\n\r\n\r\n     M   L   XL\r\n肩寬 60.0 62.5 65.0\r\n胸寬 63.0 65.5 68.0\r\n袖長 60.0 61.5 63.0\r\n衣長 68.5 71.0 73.5 (cm)\r\n\r\n\r\n建議身高 ≤ 173 拿 M\r\n建議身高∊173~178 拿 L\r\n建議身高 ≥ 178 拿 XL (cm)\r\n\r\n\r\n#PD24015"
+      },
+      "images": [],
+      "localImages": [
+        "assets/images/products/paradigm-hoodie.webp"
+      ],
+      "imageSource": "preserved-existing"
+    },
+    {
+      "productNumber": "AE23016",
+      "title": "PRDM Aesthetics Crewneck",
+      "price": 1180,
+      "shopeeUrl": "https://shopee.tw/product/74187402/25104801884",
+      "variants": [
+        {
+          "color": "Black",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        }
+      ],
+      "document": {
+        "id": "14r-yXVpvkjhhFNzxcvIVACwO4DvjDOYoH6LreYOXNcA",
+        "title": "#AE23016_Copy_Instagram",
+        "modifiedTime": "2023-12-21T17:47:20.050Z",
+        "content": "﻿@prdm.tw ®\r\n\r\n\r\nPRDM Aesthetics Crewneck\r\n\r\n\r\nColor : Black, Grey\r\nSize : M, L, XL\r\nPrice : NT$1180\r\n\r\n\r\n• Printed graphics on front and back\r\n• 100% cotton loopback jersey of 350 g/sqm\r\n• Wide silhouette and longer-back cutting\r\n• Signature tab on sleeve\r\n\r\n\r\n-\r\n\r\n\r\nAesthetics 款式是我們的定番系列\r\n以精美的書寫體彰顯品牌美學\r\n在這系列我們喜歡選用較跳脫的配色\r\n兼顧明度、飽和度的流行色彩\r\n\r\n\r\n這款印花大學 T 的面料設定\r\n同樣是優秀的重磅毛圈布\r\n兼顧外觀的立體度以及在台灣的實穿性\r\n\r\n\r\n寬鬆的袖管讓整體輪廓的寬鬆感更自然\r\n領口是最費工的鑲嵌型羅紋裁片\r\n加強領口彈性、壽命及層次感\r\n\r\n\r\n我們在每個細節上的雕琢\r\n都是為了讓你在低調中感受美好\r\n\r\n\r\n-\r\n\r\n\r\n     M   L   XL\r\n肩寬 60.0 63.0 64.5\r\n胸寬 66.0 71.0 73.5\r\n袖長 56.0 57.0 59.0\r\n衣長 71.0 73.0 77.0 (cm)\r\n\r\n\r\n建議身高 ≤ 173 拿 M\r\n建議身高∊173~178 拿 L\r\n建議身高 ≥ 178 拿 XL (cm)\r\n\r\n\r\n#AE23016"
+      },
+      "images": [],
+      "localImages": [
+        "assets/svg/crewneck.svg"
+      ],
+      "imageSource": "placeholder"
+    },
+    {
+      "productNumber": "AE24017",
+      "title": "PRDM Aesthetics Hoodie",
+      "price": 1380,
+      "shopeeUrl": "https://shopee.tw/product/74187402/25254807185",
+      "variants": [
+        {
+          "color": "Black",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Midnight",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Midnight",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Midnight",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        }
+      ],
+      "document": {
+        "id": "1DtFGhWxl5jfVhzU2-xSMmHlHW5em4hg4MbHwGQIxVZ4",
+        "title": "#AE24017_Copy_Instagram",
+        "modifiedTime": "2023-12-23T10:26:39.626Z",
+        "content": "﻿@prdm.tw ®\r\n\r\n\r\nPRDM Aesthetics Hoodie\r\n\r\n\r\nColor : Black, Midnight\r\nSize : M, L, XL\r\nPrice : NT$1380\r\n\r\n\r\n• Printed graphics on front and back\r\n• 100% cotton loopback jersey of 350 g/sqm\r\n• Boxy silhouette and longer-back cutting\r\n• Watch pocket inside the kangaroo pocket\r\n• Signature tab on sleeve\r\n\r\n\r\n-\r\n\r\n\r\nAesthetics 款式是我們的定番系列\r\n以精美的書寫體彰顯品牌美學\r\n在這系列我們喜歡選用較跳脫的配色\r\n兼顧明度、飽和度的流行色彩\r\n\r\n\r\n這款印花帽 T 的面料設定\r\n同樣是最適合台灣的重磅毛圈布\r\n兼顧外觀的立體度以及優異的舒適度、實穿性\r\n\r\n\r\n極寬的袖管讓整體輪廓的寬鬆感更一致\r\n微短版的衣長有助於修飾身形比例\r\n選擇小一號的尺寸可以穿出更短版的效果\r\n我們在口袋內側額外增加了隱藏小口袋\r\n便於放置零錢或是鑰匙、卡片、耳機……\r\n\r\n\r\n我們在面料、版型、機能上努力\r\n就是要為你打造這款最強帽 T\r\n\r\n\r\n-\r\n\r\n\r\n     M   L   XL\r\n肩寬 60.0 62.5 65.0\r\n胸寬 63.0 65.5 68.0\r\n袖長 60.0 61.5 63.0\r\n衣長 68.5 71.0 73.5 (cm)\r\n\r\n\r\n建議身高 ≤ 173 拿 M\r\n建議身高∊173~178 拿 L\r\n建議身高 ≥ 178 拿 XL (cm)\r\n\r\n\r\n#AE24017"
+      },
+      "images": [],
+      "localImages": [
+        "assets/svg/hoodie-graphic.svg"
+      ],
+      "imageSource": "placeholder"
+    },
+    {
+      "productNumber": "TL23018",
+      "title": "PRDM Timeless Crewneck",
+      "price": 1180,
+      "shopeeUrl": "https://shopee.tw/product/74187402/25854802717",
+      "variants": [
+        {
+          "color": "Black",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        }
+      ],
+      "document": {
+        "id": "1WS2VZgv14arGXC4LNo18eG_z747s9tgvpGy9QFRd50Q",
+        "title": "#TL23018_Copy_Instagram",
+        "modifiedTime": "2023-12-24T06:42:06.135Z",
+        "content": "﻿@prdm.tw ®\r\n\r\n\r\nPRDM Timeless Crewneck\r\n\r\n\r\nColor : Black, Grey\r\nSize : M, L, XL\r\nPrice : NT$1180\r\n\r\n\r\n• Printed graphics on front and back\r\n• 100% cotton loopback jersey of 350 g/sqm\r\n• Wide silhouette and longer-back cutting\r\n• Signature tab on sleeve\r\n\r\n\r\n-\r\n\r\n\r\nTimeless 系列旨在傳達品牌的初衷\r\n我們不追求浮誇的剪裁與結構\r\n而是回歸最本質性的經典原型\r\n改良成現在流行而未來也不會過時的型態\r\n同時技巧性地融入當季創意\r\n打造簡約百搭的設計風格\r\n\r\n\r\n這款印花大學 T 的面料設定\r\n同樣是優秀的重磅毛圈布\r\n兼顧外觀的立體度以及在台灣的實穿性\r\n\r\n\r\n寬鬆的袖管讓整體輪廓的寬鬆感更自然\r\n領口是最費工的鑲嵌型羅紋裁片\r\n加強領口彈性、壽命及層次感\r\n\r\n\r\n我們在每個細節上的雕琢\r\n都是為了讓你在低調中感受美好\r\n\r\n\r\n-\r\n\r\n\r\n     M   L   XL\r\n肩寬 60.0 63.0 64.5\r\n胸寬 66.0 71.0 73.5\r\n袖長 56.0 57.0 59.0\r\n衣長 71.0 73.0 77.0 (cm)\r\n\r\n\r\n建議身高 ≤ 173 拿 M\r\n建議身高∊173~178 拿 L\r\n建議身高 ≥ 178 拿 XL (cm)\r\n\r\n\r\n#TL23018"
+      },
+      "images": [],
+      "localImages": [
+        "assets/images/products/timeless-crewneck.webp"
+      ],
+      "imageSource": "preserved-existing"
+    },
+    {
+      "productNumber": "TL24019",
+      "title": "PRDM Timeless Hoodie",
+      "price": 1380,
+      "shopeeUrl": "https://shopee.tw/product/74187402/24704802748",
+      "variants": [
+        {
+          "color": "Black",
+          "size": "M",
+          "visible": true,
+          "soldOut": true
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": true,
+          "soldOut": true
+        },
+        {
+          "color": "Black",
+          "size": "XL",
+          "visible": true,
+          "soldOut": true
+        },
+        {
+          "color": "Midnight",
+          "size": "M",
+          "visible": true,
+          "soldOut": true
+        },
+        {
+          "color": "Midnight",
+          "size": "L",
+          "visible": true,
+          "soldOut": true
+        },
+        {
+          "color": "Midnight",
+          "size": "XL",
+          "visible": true,
+          "soldOut": true
+        }
+      ],
+      "document": {
+        "id": "1BD7R-S2ynPZqkP3XD1m3M8QxW8bR4sb_UXK9-RLO4Bc",
+        "title": "#TL24019_Copy_Instagram",
+        "modifiedTime": "2023-12-24T06:42:26.227Z",
+        "content": "﻿@prdm.tw ®\r\n\r\n\r\nPRDM Timeless Hoodie\r\n\r\n\r\nColor : Black, Midnight\r\nSize : M, L, XL\r\nPrice : NT$1380\r\n\r\n\r\n• Printed graphics on front and back\r\n• 100% cotton loopback jersey of 350 g/sqm\r\n• Boxy silhouette and longer-back cutting\r\n• Watch pocket inside the kangaroo pocket\r\n• Signature tab on sleeve\r\n\r\n\r\n-\r\n\r\n\r\nTimeless 系列旨在傳達品牌的初衷\r\n我們不追求浮誇的剪裁與結構\r\n而是回歸最本質性的經典原型\r\n改良成現在流行而未來也不會過時的型態\r\n同時技巧性地融入當季創意\r\n打造簡約百搭的設計風格\r\n\r\n\r\n這款印花帽 T 的面料設定\r\n同樣是最適合台灣的重磅毛圈布\r\n兼顧外觀的立體度以及優異的舒適度、實穿性\r\n\r\n\r\n極寬的袖管讓整體輪廓的寬鬆感更一致\r\n微短版的衣長有助於修飾身形比例\r\n選擇小一號的尺寸可以穿出更短版的效果\r\n我們在口袋內側額外增加了隱藏小口袋\r\n便於放置零錢或是鑰匙、卡片、耳機……\r\n\r\n\r\n我們在面料、版型、機能上努力\r\n就是要為你打造這款最強帽 T\r\n\r\n\r\n-\r\n\r\n\r\n     M   L   XL\r\n肩寬 60.0 62.5 65.0\r\n胸寬 63.0 65.5 68.0\r\n袖長 60.0 61.5 63.0\r\n衣長 68.5 71.0 73.5 (cm)\r\n\r\n\r\n建議身高 ≤ 173 拿 M\r\n建議身高∊173~178 拿 L\r\n建議身高 ≥ 178 拿 XL (cm)\r\n\r\n\r\n#TL24019"
+      },
+      "images": [],
+      "localImages": [
+        "assets/svg/hoodie.svg"
+      ],
+      "imageSource": "placeholder"
+    },
+    {
+      "productNumber": "BT24020",
+      "title": "PRDM Intelligence Hoodie",
+      "price": 1380,
+      "shopeeUrl": "https://shopee.tw/product/74187402/24506235365",
+      "variants": [
+        {
+          "color": "Black",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Midnight",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Midnight",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Midnight",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        }
+      ],
+      "document": {
+        "id": "1XnJjClFY5CUWQWak1-s07nFMCv0Iwnwi8gF9uVXQVKU",
+        "title": "#BT24020_Copy_Instagram",
+        "modifiedTime": "2026-08-06T06:25:39.010Z",
+        "content": "﻿@prdm.tw ®\r\n\r\n\r\nPRDM Intelligence Hoodie\r\n\r\n\r\nColor: Black, Midnight\r\nSize: M, L, XL\r\nPrice: NT$1380\r\n\r\n\r\n• Printed graphics on front and back\r\n• 100% cotton loopback jersey of 350 g/m²\r\n• Boxy silhouette and longer-back cutting\r\n• Watch pocket inside the kangaroo pocket\r\n• Signature tab on sleeve\r\n\r\n\r\n-\r\n\r\n\r\n「Authentic」作為韋氏辭典的年度關鍵字\r\n揭示了生成式人工智慧的瘋狂擴張\r\n此時世界的真實性已不再是理所當然\r\n\r\n\r\n人類已然置身於一個真假難辨的世界\r\n我們無法使用言語來識別敵友\r\n抑或使用 reCAPTCHA v2 進行人機驗證\r\n為證明自己是人類而辯解看似可笑\r\n卻是我們無可迴避的文明危機\r\n\r\n\r\n為打造古往今來之間恆真的美學\r\nParadigm® 將「Authentic」列入品牌核心理念\r\n未來也將持續演示這個世界運作的真相\r\n\r\n\r\n這款印花帽 T 的面料是最適合台灣的重磅毛圈布\r\n兼顧外觀的立體度以及優異的舒適度、實穿性\r\n\r\n\r\n極寬的袖管讓整體輪廓的寬鬆感更一致\r\n微短版的衣長有助於修飾身形比例\r\n選擇小一號的尺寸可以穿出更短版的效果\r\n我們在口袋內側額外增加了隱藏小口袋\r\n便於放置零錢或是鑰匙、卡片、耳機……\r\n\r\n\r\n-\r\n\r\n\r\n    M  L  XL\r\n肩寬 𝟨𝟢.𝟢 𝟨𝟤.𝟧 𝟨𝟧.𝟢\r\n胸寬 𝟨𝟥.𝟢 𝟨𝟧.𝟧 𝟨𝟪.𝟢\r\n袖長 𝟨𝟢.𝟢 𝟨𝟣.𝟧 𝟨𝟥.𝟢\r\n衣長 𝟨𝟪.𝟧 𝟩𝟣.𝟢 𝟩𝟥.𝟧 (cm)\r\n\r\n\r\n建議身高 < 173 著用 M\r\n建議身高 173~178 著用 L\r\n建議身高 > 178 著用 XL (cm)\r\n\r\n\r\n#BT24020"
+      },
+      "images": [],
+      "localImages": [
+        "assets/images/products/intelligence-hoodie.webp"
+      ],
+      "imageSource": "preserved-existing"
+    },
+    {
+      "productNumber": "BD24021",
+      "title": "PRDM Cosmos Hoodie",
+      "price": 1380,
+      "shopeeUrl": "https://shopee.tw/product/74187402/24756231227",
+      "variants": [
+        {
+          "color": "Black",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Black",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Midnight",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Midnight",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Midnight",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        }
+      ],
+      "document": {
+        "id": "1drTbvQ1ERiWXfSORGyMs4p-Xv8_GdHW4SwKvXiZQT3g",
+        "title": "#BD24021_Copy_Instagram",
+        "modifiedTime": "2026-08-06T06:27:25.053Z",
+        "content": "﻿@prdm.tw ®\r\n\r\n\r\nPRDM Cosmos Hoodie\r\n\r\n\r\nColor: Black, Midnight\r\nSize: M, L, XL\r\nPrice: NT$1380\r\n\r\n\r\n• Printed graphics on front and back\r\n• 100% cotton loopback jersey of 350 g/m²\r\n• Boxy silhouette and longer-back cutting\r\n• Watch pocket inside the kangaroo pocket\r\n• Signature tab on sleeve\r\n\r\n\r\n-\r\n\r\n\r\n西元 1543 年  波蘭教士哥白尼出版《天體運行論》\r\n提出近乎異端的日心說  為科學革命揭開序幕\r\n哥白尼指出月球公轉、地球自轉及地球公轉等現象\r\n此後百年內由伽利略、克卜勒的實際觀測支持\r\n終於讓歐洲世界開始接受地球並非宇宙的中心\r\n天體以橢圓軌道公轉因此成為宇宙運行的新典範\r\n\r\n\r\n然而  以銀河系的座標來說\r\n地球並非在一個平面的橢圓軌道上繞太陽公轉\r\n地球公轉的黃道面與銀河系的盤面有著 60° 的夾角\r\n而隨著太陽以 230 km/s 的速度繞行銀河系\r\n地球移動的軌跡實際上是以太陽為軸心的螺旋狀\r\n\r\n\r\n後繼科學家在五百年來不斷改良或挑戰\r\n無論是否能成為主流常態科學\r\n都已在科學史上留下永恆的註記\r\n正如 Paradigm® 致力於奠定穿搭新典範\r\n推動符合當代潮流、不易過時的簡約美學\r\n\r\n\r\n這款印花帽Ｔ的面料是最適合台灣的重磅毛圈布\r\n兼顧外觀的立體度以及優異的舒適度、實穿性\r\n\r\n\r\n極寬的袖管讓整體輪廓的寬鬆感更一致\r\n微短版的衣長有助於修飾身形比例\r\n選擇小一號的尺寸可以穿出更短版的效果\r\n我們在口袋內側額外增加了隱藏小口袋\r\n便於放置零錢或是鑰匙、卡片、耳機……\r\n\r\n\r\n-\r\n\r\n\r\n    M  L  XL\r\n肩寬 𝟨𝟢.𝟢 𝟨𝟤.𝟧 𝟨𝟧.𝟢\r\n胸寬 𝟨𝟥.𝟢 𝟨𝟧.𝟧 𝟨𝟪.𝟢\r\n袖長 𝟨𝟢.𝟢 𝟨𝟣.𝟧 𝟨𝟥.𝟢\r\n衣長 𝟨𝟪.𝟧 𝟩𝟣.𝟢 𝟩𝟥.𝟧 (cm)\r\n\r\n\r\n建議身高 < 173 著用 M\r\n建議身高 173~178 著用 L\r\n建議身高 > 178 著用 XL (cm)\r\n\r\n\r\n#BD24021"
+      },
+      "images": [],
+      "localImages": [
+        "assets/images/products/BD24021/cosmos-hoodie-01.webp",
+        "assets/images/products/BD24021/cosmos-hoodie-02.webp",
+        "assets/images/products/BD24021/cosmos-hoodie-03.webp",
+        "assets/images/products/BD24021/cosmos-hoodie-04.webp",
+        "assets/images/products/BD24021/cosmos-hoodie-05.webp",
+        "assets/images/products/BD24021/cosmos-hoodie-06.webp",
+        "assets/images/products/BD24021/cosmos-hoodie-07.webp"
+      ],
+      "imageSource": "preserved-existing"
+    },
+    {
+      "productNumber": "GM42022",
+      "title": "PRDM Training Shorts",
+      "price": 1180,
+      "shopeeUrl": "https://shopee.tw/product/74187402/41405643937",
+      "variants": [
+        {
+          "color": "Mocha",
+          "size": "M",
+          "visible": true,
+          "soldOut": true
+        },
+        {
+          "color": "Mocha",
+          "size": "L",
+          "visible": true,
+          "soldOut": true
+        },
+        {
+          "color": "Mocha",
+          "size": "XL",
+          "visible": true,
+          "soldOut": true
+        }
+      ],
+      "document": {
+        "id": "1Y-96P4VITWHtaJ77h5je-XzcqEZ-XP1LdtImTT5riM4",
+        "title": "#GM42022_Copy_Instagram",
+        "modifiedTime": "2026-08-06T06:02:26.162Z",
+        "content": "﻿@prdm.tw ®\r\n\r\n\r\nPRDM Training Shorts\r\n\r\n\r\nColor: Mocha\r\nSize: M, L, XL\r\nPrice: NT$1180\r\n\r\n\r\n• 100% polyester mesh fabric\r\n• 100% polyester recycled lining ⸺ TOPGREEN®\r\n• 100% polyester drawstring with coated ends\r\n• Watch pocket & key ring inside front pocket\r\n• No-drop openings within front pockets\r\n• Signature tab on hem\r\n• Made in Taiwan\r\n\r\n\r\n-\r\n\r\n\r\n在副熱帶的炎熱氣候下\r\n我們將實用機能巧妙注入這款網眼短褲\r\n\r\n\r\n外層以經典的網眼面料呈現復古氛圍\r\n內層選用 TOPGREEN® 寶特瓶回收紗製成\r\n榮獲全球 GRS 及台灣綠色環保標章認證\r\n在追求風格的同時也能為地球盡一份心力\r\n\r\n\r\n為了拉長腿部比例來修飾身形\r\n我們反覆雕琢現下流行的較短褲長\r\n並且選用與肌膚相近的棕色系\r\n維持下半身的視覺連貫性\r\n即使是較矮小的身形也能輕鬆駕馭\r\n\r\n\r\n致力於融合極簡外觀與日常機能\r\n我們在口袋內側額外縫製機能小袋\r\n並且設計了隱藏式的鑰匙扣環\r\n更獨創「防噴袋口」設計以防物品掉落\r\n\r\n\r\n考量到 Mono-Material 原則\r\n褲頭採用精心訂製的聚酯纖維抽繩\r\n搭配繩頭別富質感的浸膠做法\r\n\r\n\r\n這款網眼短褲將成為你最常著用的選擇\r\n陪伴你度過一個清爽舒適的夏日\r\n\r\n\r\n-\r\n\r\n\r\n     M  L  XL\r\n褲頭寬 𝟥𝟦.𝟢 𝟥𝟩.𝟢 𝟦𝟤.𝟢\r\n褲腳寬 𝟥𝟥.𝟢 𝟥𝟦.𝟧 𝟥𝟩.𝟢\r\n內側長 𝟣𝟥.𝟧 𝟣𝟦.𝟧 𝟣𝟧.𝟧\r\n外側長 𝟥𝟩.𝟧 𝟥𝟫.𝟢 𝟦𝟢.𝟧 (cm)\r\n\r\n\r\n建議腰圍 < 80 著用 M\r\n建議腰圍 80~90 著用 L\r\n建議腰圍 > 90 著用 XL (cm)\r\n\r\n\r\n#GM42022"
+      },
+      "images": [],
+      "localImages": [
+        "assets/images/products/training-shorts.webp"
+      ],
+      "imageSource": "preserved-existing"
+    },
+    {
+      "productNumber": "GM42023",
+      "title": "PRDM Training Shorts",
+      "price": 1180,
+      "shopeeUrl": "https://shopee.tw/product/74187402/40105649000",
+      "variants": [
+        {
+          "color": "Mud",
+          "size": "M",
+          "visible": true,
+          "soldOut": true
+        },
+        {
+          "color": "Mud",
+          "size": "L",
+          "visible": true,
+          "soldOut": true
+        },
+        {
+          "color": "Mud",
+          "size": "XL",
+          "visible": true,
+          "soldOut": true
+        }
+      ],
+      "document": {
+        "id": "1k6CPp6rKsWWB9YMjy9WtPLiiDTqSy7B5XSPj_uhYREk",
+        "title": "#GM42023_Copy_Instagram",
+        "modifiedTime": "2026-08-06T06:03:40.052Z",
+        "content": "﻿@prdm.tw ®\r\n\r\n\r\nPRDM Training Shorts\r\n\r\n\r\nColor: Mud\r\nSize: M, L, XL\r\nPrice: NT$1180\r\n\r\n\r\n• 100% polyester mesh fabric\r\n• 100% polyester recycled lining ⸺ TOPGREEN®\r\n• 100% polyester drawstring with coated ends\r\n• Watch pocket & key ring inside front pocket\r\n• No-drop openings within front pockets\r\n• Signature tab on hem\r\n• Made in Taiwan\r\n\r\n\r\n-\r\n\r\n\r\n在副熱帶的炎熱氣候下\r\n我們將實用機能巧妙注入這款網眼短褲\r\n\r\n\r\n外層以經典的網眼面料呈現復古氛圍\r\n內層選用 TOPGREEN® 寶特瓶回收紗製成\r\n榮獲全球 GRS 及台灣綠色環保標章認證\r\n在追求風格的同時也能為地球盡一份心力\r\n\r\n\r\n為了拉長腿部比例來修飾身形\r\n我們反覆雕琢現下流行的較短褲長\r\n並且選用與肌膚相近的棕色系\r\n維持下半身的視覺連貫性\r\n即使是較矮小的身形也能輕鬆駕馭\r\n\r\n\r\n致力於融合極簡外觀與日常機能\r\n我們在口袋內側額外縫製機能小袋\r\n並且設計了隱藏式的鑰匙扣環\r\n更獨創「防噴袋口」設計以防物品掉落\r\n\r\n\r\n考量到 Mono-Material 原則\r\n褲頭採用精心訂製的聚酯纖維抽繩\r\n搭配繩頭別富質感的浸膠做法\r\n\r\n\r\n這款網眼短褲將成為你最常著用的選擇\r\n陪伴你度過一個清爽舒適的夏日\r\n\r\n\r\n-\r\n\r\n\r\n     M  L  XL\r\n褲頭寬 𝟥𝟦.𝟢 𝟥𝟩.𝟢 𝟦𝟤.𝟢\r\n褲腳寬 𝟥𝟥.𝟢 𝟥𝟦.𝟧 𝟥𝟩.𝟢\r\n內側長 𝟣𝟥.𝟧 𝟣𝟦.𝟧 𝟣𝟧.𝟧\r\n外側長 𝟥𝟩.𝟧 𝟥𝟫.𝟢 𝟦𝟢.𝟧 (cm)\r\n\r\n\r\n建議腰圍 < 80 著用 M\r\n建議腰圍 80~90 著用 L\r\n建議腰圍 > 90 著用 XL (cm)\r\n\r\n\r\n#GM42023"
+      },
+      "images": [],
+      "localImages": [
+        "assets/images/products/training-shorts.webp"
+      ],
+      "imageSource": "preserved-existing"
+    },
+    {
+      "productNumber": "ED14024",
+      "title": "PRDM Everyday Tee",
+      "price": 590,
+      "shopeeUrl": "https://shopee.tw/product/74187402/51965487881",
+      "variants": [
+        {
+          "color": "Shadow",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Shadow",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Shadow",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "Grey",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "M",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "L",
+          "visible": true,
+          "soldOut": false
+        },
+        {
+          "color": "White",
+          "size": "XL",
+          "visible": true,
+          "soldOut": false
+        }
+      ],
+      "document": {
+        "id": "1LTnLM21NKGVWx89M3Nm4mPdc5szFyIA4Qd90gh6-P5w",
+        "title": "#ED14024_Copy_Instagram",
+        "modifiedTime": "2026-08-05T16:06:41.400Z",
+        "content": "﻿@prdm.tw ®\r\n\r\n\r\nPRDM Everyday Tee\r\n\r\n\r\nColor: Charcoal, Dove, White\r\nSize: M, L, XL\r\nPrice: NT$590\r\n\r\n\r\n• 235 g/m² combed jersey of 100% cotton\r\n• Relaxed fit with longer-back cutting\r\n• Signature tab on hem\r\n\r\n\r\n-\r\n\r\n\r\n這次我們選擇降低設計的存在感\r\n讓服裝扮演最稱職的配角\r\n\r\n\r\n面料改用 32 支雙股的織法\r\n在相同單位克重條件之下\r\n布面觸感會更加細緻滑順\r\n體感輕薄但仍保有足夠挺度\r\n\r\n\r\n與前代 Everyday Tee 相比\r\n衣長縮短成更容易搭配的長度\r\n袖管角度略微下調\r\n使整體寬鬆感相應收斂\r\n\r\n\r\n「這不是一件完美的短Ｔ。」\r\n針對雙手垂放姿態最佳化的結果\r\n就是在抬手活動量有所侷限\r\n因此並不適合在運動時穿著\r\n\r\n\r\n細節回歸最標準的處理\r\n採用雙針羅紋領口及本布滾條\r\n僅下擺以灰階品牌織標點綴\r\n\r\n\r\n看起來沒有什麼特別之處\r\n穿上之後，一切都剛剛好\r\n\r\n\r\n-\r\n\r\n\r\n    M  L  XL\r\n肩寬 𝟧𝟦.𝟢 𝟧𝟨.𝟧 𝟧𝟫.𝟢\r\n胸寬 𝟧𝟧.𝟧 𝟧𝟪.𝟢 𝟨𝟢.𝟧\r\n袖長 𝟤𝟣.𝟢 𝟤𝟤.𝟢 𝟤𝟥.𝟢\r\n衣長 𝟨𝟩.𝟧 𝟨𝟫.𝟧 𝟩𝟤.𝟧 (cm)\r\n\r\n\r\n建議身高 < 173 著用 M\r\n建議身高 173~178 著用 L\r\n建議身高 > 178 著用 XL (cm)\r\n\r\n\r\n#ED14024"
+      },
+      "images": [
+        {
+          "index": 0,
+          "id": "1dRisJTLdFn5ellqYk4FCoSyTHUWLbmTr",
+          "label": "#ED14024-C030609_ProductPhoto.jpg",
+          "mimeType": "image/jpeg",
+          "size": "2298493",
+          "modifiedTime": "2026-08-04T13:11:40.000Z",
+          "localPath": "assets/images/products/ED14024/ed14024-00.webp"
+        },
+        {
+          "index": 1,
+          "id": "13ATR3UNABmz1-73kP2YRHsuR4MSB_rqW",
+          "label": "#ED14024-C03_ProductPhoto_1-Front.jpg",
+          "mimeType": "image/jpeg",
+          "size": "2016722",
+          "modifiedTime": "2026-08-02T18:13:55.000Z",
+          "localPath": "assets/images/products/ED14024/ed14024-01.webp"
+        },
+        {
+          "index": 2,
+          "id": "14OohzrbpPgAU8cVaIH3GaTt-Spk6q6v4",
+          "label": "#ED14024-C06_ProductPhoto_1-Front.jpg",
+          "mimeType": "image/jpeg",
+          "size": "2555836",
+          "modifiedTime": "2026-08-02T17:55:35.000Z",
+          "localPath": "assets/images/products/ED14024/ed14024-02.webp"
+        },
+        {
+          "index": 3,
+          "id": "1a1uJ8zeiVTS8Lh-AiyT-wQK4YuxBptth",
+          "label": "#ED14024-C09_ProductPhoto_1-Front.jpg",
+          "mimeType": "image/jpeg",
+          "size": "1581166",
+          "modifiedTime": "2026-08-02T18:11:16.000Z",
+          "localPath": "assets/images/products/ED14024/ed14024-03.webp"
+        },
+        {
+          "index": 4,
+          "id": "1NphtKTPWsActFuaB_EInxecBAjyL1MK0",
+          "label": "#ED14024-C06_ProductPhoto_3-Detail.jpg",
+          "mimeType": "image/jpeg",
+          "size": "9959643",
+          "modifiedTime": "2026-07-29T13:50:02.000Z",
+          "localPath": "assets/images/products/ED14024/ed14024-04.webp"
+        },
+        {
+          "index": 5,
+          "id": "190DhgNppQhSLuXbBoItvd7HrUzT1agJC",
+          "label": "#ED14024-C06_ProductPhoto_4-Detail.jpg",
+          "mimeType": "image/jpeg",
+          "size": "6855002",
+          "modifiedTime": "2026-07-29T13:50:01.000Z",
+          "localPath": "assets/images/products/ED14024/ed14024-05.webp"
+        },
+        {
+          "index": 6,
+          "id": "1Afhg54lwqZMLkZZY3iOeh4N52y7Xp86Y",
+          "label": "#ED14024-C06_FittingPhoto_1-Front.jpg",
+          "mimeType": "image/jpeg",
+          "size": "5615232",
+          "modifiedTime": "2026-08-04T13:21:36.000Z",
+          "localPath": "assets/images/products/ED14024/ed14024-06.webp"
+        },
+        {
+          "index": 7,
+          "id": "19XY_-OV97WJ5pq8iMNs9Ivbhe9CMW_wa",
+          "label": "#ED14024-C06_FittingPhoto_2-Back.jpg",
+          "mimeType": "image/jpeg",
+          "size": "4627380",
+          "modifiedTime": "2026-08-04T13:20:42.000Z",
+          "localPath": "assets/images/products/ED14024/ed14024-07.webp"
+        }
+      ],
+      "localImages": [
+        "assets/images/products/ED14024/ed14024-00.webp",
+        "assets/images/products/ED14024/ed14024-01.webp",
+        "assets/images/products/ED14024/ed14024-02.webp",
+        "assets/images/products/ED14024/ed14024-03.webp",
+        "assets/images/products/ED14024/ed14024-04.webp",
+        "assets/images/products/ED14024/ed14024-05.webp",
+        "assets/images/products/ED14024/ed14024-06.webp",
+        "assets/images/products/ED14024/ed14024-07.webp"
+      ],
+      "imageSource": "sheet"
+    }
+  ]
+}

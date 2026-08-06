@@ -139,6 +139,8 @@ rg "shopee|instagram|discord|https://" collections products teamwear
 
 正式環境採用 Cloudflare Pages；完整設定請見 `docs/cloudflare-pages-deployment.md`。
 
+商品資料由 Google Sheet 的 `網站參照` 分頁定期同步；欄位規則、Google Docs 文案截取、圖片保留策略、修改時間追蹤與驗證流程請見 `docs/product-sync.md`。
+
 ```text
 Production branch: main
 Framework preset: None
