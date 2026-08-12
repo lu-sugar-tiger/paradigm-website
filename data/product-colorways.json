@@ -1,0 +1,12 @@
+{
+  "colorways": [
+    { "label": "Black", "hex": "#111111" },
+    { "label": "Cardinal", "hex": "#8d1f2d" },
+    { "label": "Grey", "hex": "#a7a8a6" },
+    { "label": "Midnight", "hex": "#1b2b68" },
+    { "label": "Mocha", "hex": "#8a6a50" },
+    { "label": "Mud", "hex": "#5b483b" },
+    { "label": "Shadow", "hex": "#343434" },
+    { "label": "White", "hex": "#f2f0e9" }
+  ]
+}

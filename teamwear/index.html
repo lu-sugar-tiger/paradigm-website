@@ -1,10 +1,14 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Paradigm | Teamwear</title>
-  <meta name="description" content="Paradigm Teamwear for custom basketball uniforms and coordinated team kits.">
+  <title>Basketball Teamwear 01 | Paradigm</title>
+  <meta name="description" content="Basketball 01 is Paradigm's reversible basketball teamwear system, composed for teams that want a complete visual identity.">
+  <meta property="og:title" content="Basketball Teamwear 01 | Paradigm">
+  <meta property="og:description" content="A reversible basketball uniform system composed by Paradigm for the whole roster.">
+  <meta property="og:image" content="https://prdm.tw/assets/images/teamwear/campaign/hero-desktop.webp">
+  <meta property="og:type" content="website">
   <link rel="canonical" href="https://prdm.tw/teamwear">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../assets/css/tokens.css">
@@ -13,30 +17,24 @@
   <link rel="stylesheet" href="../assets/css/layout.css">
   <link rel="stylesheet" href="../assets/css/components.css">
   <link rel="stylesheet" href="../assets/css/pages.css">
-  <script defer src="../assets/js/catalog.js"></script>
+  <link rel="stylesheet" href="../assets/css/teamwear.css">
+  <link rel="stylesheet" href="../assets/css/teamwear-story.css?v=20260813c">
   <script defer src="../assets/js/app.js"></script>
+  <script defer src="../assets/js/teamwear.js?v=20260813"></script>
 </head>
-<body class="site-shell reference-page reference-page--teamwear" data-root="..">
+<body class="site-shell reference-page teamwear-page" data-root="..">
   <header class="site-header">
     <div class="container site-header__inner">
       <a class="site-logo" href="/" aria-label="Paradigm home">PARADIGM</a>
       <div class="site-actions" aria-label="Quick actions">
         <button class="icon-button" type="button" aria-label="Search">
-          <svg aria-hidden="true" viewBox="0 0 24 24">
-            <circle cx="11" cy="11" r="6.5"></circle>
-            <path d="M16 16l4.5 4.5"></path>
-          </svg>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4.5 4.5"></path></svg>
         </button>
         <button class="icon-button" type="button" aria-label="Shopping bag">
-          <svg aria-hidden="true" viewBox="0 0 24 24">
-            <path d="M6.5 8.5h11l-.8 10H7.3z"></path>
-            <path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"></path>
-          </svg>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6.5 8.5h11l-.8 10H7.3z"></path><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"></path></svg>
         </button>
         <button class="icon-button" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle>
-          <svg aria-hidden="true" viewBox="0 0 24 24">
-            <path d="M4 7h16M4 12h16M4 17h16"></path>
-          </svg>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
         </button>
       </div>
     </div>
@@ -45,216 +43,212 @@
   <div class="nav-drawer" aria-hidden="true" data-nav-drawer>
     <div class="nav-drawer__panel">
       <button class="icon-button nav-drawer__close" type="button" aria-label="Close navigation" data-nav-close>
-        <svg aria-hidden="true" viewBox="0 0 24 24">
-          <path d="M6 6l12 12M18 6L6 18"></path>
-        </svg>
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></svg>
       </button>
-      <nav class="drawer-nav" aria-label="Mobile navigation">
-        <ul role="list">
-          <li>
-            <a href="/collections/all">All</a>
-            <ul class="drawer-nav__subcollections" role="list">
-              <li><a href="/collections/ss-tops">SS Tops</a></li>
-              <li><a href="/collections/aw-tops">AW Tops</a></li>
-              <li><a href="/collections/bottoms">Bottoms</a></li>
-            </ul>
-          </li>
-        </ul>
-        <div class="drawer-nav__divider"></div>
-        <ul role="list">
-          <li><a href="/teamwear" aria-current="page">Teamwear</a></li>
-        </ul>
-      </nav>
+      <nav class="drawer-nav" aria-label="Navigation"></nav>
     </div>
   </div>
 
-  <main class="page">
-    <section class="page-headline">
-      <div class="container">
-        <p class="teamwear-caption">PRDM PE Basketball Teamwear</p>
+  <main class="page teamwear-story-page" id="main-content">
+    <section class="teamwear-hero" aria-labelledby="teamwear-title" data-teamwear-hero>
+      <picture class="teamwear-hero__media">
+        <source media="(max-width: 47.99rem)" srcset="../assets/images/teamwear/campaign/hero-mobile.webp">
+        <img src="../assets/images/teamwear/campaign/hero-desktop.webp" alt="Five basketball players in coordinated mocha, white, and black uniforms on an urban night court" width="2400" height="1500" fetchpriority="high">
+      </picture>
+      <div class="teamwear-hero__shade" aria-hidden="true"></div>
+      <div class="container teamwear-hero__copy">
+        <p class="teamwear-kicker">PARADIGM TEAMWEAR / BASKETBALL 01</p>
+        <h1 id="teamwear-title">Make the team<br> impossible to overlook.</h1>
+        <p>Basketball 01 is a reversible uniform system composed by Paradigm for the whole roster.</p>
       </div>
     </section>
 
-    <section class="hero teamwear-hero">
-      <div class="container hero__content">
-        <div class="stack-md">
-          <h1 class="hero__title">Your teamwear, designed by Paradigm.</h1>
-          <p class="hero__copy">Studio-curated athletic kits built around your roster, your pacing, and your visual identity.</p>
+    <section class="teamwear-index" aria-labelledby="index-title">
+      <div class="container teamwear-index__layout">
+        <div class="teamwear-index__heading">
+          <p class="teamwear-section-label">BASKETBALL 01 / AT A GLANCE</p>
+          <h2 id="index-title">One complete uniform.</h2>
         </div>
-        <figure class="hero__visual">
-          <img src="../assets/images/teamwear/teamwear-hero.webp" alt="Brown and white Paradigm basketball teamwear shown above a night court" width="941" height="1672">
-        </figure>
-      </div>
-    </section>
-
-    <section class="teamwear-story">
-      <div class="container">
-        <article class="teamwear-story__section">
-          <div class="teamwear-story__copy">
-            <span class="teamwear-story__index">01</span>
-            <h2>The Anti-DIY Philosophy</h2>
-            <p>You provide the roster, colour direction, and usage context. Paradigm turns that into a coherent kit system rather than a quick logo placement job.</p>
-          </div>
-          <figure class="teamwear-story__visual teamwear-story__visual--identity">
-            <img src="../assets/images/teamwear/teamwear-story.webp" alt="Standardized brown basketball jersey typography" width="941" height="1672" loading="lazy">
-          </figure>
-        </article>
-
-        <article class="teamwear-story__section">
-          <div class="teamwear-story__copy">
-            <span class="teamwear-story__index">02</span>
-            <h2>The Fabric Construction</h2>
-            <p>Lightweight, durable, and prepared for repeated wear. This area is structured to accept real fabric closeups and performance notes once you provide them.</p>
-          </div>
-          <figure class="teamwear-story__visual teamwear-story__visual--fabric">
-            <img src="../assets/images/teamwear/teamwear-story.webp" alt="Close view of moisture-wicking basketball jersey fabric" width="941" height="1672" loading="lazy">
-          </figure>
-        </article>
-
-        <article class="teamwear-story__section">
-          <div class="teamwear-story__copy">
-            <span class="teamwear-story__index">03</span>
-            <h2>The Reversible Concept</h2>
-            <p>Front and back, home and away, statement and utility. The section keeps the same editorial hierarchy as your reference while staying editable in plain HTML.</p>
-          </div>
-          <figure class="teamwear-story__visual teamwear-story__visual--reversible">
-            <img src="../assets/images/teamwear/teamwear-story.webp" alt="Brown and white sides of a reversible Paradigm jersey" width="941" height="1672" loading="lazy">
-          </figure>
-        </article>
-      </div>
-    </section>
-
-    <section class="section section--tight">
-      <div class="container">
-        <div class="section-heading">
+        <dl class="teamwear-index__facts">
           <div>
-            <p class="section-heading__eyebrow">1.2</p>
-            <h2>Feature Summary</h2>
+            <dt>01</dt>
+            <dd><strong>Jersey + shorts</strong><span>A complete set for the full roster.</span></dd>
           </div>
-          <p>Built for the court. Refined for everyday wear.</p>
-        </div>
-        <div class="feature-summary">
-          <article class="feature-tile">
-            <p class="feature-tile__eyebrow">01</p>
-            <h3 class="feature-tile__title">Sublimation Cut Prints</h3>
-            <p class="feature-tile__copy">Seamless graphics embedded into the fabric to reduce cracking and peeling.</p>
-          </article>
-          <article class="feature-tile">
-            <p class="feature-tile__eyebrow">02</p>
-            <h3 class="feature-tile__title">Moisture-Wicking Polyester</h3>
-            <p class="feature-tile__copy">Lightweight performance fabric that actively moves sweat away from the body.</p>
-          </article>
-          <article class="feature-tile">
-            <p class="feature-tile__eyebrow">03</p>
-            <h3 class="feature-tile__title">Light but Durable</h3>
-            <p class="feature-tile__copy">Built to handle repeat wear, washing cycles, and movement on court.</p>
-          </article>
-          <article class="feature-tile">
-            <p class="feature-tile__eyebrow">04</p>
-            <h3 class="feature-tile__title">Lockup-Driven Typography</h3>
-            <p class="feature-tile__copy">Strong roster identifiers and typographic systems can be tailored to your team identity.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--tight">
-      <div class="container container--narrow">
-        <div class="section-heading">
           <div>
-            <p class="section-heading__eyebrow">Specs Summary</p>
-            <h2>Materials and care.</h2>
+            <dt>02</dt>
+            <dd><strong>Road + Home</strong><span>Both garments reverse together.</span></dd>
           </div>
-        </div>
-        <dl class="spec-list">
-          <div class="spec-card">
-            <svg aria-hidden="true"><use href="../assets/svg/icons.svg#icon-shirt"></use></svg>
-            <div>
-              <dt>Fit</dt>
-              <dd>Paradigm signature relaxed fit</dd>
-            </div>
+          <div>
+            <dt>03 / 07</dt>
+            <dd><strong>Design bases + Road colors</strong><span>A focused range, composed by Paradigm.</span></dd>
           </div>
-          <div class="spec-card">
-            <svg aria-hidden="true"><use href="../assets/svg/icons.svg#icon-drop"></use></svg>
-            <div>
-              <dt>Material</dt>
-              <dd>100% moisture-wicking polyester</dd>
-            </div>
-          </div>
-          <div class="spec-card">
-            <svg aria-hidden="true"><use href="../assets/svg/icons.svg#icon-grid"></use></svg>
-            <div>
-              <dt>Print</dt>
-              <dd>Sublimation print that will not crack or peel</dd>
-            </div>
-          </div>
-          <div class="spec-card">
-            <svg aria-hidden="true"><use href="../assets/svg/icons.svg#icon-care"></use></svg>
-            <div>
-              <dt>Care</dt>
-              <dd>Cold wash, wrinkle-resistant, quick-dry</dd>
-            </div>
+          <div>
+            <dt>PRINT</dt>
+            <dd><strong>Dye sublimated</strong><span>Detailed artwork fixed into polyester.</span></dd>
           </div>
         </dl>
       </div>
     </section>
 
-    <section class="section section--tight">
-      <div class="container container--narrow">
-        <div class="section-heading">
-          <div>
-            <p class="section-heading__eyebrow">FAQ</p>
-            <h2>Production questions.</h2>
-          </div>
-        </div>
-
-        <article class="faq-card">
-          <button class="faq-question" type="button" aria-expanded="true" aria-controls="faq-1" data-accordion-button>
-            What is the minimum order quantity?
-            <svg aria-hidden="true"><use href="../assets/svg/icons.svg#icon-chevron"></use></svg>
-          </button>
-          <div class="faq-answer" id="faq-1">
-            Orders of 10 sets or more are treated as standard production runs.
-          </div>
-        </article>
-
-        <article class="faq-card">
-          <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-2" data-accordion-button>
-            Can I use my own logo or font?
-            <svg aria-hidden="true"><use href="../assets/svg/icons.svg#icon-chevron"></use></svg>
-          </button>
-          <div class="faq-answer" id="faq-2" hidden>
-            Yes. Send your logo, preferred type style, and colour direction with your inquiry so the design can be evaluated as one system.
-          </div>
-        </article>
-
-        <article class="faq-card">
-          <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-3" data-accordion-button>
-            How long does production take?
-            <svg aria-hidden="true"><use href="../assets/svg/icons.svg#icon-chevron"></use></svg>
-          </button>
-          <div class="faq-answer" id="faq-3" hidden>
-            Production timing depends on quantity, artwork approval, and material availability. A schedule is confirmed with each inquiry.
-          </div>
-        </article>
-
-        <article class="faq-card">
-          <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-4" data-accordion-button>
-            Do team captains get a perk?
-            <svg aria-hidden="true"><use href="../assets/svg/icons.svg#icon-chevron"></use></svg>
-          </button>
-          <div class="faq-answer" id="faq-4" hidden>
-            Team coordinators can discuss sampling and volume options during the initial consultation.
-          </div>
-        </article>
+    <section class="teamwear-statement" aria-label="Basketball 01 design statement" data-word-reveal>
+      <div class="container teamwear-statement__inner">
+        <p aria-label="One roster. One visual language.">
+          <span data-reveal-word>One</span>
+          <span data-reveal-word>roster.</span><br>
+          <span data-reveal-word>One</span>
+          <span data-reveal-word>visual</span>
+          <span data-reveal-word>language.</span>
+        </p>
       </div>
     </section>
 
+    <section class="teamwear-range" aria-labelledby="range-title">
+      <div class="container teamwear-range__header">
+        <p class="teamwear-section-label">THE SYSTEM</p>
+        <div>
+          <h2 id="range-title">A team, in your colors.</h2>
+          <p>Choose one of three design bases and one of seven Road colors. Home stays white, while Paradigm resolves the team name, numbers, trim, and marks across the complete set.</p>
+        </div>
+      </div>
+
+      <div class="container teamwear-range__board">
+        <div class="teamwear-range__looks" aria-label="Basketball 01 design bases">
+          <figure>
+            <img src="../assets/images/teamwear/teamwear-essential-pair-v3.webp" alt="Essential Basketball 01 Road and Home uniform sets in Mocha and white" width="1254" height="1254" loading="lazy">
+            <figcaption>Essential</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/images/teamwear/teamwear-classic-pair-v3.webp" alt="Classic Basketball 01 Road and Home uniform sets in Mocha and white" width="1254" height="1254" loading="lazy">
+            <figcaption>Classic</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/images/teamwear/teamwear-signature-pair-v3.webp" alt="Signature Basketball 01 Road and Home uniform sets in Mocha and white" width="1254" height="1254" loading="lazy">
+            <figcaption>Signature</figcaption>
+          </figure>
+        </div>
+
+        <div class="teamwear-range__palette" aria-label="Seven available Road colors">
+          <span class="teamwear-range__color teamwear-swatch--wine"><i aria-hidden="true"></i>Wine</span>
+          <span class="teamwear-range__color teamwear-swatch--cardinal"><i aria-hidden="true"></i>Cardinal</span>
+          <span class="teamwear-range__color teamwear-swatch--azure"><i aria-hidden="true"></i>Azure</span>
+          <span class="teamwear-range__color teamwear-swatch--midnight"><i aria-hidden="true"></i>Midnight</span>
+          <span class="teamwear-range__color teamwear-swatch--sapphire"><i aria-hidden="true"></i>Sapphire</span>
+          <span class="teamwear-range__color teamwear-swatch--mocha"><i aria-hidden="true"></i>Mocha</span>
+          <span class="teamwear-range__color teamwear-swatch--black"><i aria-hidden="true"></i>Black</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="teamwear-campaign" aria-labelledby="campaign-title">
+      <div class="container teamwear-campaign__header">
+        <p class="teamwear-section-label">ON COURT</p>
+        <div>
+          <h2 id="campaign-title">The court is the lookbook.</h2>
+          <p>Built around the full lineup, not a single jersey. Consistent scale, trim, and type keep the team visually connected in stills and in motion.</p>
+        </div>
+      </div>
+
+      <div class="container teamwear-campaign__grid">
+        <figure class="teamwear-campaign__image teamwear-campaign__image--action">
+          <img src="../assets/images/teamwear/campaign/campaign-action.webp" alt="Basketball players in coordinated uniforms moving through a play on a night court" width="1800" height="1200" loading="lazy">
+          <figcaption>Motion</figcaption>
+        </figure>
+        <figure class="teamwear-campaign__image">
+          <img src="../assets/images/teamwear/campaign/campaign-portrait.webp" alt="Three basketball players in mocha, white, and black uniforms after practice" width="1440" height="1800" loading="lazy">
+          <figcaption>Lineup</figcaption>
+        </figure>
+        <figure class="teamwear-campaign__image">
+          <img src="../assets/images/teamwear/campaign/garment-detail.webp" alt="Close view of mocha pinstripe mesh, cream binding, and a white reverse jersey" width="1440" height="1800" loading="lazy">
+          <figcaption>Detail</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="teamwear-proof" aria-labelledby="proof-title">
+      <div class="container teamwear-proof__layout">
+        <figure class="teamwear-proof__lead">
+          <img src="../assets/images/teamwear/campaign/customer-locker-room-v2.webp" alt="Mocha and white reversible basketball uniforms arranged in a locker room after practice" width="1536" height="1024" loading="lazy">
+          <figcaption>Basketball 01 / Classic / Mocha</figcaption>
+        </figure>
+        <div class="teamwear-proof__story">
+          <p class="teamwear-section-label" id="proof-title">FROM THE ROSTER</p>
+          <blockquote>“The material feels really good. It’s comfortable to wear.”</blockquote>
+          <p>Customer team feedback · Translated from Chinese</p>
+          <figure class="teamwear-proof__customer">
+            <img src="../assets/images/teamwear/teamwear-court-action.webp" alt="NTUE SOE players wearing mocha Road and white Home Basketball 01 uniforms during night practice" width="1800" height="1800" loading="lazy">
+            <figcaption>NTUE SOE / Night practice</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="teamwear-material" aria-labelledby="material-title">
+      <div class="container teamwear-material__header">
+        <p class="teamwear-section-label">FABRIC + PRINT</p>
+        <div>
+          <h2 id="material-title">Made for repeat wear.</h2>
+          <p>Lightweight polyester mesh keeps the reversible set easy to wear through regular training. Dye-sublimation fixes detailed artwork into the fabric for a smooth finish.</p>
+        </div>
+      </div>
+
+      <div class="container teamwear-material__layout">
+        <figure class="teamwear-material__media">
+          <img src="../assets/images/teamwear/campaign/fabric-macro.webp" alt="Macro view of mocha pinstripe and white polyester mesh with cream rib binding" width="1600" height="1200" loading="lazy">
+          <figcaption>Polyester mesh and rib binding</figcaption>
+        </figure>
+        <ul class="teamwear-material__facts" aria-label="Five material and print features">
+          <li><strong>Lightweight mesh</strong><small>Keeps the complete reversible set from feeling bulky.</small></li>
+          <li><strong>Low moisture absorption</strong><small>Polyester absorbs little moisture and dries quickly after wear and washing.</small></li>
+          <li><strong>Durable fibers</strong><small>Suited to regular practice, washing, and repeat wear.</small></li>
+          <li><strong>Crease resistant</strong><small>Helps the uniform keep a cleaner appearance between wears.</small></li>
+          <li><strong>Dye-sublimated</strong><small>Color is fixed into the polyester without a raised transfer layer.</small></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="teamwear-faq" aria-labelledby="faq-title">
+      <div class="container teamwear-faq__layout">
+        <div class="teamwear-faq__heading">
+          <h2 id="faq-title">Teamwear FAQ.</h2>
+        </div>
+        <div class="teamwear-faq__list">
+          <details>
+            <summary>What can our team personalize?</summary>
+            <p>Choose Essential, Classic, or Signature and one of seven Road colors in the builder. Team name, logo, typography, player names, numbers, roster, sizing, quantity, price, and production timing are confirmed after inquiry.</p>
+          </details>
+          <details>
+            <summary>Do the jersey and shorts reverse together?</summary>
+            <p>Yes. Both pieces reverse between the white Home side and your selected Road color.</p>
+          </details>
+          <details>
+            <summary>Can we supply a different pattern?</summary>
+            <p>Basketball 01 uses Essential, Classic, or Signature as its design foundation. This keeps the proportions consistent across the complete kit.</p>
+          </details>
+          <details>
+            <summary>How is the artwork applied?</summary>
+            <p>The kit is dye-sublimated. Heat fixes the artwork into the polyester, leaving a smooth surface without a raised film layer.</p>
+          </details>
+          <details>
+            <summary>How long does delivery take?</summary>
+            <p>Delivery is typically within one month—about four weeks—after the design, roster, sizing, and quantity are confirmed.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="teamwear-close" aria-labelledby="close-title">
+      <img src="../assets/images/teamwear/campaign/reversible-studio.webp" alt="Mocha Road and white Home basketball uniform looks presented together in a studio" width="1800" height="1350" loading="lazy">
+      <div class="teamwear-close__shade" aria-hidden="true"></div>
+      <div class="container teamwear-close__copy">
+        <h2 id="close-title">Make Basketball 01 yours.</h2>
+        <p>Choose a design base and Road color to begin.</p>
+      </div>
+    </section>
   </main>
 
-  <a class="button teamwear-inquiry" href="https://www.instagram.com/prdm.tw/" target="_blank" rel="noopener noreferrer" aria-label="Message Paradigm about Teamwear on Instagram — opens an external site">
+  <a class="button teamwear-action" href="/teamwear/customize">
     <svg aria-hidden="true"><use href="../assets/svg/icons.svg#icon-arrow"></use></svg>
-    Direct Message
+    Build yours
   </a>
 
   <footer class="site-footer">
@@ -263,7 +257,7 @@
         <a class="footer-link" href="#">Privacy Policy</a>
         <a class="footer-link" href="https://shopee.tw/" target="_blank" rel="noreferrer"><svg aria-hidden="true"><use href="../assets/svg/icons.svg#icon-globe"></use></svg> Shopee</a>
         <a class="footer-link" href="#">Term of Use</a>
-        <a class="footer-link" href="https://www.instagram.com/" target="_blank" rel="noreferrer"><svg aria-hidden="true"><use href="../assets/svg/icons.svg#icon-instagram"></use></svg> Instagram</a>
+        <a class="footer-link" href="https://www.instagram.com/prdm.tw/" target="_blank" rel="noreferrer"><svg aria-hidden="true"><use href="../assets/svg/icons.svg#icon-instagram"></use></svg> Instagram</a>
         <a class="footer-link" href="#">Sales and Refunds</a>
         <a class="footer-link" href="https://discord.com/" target="_blank" rel="noreferrer"><svg aria-hidden="true"><use href="../assets/svg/icons.svg#icon-discord"></use></svg> Discord</a>
       </div>

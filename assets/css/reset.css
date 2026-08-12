@@ -22,6 +22,10 @@ dd {
   margin: 0;
 }
 
+p {
+  margin-block-end: var(--type-paragraph-spacing-default);
+}
+
 ul[role="list"],
 ol[role="list"] {
   list-style: none;

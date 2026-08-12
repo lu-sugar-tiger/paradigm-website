@@ -84,25 +84,35 @@ python -m http.server 8000
 
 ## 商品資料
 
-商品資料集中在 `assets/js/catalog.js`。每個商品應提供穩定且唯一的 `productNumber`：
+商品來源快照位於 `data/products-source.json`，再由 `scripts/build-product-catalog.mjs` 產生 `assets/js/catalog.js` 與各商品靜態頁。請勿直接編輯產生檔。每個商品都有穩定且唯一的 `productNumber`：
 
 ```js
 {
-  slug: "training-shorts",
-  productNumber: "PL-002",
-  title: "Training Shorts",
-  category: "Bottoms",
-  price: "NT$1180",
-  image: "assets/svg/shorts.svg",
-  alt: "Dark training shorts placeholder artwork",
-  ...createPlaceholderDetails({
-    title: "Training Shorts",
-    colorLabel: "Graphite",
-    colorHex: "#34383b",
-    productNumber: "PL-002",
-    type: "bottom"
-  }),
-  shopeeUrl: "https://shopee.tw/"
+  slug: "everyday-tee",
+  productNumber: "ED14001",
+  title: "PRDM Everyday Tee",
+  category: "SS Tops",
+  price: "NT$1,180",
+  image: "assets/images/everyday-tee.webp",
+  images: ["assets/images/everyday-tee.webp"],
+  colors: [{ label: "Black", hex: "#111111" }],
+  sizes: ["M", "L", "XL"],
+  variants: [{ sku: "...", color: "Black", size: "M", visible: true, soldOut: false }],
+  copy: [
+    { type: "text", text: "• 100% cotton" },
+    { type: "blank", text: "\n" },
+    { type: "rule", text: "-" },
+    { type: "blank", text: "\n" },
+    {
+      type: "table",
+      sourceLines: ["     M   L", "肩寬 50.0 51.5", "胸寬 55.5 57.5"],
+      columnCount: 3,
+      header: ["", "M", "L"],
+      body: [["肩寬", "50.0", "51.5"], ["胸寬", "55.5", "57.5"]]
+    },
+    { type: "text", text: "#ED14001" }
+  ],
+  shopeeUrl: "https://shopee.tw/..."
 }
 ```
 
@@ -110,18 +120,16 @@ python -m http.server 8000
 
 - `productNumber`：網址與資料查找使用的商品編號，不含 `#`
 - `title`、`category`、`price`：商品基本資料
-- `image`、`alt`：商品圖片與替代文字
-- `colors`、`sizes`、`measurements`、`fitGuide`：款式與尺寸資料
-- `bullets`、`description`：商品內容
-- `code`：由 `productNumber` 產生、顯示在畫面上的 `#商品編號`
-- `isPlaceholder`、`placeholderNote`：placeholder 狀態與提示
+- `image`、`images`、`alt`：商品圖片與替代文字；沒有真實圖片時 `image` 為 `null`、`images` 為空陣列
+- `colors`、`sizes`、`variants`：款式與尺寸資料；`sku` 可以保留於資料但不顯示在網站
+- `copy`：普通文字與空白段落依來源順序保留；空白段落以可選取的 `U+000A` 表示，單獨破折號只轉成單行水平線，已確認的矩形尺寸資料轉為無格線表格
 - `shopeeUrl`：外部 Shopee 商品連結
 
-正式資料尚未提供時可使用 `createPlaceholderDetails(...)`，頁面會清楚標示 placeholder。正式上線前應換成核准文案與圖片，並將 `isPlaceholder` 設為 `false`。
+商品同步與文案正規化規則詳見 `docs/product-sync.md`。
 
 ## 圖片與文案
 
-目前 placeholder 圖片放在 `assets/svg/`。正式商品圖片建議放在 `assets/images/`，優先使用尺寸合適且壓縮過的 WebP，例如：
+商品圖片放在 `assets/images/`，優先使用尺寸合適且壓縮過的 WebP。若來源沒有圖片，保留既有真實商品照片；完全沒有照片時顯示空白媒體區，不使用替代插圖或提示標籤。例如：
 
 ```js
 image: "assets/images/cosmos-hoodie-front.webp"
@@ -162,7 +170,7 @@ Repository：`https://github.com/lu-sugar-tiger/paradigm-website`
 - 行動導覽與 FAQ 可使用鍵盤操作
 - 圖片沒有 404，瀏覽器 console 沒有錯誤
 - Shopee 連結清楚表示使用者將離開本站
-- placeholder 文案與圖片已替換，或已確認可接受
+- 缺少商品圖片的媒體區保持空白，且沒有提示標籤
 
 ## 範圍限制
 

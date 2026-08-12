@@ -1,111 +1,16 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { transformProductCopy } from "./lib/product-copy.mjs";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const SOURCE_PATH = path.join(ROOT, "data", "products-source.json");
+const COLORWAYS_PATH = path.join(ROOT, "data", "product-colorways.json");
 const CATALOG_PATH = path.join(ROOT, "assets", "js", "catalog.js");
 const TEMPLATE_PATH = path.join(ROOT, "scripts", "templates", "product-page.html");
 
-const COLOR_HEX = {
-  Black: "#111111",
-  Cardinal: "#8d1f2d",
-  Grey: "#a7a8a6",
-  Midnight: "#1b2b68",
-  Mocha: "#8a6a50",
-  Mud: "#5b483b",
-  Shadow: "#343434",
-  White: "#f2f0e9"
-};
-
 function unique(values) {
   return [...new Set(values.filter(Boolean))];
-}
-
-function trimOuterBlankLines(lines) {
-  const copy = lines.slice();
-  while (copy[0] === "") copy.shift();
-  while (copy.at(-1) === "") copy.pop();
-  return copy;
-}
-
-function parseDocumentCopy(rawContent) {
-  const allLines = rawContent
-    .replace(/^\uFEFF/, "")
-    .replace(/\r\n?/g, "\n")
-    .split("\n")
-    .map((line) => line.trim());
-
-  const firstBullet = allLines.findIndex((line) => /^[•●]\s*/u.test(line));
-  if (firstBullet < 0) {
-    throw new Error("Product document has no bullet list");
-  }
-
-  let lastLine = allLines.length - 1;
-  while (lastLine > firstBullet && !allLines[lastLine]) lastLine -= 1;
-  const copyLines = allLines.slice(firstBullet, lastLine + 1);
-
-  const bullets = [];
-  let cursor = 0;
-  while (cursor < copyLines.length) {
-    const line = copyLines[cursor];
-    if (!line) {
-      cursor += 1;
-      continue;
-    }
-    if (!/^[•●]\s*/u.test(line)) break;
-    bullets.push(line.replace(/^●/u, "•"));
-    cursor += 1;
-  }
-
-  const body = trimOuterBlankLines(copyLines.slice(cursor));
-  const separators = body
-    .map((line, index) => (line === "-" ? index : -1))
-    .filter((index) => index >= 0);
-  const firstSeparator = separators[0] ?? -1;
-  const secondSeparator = separators[1] ?? -1;
-
-  const descriptionStart = firstSeparator >= 0 ? firstSeparator + 1 : 0;
-  const descriptionEnd = secondSeparator >= 0 ? secondSeparator : body.length;
-  const description = ["-", ...trimOuterBlankLines(body.slice(descriptionStart, descriptionEnd))];
-
-  const technical = secondSeparator >= 0 ? body.slice(secondSeparator + 1) : [];
-  const codeIndex = technical.findLastIndex((line) => /^#\S+/u.test(line));
-  const code = codeIndex >= 0 ? technical[codeIndex] : null;
-  const fitStart = technical.findIndex((line) => line.startsWith("建議"));
-  const headerIndex = technical.findIndex((line) => /(^|\s)M(\s|$)/u.test(line) && /(^|\s)L(\s|$)/u.test(line));
-  const measurementSizes = headerIndex >= 0
-    ? technical[headerIndex]
-        .normalize("NFKC")
-        .split(/\s+/u)
-        .filter((value) => /^(?:XS|S|M|L|XL|XXL)$/iu.test(value))
-    : [];
-  const measurementEnd = fitStart >= 0 ? fitStart : codeIndex >= 0 ? codeIndex : technical.length;
-  const measurementLines = headerIndex >= 0
-    ? technical.slice(headerIndex + 1, measurementEnd)
-    : technical.slice(0, measurementEnd);
-
-  const measurements = measurementLines
-    .filter(Boolean)
-    .map((line) => line.normalize("NFKC").replace(/\s*\(cm\)\s*$/iu, "").trim())
-    .map((line) => line.split(/\s+/u))
-    .filter((cells) => measurementSizes.length > 0 && cells.length >= measurementSizes.length + 1)
-    .map((cells) => [cells[0], ...cells.slice(1, measurementSizes.length + 1)]);
-
-  const fitEnd = codeIndex >= 0 ? codeIndex : technical.length;
-  const fitGuide = fitStart >= 0
-    ? technical.slice(fitStart, fitEnd).filter(Boolean).map((line) => line.normalize("NFKC"))
-    : [];
-
-  return {
-    bullets,
-    description,
-    measurements,
-    measurementSizes,
-    fitGuide,
-    code,
-    copyLines
-  };
 }
 
 function categoryFor(title) {
@@ -135,12 +40,29 @@ function html(value) {
     .replaceAll("'", "&#39;");
 }
 
-function renderLines(lines) {
-  return lines
-    .map((line) => line
-      ? `                <p class="product-copy__line">${html(line)}</p>`
-      : "                <div class=\"product-copy__line product-copy__blank-line\">&nbsp;</div>")
-    .join("\n");
+function renderCopy(tokens) {
+  return tokens.map((token) => {
+    if (token.type === "blank") {
+      return `              <div class="product-copy__line product-copy__blank-line">${html(token.text)}</div>`;
+    }
+    if (token.type === "rule") {
+      return `              <div class="product-copy__line product-copy__rule" role="separator">${html(token.text)}</div>`;
+    }
+    if (token.type === "table") {
+      const header = token.header.map((cell, index) => (
+        index === 0
+          ? `                  <th scope="col" aria-label="Row heading">${html(cell)}</th>`
+          : `                  <th scope="col">${html(cell)}</th>`
+      )).join("\n");
+      const body = token.body.map((row) => `                <tr>\n${row.map((cell, index) => (
+        index === 0
+          ? `                  <th scope="row">${html(cell)}</th>`
+          : `                  <td>${html(cell)}</td>`
+      )).join("\n")}\n                </tr>`).join("\n");
+      return `              <div class="product-copy__table-wrap">\n                <table class="size-table">\n                  <thead>\n                    <tr>\n${header}\n                    </tr>\n                  </thead>\n                  <tbody>\n${body}\n                  </tbody>\n                </table>\n              </div>`;
+    }
+    return `              <p class="product-copy__line">${html(token.text)}</p>`;
+  }).join("\n");
 }
 
 function renderSwatches(product) {
@@ -161,21 +83,6 @@ function renderSizes(product) {
   }).join("\n");
 }
 
-function renderMeasurements(product) {
-  return product.measurements.map((cells, index) => {
-    const unit = index === product.measurements.length - 1 ? "(cm)" : "";
-    return `                    <tr><th scope="row">${html(cells[0])}</th>${cells.slice(1).map((cell) => `<td>${html(cell)}</td>`).join("")}<td class="size-table__unit">${unit}</td></tr>`;
-  }).join("\n");
-}
-
-function renderMeasurementHeaders(product) {
-  return [
-    '                      <th scope="col" aria-label="Measurement"></th>',
-    ...product.measurementSizes.map((size) => `                      <th scope="col">${html(size)}</th>`),
-    '                      <th scope="col" aria-label="Unit"></th>'
-  ].join("\n");
-}
-
 function applyTemplate(template, product) {
   const categoryPath = product.category.toLowerCase().replace(" ", "-");
   const shopeeAttributes = product.soldOut
@@ -187,10 +94,8 @@ function applyTemplate(template, product) {
     PRODUCT_NUMBER: html(product.productNumber),
     CATEGORY: html(product.category),
     CATEGORY_PATH: html(categoryPath),
-    IMAGE: html(product.image),
-    ALT: html(product.alt),
-    PLACEHOLDER_NOTE: product.imageSource === "placeholder"
-      ? '            <span class="product-media-note">Placeholder image</span>'
+    PRODUCT_MEDIA: product.image
+      ? `            <img src="../../${html(product.image)}" alt="${html(product.alt)}" width="800" height="800" data-product-image>`
       : "",
     PRICE: html(product.price),
     COLOR_LABEL: html(product.colors[0]?.label || "Color"),
@@ -198,12 +103,7 @@ function applyTemplate(template, product) {
     SIZES: renderSizes(product),
     SHOPEE_ATTRIBUTES: shopeeAttributes,
     SHOPEE_LABEL: product.soldOut ? "Sold out" : "Buy on Shopee",
-    BULLETS: renderLines(product.bullets),
-    DESCRIPTION: renderLines(product.description),
-    MEASUREMENT_HEADERS: renderMeasurementHeaders(product),
-    MEASUREMENTS: renderMeasurements(product),
-    FIT_GUIDE: renderLines(product.fitGuide),
-    CODE: html(product.code)
+    PRODUCT_COPY: renderCopy(product.copy)
   };
 
   return Object.entries(values).reduce(
@@ -212,23 +112,27 @@ function applyTemplate(template, product) {
   );
 }
 
-const source = JSON.parse(await readFile(SOURCE_PATH, "utf8"));
-const template = await readFile(TEMPLATE_PATH, "utf8");
+const [source, colorwayRegistry, template] = await Promise.all([
+  readFile(SOURCE_PATH, "utf8").then(JSON.parse),
+  readFile(COLORWAYS_PATH, "utf8").then(JSON.parse),
+  readFile(TEMPLATE_PATH, "utf8")
+]);
+const colorways = new Map(
+  colorwayRegistry.colorways.map(({ label, hex }) => [label, hex])
+);
 
 const products = source.products
   .filter((entry) => entry.variants.some((variant) => variant.visible))
   .map((entry) => {
-    const parsed = parseDocumentCopy(entry.document?.content || "");
+    const copy = transformProductCopy(entry.document?.content || "");
     const visibleVariants = entry.variants.filter((variant) => variant.visible);
-    const colors = unique(visibleVariants.map((variant) => variant.color)).map((label) => ({
-      label,
-      hex: COLOR_HEX[label] || "#777777"
-    }));
+    const colors = unique(visibleVariants.map((variant) => variant.color)).map((label) => {
+      const hex = colorways.get(label);
+      if (!hex) throw new Error(`Missing product colorway definition for "${label}".`);
+      return { label, hex };
+    });
     const sizes = unique(visibleVariants.map((variant) => variant.size));
-    const localImages = entry.localImages.filter(Boolean);
-    if (!localImages.length) {
-      throw new Error(`${entry.productNumber} has no local image or image fallback`);
-    }
+    const localImages = (entry.localImages || []).filter(Boolean);
 
     return {
       slug: slugFor(entry.title),
@@ -236,27 +140,21 @@ const products = source.products
       title: entry.title,
       category: categoryFor(entry.title),
       price: priceLabel(entry.price),
-      image: localImages[0],
+      image: localImages[0] || null,
       images: localImages,
-      imageSource: entry.imageSource,
-      alt: entry.imageSource === "placeholder"
-        ? `${entry.title} placeholder illustration; product photography pending`
-        : `${entry.title} product image`,
+      imageSource: localImages.length ? entry.imageSource : "blank",
+      alt: localImages.length ? `${entry.title} product image` : "",
       colors,
       sizes,
-      variants: entry.variants.map(({ color, size, visible, soldOut }) => ({
+      variants: entry.variants.map(({ sku, color, size, visible, soldOut }) => ({
+        ...(sku ? { sku } : {}),
         color,
         size,
         visible,
         soldOut
       })),
       soldOut: visibleVariants.every((variant) => variant.soldOut),
-      bullets: parsed.bullets,
-      description: parsed.description,
-      fitGuide: parsed.fitGuide,
-      code: parsed.code || `#${entry.productNumber}`,
-      measurements: parsed.measurements,
-      measurementSizes: parsed.measurementSizes,
+      copy,
       shopeeUrl: entry.shopeeUrl,
       source: {
         spreadsheetModifiedTime: source.source.spreadsheetModifiedTime,

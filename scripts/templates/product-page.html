@@ -85,8 +85,7 @@
       <div class="container">
         <div class="product-detail__panel" data-product-detail data-product-number="{{PRODUCT_NUMBER}}">
           <div class="product-detail__gallery">
-            <img src="../../{{IMAGE}}" alt="{{ALT}}" width="800" height="800" data-product-image>
-{{PLACEHOLDER_NOTE}}
+{{PRODUCT_MEDIA}}
           </div>
           <article class="product-detail__summary">
             <div class="product-detail__header">
@@ -119,35 +118,8 @@
               </a>
             </div>
 
-            <div class="product-copy">
-              <div data-product-bullets>
-{{BULLETS}}
-              </div>
-              <div class="product-copy__line product-copy__blank-line">&nbsp;</div>
-              <div data-product-description>
-{{DESCRIPTION}}
-              </div>
-              <div class="product-copy__line product-copy__blank-line">&nbsp;</div>
-              <div class="product-copy__line product-copy__separator">-</div>
-              <div class="product-copy__line product-copy__blank-line">&nbsp;</div>
-              <div class="product-copy__measurements">
-                <table class="size-table">
-                  <thead>
-                    <tr data-product-measurement-head>
-{{MEASUREMENT_HEADERS}}
-                    </tr>
-                  </thead>
-                  <tbody data-product-measurements>
-{{MEASUREMENTS}}
-                  </tbody>
-                </table>
-              </div>
-              <div class="product-copy__line product-copy__blank-line">&nbsp;</div>
-              <div class="product-fit-guide" data-product-fit-guide>
-{{FIT_GUIDE}}
-              </div>
-              <div class="product-copy__line product-copy__blank-line">&nbsp;</div>
-              <div class="product-code product-copy__line" data-product-code>{{CODE}}</div>
+            <div class="product-copy" data-product-copy>
+{{PRODUCT_COPY}}
             </div>
           </article>
         </div>

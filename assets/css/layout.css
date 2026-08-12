@@ -37,11 +37,11 @@
 }
 
 .surface {
-  background: var(--color-surface);
+  background: var(--color-surface-high);
 }
 
 .surface-muted {
-  background: var(--color-surface-muted);
+  background: var(--color-surface-low);
 }
 
 .reference-page .container,
@@ -57,7 +57,7 @@
 .auto-grid {
   display: grid;
   gap: 1px;
-  background: var(--color-border);
+  background: var(--color-outline-low);
 }
 
 @media (min-width: 48rem) {

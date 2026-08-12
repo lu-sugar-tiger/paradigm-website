@@ -1,8 +1,8 @@
 body {
   min-height: 100vh;
   overflow-x: clip;
-  background: var(--color-bg);
-  color: var(--color-text);
+  background: var(--color-background-mid);
+  color: var(--color-on-background-high);
   font-family: var(--font-sans);
   line-height: 1.3333;
   letter-spacing: 0;
@@ -13,7 +13,7 @@ main {
 }
 
 ::selection {
-  background: var(--color-selection);
+  background: color-mix(in srgb, var(--color-brand) 12%, transparent);
 }
 
 :where(a, button, input, select, textarea, summary, [tabindex]) {
@@ -25,7 +25,7 @@ main {
 }
 
 :focus-visible {
-  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline: var(--focus-ring-width) solid var(--color-outline-high);
   outline-offset: var(--focus-ring-offset);
 }
 
@@ -48,7 +48,7 @@ html[data-input-modality="pointer"] :focus-visible {
 .noscript-note {
   padding: var(--space-4);
   border-radius: var(--radius-sm);
-  background: var(--color-surface-muted);
-  color: var(--color-text-muted);
+  background: var(--color-surface-low);
+  color: var(--color-on-surface-low);
   font-size: var(--text-sm);
 }

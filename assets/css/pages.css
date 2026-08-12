@@ -5,7 +5,7 @@
 .teamwear-hero .hero__title {
   max-width: 10ch;
   font-size: clamp(2.5rem, 11vw, 5rem);
-  color: var(--color-accent);
+  color: #2d231d;
 }
 
 .teamwear-hero .hero__visual {
@@ -16,7 +16,7 @@
 
 .teamwear-caption {
   margin-bottom: var(--space-3);
-  color: var(--color-text-muted);
+  color: var(--color-on-surface-low);
   font-size: var(--text-xs);
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -26,7 +26,7 @@
   max-width: 42rem;
   display: grid;
   gap: var(--space-4);
-  color: var(--color-text-muted);
+  color: var(--color-on-surface-low);
 }
 
 .reference-page {
@@ -223,7 +223,7 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: start;
-    background: var(--color-surface);
+    background: var(--color-surface-high);
   }
 
   .reference-page--detail .product-detail__gallery {
