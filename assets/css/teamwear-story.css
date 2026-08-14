@@ -1,9 +1,19 @@
+/*
+  Direction: a refined editorial product story.
+  Apple informs the hero, highlights rail, and progressive chapters.
+  Google informs the static design lineup and approachable product cards.
+  Gogoro informs the named product system, factual benefit modules, and persistent action.
+  Paradigm's existing typography, semantic tokens, and vanilla architecture remain authoritative.
+*/
+
 .teamwear-story-page {
   --teamwear-paper: #efede8;
   --teamwear-paper-deep: #e3dfd7;
   --teamwear-ink: #151515;
-  --teamwear-muted: rgb(21 21 21 / 58%);
+  --teamwear-muted: rgb(21 21 21 / 62%);
   --teamwear-rule: rgb(21 21 21 / 18%);
+  --teamwear-dark: #181818;
+  --teamwear-dark-raised: #272727;
   --teamwear-ease: cubic-bezier(.32, .72, 0, 1);
   overflow: clip;
   background: var(--teamwear-paper);
@@ -11,11 +21,21 @@
 }
 
 .teamwear-story-page h1,
-.teamwear-story-page h2 {
+.teamwear-story-page h2,
+.teamwear-story-page h3,
+.teamwear-story-page p,
+.teamwear-story-page blockquote {
+  margin: 0;
+}
+
+.teamwear-story-page h1,
+.teamwear-story-page h2,
+.teamwear-story-page h3 {
   text-wrap: balance;
 }
 
-.teamwear-story-page p {
+.teamwear-story-page p,
+.teamwear-story-page blockquote {
   text-wrap: pretty;
 }
 
@@ -23,7 +43,13 @@
   max-width: 11ch;
   font-size: clamp(3rem, 7vw, 6rem);
   letter-spacing: -.055em;
-  line-height: .92;
+  line-height: 1;
+}
+
+.teamwear-story-page h3 {
+  font-size: 1.5rem;
+  letter-spacing: -.025em;
+  line-height: 2rem;
 }
 
 .teamwear-story-page img {
@@ -32,13 +58,24 @@
 
 .teamwear-section-label {
   color: var(--color-brand);
-  font-size: var(--type-body-size);
+  font-size: .75rem;
   font-weight: var(--font-weight-bold);
-  line-height: var(--type-body-line-height);
+  line-height: 1rem;
   letter-spacing: .08em;
 }
 
-/* Campaign opening */
+.teamwear-story-page.reveal-ready [data-section-reveal] {
+  opacity: 0;
+  transform: translateY(48px);
+  transition: opacity .9s var(--teamwear-ease), transform .9s var(--teamwear-ease);
+}
+
+.teamwear-story-page.reveal-ready [data-section-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Apple-style campaign hero */
 
 .teamwear-story-page .teamwear-hero {
   position: relative;
@@ -66,7 +103,7 @@
 
 .teamwear-hero__shade {
   z-index: 1;
-  background: rgb(0 0 0 / 30%);
+  background: rgb(0 0 0 / 36%);
   box-shadow: inset 0 -16rem 12rem -8rem rgb(0 0 0 / 86%);
   pointer-events: none;
 }
@@ -94,10 +131,10 @@
 }
 
 .teamwear-hero__copy .teamwear-kicker {
-  color: rgb(255 255 255 / 72%);
-  font-size: var(--type-body-size);
+  color: rgb(255 255 255 / 76%);
+  font-size: .75rem;
   font-weight: var(--font-weight-bold);
-  line-height: var(--type-body-line-height);
+  line-height: 1rem;
   letter-spacing: .08em;
 }
 
@@ -105,7 +142,7 @@
   max-width: 11.5ch;
   font-size: clamp(3rem, 7.5vw, 6rem);
   letter-spacing: -.065em;
-  line-height: .86;
+  line-height: 1;
 }
 
 .teamwear-hero__copy > p:last-child {
@@ -115,47 +152,239 @@
   line-height: 1.5rem;
 }
 
-/* Product index */
+/* Apple-style highlights rail */
 
-.teamwear-index {
-  padding-block: 80px;
+.teamwear-highlights {
+  padding-block: 96px;
   background: var(--teamwear-paper-deep);
 }
 
-.teamwear-index__layout {
+.teamwear-highlights__header {
   display: grid;
-  gap: 48px;
+  gap: 24px;
+  margin-bottom: 48px;
 }
 
-.teamwear-index__heading {
+.teamwear-highlights__header h2 {
+  max-width: 9ch;
+}
+
+.teamwear-highlights__viewport,
+.teamwear-system__viewport {
+  width: 100%;
+}
+
+.teamwear-highlights__rail {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 0 max(16px, calc((100vw - var(--content-width)) / 2)) 16px;
+  scroll-padding-inline: max(16px, calc((100vw - var(--content-width)) / 2));
+  scroll-snap-type: x mandatory;
+  scrollbar-color: var(--teamwear-muted) transparent;
+  scrollbar-width: thin;
+}
+
+.teamwear-highlight-card {
+  position: relative;
+  flex: 0 0 min(82vw, 25rem);
+  height: min(128vw, 36rem);
+  min-height: 28rem;
+  max-height: 36rem;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--teamwear-dark-raised);
+  color: #fff;
+  scroll-snap-align: start;
+}
+
+.teamwear-highlight-card--wide {
+  flex-basis: min(88vw, 40rem);
+}
+
+.teamwear-highlight-card > img,
+.teamwear-highlight-card__shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.teamwear-highlight-card > img {
+  object-fit: cover;
+  transition: transform .9s var(--teamwear-ease);
+}
+
+.teamwear-highlight-card__shade {
+  z-index: 1;
+  background: rgb(0 0 0 / 36%);
+  box-shadow: inset 0 -14rem 9rem -7rem rgb(0 0 0 / 78%);
+  pointer-events: none;
+}
+
+.teamwear-highlight-card__copy {
+  position: absolute;
+  z-index: 2;
+  inset: auto 0 0;
   display: grid;
-  align-content: start;
+  gap: 8px;
+  padding: 32px;
+}
+
+.teamwear-highlight-card__copy p {
+  color: rgb(255 255 255 / 72%);
+  font-size: .75rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.teamwear-highlight-card__copy h3 {
+  max-width: 18ch;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .teamwear-highlight-card:hover > img,
+  .teamwear-design-card:hover img {
+    transform: scale(1.018);
+  }
+}
+
+/* Google-style static design lineup */
+
+.teamwear-system {
+  padding-block: 96px;
+  background: var(--teamwear-paper);
+}
+
+.teamwear-section-heading {
+  display: grid;
+  gap: 32px;
+  margin-bottom: 64px;
+}
+
+.teamwear-section-heading > div {
+  display: grid;
   gap: 24px;
 }
 
-.teamwear-index__heading h2 {
-  max-width: 8ch;
+.teamwear-section-heading > div > p {
+  max-width: 40rem;
+  color: var(--teamwear-muted);
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
-.teamwear-index__facts {
-  margin: 0;
-  border-top: 1px solid var(--teamwear-rule);
-}
-
-.teamwear-index__facts > div {
-  display: grid;
-  grid-template-columns: 64px minmax(0, 1fr);
+.teamwear-system__lineup {
+  display: flex;
   gap: 16px;
-  padding-block: 24px;
+  overflow-x: auto;
+  padding: 0 16px 16px;
+  scroll-padding-inline: 16px;
+  scroll-snap-type: x mandatory;
+  scrollbar-color: var(--teamwear-muted) transparent;
+  scrollbar-width: thin;
+}
+
+.teamwear-design-card {
+  flex: 0 0 min(82vw, 24rem);
+  overflow: hidden;
+  border: 1px solid var(--teamwear-rule);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-high);
+  scroll-snap-align: start;
+}
+
+.teamwear-design-card__media {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #f6f4f0;
+}
+
+.teamwear-design-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform .9s var(--teamwear-ease);
+}
+
+.teamwear-design-card__copy {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 16px;
+  padding: 24px;
+}
+
+.teamwear-design-card__copy p,
+.teamwear-design-card__copy span {
+  color: var(--teamwear-muted);
+  font-size: .75rem;
+  line-height: 1rem;
+}
+
+.teamwear-design-card__copy p {
+  color: var(--color-brand);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: .08em;
+}
+
+.teamwear-system__palette {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  overflow: hidden;
+  margin-top: 32px;
+  border: 1px solid var(--teamwear-rule);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-high);
+}
+
+.teamwear-system__color {
+  display: grid;
+  min-width: 0;
+  color: var(--teamwear-muted);
+  font-size: 0;
+  line-height: 1rem;
+  text-align: center;
+}
+
+.teamwear-system__color i {
+  display: block;
+  height: 64px;
+  background: var(--teamwear-swatch-color);
+  border-right: 1px solid rgb(255 255 255 / 28%);
+}
+
+.teamwear-system__color:last-child i {
+  border-right: 0;
+}
+
+.teamwear-system__steps {
+  display: grid;
+  overflow: hidden;
+  margin-top: 48px;
+  border: 1px solid var(--teamwear-rule);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-high);
+}
+
+.teamwear-system__steps article {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 8px 16px;
+  padding: 24px;
   border-bottom: 1px solid var(--teamwear-rule);
 }
 
-.teamwear-index__facts dt,
-.teamwear-index__facts dd {
-  margin: 0;
+.teamwear-system__steps article:last-child {
+  border-bottom: 0;
 }
 
-.teamwear-index__facts dt {
+.teamwear-system__steps span {
+  grid-row: 1 / span 2;
   color: var(--color-brand);
   font-size: .75rem;
   font-weight: var(--font-weight-bold);
@@ -163,224 +392,97 @@
   letter-spacing: .08em;
 }
 
-.teamwear-index__facts dd {
-  display: grid;
-  gap: 4px;
+.teamwear-system__steps h3 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
-.teamwear-index__facts strong {
-  font-size: 1.5rem;
-  line-height: 2rem;
-  letter-spacing: -.025em;
-}
-
-.teamwear-index__facts span {
+.teamwear-system__steps p {
   color: var(--teamwear-muted);
-  font-size: var(--type-body-size);
-  line-height: var(--type-body-line-height);
+  font-size: .875rem;
+  line-height: 1.25rem;
 }
 
-/* Word by word brand statement */
+/* Apple-style thematic chapter with customer proof */
 
-.teamwear-statement {
-  display: grid;
-  min-height: 60svh;
-  background: #181818;
+.teamwear-oncourt {
+  padding-block: 96px;
+  background: var(--teamwear-dark);
   color: #fff;
 }
 
-.teamwear-statement__inner {
+.teamwear-oncourt__statement {
   display: grid;
-  align-items: center;
+  align-content: center;
+  min-height: 56svh;
   padding-block: 80px;
 }
 
-.teamwear-statement__inner p {
-  max-width: 12ch;
-  margin: 0;
-  font-size: clamp(3rem, 8vw, 6rem);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: -.055em;
-  line-height: .96;
+.teamwear-oncourt__statement h2 {
+  max-width: 13ch;
+  margin-top: 32px;
 }
 
-.teamwear-statement [data-reveal-word] {
+.teamwear-oncourt__statement h2 [data-reveal-word] {
   display: inline-block;
-  color: rgb(255 255 255 / 28%);
+  color: rgb(255 255 255 / 30%);
   transform: translateY(8px);
   transition: color .8s var(--teamwear-ease), transform .8s var(--teamwear-ease);
 }
 
-.teamwear-statement.is-visible [data-reveal-word] {
+.teamwear-oncourt__statement.is-visible h2 [data-reveal-word] {
   color: #fff;
   transform: none;
 }
 
-.teamwear-statement [data-reveal-word]:nth-child(1) { transition-delay: 0ms; }
-.teamwear-statement [data-reveal-word]:nth-child(2) { transition-delay: 110ms; }
-.teamwear-statement [data-reveal-word]:nth-child(4) { transition-delay: 220ms; }
-.teamwear-statement [data-reveal-word]:nth-child(5) { transition-delay: 330ms; }
-.teamwear-statement [data-reveal-word]:nth-child(6) { transition-delay: 440ms; }
+.teamwear-oncourt__statement h2 [data-reveal-word]:nth-child(1) { transition-delay: 0ms; }
+.teamwear-oncourt__statement h2 [data-reveal-word]:nth-child(2) { transition-delay: 110ms; }
+.teamwear-oncourt__statement h2 [data-reveal-word]:nth-child(4) { transition-delay: 220ms; }
+.teamwear-oncourt__statement h2 [data-reveal-word]:nth-child(5) { transition-delay: 330ms; }
+.teamwear-oncourt__statement h2 [data-reveal-word]:nth-child(6) { transition-delay: 440ms; }
 
-/* Static reversible range */
-
-.teamwear-range,
-.teamwear-campaign,
-.teamwear-proof,
-.teamwear-story-page .teamwear-material,
-.teamwear-story-page .teamwear-faq {
-  padding-block: 96px;
-}
-
-.teamwear-range {
-  background: var(--teamwear-paper);
-}
-
-.teamwear-range__header,
-.teamwear-campaign__header,
-.teamwear-material__header {
-  display: grid;
-  gap: 32px;
-  margin-bottom: 64px;
-}
-
-.teamwear-range__header > div,
-.teamwear-campaign__header > div,
-.teamwear-material__header > div {
-  display: grid;
-  gap: 24px;
-}
-
-.teamwear-range__header > div > p,
-.teamwear-campaign__header > div > p,
-.teamwear-material__header > div > p {
-  max-width: 40rem;
-  color: var(--teamwear-muted);
+.teamwear-oncourt__statement > p:last-child {
+  max-width: 38rem;
+  margin-top: 32px;
+  color: rgb(255 255 255 / 62%);
   font-size: 1rem;
   line-height: 1.5rem;
 }
 
-.teamwear-range__board {
-  overflow: hidden;
-  border: 1px solid var(--teamwear-rule);
-  border-radius: var(--radius-card);
-  background: var(--color-surface-high);
-}
-
-.teamwear-range__looks {
-  display: grid;
-}
-
-.teamwear-range__looks figure {
+.teamwear-oncourt__lead {
   position: relative;
-  min-width: 0;
-  aspect-ratio: 4 / 3;
-  margin: 0;
-  overflow: hidden;
-  border-bottom: 1px solid var(--teamwear-rule);
-  background: #f6f4f0;
-}
-
-.teamwear-range__looks img {
-  width: 100%;
-  height: 100%;
-  filter: hue-rotate(31deg) saturate(.5) contrast(1.48);
-  object-fit: contain;
-}
-
-.teamwear-range__looks figcaption {
-  position: absolute;
-  inset: 12px auto auto 12px;
-  padding: 4px 8px;
-  background: rgb(246 244 240 / 88%);
-  color: var(--teamwear-ink);
-  font-size: .75rem;
-  font-weight: var(--font-weight-bold);
-  line-height: 1rem;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-}
-
-.teamwear-range__palette {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-}
-
-.teamwear-range__color {
-  display: grid;
-  min-width: 0;
-  color: var(--teamwear-muted);
-  font-size: 0;
-  line-height: 1rem;
-}
-
-.teamwear-range__color i {
-  display: block;
-  height: 64px;
-  background: var(--teamwear-swatch-color);
-  border-right: 1px solid rgb(255 255 255 / 28%);
-}
-
-/* Fashion campaign */
-
-.teamwear-campaign {
-  background: #181818;
-  color: #fff;
-}
-
-.teamwear-campaign__header > div > p {
-  color: rgb(255 255 255 / 60%);
-}
-
-.teamwear-campaign__grid {
-  display: grid;
-  gap: 8px;
-}
-
-.teamwear-campaign__image {
-  position: relative;
-  min-width: 0;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  background: #242424;
-}
-
-.teamwear-campaign__image--action {
   aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--teamwear-dark-raised);
 }
 
-.teamwear-campaign__image img {
+.teamwear-oncourt__lead img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform .9s var(--teamwear-ease);
 }
 
-.teamwear-campaign__image:hover img {
-  transform: scale(1.014);
-}
-
-.teamwear-campaign__image figcaption {
+.teamwear-oncourt__lead figcaption,
+.teamwear-proof figcaption,
+.teamwear-material__media figcaption {
   position: absolute;
   inset: auto 8px 8px;
   width: max-content;
+  max-width: calc(100% - 16px);
   padding: 8px 12px;
-  background: rgb(0 0 0 / 72%);
-  color: #fff;
-  font-size: var(--type-body-size);
-  line-height: var(--type-body-line-height);
+  background: rgb(0 0 0 / 76%);
+  color: rgb(255 255 255 / 72%);
+  font-size: .75rem;
+  line-height: 1rem;
 }
-
-/* Customer proof as an editorial case study */
 
 .teamwear-proof {
-  background: var(--teamwear-paper-deep);
-}
-
-.teamwear-proof__layout {
   display: grid;
   overflow: hidden;
-  background: var(--teamwear-ink);
+  margin-top: 64px;
+  border-radius: var(--radius-lg);
+  background: #000;
   color: #fff;
 }
 
@@ -389,7 +491,6 @@
   min-width: 0;
   aspect-ratio: 3 / 2;
   overflow: hidden;
-  margin: 0;
 }
 
 .teamwear-proof__lead img,
@@ -397,20 +498,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.teamwear-proof__lead figcaption,
-.teamwear-proof__customer figcaption {
-  color: rgb(255 255 255 / 56%);
-  font-size: .75rem;
-  line-height: 1rem;
-}
-
-.teamwear-proof__lead figcaption {
-  position: absolute;
-  inset: auto 8px 8px;
-  padding: 8px 12px;
-  background: rgb(0 0 0 / 72%);
 }
 
 .teamwear-proof__story {
@@ -422,17 +509,16 @@
 
 .teamwear-proof__story blockquote {
   max-width: 17ch;
-  margin: 0;
   font-size: clamp(2.25rem, 4vw, 3.75rem);
   font-weight: var(--font-weight-bold);
   letter-spacing: -.05em;
-  line-height: .98;
+  line-height: 1;
 }
 
 .teamwear-proof__story > p:not(.teamwear-section-label) {
   color: rgb(255 255 255 / 56%);
-  font-size: var(--type-body-size);
-  line-height: var(--type-body-line-height);
+  font-size: .875rem;
+  line-height: 1.25rem;
 }
 
 .teamwear-proof__customer {
@@ -441,39 +527,32 @@
   min-width: 0;
   margin: 16px 0 0;
   overflow: hidden;
+  border-radius: var(--radius-md);
 }
 
-.teamwear-proof__customer figcaption {
-  position: absolute;
-  inset: auto 8px 8px;
-  padding: 8px 12px;
-  background: rgb(0 0 0 / 72%);
-}
-
-/* Fabric and print */
+/* Gogoro-style material chapter */
 
 .teamwear-story-page .teamwear-material {
-  background: #181818;
+  padding-block: 96px;
+  background: #000;
   color: #fff;
 }
 
-.teamwear-material__header > div > p {
-  color: rgb(255 255 255 / 60%);
+.teamwear-section-heading--dark > div > p {
+  color: rgb(255 255 255 / 62%);
 }
 
-.teamwear-story-page .teamwear-material__layout {
+.teamwear-material__chapter {
   display: grid;
-  align-items: start;
   gap: 48px;
 }
 
-.teamwear-story-page .teamwear-material__media {
+.teamwear-material__media {
   position: relative;
-  width: min(100%, 480px);
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  border-radius: var(--radius-card);
-  background: #262626;
+  border-radius: var(--radius-lg);
+  background: var(--teamwear-dark-raised);
 }
 
 .teamwear-material__media img {
@@ -482,43 +561,46 @@
   object-fit: cover;
 }
 
-.teamwear-material__media figcaption {
-  position: absolute;
-  inset: auto 8px 8px;
-  padding: 8px 12px;
-  background: rgb(0 0 0 / 74%);
-  color: rgb(255 255 255 / 58%);
-  font-size: .75rem;
-  line-height: 1rem;
-}
-
-.teamwear-story-page .teamwear-material__facts {
-  margin: 0;
-  border-top: 1px solid rgb(255 255 255 / 20%);
-}
-
-.teamwear-story-page .teamwear-material__facts li {
+.teamwear-material__benefits {
   display: grid;
-  gap: 8px;
-  padding-block: 20px;
-  border-bottom: 1px solid rgb(255 255 255 / 20%);
+  gap: 16px;
 }
 
-.teamwear-story-page .teamwear-material__facts strong {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
+.teamwear-material__benefits article {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 8px 16px;
+  padding: 24px;
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: var(--radius-md);
+  background: var(--teamwear-dark);
 }
 
-.teamwear-story-page .teamwear-material__facts small {
-  max-width: 35rem;
-  color: rgb(255 255 255 / 58%);
-  font-size: var(--type-body-size);
-  line-height: var(--type-body-line-height);
+.teamwear-material__benefits span {
+  grid-row: 1 / span 2;
+  color: var(--color-brand);
+  font-size: .75rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1rem;
+  letter-spacing: .08em;
+}
+
+.teamwear-material__benefits h3 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.teamwear-material__benefits p {
+  max-width: 34rem;
+  color: rgb(255 255 255 / 60%);
+  font-size: .875rem;
+  line-height: 1.25rem;
 }
 
 /* Direct utility FAQ */
 
 .teamwear-story-page .teamwear-faq {
+  padding-block: 96px;
   background: var(--teamwear-paper);
 }
 
@@ -551,129 +633,71 @@
   max-width: 42rem;
   padding: 0 40px 24px 0;
   color: var(--teamwear-muted);
-  font-size: var(--type-body-size);
-  line-height: var(--type-body-line-height);
+  font-size: .875rem;
+  line-height: 1.25rem;
 }
 
-/* Closing frame */
-
-.teamwear-close {
-  position: relative;
-  display: grid;
-  min-height: 70svh;
-  overflow: hidden;
-  background: #6d675f;
-  color: #fff;
-}
-
-.teamwear-close > img,
-.teamwear-close__shade {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.teamwear-close > img {
-  object-fit: cover;
-  object-position: center 36%;
-}
-
-.teamwear-close__shade {
-  z-index: 1;
-  background: rgb(0 0 0 / 30%);
-  box-shadow: inset 0 -15rem 10rem -7rem rgb(0 0 0 / 82%);
-}
-
-.teamwear-close__copy {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  align-content: end;
-  gap: 16px;
-  padding-block: 96px 80px;
-}
-
-.teamwear-close__copy h2 {
-  max-width: 9ch;
-}
-
-.teamwear-close__copy p {
-  color: rgb(255 255 255 / 74%);
-  font-size: 1rem;
-  line-height: 1.5rem;
+.teamwear-page .site-footer {
+  margin-top: 0;
 }
 
 @media (min-width: 48rem) {
-  .teamwear-index {
-    padding-block: 96px;
+  .teamwear-highlights__header {
+    grid-template-columns: minmax(10rem, .38fr) minmax(0, 1.62fr);
+    align-items: end;
+    gap: 64px;
   }
 
-  .teamwear-index__layout {
-    grid-template-columns: minmax(15rem, .65fr) minmax(0, 1.35fr);
-    gap: 80px;
-  }
-
-  .teamwear-index__facts > div {
-    grid-template-columns: 88px minmax(0, 1fr);
-    gap: 24px;
-    padding-block: 28px;
-  }
-
-  .teamwear-index__facts dd {
-    grid-template-columns: minmax(12rem, .72fr) minmax(0, 1.28fr);
-    align-items: baseline;
-    gap: 24px;
-  }
-
-  .teamwear-range__header,
-  .teamwear-campaign__header,
-  .teamwear-material__header {
+  .teamwear-section-heading {
     grid-template-columns: minmax(10rem, .38fr) minmax(0, 1.62fr);
     gap: 64px;
   }
 
-  .teamwear-range__looks {
+  .teamwear-system__viewport {
+    width: min(calc(100% - 4rem), var(--content-width));
+    margin-inline: auto;
+  }
+
+  .teamwear-system__lineup {
+    display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    overflow: visible;
+    padding: 0;
   }
 
-  .teamwear-range__looks figure {
-    border-right: 1px solid var(--teamwear-rule);
-    border-bottom: 1px solid var(--teamwear-rule);
+  .teamwear-design-card {
+    min-width: 0;
   }
 
-  .teamwear-range__looks figure:last-child {
-    border-right: 0;
-  }
-
-  .teamwear-range__looks figure {
-    aspect-ratio: 1 / 1;
-  }
-
-  .teamwear-range__color {
+  .teamwear-system__color {
     gap: 8px;
     padding: 12px 8px 16px;
     font-size: .75rem;
-    text-align: center;
   }
 
-  .teamwear-range__color i {
+  .teamwear-system__color i {
     height: 80px;
     border: 0;
   }
 
-  .teamwear-campaign__grid {
-    grid-template-columns: 2fr 1fr 1fr;
-    align-items: stretch;
+  .teamwear-system__steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .teamwear-campaign__image,
-  .teamwear-campaign__image--action {
-    aspect-ratio: auto;
-    min-height: 24rem;
+  .teamwear-system__steps article {
+    border-right: 1px solid var(--teamwear-rule);
+    border-bottom: 0;
   }
 
-  .teamwear-proof__layout {
+  .teamwear-system__steps article:last-child {
+    border-right: 0;
+  }
+
+  .teamwear-oncourt__lead {
+    aspect-ratio: 16 / 9;
+  }
+
+  .teamwear-proof {
     grid-template-columns: minmax(0, 1.25fr) minmax(22rem, .75fr);
   }
 
@@ -690,9 +714,21 @@
     margin-top: 24px;
   }
 
-  .teamwear-story-page .teamwear-material__layout {
-    grid-template-columns: minmax(18rem, .72fr) minmax(0, 1.28fr);
-    gap: 80px;
+  .teamwear-material__chapter {
+    grid-template-columns: minmax(18rem, .92fr) minmax(0, 1.08fr);
+    align-items: start;
+    gap: 64px;
+  }
+
+  .teamwear-material__media {
+    position: sticky;
+    top: calc(var(--header-height) + 32px);
+  }
+
+  .teamwear-material__benefits article {
+    min-height: 12rem;
+    align-content: start;
+    padding: 32px;
   }
 
   .teamwear-story-page .teamwear-faq__layout {
@@ -711,37 +747,36 @@
     line-height: 1.75rem;
   }
 
-  .teamwear-statement__inner p {
-    max-width: 13ch;
-  }
-
-  .teamwear-range,
-  .teamwear-campaign,
-  .teamwear-proof,
+  .teamwear-highlights,
+  .teamwear-system,
+  .teamwear-oncourt,
   .teamwear-story-page .teamwear-material,
   .teamwear-story-page .teamwear-faq {
     padding-block: 128px;
   }
 
-  .teamwear-range__looks figure {
-    aspect-ratio: 4 / 3;
+  .teamwear-material__chapter {
+    gap: 80px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .teamwear-hero__media img,
   .teamwear-hero__copy,
-  .teamwear-statement [data-reveal-word],
-  .teamwear-campaign__image img {
+  .teamwear-highlight-card > img,
+  .teamwear-design-card img,
+  .teamwear-oncourt__statement h2 [data-reveal-word],
+  .teamwear-story-page.reveal-ready [data-section-reveal] {
     transition: none;
   }
 
-  .teamwear-hero__copy {
+  .teamwear-hero__copy,
+  .teamwear-story-page.reveal-ready [data-section-reveal] {
     opacity: 1;
     transform: none;
   }
 
-  .teamwear-statement [data-reveal-word] {
+  .teamwear-oncourt__statement h2 [data-reveal-word] {
     color: #fff;
     transform: none;
   }

@@ -26,6 +26,26 @@
     }
   }
 
+  const storyPage = document.querySelector(".teamwear-story-page");
+  const sectionReveals = Array.from(document.querySelectorAll("[data-section-reveal]"));
+
+  if (sectionReveals.length) {
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      sectionReveals.forEach((element) => element.classList.add("is-visible"));
+    } else {
+      storyPage?.classList.add("reveal-ready");
+      const sectionObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      }, { rootMargin: "0px 0px -12%", threshold: 0.12 });
+
+      sectionReveals.forEach((element) => sectionObserver.observe(element));
+    }
+  }
+
   const form = document.querySelector("[data-teamwear-form]");
 
   if (!form) return;
