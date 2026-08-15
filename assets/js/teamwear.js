@@ -8,22 +8,28 @@
     else window.requestAnimationFrame(() => hero.classList.add("is-ready"));
   }
 
-  const wordReveal = document.querySelector("[data-word-reveal]");
+  function bindRadioKeyboard(scope, name) {
+    const options = Array.from(scope.querySelectorAll(`input[name="${name}"]`));
 
-  if (wordReveal) {
-    if (reducedMotion || !("IntersectionObserver" in window)) {
-      wordReveal.classList.add("is-visible");
-    } else {
-      const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        });
-      }, { rootMargin: "0px 0px -28%", threshold: 0.35 });
+    options.forEach((option, index) => {
+      option.addEventListener("keydown", (event) => {
+        const nextKeys = ["ArrowRight", "ArrowDown"];
+        const previousKeys = ["ArrowLeft", "ArrowUp"];
+        let nextIndex = index;
 
-      revealObserver.observe(wordReveal);
-    }
+        if (nextKeys.includes(event.key)) nextIndex = (index + 1) % options.length;
+        else if (previousKeys.includes(event.key)) nextIndex = (index - 1 + options.length) % options.length;
+        else if (event.key === "Home") nextIndex = 0;
+        else if (event.key === "End") nextIndex = options.length - 1;
+        else return;
+
+        event.preventDefault();
+        const nextOption = options[nextIndex];
+        nextOption.checked = true;
+        nextOption.focus();
+        nextOption.dispatchEvent(new Event("change", { bubbles: true }));
+      });
+    });
   }
 
   const storyPage = document.querySelector(".teamwear-story-page");
@@ -44,6 +50,58 @@
 
       sectionReveals.forEach((element) => sectionObserver.observe(element));
     }
+  }
+
+  const patternPicker = document.querySelector("[data-teamwear-pattern-picker]");
+  const colorwayRail = document.querySelector("[data-colorway-rail]");
+
+  if (patternPicker && colorwayRail) {
+    const patternPreviews = {
+      P01: {
+        label: "Essential",
+        src: "../assets/images/teamwear/teamwear-essential-pair-v3.webp"
+      },
+      P02: {
+        label: "Classic",
+        src: "../assets/images/teamwear/teamwear-classic-pair-v3.webp"
+      },
+      P03: {
+        label: "Signature",
+        src: "../assets/images/teamwear/teamwear-signature-pair-v3.webp"
+      }
+    };
+    const colorwayCards = Array.from(colorwayRail.querySelectorAll("[data-colorway-card]"));
+    const patternStatus = patternPicker.querySelector("[data-pattern-status]");
+
+    function updateColorwayRail() {
+      const selectedPattern = patternPicker.querySelector('input[name="landing-pattern"]:checked')?.value;
+      const preview = patternPreviews[selectedPattern];
+
+      if (!preview) return;
+
+      patternPicker.querySelectorAll('input[name="landing-pattern"]').forEach((input) => {
+        input.closest("label")?.classList.toggle("is-active", input.checked);
+      });
+
+      colorwayCards.forEach((card) => {
+        const image = card.querySelector("[data-colorway-image]");
+        const colorName = card.dataset.colorName || "Road";
+
+        card.classList.add("is-updating");
+        if (image) {
+          image.src = preview.src;
+          image.alt = `${preview.label} Basketball 01 ${colorName} Road uniform rendering`;
+          if (image.complete) window.requestAnimationFrame(() => card.classList.remove("is-updating"));
+          else image.addEventListener("load", () => card.classList.remove("is-updating"), { once: true });
+        }
+      });
+
+      if (patternStatus) patternStatus.textContent = `${preview.label} pattern shown across seven Road colors.`;
+    }
+
+    patternPicker.addEventListener("change", updateColorwayRail);
+    bindRadioKeyboard(patternPicker, "landing-pattern");
+    updateColorwayRail();
   }
 
   const form = document.querySelector("[data-teamwear-form]");
@@ -103,30 +161,7 @@
   }
 
   form.addEventListener("change", updateBuilder);
-
-  ["pattern", "color"].forEach((name) => {
-    const options = Array.from(form.querySelectorAll(`input[name="${name}"]`));
-
-    options.forEach((option, index) => {
-      option.addEventListener("keydown", (event) => {
-        const nextKeys = ["ArrowRight", "ArrowDown"];
-        const previousKeys = ["ArrowLeft", "ArrowUp"];
-        let nextIndex = index;
-
-        if (nextKeys.includes(event.key)) nextIndex = (index + 1) % options.length;
-        else if (previousKeys.includes(event.key)) nextIndex = (index - 1 + options.length) % options.length;
-        else if (event.key === "Home") nextIndex = 0;
-        else if (event.key === "End") nextIndex = options.length - 1;
-        else return;
-
-        event.preventDefault();
-        const nextOption = options[nextIndex];
-        nextOption.checked = true;
-        nextOption.focus();
-        nextOption.dispatchEvent(new Event("change", { bubbles: true }));
-      });
-    });
-  });
+  ["pattern", "color"].forEach((name) => bindRadioKeyboard(form, name));
 
   function fallbackCopy(text) {
     const textarea = document.createElement("textarea");
