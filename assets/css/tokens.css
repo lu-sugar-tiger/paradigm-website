@@ -1,29 +1,38 @@
 :root {
   /*
-   * One-to-one mirrors of Figma Variables > Paradigm > Color Styles.
-   * The separate `material-theme` collection is intentionally excluded.
+   * Base roles mirror Figma Variables > Paradigm > Color Styles.
+   * Brand Low is a deliberate system extension; `material-theme` remains excluded.
   */
   --color-brand: #a6192e;
+  --color-brand-low: #ff808b;
+
+  /* A restrained highlight for large branded titles; not applied by default. */
+  --gradient-brand-title: linear-gradient(
+    105deg,
+    var(--color-brand) 0%,
+    var(--color-brand-low) 48%,
+    var(--color-brand) 100%
+  );
 
   --color-background-high: #ffffff;
   --color-background-mid: #f7f7f7;
   --color-background-low: #efefef;
-  --color-on-background-high: #000000;
+  --color-on-background-high: #181818;
   --color-on-background-mid: #404040;
   --color-on-background-low: #808080;
 
   --color-surface-high: #ffffff;
   --color-surface-mid: #f7f7f7;
   --color-surface-low: #efefef;
-  --color-on-surface-high: #000000;
+  --color-on-surface-high: #181818;
   --color-on-surface-mid: #404040;
   --color-on-surface-low: #808080;
 
-  --color-outline-high: #000000;
+  --color-outline-high: #181818;
   --color-outline-mid: #bfbfbf;
   --color-outline-low: #dfdfdf;
 
-  --color-container-high: #202020;
+  --color-container-high: #181818;
   --color-container-mid: #404040;
   --color-container-low: #dfdfdf;
   --color-on-container-high: #ffffff;
@@ -36,10 +45,20 @@
   --font-sans: sans-serif;
   --font-brand: sans-serif;
 
+  --font-weight-thin: 100;
+  --font-weight-extra-light: 200;
+  --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
+  --font-weight-semi-bold: 600;
   --font-weight-bold: 700;
   --font-weight-extra-bold: 800;
+  --font-weight-black: 900;
+
+  /* Inline style modifiers remain independent from whole-text roles. */
+  --font-style-normal: normal;
+  --font-style-italic: italic;
+  --font-weight-strong-offset: 200;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -48,30 +67,60 @@
   --text-xl: clamp(2.2rem, 7vw, 3.5rem);
   --text-hero: clamp(2.8rem, 11vw, 5rem);
 
-  /* Figma text roles: Body 12/16, Title 14/17, navigation 22/26. */
+  /* Markdown-style text roles use the Body 12/16 line-height ratio. */
+  --type-small-size: 0.625rem;
+  --type-small-line-height: 0.833333rem;
+  --type-small-weight: var(--font-weight-regular);
   --type-body-size: 0.75rem;
   --type-body-line-height: 1rem;
-  --type-title-size: 0.875rem;
-  --type-title-line-height: 1.0625rem;
+  --type-body-weight: var(--font-weight-regular);
+  --type-h1-size: 2rem;
+  --type-h1-line-height: 2.666667rem;
+  --type-h1-weight: var(--font-weight-semi-bold);
+  --type-h2-size: 1.5rem;
+  --type-h2-line-height: 2rem;
+  --type-h2-weight: var(--font-weight-semi-bold);
+  --type-h3-size: 1.25rem;
+  --type-h3-line-height: 1.666667rem;
+  --type-h3-weight: var(--font-weight-semi-bold);
+  --type-h4-size: 1rem;
+  --type-h4-line-height: 1.333333rem;
+  --type-h4-weight: var(--font-weight-semi-bold);
+  --type-h5-size: 0.875rem;
+  --type-h5-line-height: 1.166667rem;
+  --type-h5-weight: var(--font-weight-semi-bold);
+  --type-h6-size: 0.75rem;
+  --type-h6-line-height: 1rem;
+  --type-h6-weight: var(--font-weight-semi-bold);
+
+  /* Component-specific roles remain separate from the Markdown-style scale. */
   --type-nav-size: 1.375rem;
   --type-nav-line-height: 1.625rem;
   --type-brand-size: 1.25rem;
   --type-brand-line-height: 1.4375rem;
 
-  /* Paragraph rhythm is part of typography, including the zero default. */
+  /* Paragraph rhythm is relative to the consuming text role's font size. */
   --type-paragraph-spacing-default: 0;
   --type-paragraph-spacing-compact: 0;
-  --type-paragraph-spacing-standard: var(--space-1);
-  --type-paragraph-spacing-relaxed: var(--space-3);
+  --type-paragraph-spacing-standard: 0.333333em;
+  --type-paragraph-spacing-relaxed: 1em;
 
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.5rem;
-  --space-6: 2rem;
-  --space-7: 3rem;
-  --space-8: 4rem;
+  --space-1: 0.125rem;
+  --space-2: 0.25rem;
+  --space-3: 0.5rem;
+  --space-4: 0.75rem;
+  --space-5: 1rem;
+  --space-6: 1.5rem;
+  --space-7: 2rem;
+  --space-8: 3rem;
+  --space-9: 4rem;
+
+  /* Semantic layout roles keep responsive composition adjustable as one system. */
+  --layout-gutter-inline: var(--space-5);
+  --layout-section-padding-tight: var(--space-6);
+  --layout-section-padding-default: var(--space-8);
+  --layout-section-padding-editorial: var(--space-9);
+  --layout-section-content-gap: var(--space-8);
 
   --radius-none: 0;
   --radius-sm: 0.25rem;
@@ -84,22 +133,42 @@
   --border-control: 1px solid var(--color-outline-mid);
   --shadow-card: 0 20px 40px color-mix(in srgb, var(--color-outline-high) 8%, transparent);
 
-  --content-width: 75rem;
+  --content-width: 60rem;
   --content-narrow: 58rem;
   --header-height: 6.25rem;
+  --header-control-gap: 0.625rem;
+  --header-actions-width: 5.75rem;
+  --icon-size-small: 1.25rem;
   --icon-size: 1.5rem;
   --choice-size: 2rem;
+  --control-size-medium: 2.5rem;
+  --control-size-large: 3rem;
   --button-height: 3.25rem;
   --product-card-rail-width: 12.5rem;
   --product-card-rail-height: 16.0625rem;
+  --footer-content-min-width: 17.125rem;
   --focus-ring-width: 2px;
   --focus-ring-offset: 3px;
   --transition-base: 180ms ease;
   --transition-fast: var(--transition-base);
+  --motion-ease-editorial: cubic-bezier(.32, .72, 0, 1);
+  --motion-duration-color: 350ms;
+  --motion-duration-medium: 700ms;
+  --motion-duration-reveal: 900ms;
+  --motion-duration-image: 1400ms;
+  --motion-distance-entrance: var(--space-6);
+  --motion-distance-reveal: var(--space-8);
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --layout-gutter-inline: var(--space-7);
+  }
 }
 
 @media (min-width: 64rem) {
   :root {
+    --content-width: 80rem;
     --header-height: 5rem;
   }
 }

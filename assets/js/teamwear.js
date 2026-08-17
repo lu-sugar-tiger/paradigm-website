@@ -52,6 +52,46 @@
     }
   }
 
+  const cardRails = Array.from(document.querySelectorAll("[data-card-rail]"));
+
+  cardRails.forEach((rail) => {
+    const controls = document.querySelector(`[aria-controls="${rail.id}"]`)?.closest(".teamwear-rail-controls");
+    const previousButton = controls?.querySelector("[data-rail-previous]");
+    const nextButton = controls?.querySelector("[data-rail-next]");
+
+    if (!previousButton || !nextButton) return;
+
+    function updateRailControls() {
+      const maximumScroll = Math.max(0, rail.scrollWidth - rail.clientWidth);
+      previousButton.disabled = rail.scrollLeft <= 1;
+      nextButton.disabled = rail.scrollLeft >= maximumScroll - 1;
+    }
+
+    function scrollRail(direction) {
+      const firstCard = rail.querySelector(".teamwear-rail-card");
+      const gap = Number.parseFloat(window.getComputedStyle(rail).columnGap) || 0;
+      const distance = (firstCard?.getBoundingClientRect().width || rail.clientWidth * .8) + gap;
+
+      rail.scrollBy({
+        left: direction * distance,
+        behavior: reducedMotion ? "auto" : "smooth"
+      });
+    }
+
+    previousButton.addEventListener("click", () => scrollRail(-1));
+    nextButton.addEventListener("click", () => scrollRail(1));
+    rail.addEventListener("scroll", updateRailControls, { passive: true });
+
+    if ("ResizeObserver" in window) {
+      const railResizeObserver = new ResizeObserver(updateRailControls);
+      railResizeObserver.observe(rail);
+    } else {
+      window.addEventListener("resize", updateRailControls, { passive: true });
+    }
+
+    updateRailControls();
+  });
+
   const patternPicker = document.querySelector("[data-teamwear-pattern-picker]");
   const colorwayRail = document.querySelector("[data-colorway-rail]");
 

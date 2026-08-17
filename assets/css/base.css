@@ -1,11 +1,124 @@
 body {
+  --font-weight-base: var(--type-body-weight);
   min-height: 100vh;
   overflow-x: clip;
   background: var(--color-background-mid);
   color: var(--color-on-background-high);
   font-family: var(--font-sans);
-  line-height: 1.3333;
+  font-size: var(--type-body-size);
+  font-style: var(--font-style-normal);
+  font-weight: var(--font-weight-base);
+  line-height: var(--type-body-line-height);
   letter-spacing: 0;
+}
+
+:where(small, .type-small) {
+  --font-weight-base: var(--type-small-weight);
+  font-size: var(--type-small-size);
+  font-weight: var(--font-weight-base);
+  line-height: var(--type-small-line-height);
+}
+
+:where(.type-body) {
+  --font-weight-base: var(--type-body-weight);
+  font-size: var(--type-body-size);
+  font-weight: var(--font-weight-base);
+  line-height: var(--type-body-line-height);
+}
+
+:where(h1) {
+  --font-weight-base: var(--type-h3-weight);
+  font-size: var(--type-h3-size);
+  font-weight: var(--font-weight-base);
+  line-height: var(--type-h3-line-height);
+}
+
+:where(h2) {
+  --font-weight-base: var(--type-h4-weight);
+  font-size: var(--type-h4-size);
+  font-weight: var(--font-weight-base);
+  line-height: var(--type-h4-line-height);
+}
+
+:where(h3) {
+  --font-weight-base: var(--type-h5-weight);
+  font-size: var(--type-h5-size);
+  font-weight: var(--font-weight-base);
+  line-height: var(--type-h5-line-height);
+}
+
+:where(h4) {
+  --font-weight-base: var(--type-h5-weight);
+  font-size: var(--type-h5-size);
+  font-weight: var(--font-weight-base);
+  line-height: var(--type-h5-line-height);
+}
+
+:where(h5) {
+  --font-weight-base: var(--type-h6-weight);
+  font-size: var(--type-h6-size);
+  font-weight: var(--font-weight-base);
+  line-height: var(--type-h6-line-height);
+}
+
+:where(h6) {
+  --font-weight-base: var(--type-h6-weight);
+  font-size: var(--type-h6-size);
+  font-weight: var(--font-weight-base);
+  line-height: var(--type-h6-line-height);
+}
+
+.type-h1 {
+  --font-weight-base: var(--type-h1-weight);
+  font-size: var(--type-h1-size);
+  font-weight: var(--font-weight-base);
+  line-height: var(--type-h1-line-height);
+}
+
+.type-h2 {
+  --font-weight-base: var(--type-h2-weight);
+  font-size: var(--type-h2-size);
+  font-weight: var(--font-weight-base);
+  line-height: var(--type-h2-line-height);
+}
+
+.type-h3 {
+  --font-weight-base: var(--type-h3-weight);
+  font-size: var(--type-h3-size);
+  font-weight: var(--font-weight-base);
+  line-height: var(--type-h3-line-height);
+}
+
+.type-h4 {
+  --font-weight-base: var(--type-h4-weight);
+  font-size: var(--type-h4-size);
+  font-weight: var(--font-weight-base);
+  line-height: var(--type-h4-line-height);
+}
+
+.type-h5 {
+  --font-weight-base: var(--type-h5-weight);
+  font-size: var(--type-h5-size);
+  font-weight: var(--font-weight-base);
+  line-height: var(--type-h5-line-height);
+}
+
+.type-h6 {
+  --font-weight-base: var(--type-h6-weight);
+  font-size: var(--type-h6-size);
+  font-weight: var(--font-weight-base);
+  line-height: var(--type-h6-line-height);
+}
+
+:where(strong, .text-strong) {
+  font-weight: min(
+    var(--font-weight-black),
+    calc(var(--font-weight-base, var(--font-weight-regular)) + var(--font-weight-strong-offset))
+  );
+}
+
+:where(em, .text-italic) {
+  font-style: var(--font-style-italic);
 }
 
 main {
@@ -46,7 +159,7 @@ html[data-input-modality="pointer"] :focus-visible {
 }
 
 .noscript-note {
-  padding: var(--space-4);
+  padding: var(--space-5);
   border-radius: var(--radius-sm);
   background: var(--color-surface-low);
   color: var(--color-on-surface-low);

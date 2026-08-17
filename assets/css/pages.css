@@ -1,31 +1,7 @@
-.teamwear-hero {
-  padding-top: 3rem;
-}
-
-.teamwear-hero .hero__title {
-  max-width: 10ch;
-  font-size: clamp(2.5rem, 11vw, 5rem);
-  color: #2d231d;
-}
-
-.teamwear-hero .hero__visual {
-  background:
-    radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.88), transparent 26%),
-    linear-gradient(180deg, #f7f3ed 8%, #cfc3b4 58%, #3f403a 100%);
-}
-
-.teamwear-caption {
-  margin-bottom: var(--space-3);
-  color: var(--color-on-surface-low);
-  font-size: var(--text-xs);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
 .about-copy {
   max-width: 42rem;
   display: grid;
-  gap: var(--space-4);
+  gap: var(--space-5);
   color: var(--color-on-surface-low);
 }
 
@@ -52,49 +28,44 @@
 }
 
 .product-page .auto-grid {
-  gap: 2px;
+  gap: var(--space-1);
   background: var(--color-outline-low);
 }
 
-.reference-page--detail .page-headline,
-.reference-page--teamwear .page-headline {
+.reference-page--detail .page-headline {
   background: var(--color-background-mid);
 }
 
-.reference-page--detail .breadcrumb,
-.reference-page--teamwear .teamwear-caption {
-  min-height: 48px;
-  padding: 16px;
+.reference-page--detail .breadcrumb {
+  min-height: var(--control-size-large);
+  padding: var(--space-5);
   font-size: 12px;
   line-height: 16px;
 }
 
-.reference-page--detail .section-heading,
-.reference-page--teamwear .section-heading {
-  margin-bottom: 16px;
+.reference-page--detail .section-heading {
+  margin-bottom: var(--space-5);
 }
 
 .reference-page--detail .section.section--tight {
   padding-block: 0;
 }
 
-.reference-page--detail .section-heading__eyebrow,
-.reference-page--teamwear .section-heading__eyebrow {
+.reference-page--detail .section-heading__eyebrow {
   font-size: 12px;
   line-height: 16px;
   text-transform: none;
   letter-spacing: 0;
 }
 
-.reference-page--detail .section-heading h2,
-.reference-page--teamwear .section-heading h2 {
+.reference-page--detail .section-heading h2 {
   font-size: 14px;
   line-height: 17px;
 }
 
 .reference-page--detail .product-detail__summary .stack-md,
 .reference-page--detail .product-copy {
-  gap: 16px;
+  gap: var(--space-5);
 }
 
 .reference-page--detail .product-detail__summary .stack-md > div:last-child > .product-detail__label {
@@ -106,7 +77,7 @@
 }
 
 .reference-page--detail .size-row {
-  padding-top: 16px;
+  padding-top: var(--space-5);
 }
 
 .reference-page--detail [data-product-category] {
@@ -115,7 +86,6 @@
 
 .reference-page--detail .product-detail__summary {
   align-content: start;
-  min-height: 1249px;
   background: var(--color-surface-mid);
 }
 
@@ -132,103 +102,19 @@
   width: 100%;
 }
 
-.reference-page--teamwear .hero {
-  padding: 0;
-  overflow: hidden;
-  background:
-    linear-gradient(180deg, #f7f7f7 0%, #f1f0eb 36%, #1d2a2d 100%);
-}
-
-.reference-page--teamwear .hero::before {
-  display: none;
-}
-
-.reference-page--teamwear .hero__content {
-  gap: 0;
-}
-
-.reference-page--teamwear .hero__visual {
-  border-radius: 0;
-  padding: 0;
-  background: transparent;
-  box-shadow: none;
-}
-
-.reference-page--teamwear .hero__visual img {
-  border-radius: 0;
-}
-
-.reference-page--teamwear .teamwear-hero .stack-md {
-  gap: 8px;
-  padding: 16px 16px 0;
-}
-
-.reference-page--teamwear .teamwear-hero .hero__title {
-  max-width: 7ch;
-  color: #3d2d22;
-  font-size: 28px;
-  line-height: 0.94;
-}
-
-.reference-page--teamwear .teamwear-hero .hero__copy {
-  max-width: 220px;
-  color: #6f6861;
-  font-size: 9px;
-  line-height: 11px;
-}
-
-.reference-page--teamwear .teamwear-hero .hero__visual {
-  margin-top: -18px;
-}
-
-.reference-page--teamwear .teamwear-hero .hero__visual img {
-  display: block;
-  width: 100%;
-  height: 520px;
-  object-fit: cover;
-  object-position: center bottom;
-}
-
-.reference-page--teamwear .section.section--tight {
-  padding-top: 32px;
-}
-
-.reference-page--teamwear .section-heading {
-  display: grid;
-  justify-content: center;
-  text-align: center;
-  gap: 4px;
-}
-
-.reference-page--teamwear .section-heading p {
-  max-width: none;
-  font-size: 12px;
-  line-height: 16px;
-}
-
-.reference-page--teamwear .spec-list,
-.reference-page--teamwear .faq-card {
-  background: var(--color-surface-mid);
-}
-
-.reference-page--teamwear .feature-panel,
-.reference-page--teamwear .cta-panel,
-.reference-page--teamwear .faq-card,
-.reference-page--teamwear .spec-card {
-  border-radius: 0;
-}
-
-@media (min-width: 48rem) {
+@media (min-width: 64rem) {
   .reference-page--detail .product-detail__panel {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: start;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 0;
     background: var(--color-surface-high);
   }
 
   .reference-page--detail .product-detail__gallery {
     position: static;
     display: grid;
+    grid-column: span 3;
     gap: 0;
     aspect-ratio: auto;
     overflow: visible;
@@ -247,40 +133,11 @@
   }
 
   .reference-page--detail .product-detail__summary {
-    min-height: 100%;
-    padding: 32px;
+    grid-column: span 2;
+    padding: var(--space-7);
   }
 
   .reference-page--detail .product-detail__actions {
     position: static;
-  }
-
-  .reference-page--teamwear .hero__content {
-    grid-template-columns: minmax(16rem, 0.72fr) minmax(0, 1.28fr);
-    align-items: center;
-  }
-
-  .reference-page--teamwear .teamwear-hero .stack-md {
-    padding: 48px 0 48px 48px;
-  }
-
-  .reference-page--teamwear .teamwear-hero .hero__title {
-    max-width: 9ch;
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-  }
-
-  .reference-page--teamwear .teamwear-hero .hero__copy {
-    max-width: 28rem;
-    font-size: 12px;
-    line-height: 18px;
-  }
-
-  .reference-page--teamwear .teamwear-hero .hero__visual {
-    margin-top: 0;
-  }
-
-  .reference-page--teamwear .teamwear-hero .hero__visual img {
-    height: min(65vw, 760px);
-    object-position: center 74%;
   }
 }

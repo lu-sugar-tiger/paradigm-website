@@ -16,6 +16,7 @@ const SEMANTIC_FAMILIES = [
 ];
 const SEMANTIC_ROLES = new Set([
   "--color-brand",
+  "--color-brand-low",
   ...SEMANTIC_FAMILIES.flatMap((family) =>
     SEMANTIC_LEVELS.map((level) => `--color-${family}-${level}`)
   )
@@ -92,9 +93,19 @@ const tokenDefinitions = [...tokensText.matchAll(/(--color-[a-z0-9-]+)\s*:/g)].m
 assert.deepEqual(
   [...new Set(tokenDefinitions)].sort(),
   [...SEMANTIC_ROLES].sort(),
-  "tokens.css must define only Brand plus High/Mid/Low Background, On Background, Surface, On Surface, Container, On Container, and Outline roles"
+  "tokens.css must define only Brand, Brand Low, plus High/Mid/Low Background, On Background, Surface, On Surface, Container, On Container, and Outline roles"
 );
 assert.equal(tokenDefinitions.length, SEMANTIC_ROLES.size, "semantic color roles must be defined exactly once");
+assert.match(tokensText, /--color-brand-low\s*:\s*#ff808b\s*;/i, "Brand Low must equal #FF808B");
+const brandTitleGradient = tokensText.match(/--gradient-brand-title\s*:\s*linear-gradient\(([\s\S]*?)\);/)?.[1] ?? "";
+assert.match(brandTitleGradient, /var\(--color-brand\)/, "brand title gradient must use Brand");
+assert.match(brandTitleGradient, /var\(--color-brand-low\)/, "brand title gradient must use Brand Low");
+const teamwearCssText = await readFile(path.join(ROOT, "assets/css/teamwear.css"), "utf8");
+assert.match(
+  teamwearCssText,
+  /\.teamwear-title--brand-gradient\s*\{[\s\S]*?background\s*:\s*var\(--gradient-brand-title\)/,
+  "Teamwear Brand Title utility must consume the prepared gradient token"
+);
 
 const semanticHexValues = new Set(
   [...tokensText.matchAll(/--color-[a-z0-9-]+\s*:\s*(#[0-9a-f]{6})\s*;/gi)]

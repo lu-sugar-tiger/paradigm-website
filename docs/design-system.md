@@ -4,59 +4,137 @@ This document connects the Paradigm Figma file to the static website. The visual
 
 ## Foundations
 
-The current Figma work uses a restrained editorial system. Semantic color values come from **Variables → Paradigm → Color Styles**—not from the separate `material-theme` collection:
+The current Figma work uses a restrained editorial system. Base semantic color values come from **Variables → Paradigm → Color Styles**—not from the separate `material-theme` collection. Brand Low is a deliberate extension requested for future branded editorial work:
 
 | Semantic role | High | Mid | Low | Website use |
 | --- | --- | --- | --- | --- |
-| Brand | `#a6192e` | — | — | Brand emphasis and selection highlight |
+| Brand | `#a6192e` | — | `#ff808b` | Brand emphasis, selection highlight, and the lighter title-gradient stop |
 | Background | `#ffffff` | `#f7f7f7` | `#efefef` | Document and full-width page-section layers |
-| On Background | `#000000` | `#404040` | `#808080` | Content placed directly on a Background layer |
+| On Background | `#181818` | `#404040` | `#808080` | Content placed directly on a Background layer |
 | Surface | `#ffffff` | `#f7f7f7` | `#efefef` | Cards, galleries, panels, and subdued controls |
-| On Surface | `#000000` | `#404040` | `#808080` | Content placed on a Surface layer |
-| Container | `#202020` | `#404040` | `#dfdfdf` | Filled actions, footer, and filled control states |
+| On Surface | `#181818` | `#404040` | `#808080` | Content placed on a Surface layer |
+| Container | `#181818` | `#404040` | `#dfdfdf` | Filled actions, footer, and filled control states |
 | On Container | `#ffffff` | `#ffffff` | `#808080` | Content placed on a Container layer |
-| Outline | `#000000` | `#bfbfbf` | `#dfdfdf` | Focus, strong controls, hairlines, and grid seams |
+| Outline | `#181818` | `#bfbfbf` | `#dfdfdf` | Focus, strong controls, hairlines, and grid seams |
 
-- brand: `#a6192e`
+- brand: base `#a6192e`, low `#ff808b`
 - backgrounds and surfaces: high `#ffffff`, mid `#f7f7f7`, low `#efefef`
-- content on backgrounds and surfaces: high `#000000`, mid `#404040`, low `#808080`
-- outlines: high `#000000`, mid `#bfbfbf`, low `#dfdfdf`
-- containers: high `#202020`, mid `#404040`, low `#dfdfdf`; their content colors are white, white, and `#808080`
+- content on backgrounds and surfaces: high `#181818`, mid `#404040`, low `#808080`
+- outlines: high `#181818`, mid `#bfbfbf`, low `#dfdfdf`
+- containers: high `#181818`, mid `#404040`, low `#dfdfdf`; their content colors are white, white, and `#808080`
 - product colorways live in the complete `data/product-colorways.json` registry rather than in semantic interface tokens
 - Figma's purple `#8a38f5` component-boundary color is a canvas/prototype aid and is never an interface token
 - the visitor's browser/OS default `sans-serif` for all interface and brand text until a website font is licensed
-- an 8px-centered spacing rhythm, with 4px used for compact details
-- 12/16 body text, 14/17 titles and labels, 20/23 wordmark text, and 22/26 drawer navigation
+- an 8px-centered spacing rhythm, with 4px for compact details and 2px for intentional grid seams
+- a Markdown-style text-role scale with one 4:3 line-height ratio: Small 10px, Body 12px, h6 12px, h5 14px, h4 16px, h3 20px, h2 24px, and h1 32px
 - square product controls and actions; rounded corners are reserved for Teamwear editorial cards and accordions
 - four control states where relevant: default, selected, sold/unavailable, and blank
 
-The Figma variable names are mirrored one-to-one in `assets/css/tokens.css`. Shared components consume those role names directly: Brand, Background, On Background, Surface, On Surface, Container, On Container, and Outline, with High/Mid/Low levels where applicable. Convenience aliases such as `--color-text` or `--color-action` are intentionally prohibited. Product colorways stay separate so a garment swatch cannot accidentally become an interface role.
+Figma variable names are mirrored directly in `assets/css/tokens.css`, with Brand Low documented as a deliberate extension. Shared components consume the semantic role names directly: Brand, Background, On Background, Surface, On Surface, Container, On Container, and Outline, with High/Mid/Low levels where applicable. Convenience aliases such as `--color-text` or `--color-action` are intentionally prohibited. Product colorways stay separate so a garment swatch cannot accidentally become an interface role.
+
+The Brand Title gradient is `Brand → Brand Low → Brand` at 105°. It is a composed gradient token, not another semantic color role. Teamwear section titles apply it through `.teamwear-title--brand-gradient` while retaining a Brand fallback for forced-colors mode.
 
 Background roles are layered by responsibility: the document and page use `Background Mid`, elevated cards and galleries use `Surface High`, subdued controls use `Surface Low`, and grid seams use `Outline Low`. Backgrounds belong to full-width page sections; `.container` constrains content without clipping the section color.
 
 The navigation menu is a full-viewport overlay at every breakpoint. The header remains its top control layer, while the menu surface extends underneath it to every viewport edge.
 
+## Layout and spacing
+
+The primitive spacing scale is shared across layout and components:
+
+| Token | Value | Typical use |
+| --- | ---: | --- |
+| `--space-1` | 2px | Intentional catalog and product-rail seams |
+| `--space-2` | 4px | Tight internal separation |
+| `--space-3` | 8px | Compact component gaps and padding |
+| `--space-4` | 12px | Small grouped-content separation |
+| `--space-5` | 16px | Standard component and mobile spacing |
+| `--space-6` | 24px | Large component and layout spacing |
+| `--space-7` | 32px | Large stack and content-gutter spacing |
+| `--space-8` | 48px | Standard section spacing |
+| `--space-9` | 64px | Large section and editorial spacing |
+
+The primitive scale deliberately stops at 64px. Responsive layout consumes semantic roles so future adjustments can be made without finding every component:
+
+| Semantic role | Base | Medium | Large |
+| --- | ---: | ---: | ---: |
+| Inline gutter | 16px | 32px | 32px |
+| Tight section padding | 24px | 24px | 24px |
+| Default section padding | 48px | 48px | 48px |
+| Editorial / Teamwear section padding | 64px | 64px | 64px |
+| Section heading to content | 48px | 48px | 48px |
+
+The responsive system has three layout ranges. Base and Medium retain mobile interaction patterns; Large introduces desktop composition:
+
+| Range | Viewport | Catalog | Product detail | Teamwear |
+| --- | --- | --- | --- | --- |
+| Base | Below 768px | 2 columns | Single column, gallery carousel, fixed purchase action | Mobile composition, 16px gutter |
+| Medium | 768–1023px | 3 columns | Single column, gallery carousel, fixed purchase action | Mobile composition, 32px gutter |
+| Large | 1024px and above | 3 columns | Gapless 5-column grid: gallery spans 3, information spans 2; stacked gallery and static action | Desktop headings, FAQ split, three-column bento, 32px gutter |
+
+Large product-detail columns stretch to the same grid-row height. No fixed or content-specific height is imposed on the information panel.
+
+`--content-width` is `60rem` (960px) through Medium and changes to `80rem` (1280px) at Large. Base viewports remain naturally limited by their viewport and container gutters. `--content-narrow: 58rem` (928px) and `.container--narrow` are defined but currently unused. The exact 928px value is project-specific rather than a required industry convention.
+
+`.container` is active throughout headers, footers, catalogs, product pages, and Teamwear. `.reference-page` is also active on all current public page templates; it deliberately lets selected catalog and product structures reach the viewport edges until the responsive 960px / 1280px maximum. Do not remove either as unused legacy. Teamwear uses full-width outer sections with constrained `.container` content where appropriate, while rails and full-bleed media may extend beyond that inner boundary.
+
+Teamwear rails align to the same responsive inline gutter as their section headings, while remaining horizontally scrollable and full-bleed. Teamwear motion uses shared editorial duration, distance, and easing roles; component dimensions such as 40px and 48px controls use size roles rather than spacing tokens. Radius roles describe shape only and must never be used as gaps or padding.
+
+The unused generic `.split` recipe and the unused 1px `.auto-grid` and `.spec-list` gaps have been removed. Active catalog seams use `--space-1` (2px). Active 1px borders remain intentional hairlines rather than spacing.
+
 ## Typography
 
 The website uses the visitor's browser/OS default `sans-serif` until a website font is licensed. Type is defined by semantic roles rather than by page:
 
-| Role | Size / line height | Token pair |
-| --- | --- | --- |
-| Body | 12px / 16px | `--type-body-size`, `--type-body-line-height` |
-| Title and label | 14px / 17px | `--type-title-size`, `--type-title-line-height` |
-| Brand | 20px / 23px | `--type-brand-size`, `--type-brand-line-height` |
-| Drawer navigation | 22px / 26px | `--type-nav-size`, `--type-nav-line-height` |
+| Role | Size / line height | Default weight | Token prefix |
+| --- | --- | --- | --- |
+| Small | 10px / 13.333px | Regular | `--type-small-*` |
+| Body | 12px / 16px | Regular | `--type-body-*` |
+| h6 | 12px / 16px | Semi Bold | `--type-h6-*` |
+| h5 | 14px / 18.667px | Semi Bold | `--type-h5-*` |
+| h4 | 16px / 21.333px | Semi Bold | `--type-h4-*` |
+| h3 | 20px / 26.667px | Semi Bold | `--type-h3-*` |
+| h2 | 24px / 32px | Semi Bold | `--type-h2-*` |
+| h1 | 32px / 42.667px | Semi Bold | `--type-h1-*` |
 
-Paragraph spacing is also a typography decision, including an explicit zero value:
+Each role has `size`, `line-height`, and `weight` tokens. `.type-h1` through `.type-h6` apply the complete visual roles independently from the semantic document outline. The previous h1–h5 roles shifted intact to h2–h6, making room for the new 32px h1. Existing semantic headings and explicit Teamwear role classes were remapped to those shifted roles so their rendered sizes do not change. `body` supplies the Body role, `.type-body` reapplies it explicitly, and `small` and `.type-small` consume the complete Small role. Brand and drawer navigation remain component-specific roles.
+
+Font weight is a separate semantic axis. All nine CSS weight values are available as tokens even when a weight is not currently used:
+
+| Weight role | Value | Token |
+| --- | ---: | --- |
+| Thin | 100 | `--font-weight-thin` |
+| Extra Light | 200 | `--font-weight-extra-light` |
+| Light | 300 | `--font-weight-light` |
+| Regular | 400 | `--font-weight-regular` |
+| Medium | 500 | `--font-weight-medium` |
+| Semi Bold | 600 | `--font-weight-semi-bold` |
+| Bold | 700 | `--font-weight-bold` |
+| Extra Bold | 800 | `--font-weight-extra-bold` |
+| Black | 900 | `--font-weight-black` |
+
+Do not place numeric font weights in component CSS. Each weighted text context declares its semantic `--font-weight-base` and consumes that value, allowing inline modifiers to respond to the surrounding role.
+
+Style modifiers remain independent from whole-text roles:
+
+| Modifier | Behavior | Website contract |
+| --- | --- | --- |
+| Normal | Uses the surrounding role's base weight and normal style | Default text behavior |
+| Italic | Changes only `font-style` to Italic | `<em>` or `.text-italic` |
+| Strong | Adds 200 to the surrounding semantic base weight, capped at Black 900 | `<strong>` or `.text-strong` |
+
+Examples: Regular becomes Semi Bold, Medium becomes Bold, Bold becomes Black, and Extra Bold is capped at Black.
+
+Paragraph spacing is also a typography decision. Relative values are calculated from the consuming text role's own font size:
 
 | Paragraph rhythm | Value | Token | Use |
 | --- | ---: | --- | --- |
 | Default | 0 | `--type-paragraph-spacing-default` | Reset and layouts where the parent owns vertical rhythm |
 | Compact | 0 | `--type-paragraph-spacing-compact` | Dense text groups that still need a distinct semantic role |
-| Standard | 4px | `--type-paragraph-spacing-standard` | Product-description lines and short component copy |
-| Relaxed | 12px | `--type-paragraph-spacing-relaxed` | Editorial or long-form copy when the composition calls for more air |
+| Standard | 1/3 × text-role size (`0.333333em`) | `--type-paragraph-spacing-standard` | Product-description lines and short component copy |
+| Relaxed | 1 × text-role size (`1em`) | `--type-paragraph-spacing-relaxed` | Editorial or long-form copy when the composition calls for more air |
 
-Use either a paragraph margin or a parent layout gap to create the same intended rhythm, never both. The product-copy renderer deliberately uses the standard 4px role and preserves source blank lines; changing that role must be checked against the source-exact product-copy contract.
+Use either a paragraph margin or a parent layout gap to create the same intended rhythm, never both. The product-copy renderer uses Body 12px with Standard spacing, so its effective value remains exactly 4px while preserving source blank lines.
 
 ## Consistency status
 
@@ -64,17 +142,18 @@ The system is partially consistent, not yet project-wide:
 
 - All active pages load the same foundation stack in the same order: tokens, reset, base, layout, components, then pages. Teamwear adds its two scoped stylesheets after that stack.
 - The shared storefront shell uses the Figma-derived semantic color roles directly, the default sans-serif family, common layout variables, full-viewport navigation, and reusable component classes.
-- Shared storefront color usage is strict: literal colors and undeclared color aliases fail `scripts/validate-color-system.mjs`. Remaining literal colors are scoped to the unfinished Teamwear implementation.
-- The generic `--text-*` scale overlaps with the semantic `--type-*` roles. New component work should use semantic roles; the generic scale should be migrated and then deprecated.
-- Teamwear is under construction, so its provisional implementation is excluded from the current consistency assessment. Once its design is stable, it must either reuse the global system or extend it with documented semantic roles; it should not remain a permanent exception.
+- Shared storefront color usage is strict: literal colors and undeclared color aliases fail `scripts/validate-color-system.mjs`. Teamwear garment colorways remain scoped merchandising data rather than interface roles.
+- Typography weights and relative paragraph roles are enforced by `scripts/validate-typography-system.mjs`; component CSS may not introduce raw numeric font weights.
+- The generic `--text-*` scale overlaps with the semantic Markdown-style `--type-*` roles. New component work should use Small, Body, or h1 through h6; the generic scale should be migrated and then deprecated.
+- Teamwear uses `.type-h1` for the 32px hero title and `.type-h2` with the Brand Title gradient for 24px section titles. Child and card titles remain semantic h3 elements but use the 14px `.type-h5` visual role. Eyebrows remain semantic h5 elements and use the default shifted h6 visual role at 12px. Its text stacks retain Standard paragraph spacing and default tracking.
 
 ### Improvement order
 
-1. Keep Figma Variables > Paradigm > Color Styles as the only source for global semantic color tokens; keep product swatches and editorial art direction outside the interface state palette.
-2. Finish migrating shared shell typography, paragraph rhythm, spacing, radii, and motion before normalizing one-off editorial compositions.
-3. After Teamwear's direction is approved, map it into the existing system or deliberately extend the shared tokens and component contracts to cover it.
+1. Keep Figma Variables > Paradigm > Color Styles as the base source for global semantic color tokens; document deliberate extensions such as Brand Low, and keep product swatches outside the interface state palette.
+2. Adjust shared typography, paragraph rhythm, spacing, radii, motion, and responsive layout through their semantic roles before changing individual components.
+3. Keep Teamwear mapped to the shared foundation roles as its editorial composition evolves; extend the system only when a genuinely reusable role is missing.
 4. Add component tokens only for repeated intentional decisions, such as control height or card radius; avoid aliases for one-off coordinates.
-5. Keep `scripts/validate-color-system.mjs` in the validation workflow so new literal colors or undeclared color roles cannot silently expand the shared system.
+5. Keep `scripts/validate-color-system.mjs`, `scripts/validate-typography-system.mjs`, and `scripts/validate-layout-system.mjs` in the validation workflow so new literals, undeclared roles, or responsive-layout drift cannot silently expand the shared system.
 
 ## Figma-to-code map
 
@@ -88,7 +167,7 @@ The system is partially consistent, not yet project-wide:
 | Product Size | `.size-chip` plus `.is-active`, `.is-muted`, and `.size-chip--blank` |
 | Button | `.button` and `.button--secondary` |
 | Footer | `.site-footer` and `.site-footer__grid` |
-| Teamwear page | `.reference-page--teamwear` and its editorial sections |
+| Teamwear page | `.teamwear-page`, `.teamwear-story-page`, and its editorial sections |
 
 ## Adjustment workflow
 
@@ -99,6 +178,6 @@ The system is partially consistent, not yet project-wide:
 5. Use the reference PNG as the visual source of truth and its companion exported CSS for dimensions, spacing, and typography.
 6. Verify collection, product-detail, navigation, footer, and Teamwear surfaces at 320px, 390px, 402px, 768px, and 1440px.
 7. Preserve a visible keyboard focus ring. Pointer taps and clicks intentionally suppress the browser's blue tap highlight, but `:focus-visible` remains enabled.
-8. Run `node scripts/validate-color-system.mjs`; it enforces the 22 semantic role names, the complete product-colorway registry, and Teamwear-only scoping for exceptions.
+8. Run `node scripts/validate-color-system.mjs`; it enforces the 23 semantic role names, the complete product-colorway registry, and Teamwear-only scoping for exceptions.
 
 Do not turn prototype hotspot outlines, selection borders, or Figma canvas effects into website styling.

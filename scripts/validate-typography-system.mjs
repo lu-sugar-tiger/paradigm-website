@@ -1,0 +1,223 @@
+import assert from "node:assert/strict";
+import { readdir, readFile } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const ROOT = fileURLToPath(new URL("../", import.meta.url));
+const CSS_DIRECTORY = path.join(ROOT, "assets", "css");
+const WEIGHTS = new Map([
+  ["thin", "100"],
+  ["extra-light", "200"],
+  ["light", "300"],
+  ["regular", "400"],
+  ["medium", "500"],
+  ["semi-bold", "600"],
+  ["bold", "700"],
+  ["extra-bold", "800"],
+  ["black", "900"]
+]);
+const PARAGRAPH_SPACING = new Map([
+  ["default", "0"],
+  ["compact", "0"],
+  ["standard", "0.333333em"],
+  ["relaxed", "1em"]
+]);
+const TEXT_ROLES = new Map([
+  ["small", { size: "0.625rem", lineHeight: "0.833333rem", weight: "regular" }],
+  ["body", { size: "0.75rem", lineHeight: "1rem", weight: "regular" }],
+  ["h1", { size: "2rem", lineHeight: "2.666667rem", weight: "semi-bold" }],
+  ["h2", { size: "1.5rem", lineHeight: "2rem", weight: "semi-bold" }],
+  ["h3", { size: "1.25rem", lineHeight: "1.666667rem", weight: "semi-bold" }],
+  ["h4", { size: "1rem", lineHeight: "1.333333rem", weight: "semi-bold" }],
+  ["h5", { size: "0.875rem", lineHeight: "1.166667rem", weight: "semi-bold" }],
+  ["h6", { size: "0.75rem", lineHeight: "1rem", weight: "semi-bold" }]
+]);
+
+function propertyValue(source, property) {
+  const match = source.match(new RegExp(`${property.replaceAll("-", "\\-")}\\s*:\\s*([^;]+);`));
+  return match?.[1].trim();
+}
+
+function collectRules(source) {
+  const css = source.replace(/\/\*[\s\S]*?\*\//g, "");
+  const rules = [];
+
+  function visit(block) {
+    let cursor = 0;
+    while (cursor < block.length) {
+      const open = block.indexOf("{", cursor);
+      if (open < 0) break;
+      const selector = block.slice(cursor, open).trim().replace(/^;\s*/, "");
+      let depth = 1;
+      let close = open + 1;
+      while (close < block.length && depth > 0) {
+        if (block[close] === "{") depth += 1;
+        if (block[close] === "}") depth -= 1;
+        close += 1;
+      }
+      assert.equal(depth, 0, `unbalanced CSS block after "${selector}"`);
+      const declarations = block.slice(open + 1, close - 1);
+      if (selector.startsWith("@")) visit(declarations);
+      else rules.push({ selector, declarations });
+      cursor = close;
+    }
+  }
+
+  visit(css);
+  return rules;
+}
+
+const tokens = await readFile(path.join(CSS_DIRECTORY, "tokens.css"), "utf8");
+for (const [name, value] of WEIGHTS) {
+  assert.equal(
+    propertyValue(tokens, `--font-weight-${name}`),
+    value,
+    `--font-weight-${name} must equal ${value}`
+  );
+}
+assert.equal(propertyValue(tokens, "--font-weight-strong-offset"), "200", "Strong must add two weight levels");
+assert.equal(propertyValue(tokens, "--font-style-normal"), "normal", "Normal style modifier must be tokenized");
+assert.equal(propertyValue(tokens, "--font-style-italic"), "italic", "Italic style modifier must be tokenized");
+
+for (const [name, value] of PARAGRAPH_SPACING) {
+  assert.equal(
+    propertyValue(tokens, `--type-paragraph-spacing-${name}`),
+    value,
+    `paragraph spacing ${name} must equal ${value}`
+  );
+}
+
+for (const [name, role] of TEXT_ROLES) {
+  assert.equal(propertyValue(tokens, `--type-${name}-size`), role.size, `${name} size must equal ${role.size}`);
+  assert.equal(
+    propertyValue(tokens, `--type-${name}-line-height`),
+    role.lineHeight,
+    `${name} line height must preserve the Body 12/16 ratio`
+  );
+  assert.equal(
+    propertyValue(tokens, `--type-${name}-weight`),
+    `var(--font-weight-${role.weight})`,
+    `${name} default weight must be ${role.weight}`
+  );
+}
+
+const cssFiles = (await readdir(CSS_DIRECTORY))
+  .filter((file) => file.endsWith(".css"))
+  .map((file) => path.join(CSS_DIRECTORY, file));
+const violations = [];
+
+for (const filePath of cssFiles) {
+  const relativePath = path.relative(ROOT, filePath).replaceAll("\\", "/");
+  const css = await readFile(filePath, "utf8");
+  const withoutComments = css.replace(/\/\*[\s\S]*?\*\//g, "");
+
+  for (const match of withoutComments.matchAll(/font-weight\s*:\s*([^;]+);/g)) {
+    const value = match[1].trim();
+    if (
+      value !== "var(--font-weight-base)" &&
+      !value.startsWith("min(")
+    ) {
+      violations.push(`${relativePath}: font-weight must use the semantic base or Strong modifier, found ${value}`);
+    }
+  }
+
+  for (const match of withoutComments.matchAll(/--font-weight-base\s*:\s*var\(--font-weight-([a-z-]+)\)/g)) {
+    if (!WEIGHTS.has(match[1])) {
+      violations.push(`${relativePath}: unknown semantic weight ${match[1]}`);
+    }
+  }
+
+
+  for (const match of withoutComments.matchAll(/--font-weight-base\s*:\s*var\(--type-([a-z0-9-]+)-weight\)/g)) {
+    if (!TEXT_ROLES.has(match[1])) {
+      violations.push(`${relativePath}: unknown text-role weight ${match[1]}`);
+    }
+  }
+
+  for (const { selector, declarations } of collectRules(css)) {
+    if (
+      declarations.includes("font-weight: var(--font-weight-base)") &&
+      !/--font-weight-base\s*:\s*var\(--(?:font-weight-[a-z-]+|type-[a-z0-9-]+-weight)\)/.test(declarations)
+    ) {
+      violations.push(`${relativePath}: ${selector} must declare its semantic --font-weight-base`);
+    }
+  }
+}
+
+const base = await readFile(path.join(CSS_DIRECTORY, "base.css"), "utf8");
+assert.match(base, /:where\(strong, \.text-strong\)/, "Strong element and modifier class must share one rule");
+assert.match(base, /var\(--font-weight-strong-offset\)/, "Strong must use the +200 token");
+assert.match(base, /var\(--font-weight-black\)/, "Strong must cap at Black 900");
+assert.match(base, /:where\(em, \.text-italic\)/, "Italic element and modifier class must share one rule");
+for (const role of TEXT_ROLES.keys()) {
+  assert.match(base, new RegExp(`\\.type-${role}`), `.type-${role} must apply the complete role`);
+}
+for (const role of ["h1", "h2", "h3", "h4", "h5", "h6"]) {
+  assert.match(
+    base,
+    new RegExp(`\\.type-${role}\\s*\\{[\\s\\S]*?var\\(--type-${role}-weight\\)[\\s\\S]*?var\\(--type-${role}-size\\)[\\s\\S]*?var\\(--type-${role}-line-height\\)`),
+    `.type-${role} must apply the complete ${role} role`
+  );
+}
+for (const [semanticElement, shiftedRole] of [
+  ["h1", "h3"],
+  ["h2", "h4"],
+  ["h3", "h5"],
+  ["h4", "h5"],
+  ["h5", "h6"]
+]) {
+  assert.match(
+    base,
+    new RegExp(`:where\\(${semanticElement}\\)\\s*\\{[\\s\\S]*?var\\(--type-${shiftedRole}-weight\\)[\\s\\S]*?var\\(--type-${shiftedRole}-size\\)[\\s\\S]*?var\\(--type-${shiftedRole}-line-height\\)`),
+    `${semanticElement} must retain its previous rendered size through the shifted ${shiftedRole} role`
+  );
+}
+
+const components = await readFile(path.join(CSS_DIRECTORY, "components.css"), "utf8");
+assert.match(
+  components,
+  /\.product-copy__line\s*\{[\s\S]*?var\(--type-paragraph-spacing-standard\)/,
+  "product copy must retain Standard paragraph spacing"
+);
+
+const teamwearStory = await readFile(path.join(CSS_DIRECTORY, "teamwear-story.css"), "utf8");
+assert.doesNotMatch(teamwearStory, /letter-spacing\s*:/, "Teamwear must use default tracking");
+assert.doesNotMatch(teamwearStory, /text-shadow\s*:/, "Teamwear text must not use invented text effects");
+assert.match(
+  teamwearStory,
+  /\.teamwear-story-page :where\(h1, h2, h3, h5, p, blockquote\)\s*\{[\s\S]*?var\(--type-paragraph-spacing-standard\)/,
+  "Teamwear text fields must use Standard paragraph spacing"
+);
+for (const selector of [
+  ".teamwear-hero__copy",
+  ".teamwear-section-heading > div",
+  ".teamwear-rail-card__copy",
+  ".teamwear-stacked-row__copy"
+]) {
+  const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  assert.match(
+    teamwearStory,
+    new RegExp(`${escapedSelector}\\s*\\{[\\s\\S]*?gap:\\s*0;`),
+    `${selector} must use typography rhythm instead of a text-stack gap`
+  );
+}
+
+const teamwearMarkup = await readFile(path.join(ROOT, "teamwear", "index.html"), "utf8");
+assert.match(teamwearMarkup, /<h1 class="type-h1"[^>]*>/, "Teamwear hero title must use the h1 display role");
+for (const match of teamwearMarkup.matchAll(/<h2([^>]*)>/g)) {
+  assert.match(match[1], /class="[^"]*\btype-h2\b[^"]*"/, "Every Teamwear section title must use the h2 display role");
+  assert.match(match[1], /class="[^"]*\bteamwear-title--brand-gradient\b[^"]*"/, "Every Teamwear section title must use the Brand Title gradient");
+}
+for (const match of teamwearMarkup.matchAll(/<h3([^>]*)>/g)) {
+  assert.match(match[1], /class="[^"]*\btype-h5\b[^"]*"/, "Every Teamwear child or card title must use the h5 text role");
+}
+assert.doesNotMatch(teamwearMarkup, /<p class="(?:teamwear-kicker|teamwear-section-label)"/, "Teamwear eyebrows must not remain paragraphs");
+const teamwearEyebrowClasses = [...teamwearMarkup.matchAll(/class="(?:teamwear-kicker|teamwear-section-label)"/g)];
+const teamwearH5Eyebrows = [...teamwearMarkup.matchAll(/<h5 class="(?:teamwear-kicker|teamwear-section-label)">/g)];
+assert.ok(teamwearH5Eyebrows.length > 0, "Teamwear must include h5 eyebrows");
+assert.equal(teamwearH5Eyebrows.length, teamwearEyebrowClasses.length, "Every Teamwear eyebrow must use h5");
+
+assert.equal(violations.length, 0, violations.join("\n"));
+console.log(
+  `TYPOGRAPHY_SYSTEM_OK weights=${WEIGHTS.size} textRoles=${TEXT_ROLES.size} paragraphRoles=${PARAGRAPH_SPACING.size} strongOffset=200 productSpacing=one-third-em teamwear=h1-h2-gradient-child-h5-eyebrow-h5`
+);
