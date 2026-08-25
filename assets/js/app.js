@@ -1,644 +1,84 @@
 (function () {
-  const rootPath = document.body.dataset.root || ".";
-  const catalog = window.PARADIGM_CATALOG || { products: [] };
   let lastFocusedElement = null;
 
   document.documentElement.dataset.inputModality = "pointer";
-  document.addEventListener(
-    "pointerdown",
-    () => {
-      document.documentElement.dataset.inputModality = "pointer";
-    },
-    true
-  );
-  document.addEventListener(
-    "keydown",
-    (event) => {
-      if (!["Alt", "Control", "Meta", "Shift"].includes(event.key)) {
-        document.documentElement.dataset.inputModality = "keyboard";
-      }
-    },
-    true
-  );
-
-  function asset(path) {
-    return `${rootPath}/${path}`.replace(/\/\.\//g, "/").replace(/([^:])\/{2,}/g, "$1/");
-  }
-
-  function productUrl(product) {
-    return `/products/${encodeURIComponent(product.productNumber)}`;
-  }
-
-  function getFocusableNodes(scope) {
-    return Array.from(
-      scope.querySelectorAll(
-        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-      )
-    ).filter((node) => !node.hasAttribute("hidden"));
-  }
-
-  function setPageInert(isInert) {
-    document.querySelectorAll("main, footer").forEach((node) => {
-      node.toggleAttribute("inert", isInert);
-    });
-  }
-
-  function openDrawer() {
-    const drawer = document.querySelector("[data-nav-drawer]");
-    const toggle = document.querySelector("[data-nav-toggle]");
-
-    if (!drawer || !toggle) {
-      return;
+  document.addEventListener("pointerdown", () => {
+    document.documentElement.dataset.inputModality = "pointer";
+  }, true);
+  document.addEventListener("keydown", (event) => {
+    if (!["Alt", "Control", "Meta", "Shift"].includes(event.key)) {
+      document.documentElement.dataset.inputModality = "keyboard";
     }
+  }, true);
 
+  function focusableNodes(scope) {
+    return Array.from(scope.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])')).filter((node) => !node.hidden);
+  }
+
+  function setPageInert(inert) {
+    document.querySelectorAll("main, footer").forEach((node) => node.toggleAttribute("inert", inert));
+  }
+
+  function openDrawer(drawer, toggle) {
     lastFocusedElement = document.activeElement;
-    document.body.style.setProperty(
-      "--scrollbar-compensation",
-      `${window.innerWidth - document.documentElement.clientWidth}px`
-    );
+    document.body.style.setProperty("--scrollbar-compensation", `${window.innerWidth - document.documentElement.clientWidth}px`);
     drawer.setAttribute("aria-hidden", "false");
     toggle.setAttribute("aria-expanded", "true");
     toggle.setAttribute("aria-label", "Close navigation");
+    const icon = toggle.querySelector(".material-icon");
+    if (icon) icon.textContent = toggle.dataset.navCloseSymbol;
     document.body.classList.add("nav-open");
     document.body.style.overflow = "hidden";
     setPageInert(true);
-
-    const toggleIcon = toggle.querySelector("img");
-    if (toggleIcon) {
-      toggleIcon.src = asset("assets/icons/close.svg");
-    }
     toggle.focus();
   }
 
-  function closeDrawer() {
-    const drawer = document.querySelector("[data-nav-drawer]");
-    const toggle = document.querySelector("[data-nav-toggle]");
-
-    if (!drawer || !toggle) {
-      return;
-    }
-
+  function closeDrawer(drawer, toggle) {
     drawer.setAttribute("aria-hidden", "true");
     toggle.setAttribute("aria-expanded", "false");
     toggle.setAttribute("aria-label", "Open navigation");
+    const icon = toggle.querySelector(".material-icon");
+    if (icon) icon.textContent = toggle.dataset.navOpenSymbol;
     document.body.classList.remove("nav-open");
     document.body.style.removeProperty("--scrollbar-compensation");
     document.body.style.overflow = "";
     setPageInert(false);
-
-    const toggleIcon = toggle.querySelector("img");
-    if (toggleIcon) {
-      toggleIcon.src = asset("assets/icons/menu.svg");
-    }
     (lastFocusedElement || toggle).focus();
   }
 
-  function buildProductCard(product) {
-    const link = document.createElement("a");
-    link.className = "product-card";
-    link.href = productUrl(product);
-    const media = product.image
-      ? `<img src="${asset(product.image)}" alt="${product.alt}" loading="lazy" width="400" height="460">`
-      : "";
-
-    link.innerHTML = `
-      <div class="product-card__media">
-        ${media}
-      </div>
-      <div class="product-card__body">
-        <h3 class="product-card__title">${product.title}</h3>
-        <div class="product-card__footer">
-          <span class="product-card__price">${product.price}</span>
-        </div>
-      </div>
-    `;
-
-    return link;
-  }
-
-  function renderNavigation() {
-    const nav = document.querySelector(".drawer-nav");
-
-    if (!nav) {
-      return;
-    }
-
-    nav.setAttribute("aria-label", "Navigation");
-
-    const currentPath = window.location.pathname.replace(/\/$/, "") || "/";
-    const isTeamwear = currentPath === "/teamwear";
-    const allCollection = { label: "All", path: "/collections/all", aliases: ["/"] };
-    const subcollections = [
-      { label: "SS Tops", path: "/collections/ss-tops" },
-      { label: "AW Tops", path: "/collections/aw-tops" },
-      { label: "Bottoms", path: "/collections/bottoms" }
-    ];
-    const allIsCurrent = currentPath === allCollection.path || allCollection.aliases.includes(currentPath);
-    const subcollectionLinks = subcollections
-      .map(({ label, path, aliases = [] }) => {
-        const isCurrent = currentPath === path || aliases.includes(currentPath);
-        return `<li><a href="${path}"${isCurrent ? ' aria-current="page"' : ""}>${label}</a></li>`;
-      })
-      .join("");
-
-    nav.innerHTML = `
-      <ul role="list">
-        <li>
-          <a href="${allCollection.path}"${allIsCurrent ? ' aria-current="page"' : ""}>${allCollection.label}</a>
-          <ul class="drawer-nav__subcollections" role="list">
-            ${subcollectionLinks}
-          </ul>
-        </li>
-      </ul>
-      <div class="drawer-nav__divider"></div>
-      <ul role="list">
-        <li><a href="/teamwear"${isTeamwear ? ' aria-current="page"' : ""}>Teamwear</a></li>
-      </ul>
-    `;
-  }
-
-  function renderFigmaIcons() {
-    const iconMap = [
-      ['[aria-label^="Search"]', "assets/icons/search.svg"],
-      ['[aria-label^="Shopping bag"]', "assets/icons/shopping-bag.svg"],
-      ["[data-nav-toggle]", "assets/icons/menu.svg"],
-      ["[data-nav-close]", "assets/icons/close.svg"],
-      [".filter-button", "assets/icons/filter.svg"],
-      [".product-detail__actions .button", "assets/icons/shopping-bag-light.svg"],
-      [".button--send", "assets/icons/send.svg"],
-      [".teamwear-inquiry", "assets/icons/send.svg"]
-    ];
-
-    iconMap.forEach(([selector, path]) => {
-      document.querySelectorAll(selector).forEach((control) => {
-        const existingIcon = control.querySelector("svg, img");
-        const icon = document.createElement("img");
-        icon.src = asset(path);
-        icon.alt = "";
-        icon.setAttribute("aria-hidden", "true");
-
-        if (existingIcon) {
-          existingIcon.remove();
-        }
-        control.prepend(icon);
-      });
-    });
-
-    const footerIcons = {
-      Shopee: "assets/icons/globe.svg",
-      Instagram: "assets/icons/instagram.svg",
-      Discord: "assets/icons/discord.svg"
-    };
-
-    document.querySelectorAll(".footer-link").forEach((link) => {
-      const label = link.textContent.trim();
-      const path = footerIcons[label];
-
-      if (!path) {
-        return;
-      }
-
-      const existingIcon = link.querySelector("svg, img");
-      const icon = document.createElement("img");
-      icon.src = asset(path);
-      icon.alt = "";
-      icon.setAttribute("aria-hidden", "true");
-
-      if (existingIcon) {
-        existingIcon.remove();
-      }
-      link.prepend(icon);
-    });
-  }
-
-  function renderProductGrids() {
-    const detail = document.querySelector("[data-product-detail]");
-    const currentProductNumber = detail?.dataset.productNumber || null;
-
-    document.querySelectorAll("[data-product-grid]").forEach((grid) => {
-      const limit = Number.parseInt(grid.dataset.limit || "", 10);
-      const exclude = grid.dataset.exclude;
-      const category = grid.dataset.category;
-      const excludeCurrent = grid.hasAttribute("data-exclude-current") ? currentProductNumber : null;
-      let items = catalog.products.slice();
-
-      if (exclude) {
-        items = items.filter((product) => product.slug !== exclude);
-      }
-
-      if (category && category.toLowerCase() !== "all") {
-        items = items.filter((product) => product.category.toLowerCase() === category.toLowerCase());
-      }
-
-      if (excludeCurrent) {
-        items = items.filter((product) => product.productNumber !== excludeCurrent);
-      }
-
-      if (Number.isFinite(limit) && !grid.classList.contains("marquee-strip")) {
-        items = items.slice(0, limit);
-      }
-
-      grid.innerHTML = "";
-      items.forEach((product) => {
-        grid.appendChild(buildProductCard(product));
-      });
-
-      if (grid.classList.contains("marquee-strip")) {
-        grid.setAttribute("role", "region");
-        grid.setAttribute("aria-label", "Related products");
-        grid.tabIndex = 0;
-        grid.addEventListener("keydown", (event) => {
-          if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-            event.preventDefault();
-            grid.scrollBy({ left: event.key === "ArrowRight" ? 202 : -202, behavior: "smooth" });
-          }
-        });
-        window.requestAnimationFrame(() => {
-          grid.scrollLeft = Math.min(303, Math.max(0, grid.scrollWidth - grid.clientWidth));
-        });
-      }
-    });
-  }
-
-  function renderProductDetail() {
-    const detail = document.querySelector("[data-product-detail]");
-
-    if (!detail) {
-      return;
-    }
-
-    const productNumber = detail.dataset.productNumber;
-    const product = catalog.products.find(
-      (item) => item.productNumber.toLowerCase() === productNumber.toLowerCase()
-    );
-
-    if (!product) {
-      return;
-    }
-
-    const image = detail.querySelector("[data-product-image]");
-    const gallery = detail.querySelector(".product-detail__gallery");
-    const title = detail.querySelector("[data-product-title]");
-    const price = detail.querySelector("[data-product-price]");
-    const category = detail.querySelector("[data-product-category]");
-    const colors = Array.isArray(product.colors) ? product.colors : [];
-    const productSizes = Array.isArray(product.sizes) ? product.sizes : [];
-    const productCopy = Array.isArray(product.copy) ? product.copy : [];
-    const productVariants = Array.isArray(product.variants) ? product.variants : [];
-    const optionIsSoldOut = (field, value) => {
-      const matchingVariants = productVariants.filter(
-        (variant) => variant.visible && variant[field] === value
-      );
-
-      return matchingVariants.length > 0 && matchingVariants.every((variant) => variant.soldOut);
-    };
-
-    document.title = `Paradigm | ${product.title}`;
-
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.content = `${product.title} by Paradigm.`;
-    }
-
-    let breadcrumbCategory = document.querySelector("[data-product-breadcrumb-category]");
-    const breadcrumbTitle = document.querySelector("[data-product-breadcrumb-title]");
-    if (breadcrumbCategory) {
-      if (breadcrumbCategory.tagName !== "A") {
-        const categoryLink = document.createElement("a");
-        categoryLink.dataset.productBreadcrumbCategory = "";
-        breadcrumbCategory.replaceWith(categoryLink);
-        breadcrumbCategory = categoryLink;
-      }
-      breadcrumbCategory.textContent = product.category;
-      const categoryRoutes = {
-        "SS Tops": "/collections/ss-tops",
-        "AW Tops": "/collections/aw-tops",
-        Bottoms: "/collections/bottoms",
-        Teamwear: "/teamwear"
-      };
-      breadcrumbCategory.href = categoryRoutes[product.category] || "/collections/all";
-    }
-    if (breadcrumbTitle) {
-      breadcrumbTitle.textContent = product.title.split(" ").pop();
-    }
-
-    const gallerySources = Array.isArray(product.images)
-      ? product.images.filter(Boolean)
-      : product.image ? [product.image] : [];
-
-    if (gallery) {
-      gallery.innerHTML = "";
-      const mobileGalleryQuery = window.matchMedia("(max-width: 47.999rem)");
-      const updateGalleryTabStop = () => {
-        if (mobileGalleryQuery.matches && gallerySources.length > 1) {
-          gallery.tabIndex = 0;
-        } else {
-          gallery.removeAttribute("tabindex");
-        }
-      };
-
-      updateGalleryTabStop();
-      mobileGalleryQuery.addEventListener("change", updateGalleryTabStop);
-      gallerySources.forEach((source, index) => {
-        const galleryImage = document.createElement("img");
-        galleryImage.src = asset(source);
-        galleryImage.alt = index === 0 ? product.alt : `${product.title}, view ${index + 1}`;
-        galleryImage.width = 800;
-        galleryImage.height = 800;
-        if (index > 0) {
-          galleryImage.loading = "lazy";
-        }
-        gallery.appendChild(galleryImage);
-      });
-
-      if (gallerySources.length) {
-        gallery.setAttribute("role", "region");
-        gallery.setAttribute("aria-label", `${product.title} images`);
-      } else {
-        gallery.removeAttribute("role");
-        gallery.removeAttribute("aria-label");
-      }
-
-      gallery.addEventListener("keydown", (event) => {
-        if (
-          mobileGalleryQuery.matches && gallerySources.length > 1 &&
-          (event.key === "ArrowLeft" || event.key === "ArrowRight")
-        ) {
-          event.preventDefault();
-          gallery.scrollBy({
-            left: event.key === "ArrowRight" ? gallery.clientWidth : -gallery.clientWidth,
-            behavior: "smooth"
-          });
-        }
-      });
-    } else if (image) {
-      image.src = asset(product.image);
-      image.alt = product.alt;
-    }
-
-    if (title) {
-      title.textContent = product.title;
-    }
-
-    if (price) {
-      price.textContent = product.price;
-    }
-
-    if (category) {
-      category.textContent = product.category;
-    }
-    const colorLabel = detail.querySelector("[data-product-color-label]");
-    const activeColorIndex = Math.max(
-      0,
-      colors.findIndex((color) => !optionIsSoldOut("color", color.label))
-    );
-    if (colorLabel) {
-      colorLabel.textContent = colors[activeColorIndex]?.label || "Color details pending";
-    }
-
-    const swatches = detail.querySelector("[data-product-colors]");
-    if (swatches) {
-      swatches.innerHTML = "";
-      colors.forEach((color, index) => {
-        const swatch = document.createElement("button");
-        const isSoldOut = optionIsSoldOut("color", color.label);
-        const isActive = index === activeColorIndex && !isSoldOut;
-        swatch.type = "button";
-        swatch.className = isActive ? "swatch is-active" : "swatch";
-        swatch.style.backgroundColor = color.hex;
-        swatch.setAttribute("title", color.label);
-        swatch.setAttribute("aria-label", isSoldOut ? `${color.label} — sold out` : color.label);
-        swatch.setAttribute("aria-pressed", String(isActive));
-        if (isSoldOut) {
-          swatch.classList.add("is-muted");
-          swatch.disabled = true;
-        } else {
-          swatch.addEventListener("click", () => {
-            swatches.querySelectorAll(".swatch").forEach((item) => {
-              item.classList.remove("is-active");
-              item.setAttribute("aria-pressed", "false");
-            });
-            swatch.classList.add("is-active");
-            swatch.setAttribute("aria-pressed", "true");
-            if (colorLabel) {
-              colorLabel.textContent = color.label;
-            }
-          });
-        }
-        swatches.appendChild(swatch);
-      });
-
-      for (let index = colors.length; index < 5; index += 1) {
-        const blankSwatch = document.createElement("span");
-        blankSwatch.className = "swatch swatch--blank";
-        blankSwatch.setAttribute("aria-hidden", "true");
-        swatches.appendChild(blankSwatch);
-      }
-    }
-
-    const sizes = detail.querySelector("[data-product-sizes]");
-    if (sizes) {
-      sizes.innerHTML = "";
-      const activeSizeIndex = Math.max(
-        0,
-        productSizes.findIndex((size) => !optionIsSoldOut("size", size))
-      );
-      productSizes.forEach((size, index) => {
-        const chip = document.createElement("button");
-        const isSoldOut = optionIsSoldOut("size", size);
-        const isActive = index === activeSizeIndex && !isSoldOut;
-        chip.type = "button";
-        chip.className = isActive ? "size-chip is-active" : "size-chip";
-        chip.setAttribute("aria-label", isSoldOut ? `Size ${size} — sold out` : `Select size ${size}`);
-        chip.setAttribute("aria-pressed", String(isActive));
-        if (isSoldOut) {
-          chip.classList.add("is-muted");
-          chip.disabled = true;
-        } else {
-          chip.addEventListener("click", () => {
-            sizes.querySelectorAll(".size-chip").forEach((item) => {
-              item.classList.remove("is-active");
-              item.setAttribute("aria-pressed", "false");
-            });
-            chip.classList.add("is-active");
-            chip.setAttribute("aria-pressed", "true");
-          });
-        }
-        chip.textContent = size;
-        sizes.appendChild(chip);
-      });
-
-      for (let index = productSizes.length; index < 5; index += 1) {
-        const blankSize = document.createElement("span");
-        blankSize.className = "size-chip size-chip--blank";
-        blankSize.setAttribute("aria-hidden", "true");
-        sizes.appendChild(blankSize);
-      }
-    }
-
-    const copy = detail.querySelector("[data-product-copy]");
-    if (copy) {
-      copy.innerHTML = "";
-      productCopy.forEach((token) => {
-        if (token.type === "table") {
-          const wrap = document.createElement("div");
-          const table = document.createElement("table");
-          const thead = document.createElement("thead");
-          const tbody = document.createElement("tbody");
-          const headerRow = document.createElement("tr");
-          wrap.className = "product-copy__table-wrap";
-          table.className = "size-table";
-
-          token.header.forEach((cell, index) => {
-            const heading = document.createElement("th");
-            heading.scope = "col";
-            heading.textContent = cell;
-            if (index === 0) heading.setAttribute("aria-label", "Row heading");
-            headerRow.appendChild(heading);
-          });
-          thead.appendChild(headerRow);
-
-          token.body.forEach((cells) => {
-            const row = document.createElement("tr");
-            cells.forEach((cell, index) => {
-              const element = document.createElement(index === 0 ? "th" : "td");
-              if (index === 0) element.scope = "row";
-              element.textContent = cell;
-              row.appendChild(element);
-            });
-            tbody.appendChild(row);
-          });
-
-          table.append(thead, tbody);
-          wrap.appendChild(table);
-          copy.appendChild(wrap);
-          return;
-        }
-
-        const line = document.createElement(token.type === "text" ? "p" : "div");
-        line.className = "product-copy__line";
-        if (token.type === "blank") {
-          line.classList.add("product-copy__blank-line");
-          line.textContent = token.text;
-        } else if (token.type === "rule") {
-          line.classList.add("product-copy__rule");
-          line.setAttribute("role", "separator");
-          line.textContent = token.text;
-        } else {
-          line.textContent = token.text;
-        }
-        copy.appendChild(line);
-      });
-    }
-
-    const shopeeLink = detail.querySelector("[data-product-shopee]");
-    if (shopeeLink) {
-      if (product.soldOut) {
-        shopeeLink.removeAttribute("href");
-        shopeeLink.removeAttribute("target");
-        shopeeLink.removeAttribute("rel");
-        shopeeLink.setAttribute("aria-disabled", "true");
-        shopeeLink.tabIndex = -1;
-        shopeeLink.setAttribute("aria-label", `${product.title} — sold out`);
-      } else {
-        shopeeLink.href = product.shopeeUrl || "https://shopee.tw/";
-        shopeeLink.target = "_blank";
-        shopeeLink.rel = "noopener noreferrer";
-        shopeeLink.removeAttribute("aria-disabled");
-        shopeeLink.removeAttribute("tabindex");
-        shopeeLink.setAttribute("aria-label", `${product.title} on Shopee — opens an external site`);
-      }
-
-      const shopeeLabel = shopeeLink.querySelector("[data-product-shopee-label]");
-      if (shopeeLabel) {
-        shopeeLabel.textContent = product.soldOut ? "Sold out" : "Buy on Shopee";
-      }
-    }
-  }
-
-  function setupAccordions() {
-    document.querySelectorAll("[data-accordion-button]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const expanded = button.getAttribute("aria-expanded") === "true";
-        const panel = document.getElementById(button.getAttribute("aria-controls"));
-
-        button.setAttribute("aria-expanded", String(!expanded));
-        if (panel) {
-          panel.hidden = expanded;
-        }
-      });
-    });
-  }
-
-  function setupDrawer() {
-    const drawer = document.querySelector("[data-nav-drawer]");
-    const toggle = document.querySelector("[data-nav-toggle]");
+  const drawer = document.querySelector("[data-nav-drawer]");
+  const toggle = document.querySelector("[data-nav-toggle]");
+  if (drawer && toggle) {
     const close = document.querySelector("[data-nav-close]");
-
-    if (!drawer || !toggle) {
-      return;
-    }
-
-    if (close) {
-      close.hidden = true;
-    }
-
+    if (close) close.hidden = true;
     toggle.addEventListener("click", () => {
-      if (drawer.getAttribute("aria-hidden") === "false") {
-        closeDrawer();
-      } else {
-        openDrawer();
-      }
+      if (drawer.getAttribute("aria-hidden") === "false") closeDrawer(drawer, toggle);
+      else openDrawer(drawer, toggle);
     });
-
     drawer.addEventListener("click", (event) => {
-      if (event.target === drawer) {
-        closeDrawer();
-      }
+      if (event.target === drawer) closeDrawer(drawer, toggle);
     });
-
     document.addEventListener("keydown", (event) => {
-      if (drawer.getAttribute("aria-hidden") !== "false") {
+      if (drawer.getAttribute("aria-hidden") !== "false") return;
+      if (event.key === "Escape") {
+        closeDrawer(drawer, toggle);
         return;
       }
-
-      if (event.key === "Escape" && drawer.getAttribute("aria-hidden") === "false") {
-        closeDrawer();
-        return;
-      }
-
-      if (event.key === "Tab") {
-        const focusable = [toggle, ...getFocusableNodes(drawer)];
-
-        if (!focusable.length) {
-          return;
-        }
-
-        const first = focusable[0];
-        const last = focusable[focusable.length - 1];
-
-        if (event.shiftKey && document.activeElement === first) {
-          event.preventDefault();
-          last.focus();
-        } else if (!event.shiftKey && document.activeElement === last) {
-          event.preventDefault();
-          first.focus();
-        }
+      if (event.key !== "Tab") return;
+      const focusable = [toggle, ...focusableNodes(drawer)];
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
       }
     });
   }
 
-  function setYear() {
-    document.querySelectorAll("[data-current-year]").forEach((node) => {
-      node.textContent = "2026";
-    });
-  }
-
-  renderNavigation();
-  setupDrawer();
-  setupAccordions();
-  renderProductDetail();
-  renderProductGrids();
-  renderFigmaIcons();
-  setYear();
+  document.querySelectorAll("[data-current-year]").forEach((node) => {
+    node.textContent = String(new Date().getFullYear());
+  });
 })();

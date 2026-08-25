@@ -1,8 +1,6 @@
 .teamwear-page {
-  --teamwear-action-height: var(--button-height);
   --layout-gutter-inline: var(--space-7);
   --layout-section-content-gap: var(--space-7);
-  padding-bottom: calc(var(--teamwear-action-height) + env(safe-area-inset-bottom));
   overflow-x: clip;
   background: var(--color-background-mid);
 }
@@ -39,55 +37,6 @@
   scroll-margin-top: calc(var(--header-height) + var(--space-5));
 }
 
-.teamwear-action {
-  position: fixed;
-  inset: auto 0 0;
-  z-index: 80;
+.teamwear-customize-page .choice-group__options {
   width: 100%;
-  min-height: var(--teamwear-action-height);
-  height: var(--teamwear-action-height);
-  margin: 0;
-  padding-block: 0;
-  border-radius: var(--radius-none);
-}
-
-.teamwear-action svg,
-.teamwear-action img {
-  width: var(--icon-size-small);
-  height: var(--icon-size-small);
-}
-
-/* Teamwear garment colorways remain separate from semantic interface colors. */
-.teamwear-swatch--wine,
-.teamwear-color-choice--wine { --teamwear-swatch-color: #7d1119; }
-.teamwear-swatch--cardinal,
-.teamwear-color-choice--cardinal { --teamwear-swatch-color: #c51637; }
-.teamwear-swatch--azure,
-.teamwear-color-choice--azure { --teamwear-swatch-color: #17629b; }
-.teamwear-swatch--midnight,
-.teamwear-color-choice--midnight { --teamwear-swatch-color: #172f69; }
-.teamwear-swatch--sapphire,
-.teamwear-color-choice--sapphire { --teamwear-swatch-color: #154bb0; }
-.teamwear-swatch--mocha,
-.teamwear-color-choice--mocha { --teamwear-swatch-color: #503018; }
-.teamwear-swatch--black,
-.teamwear-color-choice--black { --teamwear-swatch-color: #191919; }
-
-.teamwear-pattern-option {
-  position: relative;
-  min-width: 0;
-  padding-inline: var(--space-3);
-  cursor: pointer;
-}
-
-.teamwear-pattern-option:has(input:focus-visible),
-.teamwear-color-choice:has(input:focus-visible) {
-  outline: var(--focus-ring-width) solid var(--color-outline-high);
-  outline-offset: var(--focus-ring-offset);
-}
-
-.teamwear-color-choice {
-  position: relative;
-  background-color: var(--teamwear-swatch-color);
-  cursor: pointer;
 }

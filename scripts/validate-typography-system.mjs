@@ -68,6 +68,11 @@ function collectRules(source) {
 }
 
 const tokens = await readFile(path.join(CSS_DIRECTORY, "tokens.css"), "utf8");
+assert.doesNotMatch(
+  tokens,
+  /--text-(?:xs|sm|base|lg|xl|hero)\b/,
+  "Legacy text-size tokens must be removed in favor of semantic typography roles"
+);
 for (const [name, value] of WEIGHTS) {
   assert.equal(
     propertyValue(tokens, `--font-weight-${name}`),
@@ -110,6 +115,10 @@ for (const filePath of cssFiles) {
   const relativePath = path.relative(ROOT, filePath).replaceAll("\\", "/");
   const css = await readFile(filePath, "utf8");
   const withoutComments = css.replace(/\/\*[\s\S]*?\*\//g, "");
+
+  for (const match of withoutComments.matchAll(/var\((--text-(?:xs|sm|base|lg|xl|hero))\)/g)) {
+    violations.push(`${relativePath}: legacy typography reference ${match[1]} is prohibited`);
+  }
 
   for (const match of withoutComments.matchAll(/font-weight\s*:\s*([^;]+);/g)) {
     const value = match[1].trim();
@@ -176,8 +185,18 @@ for (const [semanticElement, shiftedRole] of [
 const components = await readFile(path.join(CSS_DIRECTORY, "components.css"), "utf8");
 assert.match(
   components,
-  /\.product-copy__line\s*\{[\s\S]*?var\(--type-paragraph-spacing-standard\)/,
-  "product copy must retain Standard paragraph spacing"
+  /\.page-headline__row\s*\{[\s\S]*?--font-weight-base:\s*var\(--type-body-weight\)[\s\S]*?font-size:\s*var\(--type-body-size\)[\s\S]*?font-weight:\s*var\(--font-weight-base\)[\s\S]*?line-height:\s*var\(--type-body-line-height\)/,
+  "All page headlines and breadcrumbs must use the complete Body role"
+);
+assert.match(
+  components,
+  /\.rich-description__line\s*\{[\s\S]*?var\(--type-paragraph-spacing-standard\)/,
+  "rich descriptions must retain Standard paragraph spacing"
+);
+assert.match(
+  components,
+  /\.product-card__title\s*\{[\s\S]*?font-size:\s*var\(--type-h6-size\)[\s\S]*?--font-weight-base:\s*var\(--type-h6-weight\)[\s\S]*?font-weight:\s*var\(--font-weight-base\)[\s\S]*?line-height:\s*var\(--type-h6-line-height\)/,
+  "Catalog product names must use the complete h6 text role"
 );
 
 const teamwearStory = await readFile(path.join(CSS_DIRECTORY, "teamwear-story.css"), "utf8");

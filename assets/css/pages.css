@@ -29,18 +29,7 @@
 
 .product-page .auto-grid {
   gap: var(--space-1);
-  background: var(--color-outline-low);
-}
-
-.reference-page--detail .page-headline {
-  background: var(--color-background-mid);
-}
-
-.reference-page--detail .breadcrumb {
-  min-height: var(--control-size-large);
-  padding: var(--space-5);
-  font-size: 12px;
-  line-height: 16px;
+  background: var(--color-surface-mid);
 }
 
 .reference-page--detail .section-heading {
@@ -63,21 +52,18 @@
   line-height: 17px;
 }
 
-.reference-page--detail .product-detail__summary .stack-md,
-.reference-page--detail .product-copy {
-  gap: var(--space-5);
+.reference-page--detail .product-detail__summary .stack-md {
+  display: grid;
+  gap: var(--space-6);
+  margin-top: var(--space-5);
 }
 
-.reference-page--detail .product-detail__summary .stack-md > div:last-child > .product-detail__label {
-  display: none;
+.reference-page--detail .product-detail__summary .stack-md > * + * {
+  margin-top: 0;
 }
 
-.reference-page--detail .product-detail__summary > .stack-md > .product-detail__label {
-  display: none;
-}
-
-.reference-page--detail .size-row {
-  padding-top: var(--space-5);
+.reference-page--detail .product-detail__summary > .primary-action-mount {
+  display: contents;
 }
 
 .reference-page--detail [data-product-category] {
@@ -86,7 +72,12 @@
 
 .reference-page--detail .product-detail__summary {
   align-content: start;
+  gap: 0;
   background: var(--color-surface-mid);
+}
+
+.reference-page--detail .rich-description {
+  margin-top: var(--space-7);
 }
 
 .reference-page--detail .product-detail__gallery,
@@ -94,12 +85,18 @@
   background: var(--color-surface-high);
 }
 
-.reference-page--detail .size-table {
+.reference-page--detail .rich-description__table {
   margin-top: 0;
 }
 
 .reference-page--detail .marquee-strip {
   width: 100%;
+}
+
+@media (min-width: 48rem) {
+  .reference-page--detail .product-detail__summary {
+    padding: var(--space-5) var(--space-7);
+  }
 }
 
 @media (min-width: 64rem) {
@@ -134,10 +131,10 @@
 
   .reference-page--detail .product-detail__summary {
     grid-column: span 2;
-    padding: var(--space-7);
   }
 
-  .reference-page--detail .product-detail__actions {
-    position: static;
+  .reference-page--detail .product-detail__summary > .primary-action-mount .primary-action {
+    margin-top: var(--space-7);
   }
+
 }

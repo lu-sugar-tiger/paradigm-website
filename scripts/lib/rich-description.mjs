@@ -2,7 +2,36 @@ const FLEXIBLE_SPACE_PATTERN = "[\\p{White_Space}\\u180E\\u200B\\u2060\\uFEFF]";
 const FLEXIBLE_SPACE_RUN = new RegExp(`${FLEXIBLE_SPACE_PATTERN}+`, "gu");
 const FLEXIBLE_SPACE_ALL = new RegExp(FLEXIBLE_SPACE_PATTERN, "gu");
 
-export function splitTableCells(line) {
+export function normalizeDescriptionSource(source, label = "Description source") {
+  if (!source || typeof source !== "object" || Array.isArray(source)) {
+    throw new Error(`${label} must be an object.`);
+  }
+  if (!['local', 'google-doc'].includes(source.type)) {
+    throw new Error(`${label} type must be local or google-doc.`);
+  }
+  if (typeof source.content !== "string" || source.content.length === 0) {
+    throw new Error(`${label} content must be a non-empty string.`);
+  }
+
+  if (source.type === "google-doc") {
+    if (typeof source.documentId !== "string" || source.documentId.length === 0) {
+      throw new Error(`${label} requires a documentId.`);
+    }
+    if (typeof source.modifiedTime !== "string" || source.modifiedTime.length === 0) {
+      throw new Error(`${label} requires a modifiedTime.`);
+    }
+    return {
+      type: source.type,
+      content: source.content,
+      documentId: source.documentId,
+      modifiedTime: source.modifiedTime
+    };
+  }
+
+  return { type: source.type, content: source.content };
+}
+
+export function splitDescriptionTableCells(line) {
   return String(line).split(FLEXIBLE_SPACE_RUN).filter(Boolean);
 }
 
@@ -14,7 +43,7 @@ function markerText(line) {
   return String(line).replace(FLEXIBLE_SPACE_ALL, "");
 }
 
-export function extractProductCopyLines(rawContent) {
+export function extractDescriptionLines(rawContent) {
   const lines = String(rawContent || "")
     .replace(/\r\n?/g, "\n")
     .split("\n");
@@ -24,7 +53,7 @@ export function extractProductCopyLines(rawContent) {
     return marker.startsWith("•") || marker.startsWith("●");
   });
   if (firstBullet < 0) {
-    throw new Error("Product document has no bullet list");
+    throw new Error("Description source has no bullet list");
   }
 
   let lastLine = lines.length - 1;
@@ -35,13 +64,13 @@ export function extractProductCopyLines(rawContent) {
 function detectTable(lines, start) {
   if (start > 0 && !isFlexibleBlank(lines[start - 1])) return null;
 
-  const header = splitTableCells(lines[start]);
+  const header = splitDescriptionTableCells(lines[start]);
   if (header.length < 2) return null;
 
   const body = [];
   let cursor = start + 1;
   while (cursor < lines.length && !isFlexibleBlank(lines[cursor]) && markerText(lines[cursor]) !== "-") {
-    const cells = splitTableCells(lines[cursor]);
+    const cells = splitDescriptionTableCells(lines[cursor]);
     if (cells.length < header.length + 1 || cells.length > header.length + 2) break;
     body.push(cells);
     cursor += 1;
@@ -63,8 +92,8 @@ function detectTable(lines, start) {
   };
 }
 
-export function tokenizeProductCopy(rawContent) {
-  const lines = extractProductCopyLines(rawContent);
+export function tokenizeDescription(rawContent) {
+  const lines = extractDescriptionLines(rawContent);
   const tokens = [];
 
   for (let index = 0; index < lines.length;) {
@@ -76,10 +105,13 @@ export function tokenizeProductCopy(rawContent) {
     }
 
     const line = lines[index];
+    const marker = markerText(line);
     if (isFlexibleBlank(line)) {
       tokens.push({ type: "blank", text: line });
-    } else if (markerText(line) === "-") {
-      tokens.push({ type: "rule", text: line });
+    } else if (marker === "-") {
+      tokens.push({ type: "divider", text: line });
+    } else if (marker.startsWith("#")) {
+      tokens.push({ type: "hashtag", text: line });
     } else {
       tokens.push({ type: "text", text: line });
     }
@@ -89,13 +121,13 @@ export function tokenizeProductCopy(rawContent) {
   return tokens;
 }
 
-export function transformProductCopy(rawContent) {
-  return tokenizeProductCopy(rawContent).map((token) => {
+export function transformDescription(rawContent) {
+  return tokenizeDescription(rawContent).map((token) => {
     if (token.type === "blank") {
       return { type: "blank", text: `${token.text}\n` };
     }
-    if (token.type === "rule") {
-      return { type: "rule", text: "-" };
+    if (token.type === "divider") {
+      return { type: "divider", text: "-" };
     }
     return token;
   });

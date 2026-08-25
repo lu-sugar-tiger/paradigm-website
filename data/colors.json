@@ -1,0 +1,15 @@
+{
+  "colors": [
+    { "id": "black", "name": "Black", "value": "#111111" },
+    { "id": "cardinal", "name": "Cardinal", "value": "#8d1f2d" },
+    { "id": "grey", "name": "Grey", "value": "#a7a8a6" },
+    { "id": "midnight", "name": "Midnight", "value": "#1b2b68" },
+    { "id": "mocha", "name": "Mocha", "value": "#8a6a50" },
+    { "id": "mud", "name": "Mud", "value": "#5b483b" },
+    { "id": "shadow", "name": "Shadow", "value": "#343434" },
+    { "id": "white", "name": "White", "value": "#f2f0e9" },
+    { "id": "wine", "name": "Wine", "value": "#7d1119" },
+    { "id": "azure", "name": "Azure", "value": "#17629b" },
+    { "id": "sapphire", "name": "Sapphire", "value": "#154bb0" }
+  ]
+}

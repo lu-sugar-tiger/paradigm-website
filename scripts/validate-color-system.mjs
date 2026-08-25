@@ -97,6 +97,8 @@ assert.deepEqual(
 );
 assert.equal(tokenDefinitions.length, SEMANTIC_ROLES.size, "semantic color roles must be defined exactly once");
 assert.match(tokensText, /--color-brand-low\s*:\s*#ff808b\s*;/i, "Brand Low must equal #FF808B");
+assert.match(tokensText, /--color-outline-mid\s*:\s*#808080\s*;/i, "Outline Mid must equal #808080");
+assert.match(tokensText, /--color-outline-low\s*:\s*#bfbfbf\s*;/i, "Outline Low must equal #BFBFBF");
 const brandTitleGradient = tokensText.match(/--gradient-brand-title\s*:\s*linear-gradient\(([\s\S]*?)\);/)?.[1] ?? "";
 assert.match(brandTitleGradient, /var\(--color-brand\)/, "brand title gradient must use Brand");
 assert.match(brandTitleGradient, /var\(--color-brand-low\)/, "brand title gradient must use Brand Low");
@@ -132,18 +134,18 @@ for (const relativePath of SHARED_CSS) {
   }
 }
 
-const colorwayRegistry = JSON.parse(
-  await readFile(path.join(ROOT, "data/product-colorways.json"), "utf8")
+const colorRegistry = JSON.parse(
+  await readFile(path.join(ROOT, "data/colors.json"), "utf8")
 );
-assert.ok(Array.isArray(colorwayRegistry.colorways), "product colorways must be a list");
+assert.ok(Array.isArray(colorRegistry.colors), "canonical colors must be a list");
 const productHexValues = new Set();
 const productLabels = new Set();
-for (const { label, hex } of colorwayRegistry.colorways) {
-  assert.ok(label && /^#[0-9a-f]{6}$/i.test(hex), "each product colorway must have a label and six-digit hex value");
-  productLabels.add(label);
-  productHexValues.add(normalizeHex(hex));
+for (const { id, name, value } of colorRegistry.colors) {
+  assert.ok(id && name && /^#[0-9a-f]{6}$/i.test(value), "each canonical color must have an id, name, and six-digit value");
+  productLabels.add(name);
+  productHexValues.add(normalizeHex(value));
 }
-assert.equal(productLabels.size, colorwayRegistry.colorways.length, "product colorway labels must be unique");
+assert.equal(productLabels.size, colorRegistry.colors.length, "canonical color names must be unique");
 
 const runtimeFiles = await walk(ROOT);
 for (const filePath of runtimeFiles.filter((file) => file.toLowerCase().endsWith(".svg"))) {
@@ -159,11 +161,7 @@ for (const filePath of runtimeFiles.filter((file) => file.toLowerCase().endsWith
 }
 
 const catalogText = await readFile(path.join(ROOT, "assets/js/catalog.js"), "utf8");
-for (const match of catalogText.matchAll(/"hex"\s*:\s*"(#[0-9a-f]{6})"/gi)) {
-  if (!productHexValues.has(normalizeHex(match[1]))) {
-    violations.push(`assets/js/catalog.js: ${match[1]} is not in product-colorways.json`);
-  }
-}
+if (/#[0-9a-f]{6}\b/i.test(catalogText)) violations.push("assets/js/catalog.js: local color values are prohibited");
 
 for (const filePath of runtimeFiles.filter((file) => file.toLowerCase().endsWith(".html"))) {
   const relativePath = path.relative(ROOT, filePath).replaceAll("\\", "/");
@@ -175,15 +173,12 @@ for (const filePath of runtimeFiles.filter((file) => file.toLowerCase().endsWith
   ) {
     violations.push(`${relativePath}: Teamwear color styles may only load on Teamwear pages`);
   }
-  if (normalizedPath.includes("teamwear")) continue;
   for (const match of html.matchAll(/(?:background(?:-color)?|color)\s*:\s*(#[0-9a-f]{6})/gi)) {
-    if (!productHexValues.has(normalizeHex(match[1]))) {
-      violations.push(`${relativePath}: inline color ${match[1]} is not a product colorway`);
-    }
+    violations.push(`${relativePath}: inline color ${match[1]} is prohibited; reference a canonical color id`);
   }
 }
 
 assert.equal(violations.length, 0, violations.join("\n"));
 console.log(
-  `COLOR_SYSTEM_OK semanticRoles=${SEMANTIC_ROLES.size} productColorways=${colorwayRegistry.colorways.length} teamwearScoped=true`
+  `COLOR_SYSTEM_OK semanticRoles=${SEMANTIC_ROLES.size} canonicalColors=${colorRegistry.colors.length} teamwearScoped=true`
 );

@@ -29,8 +29,8 @@
   --color-on-surface-low: #808080;
 
   --color-outline-high: #181818;
-  --color-outline-mid: #bfbfbf;
-  --color-outline-low: #dfdfdf;
+  --color-outline-mid: #808080;
+  --color-outline-low: #bfbfbf;
 
   --color-container-high: #181818;
   --color-container-mid: #404040;
@@ -59,13 +59,6 @@
   --font-style-normal: normal;
   --font-style-italic: italic;
   --font-weight-strong-offset: 200;
-
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.375rem;
-  --text-xl: clamp(2.2rem, 7vw, 3.5rem);
-  --text-hero: clamp(2.8rem, 11vw, 5rem);
 
   /* Markdown-style text roles use the Body 12/16 line-height ratio. */
   --type-small-size: 0.625rem;
@@ -121,6 +114,10 @@
   --layout-section-padding-default: var(--space-8);
   --layout-section-padding-editorial: var(--space-9);
   --layout-section-content-gap: var(--space-8);
+  --layout-page-gutter: max(
+    var(--layout-gutter-inline),
+    calc((100vw - var(--content-width)) / 2)
+  );
 
   --radius-none: 0;
   --radius-sm: 0.25rem;
@@ -129,8 +126,6 @@
   --radius-lg: 1.75rem;
   --radius-pill: 999px;
 
-  --border-hairline: 1px solid var(--color-outline-low);
-  --border-control: 1px solid var(--color-outline-mid);
   --shadow-card: 0 20px 40px color-mix(in srgb, var(--color-outline-high) 8%, transparent);
 
   --content-width: 60rem;
@@ -143,7 +138,20 @@
   --choice-size: 2rem;
   --control-size-medium: 2.5rem;
   --control-size-large: 3rem;
-  --button-height: 3.25rem;
+  --primary-action-padding-block: var(--space-5);
+  --primary-action-padding-inline: var(--space-7);
+  --primary-action-content-gap: var(--space-3);
+  --primary-action-icon-size: var(--icon-size-small);
+  --primary-action-content-clearance: calc(
+    var(--type-h5-line-height) +
+    var(--primary-action-padding-block) +
+    var(--primary-action-padding-block)
+  );
+  --primary-action-fixed-clearance: calc(
+    var(--primary-action-content-clearance) +
+    env(safe-area-inset-bottom, 0px)
+  );
+  --primary-action-z-index: 80;
   --product-card-rail-width: 12.5rem;
   --product-card-rail-height: 16.0625rem;
   --footer-content-min-width: 17.125rem;

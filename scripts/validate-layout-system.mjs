@@ -81,6 +81,11 @@ assert.equal(propertyValue(tokens, "--layout-section-padding-tight"), "var(--spa
 assert.equal(propertyValue(tokens, "--layout-section-padding-default"), "var(--space-8)", "Default sections must use 48px");
 assert.equal(propertyValue(tokens, "--layout-section-padding-editorial"), "var(--space-9)", "Editorial sections must use 64px");
 assert.equal(propertyValue(tokens, "--layout-section-content-gap"), "var(--space-8)", "Section content gaps must use 48px");
+assert.equal(propertyValue(tokens, "--primary-action-padding-block"), "var(--space-5)", "Primary actions must use 16px vertical padding");
+assert.equal(propertyValue(tokens, "--primary-action-padding-inline"), "var(--space-7)", "Primary actions must use 32px horizontal padding");
+assert.equal(propertyValue(tokens, "--primary-action-content-gap"), "var(--space-3)", "Primary action icon-label gaps must use 8px");
+assert.equal(propertyValue(tokens, "--primary-action-icon-size"), "var(--icon-size-small)", "Primary action icons must use 20px");
+assert.doesNotMatch(tokens, /--button-height\s*:/, "Primary actions must be content-sized rather than height-token sized");
 const mediumTokens = blockAfter(tokens, "@media (min-width: 48rem)");
 assert.equal(propertyValue(mediumTokens, "--layout-gutter-inline"), "var(--space-7)", "Medium and Large gutters must be 32px");
 assert.equal(propertyValue(tokens, "--content-width"), "60rem", "Base and Medium content must max at 960px");
@@ -98,6 +103,28 @@ assert.match(
   /\.product-grid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/,
   "Base catalog must use two columns"
 );
+assert.match(
+  components,
+  /\.product-card__body\s*\{[\s\S]*?gap:\s*var\(--space-2\)/,
+  "Catalog product names and prices must use the 4px tight internal gap"
+);
+assert.match(
+  components,
+  /\.page-headline__row\s*\{[\s\S]*?gap:\s*var\(--space-5\);[\s\S]*?min-height:\s*var\(--control-size-large\);[\s\S]*?padding-inline:\s*var\(--space-5\)/,
+  "Every page headline must use the shared 48px row and 16px inline padding"
+);
+assert.match(
+  components,
+  /\.breadcrumb\s*\{[\s\S]*?min-width:\s*0;[\s\S]*?flex:\s*1 1 auto;[\s\S]*?overflow-x:\s*auto/,
+  "Breadcrumbs must own overflow without displacing the trailing headline action"
+);
+assert.match(
+  components,
+  /\.page-headline__action\s*\{[\s\S]*?flex:\s*0 0 auto/,
+  "Page-headline actions must occupy only their intrinsic width"
+);
+assert.doesNotMatch(components, /\.filter-bar|\.breadcrumb--(?:standalone|embedded)/, "Legacy headline layout variations must remain removed");
+assert.doesNotMatch(pages, /\.reference-page--detail \.page-headline/, "Product Detail must use the shared headline surface without overrides");
 
 const mediumComponents = blockAfter(components, "@media (min-width: 48rem)");
 assert.match(
@@ -108,17 +135,39 @@ assert.match(
 
 assert.match(
   pages,
-  /\.product-page \.auto-grid\s*\{[\s\S]*?gap:\s*var\(--space-1\)/,
-  "Catalog seam must consume the 2px spacing token"
+  /\.product-page \.auto-grid\s*\{[\s\S]*?gap:\s*var\(--space-1\)[\s\S]*?background:\s*var\(--color-surface-mid\)/,
+  "Catalog seams must be a 2px grid gap exposing Surface Mid"
+);
+assert.match(
+  pages,
+  /\.product-detail__summary \.stack-md\s*\{[\s\S]*?gap:\s*var\(--space-6\);[\s\S]*?margin-top:\s*var\(--space-5\)/,
+  "Product Header to Color must use 16px while Color to unlabeled Size choices uses 24px"
+);
+assert.match(
+  pages,
+  /\.reference-page--detail \.rich-description\s*\{[\s\S]*?margin-top:\s*var\(--space-7\)/,
+  "Detail choices and rich descriptions must use the 32px composition rhythm"
+);
+assert.doesNotMatch(
+  `${tokens}\n${layout}\n${components}\n${pages}\n${teamwearStory}`,
+  /--border-(?:hairline|control)\b/,
+  "Border aliases must be removed in favor of direct semantic outline colors"
 );
 
+const mediumPages = blockAfter(pages, "@media (min-width: 48rem)");
+assert.match(
+  mediumPages,
+  /\.product-detail__summary\s*\{[\s\S]*?padding:\s*var\(--space-5\) var\(--space-7\)/,
+  "Medium and larger product information must retain 16px vertical padding and align horizontally to the 32px responsive gutter"
+);
 assert.doesNotMatch(
-  pages.slice(0, pages.indexOf("@media (min-width: 64rem)")),
-  /@media[\s\S]*?\.reference-page--detail/,
-  "Product detail must retain the Base single-column carousel and fixed action through Medium"
+  mediumPages,
+  /\.product-detail__(?:panel|gallery)\s*\{|grid-template-columns|grid-column/,
+  "Product detail must retain the Base single-column carousel composition through Medium"
 );
 
 const largePages = blockAfter(pages, "@media (min-width: 64rem)");
+const largeComponents = blockAfter(components, "@media (min-width: 64rem)");
 assert.match(
   largePages,
   /\.product-detail__panel\s*\{[\s\S]*?grid-template-columns:\s*repeat\(5,\s*minmax\(0,\s*1fr\)\)[\s\S]*?align-items:\s*stretch[\s\S]*?gap:\s*0/,
@@ -126,7 +175,7 @@ assert.match(
 );
 assert.match(largePages, /\.product-detail__gallery\s*\{[\s\S]*?grid-column:\s*span 3/, "Large gallery must span three columns");
 assert.match(largePages, /\.product-detail__summary\s*\{[\s\S]*?grid-column:\s*span 2/, "Large information must span two columns");
-assert.match(largePages, /\.product-detail__actions\s*\{[\s\S]*?position:\s*static/, "Large purchase action must be static");
+assert.match(largeComponents, /data-action-behavior="fixed-to-static"[\s\S]*?position:\s*static/, "Large purchase and inquiry actions must be static");
 
 for (const declarations of ruleDeclarations(pages, ".reference-page--detail .product-detail__summary")) {
   assert.doesNotMatch(declarations, /min-height\s*:/, "Product information must not use a fixed or minimum height");
@@ -141,7 +190,7 @@ assert.match(teamwearStory, /\.teamwear-section-heading\s*\{[\s\S]*?margin-botto
 assert.match(teamwearStory, /\.teamwear-highlights__header\s*\{[\s\S]*?margin-bottom:\s*var\(--layout-section-content-gap\)/, "Highlights must use the same 48px content gap");
 assert.match(teamwearStory, /padding:\s*0 max\(var\(--layout-gutter-inline\)/, "Teamwear rails must consume the responsive gutter role");
 assert.match(teamwearStory, /\.teamwear-story-page \.teamwear-hero\s*\{[\s\S]*?padding:\s*0/, "Teamwear hero must not inherit extra top padding");
-assert.match(teamwearStory, /\.teamwear-hero__copy\s*\{[\s\S]*?var\(--layout-section-padding-editorial\)[\s\S]*?var\(--teamwear-action-height\)/, "Hero copy must use 64px insets plus action clearance");
+assert.match(teamwearStory, /\.teamwear-hero__copy\s*\{[\s\S]*?var\(--layout-section-padding-editorial\)[\s\S]*?var\(--primary-action-fixed-clearance\)/, "Hero copy must derive action clearance from shared primary-action tokens");
 const mediumTeamwear = blockAfter(teamwearStory, "@media (min-width: 48rem)");
 assert.match(
   mediumTeamwear,
@@ -161,10 +210,15 @@ assert.match(largeTeamwear, /\.teamwear-material__bento\s*\{[\s\S]*?repeat\(3,/,
 assert.match(largeTeamwear, /\.teamwear-story-page \.teamwear-faq__layout\s*\{[\s\S]*?grid-template-columns:/, "Teamwear FAQ split must begin at Large");
 assert.doesNotMatch(teamwearStory, /(?:gap|padding|margin(?:-(?:top|right|bottom|left))?)\s*:\s*(?:2|4|8|12|16|24|32|48|64|72|80|96|128)px/, "Teamwear spacing must consume system tokens");
 assert.doesNotMatch(teamwearStory, /(?:gap|padding|margin(?:-(?:top|right|bottom|left))?)\s*:[^;]*var\(--radius-/, "Radius roles must not be used as spacing");
-assert.match(teamwear, /\.teamwear-action\s*\{/, "Shared Teamwear action must remain available");
+assert.match(components, /\.primary-action\s*\{/, "Shared primary action must remain available");
+assert.doesNotMatch(teamwear, /teamwear-action-height|\.teamwear-page \.primary-action/, "Teamwear must not override shared primary-action sizing");
+assert.doesNotMatch(components.match(/\.primary-action\s*\{[\s\S]*?\}/)?.[0] || "", /(?:min-)?height\s*:/, "Primary actions must not use fixed or minimum heights");
+assert.match(components, /body:has\(\.primary-action\[data-action-behavior\]\) \.site-footer__grid\s*\{[\s\S]*?var\(--primary-action-fixed-clearance\)/, "Base and Medium footers must reserve calculated fixed-action clearance");
 assert.match(teamwear, /\.teamwear-page main \.container\s*\{[\s\S]*?var\(--layout-gutter-inline\)/, "Teamwear inner content must override reference-page full bleed with the shared gutter");
-assert.match(teamwear, /\.teamwear-pattern-option\s*\{/, "Teamwear customizer pattern control must remain available");
-assert.match(teamwear, /\.teamwear-color-choice\s*\{/, "Teamwear customizer color control must remain available");
+assert.match(components, /\.choice-option--chip\s*\{[\s\S]*?flex:\s*1 1 0/, "Shared chip choices must expand equally");
+assert.match(components, /\.choice-option--swatch\s*\{/, "Shared swatch choices must remain available");
+assert.match(components, /data-action-behavior="fixed-to-float"[\s\S]*?var\(--layout-page-gutter\)/, "Large floating actions must use the semantic page gutter");
+assert.match(components, /\.primary-action-dock:has\(\.primary-action\)\s*\{[\s\S]*?padding:\s*0 var\(--layout-page-gutter\) var\(--layout-page-gutter\)/, "Large docks must use the page gutter on the right and bottom");
 assert.doesNotMatch(teamwear, /\.teamwear-(?:facts|patterns|pattern-grid|pattern-card|on-court|reversible|feedback|closing)/, "Unused legacy Teamwear landing rules must be removed");
 assert.doesNotMatch(`${components}\n${pages}`, /\.reference-page--teamwear/, "Unused legacy Teamwear page rules must be removed from shared CSS");
 

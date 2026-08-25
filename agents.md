@@ -108,8 +108,8 @@ Avoid unnecessary URL changes once pages are published.
   - available colors
   - available sizes
   - Shopee URL
-- Use realistic placeholder content when final content is unavailable.
-- Clearly identify placeholder content.
+- Use realistic draft content when final content is unavailable.
+- Never display a label, note, badge, caption, or disclaimer that identifies draft text or imagery as placeholder content.
 
 # Design direction
 
@@ -122,6 +122,13 @@ Avoid unnecessary URL changes once pages are published.
 - Product presentation should feel visual and editorial rather than marketplace-like
 - Match supplied Paradigm designs and assets closely
 - Do not invent major visual directions without approval
+
+# Icon and generated-image policy
+
+- Use Google Material Symbols for interface icons.
+- Do not author or use hand-drawn SVGs as icons, images, or placeholders.
+- When a Material Symbol is not suitable for requested imagery, use a generated raster image rather than hand-drawn SVG artwork.
+- Keep icon names mapped through the shared renderer so repeated icons remain consistent across pages.
 
 # Reusable interface components
 
@@ -236,7 +243,7 @@ Prioritize:
 8. product detail page shell
 9. Teamwear page shell
 
-Use placeholder images and content where final material is unavailable.
+Use realistic draft images and content where final material is unavailable, without identifying them as placeholders in the rendered website.
 
 Do not implement:
 
@@ -262,4 +269,4 @@ Before considering a task complete:
 - Confirm there are no browser console errors.
 - Confirm links and buttons use the correct semantic elements.
 - Confirm external purchase links clearly indicate that users are leaving the site.
-- Summarize changed files and remaining placeholder content.
+- Summarize changed files and remaining draft content.

@@ -76,15 +76,14 @@ python -m http.server 8000
 ├── teamwear/index.html
 ├── assets/
 │   ├── css/
-│   ├── js/
-│   └── svg/
+│   └── js/
 ├── pages/                      # 舊網址 redirect stubs
 └── references/
 ```
 
 ## 商品資料
 
-商品來源快照位於 `data/products-source.json`，再由 `scripts/build-product-catalog.mjs` 產生 `assets/js/catalog.js` 與各商品靜態頁。請勿直接編輯產生檔。每個商品都有穩定且唯一的 `productNumber`：
+商品來源快照位於 `data/products-source.json`。`scripts/build-site.mjs` 會從集中資料與共用 renderer 產生商品、商品分類、Teamwear、導覽、頁尾、選項與主要操作；`scripts/build-product-catalog.mjs` 保留為相容入口。產生檔帶有 do-not-edit 標記，請勿直接修改。每個商品都有穩定且唯一的 `productNumber`：
 
 ```js
 {
@@ -95,13 +94,13 @@ python -m http.server 8000
   price: "NT$1,180",
   image: "assets/images/everyday-tee.webp",
   images: ["assets/images/everyday-tee.webp"],
-  colors: [{ label: "Black", hex: "#111111" }],
+  colors: [{ label: "Black", colorId: "black" }],
   sizes: ["M", "L", "XL"],
   variants: [{ sku: "...", color: "Black", size: "M", visible: true, soldOut: false }],
-  copy: [
+  description: [
     { type: "text", text: "• 100% cotton" },
     { type: "blank", text: "\n" },
-    { type: "rule", text: "-" },
+    { type: "divider", text: "-" },
     { type: "blank", text: "\n" },
     {
       type: "table",
@@ -110,7 +109,7 @@ python -m http.server 8000
       header: ["", "M", "L"],
       body: [["肩寬", "50.0", "51.5"], ["胸寬", "55.5", "57.5"]]
     },
-    { type: "text", text: "#ED14001" }
+    { type: "hashtag", text: "#ED14001" }
   ],
   shopeeUrl: "https://shopee.tw/..."
 }
@@ -175,5 +174,5 @@ Repository：`https://github.com/lu-sugar-tiger/paradigm-website`
 ## 範圍限制
 
 - 不加入購物車、結帳、會員、庫存同步或後端功能，除非另有明確決定。
-- 商品資料優先維護在 `assets/js/catalog.js`，避免在 HTML 重複保存。
+- 商品資料維護在 `data/products-source.json`；顏色維護在 `data/colors.json`；Teamwear 選項維護在 `data/teamwear-options.json`。`assets/js/catalog.js` 與公開 HTML 都是產生檔。
 - 未來可將既有 HTML/CSS 元件轉成 Shopify sections/snippets，目前不寫 Liquid 或 Shopify API。

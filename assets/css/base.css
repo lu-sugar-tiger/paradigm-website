@@ -159,9 +159,12 @@ html[data-input-modality="pointer"] :focus-visible {
 }
 
 .noscript-note {
+  --font-weight-base: var(--type-body-weight);
   padding: var(--space-5);
   border-radius: var(--radius-sm);
   background: var(--color-surface-low);
   color: var(--color-on-surface-low);
-  font-size: var(--text-sm);
+  font-size: var(--type-body-size);
+  font-weight: var(--font-weight-base);
+  line-height: var(--type-body-line-height);
 }

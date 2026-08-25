@@ -23,10 +23,10 @@ Category is not present in the sheet. The current deterministic mapping is: shor
 ## Files and responsibilities
 
 - `data/products-source.json` is the connector-captured snapshot used for generation. It includes grouped product fields, Doc copy, local image paths, source modification times, and variant SKUs when captured.
-- `scripts/lib/product-copy.mjs` preserves ordinary Google Docs text and blank paragraphs in source order, turns dash-only lines into horizontal rules without changing their neighbors, and turns positively detected rectangular size blocks into semantic tables.
-- `scripts/build-product-catalog.mjs` builds `assets/js/catalog.js` and creates one static route per visible product model.
-- `scripts/templates/product-page.html` is the reusable no-JavaScript product-page template.
-- `data/product-colorways.json` is the complete merchandising colorway registry; it is separate from semantic interface colors.
+- `scripts/lib/rich-description.mjs` preserves ordinary source text and blank paragraphs in source order, turns dash-only lines into horizontal dividers without changing their neighbors, identifies hashtag lines, and turns positively detected rectangular size blocks into semantic tables. The same contract serves Product Detail and Teamwear Customize.
+- `scripts/build-site.mjs` builds the catalog and every shared static page. `scripts/build-product-catalog.mjs` delegates to it for backward compatibility.
+- `scripts/templates/product-page.html` is product composition only; the shared shell, choices, actions, product cards, navigation, and footer come from `scripts/lib/site-renderers.mjs`.
+- `data/colors.json` is the canonical product and Teamwear color registry. Option data stores `colorId`, never a local hex value.
 - `scripts/validate-product-catalog.mjs` verifies source coverage, colorway completeness, routes, images, purchase links, product-detail sold-out behavior, and the exact copy-token contract.
 - `assets/images/products/{商品型號}/` stores downloaded product imagery when the sheet supplies images.
 
@@ -41,26 +41,31 @@ Category is not present in the sheet. The current deterministic mapping is: shor
 7. Update `data/products-source.json`, then regenerate and validate:
 
    ```powershell
-   node scripts/build-product-catalog.mjs
+   node scripts/build-site.mjs
+   node scripts/build-site.mjs --check
    node scripts/validate-product-catalog.mjs
+   node scripts/validate-shared-components.mjs
    ```
 
 8. Serve the repository over HTTP and check the all-products page plus representative available, sold-out-detail, blank-image, and multi-image products on mobile and desktop. Confirm collection cards never display sold-out or placeholder labels.
 
-## Product-description normalization contract
+## Rich-description normalization contract
 
 Apply these rules in this order. This is the complete contract; do not add inferred formatting.
 
 1. **Source range:** Import from the first bullet line through the last line containing a non-space character. Ignore content before the first bullet and trailing empty paragraphs after the final line.
 2. **Ordinary text is exact:** Never trim, normalize, retype, split, join, or change an ordinary text line. Preserve leading/trailing spaces, repeated spaces inside the line, Unicode space types, punctuation, letter width, mathematical glyphs, and number formats.
 3. **Blank paragraphs are exact:** Google Docs represents every paragraph terminator, including an otherwise empty paragraph, with `U+000A`. Preserve every source blank paragraph one-for-one and render its `U+000A` as a one-line selectable character. Preserve any whitespace preceding that terminator. Do not replace it with `U+00A0`, collapse consecutive blank paragraphs, or insert or remove blank paragraphs. A stored snapshot may contain `U+000D U+000A`; normalize that transport-level line ending to the Google Docs `U+000A` representation while parsing.
-4. **One-line horizontal rule:** Treat a line whose only non-space character is the ASCII `-` as a rule. Render one `rule` token containing the literal selectable `-`, visually replaced by a horizontal line, with the same one-line height as ordinary copy. Do not insert, remove, or collapse neighboring blank paragraphs.
+4. **One-line horizontal divider:** Treat a line whose only non-space character is the ASCII `-` as a divider. Render one `divider` token containing the literal selectable `-`, visually replaced by an On Surface Low horizontal line, with the same one-line height as ordinary copy. Do not insert, remove, or collapse neighboring blank paragraphs.
 5. **Size-table recognition:** Detect a table from the raw source lines before transforming dash-only lines. A candidate must be blank-separated, have at least two header cells, and have at least two following rows whose cell counts form a compatible rectangle with one row-heading cell and at most one optional trailing cell. Split candidate cells using all Unicode whitespace plus `U+180E`, `U+200B`, `U+2060`, and `U+FEFF`.
 6. **No table-content assumptions:** Never identify or reject a table based on particular size names, dimension names, languages, units, or numeric formats. Preserve every detected cell value exactly; do not apply `trim`, `NFKC`, numeric parsing, or typography substitution to cell contents.
 7. **Uncertainty stays plain:** If a candidate has fewer than two body rows, inconsistent widths, or an unbounded non-blank continuation, do not make a table. Leave every line in that candidate as ordinary text.
 8. **Gridless semantic output:** Render a confirmed table with `<table>`, column headers, and row headers. Do not show grid lines. Preserve the source blank paragraphs before and after the table one-for-one.
-9. **No other transformations:** Do not infer bullet groups, prose sections, fit guidance, product codes, measurement types, or separator spacing. The only content transforms are dash-only rules and confirmed size tables.
-10. **Required validation:** For every product, verify ordinary text character equality, source paragraph/rule sequence equality, one-for-one blank-paragraph preservation using `U+000A`, no inserted rule spacing, one-line/selectable blank and rule elements, exact table cell equality, gridless table borders, and responsive overflow.
+9. **Hashtag recognition:** Outside a confirmed table, treat any line whose first non-space character is `#` as a `hashtag` token. Preserve the complete source line exactly and render it in On Surface Low without changing its Body role, spacing, wrapping, or emphasis.
+10. **No other transformations:** Do not infer bullet groups, prose sections, fit guidance, product codes, measurement types, or separator spacing. The only content transforms are dash-only dividers, hashtag classification, and confirmed tables.
+11. **Required validation:** For every description, verify ordinary text character equality, source token sequence equality, one-for-one blank-paragraph preservation using `U+000A`, no inserted divider spacing, one-line/selectable blank and divider elements, exact hashtag text, exact table cell equality, gridless table borders, and responsive overflow.
+
+Teamwear stores the current copy as a normalized `descriptionSource` record in `data/teamwear-options.json`. Local records require `{ type: "local", content }`; future Google Doc records require `{ type: "google-doc", content, documentId, modifiedTime }`. The current build does not fetch Teamwear Docs, but changing the source type later does not change parsing, rendering, or templates.
 
 ## Change detection
 
@@ -95,9 +100,9 @@ This avoids missing in-place edits to Docs and photos while keeping unchanged im
 
 - Verified through the live Google Docs API that Docs paragraph terminators and blank paragraphs use `U+000A`; the checked-in snapshot's `U+000D U+000A` is a transport-level Windows line ending.
 - Removed the `U+00A0` blank-line substitute. Each source blank paragraph now renders one-for-one as its selectable `U+000A`, preserving any whitespace before it.
-- Removed automatic blank insertion and collapse around horizontal rules. A dash-only line changes only into the one-line visual rule and does not modify either neighbor.
-- Kept the size-table detector and exact ordinary-text/table-cell preservation intact.
-- Added regression coverage for preserved consecutive blanks, unchanged missing rule blanks, Unicode and zero-width spacing, arbitrary table labels, arbitrary cell formats, and uncertain non-table blocks.
+- Removed automatic blank insertion and collapse around horizontal dividers. A dash-only line changes only into the one-line visual divider and does not modify either neighbor.
+- Kept the shared table detector and exact ordinary-text/table-cell preservation intact.
+- Added regression coverage for preserved consecutive blanks, unchanged missing divider blanks, hashtags, Unicode and zero-width spacing, arbitrary table labels, arbitrary cell formats, and uncertain non-table blocks.
 
 ## Improvement notes
 

@@ -6,8 +6,6 @@
 
 .teamwear-story-page {
   --teamwear-card-width: 50vw;
-  --teamwear-row-min-height: 9rem;
-  --teamwear-row-min-height-large: 10rem;
   overflow: clip;
   background: var(--color-background-mid);
   color: var(--color-on-background-high);
@@ -76,7 +74,7 @@
   height: var(--control-size-large);
   padding: 0;
   place-items: center;
-  border: var(--border-hairline);
+  border: 1px solid var(--color-outline-low);
   border-radius: var(--radius-none);
   background: var(--color-surface-high);
   color: var(--color-on-surface-high);
@@ -84,17 +82,13 @@
   transition: background-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast);
 }
 
-.teamwear-rail-button svg {
+.teamwear-rail-button .material-icon {
   width: var(--icon-size);
   height: var(--icon-size);
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.5;
+  font-size: var(--icon-size);
 }
 
-.teamwear-rail-button--previous svg {
+.teamwear-rail-button--previous .material-icon {
   transform: rotate(180deg);
 }
 
@@ -179,11 +173,18 @@
   z-index: 2;
   display: grid;
   align-content: end;
+  justify-items: center;
   gap: 0;
   min-height: max(42rem, calc(92svh - var(--header-height)));
   padding-block:
     var(--layout-section-padding-editorial)
-    calc(var(--layout-section-padding-editorial) + var(--teamwear-action-height));
+    calc(var(--layout-section-padding-editorial) + var(--primary-action-fixed-clearance));
+  text-align: center;
+}
+
+.teamwear-hero__content {
+  display: grid;
+  justify-items: center;
   opacity: 0;
   transform: translateY(var(--motion-distance-entrance));
   transition:
@@ -191,7 +192,7 @@
     transform var(--motion-duration-reveal) var(--motion-ease-editorial);
 }
 
-.teamwear-hero.is-ready .teamwear-hero__copy {
+.teamwear-hero.is-ready .teamwear-hero__content {
   opacity: 1;
   transform: none;
 }
@@ -200,17 +201,23 @@
   transform: none;
 }
 
-.teamwear-hero__copy .teamwear-kicker {
+.teamwear-hero__content .teamwear-kicker {
   color: var(--color-on-container-mid);
 }
 
-.teamwear-hero__copy h1 {
+.teamwear-hero__content h1 {
   max-width: 42rem;
 }
 
-.teamwear-hero__copy > p:last-child {
+.teamwear-hero__content > p:last-child {
   max-width: 36rem;
   color: var(--color-on-container-low);
+}
+
+.teamwear-hero__copy .primary-action-mount {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-5);
 }
 
 /* Horizontal card rails */
@@ -274,7 +281,7 @@
 
 .teamwear-rail-card__surface {
   overflow: hidden;
-  border: var(--border-hairline);
+  border: 0;
   border-radius: var(--radius-none);
   background: var(--color-surface-low);
 }
@@ -329,7 +336,7 @@
 .teamwear-colorway-card__media::after {
   position: absolute;
   inset: 0;
-  background: var(--teamwear-swatch-color);
+  background: var(--choice-color);
   content: "";
   mix-blend-mode: color;
   opacity: .94;
@@ -352,7 +359,7 @@
   opacity: .35;
 }
 
-.teamwear-colorway-card.teamwear-swatch--black img {
+.teamwear-colorway-card.teamwear-colorway--black img {
   filter: grayscale(1) contrast(1.15);
 }
 
@@ -362,7 +369,9 @@
   margin-top: var(--space-7);
 }
 
-.teamwear-pattern-picker .size-row {
+.teamwear-pattern-picker .choice-group,
+.teamwear-pattern-picker .choice-group__layout,
+.teamwear-pattern-picker .choice-group__options {
   width: 100%;
 }
 
@@ -373,7 +382,12 @@
 }
 
 .teamwear-stacked-list {
-  border-top: var(--border-hairline);
+  border-top: 1px solid var(--color-outline-low);
+}
+
+.teamwear-process__list {
+  display: grid;
+  grid-auto-rows: 1fr;
 }
 
 .teamwear-stacked-row {
@@ -381,9 +395,8 @@
   grid-template-columns: minmax(0, 1fr) var(--control-size-large);
   align-items: center;
   gap: var(--space-6);
-  min-height: var(--teamwear-row-min-height);
   padding-block: var(--space-4);
-  border-bottom: var(--border-hairline);
+  border-bottom: 1px solid var(--color-outline-low);
 }
 
 .teamwear-stacked-row__copy {
@@ -404,11 +417,7 @@
   justify-self: end;
   width: var(--control-size-medium);
   height: var(--control-size-medium);
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.35;
+  font-size: var(--control-size-medium);
   color: var(--color-on-surface-high);
 }
 
@@ -480,20 +489,16 @@
   min-width: 0;
   min-height: 0;
   padding: var(--space-3);
-  border: var(--border-hairline);
+  border: 0;
   border-radius: var(--radius-none);
   background: var(--color-surface-high);
   color: var(--color-on-surface-high);
 }
 
-.teamwear-material__bento svg {
+.teamwear-material__bento .material-icon {
   width: var(--icon-size);
   height: var(--icon-size);
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.35;
+  font-size: var(--icon-size);
   color: var(--color-on-surface-high);
 }
 
@@ -519,15 +524,22 @@
 }
 
 .teamwear-story-page .teamwear-faq details {
-  border-bottom: var(--border-hairline);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--icon-size-small);
+  column-gap: var(--space-6);
+  border-bottom: 1px solid var(--color-outline-low);
+}
+
+.teamwear-story-page .teamwear-faq details[open] {
+  padding-bottom: var(--space-4);
 }
 
 .teamwear-story-page .teamwear-faq summary {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) var(--control-size-large);
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 1fr) var(--icon-size-small);
   align-items: center;
   gap: var(--space-6);
-  min-height: var(--teamwear-row-min-height);
   padding: var(--space-4) 0;
   list-style: none;
   font-size: var(--type-h5-size);
@@ -535,6 +547,16 @@
   font-weight: var(--font-weight-base);
   line-height: var(--type-h5-line-height);
   color: var(--color-on-surface-high);
+}
+
+.teamwear-story-page .teamwear-faq details:not([open]) summary {
+  height: var(--teamwear-faq-question-height, auto);
+}
+
+.teamwear-story-page .teamwear-faq details[open] summary {
+  height: auto;
+  margin-bottom: var(--type-paragraph-spacing-standard);
+  padding-bottom: 0;
 }
 
 .teamwear-story-page .teamwear-faq summary::before,
@@ -549,8 +571,8 @@
 .teamwear-story-page .teamwear-faq summary i {
   position: relative;
   justify-self: end;
-  width: var(--control-size-medium);
-  height: var(--control-size-medium);
+  width: var(--icon-size-small);
+  height: var(--icon-size-small);
   color: var(--color-on-surface-high);
 }
 
@@ -578,8 +600,9 @@
 }
 
 .teamwear-story-page .teamwear-faq details > p {
+  grid-column: 1;
   max-width: 42rem;
-  padding: 0 var(--space-9) var(--space-4) 0;
+  padding: 0;
   color: var(--color-on-surface-low);
 }
 
@@ -609,30 +632,28 @@
     row-gap: 0;
   }
 
-  .teamwear-pattern-picker {
+  .teamwear-pattern-picker .choice-group__layout {
+    display: grid;
     grid-template-columns: minmax(10rem, .38fr) minmax(0, 1.62fr);
     align-items: center;
     gap: var(--space-9);
   }
 
-  .teamwear-pattern-picker .size-row {
+  .teamwear-pattern-picker .choice-group__options {
     grid-column: 2;
+    grid-row: 1;
+    margin-top: 0;
   }
 
-  .teamwear-pattern-picker > .product-detail__label {
+  .teamwear-pattern-picker .choice-group__label {
     grid-column: 1;
     grid-row: 1;
   }
 
-  .teamwear-stacked-row,
-  .teamwear-story-page .teamwear-faq summary {
-    min-height: var(--teamwear-row-min-height-large);
-  }
-
-  .teamwear-stacked-row__icon,
-  .teamwear-story-page .teamwear-faq summary i {
+  .teamwear-stacked-row__icon {
     width: var(--control-size-large);
     height: var(--control-size-large);
+    font-size: var(--control-size-large);
   }
 
   .teamwear-material__bento {
@@ -644,9 +665,10 @@
     padding: var(--space-7);
   }
 
-  .teamwear-material__bento svg {
+  .teamwear-material__bento .material-icon {
     width: var(--control-size-medium);
     height: var(--control-size-medium);
+    font-size: var(--control-size-medium);
   }
 
   .teamwear-story-page .teamwear-faq__layout {
@@ -676,7 +698,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .teamwear-hero__media img,
-  .teamwear-hero__copy,
+  .teamwear-hero__content,
   .teamwear-highlight-card .teamwear-rail-card__media img,
   .teamwear-colorway-card__media img,
   .teamwear-gallery-card .teamwear-rail-card__media img,
@@ -687,7 +709,7 @@
     transition: none;
   }
 
-  .teamwear-hero__copy,
+  .teamwear-hero__content,
   .teamwear-story-page.reveal-ready [data-section-reveal] {
     opacity: 1;
     transform: none;
