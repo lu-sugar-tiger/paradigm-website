@@ -83,8 +83,9 @@ assert.equal(propertyValue(tokens, "--layout-section-padding-editorial"), "var(-
 assert.equal(propertyValue(tokens, "--layout-section-content-gap"), "var(--space-8)", "Section content gaps must use 48px");
 assert.equal(propertyValue(tokens, "--primary-action-padding-block"), "var(--space-5)", "Primary actions must use 16px vertical padding");
 assert.equal(propertyValue(tokens, "--primary-action-padding-inline"), "var(--space-7)", "Primary actions must use 32px horizontal padding");
-assert.equal(propertyValue(tokens, "--primary-action-content-gap"), "var(--space-3)", "Primary action icon-label gaps must use 8px");
-assert.equal(propertyValue(tokens, "--primary-action-icon-size"), "var(--icon-size-small)", "Primary action icons must use 20px");
+assert.equal(propertyValue(tokens, "--external-link-arrow-size"), "0.5em", "External-link arrows must stay half the label font size");
+assert.equal(propertyValue(tokens, "--external-link-arrow-gap"), "var(--space-1)", "External-link arrows must use the shared 2px label gap");
+assert.equal(propertyValue(tokens, "--external-link-arrow-motion-distance"), "var(--space-1)", "External-link arrow motion must use the shared 2px distance");
 assert.doesNotMatch(tokens, /--button-height\s*:/, "Primary actions must be content-sized rather than height-token sized");
 const mediumTokens = blockAfter(tokens, "@media (min-width: 48rem)");
 assert.equal(propertyValue(mediumTokens, "--layout-gutter-inline"), "var(--space-7)", "Medium and Large gutters must be 32px");
@@ -100,9 +101,11 @@ assert.doesNotMatch(
 );
 assert.match(
   components,
-  /\.product-grid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/,
-  "Base catalog must use two columns"
+  /\.product-grid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)[\s\S]*?gap:\s*var\(--space-1\)/,
+  "Base product feeds must use two columns and the shared 2px gap"
 );
+assert.doesNotMatch(tokens, /--product-card-rail-(?:width|height)/, "Removed carousel size tokens must not remain in the design system");
+assert.doesNotMatch(`${components}\n${pages}`, /marquee-strip/, "Removed horizontal product-carousel styles must not remain");
 assert.match(
   components,
   /\.product-card__body\s*\{[\s\S]*?gap:\s*var\(--space-2\)/,
@@ -110,8 +113,8 @@ assert.match(
 );
 assert.match(
   components,
-  /\.page-headline__row\s*\{[\s\S]*?gap:\s*var\(--space-5\);[\s\S]*?min-height:\s*var\(--control-size-large\);[\s\S]*?padding-inline:\s*var\(--space-5\)/,
-  "Every page headline must use the shared 48px row and 16px inline padding"
+  /\.page-headline__row\s*\{[\s\S]*?gap:\s*var\(--space-5\);[\s\S]*?min-height:\s*var\(--control-size-large\);[\s\S]*?padding-inline:\s*var\(--layout-shell-gutter-inline\)/,
+  "Every page headline must use the shared 48px row and responsive shell gutter"
 );
 assert.match(
   components,
@@ -133,11 +136,6 @@ assert.match(
   "Medium and larger catalogs must use three columns"
 );
 
-assert.match(
-  pages,
-  /\.product-page \.auto-grid\s*\{[\s\S]*?gap:\s*var\(--space-1\)[\s\S]*?background:\s*var\(--color-surface-mid\)/,
-  "Catalog seams must be a 2px grid gap exposing Surface Mid"
-);
 assert.match(
   pages,
   /\.product-detail__summary \.stack-md\s*\{[\s\S]*?gap:\s*var\(--space-6\);[\s\S]*?margin-top:\s*var\(--space-5\)/,
@@ -213,6 +211,20 @@ assert.doesNotMatch(teamwearStory, /(?:gap|padding|margin(?:-(?:top|right|bottom
 assert.match(components, /\.primary-action\s*\{/, "Shared primary action must remain available");
 assert.doesNotMatch(teamwear, /teamwear-action-height|\.teamwear-page \.primary-action/, "Teamwear must not override shared primary-action sizing");
 assert.doesNotMatch(components.match(/\.primary-action\s*\{[\s\S]*?\}/)?.[0] || "", /(?:min-)?height\s*:/, "Primary actions must not use fixed or minimum heights");
+assert.match(components, /\.site-footer\s*\{[\s\S]*?margin-top:\s*0;/, "The shared footer must connect directly to preceding content");
+assert.doesNotMatch(teamwearStory, /\.teamwear-page \.site-footer/, "Teamwear must not override shared footer spacing");
+assert.match(tokens, /--layout-shell-gutter-inline:\s*var\(--space-5\);/, "Base shared shell gutters must use the 16px spacing token");
+assert.match(mediumTokens, /--layout-shell-gutter-inline:\s*var\(--space-7\);/, "Medium and Large shared shell gutters must use the 32px spacing token");
+assert.match(components, /\.site-header__inner\s*\{[\s\S]*?var\(--layout-shell-gutter-inline\)/, "Shared headers must use the shared shell gutter");
+assert.match(components, /\.page-headline__row\s*\{[\s\S]*?padding-inline:\s*var\(--layout-shell-gutter-inline\);/, "Page headlines must use the shared shell gutter");
+assert.match(components, /\.site-footer__grid\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\);[\s\S]*?row-gap:\s*var\(--space-5\);[\s\S]*?column-gap:\s*0;[\s\S]*?padding-block:\s*var\(--space-7\) var\(--space-9\);[\s\S]*?padding-inline:\s*var\(--layout-shell-gutter-inline\);/, "Base footers must use one column, a 16px vertical gap, no horizontal gap, 32px top padding, 64px bottom padding, and tokenized shell padding");
+assert.doesNotMatch(teamwear, /--layout-shell-gutter-inline/, "Teamwear must not override the shared header, headline, or footer gutter");
+assert.match(mediumComponents, /\.site-footer__grid\s*\{[\s\S]*?repeat\(2, minmax\(0, 1fr\)\)/, "Medium footers must use two equal columns");
+assert.match(largeComponents, /\.site-footer__grid\s*\{[\s\S]*?repeat\(3, minmax\(0, 1fr\)\)/, "Large footers must use three equal columns");
+assert.match(components, /\.footer-meta\s*\{[\s\S]*?display:\s*flex;[\s\S]*?flex-wrap:\s*wrap;[\s\S]*?align-self:\s*end;[\s\S]*?gap:\s*0 var\(--space-3\);/, "Footer metadata must stay bottom-aligned and wrap only between its two segments");
+assert.doesNotMatch(components, /\.footer-links|\.footer-link \.material-icon/, "Footers must not retain the former nested link grid or icons");
+assert.doesNotMatch(components.match(/\.footer-link\s*\{[\s\S]*?\}/)?.[0] || "", /opacity|transition/, "Footer links must render at their inherited foreground color without opacity styling");
+assert.doesNotMatch(components, /\.footer-link:hover\s*\{/, "Footer links must not reintroduce an opacity hover state");
 assert.match(components, /body:has\(\.primary-action\[data-action-behavior\]\) \.site-footer__grid\s*\{[\s\S]*?var\(--primary-action-fixed-clearance\)/, "Base and Medium footers must reserve calculated fixed-action clearance");
 assert.match(teamwear, /\.teamwear-page main \.container\s*\{[\s\S]*?var\(--layout-gutter-inline\)/, "Teamwear inner content must override reference-page full bleed with the shared gutter");
 assert.match(components, /\.choice-option--chip\s*\{[\s\S]*?flex:\s*1 1 0/, "Shared chip choices must expand equally");

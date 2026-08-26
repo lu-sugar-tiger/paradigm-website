@@ -7,23 +7,19 @@ const NAV_ITEMS = [
 
 export const MATERIAL_ICON_NAMES = Object.freeze({
   arrow: "arrow_forward",
+  back: "arrow_back",
   bag: "shopping_bag",
-  bell: "notifications",
   care: "laundry",
   chevron: "chevron_right",
   close: "close",
-  discord: "forum",
   drop: "water_drop",
-  external: "open_in_new",
+  external: "arrow_outward",
   filter: "filter_alt",
-  globe: "public",
   grid: "grid_view",
   image: "image",
-  instagram: "photo_camera",
   layers: "layers",
   menu: "menu",
   search: "search",
-  send: "send",
   shirt: "apparel"
 });
 
@@ -47,6 +43,10 @@ export function renderIcon(name, root = "", className = "") {
   if (!materialName) throw new Error(`Unsupported Material icon: ${name}`);
   const classes = `material-symbols-outlined material-icon${className ? ` ${className}` : ""}`;
   return `<span class="${html(classes)}" aria-hidden="true">${html(materialName)}</span>`;
+}
+
+function renderExternalLinkIndicator(root = "") {
+  return `${renderIcon("external", root, "external-link__indicator")}<span class="visually-hidden" data-external-link-description> (opens in a new tab)</span>`;
 }
 
 export function renderDescription({ tokens }) {
@@ -114,7 +114,7 @@ export function renderBreadcrumb({
     if (items.length !== 1 || !items[0].href) throw new Error("Back breadcrumbs require one linked item.");
     const item = items[0];
     return `<nav class="${className}" aria-label="${html(ariaLabel)}" data-generated-component="breadcrumb">
-  <a class="breadcrumb__back-link" href="${html(item.href)}"${breadcrumbDataAttribute(item.dataAttribute)}>${renderIcon("chevron", root, "breadcrumb__icon breadcrumb__icon--back")}<span class="breadcrumb__link-label">${html(item.label)}</span></a>
+  <a class="breadcrumb__back-link" href="${html(item.href)}"${breadcrumbDataAttribute(item.dataAttribute)}>${renderIcon("back", root, "breadcrumb__icon breadcrumb__icon--back")}<span class="breadcrumb__link-label">${html(item.label)}</span></a>
 </nav>`;
   }
 
@@ -212,20 +212,14 @@ ${subcollectionMarkup}
   </div>`;
 }
 
-export function renderSiteFooter({ root = "" } = {}) {
+export function renderSiteFooter() {
   return `  <footer class="site-footer" data-primary-action-footer-anchor>
     <div class="container site-footer__grid">
-      <div class="footer-links">
-        <a class="footer-link" href="#">Privacy Policy</a>
-        <a class="footer-link" href="https://shopee.tw/" target="_blank" rel="noreferrer">${renderIcon("globe", root)} Shopee</a>
-        <a class="footer-link" href="#">Term of Use</a>
-        <a class="footer-link" href="https://www.instagram.com/prdm.tw/" target="_blank" rel="noreferrer">${renderIcon("instagram", root)} Instagram</a>
-        <a class="footer-link" href="#">Sales and Refunds</a>
-        <a class="footer-link" href="https://discord.com/" target="_blank" rel="noreferrer">${renderIcon("discord", root)} Discord</a>
-      </div>
+      <a class="footer-link external-link" href="https://www.instagram.com/prdm.tw/" target="_blank" rel="noopener noreferrer" data-external-link="true"><span class="footer-link__content"><span class="external-link__label">Instagram</span>${renderExternalLinkIndicator()}</span></a>
+      <a class="footer-link external-link" href="https://shopee.tw/" target="_blank" rel="noopener noreferrer" data-external-link="true"><span class="footer-link__content"><span class="external-link__label">Shopee</span>${renderExternalLinkIndicator()}</span></a>
       <div class="footer-meta">
-        <p>PARADIGM Co., Ltd.</p>
-        <p>Copyright © <span data-current-year>2026</span> All Rights Reserved.</p>
+        <span>PARADIGM Co., Ltd.</span>
+        <span>Copyright © <span data-current-year>2026</span> All Rights Reserved.</span>
       </div>
     </div>
   </footer>`;
@@ -277,28 +271,30 @@ export function renderPrimaryAction({
   intent,
   behavior,
   label,
-  icon,
   href,
   root = "",
   target = "",
+  external = false,
   initialIntent = intent,
   notificationChannel = "https://www.instagram.com/prdm.tw/"
 }) {
   if (!["fixed-to-static", "fixed-to-float"].includes(behavior)) {
     throw new Error(`Unsupported primary-action behavior: ${behavior}`);
   }
+  if (external !== (target === "_blank")) {
+    throw new Error("Primary-action external state must match its new-tab target.");
+  }
   const isNotify = initialIntent === "notify";
   const actionLabel = isNotify ? "Notify Me" : label;
-  const actionIcon = isNotify ? "bell" : icon;
   const actionHref = isNotify ? notificationChannel : href;
   const actionTarget = isNotify ? "_blank" : target;
+  const actionExternal = isNotify || external;
   const targetAttributes = actionTarget
     ? ` target="${html(actionTarget)}" rel="noopener noreferrer"`
     : "";
   return `<div class="primary-action-mount primary-action-mount--inline" data-primary-action-inline-mount="${html(id)}">
-    <a class="button primary-action" id="${html(id)}" href="${html(actionHref)}"${targetAttributes} data-primary-action data-action-intent="${html(initialIntent)}" data-action-default-intent="${html(intent)}" data-action-default-label="${html(label)}" data-action-default-icon="${html(icon)}" data-action-default-symbol="${html(MATERIAL_ICON_NAMES[icon])}" data-action-notify-symbol="${html(MATERIAL_ICON_NAMES.bell)}" data-action-default-href="${html(href)}" data-action-default-target="${html(target)}" data-action-notify-href="${html(notificationChannel)}" data-action-behavior="${html(behavior)}">
-      ${renderIcon(actionIcon, root, "primary-action__icon")}
-      <span data-primary-action-label>${html(actionLabel)}</span>
+    <a class="button primary-action external-link" id="${html(id)}" href="${html(actionHref)}"${targetAttributes} data-primary-action data-action-intent="${html(initialIntent)}" data-action-default-intent="${html(intent)}" data-action-default-label="${html(label)}" data-action-default-href="${html(href)}" data-action-default-target="${html(target)}" data-action-default-external="${html(external)}" data-action-notify-href="${html(notificationChannel)}" data-action-notify-external="true" data-action-behavior="${html(behavior)}" data-external-link="${html(actionExternal)}">
+      <span class="primary-action__content"><span class="external-link__label" data-primary-action-label>${html(actionLabel)}</span>${renderExternalLinkIndicator(root)}</span>
     </a>
   </div>`;
 }
@@ -328,8 +324,8 @@ export function renderProductCard(product, root = "") {
 </a>`;
 }
 
-export function renderProductGrid(products, root = "", className = "auto-grid product-grid") {
-  return `<div class="${html(className)}" data-generated-component="product-grid">
+export function renderProductGrid(products, root = "") {
+  return `<div class="auto-grid product-grid" data-generated-component="product-grid">
 ${products.map((product) => renderProductCard(product, root)).join("\n")}
 </div>`;
 }
@@ -373,7 +369,7 @@ ${renderSiteHeader({ root, currentPath })}
 ${main}
 
 ${renderPrimaryActionDock(primaryActionDockId)}
-${renderSiteFooter({ root })}
+${renderSiteFooter()}
 </body>
 </html>
 `;

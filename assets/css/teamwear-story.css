@@ -606,10 +606,6 @@
   color: var(--color-on-surface-low);
 }
 
-.teamwear-page .site-footer {
-  margin-top: 0;
-}
-
 @media (hover: hover) and (pointer: fine) {
   .teamwear-highlight-card:hover .teamwear-rail-card__media img,
   .teamwear-gallery-card:hover .teamwear-rail-card__media img {

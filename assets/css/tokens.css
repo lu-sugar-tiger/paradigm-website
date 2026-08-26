@@ -109,6 +109,7 @@
   --space-9: 4rem;
 
   /* Semantic layout roles keep responsive composition adjustable as one system. */
+  --layout-shell-gutter-inline: var(--space-5);
   --layout-gutter-inline: var(--space-5);
   --layout-section-padding-tight: var(--space-6);
   --layout-section-padding-default: var(--space-8);
@@ -135,13 +136,14 @@
   --header-actions-width: 5.75rem;
   --icon-size-small: 1.25rem;
   --icon-size: 1.5rem;
+  --external-link-arrow-size: 0.5em;
+  --external-link-arrow-gap: var(--space-1);
+  --external-link-arrow-motion-distance: var(--space-1);
   --choice-size: 2rem;
   --control-size-medium: 2.5rem;
   --control-size-large: 3rem;
   --primary-action-padding-block: var(--space-5);
   --primary-action-padding-inline: var(--space-7);
-  --primary-action-content-gap: var(--space-3);
-  --primary-action-icon-size: var(--icon-size-small);
   --primary-action-content-clearance: calc(
     var(--type-h5-line-height) +
     var(--primary-action-padding-block) +
@@ -152,9 +154,6 @@
     env(safe-area-inset-bottom, 0px)
   );
   --primary-action-z-index: 80;
-  --product-card-rail-width: 12.5rem;
-  --product-card-rail-height: 16.0625rem;
-  --footer-content-min-width: 17.125rem;
   --focus-ring-width: 2px;
   --focus-ring-offset: 3px;
   --transition-base: 180ms ease;
@@ -170,6 +169,7 @@
 
 @media (min-width: 48rem) {
   :root {
+    --layout-shell-gutter-inline: var(--space-7);
     --layout-gutter-inline: var(--space-7);
   }
 }

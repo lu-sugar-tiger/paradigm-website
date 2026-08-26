@@ -131,13 +131,15 @@
 
   function setActionState(action, notify) {
     const label = action.querySelector("[data-primary-action-label]");
-    const icon = action.querySelector(".primary-action__icon");
     const intent = notify ? "notify" : action.dataset.actionDefaultIntent;
     const nextLabel = notify ? "Notify Me" : action.dataset.actionDefaultLabel;
-    const nextSymbol = notify ? action.dataset.actionNotifySymbol : action.dataset.actionDefaultSymbol;
     const nextHref = notify ? action.dataset.actionNotifyHref : action.dataset.actionDefaultHref;
     const nextTarget = notify ? "_blank" : action.dataset.actionDefaultTarget;
+    const nextExternal = notify
+      ? action.dataset.actionNotifyExternal === "true"
+      : action.dataset.actionDefaultExternal === "true";
     action.dataset.actionIntent = intent;
+    action.dataset.externalLink = String(nextExternal);
     action.href = nextHref;
     if (nextTarget) {
       action.target = nextTarget;
@@ -147,7 +149,6 @@
       action.removeAttribute("rel");
     }
     if (label) label.textContent = nextLabel;
-    if (icon) icon.textContent = nextSymbol;
   }
 
   function syncAction(action) {

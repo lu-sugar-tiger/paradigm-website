@@ -200,7 +200,8 @@ for (const product of products) {
 
   if (product.soldOut) {
     assert.ok(route.includes('data-action-intent="notify"'), `${product.productNumber} sold-out route must begin with Notify Me`);
-    assert.ok(route.includes('data-action-notify-symbol="notifications"'), `${product.productNumber} sold-out route must use the Material notifications icon`);
+    assert.ok(route.includes('data-external-link="true"'), `${product.productNumber} sold-out route must expose the external notification destination`);
+    assert.ok(route.includes('>arrow_outward</span>'), `${product.productNumber} sold-out route must use the trailing Material external arrow`);
   } else {
     assert.ok(route.includes(`href="${product.shopeeUrl}"`), `${product.productNumber} must link to its Shopee listing`);
     assert.ok(route.includes('target="_blank" rel="noopener noreferrer"'), `${product.productNumber} external link must be safe`);

@@ -5,6 +5,7 @@ import {
   normalizeDescriptionSource,
   transformDescription
 } from "./lib/rich-description.mjs";
+import { categoryForTitle, rankRelatedProducts } from "./lib/product-relations.mjs";
 import {
   html,
   renderChoiceGroup,
@@ -24,12 +25,6 @@ const readTemplate = (name) => readFile(path.join(ROOT, "scripts", "templates", 
 
 function unique(values) {
   return [...new Set(values.filter(Boolean))];
-}
-
-function categoryFor(title) {
-  if (/Shorts/i.test(title)) return "Bottoms";
-  if (/(Hoodie|Crewneck)/i.test(title)) return "AW Tops";
-  return "SS Tops";
 }
 
 function slugFor(title) {
@@ -99,9 +94,9 @@ function renderProductMain(template, product, relatedProducts) {
     initialIntent: resolvedUnavailable ? "notify" : "purchase",
     behavior: "fixed-to-static",
     label: "Buy on Shopee",
-    icon: "external",
     href: product.shopeeUrl,
     target: "_blank",
+    external: true,
     root: "../.."
   });
   const media = product.images.map((source, index) => `          <img src="../../${html(source)}" alt="${html(index === 0 ? product.alt : `${product.title}, view ${index + 1}`)}" width="800" height="800"${index ? ' loading="lazy"' : ""}>`).join("\n");
@@ -128,7 +123,7 @@ function renderProductMain(template, product, relatedProducts) {
     SIZE_CHOICES: sizeChoices.split("\n").map((line) => `            ${line}`).join("\n"),
     PRIMARY_ACTION: primaryAction.split("\n").map((line) => `          ${line}`).join("\n"),
     DESCRIPTION: renderDescription({ tokens: product.description }).split("\n").map((line) => `          ${line}`).join("\n"),
-    RELATED_PRODUCTS: renderProductGrid(relatedProducts, "../..", "marquee-strip")
+    RELATED_PRODUCTS: renderProductGrid(relatedProducts, "../..")
   });
 }
 
@@ -185,7 +180,6 @@ function renderTeamwearLanding(template, model, colorById, instagramUrl) {
     intent: "build",
     behavior: "fixed-to-float",
     label: "Build yours",
-    icon: "arrow",
     href: "/teamwear/customize",
     root: "..",
     notificationChannel: instagramUrl
@@ -256,9 +250,9 @@ function renderTeamwearCustomize(template, model, colorById, instagramUrl) {
     intent: "inquiry",
     behavior: "fixed-to-static",
     label: "Direct Message",
-    icon: "send",
     href: instagramUrl,
     target: "_blank",
+    external: true,
     root: "../..",
     notificationChannel: instagramUrl
   });
@@ -324,7 +318,7 @@ const products = source.products.filter((entry) => entry.variants.some((variant)
     slug: slugFor(entry.title),
     productNumber: entry.productNumber,
     title: entry.title,
-    category: categoryFor(entry.title),
+    category: categoryForTitle(entry.title),
     price: priceLabel(entry.price),
     image: localImages[0] || null,
     images: localImages,
@@ -361,7 +355,7 @@ const collectionPages = [
 collectionPages.forEach((page) => outputs.set(page.output, renderCollectionPage({ ...page, products })));
 
 products.forEach((product) => {
-  const related = products.filter((item) => item.productNumber !== product.productNumber).slice(0, 4);
+  const related = rankRelatedProducts(products, product);
   const main = renderProductMain(productTemplate, product, related);
   outputs.set(`products/${product.productNumber}/index.html`, renderDocument({
     lang: "zh-Hant",
