@@ -91,6 +91,7 @@
   --type-nav-line-height: 1.625rem;
   --type-brand-size: 1.25rem;
   --type-brand-line-height: 1.4375rem;
+  --type-interface-label-transform: uppercase;
 
   /* Paragraph rhythm is relative to the consuming text role's font size. */
   --type-paragraph-spacing-default: 0;
@@ -129,11 +130,16 @@
 
   --shadow-card: 0 20px 40px color-mix(in srgb, var(--color-outline-high) 8%, transparent);
 
+  --layout-canvas-width: 90rem;
   --content-width: 60rem;
   --content-narrow: 58rem;
   --header-height: 6.25rem;
   --header-control-gap: 0.625rem;
-  --header-actions-width: 5.75rem;
+  --header-actions-width: calc(
+    var(--icon-size) +
+    var(--icon-size) +
+    var(--header-control-gap)
+  );
   --icon-size-small: 1.25rem;
   --icon-size: 1.5rem;
   --external-link-arrow-size: 0.5em;
@@ -152,6 +158,11 @@
   --primary-action-fixed-clearance: calc(
     var(--primary-action-content-clearance) +
     env(safe-area-inset-bottom, 0px)
+  );
+  --primary-action-floating-bottom-gap: var(--space-7);
+  --primary-action-dock-clearance: calc(
+    var(--primary-action-content-clearance) +
+    var(--primary-action-floating-bottom-gap)
   );
   --primary-action-z-index: 80;
   --focus-ring-width: 2px;

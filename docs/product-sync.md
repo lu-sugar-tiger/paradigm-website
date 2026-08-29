@@ -36,7 +36,7 @@ Category is not present in the sheet. The current deterministic mapping is: shor
 2. Read rich-link chip metadata for `商品文案` and `商品圖片` cells. Plain cell values contain chip labels, not the underlying Drive URLs.
 3. Group rows by `商品型號`. Carry product-level values from whichever row contains them and retain variant SKU, visibility, and sold-out flags.
 4. For every linked Google Doc, read the current file and record its file ID and `modifiedTime`. Copy from the first bullet through the last non-empty line, then apply the complete product-description contract below.
-5. For every linked image, record file ID and `modifiedTime`. Download through an authenticated Drive session and store an optimized WebP locally. `商品圖片 0` must remain first.
+5. For every linked image, record file ID and `modifiedTime`, then download the original through an authenticated Drive session. Pass that local source to `scripts/generate-product-images.mjs`; `商品圖片 0` remains first only in the product-media relationship and is never encoded into a generated filename.
 6. If a product has no sheet image links, preserve existing real product photography in `localImages`. If no real photography exists, keep `localImages` empty and render an unlabelled blank media surface. Do not create or reuse placeholder artwork.
 7. Update `data/products-source.json`, then regenerate and validate:
 
@@ -46,6 +46,28 @@ Category is not present in the sheet. The current deterministic mapping is: shor
    node scripts/validate-product-catalog.mjs
    node scripts/validate-shared-components.mjs
    ```
+
+## Product-image derivatives
+
+- Generate exactly three lossy WebP derivatives at quality `100`, with short edges of `540`, `1080`, and `2160` pixels.
+- Preserve the source aspect ratio without cropping. For example, a 5:4 landscape image produces `675x540`, `1350x1080`, and `2700x2160` derivatives.
+- Generated paths are content-addressed and contain no product number, filename, or gallery index: `assets/images/catalog/{hash-prefix}/{hash-prefix}-{width}x{height}.webp`.
+- Store the complete 64-character SHA-256 in `data/products-source.json`. Public filenames start with a 20-character prefix; if that candidate collides with different bytes, the generator extends the prefix until it is unique.
+- Hash the final WebP bytes. Different resolutions therefore have different hashes and paths. Their shared source identity and gallery order remain database relationships.
+- The generated catalog retains `image` and `images` as fallback paths and adds `media[].derivatives` for native `srcset` rendering. Cards and product-detail galleries use the same derivative family with context-specific `sizes` values.
+- The generator requires Sharp to be resolvable by Node. No runtime image library is shipped to website visitors.
+
+Generate one image record:
+
+```powershell
+node scripts/generate-product-images.mjs --input path/to/downloaded-source.jpg
+```
+
+Refresh derivative records for the current Sheet-backed image entries whose `localPath` files are available:
+
+```powershell
+node scripts/generate-product-images.mjs --catalog data/products-source.json
+```
 
 8. Serve the repository over HTTP and check the all-products page plus representative available, sold-out-detail, blank-image, and multi-image products on mobile and desktop. Confirm collection cards never display sold-out or placeholder labels.
 

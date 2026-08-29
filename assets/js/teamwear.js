@@ -35,8 +35,12 @@
 
     function updateControls() {
       const maximumScroll = Math.max(0, rail.scrollWidth - rail.clientWidth);
-      previousButton.disabled = rail.scrollLeft <= 1;
-      nextButton.disabled = rail.scrollLeft >= maximumScroll - 1;
+      const atStart = rail.scrollLeft <= 1;
+      const atEnd = maximumScroll <= 1 || rail.scrollLeft >= maximumScroll - 1;
+      previousButton.disabled = atStart;
+      previousButton.hidden = atStart;
+      nextButton.disabled = atEnd;
+      nextButton.hidden = atEnd;
     }
 
     function scrollRail(direction) {
@@ -126,21 +130,44 @@
     return checkedChoice(form, kind);
   }
 
-  function updateBuilder() {
-    const pattern = selectedOption("chip");
-    const color = selectedOption("swatch");
-    const summaryCode = form.querySelector("[data-summary-code]");
-    if (summaryCode && pattern && color) summaryCode.textContent = `${model.code}-${pattern.dataset.choiceId}-${color.dataset.choiceId}`;
+  function selectedAddOns() {
+    return Array.from(form.querySelectorAll('[data-choice-variant="add-on"] [data-choice-option]:has(input:checked)'));
+  }
+
+  function selectedQuantity() {
+    return form.querySelector('[name="teamwear-quantity"]:checked')?.closest("[data-choice-option]") || null;
+  }
+
+  function priceLabel(value) {
+    return `NT$${Number(value).toLocaleString("en-US")}`;
+  }
+
+  function totalPrice() {
+    const selectedIds = new Set(selectedAddOns().map((option) => option.dataset.choiceId));
+    const addOnAdjustment = (model.addOns || []).reduce((total, addOn) => total + (selectedIds.has(addOn.id) ? addOn.priceAdjustment : 0), 0);
+    const quantityId = selectedQuantity()?.dataset.choiceId;
+    const quantityAdjustment = (model.quantities || []).find((quantity) => quantity.id === quantityId)?.priceAdjustment || 0;
+    return model.price + quantityAdjustment + addOnAdjustment;
+  }
+
+  function updateBuilderPrice() {
+    const price = form.querySelector("[data-teamwear-price]");
+    if (price) price.textContent = priceLabel(totalPrice());
   }
 
   function inquiryText() {
     const pattern = selectedOption("chip");
     const color = selectedOption("swatch");
+    const quantity = selectedQuantity();
+    const addOns = selectedAddOns();
     return [
       "Paradigm Teamwear inquiry",
       `Model: ${model.name}`,
       `Pattern: ${pattern?.dataset.choiceLabel || ""}`,
       `Color: ${color?.dataset.choiceLabel || colorNameById.get(colorByOptionId.get(color?.dataset.choiceId)?.id) || ""}`,
+      `Quantity: ${quantity?.dataset.choiceLabel || ""}`,
+      `Add-on: ${addOns.length ? addOns.map((option) => option.dataset.choiceLabel).join(", ") : "None"}`,
+      `Price: ${priceLabel(totalPrice())}`,
       `Selection code: ${model.code}-${pattern?.dataset.choiceId || ""}-${color?.dataset.choiceId || ""}`
     ].join("\n");
   }
@@ -156,7 +183,7 @@
     textarea.remove();
   }
 
-  form.addEventListener("change", updateBuilder);
+  form.addEventListener("change", updateBuilderPrice);
   const action = form.querySelector("[data-primary-action]");
   action?.addEventListener("click", () => {
     if (action.dataset.actionIntent === "notify") return;
@@ -164,5 +191,5 @@
     fallbackCopy(text);
     navigator.clipboard?.writeText(text).catch(() => {});
   });
-  updateBuilder();
+  updateBuilderPrice();
 })();

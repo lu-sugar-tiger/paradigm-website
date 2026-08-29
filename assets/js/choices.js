@@ -2,21 +2,32 @@
   const LARGE_QUERY = "(min-width: 64rem)";
 
   function checkedOption(group) {
-    const input = group.querySelector('input[type="radio"]:checked');
+    const input = group?.querySelector("input:checked");
     return input?.closest("[data-choice-option]") || null;
   }
 
   function groupLabel(group) {
-    return checkedOption(group)?.dataset.choiceLabel || "";
+    return checkedOption(group)?.dataset.choiceLabel || (group?.dataset.choiceVariant === "add-on" ? "None" : "");
+  }
+
+  function syncChoiceStateSymbols(group) {
+    group.querySelectorAll("[data-choice-option]").forEach((option) => {
+      const input = option.querySelector("input");
+      const symbol = option.querySelector("[data-choice-state-symbol]");
+      if (!input || !symbol) return;
+      symbol.textContent = input.checked ? symbol.dataset.choiceSelectedSymbol : symbol.dataset.choiceUnselectedSymbol;
+    });
   }
 
   function announceSelection(group) {
     const option = checkedOption(group);
+    const selectionLabel = groupLabel(group);
     const labelValue = group.querySelector("[data-choice-label-value]");
     const status = group.querySelector("[data-choice-status]");
+    syncChoiceStateSymbols(group);
     if (labelValue && option) labelValue.textContent = option.dataset.choiceLabel;
-    if (status && option) {
-      status.textContent = `${group.dataset.choiceTitle}: ${option.dataset.choiceLabel}${option.dataset.availability === "unavailable" ? ", unavailable" : ""}`;
+    if (status && selectionLabel) {
+      status.textContent = `${group.dataset.choiceTitle}: ${selectionLabel}${option?.dataset.availability === "unavailable" ? ", unavailable" : ""}`;
     }
   }
 
@@ -189,15 +200,21 @@
     if (!inlineMount || !dockMount || !footer) return;
 
     const largeQuery = window.matchMedia(LARGE_QUERY);
+    const controlsTeamwearHeader = document.body.classList.contains("teamwear-story-shell");
+    const siteHeader = controlsTeamwearHeader ? document.querySelector(".site-header") : null;
     let inlineAboveViewport = false;
     let footerVisible = false;
 
     function updateMount() {
       const isLarge = largeQuery.matches;
       const shouldDock = isLarge && footerVisible;
-      const shouldFloat = isLarge && !shouldDock && inlineAboveViewport;
+      const shouldFloat = !shouldDock && inlineAboveViewport;
       action.classList.toggle("is-docked", shouldDock);
       action.classList.toggle("is-floating", shouldFloat);
+      if (controlsTeamwearHeader) {
+        document.body.classList.toggle("has-floating-primary-action", shouldFloat);
+        siteHeader?.toggleAttribute("inert", shouldFloat);
+      }
       if (shouldDock) preserveFocusWhileMoving(action, dockMount);
       else preserveFocusWhileMoving(action, inlineMount);
     }

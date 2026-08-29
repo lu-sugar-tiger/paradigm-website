@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "source": {
     "spreadsheetId": "1vt4wTxgUujj6L_p_I-zqzcpWvWZwACp4O1JRQlf2t9M",
     "spreadsheetUrl": "https://docs.google.com/spreadsheets/d/1vt4wTxgUujj6L_p_I-zqzcpWvWZwACp4O1JRQlf2t9M/edit",
@@ -1332,7 +1332,47 @@
           "mimeType": "image/jpeg",
           "size": "2298493",
           "modifiedTime": "2026-08-04T13:11:40.000Z",
-          "localPath": "assets/images/products/ED14024/ed14024-00.webp"
+          "localPath": "assets/images/products/ED14024/ed14024-00.webp",
+          "sourceWidth": 1600,
+          "sourceHeight": 1600,
+          "sourceBytes": 18750,
+          "sourceSha256": "37467bea3183dd715ba03ea703dcb48034146714af2093548ad03aabb319845f",
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/59/599a22252cda2eb00f2a-540x540.webp",
+              "bytes": 12352,
+              "sha256": "599a22252cda2eb00f2af17ca12a0ab33ee755237c80474b069f98c9e5217879"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/3a/3a4d8d1d4a54393c6092-1080x1080.webp",
+              "bytes": 32946,
+              "sha256": "3a4d8d1d4a54393c6092ac0c1593b58ff8963371d40372ff6795cdb1653b9ea7"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/93/939986dd5d2f15917d01-2160x2160.webp",
+              "bytes": 77044,
+              "sha256": "939986dd5d2f15917d011423f1d617ff40b8aa0750ce43d0208be106688f5ae3"
+            }
+          ],
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          }
         },
         {
           "index": 1,
@@ -1341,7 +1381,47 @@
           "mimeType": "image/jpeg",
           "size": "2016722",
           "modifiedTime": "2026-08-02T18:13:55.000Z",
-          "localPath": "assets/images/products/ED14024/ed14024-01.webp"
+          "localPath": "assets/images/products/ED14024/ed14024-01.webp",
+          "sourceWidth": 1600,
+          "sourceHeight": 1600,
+          "sourceBytes": 16714,
+          "sourceSha256": "b8cab32befb98aeb0a4edb4e802a6ac3b8076105c635995c203fda7a9f088614",
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/cf/cf28872f5d852494e65e-540x540.webp",
+              "bytes": 10500,
+              "sha256": "cf28872f5d852494e65e19f641644352413829892d423c6e2da72b6ee9b99130"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/70/70566208856c2c68c30c-1080x1080.webp",
+              "bytes": 28008,
+              "sha256": "70566208856c2c68c30cfa88159c7f898d4880764212a47582bf8a0d5ac2399f"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/70/7010ebbbc217325b5ba3-2160x2160.webp",
+              "bytes": 68190,
+              "sha256": "7010ebbbc217325b5ba3454684f094aca16dad99a87a733359adc679b4a286bb"
+            }
+          ],
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          }
         },
         {
           "index": 2,
@@ -1350,7 +1430,47 @@
           "mimeType": "image/jpeg",
           "size": "2555836",
           "modifiedTime": "2026-08-02T17:55:35.000Z",
-          "localPath": "assets/images/products/ED14024/ed14024-02.webp"
+          "localPath": "assets/images/products/ED14024/ed14024-02.webp",
+          "sourceWidth": 1600,
+          "sourceHeight": 1600,
+          "sourceBytes": 20820,
+          "sourceSha256": "25da52c4288428f241512d3752ee320301490b5faabf34881effdc507985a0dd",
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/fb/fbd382d61f25a81535ce-540x540.webp",
+              "bytes": 13640,
+              "sha256": "fbd382d61f25a81535ced47df84342a9d8ae24535ea8200829a8481b014337d5"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/e2/e22643b06723b8f8a169-1080x1080.webp",
+              "bytes": 39076,
+              "sha256": "e22643b06723b8f8a16960b734f8de9721e84354e61bce70292ce6cd165156f4"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/32/32fac39b1b5b4b1bd18b-2160x2160.webp",
+              "bytes": 93702,
+              "sha256": "32fac39b1b5b4b1bd18b16da67ab28c5a0c1dbe6fcce868e81bf9b53b85cfb39"
+            }
+          ],
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          }
         },
         {
           "index": 3,
@@ -1359,7 +1479,47 @@
           "mimeType": "image/jpeg",
           "size": "1581166",
           "modifiedTime": "2026-08-02T18:11:16.000Z",
-          "localPath": "assets/images/products/ED14024/ed14024-03.webp"
+          "localPath": "assets/images/products/ED14024/ed14024-03.webp",
+          "sourceWidth": 1600,
+          "sourceHeight": 1600,
+          "sourceBytes": 10304,
+          "sourceSha256": "2109a9e92e92b19359fe2d4e1962477a7b646435537f42b755f6bad1ad5d1fb8",
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/0d/0d87e6a2fd07a8877f8e-540x540.webp",
+              "bytes": 6066,
+              "sha256": "0d87e6a2fd07a8877f8e9745c771cdbb590335545f092cd4d03918387f3d3507"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/9c/9cfb7703b233a921b4bb-1080x1080.webp",
+              "bytes": 15542,
+              "sha256": "9cfb7703b233a921b4bb6da04dd63ca75d1cfa57c46e275a805b6100eb107465"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/5d/5dafa859cf648cb90bde-2160x2160.webp",
+              "bytes": 37428,
+              "sha256": "5dafa859cf648cb90bde26d2b19bcd9dc635558a9ef76a69452385722205bb52"
+            }
+          ],
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          }
         },
         {
           "index": 4,
@@ -1368,7 +1528,47 @@
           "mimeType": "image/jpeg",
           "size": "9959643",
           "modifiedTime": "2026-07-29T13:50:02.000Z",
-          "localPath": "assets/images/products/ED14024/ed14024-04.webp"
+          "localPath": "assets/images/products/ED14024/ed14024-04.webp",
+          "sourceWidth": 1600,
+          "sourceHeight": 1600,
+          "sourceBytes": 411098,
+          "sourceSha256": "c7416ae2ae5905918d32aaae17a2bf747c0703acd68faaa90d22a4182cdca8d3",
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/27/27d2ec1cc45f4fae1360-540x540.webp",
+              "bytes": 146792,
+              "sha256": "27d2ec1cc45f4fae13607acbb59951915c313062ec4d3e6a38f673622e53c4f3"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/5d/5dd7819a937d00bcd96e-1080x1080.webp",
+              "bytes": 635288,
+              "sha256": "5dd7819a937d00bcd96e070ea725ead04e7b3fd8efb65b42a15f2f3f9c1dd207"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/c2/c2d5e536d38b7098b4bf-2160x2160.webp",
+              "bytes": 2163494,
+              "sha256": "c2d5e536d38b7098b4bf77203312f4878a597289e12a6d4ce0f3b72a442ed9ec"
+            }
+          ],
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          }
         },
         {
           "index": 5,
@@ -1377,7 +1577,47 @@
           "mimeType": "image/jpeg",
           "size": "6855002",
           "modifiedTime": "2026-07-29T13:50:01.000Z",
-          "localPath": "assets/images/products/ED14024/ed14024-05.webp"
+          "localPath": "assets/images/products/ED14024/ed14024-05.webp",
+          "sourceWidth": 1600,
+          "sourceHeight": 1600,
+          "sourceBytes": 102142,
+          "sourceSha256": "8e26b81df070c18822220f34d9ba6cee14c010e087197ea1c31820526e036f4f",
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/e1/e1c33843c425b505fb17-540x540.webp",
+              "bytes": 54036,
+              "sha256": "e1c33843c425b505fb17bfb2383ab56283c269a443f56af4f128ae2215404a91"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/61/6138a65fc291952f6a74-1080x1080.webp",
+              "bytes": 173946,
+              "sha256": "6138a65fc291952f6a74e91e415a93535999d5d93bde83a9f6b7c070eddc100e"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/d1/d19ebf1e08588f4c7315-2160x2160.webp",
+              "bytes": 450074,
+              "sha256": "d19ebf1e08588f4c73150685d37437bd9646837ef9a59f1b7888badd0e4e8c8c"
+            }
+          ],
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          }
         },
         {
           "index": 6,
@@ -1386,7 +1626,47 @@
           "mimeType": "image/jpeg",
           "size": "5615232",
           "modifiedTime": "2026-08-04T13:21:36.000Z",
-          "localPath": "assets/images/products/ED14024/ed14024-06.webp"
+          "localPath": "assets/images/products/ED14024/ed14024-06.webp",
+          "sourceWidth": 1600,
+          "sourceHeight": 1600,
+          "sourceBytes": 123480,
+          "sourceSha256": "b187c965c241e3fc4d8b07dd48891d8fccbeac46ec7798fe14d7d59f1fa606a3",
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/51/5150b7359cb23e02a435-540x540.webp",
+              "bytes": 50632,
+              "sha256": "5150b7359cb23e02a435d3f120f7dc34e88336a29cd9c152c4e93d409bbe992e"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/3f/3f527c007953a17ff7b7-1080x1080.webp",
+              "bytes": 183560,
+              "sha256": "3f527c007953a17ff7b7ce5e58fb4c8e14f15957508e1d7221edd993c127f841"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/f4/f47ffc6561105f773458-2160x2160.webp",
+              "bytes": 548604,
+              "sha256": "f47ffc6561105f77345844a2999ad17a9b8cc1390fad790d85d88231ddf8879c"
+            }
+          ],
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          }
         },
         {
           "index": 7,
@@ -1395,7 +1675,47 @@
           "mimeType": "image/jpeg",
           "size": "4627380",
           "modifiedTime": "2026-08-04T13:20:42.000Z",
-          "localPath": "assets/images/products/ED14024/ed14024-07.webp"
+          "localPath": "assets/images/products/ED14024/ed14024-07.webp",
+          "sourceWidth": 1600,
+          "sourceHeight": 1600,
+          "sourceBytes": 97896,
+          "sourceSha256": "f409b576575752626ff89702248d1a83edb01d149182128958d684a98cce970d",
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/20/20f29a15ed7d08f866f9-540x540.webp",
+              "bytes": 43884,
+              "sha256": "20f29a15ed7d08f866f9f5f261ca64d818b57f06b56ce08f8204b76eada68a6f"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/15/15cb30e5221fe14a3c92-1080x1080.webp",
+              "bytes": 153070,
+              "sha256": "15cb30e5221fe14a3c92c6953ce153029856bb1681b16320417f1d4513e8eeea"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/65/652219a666c56a07d134-2160x2160.webp",
+              "bytes": 432952,
+              "sha256": "652219a666c56a07d1348132b990595e2d74335bc70c0e2146d6c054ce878fcb"
+            }
+          ],
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          }
         }
       ],
       "localImages": [

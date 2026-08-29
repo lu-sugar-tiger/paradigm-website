@@ -1,3 +1,5 @@
+import { imageSrcset } from "./product-images.mjs";
+
 const NAV_ITEMS = [
   { label: "All", path: "/collections/all", aliases: ["/"] },
   { label: "SS Tops", path: "/collections/ss-tops" },
@@ -6,15 +8,15 @@ const NAV_ITEMS = [
 ];
 
 export const MATERIAL_ICON_NAMES = Object.freeze({
+  add: "add",
   arrow: "arrow_forward",
-  back: "arrow_back",
-  bag: "shopping_bag",
+  back: "chevron_left",
   care: "laundry",
   chevron: "chevron_right",
+  check: "check",
   close: "close",
   drop: "water_drop",
   external: "arrow_outward",
-  filter: "filter_alt",
   grid: "grid_view",
   image: "image",
   layers: "layers",
@@ -32,6 +34,15 @@ export function html(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
+}
+
+export function renderProductDetailPrice({ price, dataAttribute = "" }) {
+  if (!price) throw new Error("Product-detail prices require a display value.");
+  if (dataAttribute && !/^data-[a-z0-9-]+$/.test(dataAttribute)) {
+    throw new Error(`Invalid product-detail price data attribute: ${dataAttribute}`);
+  }
+  const attribute = dataAttribute ? ` ${dataAttribute}` : "";
+  return `<p class="product-detail__price"${attribute} data-generated-component="product-detail-price">${html(price)}</p>`;
 }
 
 function asset(root, path) {
@@ -114,21 +125,22 @@ export function renderBreadcrumb({
     if (items.length !== 1 || !items[0].href) throw new Error("Back breadcrumbs require one linked item.");
     const item = items[0];
     return `<nav class="${className}" aria-label="${html(ariaLabel)}" data-generated-component="breadcrumb">
-  <a class="breadcrumb__back-link" href="${html(item.href)}"${breadcrumbDataAttribute(item.dataAttribute)}>${renderIcon("back", root, "breadcrumb__icon breadcrumb__icon--back")}<span class="breadcrumb__link-label">${html(item.label)}</span></a>
+  <a class="breadcrumb__back-link" href="${html(item.href)}"${breadcrumbDataAttribute(item.dataAttribute)}>${renderIcon("back", root, "breadcrumb__icon breadcrumb__icon--back")}<span class="breadcrumb__link-label interface-label">${html(item.label)}</span></a>
 </nav>`;
   }
 
   const itemMarkup = items.map((item, index) => {
     const current = Boolean(item.current);
     const attributes = `${current ? ' aria-current="page"' : ""}${breadcrumbDataAttribute(item.dataAttribute)}`;
+    const currentClassName = `breadcrumb__current${item.interfaceLabel ? " interface-label" : ""}`;
     let content;
     if (item.href && !current) {
-      content = `<a href="${html(item.href)}"${attributes}><span class="breadcrumb__link-label">${html(item.label)}</span></a>`;
+      content = `<a href="${html(item.href)}"${attributes}><span class="breadcrumb__link-label interface-label">${html(item.label)}</span></a>`;
     } else if (item.headingLevel) {
       if (!Number.isInteger(item.headingLevel) || item.headingLevel < 1 || item.headingLevel > 6) throw new Error(`Invalid breadcrumb heading level: ${item.headingLevel}`);
-      content = `<h${item.headingLevel} class="breadcrumb__current"${attributes}>${html(item.label)}</h${item.headingLevel}>`;
+      content = `<h${item.headingLevel} class="${currentClassName}"${attributes}>${html(item.label)}</h${item.headingLevel}>`;
     } else {
-      content = `<span class="breadcrumb__current"${attributes}>${html(item.label)}</span>`;
+      content = `<span class="${currentClassName}"${attributes}>${html(item.label)}</span>`;
     }
     const separator = index === 0
       ? ""
@@ -153,7 +165,7 @@ export function renderPageHeadline({ breadcrumb, trailingAction, root = "" }) {
     if (trailingAction.kind === "icon" && !trailingAction.icon) throw new Error("Icon page-headline actions require an icon.");
     const actionContent = trailingAction.kind === "icon"
       ? renderIcon(trailingAction.icon, root, "page-headline__action-icon")
-      : `<span>${html(trailingAction.label)}</span>`;
+      : `<span class="interface-label">${html(trailingAction.label)}</span>`;
     const accessibleLabel = trailingAction.kind === "icon" ? ` aria-label="${html(trailingAction.label)}"` : "";
     trailingMarkup = `
     <button class="page-headline__action page-headline__action--${html(trailingAction.kind)}" type="button"${accessibleLabel}>${actionContent}</button>`;
@@ -174,7 +186,7 @@ export function renderSiteHeader({ root = "", currentPath = "/" } = {}) {
   const allCurrent = isCurrentPath(currentPath, allItem) ? ' aria-current="page"' : "";
   const subcollectionMarkup = subcollections.map((item) => {
     const current = isCurrentPath(currentPath, item) ? ' aria-current="page"' : "";
-    return `              <li><a href="${item.path}"${current}>${item.label}</a></li>`;
+    return `              <li><a class="interface-label" href="${item.path}"${current}>${item.label}</a></li>`;
   }).join("\n");
   const teamwearCurrent = currentPath === "/teamwear" || currentPath.startsWith("/teamwear/")
     ? ' aria-current="page"'
@@ -185,7 +197,6 @@ export function renderSiteHeader({ root = "", currentPath = "/" } = {}) {
       <a class="site-logo" href="/" aria-label="Paradigm home">PARADIGM</a>
       <div class="site-actions" aria-label="Quick actions">
         <button class="icon-button" type="button" aria-label="Search">${renderIcon("search", root)}</button>
-        <button class="icon-button" type="button" aria-label="Shopping bag">${renderIcon("bag", root)}</button>
         <button class="icon-button" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle data-nav-open-symbol="${html(MATERIAL_ICON_NAMES.menu)}" data-nav-close-symbol="${html(MATERIAL_ICON_NAMES.close)}">${renderIcon("menu", root)}</button>
       </div>
     </div>
@@ -197,7 +208,7 @@ export function renderSiteHeader({ root = "", currentPath = "/" } = {}) {
       <nav class="drawer-nav" aria-label="Navigation">
         <ul role="list">
           <li>
-            <a href="${allItem.path}"${allCurrent}>${allItem.label}</a>
+            <a class="interface-label" href="${allItem.path}"${allCurrent}>${allItem.label}</a>
             <ul class="drawer-nav__subcollections" role="list">
 ${subcollectionMarkup}
             </ul>
@@ -205,7 +216,7 @@ ${subcollectionMarkup}
         </ul>
         <div class="drawer-nav__divider"></div>
         <ul role="list">
-          <li><a href="/teamwear"${teamwearCurrent}>Teamwear</a></li>
+          <li><a class="interface-label" href="/teamwear"${teamwearCurrent}>Teamwear</a></li>
         </ul>
       </nav>
     </div>
@@ -215,10 +226,10 @@ ${subcollectionMarkup}
 export function renderSiteFooter() {
   return `  <footer class="site-footer" data-primary-action-footer-anchor>
     <div class="container site-footer__grid">
-      <a class="footer-link external-link" href="https://www.instagram.com/prdm.tw/" target="_blank" rel="noopener noreferrer" data-external-link="true"><span class="footer-link__content"><span class="external-link__label">Instagram</span>${renderExternalLinkIndicator()}</span></a>
-      <a class="footer-link external-link" href="https://shopee.tw/" target="_blank" rel="noopener noreferrer" data-external-link="true"><span class="footer-link__content"><span class="external-link__label">Shopee</span>${renderExternalLinkIndicator()}</span></a>
+      <a class="footer-link external-link" href="https://www.instagram.com/prdm.tw/" target="_blank" rel="noopener noreferrer" data-external-link="true"><span class="footer-link__content"><span class="external-link__label interface-label">Instagram</span>${renderExternalLinkIndicator()}</span></a>
+      <a class="footer-link external-link" href="https://shopee.tw/" target="_blank" rel="noopener noreferrer" data-external-link="true"><span class="footer-link__content"><span class="external-link__label interface-label">Shopee</span>${renderExternalLinkIndicator()}</span></a>
       <div class="footer-meta">
-        <span>PARADIGM Co., Ltd.</span>
+        <span>Paradigm Co., Ltd.</span>
         <span>Copyright © <span data-current-year>2026</span> All Rights Reserved.</span>
       </div>
     </div>
@@ -227,6 +238,7 @@ export function renderSiteFooter() {
 
 export function renderChoiceGroup({
   kind,
+  variant = "default",
   title,
   inputName,
   selectedValue,
@@ -235,7 +247,10 @@ export function renderChoiceGroup({
   options
 }) {
   if (!["swatch", "chip"].includes(kind)) throw new Error(`Unsupported choice kind: ${kind}`);
-  const selectedOption = options.find((option) => option.id === selectedValue || option.selected) || options[0];
+  if (!["default", "add-on"].includes(variant)) throw new Error(`Unsupported choice variant: ${variant}`);
+  if (variant === "add-on" && kind !== "chip") throw new Error("The add-on choice variant requires chip choices.");
+  const isAddOn = variant === "add-on";
+  const selectedOption = options.find((option) => option.id === selectedValue || option.selected) || (isAddOn ? null : options[0]);
   const groupId = `choice-${inputName.replace(/[^a-z0-9_-]+/gi, "-")}`;
   const labelMarkup = kind === "swatch"
     ? `<span data-choice-label-value>${html(selectedOption?.label || title)}</span>`
@@ -243,18 +258,22 @@ export function renderChoiceGroup({
   const optionMarkup = options.map((option) => {
     const optionId = `${groupId}-${String(option.id).replace(/[^a-z0-9_-]+/gi, "-")}`;
     const unavailable = option.availability === "unavailable";
-    const selected = option.id === selectedOption?.id;
+    const selected = isAddOn ? Boolean(option.selected || option.id === selectedValue) : option.id === selectedOption?.id;
     const colorClass = kind === "swatch" ? ` choice-option--color-${html(option.colorId)}` : "";
+    const variantClass = isAddOn ? " choice-option--chip-add-on" : "";
     const descriptionId = `${optionId}-availability`;
-    return `      <label class="choice-option choice-option--${kind}${colorClass}" data-choice-option data-choice-id="${html(option.id)}" data-choice-label="${html(option.label)}" data-availability="${unavailable ? "unavailable" : "available"}"${kind === "swatch" ? ` data-color-id="${html(option.colorId)}" title="${html(option.label)}"` : ""}>
-        <input class="visually-hidden" type="radio" id="${html(optionId)}" name="${html(inputName)}" value="${html(option.id)}"${selected ? " checked" : ""}${unavailable ? ` aria-describedby="${html(descriptionId)}"` : ""}>
-        ${kind === "chip" ? `<span aria-hidden="true">${html(option.label)}</span>` : ""}
+    const stateSymbol = selected ? MATERIAL_ICON_NAMES.check : MATERIAL_ICON_NAMES.add;
+    const addOnIcon = isAddOn ? `
+        <span class="choice-option__state-icon" aria-hidden="true"><span class="material-symbols-outlined material-icon choice-option__state-symbol" data-choice-state-symbol data-choice-unselected-symbol="${html(MATERIAL_ICON_NAMES.add)}" data-choice-selected-symbol="${html(MATERIAL_ICON_NAMES.check)}" aria-hidden="true">${html(stateSymbol)}</span></span>` : "";
+    return `      <label class="choice-option choice-option--${kind}${colorClass}${variantClass}" data-choice-option data-choice-id="${html(option.id)}" data-choice-label="${html(option.label)}" data-availability="${unavailable ? "unavailable" : "available"}"${kind === "swatch" ? ` data-color-id="${html(option.colorId)}" title="${html(option.label)}"` : ""}>
+        <input class="visually-hidden" type="${isAddOn ? "checkbox" : "radio"}" id="${html(optionId)}" name="${html(inputName)}" value="${html(option.id)}"${selected ? " checked" : ""}${unavailable ? ` aria-describedby="${html(descriptionId)}"` : ""}>
+        ${kind === "chip" ? `<span class="choice-option__label${isAddOn ? " interface-label" : ""}" aria-hidden="true">${html(option.label)}</span>` : ""}${addOnIcon}
         <span class="visually-hidden">${kind === "chip" ? html(option.label) : html(`${title} ${option.label}`)}</span>
         ${unavailable ? `<span class="visually-hidden" id="${html(descriptionId)}" data-choice-availability-text>Unavailable</span>` : ""}
       </label>`;
   }).join("\n");
 
-  return `<fieldset class="choice-group choice-group--${kind}" data-choice-group data-choice-kind="${kind}" data-choice-title="${html(title)}" data-primary-action-id="${html(primaryActionId)}">
+  return `<fieldset class="choice-group choice-group--${kind}${isAddOn ? " choice-group--chip-add-on" : ""}" data-choice-group data-choice-kind="${kind}"${isAddOn ? ' data-choice-variant="add-on"' : ""} data-choice-title="${html(title)}" data-primary-action-id="${html(primaryActionId)}">
     <legend class="visually-hidden">${html(title)}</legend>
     <div class="choice-group__layout">
       ${showLabel ? `<div class="choice-group__label" aria-hidden="true">${labelMarkup}</div>` : ""}
@@ -294,7 +313,7 @@ export function renderPrimaryAction({
     : "";
   return `<div class="primary-action-mount primary-action-mount--inline" data-primary-action-inline-mount="${html(id)}">
     <a class="button primary-action external-link" id="${html(id)}" href="${html(actionHref)}"${targetAttributes} data-primary-action data-action-intent="${html(initialIntent)}" data-action-default-intent="${html(intent)}" data-action-default-label="${html(label)}" data-action-default-href="${html(href)}" data-action-default-target="${html(target)}" data-action-default-external="${html(external)}" data-action-notify-href="${html(notificationChannel)}" data-action-notify-external="true" data-action-behavior="${html(behavior)}" data-external-link="${html(actionExternal)}">
-      <span class="primary-action__content"><span class="external-link__label" data-primary-action-label>${html(actionLabel)}</span>${renderExternalLinkIndicator(root)}</span>
+      <span class="primary-action__content"><span class="external-link__label interface-label" data-primary-action-label>${html(actionLabel)}</span>${renderExternalLinkIndicator(root)}</span>
     </a>
   </div>`;
 }
@@ -306,14 +325,21 @@ export function renderPrimaryActionDock(id) {
 
 export function renderRailControls({ label, railId, root = "" }) {
   return `<div class="teamwear-rail-controls" role="group" aria-label="${html(label)} carousel controls">
-    <button class="teamwear-rail-button teamwear-rail-button--previous" type="button" aria-label="Previous ${html(label.toLowerCase())}" aria-controls="${html(railId)}" data-rail-previous>${renderIcon("arrow", root)}</button>
-    <button class="teamwear-rail-button" type="button" aria-label="Next ${html(label.toLowerCase())}" aria-controls="${html(railId)}" data-rail-next>${renderIcon("arrow", root)}</button>
+    <button class="teamwear-rail-button teamwear-rail-button--previous" type="button" aria-label="Previous ${html(label.toLowerCase())}" aria-controls="${html(railId)}" data-rail-previous hidden>${renderIcon("back", root)}</button>
+    <button class="teamwear-rail-button" type="button" aria-label="Next ${html(label.toLowerCase())}" aria-controls="${html(railId)}" data-rail-next hidden>${renderIcon("chevron", root)}</button>
   </div>`;
 }
 
 export function renderProductCard(product, root = "") {
-  const image = product.image
-    ? `<img src="${html(asset(root, product.image))}" alt="${html(product.alt)}" loading="lazy" width="400" height="460">`
+  const media = product.media?.[0] || (product.image ? { src: product.image, derivatives: [] } : null);
+  const image = media
+    ? renderResponsiveProductImage({
+      media,
+      alt: product.alt,
+      root,
+      sizes: "(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw",
+      loading: "lazy"
+    })
     : "";
   return `<a class="product-card" href="/products/${html(product.productNumber)}">
   <div class="product-card__media">${image}</div>
@@ -322,6 +348,17 @@ export function renderProductCard(product, root = "") {
     <div class="product-card__footer"><span class="product-card__price">${html(product.price)}</span></div>
   </div>
 </a>`;
+}
+
+export function renderResponsiveProductImage({ media, alt, root = "", sizes, loading = "" }) {
+  if (!media?.src) throw new Error("Responsive product images require a fallback source.");
+  const resolvedPath = (source) => asset(root, source);
+  const srcset = imageSrcset(media, resolvedPath);
+  const responsiveAttributes = srcset ? ` srcset="${html(srcset)}" sizes="${html(sizes)}"` : "";
+  const loadingAttribute = loading ? ` loading="${html(loading)}"` : "";
+  const width = media.width || 1;
+  const height = media.height || 1;
+  return `<img src="${html(resolvedPath(media.src))}"${responsiveAttributes} alt="${html(alt)}" width="${html(width)}" height="${html(height)}"${loadingAttribute}>`;
 }
 
 export function renderProductGrid(products, root = "") {
@@ -346,9 +383,10 @@ export function renderDocument({
 }) {
   const baseStyles = ["tokens.css", "reset.css", "base.css", "layout.css", "components.css", "pages.css", "color-options.css"];
   const styleMarkup = [...baseStyles, ...styles].map((file) => `  <link rel="stylesheet" href="${html(asset(root, `assets/css/${file}`))}">`).join("\n");
-  const dataScripts = scripts.filter((file) => ["catalog.js", "teamwear-options.js"].includes(file));
-  const interactionScripts = scripts.filter((file) => !["catalog.js", "teamwear-options.js"].includes(file));
-  const scriptMarkup = ["app.js", ...dataScripts, "choices.js", ...interactionScripts].map((file) => `  <script defer src="${html(asset(root, `assets/js/${file}`))}"></script>`).join("\n");
+  const isDataScript = (file) => ["catalog.js", "teamwear-options.js"].includes(file.split("?")[0]);
+  const dataScripts = scripts.filter(isDataScript);
+  const interactionScripts = scripts.filter((file) => !isDataScript(file));
+  const scriptMarkup = ["app.js", ...dataScripts, "choices.js?v=20260827a", ...interactionScripts].map((file) => `  <script defer src="${html(asset(root, `assets/js/${file}`))}"></script>`).join("\n");
   const document = `<!doctype html>
 <!-- Generated by scripts/build-site.mjs. Do not edit this file directly. -->
 <html lang="${html(lang)}">

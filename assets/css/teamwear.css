@@ -1,13 +1,18 @@
 .teamwear-page {
   --layout-gutter-inline: var(--space-7);
   --layout-section-content-gap: var(--space-7);
+  --teamwear-content-edge: max(
+    var(--layout-gutter-inline),
+    calc((100vw - var(--content-width)) / 2 + var(--layout-gutter-inline))
+  );
+  --layout-page-gutter: var(--teamwear-content-edge);
   overflow-x: clip;
   background: var(--color-background-mid);
 }
 
 @media (min-width: 48rem) {
   .teamwear-page {
-    --layout-gutter-inline: var(--space-8);
+    --layout-gutter-inline: var(--space-9);
   }
 }
 
@@ -27,10 +32,9 @@
 }
 
 .teamwear-page main .container {
-  width: min(
-    calc(100% - var(--layout-gutter-inline) - var(--layout-gutter-inline)),
-    var(--content-width)
-  );
+  box-sizing: border-box;
+  width: min(100%, var(--content-width));
+  padding-inline: var(--layout-gutter-inline);
 }
 
 .teamwear-page [id] {

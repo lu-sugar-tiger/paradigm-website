@@ -6,6 +6,7 @@ import {
   transformDescription
 } from "./lib/rich-description.mjs";
 import { categoryForTitle, rankRelatedProducts } from "./lib/product-relations.mjs";
+import { resolveProductMedia } from "./lib/product-images.mjs";
 import {
   html,
   renderChoiceGroup,
@@ -14,7 +15,9 @@ import {
   renderIcon,
   renderPageHeadline,
   renderPrimaryAction,
+  renderProductDetailPrice,
   renderProductGrid,
+  renderResponsiveProductImage,
   renderRailControls
 } from "./lib/site-renderers.mjs";
 
@@ -99,7 +102,13 @@ function renderProductMain(template, product, relatedProducts) {
     external: true,
     root: "../.."
   });
-  const media = product.images.map((source, index) => `          <img src="../../${html(source)}" alt="${html(index === 0 ? product.alt : `${product.title}, view ${index + 1}`)}" width="800" height="800"${index ? ' loading="lazy"' : ""}>`).join("\n");
+  const media = product.media.map((image, index) => `          ${renderResponsiveProductImage({
+    media: image,
+    alt: index === 0 ? product.alt : `${product.title}, view ${index + 1}`,
+    root: "../..",
+    sizes: "(min-width: 80rem) 768px, (min-width: 64rem) 60vw, 100vw",
+    loading: index ? "lazy" : ""
+  })}`).join("\n");
   const pageHeadline = renderPageHeadline({
     root: "../..",
     breadcrumb: {
@@ -118,7 +127,7 @@ function renderProductMain(template, product, relatedProducts) {
     PRODUCT_NUMBER: html(product.productNumber),
     CATEGORY: html(product.category),
     PRODUCT_MEDIA: media,
-    PRICE: html(product.price),
+    PRICE: renderProductDetailPrice({ price: product.price, dataAttribute: "data-product-price" }),
     COLOR_CHOICES: colorChoices.split("\n").map((line) => `            ${line}`).join("\n"),
     SIZE_CHOICES: sizeChoices.split("\n").map((line) => `            ${line}`).join("\n"),
     PRIMARY_ACTION: primaryAction.split("\n").map((line) => `          ${line}`).join("\n"),
@@ -131,12 +140,12 @@ function renderCollectionPage({ title, category, pathName, root, products }) {
   const currentPath = pathName === "home" ? "/" : `/collections/${pathName}`;
   const filtered = category === "all" ? products : products.filter((product) => product.category === category);
   const items = category === "all"
-    ? [{ label: title, current: true, headingLevel: 1 }]
-    : [{ label: "All", href: "/collections/all" }, { label: title, current: true, headingLevel: 1 }];
+    ? [{ label: title, current: true, headingLevel: 1, interfaceLabel: true }]
+    : [{ label: "All", href: "/collections/all" }, { label: title, current: true, headingLevel: 1, interfaceLabel: true }];
   const pageHeadline = renderPageHeadline({
     root,
     breadcrumb: { variant: "hierarchy", items },
-    trailingAction: { kind: "icon", icon: "filter", label: "Filter products" }
+    trailingAction: { kind: "text", label: "Refine" }
   });
   const main = `  <main class="page">
 ${pageHeadline.split("\n").map((line) => `    ${line}`).join("\n")}
@@ -204,23 +213,23 @@ function renderTeamwearLanding(template, model, colorById, instagramUrl) {
     ICON_SHIRT: renderIcon("shirt", ".."),
     ICON_LAYERS: renderIcon("layers", ".."),
     ICON_IMAGE: renderIcon("image", ".."),
-    HIGHLIGHT_CONTROLS: renderRailControls({ label: "Highlights", railId: "teamwear-highlights-rail", root: ".." }).split("\n").map((line) => `        ${line}`).join("\n"),
-    COLORWAY_CONTROLS: renderRailControls({ label: "Colorway", railId: "teamwear-colorways-rail", root: ".." }).split("\n").map((line) => `        ${line}`).join("\n"),
-    GALLERY_CONTROLS: renderRailControls({ label: "Customer stories", railId: "teamwear-gallery-rail", root: ".." }).split("\n").map((line) => `        ${line}`).join("\n"),
+    HIGHLIGHT_CONTROLS: renderRailControls({ label: "Highlights", railId: "teamwear-highlights-rail", root: ".." }).split("\n").map((line) => `      ${line}`).join("\n"),
+    COLORWAY_CONTROLS: renderRailControls({ label: "Colorway", railId: "teamwear-colorways-rail", root: ".." }).split("\n").map((line) => `      ${line}`).join("\n"),
+    GALLERY_CONTROLS: renderRailControls({ label: "Customer stories", railId: "teamwear-gallery-rail", root: ".." }).split("\n").map((line) => `      ${line}`).join("\n"),
     COLORWAY_CARDS: renderTeamwearColorwayCards(model, colorById),
     PATTERN_CHOICES: patterns.split("\n").map((line) => `      ${line}`).join("\n")
   });
   return renderDocument({
-    title: "Basketball Teamwear 01 | Paradigm",
-    description: "Basketball 01 is Paradigm's reversible basketball teamwear system, composed for teams that want one complete visual identity.",
+    title: `${model.name} | Paradigm`,
+    description: `${model.name} is Paradigm's reversible basketball teamwear system, composed for teams that want one complete visual identity.`,
     canonical: "https://prdm.tw/teamwear",
     root: "..",
     currentPath: "/teamwear",
-    bodyClass: "site-shell reference-page teamwear-page",
+    bodyClass: "site-shell reference-page teamwear-page teamwear-story-shell",
     main,
-    styles: ["teamwear.css?v=20260821a", "teamwear-story.css?v=20260821a"],
-    scripts: ["teamwear-options.js", "teamwear.js?v=20260821b"],
-    head: "  <meta property=\"og:title\" content=\"Basketball Teamwear 01 | Paradigm\">\n  <meta property=\"og:description\" content=\"A reversible basketball uniform system composed by Paradigm for the whole roster.\">\n  <meta property=\"og:image\" content=\"https://prdm.tw/assets/images/teamwear/campaign/hero-desktop.webp\">\n  <meta property=\"og:type\" content=\"website\">",
+    styles: ["teamwear.css?v=20260821a", "teamwear-story.css?v=20260829b"],
+    scripts: ["teamwear-options.js?v=20260828a", "teamwear.js?v=20260829a"],
+    head: `  <meta property="og:title" content="${html(model.name)} | Paradigm">\n  <meta property="og:description" content="${html(`${model.name} is a reversible basketball uniform system composed by Paradigm for the whole roster.`)}">\n  <meta property="og:image" content="https://prdm.tw/assets/images/teamwear/campaign/hero-desktop.webp">\n  <meta property="og:type" content="website">`,
     primaryActionDockId: actionId
   });
 }
@@ -244,6 +253,23 @@ function renderTeamwearCustomize(template, model, colorById, instagramUrl) {
     selectedValue: selectedPattern.id,
     primaryActionId: actionId,
     options: model.patterns.map((pattern) => ({ id: pattern.id, label: pattern.name, availability: pattern.availability }))
+  });
+  const selectedQuantity = model.quantities.find((quantity) => quantity.id === "Q03") || model.quantities.at(-1);
+  const quantities = renderChoiceGroup({
+    kind: "chip",
+    title: "Quantity",
+    inputName: "teamwear-quantity",
+    selectedValue: selectedQuantity.id,
+    primaryActionId: actionId,
+    options: model.quantities.map((quantity) => ({ id: quantity.id, label: quantity.label, availability: quantity.availability }))
+  });
+  const addOns = renderChoiceGroup({
+    kind: "chip",
+    variant: "add-on",
+    title: "Add-on",
+    inputName: "teamwear-add-on",
+    primaryActionId: actionId,
+    options: model.addOns.map((addOn) => ({ id: addOn.id, label: addOn.name, selected: false, availability: addOn.availability }))
   });
   const primaryAction = renderPrimaryAction({
     id: actionId,
@@ -270,22 +296,24 @@ function renderTeamwearCustomize(template, model, colorById, instagramUrl) {
     PAGE_HEADLINE: pageHeadline.split("\n").map((line) => `  ${line}`).join("\n"),
     MODEL_CODE: html(model.code),
     MODEL_NAME: html(model.name),
-    INITIAL_CODE: html(`${model.code}-${selectedPattern.id}-${selectedColor.id}`),
+    PRICE: renderProductDetailPrice({ price: priceLabel(model.price), dataAttribute: "data-teamwear-price" }),
     COLOR_CHOICES: colors.split("\n").map((line) => `          ${line}`).join("\n"),
     PATTERN_CHOICES: patterns.split("\n").map((line) => `          ${line}`).join("\n"),
+    QUANTITY_CHOICES: quantities.split("\n").map((line) => `          ${line}`).join("\n"),
+    ADD_ON_CHOICES: addOns.split("\n").map((line) => `          ${line}`).join("\n"),
     PRIMARY_ACTION: primaryAction.split("\n").map((line) => `        ${line}`).join("\n"),
     DESCRIPTION: description.split("\n").map((line) => `          ${line}`).join("\n")
   });
   return renderDocument({
     title: `Build ${model.name} | Paradigm Teamwear`,
-    description: "Preview Basketball 01 in three patterns and seven colors, with Home and Road sides shown together.",
+    description: `Preview ${model.name} in three patterns and seven colors, with Home and Road sides shown together.`,
     canonical: "https://prdm.tw/teamwear/customize",
     root: "../..",
     currentPath: "/teamwear/customize",
     bodyClass: "site-shell reference-page reference-page--detail teamwear-customize-page",
     main,
     styles: ["teamwear.css?v=20260821a"],
-    scripts: ["teamwear-options.js", "teamwear.js?v=20260821b"]
+    scripts: ["teamwear-options.js?v=20260828a", "teamwear.js?v=20260829a"]
   });
 }
 
@@ -307,7 +335,8 @@ const products = source.products.filter((entry) => entry.variants.some((variant)
     if (!color) throw new Error(`Missing canonical color definition for "${label}".`);
     return { id: color.id, colorId: color.id, label: color.name };
   });
-  const localImages = (entry.localImages || []).filter(Boolean);
+  const media = resolveProductMedia(entry);
+  const localImages = media.map((image) => image.src);
   const descriptionSource = normalizeDescriptionSource({
     type: "google-doc",
     content: entry.document?.content || "",
@@ -322,6 +351,7 @@ const products = source.products.filter((entry) => entry.variants.some((variant)
     price: priceLabel(entry.price),
     image: localImages[0] || null,
     images: localImages,
+    media,
     imageSource: localImages.length ? entry.imageSource : "blank",
     alt: localImages.length ? `${entry.title} product image` : "",
     colors,

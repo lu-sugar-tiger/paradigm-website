@@ -14,6 +14,12 @@ window.PARADIGM_CATALOG = {
       "images": [
         "assets/images/products/everyday-tee.webp"
       ],
+      "media": [
+        {
+          "src": "assets/images/products/everyday-tee.webp",
+          "derivatives": []
+        }
+      ],
       "imageSource": "preserved-existing",
       "alt": "PRDM Everyday Tee product image",
       "colors": [
@@ -334,6 +340,7 @@ window.PARADIGM_CATALOG = {
       "price": "NT$990",
       "image": null,
       "images": [],
+      "media": [],
       "imageSource": "blank",
       "alt": "",
       "colors": [
@@ -613,6 +620,7 @@ window.PARADIGM_CATALOG = {
       "price": "NT$1,180",
       "image": null,
       "images": [],
+      "media": [],
       "imageSource": "blank",
       "alt": "",
       "colors": [
@@ -885,6 +893,7 @@ window.PARADIGM_CATALOG = {
       "price": "NT$790",
       "image": null,
       "images": [],
+      "media": [],
       "imageSource": "blank",
       "alt": "",
       "colors": [
@@ -1220,6 +1229,12 @@ window.PARADIGM_CATALOG = {
       "images": [
         "assets/images/products/aesthetics-tee.webp"
       ],
+      "media": [
+        {
+          "src": "assets/images/products/aesthetics-tee.webp",
+          "derivatives": []
+        }
+      ],
       "imageSource": "preserved-existing",
       "alt": "PRDM Aesthetics Tee product image",
       "colors": [
@@ -1508,6 +1523,7 @@ window.PARADIGM_CATALOG = {
       "price": "NT$790",
       "image": null,
       "images": [],
+      "media": [],
       "imageSource": "blank",
       "alt": "",
       "colors": [
@@ -1797,6 +1813,12 @@ window.PARADIGM_CATALOG = {
       "image": "assets/images/products/partnership-football-jersey.webp",
       "images": [
         "assets/images/products/partnership-football-jersey.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/products/partnership-football-jersey.webp",
+          "derivatives": []
+        }
       ],
       "imageSource": "preserved-existing",
       "alt": "PRDM Partnership Football Jersey product image",
@@ -2110,6 +2132,7 @@ window.PARADIGM_CATALOG = {
       "price": "NT$990",
       "image": null,
       "images": [],
+      "media": [],
       "imageSource": "blank",
       "alt": "",
       "colors": [
@@ -2436,6 +2459,7 @@ window.PARADIGM_CATALOG = {
       "price": "NT$1,180",
       "image": null,
       "images": [],
+      "media": [],
       "imageSource": "blank",
       "alt": "",
       "colors": [
@@ -2728,6 +2752,12 @@ window.PARADIGM_CATALOG = {
       "images": [
         "assets/images/products/paradigm-hoodie.webp"
       ],
+      "media": [
+        {
+          "src": "assets/images/products/paradigm-hoodie.webp",
+          "derivatives": []
+        }
+      ],
       "imageSource": "preserved-existing",
       "alt": "PRDM Paradigm Hoodie product image",
       "colors": [
@@ -2998,6 +3028,7 @@ window.PARADIGM_CATALOG = {
       "price": "NT$1,180",
       "image": null,
       "images": [],
+      "media": [],
       "imageSource": "blank",
       "alt": "",
       "colors": [
@@ -3252,6 +3283,7 @@ window.PARADIGM_CATALOG = {
       "price": "NT$1,380",
       "image": null,
       "images": [],
+      "media": [],
       "imageSource": "blank",
       "alt": "",
       "colors": [
@@ -3520,6 +3552,12 @@ window.PARADIGM_CATALOG = {
       "images": [
         "assets/images/products/timeless-crewneck.webp"
       ],
+      "media": [
+        {
+          "src": "assets/images/products/timeless-crewneck.webp",
+          "derivatives": []
+        }
+      ],
       "imageSource": "preserved-existing",
       "alt": "PRDM Timeless Crewneck product image",
       "colors": [
@@ -3782,6 +3820,7 @@ window.PARADIGM_CATALOG = {
       "price": "NT$1,380",
       "image": null,
       "images": [],
+      "media": [],
       "imageSource": "blank",
       "alt": "",
       "colors": [
@@ -4057,6 +4096,12 @@ window.PARADIGM_CATALOG = {
       "image": "assets/images/products/intelligence-hoodie.webp",
       "images": [
         "assets/images/products/intelligence-hoodie.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/products/intelligence-hoodie.webp",
+          "derivatives": []
+        }
       ],
       "imageSource": "preserved-existing",
       "alt": "PRDM Intelligence Hoodie product image",
@@ -4351,6 +4396,36 @@ window.PARADIGM_CATALOG = {
         "assets/images/products/BD24021/cosmos-hoodie-05.webp",
         "assets/images/products/BD24021/cosmos-hoodie-06.webp",
         "assets/images/products/BD24021/cosmos-hoodie-07.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/products/BD24021/cosmos-hoodie-01.webp",
+          "derivatives": []
+        },
+        {
+          "src": "assets/images/products/BD24021/cosmos-hoodie-02.webp",
+          "derivatives": []
+        },
+        {
+          "src": "assets/images/products/BD24021/cosmos-hoodie-03.webp",
+          "derivatives": []
+        },
+        {
+          "src": "assets/images/products/BD24021/cosmos-hoodie-04.webp",
+          "derivatives": []
+        },
+        {
+          "src": "assets/images/products/BD24021/cosmos-hoodie-05.webp",
+          "derivatives": []
+        },
+        {
+          "src": "assets/images/products/BD24021/cosmos-hoodie-06.webp",
+          "derivatives": []
+        },
+        {
+          "src": "assets/images/products/BD24021/cosmos-hoodie-07.webp",
+          "derivatives": []
+        }
       ],
       "imageSource": "preserved-existing",
       "alt": "PRDM Cosmos Hoodie product image",
@@ -4660,6 +4735,12 @@ window.PARADIGM_CATALOG = {
       "images": [
         "assets/images/products/training-shorts.webp"
       ],
+      "media": [
+        {
+          "src": "assets/images/products/training-shorts.webp",
+          "derivatives": []
+        }
+      ],
       "imageSource": "preserved-existing",
       "alt": "PRDM Training Shorts product image",
       "colors": [
@@ -4942,6 +5023,12 @@ window.PARADIGM_CATALOG = {
       "images": [
         "assets/images/products/training-shorts.webp"
       ],
+      "media": [
+        {
+          "src": "assets/images/products/training-shorts.webp",
+          "derivatives": []
+        }
+      ],
       "imageSource": "preserved-existing",
       "alt": "PRDM Training Shorts product image",
       "colors": [
@@ -5220,16 +5307,218 @@ window.PARADIGM_CATALOG = {
       "title": "PRDM Everyday Tee",
       "category": "SS Tops",
       "price": "NT$590",
-      "image": "assets/images/products/ED14024/ed14024-00.webp",
+      "image": "assets/images/catalog/3a/3a4d8d1d4a54393c6092-1080x1080.webp",
       "images": [
-        "assets/images/products/ED14024/ed14024-00.webp",
-        "assets/images/products/ED14024/ed14024-01.webp",
-        "assets/images/products/ED14024/ed14024-02.webp",
-        "assets/images/products/ED14024/ed14024-03.webp",
-        "assets/images/products/ED14024/ed14024-04.webp",
-        "assets/images/products/ED14024/ed14024-05.webp",
-        "assets/images/products/ED14024/ed14024-06.webp",
-        "assets/images/products/ED14024/ed14024-07.webp"
+        "assets/images/catalog/3a/3a4d8d1d4a54393c6092-1080x1080.webp",
+        "assets/images/catalog/70/70566208856c2c68c30c-1080x1080.webp",
+        "assets/images/catalog/e2/e22643b06723b8f8a169-1080x1080.webp",
+        "assets/images/catalog/9c/9cfb7703b233a921b4bb-1080x1080.webp",
+        "assets/images/catalog/5d/5dd7819a937d00bcd96e-1080x1080.webp",
+        "assets/images/catalog/61/6138a65fc291952f6a74-1080x1080.webp",
+        "assets/images/catalog/3f/3f527c007953a17ff7b7-1080x1080.webp",
+        "assets/images/catalog/15/15cb30e5221fe14a3c92-1080x1080.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/catalog/3a/3a4d8d1d4a54393c6092-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/59/599a22252cda2eb00f2a-540x540.webp"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/3a/3a4d8d1d4a54393c6092-1080x1080.webp"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/93/939986dd5d2f15917d01-2160x2160.webp"
+            }
+          ]
+        },
+        {
+          "src": "assets/images/catalog/70/70566208856c2c68c30c-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/cf/cf28872f5d852494e65e-540x540.webp"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/70/70566208856c2c68c30c-1080x1080.webp"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/70/7010ebbbc217325b5ba3-2160x2160.webp"
+            }
+          ]
+        },
+        {
+          "src": "assets/images/catalog/e2/e22643b06723b8f8a169-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/fb/fbd382d61f25a81535ce-540x540.webp"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/e2/e22643b06723b8f8a169-1080x1080.webp"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/32/32fac39b1b5b4b1bd18b-2160x2160.webp"
+            }
+          ]
+        },
+        {
+          "src": "assets/images/catalog/9c/9cfb7703b233a921b4bb-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/0d/0d87e6a2fd07a8877f8e-540x540.webp"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/9c/9cfb7703b233a921b4bb-1080x1080.webp"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/5d/5dafa859cf648cb90bde-2160x2160.webp"
+            }
+          ]
+        },
+        {
+          "src": "assets/images/catalog/5d/5dd7819a937d00bcd96e-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/27/27d2ec1cc45f4fae1360-540x540.webp"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/5d/5dd7819a937d00bcd96e-1080x1080.webp"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/c2/c2d5e536d38b7098b4bf-2160x2160.webp"
+            }
+          ]
+        },
+        {
+          "src": "assets/images/catalog/61/6138a65fc291952f6a74-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/e1/e1c33843c425b505fb17-540x540.webp"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/61/6138a65fc291952f6a74-1080x1080.webp"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/d1/d19ebf1e08588f4c7315-2160x2160.webp"
+            }
+          ]
+        },
+        {
+          "src": "assets/images/catalog/3f/3f527c007953a17ff7b7-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/51/5150b7359cb23e02a435-540x540.webp"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/3f/3f527c007953a17ff7b7-1080x1080.webp"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/f4/f47ffc6561105f773458-2160x2160.webp"
+            }
+          ]
+        },
+        {
+          "src": "assets/images/catalog/15/15cb30e5221fe14a3c92-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/20/20f29a15ed7d08f866f9-540x540.webp"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/15/15cb30e5221fe14a3c92-1080x1080.webp"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/65/652219a666c56a07d134-2160x2160.webp"
+            }
+          ]
+        }
       ],
       "imageSource": "sheet",
       "alt": "PRDM Everyday Tee product image",

@@ -11,6 +11,21 @@
   color: var(--color-on-background-high);
 }
 
+.teamwear-story-shell .site-header {
+  transition:
+    transform var(--motion-duration-medium) var(--motion-ease-editorial),
+    visibility 0s linear 0s;
+}
+
+.teamwear-story-shell.has-floating-primary-action .site-header {
+  visibility: hidden;
+  transform: translateY(-100%);
+  pointer-events: none;
+  transition:
+    transform var(--motion-duration-medium) var(--motion-ease-editorial),
+    visibility 0s linear var(--motion-duration-medium);
+}
+
 .teamwear-story-page :where(h1, h2, h3, h5, p, blockquote) {
   margin: 0 0 var(--type-paragraph-spacing-standard);
 }
@@ -69,43 +84,52 @@
 }
 
 .teamwear-rail-button {
+  --teamwear-rail-chevron-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cmask id='cut' maskUnits='userSpaceOnUse' x='0' y='0' width='32' height='32'%3E%3Crect width='32' height='32' fill='white'/%3E%3Csvg x='4' y='4' width='24' height='24' viewBox='0 -960 960 960'%3E%3Cpath d='M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z' fill='black'/%3E%3C/svg%3E%3C/mask%3E%3Crect width='32' height='32' fill='white' mask='url(%23cut)'/%3E%3C/svg%3E");
+  position: relative;
   display: inline-grid;
-  width: var(--control-size-large);
-  height: var(--control-size-large);
+  width: var(--space-7);
+  height: var(--space-7);
   padding: 0;
   place-items: center;
-  border: 1px solid var(--color-outline-low);
-  border-radius: var(--radius-none);
-  background: var(--color-surface-high);
-  color: var(--color-on-surface-high);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  box-shadow: none;
   cursor: pointer;
-  transition: background-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast);
+}
+
+.teamwear-rail-button::before {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--color-container-low);
+  content: "";
+  -webkit-mask: var(--teamwear-rail-chevron-mask) center / 100% 100% no-repeat;
+  mask: var(--teamwear-rail-chevron-mask) center / 100% 100% no-repeat;
 }
 
 .teamwear-rail-button .material-icon {
   width: var(--icon-size);
   height: var(--icon-size);
+  opacity: 0;
   font-size: var(--icon-size);
 }
 
-.teamwear-rail-button--previous .material-icon {
-  transform: rotate(180deg);
+.teamwear-rail-button--previous {
+  --teamwear-rail-chevron-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cmask id='cut' maskUnits='userSpaceOnUse' x='0' y='0' width='32' height='32'%3E%3Crect width='32' height='32' fill='white'/%3E%3Csvg x='4' y='4' width='24' height='24' viewBox='0 -960 960 960'%3E%3Cpath d='M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z' fill='black'/%3E%3C/svg%3E%3C/mask%3E%3Crect width='32' height='32' fill='white' mask='url(%23cut)'/%3E%3C/svg%3E");
 }
 
 .teamwear-rail-button:disabled {
-  opacity: .32;
   cursor: default;
+}
+
+.teamwear-rail-button[hidden] {
+  display: none;
 }
 
 .teamwear-rail-button:focus-visible {
   outline: var(--focus-ring-width) solid var(--color-outline-high);
   outline-offset: var(--focus-ring-offset);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .teamwear-rail-button:not(:disabled):hover {
-    background: var(--color-surface-low);
-  }
 }
 
 .teamwear-section-heading > div > p,
@@ -132,11 +156,19 @@
   transform: none;
 }
 
+.teamwear-story-page.reveal-ready .teamwear-highlights__rail > [data-section-reveal],
+.teamwear-story-page.reveal-ready .teamwear-colorway__rail > [data-section-reveal],
+.teamwear-story-page.reveal-ready .teamwear-gallery__rail > [data-section-reveal] {
+  transform: none;
+}
+
 /* Hero section */
 
 .teamwear-story-page .teamwear-hero {
   position: relative;
+  width: min(100%, var(--layout-canvas-width));
   min-height: max(42rem, calc(92svh - var(--header-height)));
+  margin-inline: auto;
   padding: 0;
   overflow: hidden;
   background: var(--color-container-high);
@@ -222,6 +254,12 @@
 
 /* Horizontal card rails */
 
+.teamwear-highlights__viewport,
+.teamwear-colorway__viewport,
+.teamwear-gallery__viewport {
+  position: relative;
+}
+
 .teamwear-highlights,
 .teamwear-colorways,
 .teamwear-process,
@@ -248,8 +286,8 @@
   align-items: stretch;
   gap: var(--space-2);
   overflow-x: auto;
-  padding: 0 max(var(--layout-gutter-inline), calc((100vw - var(--content-width)) / 2));
-  scroll-padding-inline: max(var(--layout-gutter-inline), calc((100vw - var(--content-width)) / 2));
+  padding: 0 var(--teamwear-content-edge);
+  scroll-padding-inline: var(--teamwear-content-edge);
   scroll-snap-type: none;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -381,6 +419,15 @@
   background: var(--color-surface-high);
 }
 
+.teamwear-process__layout {
+  display: grid;
+  gap: var(--layout-section-content-gap);
+}
+
+.teamwear-process__layout .teamwear-section-heading {
+  margin-bottom: 0;
+}
+
 .teamwear-stacked-list {
   border-top: 1px solid var(--color-outline-low);
 }
@@ -395,7 +442,7 @@
   grid-template-columns: minmax(0, 1fr) var(--control-size-large);
   align-items: center;
   gap: var(--space-6);
-  padding-block: var(--space-4);
+  padding-block: var(--space-6);
   border-bottom: 1px solid var(--color-outline-low);
 }
 
@@ -460,9 +507,10 @@
 .teamwear-material__media {
   position: static;
   top: auto;
-  width: 100%;
+  width: min(100%, var(--layout-canvas-width));
   aspect-ratio: 16 / 9;
   max-height: none;
+  margin-inline: auto;
   overflow: hidden;
   border-radius: 0;
   background: var(--color-surface-low);
@@ -531,7 +579,7 @@
 }
 
 .teamwear-story-page .teamwear-faq details[open] {
-  padding-bottom: var(--space-4);
+  padding-bottom: var(--space-6);
 }
 
 .teamwear-story-page .teamwear-faq summary {
@@ -540,7 +588,7 @@
   grid-template-columns: minmax(0, 1fr) var(--icon-size-small);
   align-items: center;
   gap: var(--space-6);
-  padding: var(--space-4) 0;
+  padding: var(--space-6) 0;
   list-style: none;
   font-size: var(--type-h5-size);
   --font-weight-base: var(--type-h5-weight);
@@ -615,17 +663,22 @@
 
 @media (min-width: 48rem) {
   .teamwear-story-page {
-    --teamwear-card-width: calc(100vw / 3);
+    --teamwear-card-width: min(
+      calc(100vw / 3),
+      calc(var(--layout-canvas-width) / 3)
+    );
   }
 }
 
 @media (min-width: 64rem) {
-  .teamwear-highlights__header,
-  .teamwear-section-heading {
-    grid-template-columns: minmax(10rem, .38fr) minmax(0, 1.62fr);
-    align-items: end;
-    column-gap: var(--space-9);
-    row-gap: 0;
+  .teamwear-process__layout {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    align-items: start;
+    gap: 0;
+  }
+
+  .teamwear-process__layout > .teamwear-section-heading {
+    padding-inline-end: var(--space-9);
   }
 
   .teamwear-pattern-picker .choice-group__layout {
@@ -668,31 +721,44 @@
   }
 
   .teamwear-story-page .teamwear-faq__layout {
-    grid-template-columns: minmax(14rem, .55fr) minmax(0, 1.45fr);
-    gap: var(--space-9);
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: 0;
   }
 
-  .teamwear-section-heading__content {
-    grid-template-columns: minmax(0, 1fr) auto;
-    column-gap: var(--space-7);
-  }
-
-  .teamwear-section-heading__content > .teamwear-section-heading__copy {
-    grid-column: 1;
-    grid-row: 1;
+  .teamwear-story-page .teamwear-faq__heading {
+    padding-inline-end: var(--space-9);
   }
 
   .teamwear-rail-controls {
-    display: flex;
+    position: absolute;
+    z-index: 2;
+    inset: 0 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    box-sizing: border-box;
+    height: var(--teamwear-card-width);
+    padding-inline: var(--layout-shell-gutter-inline);
+    pointer-events: none;
+  }
+
+  .teamwear-rail-button {
+    pointer-events: auto;
+  }
+
+  .teamwear-rail-button--previous {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  .teamwear-rail-button:not(.teamwear-rail-button--previous) {
     grid-column: 2;
-    grid-row: 1;
-    align-self: end;
     justify-self: end;
-    gap: var(--space-3);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .teamwear-story-shell .site-header,
   .teamwear-hero__media img,
   .teamwear-hero__content,
   .teamwear-highlight-card .teamwear-rail-card__media img,
@@ -700,7 +766,6 @@
   .teamwear-gallery-card .teamwear-rail-card__media img,
   .teamwear-story-page .teamwear-faq summary i::before,
   .teamwear-story-page .teamwear-faq summary i::after,
-  .teamwear-rail-button,
   .teamwear-story-page.reveal-ready [data-section-reveal] {
     transition: none;
   }

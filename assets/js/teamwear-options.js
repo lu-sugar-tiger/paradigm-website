@@ -5,7 +5,36 @@ window.PARADIGM_TEAMWEAR = {
     {
       "id": "basketball-01",
       "code": "B01",
-      "name": "Basketball 01",
+      "name": "PE Basketball Teamwear",
+      "price": 1580,
+      "quantities": [
+        {
+          "id": "Q01",
+          "label": "<10",
+          "priceAdjustment": 200,
+          "availability": "available"
+        },
+        {
+          "id": "Q02",
+          "label": "10~19",
+          "priceAdjustment": 100,
+          "availability": "available"
+        },
+        {
+          "id": "Q03",
+          "label": ">19",
+          "priceAdjustment": 0,
+          "availability": "available"
+        }
+      ],
+      "addOns": [
+        {
+          "id": "A01",
+          "name": "Front Pockets",
+          "priceAdjustment": 200,
+          "availability": "available"
+        }
+      ],
       "descriptionSource": {
         "type": "local",
         "content": "• Reversible jersey and shorts for a complete roster\n• Three established patterns with seven Road colors\n• Team marks, names, numbers, sizing, and quantity confirmed after inquiry\n\n-\n\nChoose a pattern and Road color here. Paradigm will confirm the full roster, artwork, price, and production timing with your team through Instagram.\n\n#B01\n"

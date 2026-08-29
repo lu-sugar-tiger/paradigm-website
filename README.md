@@ -119,7 +119,7 @@ python -m http.server 8000
 
 - `productNumber`：網址與資料查找使用的商品編號，不含 `#`
 - `title`、`category`、`price`：商品基本資料
-- `image`、`images`、`alt`：商品圖片與替代文字；沒有真實圖片時 `image` 為 `null`、`images` 為空陣列
+- `image`、`images`、`media`、`alt`：商品圖片與替代文字；`media[].derivatives` 提供 540、1080、2160 短邊的 content-addressed WebP 與 `srcset` 資料；沒有真實圖片時 `image` 為 `null`、`images` 與 `media` 為空陣列
 - `colors`、`sizes`、`variants`：款式與尺寸資料；`sku` 可以保留於資料但不顯示在網站
 - `copy`：普通文字與空白段落依來源順序保留；空白段落以可選取的 `U+000A` 表示，單獨破折號只轉成單行水平線，已確認的矩形尺寸資料轉為無格線表格
 - `shopeeUrl`：外部 Shopee 商品連結

@@ -4,21 +4,23 @@
   <section class="product-detail">
     <div class="container">
       <div class="product-detail__panel">
-        <div class="product-detail__gallery" data-builder-preview aria-label="Basketball 01 images">
+        <div class="product-detail__gallery" data-builder-preview aria-label="{{MODEL_NAME}} images">
           <img src="../../assets/images/teamwear/teamwear-court-action.webp" alt="Basketball team wearing Paradigm Teamwear during a night game" width="1800" height="1800">
-          <img src="../../assets/images/teamwear/teamwear-court-road.webp" alt="Player wearing the Road side of Paradigm Basketball 01" width="1100" height="1100" loading="lazy">
-          <img src="../../assets/images/teamwear/teamwear-court-home.webp" alt="Players wearing the Home side of Paradigm Basketball 01" width="1100" height="1100" loading="lazy">
+          <img src="../../assets/images/teamwear/teamwear-court-road.webp" alt="Player wearing the Road side of Paradigm {{MODEL_NAME}}" width="1100" height="1100" loading="lazy">
+          <img src="../../assets/images/teamwear/teamwear-court-home.webp" alt="Players wearing the Home side of Paradigm {{MODEL_NAME}}" width="1100" height="1100" loading="lazy">
         </div>
 
         <article class="product-detail__summary" data-teamwear-form data-teamwear-model="{{MODEL_CODE}}" data-notification-title="{{MODEL_NAME}}">
           <div class="product-detail__header">
             <div><h1 id="builder-title">{{MODEL_NAME}}</h1></div>
-            <p class="product-detail__price" data-summary-code>{{INITIAL_CODE}}</p>
+            {{PRICE}}
           </div>
 
           <div class="stack-md">
 {{COLOR_CHOICES}}
 {{PATTERN_CHOICES}}
+{{QUANTITY_CHOICES}}
+{{ADD_ON_CHOICES}}
           </div>
 
 {{PRIMARY_ACTION}}

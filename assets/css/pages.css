@@ -35,6 +35,10 @@
   padding-block: 0;
 }
 
+.reference-page--detail .product-feed-section {
+  margin-top: var(--space-1);
+}
+
 .reference-page--detail .section-heading__eyebrow {
   font-size: 12px;
   line-height: 16px;
