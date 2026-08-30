@@ -123,6 +123,17 @@ Avoid unnecessary URL changes once pages are published.
 - Match supplied Paradigm designs and assets closely
 - Do not invent major visual directions without approval
 
+# Design-system-first workflow
+
+Before designing or implementing any new interface:
+
+1. Inspect the existing design tokens, shared components, generated renderers, and comparable page patterns.
+2. Prefer reusing an existing component, element, style, or behavior unchanged.
+3. If direct reuse is unsuitable, adapt or combine existing patterns using the established semantic tokens and responsive system.
+4. Introduce a new pattern only when existing patterns cannot reasonably satisfy the requirement.
+5. Clearly identify and justify any genuinely new component, token, style, or behavior before implementing it.
+6. Do not create page-local duplicates or arbitrary visual values when a shared equivalent exists.
+
 # Icon and generated-image policy
 
 - Use Google Material Symbols for interface icons.

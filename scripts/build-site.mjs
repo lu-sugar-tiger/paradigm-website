@@ -42,6 +42,25 @@ function categoryPath(category) {
   return category.toLowerCase().replace(" ", "-");
 }
 
+function productType(title) {
+  return title.match(/(Football Jersey|Crewneck|Hoodie|Shorts|Tee)$/i)?.[1] || "Apparel";
+}
+
+function productFamily(title) {
+  const type = productType(title);
+  return title.replace(/^PRDM\s+/i, "").replace(new RegExp(`\\s+${type}$`, "i"), "").trim();
+}
+
+function uniqueLabels(values) {
+  const seen = new Set();
+  return values.filter((value) => {
+    const key = String(value || "").trim().toLowerCase();
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
 function applyTemplate(template, values) {
   return Object.entries(values).reduce((result, [key, value]) => result.replaceAll(`{{${key}}}`, value), template);
 }
@@ -165,6 +184,90 @@ ${renderProductGrid(filtered, root).split("\n").map((line) => `      ${line}`).j
   });
 }
 
+function renderSearchPage() {
+  const pageHeadline = renderPageHeadline({
+    root: "..",
+    breadcrumb: {
+      variant: "hierarchy",
+      items: [{ label: "Search", current: true, headingLevel: 1, dataAttribute: "data-search-page-title" }]
+    }
+  });
+  const main = `  <main class="page search-page__main" id="main-content">
+${pageHeadline.split("\n").map((line) => `    ${line}`).join("\n")}
+    <section class="search-page__results" aria-label="Search results">
+      <p class="visually-hidden" aria-live="polite" data-search-page-status></p>
+      <div class="container search-results search-results--page" aria-busy="true" data-search-page-results>
+        <p class="search-status-row">Loading search…</p>
+        <noscript><p class="noscript-note">JavaScript is required to search the Paradigm catalog.</p></noscript>
+      </div>
+    </section>
+  </main>`;
+  return renderDocument({
+    lang: "en",
+    title: "Paradigm | Search",
+    description: "Search Paradigm pages and products.",
+    canonical: "https://prdm.tw/search",
+    root: "..",
+    currentPath: "/search",
+    bodyClass: "site-shell reference-page search-page",
+    main,
+    head: '  <meta name="robots" content="noindex,follow">'
+  });
+}
+
+function buildSearchIndex(searchConfig, products) {
+  if (searchConfig.schemaVersion !== 1) throw new Error("Unsupported search data schema.");
+  if (!Array.isArray(searchConfig.popularKeywords) || searchConfig.popularKeywords.length === 0) {
+    throw new Error("Search data requires popular keywords.");
+  }
+  if (!Array.isArray(searchConfig.pages) || searchConfig.pages.length === 0) {
+    throw new Error("Search data requires canonical pages.");
+  }
+  if (searchConfig.pages.some((page) => typeof page.interfaceLabel !== "boolean")) {
+    throw new Error("Every Search page requires an explicit interface-label casing contract.");
+  }
+
+  const pages = searchConfig.pages.map((page) => ({
+    title: page.title,
+    interfaceLabel: Boolean(page.interfaceLabel),
+    url: page.url,
+    summary: page.summary,
+    keywords: page.keywords,
+    external: Boolean(page.external),
+    searchTerms: [page.title, page.summary, ...page.keywords]
+  }));
+  const searchProducts = products.map((product) => {
+    const type = productType(product.title);
+    const family = productFamily(product.title);
+    const colors = product.colors.map((color) => color.label);
+    return {
+      productNumber: product.productNumber,
+      title: product.title,
+      category: product.category,
+      colors,
+      productType: type,
+      family,
+      price: product.price,
+      url: `/products/${product.productNumber}`,
+      media: product.media[0] || null,
+      alt: product.alt,
+      searchTerms: [product.title, product.productNumber, product.category, ...colors, type, family]
+    };
+  });
+  const vocabulary = uniqueLabels([
+    ...searchConfig.popularKeywords,
+    ...pages.flatMap((page) => [page.title, ...page.keywords]),
+    ...searchProducts.flatMap((product) => [product.family, product.productType, product.category, ...product.colors])
+  ]);
+  return {
+    schemaVersion: 1,
+    popularKeywords: searchConfig.popularKeywords,
+    vocabulary,
+    pages,
+    products: searchProducts
+  };
+}
+
 function renderColorOptionsCss(colors) {
   const variables = colors.map((color) => `  --color-option-${color.id}: ${color.value};`).join("\n");
   const classes = colors.map((color) => `.choice-option--color-${color.id},\n.teamwear-colorway--${color.id} {\n  --choice-color: var(--color-option-${color.id});\n}`).join("\n\n");
@@ -199,6 +302,7 @@ function renderTeamwearLanding(template, model, colorById, instagramUrl) {
     inputName: "landing-pattern",
     selectedValue: "P02",
     primaryActionId: actionId,
+    showLabel: false,
     options: model.patterns.map((pattern) => ({ id: pattern.id, label: pattern.name, availability: pattern.availability }))
   });
   const main = applyTemplate(template, {
@@ -227,10 +331,9 @@ function renderTeamwearLanding(template, model, colorById, instagramUrl) {
     currentPath: "/teamwear",
     bodyClass: "site-shell reference-page teamwear-page teamwear-story-shell",
     main,
-    styles: ["teamwear.css?v=20260821a", "teamwear-story.css?v=20260829b"],
-    scripts: ["teamwear-options.js?v=20260828a", "teamwear.js?v=20260829a"],
-    head: `  <meta property="og:title" content="${html(model.name)} | Paradigm">\n  <meta property="og:description" content="${html(`${model.name} is a reversible basketball uniform system composed by Paradigm for the whole roster.`)}">\n  <meta property="og:image" content="https://prdm.tw/assets/images/teamwear/campaign/hero-desktop.webp">\n  <meta property="og:type" content="website">`,
-    primaryActionDockId: actionId
+    styles: ["teamwear.css?v=20260829c", "teamwear-story.css?v=20260830a"],
+    scripts: ["teamwear-options.js?v=20260828a", "teamwear.js?v=20260830a"],
+    head: `  <meta property="og:title" content="${html(model.name)} | Paradigm">\n  <meta property="og:description" content="${html(`${model.name} is a reversible basketball uniform system composed by Paradigm for the whole roster.`)}">\n  <meta property="og:image" content="https://prdm.tw/assets/images/teamwear/campaign/hero-desktop.webp">\n  <meta property="og:type" content="website">`
   });
 }
 
@@ -266,7 +369,7 @@ function renderTeamwearCustomize(template, model, colorById, instagramUrl) {
   const addOns = renderChoiceGroup({
     kind: "chip",
     variant: "add-on",
-    title: "Add-on",
+    title: "Add-On",
     inputName: "teamwear-add-on",
     primaryActionId: actionId,
     options: model.addOns.map((addOn) => ({ id: addOn.id, label: addOn.name, selected: false, availability: addOn.availability }))
@@ -312,15 +415,16 @@ function renderTeamwearCustomize(template, model, colorById, instagramUrl) {
     currentPath: "/teamwear/customize",
     bodyClass: "site-shell reference-page reference-page--detail teamwear-customize-page",
     main,
-    styles: ["teamwear.css?v=20260821a"],
-    scripts: ["teamwear-options.js?v=20260828a", "teamwear.js?v=20260829a"]
+    styles: ["teamwear.css?v=20260829c"],
+    scripts: ["teamwear-options.js?v=20260828a", "teamwear.js?v=20260830a"]
   });
 }
 
-const [source, colorRegistry, teamwearData, productTemplate, teamwearTemplate, customizeTemplate] = await Promise.all([
+const [source, colorRegistry, teamwearData, searchConfig, productTemplate, teamwearTemplate, customizeTemplate] = await Promise.all([
   readJson("data/products-source.json"),
   readJson("data/colors.json"),
   readJson("data/teamwear-options.json"),
+  readJson("data/search.json"),
   readTemplate("product-page.html"),
   readTemplate("teamwear-page.html"),
   readTemplate("teamwear-customize.html")
@@ -374,6 +478,7 @@ const catalogBanner = `// Generated by scripts/build-site.mjs.\n// Source: ${sou
 outputs.set("assets/js/catalog.js", `${catalogBanner}window.PARADIGM_CATALOG = ${JSON.stringify({ products }, null, 2)};\n`);
 outputs.set("assets/js/teamwear-options.js", `// Generated by scripts/build-site.mjs from data/teamwear-options.json.\nwindow.PARADIGM_TEAMWEAR = ${JSON.stringify(teamwearData, null, 2)};\n`);
 outputs.set("assets/css/color-options.css", renderColorOptionsCss(colorRegistry.colors));
+outputs.set("assets/data/search-index.json", `${JSON.stringify(buildSearchIndex(searchConfig, products), null, 2)}\n`);
 
 const collectionPages = [
   { output: "index.html", title: "All", category: "all", pathName: "home", root: "" },
@@ -383,6 +488,7 @@ const collectionPages = [
   { output: "collections/bottoms/index.html", title: "Bottoms", category: "Bottoms", pathName: "bottoms", root: "../.." }
 ];
 collectionPages.forEach((page) => outputs.set(page.output, renderCollectionPage({ ...page, products })));
+outputs.set("search/index.html", renderSearchPage());
 
 products.forEach((product) => {
   const related = rankRelatedProducts(products, product);

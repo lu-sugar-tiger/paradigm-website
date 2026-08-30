@@ -36,7 +36,10 @@
     function updateControls() {
       const maximumScroll = Math.max(0, rail.scrollWidth - rail.clientWidth);
       const atStart = rail.scrollLeft <= 1;
-      const atEnd = maximumScroll <= 1 || rail.scrollLeft >= maximumScroll - 1;
+      const lastCard = rail.querySelector(".teamwear-rail-card:last-child");
+      const railRight = rail.getBoundingClientRect().right;
+      const lastCardRight = lastCard?.getBoundingClientRect().right || railRight;
+      const atEnd = maximumScroll <= 1 || lastCardRight <= railRight + 1;
       previousButton.disabled = atStart;
       previousButton.hidden = atStart;
       nextButton.disabled = atEnd;
@@ -88,34 +91,6 @@
 
   patternPicker?.addEventListener("change", updateColorwayRail);
   updateColorwayRail();
-
-  const faqList = document.querySelector(".teamwear-faq__list");
-  if (faqList) {
-    const faqItems = Array.from(faqList.querySelectorAll("details"));
-    const faqQuestions = faqItems.map((item) => item.querySelector("summary")).filter(Boolean);
-    let faqMeasureFrame = 0;
-
-    function measureClosedFaqQuestions() {
-      if (faqItems.some((item) => item.open)) return;
-      faqList.style.removeProperty("--teamwear-faq-question-height");
-      const tallestQuestion = Math.max(...faqQuestions.map((question) => question.getBoundingClientRect().height));
-      if (tallestQuestion > 0) {
-        faqList.style.setProperty("--teamwear-faq-question-height", `${Math.ceil(tallestQuestion)}px`);
-      }
-    }
-
-    function scheduleFaqMeasurement() {
-      window.cancelAnimationFrame(faqMeasureFrame);
-      faqMeasureFrame = window.requestAnimationFrame(measureClosedFaqQuestions);
-    }
-
-    faqItems.forEach((item) => item.addEventListener("toggle", () => {
-      if (!faqItems.some((candidate) => candidate.open)) scheduleFaqMeasurement();
-    }));
-    window.addEventListener("resize", scheduleFaqMeasurement, { passive: true });
-    document.fonts?.ready.then(scheduleFaqMeasurement);
-    scheduleFaqMeasurement();
-  }
 
   const form = document.querySelector("[data-teamwear-form]");
   if (!form || !model) return;

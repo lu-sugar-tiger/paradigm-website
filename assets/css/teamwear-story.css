@@ -5,25 +5,16 @@
 */
 
 .teamwear-story-page {
-  --teamwear-card-width: 50vw;
+  --teamwear-card-width: calc(
+    (min(100vw, var(--content-width)) - var(--space-2)) / 2
+  );
   overflow: clip;
   background: var(--color-background-mid);
   color: var(--color-on-background-high);
 }
 
 .teamwear-story-shell .site-header {
-  transition:
-    transform var(--motion-duration-medium) var(--motion-ease-editorial),
-    visibility 0s linear 0s;
-}
-
-.teamwear-story-shell.has-floating-primary-action .site-header {
-  visibility: hidden;
-  transform: translateY(-100%);
-  pointer-events: none;
-  transition:
-    transform var(--motion-duration-medium) var(--motion-ease-editorial),
-    visibility 0s linear var(--motion-duration-medium);
+  position: absolute;
 }
 
 .teamwear-story-page :where(h1, h2, h3, h5, p, blockquote) {
@@ -166,7 +157,7 @@
 
 .teamwear-story-page .teamwear-hero {
   position: relative;
-  width: min(100%, var(--layout-canvas-width));
+  width: 100%;
   min-height: max(42rem, calc(92svh - var(--header-height)));
   margin-inline: auto;
   padding: 0;
@@ -507,7 +498,7 @@
 .teamwear-material__media {
   position: static;
   top: auto;
-  width: min(100%, var(--layout-canvas-width));
+  width: 100%;
   aspect-ratio: 16 / 9;
   max-height: none;
   margin-inline: auto;
@@ -555,7 +546,7 @@
   color: var(--color-on-surface-high);
 }
 
-/* Stacked disclosure list */
+/* Static FAQ rows */
 
 .teamwear-story-page .teamwear-faq {
   background: var(--color-surface-high);
@@ -571,84 +562,18 @@
   color: var(--color-on-surface-high);
 }
 
-.teamwear-story-page .teamwear-faq details {
+.teamwear-story-page .teamwear-faq__item {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) var(--icon-size-small);
-  column-gap: var(--space-6);
+  grid-template-columns: minmax(0, 1fr);
+  padding: var(--space-6) 0;
   border-bottom: 1px solid var(--color-outline-low);
 }
 
-.teamwear-story-page .teamwear-faq details[open] {
-  padding-bottom: var(--space-6);
-}
-
-.teamwear-story-page .teamwear-faq summary {
-  display: grid;
-  grid-column: 1 / -1;
-  grid-template-columns: minmax(0, 1fr) var(--icon-size-small);
-  align-items: center;
-  gap: var(--space-6);
-  padding: var(--space-6) 0;
-  list-style: none;
-  font-size: var(--type-h5-size);
-  --font-weight-base: var(--type-h5-weight);
-  font-weight: var(--font-weight-base);
-  line-height: var(--type-h5-line-height);
+.teamwear-story-page .teamwear-faq__item h3 {
   color: var(--color-on-surface-high);
 }
 
-.teamwear-story-page .teamwear-faq details:not([open]) summary {
-  height: var(--teamwear-faq-question-height, auto);
-}
-
-.teamwear-story-page .teamwear-faq details[open] summary {
-  height: auto;
-  margin-bottom: var(--type-paragraph-spacing-standard);
-  padding-bottom: 0;
-}
-
-.teamwear-story-page .teamwear-faq summary::before,
-.teamwear-story-page .teamwear-faq summary::after {
-  content: none;
-}
-
-.teamwear-story-page .teamwear-faq summary::-webkit-details-marker {
-  display: none;
-}
-
-.teamwear-story-page .teamwear-faq summary i {
-  position: relative;
-  justify-self: end;
-  width: var(--icon-size-small);
-  height: var(--icon-size-small);
-  color: var(--color-on-surface-high);
-}
-
-.teamwear-story-page .teamwear-faq summary i::before,
-.teamwear-story-page .teamwear-faq summary i::after {
-  position: absolute;
-  inset: 50% auto auto 50%;
-  width: var(--icon-size-small);
-  height: 1px;
-  background: currentColor;
-  content: "";
-  transition: transform var(--motion-duration-medium) var(--motion-ease-editorial);
-}
-
-.teamwear-story-page .teamwear-faq summary i::before {
-  transform: translate(-50%, -50%);
-}
-
-.teamwear-story-page .teamwear-faq summary i::after {
-  transform: translate(-50%, -50%) rotate(90deg);
-}
-
-.teamwear-story-page .teamwear-faq details[open] summary i::after {
-  transform: translate(-50%, -50%) rotate(0deg);
-}
-
-.teamwear-story-page .teamwear-faq details > p {
-  grid-column: 1;
+.teamwear-story-page .teamwear-faq__item > p {
   max-width: 42rem;
   padding: 0;
   color: var(--color-on-surface-low);
@@ -663,9 +588,8 @@
 
 @media (min-width: 48rem) {
   .teamwear-story-page {
-    --teamwear-card-width: min(
-      calc(100vw / 3),
-      calc(var(--layout-canvas-width) / 3)
+    --teamwear-card-width: calc(
+      (min(100vw, var(--content-width)) - var(--space-2) - var(--space-2)) / 3
     );
   }
 }
@@ -679,24 +603,6 @@
 
   .teamwear-process__layout > .teamwear-section-heading {
     padding-inline-end: var(--space-9);
-  }
-
-  .teamwear-pattern-picker .choice-group__layout {
-    display: grid;
-    grid-template-columns: minmax(10rem, .38fr) minmax(0, 1.62fr);
-    align-items: center;
-    gap: var(--space-9);
-  }
-
-  .teamwear-pattern-picker .choice-group__options {
-    grid-column: 2;
-    grid-row: 1;
-    margin-top: 0;
-  }
-
-  .teamwear-pattern-picker .choice-group__label {
-    grid-column: 1;
-    grid-row: 1;
   }
 
   .teamwear-stacked-row__icon {
@@ -758,14 +664,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .teamwear-story-shell .site-header,
   .teamwear-hero__media img,
   .teamwear-hero__content,
   .teamwear-highlight-card .teamwear-rail-card__media img,
   .teamwear-colorway-card__media img,
   .teamwear-gallery-card .teamwear-rail-card__media img,
-  .teamwear-story-page .teamwear-faq summary i::before,
-  .teamwear-story-page .teamwear-faq summary i::after,
   .teamwear-story-page.reveal-ready [data-section-reveal] {
     transition: none;
   }

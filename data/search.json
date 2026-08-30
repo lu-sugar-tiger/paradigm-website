@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "popularKeywords": [
+    "Teamwear",
+    "Everyday",
+    "Paradigm",
+    "Hoodie",
+    "Tee"
+  ],
+  "pages": [
+    {
+      "title": "All Products",
+      "interfaceLabel": true,
+      "url": "/collections/all",
+      "summary": "Browse the complete Paradigm product catalog.",
+      "keywords": ["catalog", "all products", "clothing"]
+    },
+    {
+      "title": "SS Tops",
+      "interfaceLabel": true,
+      "url": "/collections/ss-tops",
+      "summary": "Explore Paradigm tees and football jerseys.",
+      "keywords": ["ss tops", "tee", "tees", "football jersey", "jersey", "tops"]
+    },
+    {
+      "title": "AW Tops",
+      "interfaceLabel": true,
+      "url": "/collections/aw-tops",
+      "summary": "Explore Paradigm crewnecks and hoodies.",
+      "keywords": ["aw tops", "crewneck", "crewnecks", "hoodie", "hoodies", "tops"]
+    },
+    {
+      "title": "Bottoms",
+      "interfaceLabel": true,
+      "url": "/collections/bottoms",
+      "summary": "Explore Paradigm shorts.",
+      "keywords": ["bottoms", "shorts", "training shorts"]
+    },
+    {
+      "title": "PE Basketball Teamwear",
+      "interfaceLabel": false,
+      "url": "/teamwear",
+      "summary": "Discover PE Basketball Teamwear for coordinated rosters.",
+      "keywords": ["teamwear", "basketball", "uniform", "uniforms", "team", "roster"]
+    },
+    {
+      "title": "Customize PE Basketball Teamwear",
+      "interfaceLabel": false,
+      "url": "/teamwear/customize",
+      "summary": "Choose the pattern, color, quantity, and add ons for PE Basketball Teamwear.",
+      "keywords": ["teamwear", "customize", "customise", "build", "pattern", "color", "quantity", "add on"]
+    },
+    {
+      "title": "Instagram",
+      "interfaceLabel": true,
+      "url": "https://www.instagram.com/prdm.tw/",
+      "summary": "Follow Paradigm on Instagram.",
+      "keywords": ["instagram", "social"],
+      "external": true
+    },
+    {
+      "title": "Shopee",
+      "interfaceLabel": true,
+      "url": "https://shopee.tw/",
+      "summary": "Shop Paradigm through Shopee.",
+      "keywords": ["shopee", "shop", "store"],
+      "external": true
+    }
+  ]
+}

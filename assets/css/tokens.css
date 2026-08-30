@@ -130,10 +130,16 @@
 
   --shadow-card: 0 20px 40px color-mix(in srgb, var(--color-outline-high) 8%, transparent);
 
-  --layout-canvas-width: 90rem;
   --content-width: 60rem;
   --content-narrow: 58rem;
-  --header-height: 6.25rem;
+  --safe-area-inset-top: env(safe-area-inset-top, 0px);
+  --safe-area-inset-left: env(safe-area-inset-left, 0px);
+  --safe-area-inset-right: env(safe-area-inset-right, 0px);
+  --header-bar-height: var(--space-9);
+  --header-height: calc(
+    var(--header-bar-height) +
+    var(--safe-area-inset-top)
+  );
   --header-control-gap: 0.625rem;
   --header-actions-width: calc(
     var(--icon-size) +
@@ -159,8 +165,8 @@
     var(--primary-action-content-clearance) +
     env(safe-area-inset-bottom, 0px)
   );
-  --primary-action-floating-bottom-gap: var(--space-7);
-  --primary-action-dock-clearance: calc(
+  --primary-action-floating-bottom-gap: var(--space-9);
+  --primary-action-floating-clearance: calc(
     var(--primary-action-content-clearance) +
     var(--primary-action-floating-bottom-gap)
   );
@@ -188,6 +194,5 @@
 @media (min-width: 64rem) {
   :root {
     --content-width: 80rem;
-    --header-height: 5rem;
   }
 }

@@ -1,6 +1,4 @@
 (function () {
-  const LARGE_QUERY = "(min-width: 64rem)";
-
   function checkedOption(group) {
     const input = group?.querySelector("input:checked");
     return input?.closest("[data-choice-option]") || null;
@@ -184,39 +182,16 @@
     document.dispatchEvent(new CustomEvent("paradigm:notification-copied", { detail: { text } }));
   }
 
-  function preserveFocusWhileMoving(action, mount) {
-    if (!mount || action.parentElement === mount) return;
-    const hadFocus = action.contains(document.activeElement);
-    mount.appendChild(action);
-    if (hadFocus) action.focus({ preventScroll: true });
-  }
-
   function mountController(action) {
     if (action.dataset.actionBehavior !== "fixed-to-float") return;
 
     const inlineMount = document.querySelector(`[data-primary-action-inline-mount="${CSS.escape(action.id)}"]`);
-    const dockMount = document.querySelector(`[data-primary-action-dock-mount="${CSS.escape(action.id)}"]`);
-    const footer = document.querySelector("[data-primary-action-footer-anchor]");
-    if (!inlineMount || !dockMount || !footer) return;
+    if (!inlineMount) return;
 
-    const largeQuery = window.matchMedia(LARGE_QUERY);
-    const controlsTeamwearHeader = document.body.classList.contains("teamwear-story-shell");
-    const siteHeader = controlsTeamwearHeader ? document.querySelector(".site-header") : null;
     let inlineAboveViewport = false;
-    let footerVisible = false;
 
     function updateMount() {
-      const isLarge = largeQuery.matches;
-      const shouldDock = isLarge && footerVisible;
-      const shouldFloat = !shouldDock && inlineAboveViewport;
-      action.classList.toggle("is-docked", shouldDock);
-      action.classList.toggle("is-floating", shouldFloat);
-      if (controlsTeamwearHeader) {
-        document.body.classList.toggle("has-floating-primary-action", shouldFloat);
-        siteHeader?.toggleAttribute("inert", shouldFloat);
-      }
-      if (shouldDock) preserveFocusWhileMoving(action, dockMount);
-      else preserveFocusWhileMoving(action, inlineMount);
+      action.classList.toggle("is-floating", inlineAboveViewport);
     }
 
     if ("IntersectionObserver" in window) {
@@ -227,15 +202,7 @@
         });
       }, { threshold: 0 });
       inlineObserver.observe(inlineMount);
-      const footerObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          footerVisible = entry.isIntersecting;
-          updateMount();
-        });
-      }, { threshold: 0 });
-      footerObserver.observe(footer);
     }
-    largeQuery.addEventListener("change", updateMount);
     updateMount();
   }
 

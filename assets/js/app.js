@@ -1,5 +1,5 @@
 (function () {
-  let lastFocusedElement = null;
+  let activeOverlay = null;
 
   document.documentElement.dataset.inputModality = "pointer";
   document.addEventListener("pointerdown", () => {
@@ -19,53 +19,55 @@
     document.querySelectorAll("main, footer").forEach((node) => node.toggleAttribute("inert", inert));
   }
 
-  function openDrawer(drawer, toggle) {
-    lastFocusedElement = document.activeElement;
-    document.body.style.setProperty("--scrollbar-compensation", `${window.innerWidth - document.documentElement.clientWidth}px`);
-    drawer.setAttribute("aria-hidden", "false");
-    toggle.setAttribute("aria-expanded", "true");
-    toggle.setAttribute("aria-label", "Close navigation");
-    const icon = toggle.querySelector(".material-icon");
-    if (icon) icon.textContent = toggle.dataset.navCloseSymbol;
-    document.body.classList.add("nav-open");
-    document.body.style.overflow = "hidden";
-    setPageInert(true);
-    toggle.focus();
-  }
+  function setupOverlay({ overlay, toggle, openClass, openLabel, closeLabel, openSymbol, closeSymbol, initialFocus }) {
+    if (!overlay || !toggle) return null;
+    let lastFocusedElement = null;
 
-  function closeDrawer(drawer, toggle) {
-    drawer.setAttribute("aria-hidden", "true");
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.setAttribute("aria-label", "Open navigation");
-    const icon = toggle.querySelector(".material-icon");
-    if (icon) icon.textContent = toggle.dataset.navOpenSymbol;
-    document.body.classList.remove("nav-open");
-    document.body.style.removeProperty("--scrollbar-compensation");
-    document.body.style.overflow = "";
-    setPageInert(false);
-    (lastFocusedElement || toggle).focus();
-  }
+    const controller = {
+      open() {
+        if (activeOverlay && activeOverlay !== controller) activeOverlay.close(false);
+        lastFocusedElement = document.activeElement;
+        overlay.setAttribute("aria-hidden", "false");
+        toggle.setAttribute("aria-expanded", "true");
+        toggle.setAttribute("aria-label", closeLabel);
+        const icon = toggle.querySelector(".material-icon");
+        if (icon) icon.textContent = closeSymbol;
+        document.body.classList.add(openClass);
+        document.body.style.overflow = "hidden";
+        setPageInert(true);
+        activeOverlay = controller;
+        overlay.dispatchEvent(new CustomEvent("paradigm:overlay-open", { bubbles: true }));
+        window.requestAnimationFrame(() => (initialFocus?.() || toggle).focus());
+      },
+      close(restoreFocus = true) {
+        overlay.setAttribute("aria-hidden", "true");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", openLabel);
+        const icon = toggle.querySelector(".material-icon");
+        if (icon) icon.textContent = openSymbol;
+        document.body.classList.remove(openClass);
+        document.body.style.overflow = "";
+        setPageInert(false);
+        if (activeOverlay === controller) activeOverlay = null;
+        if (restoreFocus) (lastFocusedElement || toggle).focus();
+      }
+    };
 
-  const drawer = document.querySelector("[data-nav-drawer]");
-  const toggle = document.querySelector("[data-nav-toggle]");
-  if (drawer && toggle) {
-    const close = document.querySelector("[data-nav-close]");
-    if (close) close.hidden = true;
     toggle.addEventListener("click", () => {
-      if (drawer.getAttribute("aria-hidden") === "false") closeDrawer(drawer, toggle);
-      else openDrawer(drawer, toggle);
+      if (overlay.getAttribute("aria-hidden") === "false") controller.close();
+      else controller.open();
     });
-    drawer.addEventListener("click", (event) => {
-      if (event.target === drawer) closeDrawer(drawer, toggle);
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay) controller.close();
     });
     document.addEventListener("keydown", (event) => {
-      if (drawer.getAttribute("aria-hidden") !== "false") return;
+      if (overlay.getAttribute("aria-hidden") !== "false") return;
       if (event.key === "Escape") {
-        closeDrawer(drawer, toggle);
+        controller.close();
         return;
       }
       if (event.key !== "Tab") return;
-      const focusable = [toggle, ...focusableNodes(drawer)];
+      const focusable = [toggle, ...focusableNodes(overlay)];
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
       if (event.shiftKey && document.activeElement === first) {
@@ -76,7 +78,36 @@
         first.focus();
       }
     });
+    return controller;
   }
+
+  const drawer = document.querySelector("[data-nav-drawer]");
+  const navToggle = document.querySelector("[data-nav-toggle]");
+  const navClose = document.querySelector("[data-nav-close]");
+  if (navClose) navClose.hidden = true;
+  setupOverlay({
+    overlay: drawer,
+    toggle: navToggle,
+    openClass: "nav-open",
+    openLabel: "Open navigation",
+    closeLabel: "Close navigation",
+    openSymbol: navToggle?.dataset.navOpenSymbol,
+    closeSymbol: navToggle?.dataset.navCloseSymbol,
+    initialFocus: () => navToggle
+  });
+
+  const searchOverlay = document.querySelector("[data-search-overlay]");
+  const searchToggle = document.querySelector("[data-search-toggle]");
+  setupOverlay({
+    overlay: searchOverlay,
+    toggle: searchToggle,
+    openClass: "search-open",
+    openLabel: "Open search",
+    closeLabel: "Close search",
+    openSymbol: searchToggle?.dataset.searchOpenSymbol,
+    closeSymbol: searchToggle?.dataset.searchCloseSymbol,
+    initialFocus: () => searchOverlay?.querySelector("[data-search-input]")
+  });
 
   document.querySelectorAll("[data-current-year]").forEach((node) => {
     node.textContent = String(new Date().getFullYear());

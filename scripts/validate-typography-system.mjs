@@ -222,12 +222,14 @@ for (const selector of [
 }
 
 const teamwearMarkup = await readFile(path.join(ROOT, "teamwear", "index.html"), "utf8");
+const teamwearMainMarkup = teamwearMarkup.match(/<main\b[\s\S]*?<\/main>/)?.[0] || "";
+assert.ok(teamwearMainMarkup, "Teamwear must render its main content landmark");
 assert.match(teamwearMarkup, /<h1 class="type-h1"[^>]*>/, "Teamwear hero title must use the h1 display role");
-for (const match of teamwearMarkup.matchAll(/<h2([^>]*)>/g)) {
+for (const match of teamwearMainMarkup.matchAll(/<h2([^>]*)>/g)) {
   assert.match(match[1], /class="[^"]*\btype-h2\b[^"]*"/, "Every Teamwear section title must use the h2 display role");
   assert.match(match[1], /class="[^"]*\bteamwear-title--brand-gradient\b[^"]*"/, "Every Teamwear section title must use the Brand Title gradient");
 }
-for (const match of teamwearMarkup.matchAll(/<h3([^>]*)>/g)) {
+for (const match of teamwearMainMarkup.matchAll(/<h3([^>]*)>/g)) {
   assert.match(match[1], /class="[^"]*\btype-h5\b[^"]*"/, "Every Teamwear child or card title must use the h5 text role");
 }
 assert.doesNotMatch(teamwearMarkup, /<p class="(?:teamwear-kicker|teamwear-section-label)"/, "Teamwear eyebrows must not remain paragraphs");

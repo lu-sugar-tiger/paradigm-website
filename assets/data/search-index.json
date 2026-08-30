@@ -1,0 +1,761 @@
+{
+  "schemaVersion": 1,
+  "popularKeywords": [
+    "Teamwear",
+    "Everyday",
+    "Paradigm",
+    "Hoodie",
+    "Tee"
+  ],
+  "vocabulary": [
+    "Teamwear",
+    "Everyday",
+    "Paradigm",
+    "Hoodie",
+    "Tee",
+    "All Products",
+    "catalog",
+    "clothing",
+    "SS Tops",
+    "tees",
+    "football jersey",
+    "jersey",
+    "tops",
+    "AW Tops",
+    "crewneck",
+    "crewnecks",
+    "hoodies",
+    "Bottoms",
+    "shorts",
+    "training shorts",
+    "PE Basketball Teamwear",
+    "basketball",
+    "uniform",
+    "uniforms",
+    "team",
+    "roster",
+    "Customize PE Basketball Teamwear",
+    "customize",
+    "customise",
+    "build",
+    "pattern",
+    "color",
+    "quantity",
+    "add on",
+    "Instagram",
+    "social",
+    "Shopee",
+    "shop",
+    "store",
+    "Black",
+    "Grey",
+    "White",
+    "Aesthetics",
+    "Timeless",
+    "Partnership",
+    "Cardinal",
+    "Sponsorship",
+    "Midnight",
+    "Intelligence",
+    "Cosmos",
+    "Training",
+    "Mocha",
+    "Mud",
+    "Shadow"
+  ],
+  "pages": [
+    {
+      "title": "All Products",
+      "interfaceLabel": true,
+      "url": "/collections/all",
+      "summary": "Browse the complete Paradigm product catalog.",
+      "keywords": [
+        "catalog",
+        "all products",
+        "clothing"
+      ],
+      "external": false,
+      "searchTerms": [
+        "All Products",
+        "Browse the complete Paradigm product catalog.",
+        "catalog",
+        "all products",
+        "clothing"
+      ]
+    },
+    {
+      "title": "SS Tops",
+      "interfaceLabel": true,
+      "url": "/collections/ss-tops",
+      "summary": "Explore Paradigm tees and football jerseys.",
+      "keywords": [
+        "ss tops",
+        "tee",
+        "tees",
+        "football jersey",
+        "jersey",
+        "tops"
+      ],
+      "external": false,
+      "searchTerms": [
+        "SS Tops",
+        "Explore Paradigm tees and football jerseys.",
+        "ss tops",
+        "tee",
+        "tees",
+        "football jersey",
+        "jersey",
+        "tops"
+      ]
+    },
+    {
+      "title": "AW Tops",
+      "interfaceLabel": true,
+      "url": "/collections/aw-tops",
+      "summary": "Explore Paradigm crewnecks and hoodies.",
+      "keywords": [
+        "aw tops",
+        "crewneck",
+        "crewnecks",
+        "hoodie",
+        "hoodies",
+        "tops"
+      ],
+      "external": false,
+      "searchTerms": [
+        "AW Tops",
+        "Explore Paradigm crewnecks and hoodies.",
+        "aw tops",
+        "crewneck",
+        "crewnecks",
+        "hoodie",
+        "hoodies",
+        "tops"
+      ]
+    },
+    {
+      "title": "Bottoms",
+      "interfaceLabel": true,
+      "url": "/collections/bottoms",
+      "summary": "Explore Paradigm shorts.",
+      "keywords": [
+        "bottoms",
+        "shorts",
+        "training shorts"
+      ],
+      "external": false,
+      "searchTerms": [
+        "Bottoms",
+        "Explore Paradigm shorts.",
+        "bottoms",
+        "shorts",
+        "training shorts"
+      ]
+    },
+    {
+      "title": "PE Basketball Teamwear",
+      "interfaceLabel": false,
+      "url": "/teamwear",
+      "summary": "Discover PE Basketball Teamwear for coordinated rosters.",
+      "keywords": [
+        "teamwear",
+        "basketball",
+        "uniform",
+        "uniforms",
+        "team",
+        "roster"
+      ],
+      "external": false,
+      "searchTerms": [
+        "PE Basketball Teamwear",
+        "Discover PE Basketball Teamwear for coordinated rosters.",
+        "teamwear",
+        "basketball",
+        "uniform",
+        "uniforms",
+        "team",
+        "roster"
+      ]
+    },
+    {
+      "title": "Customize PE Basketball Teamwear",
+      "interfaceLabel": false,
+      "url": "/teamwear/customize",
+      "summary": "Choose the pattern, color, quantity, and add ons for PE Basketball Teamwear.",
+      "keywords": [
+        "teamwear",
+        "customize",
+        "customise",
+        "build",
+        "pattern",
+        "color",
+        "quantity",
+        "add on"
+      ],
+      "external": false,
+      "searchTerms": [
+        "Customize PE Basketball Teamwear",
+        "Choose the pattern, color, quantity, and add ons for PE Basketball Teamwear.",
+        "teamwear",
+        "customize",
+        "customise",
+        "build",
+        "pattern",
+        "color",
+        "quantity",
+        "add on"
+      ]
+    },
+    {
+      "title": "Instagram",
+      "interfaceLabel": true,
+      "url": "https://www.instagram.com/prdm.tw/",
+      "summary": "Follow Paradigm on Instagram.",
+      "keywords": [
+        "instagram",
+        "social"
+      ],
+      "external": true,
+      "searchTerms": [
+        "Instagram",
+        "Follow Paradigm on Instagram.",
+        "instagram",
+        "social"
+      ]
+    },
+    {
+      "title": "Shopee",
+      "interfaceLabel": true,
+      "url": "https://shopee.tw/",
+      "summary": "Shop Paradigm through Shopee.",
+      "keywords": [
+        "shopee",
+        "shop",
+        "store"
+      ],
+      "external": true,
+      "searchTerms": [
+        "Shopee",
+        "Shop Paradigm through Shopee.",
+        "shopee",
+        "shop",
+        "store"
+      ]
+    }
+  ],
+  "products": [
+    {
+      "productNumber": "ED14001",
+      "title": "PRDM Everyday Tee",
+      "category": "SS Tops",
+      "colors": [
+        "Black",
+        "Grey",
+        "White"
+      ],
+      "productType": "Tee",
+      "family": "Everyday",
+      "price": "NT$590",
+      "url": "/products/ED14001",
+      "media": {
+        "src": "assets/images/products/everyday-tee.webp",
+        "derivatives": []
+      },
+      "alt": "PRDM Everyday Tee product image",
+      "searchTerms": [
+        "PRDM Everyday Tee",
+        "ED14001",
+        "SS Tops",
+        "Black",
+        "Grey",
+        "White",
+        "Tee",
+        "Everyday"
+      ]
+    },
+    {
+      "productNumber": "ED23002",
+      "title": "PRDM Everyday Crewneck",
+      "category": "AW Tops",
+      "colors": [
+        "Black",
+        "Grey"
+      ],
+      "productType": "Crewneck",
+      "family": "Everyday",
+      "price": "NT$990",
+      "url": "/products/ED23002",
+      "media": null,
+      "alt": "",
+      "searchTerms": [
+        "PRDM Everyday Crewneck",
+        "ED23002",
+        "AW Tops",
+        "Black",
+        "Grey",
+        "Crewneck",
+        "Everyday"
+      ]
+    },
+    {
+      "productNumber": "PD23006",
+      "title": "PRDM Paradigm Crewneck",
+      "category": "AW Tops",
+      "colors": [
+        "Black",
+        "Grey"
+      ],
+      "productType": "Crewneck",
+      "family": "Paradigm",
+      "price": "NT$1,180",
+      "url": "/products/PD23006",
+      "media": null,
+      "alt": "",
+      "searchTerms": [
+        "PRDM Paradigm Crewneck",
+        "PD23006",
+        "AW Tops",
+        "Black",
+        "Grey",
+        "Crewneck",
+        "Paradigm"
+      ]
+    },
+    {
+      "productNumber": "PD14007",
+      "title": "PRDM Paradigm Tee",
+      "category": "SS Tops",
+      "colors": [
+        "Black",
+        "Grey",
+        "White"
+      ],
+      "productType": "Tee",
+      "family": "Paradigm",
+      "price": "NT$790",
+      "url": "/products/PD14007",
+      "media": null,
+      "alt": "",
+      "searchTerms": [
+        "PRDM Paradigm Tee",
+        "PD14007",
+        "SS Tops",
+        "Black",
+        "Grey",
+        "White",
+        "Tee",
+        "Paradigm"
+      ]
+    },
+    {
+      "productNumber": "AE14008",
+      "title": "PRDM Aesthetics Tee",
+      "category": "SS Tops",
+      "colors": [
+        "Black",
+        "White"
+      ],
+      "productType": "Tee",
+      "family": "Aesthetics",
+      "price": "NT$790",
+      "url": "/products/AE14008",
+      "media": {
+        "src": "assets/images/products/aesthetics-tee.webp",
+        "derivatives": []
+      },
+      "alt": "PRDM Aesthetics Tee product image",
+      "searchTerms": [
+        "PRDM Aesthetics Tee",
+        "AE14008",
+        "SS Tops",
+        "Black",
+        "White",
+        "Tee",
+        "Aesthetics"
+      ]
+    },
+    {
+      "productNumber": "TL14009",
+      "title": "PRDM Timeless Tee",
+      "category": "SS Tops",
+      "colors": [
+        "Black",
+        "White"
+      ],
+      "productType": "Tee",
+      "family": "Timeless",
+      "price": "NT$790",
+      "url": "/products/TL14009",
+      "media": null,
+      "alt": "",
+      "searchTerms": [
+        "PRDM Timeless Tee",
+        "TL14009",
+        "SS Tops",
+        "Black",
+        "White",
+        "Tee",
+        "Timeless"
+      ]
+    },
+    {
+      "productNumber": "PH14010",
+      "title": "PRDM Partnership Football Jersey",
+      "category": "SS Tops",
+      "colors": [
+        "Black",
+        "White",
+        "Cardinal"
+      ],
+      "productType": "Football Jersey",
+      "family": "Partnership",
+      "price": "NT$990",
+      "url": "/products/PH14010",
+      "media": {
+        "src": "assets/images/products/partnership-football-jersey.webp",
+        "derivatives": []
+      },
+      "alt": "PRDM Partnership Football Jersey product image",
+      "searchTerms": [
+        "PRDM Partnership Football Jersey",
+        "PH14010",
+        "SS Tops",
+        "Black",
+        "White",
+        "Cardinal",
+        "Football Jersey",
+        "Partnership"
+      ]
+    },
+    {
+      "productNumber": "PH14011",
+      "title": "PRDM Sponsorship Football Jersey",
+      "category": "SS Tops",
+      "colors": [
+        "Black",
+        "White",
+        "Cardinal"
+      ],
+      "productType": "Football Jersey",
+      "family": "Sponsorship",
+      "price": "NT$990",
+      "url": "/products/PH14011",
+      "media": null,
+      "alt": "",
+      "searchTerms": [
+        "PRDM Sponsorship Football Jersey",
+        "PH14011",
+        "SS Tops",
+        "Black",
+        "White",
+        "Cardinal",
+        "Football Jersey",
+        "Sponsorship"
+      ]
+    },
+    {
+      "productNumber": "ED24014",
+      "title": "PRDM Everyday Hoodie",
+      "category": "AW Tops",
+      "colors": [
+        "Black",
+        "Midnight"
+      ],
+      "productType": "Hoodie",
+      "family": "Everyday",
+      "price": "NT$1,180",
+      "url": "/products/ED24014",
+      "media": null,
+      "alt": "",
+      "searchTerms": [
+        "PRDM Everyday Hoodie",
+        "ED24014",
+        "AW Tops",
+        "Black",
+        "Midnight",
+        "Hoodie",
+        "Everyday"
+      ]
+    },
+    {
+      "productNumber": "PD24015",
+      "title": "PRDM Paradigm Hoodie",
+      "category": "AW Tops",
+      "colors": [
+        "Black",
+        "Midnight"
+      ],
+      "productType": "Hoodie",
+      "family": "Paradigm",
+      "price": "NT$1,380",
+      "url": "/products/PD24015",
+      "media": {
+        "src": "assets/images/products/paradigm-hoodie.webp",
+        "derivatives": []
+      },
+      "alt": "PRDM Paradigm Hoodie product image",
+      "searchTerms": [
+        "PRDM Paradigm Hoodie",
+        "PD24015",
+        "AW Tops",
+        "Black",
+        "Midnight",
+        "Hoodie",
+        "Paradigm"
+      ]
+    },
+    {
+      "productNumber": "AE23016",
+      "title": "PRDM Aesthetics Crewneck",
+      "category": "AW Tops",
+      "colors": [
+        "Black",
+        "Grey"
+      ],
+      "productType": "Crewneck",
+      "family": "Aesthetics",
+      "price": "NT$1,180",
+      "url": "/products/AE23016",
+      "media": null,
+      "alt": "",
+      "searchTerms": [
+        "PRDM Aesthetics Crewneck",
+        "AE23016",
+        "AW Tops",
+        "Black",
+        "Grey",
+        "Crewneck",
+        "Aesthetics"
+      ]
+    },
+    {
+      "productNumber": "AE24017",
+      "title": "PRDM Aesthetics Hoodie",
+      "category": "AW Tops",
+      "colors": [
+        "Black",
+        "Midnight"
+      ],
+      "productType": "Hoodie",
+      "family": "Aesthetics",
+      "price": "NT$1,380",
+      "url": "/products/AE24017",
+      "media": null,
+      "alt": "",
+      "searchTerms": [
+        "PRDM Aesthetics Hoodie",
+        "AE24017",
+        "AW Tops",
+        "Black",
+        "Midnight",
+        "Hoodie",
+        "Aesthetics"
+      ]
+    },
+    {
+      "productNumber": "TL23018",
+      "title": "PRDM Timeless Crewneck",
+      "category": "AW Tops",
+      "colors": [
+        "Black",
+        "Grey"
+      ],
+      "productType": "Crewneck",
+      "family": "Timeless",
+      "price": "NT$1,180",
+      "url": "/products/TL23018",
+      "media": {
+        "src": "assets/images/products/timeless-crewneck.webp",
+        "derivatives": []
+      },
+      "alt": "PRDM Timeless Crewneck product image",
+      "searchTerms": [
+        "PRDM Timeless Crewneck",
+        "TL23018",
+        "AW Tops",
+        "Black",
+        "Grey",
+        "Crewneck",
+        "Timeless"
+      ]
+    },
+    {
+      "productNumber": "TL24019",
+      "title": "PRDM Timeless Hoodie",
+      "category": "AW Tops",
+      "colors": [
+        "Black",
+        "Midnight"
+      ],
+      "productType": "Hoodie",
+      "family": "Timeless",
+      "price": "NT$1,380",
+      "url": "/products/TL24019",
+      "media": null,
+      "alt": "",
+      "searchTerms": [
+        "PRDM Timeless Hoodie",
+        "TL24019",
+        "AW Tops",
+        "Black",
+        "Midnight",
+        "Hoodie",
+        "Timeless"
+      ]
+    },
+    {
+      "productNumber": "BT24020",
+      "title": "PRDM Intelligence Hoodie",
+      "category": "AW Tops",
+      "colors": [
+        "Black",
+        "Midnight"
+      ],
+      "productType": "Hoodie",
+      "family": "Intelligence",
+      "price": "NT$1,380",
+      "url": "/products/BT24020",
+      "media": {
+        "src": "assets/images/products/intelligence-hoodie.webp",
+        "derivatives": []
+      },
+      "alt": "PRDM Intelligence Hoodie product image",
+      "searchTerms": [
+        "PRDM Intelligence Hoodie",
+        "BT24020",
+        "AW Tops",
+        "Black",
+        "Midnight",
+        "Hoodie",
+        "Intelligence"
+      ]
+    },
+    {
+      "productNumber": "BD24021",
+      "title": "PRDM Cosmos Hoodie",
+      "category": "AW Tops",
+      "colors": [
+        "Black",
+        "Midnight"
+      ],
+      "productType": "Hoodie",
+      "family": "Cosmos",
+      "price": "NT$1,380",
+      "url": "/products/BD24021",
+      "media": {
+        "src": "assets/images/products/BD24021/cosmos-hoodie-01.webp",
+        "derivatives": []
+      },
+      "alt": "PRDM Cosmos Hoodie product image",
+      "searchTerms": [
+        "PRDM Cosmos Hoodie",
+        "BD24021",
+        "AW Tops",
+        "Black",
+        "Midnight",
+        "Hoodie",
+        "Cosmos"
+      ]
+    },
+    {
+      "productNumber": "GM42022",
+      "title": "PRDM Training Shorts",
+      "category": "Bottoms",
+      "colors": [
+        "Mocha"
+      ],
+      "productType": "Shorts",
+      "family": "Training",
+      "price": "NT$1,180",
+      "url": "/products/GM42022",
+      "media": {
+        "src": "assets/images/products/training-shorts.webp",
+        "derivatives": []
+      },
+      "alt": "PRDM Training Shorts product image",
+      "searchTerms": [
+        "PRDM Training Shorts",
+        "GM42022",
+        "Bottoms",
+        "Mocha",
+        "Shorts",
+        "Training"
+      ]
+    },
+    {
+      "productNumber": "GM42023",
+      "title": "PRDM Training Shorts",
+      "category": "Bottoms",
+      "colors": [
+        "Mud"
+      ],
+      "productType": "Shorts",
+      "family": "Training",
+      "price": "NT$1,180",
+      "url": "/products/GM42023",
+      "media": {
+        "src": "assets/images/products/training-shorts.webp",
+        "derivatives": []
+      },
+      "alt": "PRDM Training Shorts product image",
+      "searchTerms": [
+        "PRDM Training Shorts",
+        "GM42023",
+        "Bottoms",
+        "Mud",
+        "Shorts",
+        "Training"
+      ]
+    },
+    {
+      "productNumber": "ED14024",
+      "title": "PRDM Everyday Tee",
+      "category": "SS Tops",
+      "colors": [
+        "Shadow",
+        "Grey",
+        "White"
+      ],
+      "productType": "Tee",
+      "family": "Everyday",
+      "price": "NT$590",
+      "url": "/products/ED14024",
+      "media": {
+        "src": "assets/images/catalog/3a/3a4d8d1d4a54393c6092-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/catalog/59/599a22252cda2eb00f2a-540x540.webp"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/catalog/3a/3a4d8d1d4a54393c6092-1080x1080.webp"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/catalog/93/939986dd5d2f15917d01-2160x2160.webp"
+          }
+        ]
+      },
+      "alt": "PRDM Everyday Tee product image",
+      "searchTerms": [
+        "PRDM Everyday Tee",
+        "ED14024",
+        "SS Tops",
+        "Shadow",
+        "Grey",
+        "White",
+        "Tee",
+        "Everyday"
+      ]
+    }
+  ]
+}

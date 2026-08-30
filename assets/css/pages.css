@@ -39,6 +39,20 @@
   margin-top: var(--space-1);
 }
 
+.search-page__results {
+  background: var(--color-background-mid);
+}
+
+.search-page__results .search-results {
+  width: min(100%, var(--content-width));
+  margin-top: 0;
+}
+
+.search-page__results .search-result-group--products {
+  margin-top: 0;
+  background: var(--color-background-mid);
+}
+
 .reference-page--detail .section-heading__eyebrow {
   font-size: 12px;
   line-height: 16px;

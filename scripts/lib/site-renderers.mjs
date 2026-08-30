@@ -1,10 +1,23 @@
 import { imageSrcset } from "./product-images.mjs";
 
-const NAV_ITEMS = [
-  { label: "All", path: "/collections/all", aliases: ["/"] },
-  { label: "SS Tops", path: "/collections/ss-tops" },
-  { label: "AW Tops", path: "/collections/aw-tops" },
-  { label: "Bottoms", path: "/collections/bottoms" }
+const NAV_GROUPS = [
+  {
+    label: "Product",
+    path: "/collections/all",
+    aliases: ["/"],
+    children: [
+      { label: "SS Tops", path: "/collections/ss-tops" },
+      { label: "AW Tops", path: "/collections/aw-tops" },
+      { label: "Bottoms", path: "/collections/bottoms" }
+    ]
+  },
+  {
+    label: "Teamwear",
+    path: "/teamwear",
+    children: [
+      { label: "Basketball", path: "/teamwear", prefixes: ["/teamwear/"] }
+    ]
+  }
 ];
 
 export const MATERIAL_ICON_NAMES = Object.freeze({
@@ -178,47 +191,64 @@ export function renderPageHeadline({ breadcrumb, trailingAction, root = "" }) {
 }
 
 function isCurrentPath(currentPath, item) {
-  return currentPath === item.path || item.aliases?.includes(currentPath);
+  return currentPath === item.path || item.aliases?.includes(currentPath) || item.prefixes?.some((prefix) => currentPath.startsWith(prefix));
 }
 
 export function renderSiteHeader({ root = "", currentPath = "/" } = {}) {
-  const [allItem, ...subcollections] = NAV_ITEMS;
-  const allCurrent = isCurrentPath(currentPath, allItem) ? ' aria-current="page"' : "";
-  const subcollectionMarkup = subcollections.map((item) => {
-    const current = isCurrentPath(currentPath, item) ? ' aria-current="page"' : "";
-    return `              <li><a class="interface-label" href="${item.path}"${current}>${item.label}</a></li>`;
+  const navigationMarkup = NAV_GROUPS.map((group) => {
+    const childMarkup = group.children.map((item) => {
+      const current = isCurrentPath(currentPath, item) ? ' aria-current="page"' : "";
+      return `              <li><a class="drawer-nav__child interface-label" href="${item.path}"${current}>${item.label}</a></li>`;
+    }).join("\n");
+    const childIsCurrent = group.children.some((item) => isCurrentPath(currentPath, item));
+    const parentCurrent = !childIsCurrent && isCurrentPath(currentPath, group) ? ' aria-current="page"' : "";
+    return `          <li class="drawer-nav__group">
+            <a class="drawer-nav__parent interface-label" href="${group.path}"${parentCurrent}>${group.label}</a>
+            <ul class="drawer-nav__children" role="list">
+${childMarkup}
+            </ul>
+          </li>`;
   }).join("\n");
-  const teamwearCurrent = currentPath === "/teamwear" || currentPath.startsWith("/teamwear/")
-    ? ' aria-current="page"'
-    : "";
 
   return `  <header class="site-header">
     <div class="container site-header__inner">
       <a class="site-logo" href="/" aria-label="Paradigm home">PARADIGM</a>
       <div class="site-actions" aria-label="Quick actions">
-        <button class="icon-button" type="button" aria-label="Search">${renderIcon("search", root)}</button>
+        <button class="icon-button" type="button" aria-label="Open search" aria-expanded="false" data-search-toggle data-search-open-symbol="${html(MATERIAL_ICON_NAMES.search)}" data-search-close-symbol="${html(MATERIAL_ICON_NAMES.close)}">${renderIcon("search", root)}</button>
         <button class="icon-button" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle data-nav-open-symbol="${html(MATERIAL_ICON_NAMES.menu)}" data-nav-close-symbol="${html(MATERIAL_ICON_NAMES.close)}">${renderIcon("menu", root)}</button>
       </div>
     </div>
   </header>
 
+  <div class="search-overlay" role="dialog" aria-modal="true" aria-labelledby="search-overlay-title" aria-hidden="true" data-search-overlay>
+    <div class="search-overlay__panel">
+      <div class="container search-overlay__inner">
+        <h2 class="visually-hidden" id="search-overlay-title">Search</h2>
+        <div class="search-overlay__form-wrap">
+          <form class="search-form" role="search" data-search-form>
+            <label class="visually-hidden" for="site-search-input">Search Paradigm</label>
+            <input class="search-form__input" id="site-search-input" type="search" name="q" placeholder="Search prdm.tw" autocomplete="off" autocapitalize="none" spellcheck="false" data-search-input>
+            <button class="icon-button search-form__submit" type="submit" aria-label="Search" data-search-submit disabled>${renderIcon("search", root)}</button>
+          </form>
+        </div>
+        <p class="visually-hidden" aria-live="polite" data-search-status></p>
+        <div class="search-results" aria-busy="true" data-search-results>
+          <p class="search-status-row">Loading search…</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="nav-drawer" aria-hidden="true" data-nav-drawer>
     <div class="nav-drawer__panel">
       <button class="icon-button nav-drawer__close" type="button" aria-label="Close navigation" data-nav-close>${renderIcon("close", root)}</button>
-      <nav class="drawer-nav" aria-label="Navigation">
-        <ul role="list">
-          <li>
-            <a class="interface-label" href="${allItem.path}"${allCurrent}>${allItem.label}</a>
-            <ul class="drawer-nav__subcollections" role="list">
-${subcollectionMarkup}
-            </ul>
-          </li>
-        </ul>
-        <div class="drawer-nav__divider"></div>
-        <ul role="list">
-          <li><a class="interface-label" href="/teamwear"${teamwearCurrent}>Teamwear</a></li>
-        </ul>
-      </nav>
+      <div class="container nav-drawer__inner">
+        <nav class="drawer-nav" aria-label="Navigation">
+          <ul class="drawer-nav__groups" role="list">
+${navigationMarkup}
+          </ul>
+        </nav>
+      </div>
     </div>
   </div>`;
 }
@@ -318,11 +348,6 @@ export function renderPrimaryAction({
   </div>`;
 }
 
-export function renderPrimaryActionDock(id) {
-  if (!id) return "";
-  return `  <div class="primary-action-dock" data-primary-action-dock-mount="${html(id)}"></div>`;
-}
-
 export function renderRailControls({ label, railId, root = "" }) {
   return `<div class="teamwear-rail-controls" role="group" aria-label="${html(label)} carousel controls">
     <button class="teamwear-rail-button teamwear-rail-button--previous" type="button" aria-label="Previous ${html(label.toLowerCase())}" aria-controls="${html(railId)}" data-rail-previous hidden>${renderIcon("back", root)}</button>
@@ -378,21 +403,20 @@ export function renderDocument({
   main,
   styles = [],
   scripts = [],
-  head = "",
-  primaryActionDockId = ""
+  head = ""
 }) {
-  const baseStyles = ["tokens.css", "reset.css", "base.css", "layout.css", "components.css", "pages.css", "color-options.css"];
+  const baseStyles = ["tokens.css?v=20260830a", "reset.css?v=20260829a", "base.css", "layout.css", "components.css?v=20260830d", "pages.css?v=20260829a", "color-options.css"];
   const styleMarkup = [...baseStyles, ...styles].map((file) => `  <link rel="stylesheet" href="${html(asset(root, `assets/css/${file}`))}">`).join("\n");
   const isDataScript = (file) => ["catalog.js", "teamwear-options.js"].includes(file.split("?")[0]);
   const dataScripts = scripts.filter(isDataScript);
   const interactionScripts = scripts.filter((file) => !isDataScript(file));
-  const scriptMarkup = ["app.js", ...dataScripts, "choices.js?v=20260827a", ...interactionScripts].map((file) => `  <script defer src="${html(asset(root, `assets/js/${file}`))}"></script>`).join("\n");
+  const scriptMarkup = ["app.js?v=20260829b", "search-core.js?v=20260829b", "search.js?v=20260830a", ...dataScripts, "choices.js?v=20260829a", ...interactionScripts].map((file) => `  <script defer src="${html(asset(root, `assets/js/${file}`))}"></script>`).join("\n");
   const document = `<!doctype html>
 <!-- Generated by scripts/build-site.mjs. Do not edit this file directly. -->
 <html lang="${html(lang)}">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>${html(title)}</title>
   <meta name="description" content="${html(description)}">
   <link rel="canonical" href="${html(canonical)}">
@@ -406,7 +430,6 @@ ${renderSiteHeader({ root, currentPath })}
 
 ${main}
 
-${renderPrimaryActionDock(primaryActionDockId)}
 ${renderSiteFooter()}
 </body>
 </html>

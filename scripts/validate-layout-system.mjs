@@ -79,7 +79,7 @@ for (const [token, value] of spacingScale) {
 assert.doesNotMatch(tokens, /--space-0-5\s*:/, "The former fractional spacing token must be removed");
 assert.doesNotMatch(tokens, /--space-(?:10|11)\s*:/, "The primitive spacing scale must stop at space-9");
 assert.equal(propertyValue(tokens, "--layout-gutter-inline"), "var(--space-5)", "Base gutter must be 16px");
-assert.equal(propertyValue(tokens, "--layout-canvas-width"), "90rem", "The visual canvas must max at 1440px");
+assert.equal(propertyValue(tokens, "--layout-canvas-width"), undefined, "The removed 1440px visual-canvas cap must not remain defined");
 assert.equal(propertyValue(tokens, "--layout-section-padding-tight"), "var(--space-6)", "Tight sections must use 24px");
 assert.equal(propertyValue(tokens, "--layout-section-padding-default"), "var(--space-8)", "Default sections must use 48px");
 assert.equal(propertyValue(tokens, "--layout-section-padding-editorial"), "var(--space-9)", "Editorial sections must use 64px");
@@ -205,7 +205,8 @@ assert.match(
 );
 assert.match(teamwearStory, /\.teamwear-section-heading\s*\{[\s\S]*?margin-bottom:\s*var\(--layout-section-content-gap\)/, "Teamwear headings must use the 48px content gap");
 assert.match(teamwearStory, /\.teamwear-highlights__header\s*\{[\s\S]*?margin-bottom:\s*var\(--layout-section-content-gap\)/, "Highlights must use the same 48px content gap");
-assert.match(teamwearStory, /\.teamwear-story-shell\.has-floating-primary-action \.site-header\s*\{[\s\S]*?visibility:\s*hidden;[\s\S]*?transform:\s*translateY\(-100%\)/, "Teamwear header must leave the viewport while its primary action floats");
+assert.match(teamwearStory, /\.teamwear-story-shell \.site-header\s*\{[\s\S]*?position:\s*absolute;/, "The Teamwear header must keep its initial overlay position and scroll away with the page");
+assert.doesNotMatch(teamwearStory, /has-floating-primary-action|\.teamwear-story-shell[^\{]*\.site-header[^\{]*\{[^}]*visibility:\s*hidden/, "The Teamwear header must not hide in response to the floating action");
 assert.match(teamwearStory, /padding:\s*0 var\(--teamwear-content-edge\)/, "Teamwear rails must start and end at the derived Teamwear content edge");
 assert.match(teamwearStory, /scroll-padding-inline:\s*var\(--teamwear-content-edge\)/, "Teamwear rails must use the content edge for scroll positioning");
 assert.match(teamwearStory, /\.teamwear-highlights__viewport,[\s\S]*?\.teamwear-colorway__viewport,[\s\S]*?\.teamwear-gallery__viewport\s*\{[\s\S]*?position:\s*relative;/, "Every Teamwear rail viewport must establish the overlay positioning context");
@@ -220,24 +221,36 @@ assert.doesNotMatch(teamwearStory, /\.teamwear-rail-button[^\{]*:hover/, "Teamwe
 assert.match(teamwearTemplate, /teamwear-highlights__viewport">\s*\{\{HIGHLIGHT_CONTROLS\}\}\s*<div class="teamwear-highlights__rail"/, "Highlight controls must be generated inside their rail viewport");
 assert.match(teamwearTemplate, /teamwear-colorway__viewport">\s*\{\{COLORWAY_CONTROLS\}\}\s*<div class="teamwear-colorway__rail"/, "Colorway controls must be generated inside their rail viewport");
 assert.match(teamwearTemplate, /teamwear-gallery__viewport">\s*\{\{GALLERY_CONTROLS\}\}\s*<div class="teamwear-gallery__rail"/, "Gallery controls must be generated inside their rail viewport");
-assert.match(teamwearBehavior, /const atStart = rail\.scrollLeft <= 1;[\s\S]*?const atEnd = maximumScroll <= 1 \|\| rail\.scrollLeft >= maximumScroll - 1;[\s\S]*?previousButton\.hidden = atStart;[\s\S]*?nextButton\.hidden = atEnd;/, "Teamwear rail controls must remove unavailable directions from layout and keyboard navigation");
+assert.match(teamwearBehavior, /const atStart = rail\.scrollLeft <= 1;[\s\S]*?const lastCard = rail\.querySelector\("\.teamwear-rail-card:last-child"\);[\s\S]*?const railRight = rail\.getBoundingClientRect\(\)\.right;[\s\S]*?const lastCardRight = lastCard\?\.getBoundingClientRect\(\)\.right \|\| railRight;[\s\S]*?const atEnd = maximumScroll <= 1 \|\| lastCardRight <= railRight \+ 1;[\s\S]*?previousButton\.hidden = atStart;[\s\S]*?nextButton\.hidden = atEnd;/, "Teamwear rail controls must show only Previous as soon as the final card is fully visible");
+assert.equal((teamwearTemplate.match(/<article class="teamwear-faq__item">/g) || []).length, 5, "Teamwear FAQ must render five static question-and-answer rows");
+assert.doesNotMatch(teamwearTemplate, /<details|<summary|<i aria-hidden="true"><\/i>/, "Teamwear FAQ must not retain disclosure markup or icons");
+assert.match(teamwearStory, /\.teamwear-story-page \.teamwear-faq__item\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\);[\s\S]*?padding:\s*var\(--space-6\) 0;[\s\S]*?border-bottom:\s*1px solid var\(--color-outline-low\);/, "Static Teamwear FAQ rows must use one content column and space-6 vertical padding");
+assert.match(teamwearStory, /\.teamwear-story-page \.teamwear-faq__item > p\s*\{[\s\S]*?color:\s*var\(--color-on-surface-low\);/, "Static Teamwear FAQ answers must remain visible at low emphasis");
+assert.doesNotMatch(teamwearStory, /\.teamwear-story-page \.teamwear-faq (?:details|summary)|teamwear-faq-question-height/, "Teamwear FAQ styles must not reserve disclosure or closed-row geometry");
+assert.doesNotMatch(teamwearBehavior, /faqList|faqItems|faqQuestions|teamwear-faq-question-height/, "Teamwear behavior must not retain accordion measurement code");
 assert.match(
   teamwearStory,
   /\.teamwear-story-page\.reveal-ready \.teamwear-highlights__rail > \[data-section-reveal\],[\s\S]*?\.teamwear-colorway__rail > \[data-section-reveal\],[\s\S]*?\.teamwear-gallery__rail > \[data-section-reveal\]\s*\{[\s\S]*?transform:\s*none;/,
   "Horizontally offscreen Teamwear cards must not create vertical scroll overflow with the shared reveal transform"
 );
-assert.match(teamwearStory, /\.teamwear-story-page \.teamwear-hero\s*\{[\s\S]*?width:\s*min\(100%, var\(--layout-canvas-width\)\);[\s\S]*?margin-inline:\s*auto;[\s\S]*?padding:\s*0/, "Teamwear hero must center within the 1440px visual canvas without extra top padding");
-assert.match(teamwearStory, /\.teamwear-material__media\s*\{[\s\S]*?width:\s*min\(100%, var\(--layout-canvas-width\)\);[\s\S]*?margin-inline:\s*auto;/, "Teamwear full-bleed material media must center within the 1440px visual canvas");
+assert.match(teamwearStory, /\.teamwear-story-page \.teamwear-hero\s*\{[\s\S]*?width:\s*100%;[\s\S]*?margin-inline:\s*auto;[\s\S]*?padding:\s*0/, "Teamwear hero must span the complete viewport width without extra top padding");
+assert.match(teamwearStory, /\.teamwear-material__media\s*\{[\s\S]*?width:\s*100%;[\s\S]*?margin-inline:\s*auto;/, "Teamwear full-bleed material media must span the complete viewport width");
+assert.doesNotMatch(teamwearStory, /layout-canvas-width/, "Teamwear media must not retain the removed 1440px cap");
 assert.match(teamwearStory, /\.teamwear-hero__copy\s*\{[\s\S]*?var\(--layout-section-padding-editorial\)[\s\S]*?var\(--primary-action-fixed-clearance\)/, "Hero copy must derive action clearance from shared primary-action tokens");
 const mediumTeamwear = blockAfter(teamwearStory, "@media (min-width: 48rem)");
 assert.match(
+  teamwearStory,
+  /--teamwear-card-width:\s*calc\(\s*\(min\(100vw, var\(--content-width\)\) - var\(--space-2\)\) \/ 2\s*\)/,
+  "Base Teamwear rail cards must use the two-column reference-width formula with one rail gap"
+);
+assert.match(
   mediumTeamwear,
-  /\.teamwear-story-page\s*\{[\s\S]*?--teamwear-card-width:\s*min\(\s*calc\(100vw \/ 3\),\s*calc\(var\(--layout-canvas-width\) \/ 3\)\s*\)/,
-  "Medium Teamwear rail cards must use one-third viewport width capped at 480px"
+  /\.teamwear-story-page\s*\{[\s\S]*?--teamwear-card-width:\s*calc\(\s*\(min\(100vw, var\(--content-width\)\) - var\(--space-2\) - var\(--space-2\)\) \/ 3\s*\)/,
+  "Medium and Large Teamwear rail cards must use the three-column reference-width formula with two rail gaps"
 );
 assert.equal(
   mediumTeamwear
-    .replace(/\.teamwear-story-page\s*\{[\s\S]*?--teamwear-card-width:\s*min\(\s*calc\(100vw \/ 3\),\s*calc\(var\(--layout-canvas-width\) \/ 3\)\s*\);[\s\S]*?\}/, "")
+    .replace(/\.teamwear-story-page\s*\{[\s\S]*?--teamwear-card-width:\s*calc\(\s*\(min\(100vw, var\(--content-width\)\) - var\(--space-2\) - var\(--space-2\)\) \/ 3\s*\);[\s\S]*?\}/, "")
     .trim(),
   "",
   "Teamwear must retain mobile composition through Medium; only rail-card sizing may change"
@@ -262,7 +275,16 @@ assert.match(components, /\.site-footer\s*\{[\s\S]*?margin-top:\s*0;/, "The shar
 assert.doesNotMatch(teamwearStory, /\.teamwear-page \.site-footer/, "Teamwear must not override shared footer spacing");
 assert.match(tokens, /--layout-shell-gutter-inline:\s*var\(--space-5\);/, "Base shared shell gutters must use the 16px spacing token");
 assert.match(mediumTokens, /--layout-shell-gutter-inline:\s*var\(--space-7\);/, "Medium and Large shared shell gutters must use the 32px spacing token");
-assert.match(components, /\.site-header__inner\s*\{[\s\S]*?var\(--layout-shell-gutter-inline\)/, "Shared headers must use the shared shell gutter");
+assert.match(tokens, /--safe-area-inset-top:\s*env\(safe-area-inset-top, 0px\);/, "The shared shell must expose the browser top safe-area inset");
+assert.match(tokens, /--safe-area-inset-left:\s*env\(safe-area-inset-left, 0px\);/, "The shared shell must expose the browser left safe-area inset");
+assert.match(tokens, /--safe-area-inset-right:\s*env\(safe-area-inset-right, 0px\);/, "The shared shell must expose the browser right safe-area inset");
+assert.match(tokens, /--header-bar-height:\s*var\(--space-9\);/, "The shared header control row must use the 64px spacing token at every breakpoint");
+assert.match(tokens, /--header-height:\s*calc\([\s\S]*?var\(--header-bar-height\)[\s\S]*?var\(--safe-area-inset-top\)[\s\S]*?\);/, "The complete header height must combine its control row with the browser top safe area");
+assert.doesNotMatch(largeTokens, /--header-(?:bar-)?height:/, "Large layouts must not override the shared header geometry");
+assert.match(components, /\.site-header\s*\{[\s\S]*?padding-top:\s*var\(--safe-area-inset-top\);/, "The opaque header surface must extend through the browser top safe area");
+assert.match(components, /\.site-header__inner\s*\{[\s\S]*?min-height:\s*var\(--header-bar-height\);[\s\S]*?max\(var\(--layout-shell-gutter-inline\), var\(--safe-area-inset-right\)\)[\s\S]*?max\(var\(--layout-shell-gutter-inline\), var\(--safe-area-inset-left\)\)/, "Shared headers must combine the responsive shell gutter with landscape safe areas");
+assert.doesNotMatch(components, /\.site-header__inner\s*\{[\s\S]*?padding:\s*var\(--space-8\)/, "Shared headers must not retain the former asymmetric 48px top padding");
+assert.doesNotMatch(`${mediumComponents}\n${largeComponents}`, /\.site-header__inner\s*\{/, "Header row geometry must not change at responsive breakpoints");
 assert.match(components, /\.page-headline__row\s*\{[\s\S]*?padding-inline:\s*var\(--layout-shell-gutter-inline\);/, "Page headlines must use the shared shell gutter");
 assert.match(components, /\.site-footer__grid\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\);[\s\S]*?row-gap:\s*var\(--space-5\);[\s\S]*?column-gap:\s*0;[\s\S]*?padding-block:\s*var\(--space-7\) var\(--space-9\);[\s\S]*?padding-inline:\s*var\(--layout-shell-gutter-inline\);/, "Base footers must use one column, a 16px vertical gap, no horizontal gap, 32px top padding, 64px bottom padding, and tokenized shell padding");
 assert.doesNotMatch(teamwear, /--layout-shell-gutter-inline/, "Teamwear must not override the shared header, headline, or footer gutter");
@@ -277,17 +299,19 @@ assert.match(teamwear, /\.teamwear-page main \.container\s*\{[\s\S]*?box-sizing:
 assert.match(teamwear, /\.teamwear-page\s*\{[\s\S]*?--layout-gutter-inline:\s*var\(--space-7\)/, "Base Teamwear content must sit two spacing levels inside the shared shell gutter");
 assert.match(teamwear, /@media \(min-width:\s*48rem\)[\s\S]*?\.teamwear-page\s*\{[\s\S]*?--layout-gutter-inline:\s*var\(--space-9\)/, "Medium and Large Teamwear content must sit two spacing levels inside the shared shell gutter");
 assert.match(teamwear, /--teamwear-content-edge:\s*max\([\s\S]*?var\(--layout-gutter-inline\)[\s\S]*?calc\(\(100vw - var\(--content-width\)\) \/ 2 \+ var\(--layout-gutter-inline\)\)[\s\S]*?\);/, "Teamwear must derive its viewport edge from the centered 1280px region plus its inner gutter");
-assert.match(teamwear, /--layout-page-gutter:\s*var\(--teamwear-content-edge\)/, "The Teamwear floating action must align to the Teamwear content edge");
+assert.doesNotMatch(teamwear, /--teamwear-reference-edge:/, "Teamwear must not retain the superseded outer-reference action edge");
+assert.match(teamwear, /--layout-page-gutter:\s*var\(--teamwear-content-edge\)/, "The Teamwear floating action must align to the 1280px reference offset plus the 64px inner gutter");
 assert.match(components, /\.choice-option--chip\s*\{[\s\S]*?flex:\s*1 1 0/, "Shared chip choices must expand equally");
 assert.match(components, /\.choice-option--chip-add-on\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\) var\(--choice-size\)/, "Add-on chips must reserve one tokenized square icon column");
 assert.match(components, /\.choice-option__state-symbol\s*\{[\s\S]*?font-size:\s*var\(--icon-size-small\)/, "Add-on state symbols must use the 20px icon token");
 assert.match(components, /\.choice-option--swatch\s*\{/, "Shared swatch choices must remain available");
-assert.match(tokens, /--primary-action-floating-bottom-gap:\s*var\(--space-7\);/, "Large floating actions must use the 32px spacing token for their bottom gap");
-assert.match(tokens, /--primary-action-dock-clearance:\s*calc\([\s\S]*?var\(--primary-action-content-clearance\)[\s\S]*?var\(--primary-action-floating-bottom-gap\)/, "The dock must reserve the calculated action and bottom-gap footprint");
+assert.match(tokens, /--primary-action-floating-bottom-gap:\s*var\(--space-9\);/, "Large floating actions must use the 64px spacing token for their bottom gap");
+assert.match(tokens, /--primary-action-floating-clearance:\s*calc\([\s\S]*?var\(--primary-action-content-clearance\)[\s\S]*?var\(--primary-action-floating-bottom-gap\)/, "The footer must reserve the calculated floating-action and bottom-gap footprint");
 assert.match(components, /data-action-behavior="fixed-to-float"\]\.is-floating\s*\{[\s\S]*?var\(--layout-page-gutter\)[\s\S]*?var\(--primary-action-floating-bottom-gap\)/, "Large floating actions must use the page gutter on the right and the fixed semantic gap on the bottom");
-assert.match(components, /\.primary-action-dock\s*\{[\s\S]*?min-height:\s*var\(--primary-action-dock-clearance\);[\s\S]*?padding:\s*0 var\(--layout-page-gutter\) var\(--primary-action-floating-bottom-gap\)/, "Large docks must permanently reserve the action footprint with page-gutter right alignment and a 32px bottom gap");
-assert.doesNotMatch(components, /\.primary-action-dock:has\(/, "Dock geometry must not depend on whether the moving action is currently mounted inside it");
+assert.doesNotMatch(largeComponents.match(/\.primary-action\[data-action-behavior="fixed-to-float"\]\.is-floating\s*\{[\s\S]*?\}/)?.[0] || "", /safe-area-inset-bottom/, "Large floating actions must not add a safe-area inset to the requested space-9 bottom offset");
+assert.match(largeComponents, /body:has\(\.primary-action\[data-action-behavior="fixed-to-float"\]\) \.site-footer__grid\s*\{[\s\S]*?padding-bottom:\s*calc\(var\(--space-9\) \+ var\(--primary-action-floating-clearance\)\)/, "Large Teamwear footers must clear the persistent floating action without docking it");
+assert.doesNotMatch(`${components}\n${teamwearStory}`, /primary-action-dock|is-docked|has-floating-primary-action/, "The persistent Teamwear action must not retain dock or header-hiding states");
 assert.doesNotMatch(teamwear, /\.teamwear-(?:facts|patterns|pattern-grid|pattern-card|on-court|reversible|feedback|closing)/, "Unused legacy Teamwear landing rules must be removed");
 assert.doesNotMatch(`${components}\n${pages}`, /\.reference-page--teamwear/, "Unused legacy Teamwear page rules must be removed from shared CSS");
 
-console.log("LAYOUT_SYSTEM_OK spacing=2-64 gutters=16-32 sections=24-48-64 canvas=1440 content=960-1280 catalog=2-3-3 detail=single-single-5col teamwear=mobile-mobile-desktop");
+console.log("LAYOUT_SYSTEM_OK spacing=2-64 gutters=16-32 sections=24-48-64 media=viewport content=960-1280 catalog=2-3-3 detail=single-single-5col teamwear=mobile-mobile-desktop");
