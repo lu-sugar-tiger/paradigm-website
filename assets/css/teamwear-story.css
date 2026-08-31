@@ -119,23 +119,30 @@
   color: var(--color-on-background-low);
 }
 
-.teamwear-story-page.reveal-ready [data-section-reveal] {
+.teamwear-story-page.reveal-ready [data-section-reveal]:not(.teamwear-rail-card) {
   opacity: 0;
-  transform: translateY(var(--motion-distance-reveal));
+  translate: 0 var(--motion-distance-entrance);
   transition:
-    opacity var(--motion-duration-reveal) var(--motion-ease-editorial),
-    transform var(--motion-duration-reveal) var(--motion-ease-editorial);
+    opacity var(--motion-duration-enter) var(--motion-ease-enter),
+    translate var(--motion-duration-enter) var(--motion-ease-enter);
 }
 
-.teamwear-story-page.reveal-ready [data-section-reveal].is-visible {
+.teamwear-story-page.reveal-ready [data-section-reveal]:not(.teamwear-rail-card).is-visible {
   opacity: 1;
-  transform: none;
+  translate: 0 0;
 }
 
-.teamwear-story-page.reveal-ready .teamwear-highlights__rail > [data-section-reveal],
-.teamwear-story-page.reveal-ready .teamwear-colorway__rail > [data-section-reveal],
-.teamwear-story-page.reveal-ready .teamwear-gallery__rail > [data-section-reveal] {
-  transform: none;
+.teamwear-story-page.reveal-ready .teamwear-rail-card[data-section-reveal] {
+  opacity: 0;
+  translate: 0 var(--motion-distance-component);
+  transition:
+    opacity var(--motion-duration-enter) var(--motion-ease-enter) var(--rail-card-delay, 0ms),
+    translate var(--motion-duration-enter) var(--motion-ease-enter) var(--rail-card-delay, 0ms);
+}
+
+.teamwear-story-page.reveal-ready .teamwear-rail-card[data-section-reveal].is-visible {
+  opacity: 1;
+  translate: 0 0;
 }
 
 /* Hero section */
@@ -161,9 +168,14 @@
 }
 
 .teamwear-hero__media img {
+  opacity: 0;
   object-fit: cover;
   object-position: 54% center;
-  transition: opacity var(--motion-duration-reveal) var(--motion-ease-editorial);
+  transition: opacity var(--motion-duration-enter) var(--motion-ease-enter);
+}
+
+.teamwear-hero.is-ready .teamwear-hero__media img {
+  opacity: 1;
 }
 
 .teamwear-hero__shade {
@@ -191,15 +203,15 @@
   display: grid;
   justify-items: center;
   opacity: 0;
-  transform: translateY(var(--motion-distance-entrance));
+  translate: 0 var(--motion-distance-entrance);
   transition:
-    opacity var(--motion-duration-reveal) var(--motion-ease-editorial),
-    transform var(--motion-duration-reveal) var(--motion-ease-editorial);
+    opacity var(--motion-duration-enter) var(--motion-ease-enter) calc(var(--motion-stagger-short) + var(--motion-stagger-short)),
+    translate var(--motion-duration-enter) var(--motion-ease-enter) calc(var(--motion-stagger-short) + var(--motion-stagger-short));
 }
 
 .teamwear-hero.is-ready .teamwear-hero__content {
   opacity: 1;
-  transform: none;
+  translate: 0 0;
 }
 
 .teamwear-hero__content .teamwear-kicker {
@@ -297,6 +309,8 @@
   display: grid;
   gap: 0;
   text-align: left;
+  translate: var(--rail-copy-offset, 0px) 0;
+  will-change: translate;
 }
 
 .teamwear-rail-card__media {
@@ -307,7 +321,15 @@
   background: var(--color-surface-low);
 }
 
-.teamwear-rail-card__media img {
+.teamwear-rail-card__photo-track {
+  width: calc(100% + var(--space-5) + var(--space-5));
+  height: 100%;
+  margin-inline: calc(0px - var(--space-5));
+  translate: var(--rail-photo-offset, 0px) 0;
+  will-change: translate;
+}
+
+.teamwear-rail-card__photo-track img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -641,9 +663,15 @@
     transition: none;
   }
 
+  .teamwear-hero__media img,
   .teamwear-hero__content,
   .teamwear-story-page.reveal-ready [data-section-reveal] {
     opacity: 1;
-    transform: none;
+    translate: 0 0;
+  }
+
+  .teamwear-rail-card__photo-track,
+  .teamwear-rail-card__copy {
+    translate: 0 0;
   }
 }

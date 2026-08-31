@@ -12,31 +12,33 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wdth,wght@87.5,100..900&amp;display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400..700&amp;icon_names=add,apparel,arrow_forward,arrow_outward,check,chevron_left,chevron_right,close,grid_view,image,laundry,layers,menu,search,water_drop&amp;display=block">
-  <link rel="stylesheet" href="assets/css/tokens.css?v=20260831c">
+  <script src="assets/js/page-transitions.js?v=20260831a"></script>
+  <link rel="stylesheet" href="assets/css/tokens.css?v=20260831f">
+  <link rel="stylesheet" href="assets/css/motion.css?v=20260831a">
   <link rel="stylesheet" href="assets/css/reset.css?v=20260829a">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/layout.css">
-  <link rel="stylesheet" href="assets/css/components.css?v=20260831c">
+  <link rel="stylesheet" href="assets/css/components.css?v=20260831h">
   <link rel="stylesheet" href="assets/css/pages.css?v=20260829a">
   <link rel="stylesheet" href="assets/css/color-options.css">
-  <script defer src="assets/js/app.js?v=20260829b"></script>
+  <script defer src="assets/js/app.js?v=20260831a"></script>
   <script defer src="assets/js/search-core.js?v=20260829b"></script>
-  <script defer src="assets/js/search.js?v=20260830c"></script>
-  <script defer src="assets/js/choices.js?v=20260829a"></script>
-  <script defer src="assets/js/media-zoom.js?v=20260830a"></script>
+  <script defer src="assets/js/search.js?v=20260831a"></script>
+  <script defer src="assets/js/choices.js?v=20260831c"></script>
+  <script defer src="assets/js/media-zoom.js?v=20260831b"></script>
 </head>
 <body class="site-shell reference-page product-page" data-root="">
   <header class="site-header">
     <div class="container site-header__inner">
       <a class="site-logo" href="/" aria-label="Paradigm home">PARADIGM</a>
       <div class="site-actions" aria-label="Quick actions">
-        <button class="icon-button" type="button" aria-label="Open search" aria-expanded="false" data-search-toggle data-search-open-symbol="search" data-search-close-symbol="close"><span class="material-symbols-outlined material-icon" aria-hidden="true">search</span></button>
-        <button class="icon-button" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle data-nav-open-symbol="menu" data-nav-close-symbol="close"><span class="material-symbols-outlined material-icon" aria-hidden="true">menu</span></button>
+        <button class="icon-button" type="button" aria-label="Open search" aria-expanded="false" data-search-toggle><span class="toggle-icon-stack" aria-hidden="true"><span class="material-symbols-outlined material-icon toggle-icon toggle-icon--resting" aria-hidden="true">search</span><span class="material-symbols-outlined material-icon toggle-icon toggle-icon--close" aria-hidden="true">close</span></span></button>
+        <button class="icon-button" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle><span class="toggle-icon-stack" aria-hidden="true"><span class="material-symbols-outlined material-icon toggle-icon toggle-icon--resting" aria-hidden="true">menu</span><span class="material-symbols-outlined material-icon toggle-icon toggle-icon--close" aria-hidden="true">close</span></span></button>
       </div>
     </div>
   </header>
 
-  <div class="search-overlay" role="dialog" aria-modal="true" aria-labelledby="search-overlay-title" aria-hidden="true" data-search-overlay>
+  <div class="search-overlay" role="dialog" aria-modal="true" aria-labelledby="search-overlay-title" aria-hidden="true" data-overlay-state="closed" data-search-overlay>
     <div class="search-overlay__panel">
       <div class="container search-overlay__inner">
         <h2 class="visually-hidden" id="search-overlay-title">Search</h2>
@@ -55,9 +57,8 @@
     </div>
   </div>
 
-  <div class="nav-drawer" aria-hidden="true" data-nav-drawer>
+  <div class="nav-drawer" aria-hidden="true" data-overlay-state="closed" data-nav-drawer>
     <div class="nav-drawer__panel">
-      <button class="icon-button nav-drawer__close" type="button" aria-label="Close navigation" data-nav-close><span class="material-symbols-outlined material-icon" aria-hidden="true">close</span></button>
       <div class="container nav-drawer__inner">
         <nav class="drawer-nav" aria-label="Navigation">
           <ul class="drawer-nav__groups" role="list">

@@ -54,14 +54,17 @@ function ruleDeclarations(source, selector) {
 }
 
 const tokens = await readFile(path.join(CSS_DIRECTORY, "tokens.css"), "utf8");
+const reset = await readFile(path.join(CSS_DIRECTORY, "reset.css"), "utf8");
 const layout = await readFile(path.join(CSS_DIRECTORY, "layout.css"), "utf8");
 const components = await readFile(path.join(CSS_DIRECTORY, "components.css"), "utf8");
+const motion = await readFile(path.join(CSS_DIRECTORY, "motion.css"), "utf8");
 const pages = await readFile(path.join(CSS_DIRECTORY, "pages.css"), "utf8");
 const teamwear = await readFile(path.join(CSS_DIRECTORY, "teamwear.css"), "utf8");
 const teamwearStory = await readFile(path.join(CSS_DIRECTORY, "teamwear-story.css"), "utf8");
 const teamwearTemplate = await readFile(path.join(ROOT, "scripts", "templates", "teamwear-page.html"), "utf8");
 const teamwearBehavior = await readFile(path.join(ROOT, "assets", "js", "teamwear.js"), "utf8");
 const mediaZoom = await readFile(path.join(ROOT, "assets", "js", "media-zoom.js"), "utf8");
+const choices = await readFile(path.join(ROOT, "assets", "js", "choices.js"), "utf8");
 const productionCssFiles = (await readdir(CSS_DIRECTORY)).filter((file) => file.endsWith(".css"));
 const productionCssEntries = await Promise.all(
   productionCssFiles.map(async (file) => [file, await readFile(path.join(CSS_DIRECTORY, file), "utf8")])
@@ -100,18 +103,35 @@ assert.equal(propertyValue(tokens, "--layout-section-padding-editorial"), "var(-
 assert.equal(propertyValue(tokens, "--layout-section-content-gap"), "var(--space-8)", "Section content gaps must use 48px");
 assert.equal(propertyValue(tokens, "--primary-action-padding-block"), "var(--space-5)", "Primary actions must use 16px vertical padding");
 assert.equal(propertyValue(tokens, "--primary-action-padding-inline"), "var(--space-7)", "Primary actions must use 32px horizontal padding");
+assert.match(
+  reset,
+  /html\s*\{[\s\S]*?background:\s*linear-gradient\(\s*to bottom,\s*var\(--color-surface-high\) 0 50%,\s*var\(--color-container-mid\) 50% 100%\s*\);/,
+  "The root canvas must use a hard un-tokenized 50% split between the page-top and footer-bottom colors"
+);
+assert.doesNotMatch(blockAfter(reset, "html"), /\bopacity\s*:|rgba\(|hsla\(|color-mix\(|transparent/, "The root canvas must use fully opaque semantic colors without blending");
+assert.doesNotMatch(tokens, /--(?:root|overscroll)[^:]*split\s*:/, "The functional root-canvas split must remain literal rather than becoming a design token");
 assert.equal(propertyValue(tokens, "--type-interface-label-transform"), "uppercase", "Interface labels must use the shared uppercase presentation token");
 assert.match(
   tokens,
-  /--header-actions-width:\s*calc\(\s*var\(--control-size-large\)\s*\+\s*var\(--control-size-large\)\s*\);/,
-  "Header actions must reserve exactly two touching 48px interaction cells"
+  /--header-actions-width:\s*calc\(\s*var\(--icon-size\)\s*\+\s*var\(--icon-size\)\s*\+\s*var\(--space-5\)\s*\);/,
+  "Header actions must preserve two intrinsic 24px glyph boxes with the shared 16px visual gap"
 );
 assert.equal(propertyValue(tokens, "--header-control-gap"), undefined, "The obsolete off-scale 10px header gap token must remain removed");
+assert.match(propertyValue(tokens, "--header-control-target-crop"), /var\(--control-size-large\)[\s\S]*var\(--icon-size\)[\s\S]*var\(--space-5\)/, "Adjacent header hit regions must derive their crop from the target, glyph, and gap tokens");
 assert.equal(propertyValue(tokens, "--external-link-arrow-size"), "1em", "External-link arrows must match the label font size");
 assert.equal(propertyValue(tokens, "--external-link-arrow-gap"), "var(--space-1)", "External-link arrows must use the shared 2px label gap");
 assert.equal(propertyValue(tokens, "--external-link-arrow-motion-distance"), "var(--space-1)", "External-link arrow motion must use the shared 2px distance");
 assert.equal(propertyValue(tokens, "--media-zoom-float-z-index"), "120", "Floating product inspection must sit above the shared header");
 assert.equal(propertyValue(tokens, "--media-zoom-overlay-z-index"), "130", "The enlarged gallery must sit above every other shared layer");
+assert.equal(propertyValue(tokens, "--motion-duration-enter"), "400ms", "Page and component entrances must use the shared 400ms role");
+assert.equal(propertyValue(tokens, "--motion-duration-exit"), "200ms", "Page and component exits must use the shared 200ms role");
+assert.equal(propertyValue(tokens, "--motion-duration-standard"), "300ms", "Standard state changes must use the shared 300ms role");
+assert.equal(propertyValue(tokens, "--motion-duration-compact-enter"), "250ms", "Compact surfaces must use the shared 250ms entrance role");
+assert.equal(propertyValue(tokens, "--motion-stagger-short"), "40ms", "Short sequencing must use the shared 40ms stagger");
+assert.equal(propertyValue(tokens, "--motion-distance-component"), "var(--space-4)", "Component travel must use the shared 12px role");
+assert.equal(propertyValue(tokens, "--motion-page-depth-shift"), "24%", "Receding pages must use the shared 24% depth shift");
+assert.match(motion, /@view-transition\s*\{[\s\S]*?navigation:\s*auto;/, "Cross-document View Transitions must be progressively enabled in the shared motion layer");
+assert.match(motion, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?navigation:\s*none;/, "Reduced motion must disable cross-document page transitions");
 assert.doesNotMatch(tokens, /--button-height\s*:/, "Primary actions must be content-sized rather than height-token sized");
 const mediumTokens = blockAfter(tokens, "@media (min-width: 48rem)");
 assert.equal(propertyValue(mediumTokens, "--layout-gutter-inline"), "var(--space-7)", "Medium and Large gutters must be 32px");
@@ -170,16 +190,16 @@ assert.match(
   "Touch-inspection media must retain native horizontal and vertical one-finger panning"
 );
 assert.match(components, /\.media-zoom-float\s*\{[\s\S]*?position:\s*fixed !important;[\s\S]*?will-change:\s*width, height, transform;/, "Pinched media must use an isolated fixed copy with frame-updated dimensions and translation");
-assert.match(components, /\.media-zoom-lens\s*\{[\s\S]*?border-radius:\s*var\(--radius-pill\);[\s\S]*?pointer-events:\s*none;/, "Large inspection must use a circular non-interactive lens");
+assert.match(components, /\.media-zoom-source-active\s*\{[\s\S]*?visibility:\s*hidden !important;/, "Pinched media must hide its in-flow source without collapsing layout");
 assert.match(components, /\.media-zoom-overlay\s*\{[\s\S]*?position:\s*fixed;[\s\S]*?overflow:\s*auto;[\s\S]*?overscroll-behavior:\s*contain;/, "The enlarged gallery must own full-viewport two-axis scrolling");
 assert.match(components, /\.media-zoom-overlay__column\s*\{[\s\S]*?flex-direction:\s*column;[\s\S]*?gap:\s*0;[\s\S]*?margin-inline:\s*auto;/, "The enlarged gallery must remain a centered gapless image column");
-assert.match(mediaZoom, /const LARGE_VIEW_QUERY = "\(min-width: 64rem\)";/, "Pointer lens and overlay behavior must begin at the shared Large breakpoint");
-assert.match(mediaZoom, /const DESKTOP_ZOOM = 2;[\s\S]*?const LENS_GALLERY_RATIO = 0\.5;[\s\S]*?const OVERLAY_GALLERY_RATIO = 2;/, "Large inspection must keep a 2x lens, half-column lens diameter, and double-width overlay column");
-assert.match(mediaZoom, /galleryRect\.width \* LENS_GALLERY_RATIO/, "Lens diameter must derive from the complete measured gallery column");
+assert.match(mediaZoom, /const LARGE_VIEW_QUERY = "\(min-width: 64rem\)";/, "The enlarged overlay must begin at the shared Large breakpoint");
+assert.match(mediaZoom, /const OVERLAY_GALLERY_RATIO = 2;/, "Large inspection must keep its double-width overlay column");
+assert.doesNotMatch(`${components}\n${mediaZoom}`, /media-zoom-lens|LENS_GALLERY_RATIO|DESKTOP_ZOOM|renderLens|queueLensFrame/, "Large inspection must not retain the removed hover magnifier");
 assert.match(mediaZoom, /gallery\.getBoundingClientRect\(\)\.width \* OVERLAY_GALLERY_RATIO/, "Overlay width must derive from twice the measured gallery column");
 assert.match(mediaZoom, /overlay\.scrollLeft = Math\.max\(0, \(overlay\.scrollWidth - overlay\.clientWidth\) \/ 2\)/, "A wider overlay column must initialize at its horizontal center");
 assert.match(mediaZoom, /overlay\.scrollTop = images\[selectedIndex\]\?\.offsetTop \|\| 0/, "The enlarged gallery must open vertically at the selected image");
-assert.match(mediaZoom, /largeView\.addEventListener\("change", setLargeGalleryMode\)/, "Leaving Large must tear down the lens and enlarged gallery");
+assert.match(mediaZoom, /largeView\.addEventListener\("change", setLargeGalleryMode\)/, "Leaving Large must tear down the enlarged gallery");
 assert.match(mediaZoom, /previousBodyOverflow[\s\S]*?trigger\.focus\(\{ preventScroll: true \}\)/, "Overlay closure must restore body scrolling and source focus");
 assert.doesNotMatch(mediaZoom, /\.style\.scale\b|\bscale\s*\(/, "Media inspection must never bypass the CSS scaling prohibition through JavaScript");
 
@@ -265,9 +285,14 @@ assert.doesNotMatch(teamwearStory, /\.teamwear-story-page \.teamwear-faq (?:deta
 assert.doesNotMatch(teamwearBehavior, /faqList|faqItems|faqQuestions|teamwear-faq-question-height/, "Teamwear behavior must not retain accordion measurement code");
 assert.match(
   teamwearStory,
-  /\.teamwear-story-page\.reveal-ready \.teamwear-highlights__rail > \[data-section-reveal\],[\s\S]*?\.teamwear-colorway__rail > \[data-section-reveal\],[\s\S]*?\.teamwear-gallery__rail > \[data-section-reveal\]\s*\{[\s\S]*?transform:\s*none;/,
-  "Horizontally offscreen Teamwear cards must not create vertical scroll overflow with the shared reveal transform"
+  /\.teamwear-story-page\.reveal-ready \.teamwear-rail-card\[data-section-reveal\]\s*\{[\s\S]*?translate:\s*0 var\(--motion-distance-component\);[\s\S]*?var\(--rail-card-delay, 0ms\)/,
+  "Teamwear rail cards must use the centralized 12px entrance and per-card delay"
 );
+assert.match(teamwearStory, /\.teamwear-rail-card__photo-track\s*\{[\s\S]*?width:\s*calc\(100% \+ var\(--space-5\) \+ var\(--space-5\)\);[\s\S]*?translate:\s*var\(--rail-photo-offset, 0px\) 0;/, "Teamwear rail photos must provide 16px inline bleed and consume the bounded photo offset");
+assert.match(teamwearStory, /\.teamwear-rail-card__copy\s*\{[\s\S]*?translate:\s*var\(--rail-copy-offset, 0px\) 0;/, "Teamwear rail copy must consume its opposed offset");
+assert.match(teamwearBehavior, /card\.style\.setProperty\("--rail-card-delay", `\$\{index \* 40\}ms`\)/, "Teamwear cards must reveal in DOM order with a 40ms stagger");
+assert.match(teamwearBehavior, /getBoundingClientRect\(\)[\s\S]*?--rail-photo-offset[\s\S]*?positions\[index\] \* -16[\s\S]*?--rail-copy-offset[\s\S]*?positions\[index\] \* 8/, "Teamwear rails must read geometry before writing bounded opposed 16px and 8px offsets");
+assert.match(teamwearBehavior, /reducedMotionQuery\.addEventListener\("change"[\s\S]*?rails\.forEach\(\(rail\) => railUpdates\.get\(rail\)\?\.\(\)\)/, "Teamwear rail motion must tear down and resume when the reduced-motion preference changes");
 assert.match(teamwearStory, /\.teamwear-story-page \.teamwear-hero\s*\{[\s\S]*?width:\s*100%;[\s\S]*?margin-inline:\s*auto;[\s\S]*?padding:\s*0/, "Teamwear hero must span the complete viewport width without extra top padding");
 assert.match(teamwearStory, /\.teamwear-material__media\s*\{[\s\S]*?width:\s*100%;[\s\S]*?margin-inline:\s*auto;/, "Teamwear full-bleed material media must span the complete viewport width");
 assert.doesNotMatch(teamwearStory, /layout-canvas-width/, "Teamwear media must not retain the removed 1440px cap");
@@ -343,6 +368,10 @@ assert.match(components, /\.choice-option--swatch\s*\{/, "Shared swatch choices 
 assert.match(tokens, /--primary-action-floating-bottom-gap:\s*var\(--space-9\);/, "Large floating actions must use the 64px spacing token for their bottom gap");
 assert.match(tokens, /--primary-action-floating-clearance:\s*calc\([\s\S]*?var\(--primary-action-content-clearance\)[\s\S]*?var\(--primary-action-floating-bottom-gap\)/, "The footer must reserve the calculated floating-action and bottom-gap footprint");
 assert.match(components, /data-action-behavior="fixed-to-float"\]\.is-floating\s*\{[\s\S]*?var\(--layout-page-gutter\)[\s\S]*?var\(--primary-action-floating-bottom-gap\)/, "Large floating actions must use the page gutter on the right and the fixed semantic gap on the bottom");
+assert.match(largeComponents, /data-action-behavior="fixed-to-float"\]\.is-floating\s*\{[\s\S]*?opacity:\s*0;[\s\S]*?translate:\s*0 var\(--motion-distance-component\);[\s\S]*?opacity var\(--motion-duration-exit\) var\(--motion-ease-exit\)[\s\S]*?translate var\(--motion-duration-exit\) var\(--motion-ease-exit\)/, "Large floating actions must reverse out with the shared 12px and 200ms exit roles");
+assert.match(largeComponents, /data-action-behavior="fixed-to-float"\]\.is-floating\.is-floating-visible\s*\{[\s\S]*?opacity:\s*1;[\s\S]*?translate:\s*0 0;[\s\S]*?var\(--motion-duration-enter\)[\s\S]*?var\(--motion-ease-enter\)/, "Large floating actions must enter with the shared 400ms emphasized-decelerate role");
+assert.match(choices, /floatingState = "entering"[\s\S]*?requestAnimationFrame[\s\S]*?floatingState = "floating"[\s\S]*?floatingState = "exiting"/, "The fixed-to-float controller must sequence entering, floating, and exiting states without cloning the action");
+assert.match(choices, /clearMotionListener\(\)[\s\S]*?stateVersion[\s\S]*?afterOpacityTransition/, "Floating-action reversals must cancel stale completions and continue from the current CSS presentation");
 assert.doesNotMatch(largeComponents.match(/\.primary-action\[data-action-behavior="fixed-to-float"\]\.is-floating\s*\{[\s\S]*?\}/)?.[0] || "", /safe-area-inset-bottom/, "Large floating actions must not add a safe-area inset to the requested space-9 bottom offset");
 assert.match(largeComponents, /body:has\(\.primary-action\[data-action-behavior="fixed-to-float"\]\) \.site-footer__grid\s*\{[\s\S]*?padding-bottom:\s*calc\(var\(--space-9\) \+ var\(--primary-action-floating-clearance\)\)/, "Large Teamwear footers must clear the persistent floating action without docking it");
 assert.doesNotMatch(`${components}\n${teamwearStory}`, /primary-action-dock|is-docked|has-floating-primary-action/, "The persistent Teamwear action must not retain dock or header-hiding states");

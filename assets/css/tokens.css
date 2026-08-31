@@ -144,11 +144,15 @@
     var(--safe-area-inset-top)
   );
   --header-actions-width: calc(
-    var(--control-size-large) +
-    var(--control-size-large)
+    var(--icon-size) +
+    var(--icon-size) +
+    var(--space-5)
   );
   --icon-size-small: 1.25rem;
   --icon-size: 1.5rem;
+  --header-control-target-crop: calc(
+    (var(--control-size-large) - (var(--icon-size) + var(--space-5))) / 2
+  );
   --external-link-arrow-size: 1em;
   --external-link-arrow-gap: var(--space-1);
   --external-link-arrow-motion-distance: var(--space-1);
@@ -176,8 +180,17 @@
   --media-zoom-overlay-z-index: 130;
   --focus-ring-width: 2px;
   --focus-ring-offset: 3px;
-  --transition-base: 180ms ease;
-  --transition-fast: var(--transition-base);
+  --motion-ease-emphasized: cubic-bezier(.2, 0, 0, 1);
+  --motion-ease-enter: cubic-bezier(.05, .7, .1, 1);
+  --motion-ease-exit: cubic-bezier(.3, 0, .8, .15);
+  --motion-ease-compact-enter: cubic-bezier(0, 0, 0, 1);
+  --motion-duration-standard: 300ms;
+  --motion-duration-enter: 400ms;
+  --motion-duration-exit: 200ms;
+  --motion-duration-compact-enter: 250ms;
+  --motion-stagger-short: 40ms;
+  --motion-distance-component: var(--space-4);
+  --motion-page-depth-shift: 24%;
   --motion-ease-editorial: cubic-bezier(.32, .72, 0, 1);
   --motion-duration-color: 350ms;
   --motion-duration-medium: 700ms;

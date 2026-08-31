@@ -2,8 +2,6 @@
   const LARGE_VIEW_QUERY = "(min-width: 64rem)";
   const TOUCH_ZOOM_MIN = 1;
   const TOUCH_ZOOM_MAX = 4;
-  const DESKTOP_ZOOM = 2;
-  const LENS_GALLERY_RATIO = 0.5;
   const OVERLAY_GALLERY_RATIO = 2;
   const STATIONARY_CLICK_DISTANCE = 6;
   const largeView = window.matchMedia(LARGE_VIEW_QUERY);
@@ -12,11 +10,6 @@
   let touchFrame = 0;
   let suppressedClickSource = null;
   let suppressClickUntil = 0;
-  let lens = null;
-  let lensImage = null;
-  let lensSource = null;
-  let lensPointer = null;
-  let lensFrame = 0;
   let overlayState = null;
   let resizeFrame = 0;
 
@@ -112,7 +105,10 @@
     removeInteractiveCloneAttributes(clone);
     clone.classList.add("media-zoom-float");
     clone.setAttribute("aria-hidden", "true");
-    clone.style.setProperty("--choice-color", window.getComputedStyle(source).getPropertyValue("--choice-color"));
+    const sourceStyle = window.getComputedStyle(source);
+    ["--choice-color", "--rail-photo-offset", "--rail-copy-offset"].forEach((property) => {
+      clone.style.setProperty(property, sourceStyle.getPropertyValue(property));
+    });
     sourceImages.forEach((image, index) => {
       if (cloneImages[index]) copyImagePresentation(image, cloneImages[index], true);
     });
@@ -207,9 +203,11 @@
   function startTouchGesture(source, touches) {
     const rect = source.getBoundingClientRect();
     if (!rect.width || !rect.height) return false;
+    const clone = createFloatingClone(source);
+    source.classList.add("media-zoom-source-active");
     touchGesture = {
       source,
-      clone: createFloatingClone(source),
+      clone,
       sourceWidth: rect.width,
       sourceHeight: rect.height,
       left: rect.left,
@@ -228,6 +226,7 @@
     const { source, clone } = touchGesture;
     if (touchFrame) window.cancelAnimationFrame(touchFrame);
     touchFrame = 0;
+    source.classList.remove("media-zoom-source-active");
     clone.remove();
     suppressedClickSource = source;
     suppressClickUntil = Date.now() + 700;
@@ -281,61 +280,6 @@
     event.stopImmediatePropagation();
   }, true);
 
-  function ensureLens() {
-    if (lens) return;
-    lens = document.createElement("div");
-    lens.className = "media-zoom-lens";
-    lens.hidden = true;
-    lens.setAttribute("aria-hidden", "true");
-    lensImage = document.createElement("img");
-    lensImage.alt = "";
-    lensImage.draggable = false;
-    lens.appendChild(lensImage);
-    document.body.appendChild(lens);
-  }
-
-  function hideLens() {
-    lensPointer = null;
-    lensSource = null;
-    if (lensFrame) window.cancelAnimationFrame(lensFrame);
-    lensFrame = 0;
-    if (lens) lens.hidden = true;
-  }
-
-  function renderLens() {
-    lensFrame = 0;
-    if (!largeView.matches || overlayState || !lensSource || !lensSource.isConnected || !lensPointer) {
-      hideLens();
-      return;
-    }
-    const gallery = lensSource.closest("[data-media-zoom-gallery]");
-    if (!gallery || (lensSource.complete && !lensSource.naturalWidth)) {
-      hideLens();
-      return;
-    }
-    ensureLens();
-    const galleryRect = gallery.getBoundingClientRect();
-    const imageRect = lensSource.getBoundingClientRect();
-    const diameter = galleryRect.width * LENS_GALLERY_RATIO;
-    if (!diameter || !imageRect.width || !imageRect.height) {
-      hideLens();
-      return;
-    }
-    copyImagePresentation(lensSource, lensImage, false);
-    lens.style.width = `${diameter}px`;
-    lens.style.height = `${diameter}px`;
-    lens.style.transform = `translate3d(${lensPointer.x - diameter / 2}px, ${lensPointer.y - diameter / 2}px, 0)`;
-    lensImage.style.width = `${imageRect.width * DESKTOP_ZOOM}px`;
-    lensImage.style.height = `${imageRect.height * DESKTOP_ZOOM}px`;
-    lensImage.style.transform = `translate3d(${diameter / 2 - (lensPointer.x - imageRect.left) * DESKTOP_ZOOM}px, ${diameter / 2 - (lensPointer.y - imageRect.top) * DESKTOP_ZOOM}px, 0)`;
-    lens.hidden = false;
-  }
-
-  function queueLensFrame() {
-    if (lensFrame) return;
-    lensFrame = window.requestAnimationFrame(renderLens);
-  }
-
   function galleryImage(node) {
     if (!(node instanceof Element)) return null;
     return node.closest("[data-media-zoom-gallery] img");
@@ -379,7 +323,6 @@
     if (largeView.matches) images.forEach(enableLargeGalleryImage);
     else {
       closeOverlay();
-      hideLens();
       images.forEach(disableLargeGalleryImage);
     }
   }
@@ -435,7 +378,6 @@
   function openOverlay(gallery, selectedIndex, trigger) {
     if (!largeView.matches) return;
     if (overlayState) closeOverlay(false);
-    hideLens();
     const sourceImages = Array.from(gallery.querySelectorAll("img"));
     if (!sourceImages.length) return;
 
@@ -490,22 +432,6 @@
     window.requestAnimationFrame(layoutOverlay);
   }
 
-  document.addEventListener("pointermove", (event) => {
-    if (!largeView.matches || overlayState || event.pointerType === "touch") return;
-    const image = galleryImage(event.target);
-    if (!image) return;
-    lensSource = image;
-    lensPointer = { x: event.clientX, y: event.clientY };
-    queueLensFrame();
-  }, true);
-
-  document.addEventListener("pointerout", (event) => {
-    const image = galleryImage(event.target);
-    if (!image || image !== lensSource) return;
-    if (event.relatedTarget instanceof Node && image.contains(event.relatedTarget)) return;
-    hideLens();
-  }, true);
-
   document.addEventListener("click", (event) => {
     if (!largeView.matches || overlayState || event.defaultPrevented) return;
     const image = galleryImage(event.target);
@@ -537,24 +463,11 @@
     if (overlayState && !overlayState.overlay.contains(event.target)) overlayState.overlay.focus({ preventScroll: true });
   });
 
-  document.addEventListener("mouseout", (event) => {
-    if (event.relatedTarget === null) hideLens();
-  });
-  window.addEventListener("blur", hideLens);
-  window.addEventListener("scroll", hideLens, { passive: true });
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) hideLens();
-  });
-  document.addEventListener("error", (event) => {
-    if (event.target === lensSource) hideLens();
-  }, true);
-
   window.addEventListener("resize", () => {
     if (resizeFrame) return;
     resizeFrame = window.requestAnimationFrame(() => {
       resizeFrame = 0;
       if (overlayState) layoutOverlay();
-      else if (lensSource) queueLensFrame();
     });
   }, { passive: true });
 

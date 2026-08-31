@@ -319,15 +319,18 @@ assert.match(components, /\.breadcrumb a:is\(:hover, :active, :focus-visible\) \
 assert.doesNotMatch(components, /\.breadcrumb a:is\([^)]*\)\s*,/, "breadcrumb interaction decoration must never target an anchor containing an icon glyph");
 assert.match(components, /\.breadcrumb\s*\{[\s\S]*?min-width:\s*0;[\s\S]*?flex:\s*1 1 auto;[\s\S]*?overflow-x:\s*auto/, "only the breadcrumb region may scroll within a page headline");
 assert.match(components, /\.page-headline__action\s*\{[\s\S]*?flex:\s*0 0 auto/, "headline actions must remain intrinsic-width trailing controls");
-assert.match(components, /:where\([\s\S]*?\.site-logo,[\s\S]*?\.drawer-nav a,[\s\S]*?\.search-suggestion,[\s\S]*?\.search-page-result,[\s\S]*?\.breadcrumb a,[\s\S]*?\.page-headline__action,[\s\S]*?\.footer-link[\s\S]*?\)\s*\{[\s\S]*?min-height:\s*var\(--control-size-large\);/, "unboxed text controls must share the 48px minimum short-side contract");
-assert.match(components, /\.site-actions\s*\{[\s\S]*?gap:\s*0;[\s\S]*?width:\s*var\(--header-actions-width\);/, "adjacent header targets must meet without overlap or an off-scale gap");
-assert.match(components, /\.icon-button\s*\{[\s\S]*?width:\s*var\(--control-size-large\);[\s\S]*?height:\s*var\(--control-size-large\);/, "icon buttons must use real 48px interaction boxes");
-assert.doesNotMatch(components, /\.icon-button::before\s*\{/, "icon-button targets must not rely on overlapping pseudo-elements");
-assert.match(components, /\.icon-button \.material-icon\s*\{[\s\S]*?width:\s*var\(--icon-size\);[\s\S]*?height:\s*var\(--icon-size\);[\s\S]*?font-size:\s*var\(--icon-size\);/, "48px icon buttons must retain centered 24px glyphs");
-assert.match(components, /\.search-form\s*\{[\s\S]*?height:\s*calc\(var\(--control-size-large\) \+ \(var\(--stroke-width-thin\) \* 2\)\);[\s\S]*?border:\s*var\(--stroke-width-thin\) solid var\(--color-outline-low\);/, "the Search frame must place its tokenized stroke outside the 48px input and submit targets");
+assert.doesNotMatch(components, /:where\([\s\S]*?\.site-logo,[\s\S]*?\.footer-link[\s\S]*?\)\s*\{[\s\S]*?min-height:\s*var\(--control-size-large\);/, "interaction guidance must not impose a shared min-height that changes established text-link layout");
+assert.match(components, /\.site-actions\s*\{[\s\S]*?gap:\s*var\(--space-5\);[\s\S]*?width:\s*var\(--header-actions-width\);/, "header glyphs must use the shared 16px visual gap without enlarging their layout boxes");
+assert.match(components, /\.icon-button\s*\{[\s\S]*?width:\s*var\(--icon-size\);[\s\S]*?height:\s*var\(--icon-size\);/, "icon buttons must retain intrinsic 24px layout boxes");
+assert.match(components, /\.icon-button::before\s*\{[\s\S]*?width:\s*var\(--control-size-large\);[\s\S]*?height:\s*var\(--control-size-large\);[\s\S]*?translate:\s*-50% -50%;/, "icon buttons must use out-of-flow 48px hit regions without changing layout");
+assert.match(components, /\.site-actions \.icon-button:first-child::before\s*\{[\s\S]*?clip-path:\s*inset\(\s*0\s*var\(--header-control-target-crop\)\s*0\s*var\(--header-control-target-crop\)\s*\);[\s\S]*?\.site-actions \.icon-button:last-child::before\s*\{[\s\S]*?clip-path:\s*inset\(0 0 0 var\(--header-control-target-crop\)\);/, "header hit regions must crop every edge facing another interactive header control");
+assert.match(components, /\.icon-button \.material-icon\s*\{[\s\S]*?width:\s*100%;[\s\S]*?height:\s*100%;[\s\S]*?font-size:\s*var\(--icon-size\);/, "intrinsic icon buttons must retain centered 24px glyphs");
+assert.match(components, /\.search-form\s*\{[\s\S]*?height:\s*var\(--control-size-large\);[\s\S]*?min-height:\s*var\(--control-size-large\);[\s\S]*?border:\s*var\(--stroke-width-thin\) solid var\(--color-outline-low\);/, "the Search frame must retain its established 48px layout height and tokenized stroke");
 assert.match(components, /\.search-form__submit\s*\{[\s\S]*?width:\s*var\(--control-size-large\);[\s\S]*?min-width:\s*var\(--control-size-large\);[\s\S]*?height:\s*100%;/, "Search submit controls must retain a real 48px interaction target");
-assert.match(components, /\.page-headline__action--icon\s*\{[\s\S]*?width:\s*var\(--control-size-large\);[\s\S]*?height:\s*var\(--control-size-large\);/, "headline icon actions must use real 48px interaction boxes");
-assert.doesNotMatch(components, /\.page-headline__action::before\s*\{/, "headline targets must not rely on overlapping pseudo-elements");
+assert.match(components, /\.page-headline__action--icon,[\s\S]*?\.page-headline__action-icon\s*\{[\s\S]*?width:\s*var\(--icon-size\);[\s\S]*?height:\s*var\(--icon-size\);/, "headline icon actions must retain intrinsic 24px layout boxes");
+assert.match(components, /\.page-headline__action::before\s*\{[\s\S]*?width:\s*var\(--control-size-large\);/, "headline actions may use a 48px out-of-flow hit region inside the existing headline row");
+assert.match(components, /\.drawer-nav a\s*\{[\s\S]*?display:\s*block;/, "drawer links must retain their intrinsic line-box layout");
+assert.match(components, /\.search-suggestion\s*\{[\s\S]*?display:\s*block;/, "Search suggestions must retain their intrinsic line-box layout");
 assert.match(components, /\.primary-action__content,[\s\S]*?\.footer-link__content,[\s\S]*?\.search-suggestion__content,[\s\S]*?\.search-page-result__content\s*\{[\s\S]*?position:\s*relative;[\s\S]*?display:\s*inline-block;/, "external-link and Search labels must own a stable positioning context");
 assert.match(components, /\.external-link__label\s*\{[\s\S]*?display:\s*block;/, "external-link labels must expose an exact block box for arrow alignment");
 assert.match(components, /\.external-link__indicator,[\s\S]*?\.search-result__indicator\s*\{[\s\S]*?inset-block-start:\s*50%;[\s\S]*?inset-inline-start:\s*calc\(100% \+ var\(--external-link-arrow-gap\)\);[\s\S]*?translate:\s*0 -50%;[\s\S]*?font-size:\s*var\(--external-link-arrow-size\)/, "external and Search arrows must be vertically centered after labels at the tokenized matching-em size");
@@ -343,6 +346,7 @@ assert.match(pages, /\.reference-page--detail \.product-feed-section\s*\{[\s\S]*
 assert.match(components, /\.product-card\s*\{[\s\S]*?border:\s*0;[\s\S]*?background:\s*var\(--color-surface-high\);/, "individual product cards must use the Surface High fill without a resting stroke");
 assert.match(components, /\.product-card__media\s*\{[\s\S]*?background:\s*transparent;/, "product photos must have no independent fill over the card surface");
 assert.match(rendererSource, /class="product-card__media" data-media-zoom-touch/, "shared product cards must opt their media into touch inspection");
+assert.match(search, /if \(product\.media\?\.src\) \{[\s\S]*?media\.dataset\.mediaZoomTouch = "";/, "Search product cards must opt only their populated photo media into touch inspection");
 assert.match(productTemplate, /data-product-gallery data-media-zoom-gallery/, "retail detail galleries must opt into shared Large inspection");
 assert.match(customizeTemplate, /data-builder-preview data-media-zoom-gallery/, "Teamwear Customize must opt into shared Large inspection");
 assert.equal((customizeTemplate.match(/data-media-zoom-touch/g) || []).length, 3, "every Teamwear Customize gallery image must opt into touch inspection");
@@ -353,12 +357,16 @@ assert.match(components, /\[data-media-zoom-touch\],[\s\S]*?\[data-media-zoom-ga
 assert.match(mediaZoom, /const TOUCH_ZOOM_MIN = 1;[\s\S]*?const TOUCH_ZOOM_MAX = 4;/, "touch product inspection must remain bounded from 1x through 4x");
 assert.match(mediaZoom, /touches\.length >= 2[\s\S]*?startTouchGesture[\s\S]*?event\.preventDefault\(\)/, "touch inspection must activate only after a second touch reaches the same media target");
 assert.match(mediaZoom, /function beginDrag\(touch\)[\s\S]*?function updateDrag\(touch\)/, "touch inspection must hand movement to the remaining finger");
-assert.match(mediaZoom, /cloneNode\(true\)[\s\S]*?getPropertyValue\("--choice-color"\)/, "floating media copies must retain current imagery and inherited Teamwear tinting");
+assert.match(mediaZoom, /cloneNode\(true\)[\s\S]*?\["--choice-color", "--rail-photo-offset", "--rail-copy-offset"\][\s\S]*?getPropertyValue\(property\)/, "floating media copies must retain current imagery, Teamwear tinting, and live rail translation");
+assert.match(mediaZoom, /createFloatingClone\(source\)[\s\S]*?source\.classList\.add\("media-zoom-source-active"\)/, "touch inspection must hide the in-flow source only after its floating copy exists");
+assert.match(mediaZoom, /source\.classList\.remove\("media-zoom-source-active"\)[\s\S]*?clone\.remove\(\)/, "touch inspection cleanup must restore the in-flow source before removing its copy");
+assert.match(components, /\.media-zoom-source-active\s*\{[\s\S]*?visibility:\s*hidden !important;/, "the active touch source must retain layout while its floating copy is visible");
 assert.match(mediaZoom, /largestImageSource[\s\S]*?srcset[\s\S]*?currentSrc/, "inspection media must prefer the largest responsive source and retain a current-source fallback");
 assert.match(mediaZoom, /requestAnimationFrame[\s\S]*?translate3d/, "gesture-driven inspection must update through animation frames and translation");
 assert.doesNotMatch(mediaZoom, /\.style\.scale\b|\bscale\s*\(/, "shared media inspection must not use scale transforms");
 assert.match(mediaZoom, /role", "dialog"[\s\S]*?aria-modal", "true"[\s\S]*?tabindex", "-1"/, "the enlarged gallery must expose an accessible modal contract");
 assert.match(mediaZoom, /event\.key === "Escape"[\s\S]*?event\.key === "Tab"/, "the enlarged gallery must close with Escape and contain keyboard focus");
+assert.doesNotMatch(`${components}\n${mediaZoom}`, /media-zoom-lens|LENS_GALLERY_RATIO|DESKTOP_ZOOM|renderLens|queueLensFrame/, "Large media inspection must not retain the removed hover magnifier");
 assert.match(components, /\.product-card__body\s*\{[\s\S]*?padding:\s*0 calc\(var\(--layout-shell-gutter-inline\) - var\(--space-3\)\) var\(--space-3\);/, "product names and prices must combine with the card inset to follow the responsive shell gutter");
 assert.match(components, /\.product-card__body\s*\{[\s\S]*?background:\s*transparent;/, "product-card bodies must have no independent fill over the card surface");
 assert.match(components, /\.product-card__title\s*\{[\s\S]*?background:\s*transparent;/, "product names must have no independent fill over the card surface");
@@ -377,16 +385,23 @@ assert.match(choices, /action\.dataset\.actionNotifyExternal/, "dynamic actions 
 assert.match(choices, /action\.dataset\.externalLink = String\(nextExternal\)/, "dynamic actions must expose their current external-link state");
 assert.doesNotMatch(choices, /primary-action__icon|action(?:Notify|Default)Symbol/, "dynamic actions must not swap icon glyphs");
 assert.match(choices, /action\.dataset\.actionBehavior !== "fixed-to-float"/, "only fixed-to-float actions may initialize movement observers");
-assert.match(choices, /action\.classList\.toggle\("is-floating", inlineAboveViewport\)/, "fixed-to-float actions must remain floating after their inline mount leaves the viewport");
+assert.match(choices, /const shouldFloat = largeView\.matches && inlineAboveViewport;[\s\S]*?if \(shouldFloat\) enterFloating\(\);[\s\S]*?else exitFloating\(\);/, "fixed-to-float actions must derive their motion state from the Large breakpoint and inline mount position");
+assert.match(choices, /floatingState = "entering"[\s\S]*?is-floating-visible[\s\S]*?floatingState = "floating"[\s\S]*?floatingState = "exiting"[\s\S]*?settleInline/, "floating actions must use the centralized interruptible state path");
+assert.match(choices, /void action\.offsetWidth;[\s\S]*?requestAnimationFrame/, "floating-action entrances must commit their hidden fixed state before becoming visible");
+assert.match(choices, /startsInline[\s\S]*?is-floating-preparing[\s\S]*?remove\("is-floating-preparing"\)[\s\S]*?is-floating-visible/, "fresh floating-action preparation must not replace current-state reversal");
+assert.match(choices, /!action\.classList\.contains\("is-floating-visible"\)[\s\S]*?settleInline\(\);/, "pre-frame floating-action reversals must settle without waiting for a missing transition");
+assert.match(choices, /reducedMotion\.addEventListener\("change", \(event\) => updateMount\(event\.matches\)\)/, "floating-action motion must settle immediately when reduced motion changes");
+assert.doesNotMatch(choices, /\bscale\s*\(|\.style\.scale\b/, "floating-action behavior must not introduce scaling");
 assert.doesNotMatch(choices, /shouldDock|footerVisible|is-docked|has-floating-primary-action|data-primary-action-dock-mount/, "the persistent floating action must not dock or change header state");
 assert.doesNotMatch(components, /primary-action-dock|is-docked/, "shared action styles must not retain a footer dock state");
 assert.doesNotMatch(choices, /icons\.svg|#icon-|querySelector\([^\n]*\buse\b/, "dynamic actions must not target SVG sprites");
 assert.doesNotMatch(choices, /\.disabled\s*=|setAttribute\(["']disabled/, "the controller must not disable unavailable choices");
 
 const app = await read("assets/js/app.js");
-assert.match(app, /function setupOverlay\(\{ overlay, toggle, openClass, openLabel, closeLabel, openSymbol, closeSymbol, initialFocus \}\)/, "menu and Search must share one overlay controller");
-assert.match(app, /icon\.textContent = closeSymbol/, "open overlays must use their configured Material close symbol");
-assert.match(app, /icon\.textContent = openSymbol/, "closed overlays must restore their configured Material symbol");
+assert.match(app, /function setupOverlay\(\{ overlay, toggle, openClass, openLabel, closeLabel, initialFocus \}\)/, "menu and Search must share one interruptible overlay state controller");
+assert.match(app, /const STATES = Object\.freeze\(\{ closed: "closed", opening: "opening", open: "open", closing: "closing" \}\)/, "shared overlays must expose the four centralized visual states");
+assert.match(rendererSource, /function renderToggleIconPair[\s\S]*?toggle-icon--resting[\s\S]*?toggle-icon--close/, "shared controls must render stacked Material icons instead of replacing text");
+assert.doesNotMatch(app, /icon\.textContent|openSymbol|closeSymbol/, "overlay state changes must not replace Material icon text");
 assert.match(app, /document\.addEventListener\("keydown", \(event\) => \{[\s\S]*?event\.key === "Escape"[\s\S]*?event\.key !== "Tab"/, "shared overlays must trap focus and handle Escape from one controller");
 assert.doesNotMatch(app, /scrollbar-compensation|window\.innerWidth\s*-\s*document\.documentElement\.clientWidth/, "overlays must rely on the stable root gutter instead of shifting the header with measured compensation");
 
@@ -417,19 +432,22 @@ const generatedPages = [
 for (const relativePath of generatedPages) {
   const page = await read(relativePath);
   assert.match(page, /Generated by scripts\/build-site\.mjs/, `${relativePath} must carry the generated banner`);
-  assert.match(page, /assets\/css\/tokens\.css\?v=20260831c/, `${relativePath} must cache-bust the shared typography, target, icon, safe-area, and media-layer tokens`);
-  assert.match(page, /assets\/css\/components\.css\?v=20260831c/, `${relativePath} must cache-bust shared interaction-target and paired-icon component rules`);
+  assert.match(page, /assets\/css\/tokens\.css\?v=20260831f/, `${relativePath} must cache-bust the shared typography, target, icon, safe-area, media-layer, and motion tokens`);
+  assert.match(page, /assets\/css\/motion\.css\?v=20260831a/, `${relativePath} must load the shared motion layer`);
+  assert.match(page, /assets\/css\/components\.css\?v=20260831h/, `${relativePath} must cache-bust shared interaction-target, overlay, paired-icon, and floating-action motion rules`);
   assert.match(page, /assets\/css\/reset\.css\?v=20260829a/, `${relativePath} must cache-bust the stable scrollbar-gutter reset`);
-  assert.match(page, /assets\/js\/app\.js\?v=20260829b/, `${relativePath} must cache-bust the shared overlay behavior`);
+  assert.match(page, /assets\/js\/page-transitions\.js\?v=20260831a/, `${relativePath} must load the early route-motion controller`);
+  assert.match(page, /assets\/js\/app\.js\?v=20260831a/, `${relativePath} must cache-bust the shared overlay behavior`);
   assert.match(page, /assets\/js\/search-core\.js\?v=20260829b/, `${relativePath} must load the shared search matcher`);
-  assert.match(page, /assets\/js\/search\.js\?v=20260830c/, `${relativePath} must load the shared Search interface`);
-  if (/^(?:index\.html|collections\/|products\/|teamwear\/)/.test(relativePath)) {
-    assert.match(page, /assets\/js\/media-zoom\.js\?v=20260830a/, `${relativePath} must cache-bust the shared media inspection behavior`);
+  assert.match(page, /assets\/js\/search\.js\?v=20260831a/, `${relativePath} must load the shared Search interface`);
+  assert.match(page, /assets\/js\/choices\.js\?v=20260831c/, `${relativePath} must cache-bust the shared choice and floating-action controller`);
+  if (/^(?:index\.html|collections\/|products\/|teamwear\/|search\/)/.test(relativePath)) {
+    assert.match(page, /assets\/js\/media-zoom\.js\?v=20260831b/, `${relativePath} must cache-bust the shared media inspection behavior`);
   } else {
     assert.doesNotMatch(page, /media-zoom\.js/, `${relativePath} must not load media inspection outside opted-in page families`);
   }
   if (relativePath === "teamwear/index.html") {
-    assert.match(page, /assets\/css\/teamwear-story\.css\?v=20260831a/, `${relativePath} must cache-bust the Material rail-control update`);
+    assert.match(page, /assets\/css\/teamwear-story\.css\?v=20260831b/, `${relativePath} must cache-bust the centralized Teamwear motion update`);
   }
   assert.match(page, /rel="preconnect" href="https:\/\/fonts\.googleapis\.com"/, `${relativePath} must preconnect to Google Fonts CSS`);
   assert.match(page, /rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin/, `${relativePath} must preconnect to Google font files`);
@@ -462,11 +480,14 @@ for (const relativePath of generatedPages) {
   if (/^(?:index\.html|collections\/)/.test(relativePath)) {
     assert.match(page, /class="product-card__media" data-media-zoom-touch/, `${relativePath} catalog cards must render touch inspection markup`);
   }
+  if (relativePath === "search/index.html") {
+    assert.match(page, /assets\/js\/media-zoom\.js\?v=20260831b/, "Search must load touch inspection for dynamically rendered product-card photos");
+  }
   if (relativePath === "teamwear/customize/index.html") {
-    assert.match(page, /assets\/js\/choices\.js\?v=20260829a/, "Teamwear Customize must cache-bust the current shared choice controller");
+    assert.match(page, /assets\/js\/choices\.js\?v=20260831c/, "Teamwear Customize must cache-bust the current shared choice controller");
     assert.match(page, /assets\/js\/teamwear-options\.js\?v=20260828a/, "Teamwear Customize must cache-bust centralized model, quantity, and add-on data");
     assert.match(page, /<h1[^>]*>PE Basketball Teamwear<\/h1>/, "Teamwear Customize must render the approved product name");
-    assert.match(page, /assets\/js\/teamwear\.js\?v=20260830a/, "Teamwear Customize must cache-bust current shared Teamwear behavior");
+    assert.match(page, /assets\/js\/teamwear\.js\?v=20260831a/, "Teamwear Customize must cache-bust current shared Teamwear behavior");
     assert.match(page, /<p class="product-detail__price" data-teamwear-price data-generated-component="product-detail-price">NT\$1,580<\/p>/, "Teamwear Customize must expose its centralized NT$1,580 price for controlled add-on updates");
     assert.match(page, /data-choice-kind="chip" data-choice-variant="add-on" data-choice-title="Add-On"/, "Teamwear Customize must render the centralized Add-On chip variation");
     assert.match(page, /data-choice-kind="chip" data-choice-title="Quantity"[\s\S]*?value="Q01"[\s\S]*?&lt;10[\s\S]*?value="Q02"[\s\S]*?10~19[\s\S]*?value="Q03" checked[\s\S]*?&gt;19/, "Teamwear Customize must render three escaped quantity chips with >19 selected by default");

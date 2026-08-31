@@ -1,5 +1,6 @@
 (function () {
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let reducedMotion = reducedMotionQuery.matches;
   const data = window.PARADIGM_TEAMWEAR || { models: [] };
   const model = data.models[0];
 
@@ -10,30 +11,83 @@
   }
 
   const storyPage = document.querySelector(".teamwear-story-page");
-  const sectionReveals = Array.from(document.querySelectorAll("[data-section-reveal]"));
-  if (sectionReveals.length) {
+  const rails = Array.from(document.querySelectorAll("[data-card-rail]"));
+  const railUpdates = new WeakMap();
+  const railCards = rails.flatMap((rail) => Array.from(rail.querySelectorAll(".teamwear-rail-card[data-section-reveal]")));
+  const sectionReveals = Array.from(document.querySelectorAll("[data-section-reveal]"))
+    .filter((element) => !element.classList.contains("teamwear-rail-card"));
+  if (sectionReveals.length || railCards.length) {
     if (reducedMotion || !("IntersectionObserver" in window)) {
-      sectionReveals.forEach((element) => element.classList.add("is-visible"));
+      [...sectionReveals, ...railCards].forEach((element) => element.classList.add("is-visible"));
     } else {
       storyPage?.classList.add("reveal-ready");
-      const observer = new IntersectionObserver((entries, revealObserver) => {
+      const sectionObserver = new IntersectionObserver((entries, revealObserver) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           entry.target.classList.add("is-visible");
           revealObserver.unobserve(entry.target);
         });
       }, { rootMargin: "0px 0px -12%", threshold: 0.12 });
-      sectionReveals.forEach((element) => observer.observe(element));
+      sectionReveals.forEach((element) => sectionObserver.observe(element));
+
+      const railObserver = new IntersectionObserver((entries, revealObserver) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          Array.from(entry.target.querySelectorAll(".teamwear-rail-card[data-section-reveal]")).forEach((card, index) => {
+            card.style.setProperty("--rail-card-delay", `${index * 40}ms`);
+            card.classList.add("is-visible");
+          });
+          revealObserver.unobserve(entry.target);
+        });
+      }, { rootMargin: "0px 0px -12%", threshold: 0.12 });
+      rails.forEach((rail) => railObserver.observe(rail));
     }
   }
 
-  document.querySelectorAll("[data-card-rail]").forEach((rail) => {
+  function clamp(value, minimum, maximum) {
+    return Math.min(maximum, Math.max(minimum, value));
+  }
+
+  rails.forEach((rail) => {
     const controls = document.querySelector(`[aria-controls="${rail.id}"]`)?.closest(".teamwear-rail-controls");
     const previousButton = controls?.querySelector("[data-rail-previous]");
     const nextButton = controls?.querySelector("[data-rail-next]");
-    if (!previousButton || !nextButton) return;
+    const cards = Array.from(rail.querySelectorAll(".teamwear-rail-card"));
+    let railFrame = 0;
+
+    function updateParallax() {
+      railFrame = 0;
+      if (reducedMotion) {
+        cards.forEach((card) => {
+          card.style.setProperty("--rail-photo-offset", "0px");
+          card.style.setProperty("--rail-copy-offset", "0px");
+        });
+        return;
+      }
+      const railRect = rail.getBoundingClientRect();
+      const railCenter = railRect.left + railRect.width / 2;
+      const positions = cards.map((card) => {
+        const rect = card.getBoundingClientRect();
+        const range = Math.max(1, (railRect.width + rect.width) / 2);
+        return clamp((rect.left + rect.width / 2 - railCenter) / range, -1, 1);
+      });
+      cards.forEach((card, index) => {
+        card.style.setProperty("--rail-photo-offset", `${positions[index] * -16}px`);
+        card.style.setProperty("--rail-copy-offset", `${positions[index] * 8}px`);
+      });
+    }
+
+    function queueRailFrame() {
+      if (railFrame) return;
+      railFrame = window.requestAnimationFrame(() => {
+        updateControls();
+        updateParallax();
+      });
+    }
+    railUpdates.set(rail, queueRailFrame);
 
     function updateControls() {
+      if (!previousButton || !nextButton) return;
       const maximumScroll = Math.max(0, rail.scrollWidth - rail.clientWidth);
       const atStart = rail.scrollLeft <= 1;
       const lastCard = rail.querySelector(".teamwear-rail-card:last-child");
@@ -53,12 +107,21 @@
       rail.scrollBy({ left: direction * distance, behavior: reducedMotion ? "auto" : "smooth" });
     }
 
-    previousButton.addEventListener("click", () => scrollRail(-1));
-    nextButton.addEventListener("click", () => scrollRail(1));
-    rail.addEventListener("scroll", updateControls, { passive: true });
-    if ("ResizeObserver" in window) new ResizeObserver(updateControls).observe(rail);
-    else window.addEventListener("resize", updateControls, { passive: true });
-    updateControls();
+    previousButton?.addEventListener("click", () => scrollRail(-1));
+    nextButton?.addEventListener("click", () => scrollRail(1));
+    rail.addEventListener("scroll", queueRailFrame, { passive: true });
+    if ("ResizeObserver" in window) new ResizeObserver(queueRailFrame).observe(rail);
+    else window.addEventListener("resize", queueRailFrame, { passive: true });
+    queueRailFrame();
+  });
+
+  reducedMotionQuery.addEventListener("change", (event) => {
+    reducedMotion = event.matches;
+    if (reducedMotion) {
+      hero?.classList.add("is-ready");
+      [...sectionReveals, ...railCards].forEach((element) => element.classList.add("is-visible"));
+    }
+    rails.forEach((rail) => railUpdates.get(rail)?.());
   });
 
   const patternPicker = document.querySelector("[data-teamwear-pattern-picker]");
@@ -82,8 +145,12 @@
       if (!image) return;
       image.src = `../${preview.preview}`;
       image.alt = `${preview.name} ${model.name} ${colorName} Road uniform rendering`;
-      if (image.complete) window.requestAnimationFrame(() => card.classList.remove("is-updating"));
-      else image.addEventListener("load", () => card.classList.remove("is-updating"), { once: true });
+      const finishUpdate = () => {
+        card.classList.remove("is-updating");
+        railUpdates.get(colorwayRail)?.();
+      };
+      if (image.complete) window.requestAnimationFrame(finishUpdate);
+      else image.addEventListener("load", finishUpdate, { once: true });
     });
     const status = patternPicker.querySelector("[data-pattern-status]");
     if (status) status.textContent = `${preview.name} pattern shown across seven Road colors.`;

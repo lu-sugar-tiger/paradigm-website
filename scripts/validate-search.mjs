@@ -96,9 +96,13 @@ assert.match(searchPage, /<link rel="canonical" href="https:\/\/prdm\.tw\/search
 assert.match(searchPage, /data-search-page-title/, "the Search breadcrumb must expose a live title target");
 assert.match(searchPage, /data-search-page-results/, "the Search route must expose a generated-results mount");
 assert.match(searchClient, /assets\/data\/search-index\.json/, "the Search client must reference the generated local index");
+assert.match(searchClient, /if \(product\.media\?\.src\) \{[\s\S]*?media\.dataset\.mediaZoomTouch = "";/, "Search product-result photos must opt into the shared touch inspection contract");
+assert.match(searchPage, /assets\/js\/media-zoom\.js\?v=20260831b/, "the Search route must load the cache-busted touch inspection module");
 assert.match(renderer, /data-search-toggle/, "the shared header must expose the Search toggle");
 assert.match(renderer, /data-search-overlay/, "the shared header must render the Search overlay on every page");
-assert.match(searchPage, /data-search-open-symbol="search" data-search-close-symbol="close"/, "the same Search control must swap its Material symbol");
+assert.match(searchPage, /data-search-toggle[\s\S]*?toggle-icon--resting[\s\S]*?>search<[\s\S]*?toggle-icon--close[\s\S]*?>close</, "the Search control must render separate stacked resting and close Material symbols");
+assert.match(searchPage, /data-overlay-state="closed" data-search-overlay/, "the Search overlay must render the shared closed state");
+assert.doesNotMatch(searchPage, /data-search-(?:open|close)-symbol/, "Search must not replace icon text during state changes");
 assert.match(searchPage, /autocomplete="off"[^>]*data-search-input/, "the Search input must be ready for immediate user input");
 assert.match(searchPage, /placeholder="Search prdm\.tw"/, "the Search field must use the complete approved prompt");
 assert.match(searchClient, /fetch\("\/assets\/data\/search-index\.json\?v=20260830a"/, "the Search index must be lazy-loaded with a cache version");
@@ -119,6 +123,8 @@ assert.match(searchClient, /trailingContent\(\s*"search-suggestion__content",\s*
 assert.match(searchClient, /page\.external \? TRAILING_ICONS\.externalPage : TRAILING_ICONS\.internalPage/, "page results must select the trailing icon from their internal or external destination");
 assert.match(searchClient, /icon\.setAttribute\("aria-hidden", "true"\)/, "decorative Search trailing icons must remain hidden from assistive technology");
 assert.match(searchClient, /let suggestionsSuppressed = false;/, "Search must track whether a suggestion was selected");
+assert.match(searchClient, /let sequenceOverlayRender = false;[\s\S]*?let overlayRenderVersion = 0;/, "Search must sequence only the first completed result render in each overlay-open cycle");
+assert.match(searchClient, /--overlay-sequence-delay[\s\S]*?120 \+ index \* 40[\s\S]*?--overlay-exit-delay/, "Search result groups must use centralized 40ms forward and reverse sequencing");
 assert.match(searchClient, /input\.addEventListener\("input", \(\) => \{[\s\S]*?suggestionsSuppressed = false;[\s\S]*?renderOverlay\(\);/, "manual input must restore current-input suggestions");
 assert.match(searchClient, /const query = suggestion\.dataset\.searchSuggestion;[\s\S]*?suggestionsSuppressed = true;/, "selecting a suggestion must suppress further suggestions immediately");
 assert.match(searchClient, /const suggestions = suggestionsSuppressed \? \[\] : core\.suggestions\(index, query\);/, "suppressed suggestions must remain absent until manual input");
@@ -130,7 +136,7 @@ assert.match(app, /const focusable = \[toggle, \.\.\.focusableNodes\(overlay\)\]
 assert.match(app, /last\.focus\(\)[\s\S]*?first\.focus\(\)/, "shared overlays must wrap keyboard focus in both directions");
 assert.match(components, /\.search-overlay\s*\{[\s\S]*?position:\s*fixed;[\s\S]*?background:\s*var\(--color-background-high\)/, "Search must use Background High for the full-screen overlay");
 assert.match(components, /\.search-overlay\s*\{[\s\S]*?overflow-y:\s*auto/, "the Search overlay must scroll independently");
-assert.match(components, /\.search-form\s*\{[\s\S]*?min-height:\s*calc\(var\(--control-size-large\) \+ \(var\(--stroke-width-thin\) \* 2\)\)/, "the Search frame must wrap a shared 48px target plus its two tokenized strokes");
+assert.match(components, /\.search-form\s*\{[\s\S]*?height:\s*var\(--control-size-large\);[\s\S]*?min-height:\s*var\(--control-size-large\)/, "the Search frame must retain its established 48px layout height");
 assert.match(components, /\.search-form\s*\{[^}]*border:\s*var\(--stroke-width-thin\) solid var\(--color-outline-low\);[^}]*background:\s*var\(--color-background-high\)/, "the Search field must use the tokenized thin option-chip border and Background High");
 assert.match(components, /\.search-form:has\(\.search-form__input:focus-visible\)\s*\{[^}]*border-color:\s*var\(--color-outline-high\);[^}]*\}/, "focused Search must switch the existing one-pixel border to Outline High");
 assert.doesNotMatch(components, /\.search-form:has\(\.search-form__input:focus-visible\)\s*\{[^}]*\boutline(?:-offset)?:/, "focused Search must not add an extra outline");

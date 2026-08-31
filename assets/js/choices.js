@@ -188,10 +188,97 @@
     const inlineMount = document.querySelector(`[data-primary-action-inline-mount="${CSS.escape(action.id)}"]`);
     if (!inlineMount) return;
 
+    const largeView = window.matchMedia("(min-width: 64rem)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let inlineAboveViewport = false;
+    let stateVersion = 0;
+    let motionListener = null;
 
-    function updateMount() {
-      action.classList.toggle("is-floating", inlineAboveViewport);
+    function clearMotionListener() {
+      if (motionListener) action.removeEventListener("transitionend", motionListener);
+      motionListener = null;
+    }
+
+    function afterOpacityTransition(version, callback) {
+      clearMotionListener();
+      motionListener = (event) => {
+        if (event.target !== action || event.propertyName !== "opacity" || version !== stateVersion) return;
+        clearMotionListener();
+        callback();
+      };
+      action.addEventListener("transitionend", motionListener);
+    }
+
+    function settleFloating() {
+      ++stateVersion;
+      clearMotionListener();
+      action.classList.remove("is-floating-preparing");
+      action.classList.add("is-floating", "is-floating-visible");
+      action.dataset.floatingState = "floating";
+    }
+
+    function settleInline() {
+      ++stateVersion;
+      clearMotionListener();
+      action.classList.remove("is-floating-preparing", "is-floating-visible", "is-floating");
+      delete action.dataset.floatingState;
+    }
+
+    function enterFloating() {
+      if (action.dataset.floatingState === "entering" || action.dataset.floatingState === "floating") return;
+      const version = ++stateVersion;
+      clearMotionListener();
+      const startsInline = !action.classList.contains("is-floating");
+      action.classList.add("is-floating");
+      if (startsInline) action.classList.add("is-floating-preparing");
+      action.dataset.floatingState = "entering";
+      if (reducedMotion.matches) {
+        settleFloating();
+        return;
+      }
+      void action.offsetWidth;
+      window.requestAnimationFrame(() => {
+        if (version !== stateVersion || !largeView.matches || !inlineAboveViewport) return;
+        action.classList.remove("is-floating-preparing");
+        action.classList.add("is-floating-visible");
+        afterOpacityTransition(version, () => {
+          if (version === stateVersion) action.dataset.floatingState = "floating";
+        });
+      });
+    }
+
+    function exitFloating() {
+      if (!action.classList.contains("is-floating")) {
+        settleInline();
+        return;
+      }
+      if (!action.classList.contains("is-floating-visible")) {
+        settleInline();
+        return;
+      }
+      if (action.dataset.floatingState === "exiting") return;
+      const version = ++stateVersion;
+      clearMotionListener();
+      action.dataset.floatingState = "exiting";
+      action.classList.remove("is-floating-visible");
+      if (reducedMotion.matches) {
+        settleInline();
+        return;
+      }
+      afterOpacityTransition(version, () => {
+        if (version === stateVersion) settleInline();
+      });
+    }
+
+    function updateMount(immediate = false) {
+      const shouldFloat = largeView.matches && inlineAboveViewport;
+      if (immediate) {
+        if (shouldFloat) settleFloating();
+        else settleInline();
+        return;
+      }
+      if (shouldFloat) enterFloating();
+      else exitFloating();
     }
 
     if ("IntersectionObserver" in window) {
@@ -203,6 +290,8 @@
       }, { threshold: 0 });
       inlineObserver.observe(inlineMount);
     }
+    largeView.addEventListener("change", (event) => updateMount(!event.matches));
+    reducedMotion.addEventListener("change", (event) => updateMount(event.matches));
     updateMount();
   }
 

@@ -12,6 +12,8 @@
   let searchIndexPromise = null;
   let renderFrame = 0;
   let suggestionsSuppressed = false;
+  let sequenceOverlayRender = false;
+  let overlayRenderVersion = 0;
   const TRAILING_ICONS = Object.freeze({
     suggestion: "search",
     internalPage: "arrow_forward",
@@ -56,6 +58,7 @@
     link.href = product.url;
     const media = element("div", "product-card__media");
     if (product.media?.src) {
+      media.dataset.mediaZoomTouch = "";
       const image = element("img");
       image.src = assetPath(product.media.src);
       image.alt = product.alt || "";
@@ -157,7 +160,17 @@
     status.textContent = "Search is unavailable.";
   }
 
-  function render(container, status, index, query, suffix, pageSurface = false) {
+  function prepareOverlaySequence(children) {
+    const groups = children.filter((child) => child.classList?.contains("search-result-group"));
+    groups.forEach((group, index) => {
+      group.dataset.overlayEntry = "";
+      group.style.setProperty("--overlay-sequence-delay", `${120 + index * 40}ms`);
+      group.style.setProperty("--overlay-exit-delay", `${(groups.length - index - 1) * 40}ms`);
+    });
+    window.requestAnimationFrame(() => groups.forEach((group) => group.classList.add("is-visible")));
+  }
+
+  function render(container, status, index, query, suffix, pageSurface = false, sequenceEntry = false) {
     const normalizedQuery = core.normalize(query);
     const suggestions = suggestionsSuppressed ? [] : core.suggestions(index, query);
     const children = [];
@@ -174,6 +187,7 @@
     }
     container.classList.toggle("search-results--page", pageSurface);
     container.replaceChildren(...children);
+    if (sequenceEntry) prepareOverlaySequence(children);
     container.setAttribute("aria-busy", "false");
     status.textContent = normalizedQuery
       ? `${pages.length} page results and ${products.length} product results for ${query.trim()}.`
@@ -187,13 +201,21 @@
   }
 
   function renderOverlay() {
+    const renderVersion = ++overlayRenderVersion;
     window.cancelAnimationFrame(renderFrame);
     renderFrame = window.requestAnimationFrame(() => {
       updateSubmit();
       loading(overlayResults);
+      const sequenceEntry = sequenceOverlayRender;
+      sequenceOverlayRender = false;
       searchIndex()
-        .then((index) => render(overlayResults, overlayStatus, index, input.value, "overlay"))
-        .catch(() => failed(overlayResults, overlayStatus));
+        .then((index) => {
+          if (renderVersion !== overlayRenderVersion) return;
+          render(overlayResults, overlayStatus, index, input.value, "overlay", false, sequenceEntry);
+        })
+        .catch(() => {
+          if (renderVersion === overlayRenderVersion) failed(overlayResults, overlayStatus);
+        });
     });
   }
 
@@ -254,6 +276,7 @@
   });
 
   overlay.addEventListener("paradigm:overlay-open", () => {
+    sequenceOverlayRender = true;
     updateSubmit();
     renderOverlay();
   });
