@@ -41,9 +41,11 @@
 
   /* No convenience color aliases: components consume the roles above directly. */
 
-  /* Use the visitor's browser/OS default until a webfont is licensed. */
-  --font-sans: sans-serif;
-  --font-brand: sans-serif;
+  /* Latin uses Google-hosted Roboto Semi Condensed; CJK stays on local system faces. */
+  --font-latin: "Roboto";
+  --font-cjk: "PingFang TC", "Noto Sans CJK TC", "Noto Sans TC", "Source Han Sans TC", "Microsoft JhengHei";
+  --font-sans: var(--font-latin), var(--font-cjk), sans-serif;
+  --font-brand: var(--font-latin), sans-serif;
 
   --font-weight-thin: 100;
   --font-weight-extra-light: 200;
@@ -127,6 +129,7 @@
   --radius-md: 1rem;
   --radius-lg: 1.75rem;
   --radius-pill: 999px;
+  --stroke-width-thin: 0.0625rem;
 
   --shadow-card: 0 20px 40px color-mix(in srgb, var(--color-outline-high) 8%, transparent);
 
@@ -140,15 +143,13 @@
     var(--header-bar-height) +
     var(--safe-area-inset-top)
   );
-  --header-control-gap: 0.625rem;
   --header-actions-width: calc(
-    var(--icon-size) +
-    var(--icon-size) +
-    var(--header-control-gap)
+    var(--control-size-large) +
+    var(--control-size-large)
   );
   --icon-size-small: 1.25rem;
   --icon-size: 1.5rem;
-  --external-link-arrow-size: 0.5em;
+  --external-link-arrow-size: 1em;
   --external-link-arrow-gap: var(--space-1);
   --external-link-arrow-motion-distance: var(--space-1);
   --choice-size: 2rem;
@@ -171,6 +172,8 @@
     var(--primary-action-floating-bottom-gap)
   );
   --primary-action-z-index: 80;
+  --media-zoom-float-z-index: 120;
+  --media-zoom-overlay-z-index: 130;
   --focus-ring-width: 2px;
   --focus-ring-offset: 3px;
   --transition-base: 180ms ease;

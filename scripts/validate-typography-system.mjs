@@ -32,6 +32,13 @@ const TEXT_ROLES = new Map([
   ["h5", { size: "0.875rem", lineHeight: "1.166667rem", weight: "semi-bold" }],
   ["h6", { size: "0.75rem", lineHeight: "1rem", weight: "semi-bold" }]
 ]);
+const FONT_FAMILIES = new Map([
+  ["font-latin", '"Roboto"'],
+  ["font-cjk", '"PingFang TC", "Noto Sans CJK TC", "Noto Sans TC", "Source Han Sans TC", "Microsoft JhengHei"'],
+  ["font-sans", "var(--font-latin), var(--font-cjk), sans-serif"],
+  ["font-brand", "var(--font-latin), sans-serif"]
+]);
+const ROBOTO_STYLESHEET = "https://fonts.googleapis.com/css2?family=Roboto:wdth,wght@87.5,100..900&display=swap";
 
 function propertyValue(source, property) {
   const match = source.match(new RegExp(`${property.replaceAll("-", "\\-")}\\s*:\\s*([^;]+);`));
@@ -73,6 +80,10 @@ assert.doesNotMatch(
   /--text-(?:xs|sm|base|lg|xl|hero)\b/,
   "Legacy text-size tokens must be removed in favor of semantic typography roles"
 );
+for (const [name, value] of FONT_FAMILIES) {
+  assert.equal(propertyValue(tokens, `--${name}`), value, `--${name} must equal ${value}`);
+}
+assert.doesNotMatch(tokens, /Alibaba/i, "Alibaba webfont tokens must remain deferred");
 for (const [name, value] of WEIGHTS) {
   assert.equal(
     propertyValue(tokens, `--font-weight-${name}`),
@@ -144,8 +155,10 @@ for (const filePath of cssFiles) {
   }
 
   for (const { selector, declarations } of collectRules(css)) {
+    const inheritsOwnerWeight = selector.trim() === ".material-symbols-outlined";
     if (
       declarations.includes("font-weight: var(--font-weight-base)") &&
+      !inheritsOwnerWeight &&
       !/--font-weight-base\s*:\s*var\(--(?:font-weight-[a-z-]+|type-[a-z0-9-]+-weight)\)/.test(declarations)
     ) {
       violations.push(`${relativePath}: ${selector} must declare its semantic --font-weight-base`);
@@ -154,6 +167,7 @@ for (const filePath of cssFiles) {
 }
 
 const base = await readFile(path.join(CSS_DIRECTORY, "base.css"), "utf8");
+assert.doesNotMatch(base, /font-stretch\s*:/, "Global typography must not stretch CJK system fallbacks");
 assert.match(base, /:where\(strong, \.text-strong\)/, "Strong element and modifier class must share one rule");
 assert.match(base, /var\(--font-weight-strong-offset\)/, "Strong must use the +200 token");
 assert.match(base, /var\(--font-weight-black\)/, "Strong must cap at Black 900");
@@ -183,6 +197,16 @@ for (const [semanticElement, shiftedRole] of [
 }
 
 const components = await readFile(path.join(CSS_DIRECTORY, "components.css"), "utf8");
+assert.match(
+  components,
+  /\.material-symbols-outlined\s*\{[^}]*font-weight:\s*var\(--font-weight-base\);[^}]*font-variation-settings:\s*"FILL" 0, "wght" var\(--font-weight-base\), "GRAD" 0, "opsz" 24;/,
+  "Material symbols must inherit the semantic weight selected by their text owner"
+);
+assert.doesNotMatch(
+  components.match(/\.material-symbols-outlined\s*\{[^}]*\}/)?.[0] || "",
+  /--font-weight-base\s*:/,
+  "Material symbols must not override their text owner's semantic weight"
+);
 assert.match(
   components,
   /\.page-headline__row\s*\{[\s\S]*?--font-weight-base:\s*var\(--type-body-weight\)[\s\S]*?font-size:\s*var\(--type-body-size\)[\s\S]*?font-weight:\s*var\(--font-weight-base\)[\s\S]*?line-height:\s*var\(--type-body-line-height\)/,
@@ -238,7 +262,25 @@ const teamwearH5Eyebrows = [...teamwearMarkup.matchAll(/<h5 class="(?:teamwear-k
 assert.ok(teamwearH5Eyebrows.length > 0, "Teamwear must include h5 eyebrows");
 assert.equal(teamwearH5Eyebrows.length, teamwearEyebrowClasses.length, "Every Teamwear eyebrow must use h5");
 
+const renderer = await readFile(path.join(ROOT, "scripts", "lib", "site-renderers.mjs"), "utf8");
+assert.match(
+  renderer,
+  new RegExp(`const ROBOTO_SEMI_CONDENSED_STYLESHEET = ${JSON.stringify(ROBOTO_STYLESHEET).replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`),
+  "The shared renderer must request Roboto at wdth 87.5 across weights 100 through 900"
+);
+assert.match(renderer, /<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">/, "Google Fonts CSS must be preconnected");
+assert.match(renderer, /<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>/, "Google font files must use a cross-origin preconnect");
+assert.doesNotMatch(renderer, /alibabafonts|AlibabaSansTC/i, "The shared renderer must not request the deferred Alibaba webfont");
+
+const rootMarkup = await readFile(path.join(ROOT, "index.html"), "utf8");
+const escapedRobotoStylesheet = ROBOTO_STYLESHEET.replaceAll("&", "&amp;");
+assert.equal((rootMarkup.match(/rel="preconnect" href="https:\/\/fonts\.googleapis\.com"/g) || []).length, 1, "Generated pages must preconnect to Google Fonts CSS once");
+assert.equal((rootMarkup.match(/rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin/g) || []).length, 1, "Generated pages must preconnect to Google font files once");
+assert.ok(rootMarkup.includes(`href="${escapedRobotoStylesheet}"`), "Generated pages must load the shared Roboto Semi Condensed stylesheet");
+assert.ok(rootMarkup.indexOf(escapedRobotoStylesheet) < rootMarkup.indexOf("assets/css/tokens.css"), "Roboto must load before local typography CSS");
+assert.doesNotMatch(rootMarkup, /alibabafonts|AlibabaSansTC/i, "Generated pages must not request the deferred Alibaba webfont");
+
 assert.equal(violations.length, 0, violations.join("\n"));
 console.log(
-  `TYPOGRAPHY_SYSTEM_OK weights=${WEIGHTS.size} textRoles=${TEXT_ROLES.size} paragraphRoles=${PARAGRAPH_SPACING.size} strongOffset=200 productSpacing=one-third-em teamwear=h1-h2-gradient-child-h5-eyebrow-h5`
+  `TYPOGRAPHY_SYSTEM_OK families=${FONT_FAMILIES.size} latin=roboto-semi-condensed-100-900 cjk=system-fallback weights=${WEIGHTS.size} textRoles=${TEXT_ROLES.size} paragraphRoles=${PARAGRAPH_SPACING.size} strongOffset=200 productSpacing=one-third-em teamwear=h1-h2-gradient-child-h5-eyebrow-h5`
 );

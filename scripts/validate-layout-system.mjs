@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -61,6 +61,20 @@ const teamwear = await readFile(path.join(CSS_DIRECTORY, "teamwear.css"), "utf8"
 const teamwearStory = await readFile(path.join(CSS_DIRECTORY, "teamwear-story.css"), "utf8");
 const teamwearTemplate = await readFile(path.join(ROOT, "scripts", "templates", "teamwear-page.html"), "utf8");
 const teamwearBehavior = await readFile(path.join(ROOT, "assets", "js", "teamwear.js"), "utf8");
+const mediaZoom = await readFile(path.join(ROOT, "assets", "js", "media-zoom.js"), "utf8");
+const productionCssFiles = (await readdir(CSS_DIRECTORY)).filter((file) => file.endsWith(".css"));
+const productionCssEntries = await Promise.all(
+  productionCssFiles.map(async (file) => [file, await readFile(path.join(CSS_DIRECTORY, file), "utf8")])
+);
+
+const cssScaleTransformPattern = /\bscale\s*\(/;
+assert.doesNotMatch("filter: grayscale(1);", cssScaleTransformPattern, "The CSS scale validator must not reject grayscale filters");
+for (const [file, source] of productionCssEntries) {
+  assert.doesNotMatch(source, /@media[^\{]*\(\s*(?:any-)?hover\s*:/, `${file} must not gate interaction styling by hover capability`);
+  assert.doesNotMatch(source, /@media[^\{]*\(\s*(?:any-)?pointer\s*:/, `${file} must not gate interaction styling by pointer capability`);
+  assert.doesNotMatch(source, cssScaleTransformPattern, `${file} must not use scale() effects`);
+  assert.doesNotMatch(source, /(^|[;\{])\s*scale\s*:/m, `${file} must not use the individual scale property`);
+}
 
 const spacingScale = new Map([
   ["--space-1", "0.125rem"],
@@ -89,12 +103,15 @@ assert.equal(propertyValue(tokens, "--primary-action-padding-inline"), "var(--sp
 assert.equal(propertyValue(tokens, "--type-interface-label-transform"), "uppercase", "Interface labels must use the shared uppercase presentation token");
 assert.match(
   tokens,
-  /--header-actions-width:\s*calc\(\s*var\(--icon-size\)\s*\+\s*var\(--icon-size\)\s*\+\s*var\(--header-control-gap\)\s*\);/,
-  "Header actions must reserve exactly two icon widths and one tokenized gap"
+  /--header-actions-width:\s*calc\(\s*var\(--control-size-large\)\s*\+\s*var\(--control-size-large\)\s*\);/,
+  "Header actions must reserve exactly two touching 48px interaction cells"
 );
-assert.equal(propertyValue(tokens, "--external-link-arrow-size"), "0.5em", "External-link arrows must stay half the label font size");
+assert.equal(propertyValue(tokens, "--header-control-gap"), undefined, "The obsolete off-scale 10px header gap token must remain removed");
+assert.equal(propertyValue(tokens, "--external-link-arrow-size"), "1em", "External-link arrows must match the label font size");
 assert.equal(propertyValue(tokens, "--external-link-arrow-gap"), "var(--space-1)", "External-link arrows must use the shared 2px label gap");
 assert.equal(propertyValue(tokens, "--external-link-arrow-motion-distance"), "var(--space-1)", "External-link arrow motion must use the shared 2px distance");
+assert.equal(propertyValue(tokens, "--media-zoom-float-z-index"), "120", "Floating product inspection must sit above the shared header");
+assert.equal(propertyValue(tokens, "--media-zoom-overlay-z-index"), "130", "The enlarged gallery must sit above every other shared layer");
 assert.doesNotMatch(tokens, /--button-height\s*:/, "Primary actions must be content-sized rather than height-token sized");
 const mediumTokens = blockAfter(tokens, "@media (min-width: 48rem)");
 assert.equal(propertyValue(mediumTokens, "--layout-gutter-inline"), "var(--space-7)", "Medium and Large gutters must be 32px");
@@ -147,6 +164,24 @@ assert.match(
 );
 assert.doesNotMatch(components, /\.filter-bar|\.breadcrumb--(?:standalone|embedded)/, "Legacy headline layout variations must remain removed");
 assert.doesNotMatch(pages, /\.reference-page--detail \.page-headline/, "Product Detail must use the shared headline surface without overrides");
+assert.match(
+  components,
+  /\[data-media-zoom-touch\],[\s\S]*?\[data-media-zoom-gallery\] img\s*\{[\s\S]*?touch-action:\s*pan-x pan-y;/,
+  "Touch-inspection media must retain native horizontal and vertical one-finger panning"
+);
+assert.match(components, /\.media-zoom-float\s*\{[\s\S]*?position:\s*fixed !important;[\s\S]*?will-change:\s*width, height, transform;/, "Pinched media must use an isolated fixed copy with frame-updated dimensions and translation");
+assert.match(components, /\.media-zoom-lens\s*\{[\s\S]*?border-radius:\s*var\(--radius-pill\);[\s\S]*?pointer-events:\s*none;/, "Large inspection must use a circular non-interactive lens");
+assert.match(components, /\.media-zoom-overlay\s*\{[\s\S]*?position:\s*fixed;[\s\S]*?overflow:\s*auto;[\s\S]*?overscroll-behavior:\s*contain;/, "The enlarged gallery must own full-viewport two-axis scrolling");
+assert.match(components, /\.media-zoom-overlay__column\s*\{[\s\S]*?flex-direction:\s*column;[\s\S]*?gap:\s*0;[\s\S]*?margin-inline:\s*auto;/, "The enlarged gallery must remain a centered gapless image column");
+assert.match(mediaZoom, /const LARGE_VIEW_QUERY = "\(min-width: 64rem\)";/, "Pointer lens and overlay behavior must begin at the shared Large breakpoint");
+assert.match(mediaZoom, /const DESKTOP_ZOOM = 2;[\s\S]*?const LENS_GALLERY_RATIO = 0\.5;[\s\S]*?const OVERLAY_GALLERY_RATIO = 2;/, "Large inspection must keep a 2x lens, half-column lens diameter, and double-width overlay column");
+assert.match(mediaZoom, /galleryRect\.width \* LENS_GALLERY_RATIO/, "Lens diameter must derive from the complete measured gallery column");
+assert.match(mediaZoom, /gallery\.getBoundingClientRect\(\)\.width \* OVERLAY_GALLERY_RATIO/, "Overlay width must derive from twice the measured gallery column");
+assert.match(mediaZoom, /overlay\.scrollLeft = Math\.max\(0, \(overlay\.scrollWidth - overlay\.clientWidth\) \/ 2\)/, "A wider overlay column must initialize at its horizontal center");
+assert.match(mediaZoom, /overlay\.scrollTop = images\[selectedIndex\]\?\.offsetTop \|\| 0/, "The enlarged gallery must open vertically at the selected image");
+assert.match(mediaZoom, /largeView\.addEventListener\("change", setLargeGalleryMode\)/, "Leaving Large must tear down the lens and enlarged gallery");
+assert.match(mediaZoom, /previousBodyOverflow[\s\S]*?trigger\.focus\(\{ preventScroll: true \}\)/, "Overlay closure must restore body scrolling and source focus");
+assert.doesNotMatch(mediaZoom, /\.style\.scale\b|\bscale\s*\(/, "Media inspection must never bypass the CSS scaling prohibition through JavaScript");
 
 const mediumComponents = blockAfter(components, "@media (min-width: 48rem)");
 assert.match(
@@ -211,10 +246,10 @@ assert.match(teamwearStory, /padding:\s*0 var\(--teamwear-content-edge\)/, "Team
 assert.match(teamwearStory, /scroll-padding-inline:\s*var\(--teamwear-content-edge\)/, "Teamwear rails must use the content edge for scroll positioning");
 assert.match(teamwearStory, /\.teamwear-highlights__viewport,[\s\S]*?\.teamwear-colorway__viewport,[\s\S]*?\.teamwear-gallery__viewport\s*\{[\s\S]*?position:\s*relative;/, "Every Teamwear rail viewport must establish the overlay positioning context");
 assert.match(teamwearStory, /\.teamwear-rail-controls\s*\{[\s\S]*?display:\s*none;/, "Teamwear rail controls must remain hidden below Large");
-assert.match(teamwearStory, /\.teamwear-rail-button\s*\{[\s\S]*?width:\s*var\(--space-7\);[\s\S]*?height:\s*var\(--space-7\);[\s\S]*?border:\s*0;[\s\S]*?border-radius:\s*var\(--radius-pill\);[\s\S]*?background:\s*transparent;[\s\S]*?box-shadow:\s*none;/, "Teamwear rail controls must use the shared 32px circular control box without a border or shadow");
-assert.match(teamwearStory, /\.teamwear-rail-button::before\s*\{[\s\S]*?background:\s*var\(--color-container-low\);[\s\S]*?-webkit-mask:\s*var\(--teamwear-rail-chevron-mask\) center \/ 100% 100% no-repeat;[\s\S]*?mask:\s*var\(--teamwear-rail-chevron-mask\) center \/ 100% 100% no-repeat;/, "Teamwear rail circles must use one browser-stable alpha mask so the photograph shows through the Material chevron");
-assert.doesNotMatch(teamwearStory, /mask-composite\s*:/, "Teamwear rail knockout must not depend on browser-variable multi-layer mask compositing");
-assert.match(teamwearStory, /\.teamwear-rail-button \.material-icon\s*\{[\s\S]*?width:\s*var\(--icon-size\);[\s\S]*?height:\s*var\(--icon-size\);[\s\S]*?opacity:\s*0;[\s\S]*?font-size:\s*var\(--icon-size\);/, "Teamwear rail controls must retain the shared 24px Material icon metrics without painting a filled glyph");
+assert.match(teamwearStory, /\.teamwear-rail-button\s*\{[\s\S]*?width:\s*var\(--control-size-large\);[\s\S]*?height:\s*var\(--control-size-large\);[\s\S]*?border:\s*0;[\s\S]*?border-radius:\s*var\(--radius-pill\);[\s\S]*?background:\s*var\(--color-container-low\);[\s\S]*?color:\s*var\(--color-on-surface-high\);[\s\S]*?box-shadow:\s*none;/, "Teamwear rail controls must use real 48px circular interaction boxes with semantic colors");
+assert.doesNotMatch(teamwearStory, /data:image\/svg\+xml|teamwear-rail-chevron-mask|-webkit-mask:\s*var\(--teamwear-rail|mask:\s*var\(--teamwear-rail/, "Teamwear rail controls must not recreate Material glyphs with SVG data masks");
+assert.doesNotMatch(teamwearStory, /\.teamwear-rail-button::before\s*\{/, "Teamwear rail controls must paint their Material symbols directly without a pseudo-icon layer");
+assert.match(teamwearStory, /\.teamwear-rail-button \.material-icon\s*\{[\s\S]*?width:\s*var\(--icon-size\);[\s\S]*?height:\s*var\(--icon-size\);[\s\S]*?font-size:\s*var\(--icon-size\);/, "Teamwear rail controls must visibly render the shared 24px Material glyph inside the 48px target");
 assert.match(teamwearStory, /\.teamwear-rail-button\[hidden\]\s*\{[\s\S]*?display:\s*none;/, "Unavailable Teamwear rail directions must override the authored button display rule");
 assert.doesNotMatch(teamwearStory, /\.teamwear-rail-button[^\{]*\{[^}]*transition\s*:/, "Teamwear rail buttons must not animate hover-state changes");
 assert.doesNotMatch(teamwearStory, /\.teamwear-rail-button[^\{]*:hover/, "Teamwear rail buttons must not define a hover effect");

@@ -126,7 +126,8 @@ function renderProductMain(template, product, relatedProducts) {
     alt: index === 0 ? product.alt : `${product.title}, view ${index + 1}`,
     root: "../..",
     sizes: "(min-width: 80rem) 768px, (min-width: 64rem) 60vw, 100vw",
-    loading: index ? "lazy" : ""
+    loading: index ? "lazy" : "",
+    touchZoom: true
   })}`).join("\n");
   const pageHeadline = renderPageHeadline({
     root: "../..",
@@ -180,7 +181,8 @@ ${renderProductGrid(filtered, root).split("\n").map((line) => `      ${line}`).j
     root,
     currentPath,
     bodyClass: "site-shell reference-page product-page",
-    main
+    main,
+    scripts: ["media-zoom.js?v=20260830a"]
   });
 }
 
@@ -279,7 +281,7 @@ function renderTeamwearColorwayCards(model, colorById) {
   return model.colors.map((option) => {
     const color = colorById.get(option.colorId);
     return `        <article class="teamwear-rail-card teamwear-colorway-card teamwear-colorway--${html(color.id)}" data-colorway-card data-color-id="${html(color.id)}" data-color-name="${html(color.name)}" data-section-reveal>
-          <div class="teamwear-rail-card__surface"><div class="teamwear-rail-card__media teamwear-colorway-card__media"><img src="../${html(selectedPattern.preview)}" alt="${html(selectedPattern.name)} ${html(model.name)} ${html(color.name)} Road uniform rendering" width="1254" height="1254" loading="lazy" data-colorway-image></div></div>
+          <div class="teamwear-rail-card__surface"><div class="teamwear-rail-card__media teamwear-colorway-card__media" data-media-zoom-touch><img src="../${html(selectedPattern.preview)}" alt="${html(selectedPattern.name)} ${html(model.name)} ${html(color.name)} Road uniform rendering" width="1254" height="1254" loading="lazy" data-colorway-image></div></div>
           <div class="teamwear-rail-card__copy"><h3 class="type-h5">${html(color.name)}</h3></div>
         </article>`;
   }).join("\n");
@@ -331,8 +333,8 @@ function renderTeamwearLanding(template, model, colorById, instagramUrl) {
     currentPath: "/teamwear",
     bodyClass: "site-shell reference-page teamwear-page teamwear-story-shell",
     main,
-    styles: ["teamwear.css?v=20260829c", "teamwear-story.css?v=20260830a"],
-    scripts: ["teamwear-options.js?v=20260828a", "teamwear.js?v=20260830a"],
+    styles: ["teamwear.css?v=20260829c", "teamwear-story.css?v=20260831a"],
+    scripts: ["teamwear-options.js?v=20260828a", "teamwear.js?v=20260830a", "media-zoom.js?v=20260830a"],
     head: `  <meta property="og:title" content="${html(model.name)} | Paradigm">\n  <meta property="og:description" content="${html(`${model.name} is a reversible basketball uniform system composed by Paradigm for the whole roster.`)}">\n  <meta property="og:image" content="https://prdm.tw/assets/images/teamwear/campaign/hero-desktop.webp">\n  <meta property="og:type" content="website">`
   });
 }
@@ -416,7 +418,7 @@ function renderTeamwearCustomize(template, model, colorById, instagramUrl) {
     bodyClass: "site-shell reference-page reference-page--detail teamwear-customize-page",
     main,
     styles: ["teamwear.css?v=20260829c"],
-    scripts: ["teamwear-options.js?v=20260828a", "teamwear.js?v=20260830a"]
+    scripts: ["teamwear-options.js?v=20260828a", "teamwear.js?v=20260830a", "media-zoom.js?v=20260830a"]
   });
 }
 
@@ -502,7 +504,7 @@ products.forEach((product) => {
     currentPath: `/products/${product.productNumber}`,
     bodyClass: "site-shell reference-page reference-page--detail",
     main,
-    scripts: ["catalog.js"]
+    scripts: ["catalog.js", "media-zoom.js?v=20260830a"]
   }));
 });
 

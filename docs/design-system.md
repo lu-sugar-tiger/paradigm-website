@@ -83,11 +83,27 @@ Product-detail information uses 16px vertical padding at every range. Its horizo
 
 Teamwear rails remain tied to the physical viewport rather than the 1440px visual canvas. Their initial and terminal scroll padding use `--teamwear-content-edge`, which combines the centered 1280px reference-region offset with the Teamwear inner gutter so the first card aligns with section content. The same edge aligns the Teamwear floating action. Rail cards are `50vw` at Base and one-third viewport width from Medium, capped at one-third of the 1440px canvas (480px). Teamwear motion uses shared editorial duration, distance, and easing roles; component dimensions such as 40px and 48px controls use size roles rather than spacing tokens. Radius roles describe shape only and must never be used as gaps or padding.
 
-The unused generic `.split` recipe, `.spec-list`, and the old 1px grid gaps have been removed. Active catalog seams are true `--space-1` (2px) grid gaps exposing `Surface Mid`; they are not outlines. Active 1px borders reference Outline Low directly rather than using a border alias.
+The unused generic `.split` recipe, `.spec-list`, `.spec-card`, and the old 1px grid gaps have been removed. Active catalog seams are true `--space-1` (2px) grid gaps exposing `Surface Mid`; they are not outlines. Active 1px borders reference Outline Low directly rather than using a border alias.
+
+## Interaction and motion
+
+Icon-only controls use a real 48×48px `--control-size-large` box around the role-specific glyph; do not simulate target size with an overlapping pseudo-element. Unboxed text controls use 48px as their minimum short side when the surrounding composition permits it. Adjacent controls meet at a shared boundary rather than overlapping hit areas; the two header controls therefore occupy two touching 48px cells while their centered 24px glyphs retain visual separation. The framed search field adds its tokenized one-pixel stroke outside the 48px input and submit targets. Boxed buttons and choice controls keep their own component sizing contracts.
+
+Hover and press are one shared visual contract. Do not gate hover styling behind `hover`, `any-hover`, `pointer`, or `any-pointer` capability media queries. Every hover treatment must also apply through `:active` so touch and pointer input receive the same feedback while the control is pressed. The press state is momentary and returns to rest on release; do not add JavaScript to persist a hover-equivalent state after a tap.
+
+Keyboard focus remains independent and visible through `:focus-visible`. When the hover treatment also helps keyboard wayfinding, include `:focus-visible` in the same selector without replacing the component's focus ring.
+
+Automatic scaling and zooming are prohibited in production design. Do not use the CSS `scale()` transform or `scale` property for hover, active, entrance, exit, image, or decorative effects. Tokenized translation and opacity motion remain available when they clarify state or spatial continuity, and reduced-motion behavior must remain intact. If a scale-only effect is removed, do not invent a replacement unless the component needs feedback for an actual interaction.
+
+Direct product-media inspection is the sole scaling exception. Opted-in catalog, related-product, product-gallery, and Teamwear card photos use the shared `data-media-zoom-touch` contract: a two-finger pinch creates a temporary fixed copy, follows the live midpoint from the point that was grabbed, ranges from 1× through 4×, hands movement to the remaining finger, and disappears when the final finger lifts or the gesture is cancelled. One-finger taps, navigation, vertical scrolling, gallery swiping, and Teamwear rail swiping remain native. The temporary copy changes its measured width, height, and translated position through `requestAnimationFrame`; it never uses a CSS scale transform or scaling transition.
+
+Retail product-detail and Teamwear Customize galleries additionally use `data-media-zoom-gallery` at Large. Pointer movement presents a circular 2× inspection lens whose diameter is half of the complete gallery-column width. Clicking, Enter, or Space opens the source-ordered gallery in an accessible full-viewport dialog: one gapless column at twice the measured gallery width, centered horizontally, and vertically aligned to the chosen image. A stationary click anywhere, Escape, or leaving the Large breakpoint closes it and restores focus and document scrolling. Hero imagery, fabric macros, search results, and non-media decoration never inherit this exception.
 
 ## Typography
 
-The website uses the visitor's browser/OS default `sans-serif` until a website font is licensed. Type is defined by semantic roles rather than by page:
+The website loads the Google Fonts Roboto variable family at the Semi Condensed width (`wdth 87.5`) across its complete Thin through Black range (`wght 100..900`). `renderDocument()` owns the preconnects and shared stylesheet request, uses `display=swap`, and places the font resource before local CSS. `--font-latin` and `--font-brand` resolve to Roboto, while every component continues to consume the composed `--font-sans` or `--font-brand` role rather than a page-local family.
+
+Traditional Chinese remains on the local `--font-cjk` stack: PingFang TC, Noto Sans CJK TC, Noto Sans TC, Source Han Sans TC, Microsoft JhengHei, then the generic sans-serif fallback. The Android-oriented Noto families and Source Han Sans TC are checked before the Windows-specific Microsoft JhengHei face. 阿里巴巴普惠體TC is intentionally deferred and must not be requested or bundled. Do not set `font-stretch` globally: the Google stylesheet supplies Roboto's 87.5% face, while CJK fallback faces retain their native width. Type is defined by semantic roles rather than by page:
 
 | Role | Size / line height | Default weight | Token prefix |
 | --- | --- | --- | --- |
@@ -143,6 +159,12 @@ Paragraph spacing is also a typography decision. Relative values are calculated 
 
 Use either a paragraph margin or a parent layout gap to create the same intended rhythm, never both. The shared rich-description renderer uses Body 12px with Standard spacing, so its effective value remains exactly 4px while preserving source blank lines. Product Detail and Teamwear Customize both receive this markup exclusively through `renderDescription()`; authored templates contain only renderer placeholders. Divider and hashtag tokens use On Surface Low while ordinary text remains On Surface High.
 
+## Iconography
+
+Interface icons use the outlined Google Material Symbols font. `renderIcon()` owns the semantic icon-name map, and each generated page requests only that mapped subset from Google Fonts with the `wght` axis limited to the active 400–700 range. The global CSS configuration uses `FILL 0`, inherited semantic `wght`, `GRAD 0`, and `opsz 24`; component rules adjust rendered size for their roles. A symbol following text inherits that text context's semantic weight: external arrows match their labels, while the Add-On symbol moves from Regular `add` to Bold `check` with the selected label. Ligature names must retain `text-transform: none`.
+
+When a Material Symbol should appear visually equal in prominence to adjacent Body text, use the established `20px / 12px` ratio: `--icon-size-small` over `--type-body-size`, or `5:3` (`1.666667×`). This is an optical relationship rather than a universal geometric rule. Directional indicators such as the external-link arrow instead match the label's font size at `1em`, remain separated by `--space-1` (2px), and are vertically centered without entering the label's layout width.
+
 ## Consistency status
 
 The system is partially consistent, not yet project-wide:
@@ -170,7 +192,7 @@ The system is partially consistent, not yet project-wide:
 | --- | --- |
 | Header | `.site-header`, `.site-header__inner`, `.site-logo`, `.site-actions`, `.icon-button` |
 | Side menu | `.nav-drawer`, `.nav-drawer__panel`, `.drawer-nav` |
-| Collection / Item Headline | `renderPageHeadline()` with one 48px Surface Mid row, a hierarchy/back `renderBreadcrumb()`, and an optional intrinsic icon/text trailing action; hovered interactive text underlines |
+| Collection / Item Headline | `renderPageHeadline()` with one 48px Surface Mid row, a hierarchy/back `renderBreadcrumb()`, and an optional intrinsic icon/text trailing action; interactive text underlines on hover, press, and keyboard focus |
 | Product Card | `.product-card`, `.product-card__media`, `.product-card__body` |
 | Product / Teamwear Color | `.choice-group--swatch` and `.choice-option--swatch`, with `data-color-id` and `data-availability` |
 | Size / Pattern / Batch / Quantity / Pocket | `.choice-group--chip` and `.choice-option--chip`, with equal flexible widths |

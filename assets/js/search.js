@@ -12,6 +12,11 @@
   let searchIndexPromise = null;
   let renderFrame = 0;
   let suggestionsSuppressed = false;
+  const TRAILING_ICONS = Object.freeze({
+    suggestion: "search",
+    internalPage: "arrow_forward",
+    externalPage: "arrow_outward"
+  });
 
   if (!core || !overlay || !input || !form || !submit || !overlayResults || !overlayStatus) return;
 
@@ -36,6 +41,14 @@
   function assetPath(value) {
     if (!value) return "";
     return value.startsWith("/") ? value : `/${value}`;
+  }
+
+  function trailingContent(contentClass, label, iconName) {
+    const content = element("span", contentClass);
+    const icon = element("span", "material-symbols-outlined material-icon search-result__indicator", iconName);
+    icon.setAttribute("aria-hidden", "true");
+    content.append(label, icon);
+    return content;
   }
 
   function createProductCard(product) {
@@ -80,9 +93,14 @@
     labels.forEach((label) => {
       const item = element("div", "search-suggestion-list__item");
       item.setAttribute("role", "listitem");
-      const button = element("button", "search-suggestion", label);
+      const button = element("button", "search-suggestion");
       button.type = "button";
       button.dataset.searchSuggestion = label;
+      button.append(trailingContent(
+        "search-suggestion__content",
+        element("span", "search-suggestion__label", label),
+        TRAILING_ICONS.suggestion
+      ));
       item.append(button);
       list.append(item);
     });
@@ -98,15 +116,19 @@
     pages.forEach((page) => {
       const link = element("a", `search-page-result${page.external ? " external-link" : ""}`);
       link.href = page.url;
-      link.append(element("h3", `search-page-result__title${page.interfaceLabel ? " interface-label" : ""}`, page.title));
+      const title = element("h3", `search-page-result__title${page.interfaceLabel ? " interface-label" : ""}${page.external ? " external-link__label" : ""}`, page.title);
+      const content = trailingContent(
+        "search-page-result__content",
+        title,
+        page.external ? TRAILING_ICONS.externalPage : TRAILING_ICONS.internalPage
+      );
       if (page.external) {
         link.target = "_blank";
         link.rel = "noopener noreferrer";
         link.dataset.externalLink = "true";
-        const icon = element("span", "material-symbols-outlined material-icon external-link__indicator", "arrow_outward");
-        icon.setAttribute("aria-hidden", "true");
-        link.append(icon, element("span", "visually-hidden", " (opens in a new tab)"));
+        content.append(element("span", "visually-hidden", " (opens in a new tab)"));
       }
+      link.append(content);
       list.append(link);
     });
     const wrap = element("div", "search-result-group__content");
