@@ -36,7 +36,13 @@
 
   function mediaTarget(node) {
     if (!(node instanceof Element)) return null;
-    return node.closest("[data-media-zoom-touch]");
+    const source = node.closest("[data-media-zoom-touch]");
+    if (!source || !imagesWithin(source).some((image) => image.currentSrc || image.getAttribute("src"))) return null;
+    return source;
+  }
+
+  function mediaSurface(source) {
+    return source.closest("[data-media-zoom-surface]") || source;
   }
 
   function touchesForSource(touchList, source) {
@@ -92,6 +98,7 @@
       element.removeAttribute("id");
       element.removeAttribute("data-media-zoom-touch");
       element.removeAttribute("data-media-zoom-gallery");
+      element.removeAttribute("data-media-zoom-surface");
       element.removeAttribute("tabindex");
       element.removeAttribute("role");
       element.removeAttribute("aria-haspopup");
@@ -204,9 +211,12 @@
     const rect = source.getBoundingClientRect();
     if (!rect.width || !rect.height) return false;
     const clone = createFloatingClone(source);
+    const surface = mediaSurface(source);
+    surface.classList.add("media-zoom-surface-active");
     source.classList.add("media-zoom-source-active");
     touchGesture = {
       source,
+      surface,
       clone,
       sourceWidth: rect.width,
       sourceHeight: rect.height,
@@ -223,10 +233,11 @@
 
   function finishTouchGesture() {
     if (!touchGesture) return;
-    const { source, clone } = touchGesture;
+    const { source, surface, clone } = touchGesture;
     if (touchFrame) window.cancelAnimationFrame(touchFrame);
     touchFrame = 0;
     source.classList.remove("media-zoom-source-active");
+    surface.classList.remove("media-zoom-surface-active");
     clone.remove();
     suppressedClickSource = source;
     suppressClickUntil = Date.now() + 700;

@@ -93,6 +93,7 @@
   --type-nav-line-height: 1.625rem;
   --type-brand-size: 1.25rem;
   --type-brand-line-height: 1.4375rem;
+  --type-brand-weight: var(--font-weight-extra-bold);
   --type-interface-label-transform: uppercase;
 
   /* Paragraph rhythm is relative to the consuming text role's font size. */
@@ -150,6 +151,7 @@
   );
   --icon-size-small: 1.25rem;
   --icon-size: 1.5rem;
+  --material-icon-grade: -25;
   --header-control-target-crop: calc(
     (var(--control-size-large) - (var(--icon-size) + var(--space-5))) / 2
   );

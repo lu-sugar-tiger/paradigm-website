@@ -32,6 +32,7 @@ const TEXT_ROLES = new Map([
   ["h5", { size: "0.875rem", lineHeight: "1.166667rem", weight: "semi-bold" }],
   ["h6", { size: "0.75rem", lineHeight: "1rem", weight: "semi-bold" }]
 ]);
+const COMPONENT_TEXT_ROLES = new Set(["brand"]);
 const FONT_FAMILIES = new Map([
   ["font-latin", '"Roboto"'],
   ["font-cjk", '"PingFang TC", "Noto Sans CJK TC", "Noto Sans TC", "Source Han Sans TC", "Microsoft JhengHei"'],
@@ -94,6 +95,7 @@ for (const [name, value] of WEIGHTS) {
 assert.equal(propertyValue(tokens, "--font-weight-strong-offset"), "200", "Strong must add two weight levels");
 assert.equal(propertyValue(tokens, "--font-style-normal"), "normal", "Normal style modifier must be tokenized");
 assert.equal(propertyValue(tokens, "--font-style-italic"), "italic", "Italic style modifier must be tokenized");
+assert.equal(propertyValue(tokens, "--type-brand-weight"), "var(--font-weight-extra-bold)", "Brand must own its default weight");
 
 for (const [name, value] of PARAGRAPH_SPACING) {
   assert.equal(
@@ -142,14 +144,12 @@ for (const filePath of cssFiles) {
   }
 
   for (const match of withoutComments.matchAll(/--font-weight-base\s*:\s*var\(--font-weight-([a-z-]+)\)/g)) {
-    if (!WEIGHTS.has(match[1])) {
-      violations.push(`${relativePath}: unknown semantic weight ${match[1]}`);
-    }
+    violations.push(`${relativePath}: base weight must come from a complete text role; use Strong for a state or inline modifier, found ${match[1]}`);
   }
 
 
   for (const match of withoutComments.matchAll(/--font-weight-base\s*:\s*var\(--type-([a-z0-9-]+)-weight\)/g)) {
-    if (!TEXT_ROLES.has(match[1])) {
+    if (!TEXT_ROLES.has(match[1]) && !COMPONENT_TEXT_ROLES.has(match[1])) {
       violations.push(`${relativePath}: unknown text-role weight ${match[1]}`);
     }
   }
@@ -199,9 +199,11 @@ for (const [semanticElement, shiftedRole] of [
 const components = await readFile(path.join(CSS_DIRECTORY, "components.css"), "utf8");
 assert.match(
   components,
-  /\.material-symbols-outlined\s*\{[^}]*font-weight:\s*var\(--font-weight-base\);[^}]*font-variation-settings:\s*"FILL" 0, "wght" var\(--font-weight-base\), "GRAD" 0, "opsz" 24;/,
-  "Material symbols must inherit the semantic weight selected by their text owner"
+  /\.material-symbols-outlined\s*\{[^}]*font-weight:\s*var\(--font-weight-base\);[^}]*font-variation-settings:\s*"FILL" 0, "wght" var\(--font-weight-base\), "GRAD" var\(--material-icon-grade\), "opsz" 24;/,
+  "Material symbols must inherit the semantic weight selected by their text owner and consume the shared grade"
 );
+assert.equal(propertyValue(tokens, "--material-icon-grade"), "-25", "Every Material Symbol must use grade -25");
+assert.doesNotMatch(components, /"GRAD"\s+0/, "No component may reset a Material Symbol to grade 0");
 assert.doesNotMatch(
   components.match(/\.material-symbols-outlined\s*\{[^}]*\}/)?.[0] || "",
   /--font-weight-base\s*:/,

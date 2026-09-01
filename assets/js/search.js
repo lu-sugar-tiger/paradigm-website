@@ -14,10 +14,10 @@
   let suggestionsSuppressed = false;
   let sequenceOverlayRender = false;
   let overlayRenderVersion = 0;
-  const TRAILING_ICONS = Object.freeze({
+  const RESULT_ICONS = Object.freeze({
     suggestion: "search",
-    internalPage: "arrow_forward",
-    externalPage: "arrow_outward"
+    page: "arrow_forward",
+    external: "arrow_outward"
   });
 
   if (!core || !overlay || !input || !form || !submit || !overlayResults || !overlayStatus) return;
@@ -45,11 +45,11 @@
     return value.startsWith("/") ? value : `/${value}`;
   }
 
-  function trailingContent(contentClass, label, iconName) {
+  function leadingContent(contentClass, label, iconName) {
     const content = element("span", contentClass);
-    const icon = element("span", "material-symbols-outlined material-icon search-result__indicator", iconName);
+    const icon = element("span", "material-symbols-outlined material-icon search-result__leading-indicator", iconName);
     icon.setAttribute("aria-hidden", "true");
-    content.append(label, icon);
+    content.append(icon, label);
     return content;
   }
 
@@ -99,10 +99,10 @@
       const button = element("button", "search-suggestion");
       button.type = "button";
       button.dataset.searchSuggestion = label;
-      button.append(trailingContent(
+      button.append(leadingContent(
         "search-suggestion__content",
         element("span", "search-suggestion__label", label),
-        TRAILING_ICONS.suggestion
+        RESULT_ICONS.suggestion
       ));
       item.append(button);
       list.append(item);
@@ -120,16 +120,18 @@
       const link = element("a", `search-page-result${page.external ? " external-link" : ""}`);
       link.href = page.url;
       const title = element("h3", `search-page-result__title${page.interfaceLabel ? " interface-label" : ""}${page.external ? " external-link__label" : ""}`, page.title);
-      const content = trailingContent(
+      const content = leadingContent(
         "search-page-result__content",
         title,
-        page.external ? TRAILING_ICONS.externalPage : TRAILING_ICONS.internalPage
+        RESULT_ICONS.page
       );
       if (page.external) {
         link.target = "_blank";
         link.rel = "noopener noreferrer";
         link.dataset.externalLink = "true";
-        content.append(element("span", "visually-hidden", " (opens in a new tab)"));
+        const externalIcon = element("span", "material-symbols-outlined material-icon external-link__indicator", RESULT_ICONS.external);
+        externalIcon.setAttribute("aria-hidden", "true");
+        content.append(externalIcon, element("span", "visually-hidden", " (opens in a new tab)"));
       }
       link.append(content);
       list.append(link);

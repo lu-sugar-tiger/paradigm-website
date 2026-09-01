@@ -262,14 +262,18 @@ assert.match(teamwearStory, /\.teamwear-section-heading\s*\{[\s\S]*?margin-botto
 assert.match(teamwearStory, /\.teamwear-highlights__header\s*\{[\s\S]*?margin-bottom:\s*var\(--layout-section-content-gap\)/, "Highlights must use the same 48px content gap");
 assert.match(teamwearStory, /\.teamwear-story-shell \.site-header\s*\{[\s\S]*?position:\s*absolute;/, "The Teamwear header must keep its initial overlay position and scroll away with the page");
 assert.doesNotMatch(teamwearStory, /has-floating-primary-action|\.teamwear-story-shell[^\{]*\.site-header[^\{]*\{[^}]*visibility:\s*hidden/, "The Teamwear header must not hide in response to the floating action");
-assert.match(teamwearStory, /padding:\s*0 var\(--teamwear-content-edge\)/, "Teamwear rails must start and end at the derived Teamwear content edge");
-assert.match(teamwearStory, /scroll-padding-inline:\s*var\(--teamwear-content-edge\)/, "Teamwear rails must use the content edge for scroll positioning");
+assert.match(teamwearStory, /padding:\s*0 var\(--teamwear-rail-content-edge\)/, "Teamwear rails must start and end at the derived rail content edge");
+assert.match(teamwearStory, /scroll-padding-inline:\s*var\(--teamwear-rail-content-edge\)/, "Teamwear rails must use the rail content edge for scroll positioning");
+assert.match(teamwearStory, /scroll-snap-type:\s*x mandatory;/, "Teamwear rails must use horizontal mandatory snap scrolling");
+assert.match(teamwearStory, /\.teamwear-rail-card\s*\{[\s\S]*?scroll-snap-align:\s*start;[\s\S]*?scroll-snap-stop:\s*always;/, "Every Teamwear rail card must snap its start edge and stop at each card");
 assert.match(teamwearStory, /\.teamwear-highlights__viewport,[\s\S]*?\.teamwear-colorway__viewport,[\s\S]*?\.teamwear-gallery__viewport\s*\{[\s\S]*?position:\s*relative;/, "Every Teamwear rail viewport must establish the overlay positioning context");
 assert.match(teamwearStory, /\.teamwear-rail-controls\s*\{[\s\S]*?display:\s*none;/, "Teamwear rail controls must remain hidden below Large");
 assert.match(teamwearStory, /\.teamwear-rail-button\s*\{[\s\S]*?width:\s*var\(--control-size-large\);[\s\S]*?height:\s*var\(--control-size-large\);[\s\S]*?border:\s*0;[\s\S]*?border-radius:\s*var\(--radius-pill\);[\s\S]*?background:\s*var\(--color-container-low\);[\s\S]*?color:\s*var\(--color-on-surface-high\);[\s\S]*?box-shadow:\s*none;/, "Teamwear rail controls must use real 48px circular interaction boxes with semantic colors");
 assert.doesNotMatch(teamwearStory, /data:image\/svg\+xml|teamwear-rail-chevron-mask|-webkit-mask:\s*var\(--teamwear-rail|mask:\s*var\(--teamwear-rail/, "Teamwear rail controls must not recreate Material glyphs with SVG data masks");
 assert.doesNotMatch(teamwearStory, /\.teamwear-rail-button::before\s*\{/, "Teamwear rail controls must paint their Material symbols directly without a pseudo-icon layer");
 assert.match(teamwearStory, /\.teamwear-rail-button \.material-icon\s*\{[\s\S]*?width:\s*var\(--icon-size\);[\s\S]*?height:\s*var\(--icon-size\);[\s\S]*?font-size:\s*var\(--icon-size\);/, "Teamwear rail controls must visibly render the shared 24px Material glyph inside the 48px target");
+assert.match(teamwearStory, /\.teamwear-stacked-row__icon\s*\{[\s\S]*?--font-weight-base:\s*var\(--type-h5-weight\);/, "Teamwear process icons must match their accompanying H5 heading weight");
+assert.match(teamwearStory, /\.teamwear-material__bento \.material-icon\s*\{[\s\S]*?--font-weight-base:\s*var\(--type-h5-weight\);/, "Teamwear material-bento icons must match their accompanying H5 heading weight");
 assert.match(teamwearStory, /\.teamwear-rail-button\[hidden\]\s*\{[\s\S]*?display:\s*none;/, "Unavailable Teamwear rail directions must override the authored button display rule");
 assert.doesNotMatch(teamwearStory, /\.teamwear-rail-button[^\{]*\{[^}]*transition\s*:/, "Teamwear rail buttons must not animate hover-state changes");
 assert.doesNotMatch(teamwearStory, /\.teamwear-rail-button[^\{]*:hover/, "Teamwear rail buttons must not define a hover effect");
@@ -289,6 +293,8 @@ assert.match(
   "Teamwear rail cards must use the centralized 12px entrance and per-card delay"
 );
 assert.match(teamwearStory, /\.teamwear-rail-card__photo-track\s*\{[\s\S]*?width:\s*calc\(100% \+ var\(--space-5\) \+ var\(--space-5\)\);[\s\S]*?translate:\s*var\(--rail-photo-offset, 0px\) 0;/, "Teamwear rail photos must provide 16px inline bleed and consume the bounded photo offset");
+assert.match(teamwearTemplate, /teamwear-rail-card__surface" data-media-zoom-surface><div class="teamwear-rail-card__media" data-media-zoom-touch/, "Teamwear rail media must declare the centralized zoom source and backing-surface relationship");
+assert.doesNotMatch(teamwearStory, /media-zoom-(?:source|surface)-active/, "Teamwear layout CSS must not duplicate the centralized floating-zoom state");
 assert.match(teamwearStory, /\.teamwear-rail-card__copy\s*\{[\s\S]*?translate:\s*var\(--rail-copy-offset, 0px\) 0;/, "Teamwear rail copy must consume its opposed offset");
 assert.match(teamwearBehavior, /card\.style\.setProperty\("--rail-card-delay", `\$\{index \* 40\}ms`\)/, "Teamwear cards must reveal in DOM order with a 40ms stagger");
 assert.match(teamwearBehavior, /getBoundingClientRect\(\)[\s\S]*?--rail-photo-offset[\s\S]*?positions\[index\] \* -16[\s\S]*?--rail-copy-offset[\s\S]*?positions\[index\] \* 8/, "Teamwear rails must read geometry before writing bounded opposed 16px and 8px offsets");
@@ -300,17 +306,17 @@ assert.match(teamwearStory, /\.teamwear-hero__copy\s*\{[\s\S]*?var\(--layout-sec
 const mediumTeamwear = blockAfter(teamwearStory, "@media (min-width: 48rem)");
 assert.match(
   teamwearStory,
-  /--teamwear-card-width:\s*calc\(\s*\(min\(100vw, var\(--content-width\)\) - var\(--space-2\)\) \/ 2\s*\)/,
-  "Base Teamwear rail cards must use the two-column reference-width formula with one rail gap"
+  /--teamwear-rail-reference-width:\s*min\(100cqw, var\(--content-width\)\);[\s\S]*?--teamwear-rail-content-edge:\s*max\([\s\S]*?100cqw[\s\S]*?--teamwear-content-region-width:\s*calc\(\s*var\(--teamwear-rail-reference-width\) - var\(--layout-gutter-inline\) - var\(--layout-gutter-inline\)\s*\);[\s\S]*?--teamwear-rail-gap:\s*var\(--space-6\);[\s\S]*?--teamwear-card-width:\s*calc\(\s*var\(--teamwear-content-region-width\) - var\(--teamwear-rail-gap\)\s*\);[\s\S]*?container-type:\s*inline-size;/,
+  "Base Teamwear rail cards must use the inner content-region width minus the space-6 rail gap"
 );
 assert.match(
   mediumTeamwear,
-  /\.teamwear-story-page\s*\{[\s\S]*?--teamwear-card-width:\s*calc\(\s*\(min\(100vw, var\(--content-width\)\) - var\(--space-2\) - var\(--space-2\)\) \/ 3\s*\)/,
-  "Medium and Large Teamwear rail cards must use the three-column reference-width formula with two rail gaps"
+  /\.teamwear-highlights__viewport,[\s\S]*?\.teamwear-gallery__viewport\s*\{[\s\S]*?--teamwear-rail-gap:\s*var\(--space-8\);[\s\S]*?--teamwear-card-width:\s*calc\(\s*\(var\(--teamwear-content-region-width\) \/ 1\.5\) - var\(--teamwear-rail-gap\)\s*\)/,
+  "Medium and Large Teamwear rail cards must show one and a half content-region cards with the space-8 rail gap"
 );
 assert.equal(
   mediumTeamwear
-    .replace(/\.teamwear-story-page\s*\{[\s\S]*?--teamwear-card-width:\s*calc\(\s*\(min\(100vw, var\(--content-width\)\) - var\(--space-2\) - var\(--space-2\)\) \/ 3\s*\);[\s\S]*?\}/, "")
+    .replace(/\.teamwear-highlights__viewport,[\s\S]*?\.teamwear-gallery__viewport\s*\{[\s\S]*?--teamwear-rail-gap:\s*var\(--space-8\);[\s\S]*?--teamwear-card-width:\s*calc\(\s*\(var\(--teamwear-content-region-width\) \/ 1\.5\) - var\(--teamwear-rail-gap\)\s*\);[\s\S]*?\}/, "")
     .trim(),
   "",
   "Teamwear must retain mobile composition through Medium; only rail-card sizing may change"

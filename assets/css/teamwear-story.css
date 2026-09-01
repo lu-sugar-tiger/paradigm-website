@@ -5,9 +5,6 @@
 */
 
 .teamwear-story-page {
-  --teamwear-card-width: calc(
-    (min(100vw, var(--content-width)) - var(--space-2)) / 2
-  );
   overflow: clip;
   background: var(--color-background-mid);
   color: var(--color-on-background-high);
@@ -238,7 +235,20 @@
 .teamwear-highlights__viewport,
 .teamwear-colorway__viewport,
 .teamwear-gallery__viewport {
+  --teamwear-rail-reference-width: min(100cqw, var(--content-width));
+  --teamwear-rail-content-edge: max(
+    var(--layout-gutter-inline),
+    calc((100cqw - var(--content-width)) / 2 + var(--layout-gutter-inline))
+  );
+  --teamwear-content-region-width: calc(
+    var(--teamwear-rail-reference-width) - var(--layout-gutter-inline) - var(--layout-gutter-inline)
+  );
+  --teamwear-rail-gap: var(--space-6);
+  --teamwear-card-width: calc(
+    var(--teamwear-content-region-width) - var(--teamwear-rail-gap)
+  );
   position: relative;
+  container-type: inline-size;
 }
 
 .teamwear-highlights,
@@ -265,11 +275,11 @@
 .teamwear-gallery__rail {
   display: flex;
   align-items: stretch;
-  gap: var(--space-2);
+  gap: var(--teamwear-rail-gap);
   overflow-x: auto;
-  padding: 0 var(--teamwear-content-edge);
-  scroll-padding-inline: var(--teamwear-content-edge);
-  scroll-snap-type: none;
+  padding: 0 var(--teamwear-rail-content-edge);
+  scroll-padding-inline: var(--teamwear-rail-content-edge);
+  scroll-snap-type: x mandatory;
   scrollbar-width: none;
   -ms-overflow-style: none;
   touch-action: pan-x pan-y;
@@ -295,6 +305,8 @@
   align-content: start;
   gap: var(--space-4);
   overflow: visible;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   color: var(--color-on-background-high);
 }
 
@@ -451,6 +463,7 @@
 }
 
 .teamwear-stacked-row__icon {
+  --font-weight-base: var(--type-h5-weight);
   justify-self: end;
   width: var(--control-size-medium);
   height: var(--control-size-medium);
@@ -534,6 +547,7 @@
 }
 
 .teamwear-material__bento .material-icon {
+  --font-weight-base: var(--type-h5-weight);
   width: var(--icon-size);
   height: var(--icon-size);
   font-size: var(--icon-size);
@@ -579,9 +593,12 @@
 }
 
 @media (min-width: 48rem) {
-  .teamwear-story-page {
+  .teamwear-highlights__viewport,
+  .teamwear-colorway__viewport,
+  .teamwear-gallery__viewport {
+    --teamwear-rail-gap: var(--space-8);
     --teamwear-card-width: calc(
-      (min(100vw, var(--content-width)) - var(--space-2) - var(--space-2)) / 3
+      (var(--teamwear-content-region-width) / 1.5) - var(--teamwear-rail-gap)
     );
   }
 }
