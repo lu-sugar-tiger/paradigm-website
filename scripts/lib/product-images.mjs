@@ -32,10 +32,12 @@ function responsiveMediaFromSource(image) {
   };
 }
 
-export function resolveProductMedia(product) {
+export function resolveProductMedia(product, fallbackMedia = null) {
   const sheetMedia = (product.images || []).map(responsiveMediaFromSource).filter(Boolean);
   if (sheetMedia.length) return sheetMedia;
-  return (product.localImages || []).filter(Boolean).map((src) => ({ src, derivatives: [] }));
+  const localMedia = (product.localImages || []).filter(Boolean).map((src) => ({ src, derivatives: [] }));
+  if (localMedia.length) return localMedia;
+  return fallbackMedia?.src ? [{ ...fallbackMedia, isFallback: true }] : [];
 }
 
 export function imageSrcset(media, resolvePath = (value) => value) {

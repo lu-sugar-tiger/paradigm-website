@@ -104,7 +104,9 @@
       const firstCard = rail.querySelector(".teamwear-rail-card");
       const gap = Number.parseFloat(window.getComputedStyle(rail).columnGap) || 0;
       const distance = (firstCard?.getBoundingClientRect().width || rail.clientWidth * 0.8) + gap;
-      rail.scrollBy({ left: direction * distance, behavior: reducedMotion ? "auto" : "smooth" });
+      const currentIndex = Math.round(rail.scrollLeft / distance);
+      const targetIndex = clamp(currentIndex + direction, 0, Math.max(0, cards.length - 1));
+      rail.scrollTo({ left: targetIndex * distance, behavior: reducedMotion ? "auto" : "smooth" });
     }
 
     previousButton?.addEventListener("click", () => scrollRail(-1));

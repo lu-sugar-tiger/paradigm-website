@@ -106,27 +106,44 @@ body.search-open [data-nav-toggle] {
   height: 100%;
 }
 
+.toggle-icon-stack::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--color-background-high);
+  opacity: 0;
+  pointer-events: none;
+}
+
 .toggle-icon {
   position: absolute;
   inset: 0;
   opacity: 0;
   translate: 0 calc(0px - var(--space-3));
+}
+
+.toggle-icon--resting {
+  z-index: 0;
+  opacity: 1;
+  translate: 0 0;
+  transition: none;
+}
+
+.toggle-icon--close {
+  z-index: 2;
   transition:
     opacity var(--motion-duration-exit) var(--motion-ease-exit),
     translate var(--motion-duration-exit) var(--motion-ease-exit);
 }
 
-.toggle-icon--resting {
+body.nav-open [data-nav-toggle] .toggle-icon-stack::before,
+body.search-open [data-search-toggle] .toggle-icon-stack::before {
   opacity: 1;
-  translate: 0 0;
 }
 
-body:is(.nav-open, .search-open):not([data-overlay-state="closing"]) .toggle-icon--resting {
-  opacity: 0;
-  translate: 0 var(--space-3);
-}
-
-body:is(.nav-open, .search-open):not([data-overlay-state="closing"]) .toggle-icon--close {
+body.nav-open:not([data-overlay-state="closing"]) [data-nav-toggle] .toggle-icon--close,
+body.search-open:not([data-overlay-state="closing"]) [data-search-toggle] .toggle-icon--close {
   opacity: 1;
   translate: 0 0;
   transition-delay: var(--motion-stagger-short);
@@ -134,13 +151,8 @@ body:is(.nav-open, .search-open):not([data-overlay-state="closing"]) .toggle-ico
   transition-timing-function: var(--motion-ease-compact-enter);
 }
 
-body[data-overlay-state="closing"] .toggle-icon--resting {
-  opacity: 1;
-  translate: 0 0;
-  transition-delay: calc(var(--motion-stagger-short) + var(--motion-stagger-short));
-}
-
-body[data-overlay-state="closing"] .toggle-icon--close {
+body.nav-open[data-overlay-state="closing"] [data-nav-toggle] .toggle-icon--close,
+body.search-open[data-overlay-state="closing"] [data-search-toggle] .toggle-icon--close {
   opacity: 0;
   translate: 0 calc(0px - var(--space-3));
   transition-delay: calc(var(--motion-stagger-short) + var(--motion-stagger-short));

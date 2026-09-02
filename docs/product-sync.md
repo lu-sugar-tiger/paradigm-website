@@ -37,7 +37,7 @@ Category is not present in the sheet. The current deterministic mapping is: shor
 3. Group rows by `商品型號`. Carry product-level values from whichever row contains them and retain variant SKU, visibility, and sold-out flags.
 4. For every linked Google Doc, read the current file and record its file ID and `modifiedTime`. Copy from the first bullet through the last non-empty line, then apply the complete product-description contract below.
 5. For every linked image, record file ID and `modifiedTime`, then download the original through an authenticated Drive session. Pass that local source to `scripts/generate-product-images.mjs`; `商品圖片 0` remains first only in the product-media relationship and is never encoded into a generated filename.
-6. If a product has no sheet image links, preserve existing real product photography in `localImages`. If no real photography exists, keep `localImages` empty and render an unlabelled blank media surface. Do not create or reuse placeholder artwork.
+6. If a product has no sheet image links, preserve existing real product photography in `localImages`. If no real photography exists, use the shared decorative fallback defined in `data/product-image-fallback.json`.
 7. Update `data/products-source.json`, then regenerate and validate:
 
    ```powershell
@@ -55,6 +55,7 @@ Category is not present in the sheet. The current deterministic mapping is: shor
 - Store the complete 64-character SHA-256 in `data/products-source.json`. Public filenames start with a 20-character prefix; if that candidate collides with different bytes, the generator extends the prefix until it is unique.
 - Hash the final WebP bytes. Different resolutions therefore have different hashes and paths. Their shared source identity and gallery order remain database relationships.
 - The generated catalog retains `image` and `images` as fallback paths and adds `media[].derivatives` for native `srcset` rendering. Cards and product-detail galleries use the same derivative family with context-specific `sizes` values.
+- The shared missing-photo fallback uses the square `assets/temp/Aesthetics_Logo_InitialA[0.1.1].png` source at `6.25%` opacity over white. It is flattened to opaque RGB WebP at the same three sizes without cropping and is excluded from product-image zoom behavior.
 - The generator requires Sharp to be resolvable by Node. No runtime image library is shipped to website visitors.
 
 Generate one image record:
@@ -69,7 +70,7 @@ Refresh derivative records for the current Sheet-backed image entries whose `loc
 node scripts/generate-product-images.mjs --catalog data/products-source.json
 ```
 
-8. Serve the repository over HTTP and check the all-products page plus representative available, sold-out-detail, blank-image, and multi-image products on mobile and desktop. Confirm collection cards never display sold-out or placeholder labels.
+8. Serve the repository over HTTP and check the all-products page plus representative available, sold-out-detail, fallback-image, and multi-image products on mobile and desktop. Confirm collection cards never display sold-out or placeholder labels.
 
 ## Rich-description normalization contract
 
@@ -108,13 +109,13 @@ This avoids missing in-place edits to Docs and photos while keeping unchanged im
 - Fully sold out: `PD24015`, `TL24019`, `GM42022`, `GM42023`.
 - Downloaded: eight `ED14024` images, each normalized to a 1600 × 1600 WebP; image 0 is the catalog card and main detail image.
 - Preserved existing photography for `ED14001`, `AE14008`, `PH14010`, `PD24015`, `TL23018`, `BT24020`, `BD24021`, `GM42022`, and `GM42023` because their sheet rows contain no images.
-- Blank media surfaces remain for `ED23002`, `PD23006`, `PD14007`, `TL14009`, `PH14011`, `ED24014`, `AE23016`, `AE24017`, and `TL24019` until real photography is supplied.
+- The shared logo fallback appears for `ED23002`, `PD23006`, `PD14007`, `TL14009`, `PH14011`, `ED24014`, `AE23016`, `AE24017`, and `TL24019` until real photography is supplied.
 - Former `PL-*` placeholder URLs and `/products/prdm-cosmos-hoodie` redirect to the matching synced product-number routes.
 
 ## Sync correction: 2026-08-09
 
 - Re-read `網站參照!A1:U200` and retained all 139 sheet SKUs on their matching variants. SKUs remain data-only and are not rendered.
-- Replaced generic product illustrations with unlabelled blank media for products without real photography.
+- Replaced blank media with one unlabelled, low-opacity brand fallback for products without real photography.
 - Rebuilt Doc copy so ordinary text characters remain exact; dash-only lines and structurally confirmed size tables are transformed.
 - Audited all 19 current Docs: each contains one confirmed size table; two use two data columns and 17 use three.
 

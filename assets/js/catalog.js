@@ -338,10 +338,45 @@ window.PARADIGM_CATALOG = {
       "title": "PRDM Everyday Crewneck",
       "category": "AW Tops",
       "price": "NT$990",
-      "image": null,
-      "images": [],
-      "media": [],
-      "imageSource": "blank",
+      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+      "images": [
+        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "isFallback": true,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
+              "bytes": 3112,
+              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+              "bytes": 7424,
+              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
+              "bytes": 18982,
+              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            }
+          ]
+        }
+      ],
+      "imageSource": "fallback",
       "alt": "",
       "colors": [
         {
@@ -618,10 +653,45 @@ window.PARADIGM_CATALOG = {
       "title": "PRDM Paradigm Crewneck",
       "category": "AW Tops",
       "price": "NT$1,180",
-      "image": null,
-      "images": [],
-      "media": [],
-      "imageSource": "blank",
+      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+      "images": [
+        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "isFallback": true,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
+              "bytes": 3112,
+              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+              "bytes": 7424,
+              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
+              "bytes": 18982,
+              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            }
+          ]
+        }
+      ],
+      "imageSource": "fallback",
       "alt": "",
       "colors": [
         {
@@ -891,10 +961,45 @@ window.PARADIGM_CATALOG = {
       "title": "PRDM Paradigm Tee",
       "category": "SS Tops",
       "price": "NT$790",
-      "image": null,
-      "images": [],
-      "media": [],
-      "imageSource": "blank",
+      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+      "images": [
+        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "isFallback": true,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
+              "bytes": 3112,
+              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+              "bytes": 7424,
+              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
+              "bytes": 18982,
+              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            }
+          ]
+        }
+      ],
+      "imageSource": "fallback",
       "alt": "",
       "colors": [
         {
@@ -1521,10 +1626,45 @@ window.PARADIGM_CATALOG = {
       "title": "PRDM Timeless Tee",
       "category": "SS Tops",
       "price": "NT$790",
-      "image": null,
-      "images": [],
-      "media": [],
-      "imageSource": "blank",
+      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+      "images": [
+        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "isFallback": true,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
+              "bytes": 3112,
+              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+              "bytes": 7424,
+              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
+              "bytes": 18982,
+              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            }
+          ]
+        }
+      ],
+      "imageSource": "fallback",
       "alt": "",
       "colors": [
         {
@@ -2130,10 +2270,45 @@ window.PARADIGM_CATALOG = {
       "title": "PRDM Sponsorship Football Jersey",
       "category": "SS Tops",
       "price": "NT$990",
-      "image": null,
-      "images": [],
-      "media": [],
-      "imageSource": "blank",
+      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+      "images": [
+        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "isFallback": true,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
+              "bytes": 3112,
+              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+              "bytes": 7424,
+              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
+              "bytes": 18982,
+              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            }
+          ]
+        }
+      ],
+      "imageSource": "fallback",
       "alt": "",
       "colors": [
         {
@@ -2457,10 +2632,45 @@ window.PARADIGM_CATALOG = {
       "title": "PRDM Everyday Hoodie",
       "category": "AW Tops",
       "price": "NT$1,180",
-      "image": null,
-      "images": [],
-      "media": [],
-      "imageSource": "blank",
+      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+      "images": [
+        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "isFallback": true,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
+              "bytes": 3112,
+              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+              "bytes": 7424,
+              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
+              "bytes": 18982,
+              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            }
+          ]
+        }
+      ],
+      "imageSource": "fallback",
       "alt": "",
       "colors": [
         {
@@ -3026,10 +3236,45 @@ window.PARADIGM_CATALOG = {
       "title": "PRDM Aesthetics Crewneck",
       "category": "AW Tops",
       "price": "NT$1,180",
-      "image": null,
-      "images": [],
-      "media": [],
-      "imageSource": "blank",
+      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+      "images": [
+        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "isFallback": true,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
+              "bytes": 3112,
+              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+              "bytes": 7424,
+              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
+              "bytes": 18982,
+              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            }
+          ]
+        }
+      ],
+      "imageSource": "fallback",
       "alt": "",
       "colors": [
         {
@@ -3281,10 +3526,45 @@ window.PARADIGM_CATALOG = {
       "title": "PRDM Aesthetics Hoodie",
       "category": "AW Tops",
       "price": "NT$1,380",
-      "image": null,
-      "images": [],
-      "media": [],
-      "imageSource": "blank",
+      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+      "images": [
+        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "isFallback": true,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
+              "bytes": 3112,
+              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+              "bytes": 7424,
+              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
+              "bytes": 18982,
+              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            }
+          ]
+        }
+      ],
+      "imageSource": "fallback",
       "alt": "",
       "colors": [
         {
@@ -3818,10 +4098,45 @@ window.PARADIGM_CATALOG = {
       "title": "PRDM Timeless Hoodie",
       "category": "AW Tops",
       "price": "NT$1,380",
-      "image": null,
-      "images": [],
-      "media": [],
-      "imageSource": "blank",
+      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+      "images": [
+        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "isFallback": true,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
+              "bytes": 3112,
+              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+              "bytes": 7424,
+              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
+              "bytes": 18982,
+              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            }
+          ]
+        }
+      ],
+      "imageSource": "fallback",
       "alt": "",
       "colors": [
         {

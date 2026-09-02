@@ -296,8 +296,11 @@
   align-items: stretch;
   gap: var(--teamwear-rail-gap);
   overflow-x: auto;
-  padding: 0 var(--teamwear-rail-content-edge);
-  scroll-padding-inline: var(--teamwear-rail-content-edge);
+  padding-block: 0;
+  padding-inline-start: var(--teamwear-rail-content-edge);
+  padding-inline-end: calc(var(--teamwear-rail-content-edge) + var(--teamwear-rail-gap));
+  scroll-padding-inline-start: var(--teamwear-rail-content-edge);
+  scroll-padding-inline-end: calc(var(--teamwear-rail-content-edge) + var(--teamwear-rail-gap));
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -350,6 +353,11 @@
   aspect-ratio: 1;
   overflow: hidden;
   background: var(--color-surface-low);
+  cursor: grab;
+}
+
+.teamwear-rail-card__media:active {
+  cursor: grabbing;
 }
 
 .teamwear-rail-card__photo-track {

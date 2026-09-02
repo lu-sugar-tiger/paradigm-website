@@ -58,13 +58,14 @@
     link.href = product.url;
     const media = element("div", "product-card__media");
     if (product.media?.src) {
-      media.dataset.mediaZoomTouch = "";
+      if (!product.media.isFallback) media.dataset.mediaZoomTouch = "";
       const image = element("img");
       image.src = assetPath(product.media.src);
       image.alt = product.alt || "";
       image.width = product.media.width || 1;
       image.height = product.media.height || 1;
       image.loading = "lazy";
+      if (product.media.isFallback) image.dataset.productImageFallback = "";
       image.sizes = "(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw";
       if (product.media.derivatives?.length) {
         image.srcset = product.media.derivatives

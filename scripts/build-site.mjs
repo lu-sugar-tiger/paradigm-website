@@ -127,7 +127,7 @@ function renderProductMain(template, product, relatedProducts) {
     root: "../..",
     sizes: "(min-width: 80rem) 768px, (min-width: 64rem) 60vw, 100vw",
     loading: index ? "lazy" : "",
-    touchZoom: true
+    touchZoom: !image.isFallback
   })}`).join("\n");
   const pageHeadline = renderPageHeadline({
     root: "../..",
@@ -146,6 +146,7 @@ function renderProductMain(template, product, relatedProducts) {
     TITLE: html(product.title),
     PRODUCT_NUMBER: html(product.productNumber),
     CATEGORY: html(product.category),
+    PRODUCT_GALLERY_ZOOM: product.imageSource === "fallback" ? "" : " data-media-zoom-gallery",
     PRODUCT_MEDIA: media,
     PRICE: renderProductDetailPrice({ price: product.price, dataAttribute: "data-product-price" }),
     COLOR_CHOICES: colorChoices.split("\n").map((line) => `            ${line}`).join("\n"),
@@ -423,11 +424,12 @@ function renderTeamwearCustomize(template, model, colorById, instagramUrl) {
   });
 }
 
-const [source, colorRegistry, teamwearData, searchConfig, productTemplate, teamwearTemplate, customizeTemplate] = await Promise.all([
+const [source, colorRegistry, teamwearData, searchConfig, productImageFallback, productTemplate, teamwearTemplate, customizeTemplate] = await Promise.all([
   readJson("data/products-source.json"),
   readJson("data/colors.json"),
   readJson("data/teamwear-options.json"),
   readJson("data/search.json"),
+  readJson("data/product-image-fallback.json"),
   readTemplate("product-page.html"),
   readTemplate("teamwear-page.html"),
   readTemplate("teamwear-customize.html")
@@ -442,8 +444,9 @@ const products = source.products.filter((entry) => entry.variants.some((variant)
     if (!color) throw new Error(`Missing canonical color definition for "${label}".`);
     return { id: color.id, colorId: color.id, label: color.name };
   });
-  const media = resolveProductMedia(entry);
-  const localImages = media.map((image) => image.src);
+  const media = resolveProductMedia(entry, productImageFallback.media);
+  const mediaPaths = media.map((image) => image.src);
+  const usesFallback = media.some((image) => image.isFallback);
   const descriptionSource = normalizeDescriptionSource({
     type: "google-doc",
     content: entry.document?.content || "",
@@ -456,11 +459,11 @@ const products = source.products.filter((entry) => entry.variants.some((variant)
     title: entry.title,
     category: categoryForTitle(entry.title),
     price: priceLabel(entry.price),
-    image: localImages[0] || null,
-    images: localImages,
+    image: mediaPaths[0] || null,
+    images: mediaPaths,
     media,
-    imageSource: localImages.length ? entry.imageSource : "blank",
-    alt: localImages.length ? `${entry.title} product image` : "",
+    imageSource: usesFallback ? "fallback" : entry.imageSource,
+    alt: usesFallback ? "" : `${entry.title} product image`,
     colors,
     sizes: unique(visibleVariants.map((variant) => variant.size)),
     variants: entry.variants.map(({ sku, color, size, visible, soldOut }) => ({ ...(sku ? { sku } : {}), color, size, visible, soldOut })),

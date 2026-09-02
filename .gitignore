@@ -2,3 +2,4 @@
 Thumbs.db
 .playwright-cli/
 output/playwright/
+assets/temp/

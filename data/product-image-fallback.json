@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "sourcePath": "assets/temp/Aesthetics_Logo_InitialA[0.1.1].png",
+  "sourceWidth": 4500,
+  "sourceHeight": 4500,
+  "sourceBytes": 112587,
+  "sourceSha256": "33085153f03ef0241de0a3e4609dd141316ea37a055fb0116ce016110aa4afb9",
+  "transform": {
+    "format": "webp",
+    "quality": 100,
+    "resize": "short-edge",
+    "shortEdges": [
+      540,
+      1080,
+      2160
+    ],
+    "opacity": 0.0625,
+    "background": "#ffffff",
+    "flatten": true
+  },
+  "media": {
+    "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+    "width": 1080,
+    "height": 1080,
+    "isFallback": true,
+    "derivatives": [
+      {
+        "shortEdge": 540,
+        "width": 540,
+        "height": 540,
+        "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
+        "bytes": 3112,
+        "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+      },
+      {
+        "shortEdge": 1080,
+        "width": 1080,
+        "height": 1080,
+        "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+        "bytes": 7424,
+        "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+      },
+      {
+        "shortEdge": 2160,
+        "width": 2160,
+        "height": 2160,
+        "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
+        "bytes": 18982,
+        "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+      }
+    ]
+  }
+}

@@ -24,6 +24,21 @@ function sha256(buffer) {
   return createHash("sha256").update(buffer).digest("hex");
 }
 
+function parseBackground(value) {
+  if (!value) return null;
+  const match = String(value).match(/^#([0-9a-f]{6})$/i);
+  if (!match) throw new Error("Image background must be a six-digit hex color such as #ffffff.");
+  const hex = `#${match[1].toLowerCase()}`;
+  return {
+    hex,
+    channels: [
+      Number.parseInt(match[1].slice(0, 2), 16),
+      Number.parseInt(match[1].slice(2, 4), 16),
+      Number.parseInt(match[1].slice(4, 6), 16)
+    ]
+  };
+}
+
 function parseArguments(argv) {
   const values = new Map();
   for (let index = 0; index < argv.length; index += 1) {
@@ -56,9 +71,17 @@ async function outputPathFor({ outputDir, outputHash, width, height }) {
   throw new Error(`Unable to create a unique filename for ${outputHash}.`);
 }
 
-export async function generateProductImageDerivatives({ inputPath, outputDir = path.join(ROOT, "assets", "images", "catalog") }) {
+export async function generateProductImageDerivatives({
+  inputPath,
+  outputDir = path.join(ROOT, "assets", "images", "catalog"),
+  opacity = 1,
+  background = null
+}) {
   const sharp = loadSharp();
   const input = await readFile(inputPath);
+  const flatBackground = parseBackground(background);
+  if (!Number.isFinite(opacity) || opacity < 0 || opacity > 1) throw new Error("Image opacity must be between 0 and 1.");
+  if (opacity !== 1 && !flatBackground) throw new Error("Image opacity below 1 requires a flat background.");
   const sourceHash = sha256(input);
   const sourceMetadata = await sharp(input).metadata();
   const orientationSwapsAxes = [5, 6, 7, 8].includes(sourceMetadata.orientation);
@@ -69,10 +92,29 @@ export async function generateProductImageDerivatives({ inputPath, outputDir = p
   const derivatives = [];
   for (const shortEdge of PRODUCT_IMAGE_SHORT_EDGES) {
     const landscape = orientedWidth > orientedHeight;
-    const output = await sharp(input)
+    let resized = sharp(input)
       .rotate()
-      .resize(landscape ? { height: shortEdge } : { width: shortEdge })
-      .webp({
+      .resize(landscape ? { height: shortEdge } : { width: shortEdge });
+
+    if (flatBackground) {
+      const raw = await resized.ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+      if (raw.info.channels !== 4) throw new Error(`Expected four RGBA channels after resize: ${inputPath}`);
+      const flattened = Buffer.alloc(raw.info.width * raw.info.height * 3);
+      for (let sourceIndex = 0, targetIndex = 0; sourceIndex < raw.data.length; sourceIndex += 4, targetIndex += 3) {
+        const effectiveAlpha = (raw.data[sourceIndex + 3] / 255) * opacity;
+        for (let channel = 0; channel < 3; channel += 1) {
+          flattened[targetIndex + channel] = Math.round(
+            raw.data[sourceIndex + channel] * effectiveAlpha
+              + flatBackground.channels[channel] * (1 - effectiveAlpha)
+          );
+        }
+      }
+      resized = sharp(flattened, {
+        raw: { width: raw.info.width, height: raw.info.height, channels: 3 }
+      });
+    }
+
+    const output = await resized.webp({
         quality: PRODUCT_IMAGE_WEBP_QUALITY,
         lossless: false,
         smartSubsample: true,
@@ -109,7 +151,8 @@ export async function generateProductImageDerivatives({ inputPath, outputDir = p
       format: "webp",
       quality: PRODUCT_IMAGE_WEBP_QUALITY,
       resize: "short-edge",
-      shortEdges: [...PRODUCT_IMAGE_SHORT_EDGES]
+      shortEdges: [...PRODUCT_IMAGE_SHORT_EDGES],
+      ...(flatBackground ? { opacity, background: flatBackground.hex, flatten: true } : {})
     },
     derivatives
   };
@@ -147,7 +190,9 @@ async function main() {
     return;
   }
   if (!args.has("input")) throw new Error("Usage: node scripts/generate-product-images.mjs --input <file> [--output-dir <directory>] OR --catalog <json>");
-  const result = await generateProductImageDerivatives({ inputPath: path.resolve(args.get("input")), outputDir });
+  const opacity = args.has("opacity") ? Number(args.get("opacity")) : 1;
+  const background = args.get("background") || null;
+  const result = await generateProductImageDerivatives({ inputPath: path.resolve(args.get("input")), outputDir, opacity, background });
   console.log(JSON.stringify(result, null, 2));
 }
 

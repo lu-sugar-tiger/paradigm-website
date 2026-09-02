@@ -12,6 +12,7 @@ import {
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const source = JSON.parse(await readFile(path.join(ROOT, "data", "products-source.json"), "utf8"));
 const colorRegistry = JSON.parse(await readFile(path.join(ROOT, "data", "colors.json"), "utf8"));
+const productImageFallback = JSON.parse(await readFile(path.join(ROOT, "data", "product-image-fallback.json"), "utf8"));
 const catalogText = await readFile(path.join(ROOT, "assets", "js", "catalog.js"), "utf8");
 const appText = await readFile(path.join(ROOT, "assets", "js", "app.js"), "utf8");
 const redirects = await readFile(path.join(ROOT, "_redirects"), "utf8");
@@ -35,6 +36,17 @@ function html(value) {
 
 function occurrences(text, pattern) {
   return [...text.matchAll(pattern)].length;
+}
+
+function webpChunkTypes(buffer) {
+  const types = [];
+  for (let offset = 12; offset + 8 <= buffer.length;) {
+    const type = buffer.toString("ascii", offset, offset + 4);
+    const size = buffer.readUInt32LE(offset + 4);
+    types.push(type);
+    offset += 8 + size + (size % 2);
+  }
+  return types;
 }
 
 const flexibleFormatFixture = [
@@ -82,6 +94,35 @@ assert.ok(Array.isArray(products), "catalog must expose a products array");
 assert.ok(!appText.includes("Placeholder image"), "UI must not label missing imagery");
 assert.ok(!appText.includes("buildProductCard"), "collection cards must be generated rather than rebuilt by app.js");
 
+const fallbackSource = await readFile(path.join(ROOT, productImageFallback.sourcePath));
+assert.equal(sha256(fallbackSource), productImageFallback.sourceSha256, "product fallback source hash must match its manifest");
+assert.equal(productImageFallback.sourceWidth, productImageFallback.sourceHeight, "product fallback source must remain square");
+assert.deepEqual(
+  productImageFallback.transform,
+  {
+    format: "webp",
+    quality: 100,
+    resize: "short-edge",
+    shortEdges: imageShortEdges,
+    opacity: 0.0625,
+    background: "#ffffff",
+    flatten: true
+  },
+  "product fallback transform must remain flat white with 6.25% artwork opacity"
+);
+assert.equal(productImageFallback.media.isFallback, true, "product fallback media must be explicitly marked");
+assert.deepEqual(productImageFallback.media.derivatives.map(({ shortEdge }) => shortEdge), imageShortEdges, "product fallback must provide all responsive tiers");
+for (const derivative of productImageFallback.media.derivatives) {
+  assert.equal(derivative.width, derivative.shortEdge, "product fallback derivatives must remain square without cropping");
+  assert.equal(derivative.height, derivative.shortEdge, "product fallback derivatives must remain square without cropping");
+  const buffer = await readFile(path.join(ROOT, derivative.path));
+  assert.equal(buffer.length, derivative.bytes, `${derivative.path} byte size must match its manifest`);
+  assert.equal(sha256(buffer), derivative.sha256, `${derivative.path} hash must match its manifest`);
+  const chunks = webpChunkTypes(buffer);
+  assert.ok(chunks.includes("VP8 "), `${derivative.path} must be a lossy flat WebP`);
+  assert.ok(!chunks.includes("ALPH"), `${derivative.path} must not retain an alpha channel`);
+}
+
 const visibleSources = source.products.filter((product) =>
   product.variants.some((variant) => variant.visible)
 );
@@ -109,7 +150,7 @@ assert.equal(products.length, visibleSources.length, "catalog must include every
 assert.equal(new Set(products.map((product) => product.productNumber)).size, products.length, "product numbers must be unique");
 
 const sourceByNumber = new Map(source.products.map((product) => [product.productNumber, product]));
-const blankImages = [];
+const fallbackImages = [];
 let descriptionTableCount = 0;
 
 for (const product of products) {
@@ -175,14 +216,20 @@ for (const product of products) {
     `${product.productNumber} sold-out status must match its visible variants`
   );
 
-  if (product.images.length) {
+  const sourceHasPhotography = (sourceProduct.images || []).some((image) => image.localPath)
+    || (sourceProduct.localImages || []).some(Boolean);
+  if (sourceHasPhotography) {
     assert.equal(product.image, product.images[0], `${product.productNumber} main image must be image 0`);
     for (const image of product.images) await access(path.join(ROOT, image));
     assert.equal(product.media.length, product.images.length, `${product.productNumber} media records must match its image list`);
   } else {
-    blankImages.push(product.productNumber);
-    assert.equal(product.image, null, `${product.productNumber} without photography must have a blank image`);
-    assert.equal(product.imageSource, "blank", `${product.productNumber} without photography must use blank media`);
+    fallbackImages.push(product.productNumber);
+    assert.equal(product.image, productImageFallback.media.src, `${product.productNumber} without photography must use the shared fallback`);
+    assert.deepEqual(Array.from(product.images), [productImageFallback.media.src], `${product.productNumber} must expose one fallback image`);
+    assert.equal(product.imageSource, "fallback", `${product.productNumber} without photography must identify fallback media`);
+    assert.equal(product.alt, "", `${product.productNumber} decorative fallback must have empty alt text`);
+    assert.equal(product.media.length, 1, `${product.productNumber} must expose one fallback media record`);
+    assert.equal(product.media[0].isFallback, true, `${product.productNumber} fallback media must be marked`);
   }
 
   const routePath = path.join(ROOT, "products", product.productNumber, "index.html");
@@ -202,6 +249,10 @@ for (const product of products) {
   assert.ok(!route.includes("{{"), `${product.productNumber} route must not contain template tokens`);
   const galleryMarkup = route.slice(route.indexOf("data-product-gallery"), route.indexOf('<article class="product-detail__summary">'));
   assert.equal(occurrences(galleryMarkup, /<img src="\.\.\/\.\.\/assets\/images\/(?:catalog|products)\//g), product.images.length, `${product.productNumber} route media count must match images`);
+  if (!sourceHasPhotography) {
+    assert.equal(occurrences(galleryMarkup, /data-product-image-fallback/g), 1, `${product.productNumber} detail route must mark its fallback image`);
+    assert.doesNotMatch(galleryMarkup, /data-media-zoom-gallery|data-media-zoom-touch/, `${product.productNumber} fallback must not enable image zoom`);
+  }
   if (product.media.some((image) => image.derivatives.length)) {
     assert.equal(occurrences(galleryMarkup, / srcset="/g), product.media.filter((image) => image.derivatives.length).length, `${product.productNumber} responsive gallery images must expose srcset`);
     assert.equal(occurrences(galleryMarkup, / sizes="\(min-width: 80rem\) 768px, \(min-width: 64rem\) 60vw, 100vw"/g), product.media.filter((image) => image.derivatives.length).length, `${product.productNumber} responsive gallery images must expose the detail slot sizes`);
@@ -218,6 +269,10 @@ for (const product of products) {
     assert.ok(route.includes('target="_blank" rel="noopener noreferrer"'), `${product.productNumber} external link must be safe`);
   }
 }
+
+const allProductsPage = await readFile(path.join(ROOT, "collections", "all", "index.html"), "utf8");
+assert.equal(occurrences(allProductsPage, /data-product-image-fallback/g), fallbackImages.length, "all-products catalog must render every shared fallback");
+assert.doesNotMatch(allProductsPage, /product-card__media" data-media-zoom-touch><img[^>]*data-product-image-fallback/, "catalog fallback images must not enable touch zoom");
 
 for (const product of source.products) {
   for (const image of product.images) {
@@ -264,5 +319,5 @@ for (const [legacy, current] of Object.entries(legacyRedirects)) {
   );
 }
 
-console.log(`PRODUCT_CATALOG_OK products=${products.length} canonicalColors=${colorRegistry.colors.length} soldOut=${products.filter((product) => product.soldOut).length} blankImages=${blankImages.length} descriptionTables=${descriptionTableCount} hashtags=${products.length} textExact=true spacingSourceExact=true blankEol=U+000A`);
-console.log(`BLANK_IMAGE_PRODUCTS ${blankImages.join(",") || "none"}`);
+console.log(`PRODUCT_CATALOG_OK products=${products.length} canonicalColors=${colorRegistry.colors.length} soldOut=${products.filter((product) => product.soldOut).length} fallbackImages=${fallbackImages.length} descriptionTables=${descriptionTableCount} hashtags=${products.length} textExact=true spacingSourceExact=true blankEol=U+000A`);
+console.log(`FALLBACK_IMAGE_PRODUCTS ${fallbackImages.join(",") || "none"}`);
