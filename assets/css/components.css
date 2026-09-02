@@ -1,11 +1,12 @@
 .material-symbols-outlined {
+  --material-icon-weight: calc(var(--font-weight-base) - var(--material-icon-weight-offset));
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-family: "Material Symbols Outlined";
   font-size: var(--icon-size);
   font-style: normal;
-  font-weight: var(--font-weight-base);
+  font-weight: var(--material-icon-weight);
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
@@ -15,7 +16,7 @@
   -webkit-font-feature-settings: "liga";
   font-feature-settings: "liga";
   -webkit-font-smoothing: antialiased;
-  font-variation-settings: "FILL" 0, "wght" var(--font-weight-base), "GRAD" var(--material-icon-grade), "opsz" 24;
+  font-variation-settings: "FILL" 0, "wght" var(--material-icon-weight), "GRAD" var(--material-icon-grade), "opsz" 24;
   user-select: none;
 }
 
@@ -163,15 +164,27 @@ body[data-overlay-state="closing"] .toggle-icon--close {
   clip-path: inset(0 0 0 var(--header-control-target-crop));
 }
 
+html:has(body[data-overlay-state]) {
+  scrollbar-gutter: auto;
+}
+
+body[data-overlay-state] .site-header {
+  overflow-y: hidden;
+  scrollbar-gutter: stable;
+}
+
 .nav-drawer,
 .search-overlay {
   position: fixed;
-  inset: 0;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 100vw;
   z-index: 90;
   display: block;
   min-height: 100vh;
   height: 100dvh;
   overflow-y: auto;
+  scrollbar-gutter: stable;
   overscroll-behavior: contain;
   background: var(--color-background-high);
   clip-path: inset(0 0 100% 0);
@@ -405,6 +418,10 @@ body[data-overlay-state="closing"] .toggle-icon--close {
 
 .search-result-group--products {
   background: var(--color-background-mid);
+}
+
+.search-overlay .search-result-group--products {
+  padding-top: var(--space-1);
 }
 
 .search-suggestion-list,
@@ -1109,14 +1126,10 @@ img.media-zoom-source-active {
 }
 
 .choice-option--chip:has(input:checked) .choice-option__state-symbol {
-  font-weight: min(
-    var(--font-weight-black),
-    calc(var(--font-weight-base) + var(--font-weight-strong-offset))
+  --material-icon-weight: min(
+    calc(var(--font-weight-black) - var(--material-icon-weight-offset)),
+    calc(var(--font-weight-base) + var(--font-weight-strong-offset) - var(--material-icon-weight-offset))
   );
-  font-variation-settings: "FILL" 0, "wght" min(
-    var(--font-weight-black),
-    calc(var(--font-weight-base) + var(--font-weight-strong-offset))
-  ), "GRAD" var(--material-icon-grade), "opsz" 24;
 }
 
 .choice-option--chip[data-availability="unavailable"]:has(input:checked) {

@@ -155,7 +155,7 @@ for (const relativePath of generatedPages) {
   const deferredApp = page.search(/<script defer src="(?:\.\.\/)*assets\/js\/app\.js\?v=20260831a"><\/script>/);
   assert.ok(earlyController >= 0 && deferredApp > earlyController, `${relativePath} must load the route controller early and before deferred behavior`);
   assert.match(page, /assets\/css\/motion\.css\?v=20260831a/, `${relativePath} must load the cache-busted global motion stylesheet`);
-  assert.match(page, /assets\/css\/components\.css\?v=20260901d/, `${relativePath} must load the cache-busted shared floating-action, Search icon, and media-source motion`);
+  assert.match(page, /assets\/css\/components\.css\?v=20260902d/, `${relativePath} must load the cache-busted shared floating-action, Search icon, media-source motion, and transferred stable overlay gutter`);
   assert.match(page, /assets\/js\/choices\.js\?v=20260831c/, `${relativePath} must load the cache-busted floating-action state controller`);
 }
 

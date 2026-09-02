@@ -72,24 +72,39 @@
 }
 
 .teamwear-rail-button {
+  --teamwear-rail-chevron-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cmask id='cut' maskUnits='userSpaceOnUse' x='0' y='0' width='32' height='32'%3E%3Crect width='32' height='32' fill='white'/%3E%3Csvg x='4' y='4' width='24' height='24' viewBox='0 -960 960 960'%3E%3Cpath d='M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z' fill='black'/%3E%3C/svg%3E%3C/mask%3E%3Crect width='32' height='32' fill='white' mask='url(%23cut)'/%3E%3C/svg%3E");
   position: relative;
   display: inline-grid;
-  width: var(--control-size-large);
-  height: var(--control-size-large);
+  width: var(--space-7);
+  height: var(--space-7);
   padding: 0;
   place-items: center;
   border: 0;
   border-radius: var(--radius-pill);
-  background: var(--color-container-low);
-  color: var(--color-on-surface-high);
+  background: transparent;
   box-shadow: none;
   cursor: pointer;
+}
+
+.teamwear-rail-button::before {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--color-container-low);
+  content: "";
+  -webkit-mask: var(--teamwear-rail-chevron-mask) center / 100% 100% no-repeat;
+  mask: var(--teamwear-rail-chevron-mask) center / 100% 100% no-repeat;
 }
 
 .teamwear-rail-button .material-icon {
   width: var(--icon-size);
   height: var(--icon-size);
+  opacity: 0;
   font-size: var(--icon-size);
+}
+
+.teamwear-rail-button--previous {
+  --teamwear-rail-chevron-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cmask id='cut' maskUnits='userSpaceOnUse' x='0' y='0' width='32' height='32'%3E%3Crect width='32' height='32' fill='white'/%3E%3Csvg x='4' y='4' width='24' height='24' viewBox='0 -960 960 960'%3E%3Cpath d='M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z' fill='black'/%3E%3C/svg%3E%3C/mask%3E%3Crect width='32' height='32' fill='white' mask='url(%23cut)'/%3E%3C/svg%3E");
 }
 
 .teamwear-rail-button:disabled {
@@ -236,6 +251,10 @@
 .teamwear-colorway__viewport,
 .teamwear-gallery__viewport {
   --teamwear-rail-reference-width: min(100cqw, var(--content-width));
+  --teamwear-rail-outer-margin: max(
+    0px,
+    calc((100cqw - var(--content-width)) / 2)
+  );
   --teamwear-rail-content-edge: max(
     var(--layout-gutter-inline),
     calc((100cqw - var(--content-width)) / 2 + var(--layout-gutter-inline))
@@ -598,7 +617,12 @@
   .teamwear-gallery__viewport {
     --teamwear-rail-gap: var(--space-8);
     --teamwear-card-width: calc(
-      (var(--teamwear-content-region-width) / 1.5) - var(--teamwear-rail-gap)
+      (
+        var(--teamwear-content-region-width)
+        + var(--teamwear-rail-outer-margin)
+        - var(--teamwear-rail-gap)
+        - var(--teamwear-rail-gap)
+      ) / 2
     );
   }
 }

@@ -23,14 +23,14 @@ const PARAGRAPH_SPACING = new Map([
   ["relaxed", "1em"]
 ]);
 const TEXT_ROLES = new Map([
-  ["small", { size: "0.625rem", lineHeight: "0.833333rem", weight: "regular" }],
-  ["body", { size: "0.75rem", lineHeight: "1rem", weight: "regular" }],
-  ["h1", { size: "2rem", lineHeight: "2.666667rem", weight: "semi-bold" }],
-  ["h2", { size: "1.5rem", lineHeight: "2rem", weight: "semi-bold" }],
-  ["h3", { size: "1.25rem", lineHeight: "1.666667rem", weight: "semi-bold" }],
-  ["h4", { size: "1rem", lineHeight: "1.333333rem", weight: "semi-bold" }],
-  ["h5", { size: "0.875rem", lineHeight: "1.166667rem", weight: "semi-bold" }],
-  ["h6", { size: "0.75rem", lineHeight: "1rem", weight: "semi-bold" }]
+  ["small", { size: "0.625rem", lineHeight: "0.833333rem", weight: "350" }],
+  ["body", { size: "0.75rem", lineHeight: "1rem", weight: "350" }],
+  ["h1", { size: "2rem", lineHeight: "2.666667rem", weight: "var(--font-weight-medium)" }],
+  ["h2", { size: "1.5rem", lineHeight: "2rem", weight: "var(--font-weight-medium)" }],
+  ["h3", { size: "1.25rem", lineHeight: "1.666667rem", weight: "var(--font-weight-medium)" }],
+  ["h4", { size: "1rem", lineHeight: "1.333333rem", weight: "var(--font-weight-medium)" }],
+  ["h5", { size: "0.875rem", lineHeight: "1.166667rem", weight: "var(--font-weight-medium)" }],
+  ["h6", { size: "0.75rem", lineHeight: "1rem", weight: "var(--font-weight-medium)" }]
 ]);
 const COMPONENT_TEXT_ROLES = new Set(["brand"]);
 const FONT_FAMILIES = new Map([
@@ -92,7 +92,7 @@ for (const [name, value] of WEIGHTS) {
     `--font-weight-${name} must equal ${value}`
   );
 }
-assert.equal(propertyValue(tokens, "--font-weight-strong-offset"), "200", "Strong must add two weight levels");
+assert.equal(propertyValue(tokens, "--font-weight-strong-offset"), "150", "Strong must add 150 to the surrounding role weight");
 assert.equal(propertyValue(tokens, "--font-style-normal"), "normal", "Normal style modifier must be tokenized");
 assert.equal(propertyValue(tokens, "--font-style-italic"), "italic", "Italic style modifier must be tokenized");
 assert.equal(propertyValue(tokens, "--type-brand-weight"), "var(--font-weight-extra-bold)", "Brand must own its default weight");
@@ -114,7 +114,7 @@ for (const [name, role] of TEXT_ROLES) {
   );
   assert.equal(
     propertyValue(tokens, `--type-${name}-weight`),
-    `var(--font-weight-${role.weight})`,
+    role.weight,
     `${name} default weight must be ${role.weight}`
   );
 }
@@ -137,6 +137,7 @@ for (const filePath of cssFiles) {
     const value = match[1].trim();
     if (
       value !== "var(--font-weight-base)" &&
+      value !== "var(--material-icon-weight)" &&
       !value.startsWith("min(")
     ) {
       violations.push(`${relativePath}: font-weight must use the semantic base or Strong modifier, found ${value}`);
@@ -155,10 +156,10 @@ for (const filePath of cssFiles) {
   }
 
   for (const { selector, declarations } of collectRules(css)) {
-    const inheritsOwnerWeight = selector.trim() === ".material-symbols-outlined";
+    const derivesIconWeight = selector.trim() === ".material-symbols-outlined";
     if (
       declarations.includes("font-weight: var(--font-weight-base)") &&
-      !inheritsOwnerWeight &&
+      !derivesIconWeight &&
       !/--font-weight-base\s*:\s*var\(--(?:font-weight-[a-z-]+|type-[a-z0-9-]+-weight)\)/.test(declarations)
     ) {
       violations.push(`${relativePath}: ${selector} must declare its semantic --font-weight-base`);
@@ -169,7 +170,7 @@ for (const filePath of cssFiles) {
 const base = await readFile(path.join(CSS_DIRECTORY, "base.css"), "utf8");
 assert.doesNotMatch(base, /font-stretch\s*:/, "Global typography must not stretch CJK system fallbacks");
 assert.match(base, /:where\(strong, \.text-strong\)/, "Strong element and modifier class must share one rule");
-assert.match(base, /var\(--font-weight-strong-offset\)/, "Strong must use the +200 token");
+assert.match(base, /var\(--font-weight-strong-offset\)/, "Strong must use the +150 token");
 assert.match(base, /var\(--font-weight-black\)/, "Strong must cap at Black 900");
 assert.match(base, /:where\(em, \.text-italic\)/, "Italic element and modifier class must share one rule");
 for (const role of TEXT_ROLES.keys()) {
@@ -199,11 +200,12 @@ for (const [semanticElement, shiftedRole] of [
 const components = await readFile(path.join(CSS_DIRECTORY, "components.css"), "utf8");
 assert.match(
   components,
-  /\.material-symbols-outlined\s*\{[^}]*font-weight:\s*var\(--font-weight-base\);[^}]*font-variation-settings:\s*"FILL" 0, "wght" var\(--font-weight-base\), "GRAD" var\(--material-icon-grade\), "opsz" 24;/,
-  "Material symbols must inherit the semantic weight selected by their text owner and consume the shared grade"
+  /\.material-symbols-outlined\s*\{[^}]*--material-icon-weight:\s*calc\(var\(--font-weight-base\) - var\(--material-icon-weight-offset\)\);[^}]*font-weight:\s*var\(--material-icon-weight\);[^}]*font-variation-settings:\s*"FILL" 0, "wght" var\(--material-icon-weight\), "GRAD" var\(--material-icon-grade\), "opsz" 24;/,
+  "Material symbols must derive a tokenized weight 100 below their semantic text owner and consume the shared grade"
 );
-assert.equal(propertyValue(tokens, "--material-icon-grade"), "-25", "Every Material Symbol must use grade -25");
-assert.doesNotMatch(components, /"GRAD"\s+0/, "No component may reset a Material Symbol to grade 0");
+assert.equal(propertyValue(tokens, "--material-icon-weight-offset"), "100", "Every Material Symbol must use the shared 100 weight offset");
+assert.equal(propertyValue(tokens, "--material-icon-grade"), "0", "Every Material Symbol must use grade 0");
+assert.doesNotMatch(components, /"GRAD"\s+-25/, "No component may retain the previous -25 Material Symbol grade");
 assert.doesNotMatch(
   components.match(/\.material-symbols-outlined\s*\{[^}]*\}/)?.[0] || "",
   /--font-weight-base\s*:/,
@@ -284,5 +286,5 @@ assert.doesNotMatch(rootMarkup, /alibabafonts|AlibabaSansTC/i, "Generated pages 
 
 assert.equal(violations.length, 0, violations.join("\n"));
 console.log(
-  `TYPOGRAPHY_SYSTEM_OK families=${FONT_FAMILIES.size} latin=roboto-semi-condensed-100-900 cjk=system-fallback weights=${WEIGHTS.size} textRoles=${TEXT_ROLES.size} paragraphRoles=${PARAGRAPH_SPACING.size} strongOffset=200 productSpacing=one-third-em teamwear=h1-h2-gradient-child-h5-eyebrow-h5`
+  `TYPOGRAPHY_SYSTEM_OK families=${FONT_FAMILIES.size} latin=roboto-semi-condensed-100-900 cjk=system-fallback weights=${WEIGHTS.size} textRoles=${TEXT_ROLES.size} paragraphRoles=${PARAGRAPH_SPACING.size} strongOffset=150 productSpacing=one-third-em teamwear=h1-h2-gradient-child-h5-eyebrow-h5`
 );

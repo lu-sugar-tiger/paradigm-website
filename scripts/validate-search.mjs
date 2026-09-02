@@ -112,7 +112,10 @@ assert.match(searchClient, /pageTitle\.textContent = label/, "the results breadc
 assert.doesNotMatch(searchClient, /search-page-result__summary|element\("p",\s*"search-page-result/, "page results must not render summaries");
 assert.doesNotMatch(searchClient, /search-result-group__heading|search-result-group__title/, "result-type titles must not be rendered visibly");
 assert.doesNotMatch(searchClient, /emptyRow|No suggested searches|No page results|No product results/, "empty result types must be skipped instead of rendering empty-state rows");
+assert.match(searchClient, /const suggestions = pageSurface \|\| suggestionsSuppressed \? \[\] : core\.suggestions\(index, query\);/, "the Search results page must omit keyword suggestions while the overlay retains them");
+assert.match(searchClient, /if \(!pageSurface\) pages = core\.rankRecords\(index\.pages, query\);/, "the Search results page must omit page results while the overlay retains them");
 assert.match(searchClient, /if \(suggestions\.length > 0\)[\s\S]*?if \(pages\.length > 0\)[\s\S]*?if \(products\.length > 0\)/, "Search must append only result types that contain matches");
+assert.match(searchClient, /status\.textContent = pageSurface[\s\S]*?\$\{products\.length\} product result/, "the results-page live status must report only the product catalog results it displays");
 assert.match(searchClient, /section\.setAttribute\("aria-label", label\)/, "result types must retain an accessible name without a visible title");
 assert.doesNotMatch(searchClient, /search-suggestion interface-label/, "suggestions must not receive implicit uppercase transformation");
 assert.match(searchClient, /search-page-result__title\$\{page\.interfaceLabel \? " interface-label" : ""\}/, "page results must reuse each page's established interface-label casing role");
@@ -128,7 +131,7 @@ assert.match(searchClient, /let sequenceOverlayRender = false;[\s\S]*?let overla
 assert.match(searchClient, /--overlay-sequence-delay[\s\S]*?120 \+ index \* 40[\s\S]*?--overlay-exit-delay/, "Search result groups must use centralized 40ms forward and reverse sequencing");
 assert.match(searchClient, /input\.addEventListener\("input", \(\) => \{[\s\S]*?suggestionsSuppressed = false;[\s\S]*?renderOverlay\(\);/, "manual input must restore current-input suggestions");
 assert.match(searchClient, /const query = suggestion\.dataset\.searchSuggestion;[\s\S]*?suggestionsSuppressed = true;/, "selecting a suggestion must suppress further suggestions immediately");
-assert.match(searchClient, /const suggestions = suggestionsSuppressed \? \[\] : core\.suggestions\(index, query\);/, "suppressed suggestions must remain absent until manual input");
+assert.match(searchClient, /const suggestions = pageSurface \|\| suggestionsSuppressed \? \[\] : core\.suggestions\(index, query\);/, "page-surface and selected-suggestion states must suppress suggestions until manual overlay input");
 assert.match(searchClient, /link\.target = "_blank"[\s\S]*?link\.rel = "noopener noreferrer"/, "external page results must open safely in a new tab");
 assert.doesNotMatch(searchClient, /innerHTML|outerHTML|insertAdjacentHTML/, "Search results must use safe DOM construction rather than HTML injection");
 assert.match(app, /setPageInert\(true\)/, "shared overlays must make the covered page inert");
@@ -178,6 +181,7 @@ assert.match(components, /\.search-suggestion-list,[\s\S]*?\.search-page-result-
 assert.doesNotMatch(components, /\.search-suggestion-list,[\s\S]*?\.search-page-result-list\s*\{[^}]*gap:\s*var\(--space-1\)/, "individual results must not use divider spacing");
 assert.doesNotMatch(components, /\.search-result-group__title/, "visible result-type title styling must be removed");
 assert.match(components, /\.search-result-group--products\s*\{[\s\S]*?background:\s*var\(--color-background-mid\)/, "product results must use Background Mid");
+assert.match(components, /\.search-overlay \.search-result-group--products\s*\{[^}]*padding-top:\s*var\(--space-1\);/, "overlay product results must add only Space 1 above the product feed");
 assert.match(pages, /\.search-page__results \.search-result-group--products\s*\{[^}]*margin-top:\s*0;/, "the results-page product feed must rely on group padding for separation without adding a second gap");
 assert.match(build, /outputs\.set\("assets\/data\/search-index\.json"/, "the static generator must own the Search index");
 assert.match(build, /outputs\.set\("search\/index\.html"/, "the static generator must own the Search route");

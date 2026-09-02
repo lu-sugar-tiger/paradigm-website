@@ -256,13 +256,18 @@ assert.match(teamwearHeaderFixture, /href="\/teamwear" aria-current="page">Baske
 assert.equal((teamwearHeaderFixture.match(/aria-current="page"/g) || []).length, 1, "Teamwear navigation must expose one current-page marker");
 assert.doesNotMatch(headerFixture, /drawer-nav__divider|role="separator"/, "the navigation directory must not render a divider element or hairline");
 assert.match(reset, /html\s*\{[\s\S]*?scrollbar-gutter:\s*stable;/, "the root scrollbar gutter must remain stable while navigation locks page scrolling");
+assert.match(components, /html:has\(body\[data-overlay-state\]\)\s*\{[^}]*scrollbar-gutter:\s*auto;/, "an open overlay must take ownership of the root scrollbar track instead of stacking a second gutter");
+assert.match(components, /body\[data-overlay-state\] \.site-header\s*\{[^}]*overflow-y:\s*hidden;[^}]*scrollbar-gutter:\s*stable;/, "the fixed header must retain the transferred stable gutter while an overlay owns scrolling");
+assert.match(components, /\.nav-drawer,\s*\.search-overlay\s*\{[^}]*inset-block:\s*0;[^}]*inset-inline-start:\s*0;[^}]*inline-size:\s*100vw;[^}]*overflow-y:\s*auto;[^}]*scrollbar-gutter:\s*stable;/, "each independently scrolling overlay must span the viewport and reserve its gutter in the root scrollbar track");
+assert.doesNotMatch(components, /(?:\.nav-drawer|\.search-overlay)[^}]*overflow-y:\s*scroll;/, "overlays must not force a visible scrollbar when their content fits");
 assert.match(tokens, /--type-interface-label-transform:\s*uppercase;/, "interface label casing must remain tokenized");
 assert.match(components, /\.interface-label\s*\{[\s\S]*?text-transform:\s*var\(--type-interface-label-transform\);/, "interface labels must consume the shared casing token");
 assert.match(components, /\.material-symbols-outlined\s*\{[\s\S]*?text-transform:\s*none;/, "Material Symbols must remain exempt from interface-label casing");
-assert.doesNotMatch(components, /\.material-symbols-outlined\s*\{[^}]*--font-weight-base\s*:/, "Material Symbols must inherit their surrounding semantic text weight");
-assert.match(tokens, /--material-icon-grade:\s*-25;/, "all Material Symbols must share the tokenized -25 grade");
-assert.match(components, /\.material-symbols-outlined\s*\{[\s\S]*?font-weight:\s*var\(--font-weight-base\);[\s\S]*?font-variation-settings:\s*"FILL" 0, "wght" var\(--font-weight-base\), "GRAD" var\(--material-icon-grade\), "opsz" 24;/, "Material Symbols must apply inherited text weight and the shared grade to their variable axes");
-assert.doesNotMatch(components, /"GRAD"\s+0/, "component-specific Material Symbol states must not reset the shared grade");
+assert.doesNotMatch(components, /\.material-symbols-outlined\s*\{[^}]*--font-weight-base\s*:/, "Material Symbols must inherit their surrounding semantic text role");
+assert.match(tokens, /--material-icon-weight-offset:\s*100;/, "all Material Symbols must share the tokenized 100 weight offset");
+assert.match(tokens, /--material-icon-grade:\s*0;/, "all Material Symbols must share grade 0");
+assert.match(components, /\.material-symbols-outlined\s*\{[\s\S]*?--material-icon-weight:\s*calc\(var\(--font-weight-base\) - var\(--material-icon-weight-offset\)\);[\s\S]*?font-weight:\s*var\(--material-icon-weight\);[\s\S]*?font-variation-settings:\s*"FILL" 0, "wght" var\(--material-icon-weight\), "GRAD" var\(--material-icon-grade\), "opsz" 24;/, "Material Symbols must use grade 0 and render 100 below their owning text weight");
+assert.doesNotMatch(components, /"GRAD"\s+-25/, "component-specific Material Symbol states must not retain the previous -25 grade");
 
 const railControlsFixture = renderRailControls({ label: "Highlights", railId: "fixture-rail", root: ".." });
 assert.match(railControlsFixture, /data-rail-previous hidden>[\s\S]*?>chevron_left<\//, "Previous rail controls must render the native left Material chevron and begin hidden");
@@ -349,8 +354,7 @@ assert.match(components, /\.choice-option\[data-availability="available"\]:is\(:
 assert.match(components, /\.choice-option--chip\s*\{[^}]*--font-weight-base:\s*var\(--type-body-weight\);[^}]*font-weight:\s*var\(--font-weight-base\);/, "chips must establish the complete Body text role");
 assert.match(components, /\.choice-option--chip:has\(input:checked\)\s*\{[^}]*font-weight:\s*min\([^}]*var\(--font-weight-black\)[^}]*calc\(var\(--font-weight-base\) \+ var\(--font-weight-strong-offset\)\)[^}]*\);/, "selected chip labels and their icons must use the shared Strong modifier over Body");
 assert.doesNotMatch(components, /\.choice-option--chip:has\(input:checked\)\s*\{[^}]*--font-weight-base\s*:/, "selected chips must not replace their Body role with a state-specific base weight");
-assert.match(components, /\.choice-option--chip:has\(input:checked\) \.choice-option__state-symbol\s*\{[^}]*font-weight:\s*min\([^}]*var\(--font-weight-strong-offset\)[^}]*font-variation-settings:[^}]*"wght" min\([^}]*var\(--font-weight-strong-offset\)/, "selected Add-On icons must use the same Strong calculation as their chip labels");
-assert.match(components, /\.choice-option--chip:has\(input:checked\) \.choice-option__state-symbol\s*\{[^}]*"GRAD" var\(--material-icon-grade\)/, "selected Add-On icons must retain the shared -25 grade");
+assert.match(components, /\.choice-option--chip:has\(input:checked\) \.choice-option__state-symbol\s*\{[^}]*--material-icon-weight:\s*min\([^}]*calc\(var\(--font-weight-black\) - var\(--material-icon-weight-offset\)\)[^}]*calc\(var\(--font-weight-base\) \+ var\(--font-weight-strong-offset\) - var\(--material-icon-weight-offset\)\)/, "selected Add-On icons must remain 100 below the Strong label calculation");
 assert.match(components, /\.button\s*\{[^}]*--font-weight-base:\s*var\(--type-h5-weight\);[^}]*font-weight:\s*var\(--font-weight-base\);/, "shared buttons must use the complete H5 role weight without a state-emphasis override");
 assert.match(components, /\.search-form\s*\{[^}]*--font-weight-base:\s*var\(--type-body-weight\);/, "Search action icons must explicitly share the field's Body weight");
 assert.match(components, /\.footer-link\s*\{[^}]*--font-weight-base:\s*var\(--type-body-weight\);[^}]*font-weight:\s*var\(--font-weight-base\);/, "footer external arrows must explicitly share their Body label weight");
@@ -459,14 +463,14 @@ for (const relativePath of generatedPages) {
     assert.match(tag, /^<div class="teamwear-rail-card__surface" data-media-zoom-surface>$/, `${relativePath} must use backing-surface markers only on explicit photo-card media surfaces`);
   });
   assert.match(page, /Generated by scripts\/build-site\.mjs/, `${relativePath} must carry the generated banner`);
-  assert.match(page, /assets\/css\/tokens\.css\?v=20260831g/, `${relativePath} must cache-bust the shared typography, target, icon, safe-area, media-layer, and motion tokens`);
+  assert.match(page, /assets\/css\/tokens\.css\?v=20260901b/, `${relativePath} must cache-bust the shared typography, target, icon, safe-area, media-layer, and motion tokens`);
   assert.match(page, /assets\/css\/motion\.css\?v=20260831a/, `${relativePath} must load the shared motion layer`);
-  assert.match(page, /assets\/css\/components\.css\?v=20260901d/, `${relativePath} must cache-bust shared interaction-target, overlay, paired-icon, floating-action, and media-source rules`);
+  assert.match(page, /assets\/css\/components\.css\?v=20260902d/, `${relativePath} must cache-bust shared interaction-target, overlay, paired-icon, floating-action, media-source, and transferred stable overlay-gutter rules`);
   assert.match(page, /assets\/css\/reset\.css\?v=20260829a/, `${relativePath} must cache-bust the stable scrollbar-gutter reset`);
   assert.match(page, /assets\/js\/page-transitions\.js\?v=20260831a/, `${relativePath} must load the early route-motion controller`);
   assert.match(page, /assets\/js\/app\.js\?v=20260831a/, `${relativePath} must cache-bust the shared overlay behavior`);
   assert.match(page, /assets\/js\/search-core\.js\?v=20260829b/, `${relativePath} must load the shared search matcher`);
-  assert.match(page, /assets\/js\/search\.js\?v=20260901a/, `${relativePath} must load the shared Search interface`);
+  assert.match(page, /assets\/js\/search\.js\?v=20260901b/, `${relativePath} must load the shared Search interface`);
   assert.match(page, /assets\/js\/choices\.js\?v=20260831c/, `${relativePath} must cache-bust the shared choice and floating-action controller`);
   if (/^(?:index\.html|collections\/|products\/|teamwear\/|search\/)/.test(relativePath)) {
     assert.match(page, /assets\/js\/media-zoom\.js\?v=20260831c/, `${relativePath} must cache-bust the shared media inspection behavior`);
@@ -474,12 +478,12 @@ for (const relativePath of generatedPages) {
     assert.doesNotMatch(page, /media-zoom\.js/, `${relativePath} must not load media inspection outside opted-in page families`);
   }
   if (relativePath === "teamwear/index.html") {
-    assert.match(page, /assets\/css\/teamwear-story\.css\?v=20260831g/, `${relativePath} must cache-bust the centralized Teamwear rail and icon treatment`);
+    assert.match(page, /assets\/css\/teamwear-story\.css\?v=20260902a/, `${relativePath} must cache-bust the restored 32px Teamwear rail treatment`);
   }
   assert.match(page, /rel="preconnect" href="https:\/\/fonts\.googleapis\.com"/, `${relativePath} must preconnect to Google Fonts CSS`);
   assert.match(page, /rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin/, `${relativePath} must preconnect to Google font files`);
   assert.match(page, /family=Roboto:wdth,wght@87\.5,100\.\.900&amp;display=swap/, `${relativePath} must load Roboto Semi Condensed across the complete weight range`);
-  assert.match(page, /fonts\.googleapis\.com\/css2\?family=Material\+Symbols\+Outlined:opsz,wght,FILL,GRAD@24,400\.\.700,0,-25&amp;icon_names=/, `${relativePath} must load the optimized Material Symbols subset with matching weights and fixed -25 grade`);
+  assert.match(page, /fonts\.googleapis\.com\/css2\?family=Material\+Symbols\+Outlined:opsz,wght,FILL,GRAD@24,100\.\.700,0,0&amp;icon_names=/, `${relativePath} must load the optimized Material Symbols subset with the complete offset weight range and fixed grade 0`);
   assert.doesNotMatch(page, /alibabafonts|AlibabaSansTC/i, `${relativePath} must not load the deferred Alibaba webfont`);
   assert.match(page, /class="material-symbols-outlined material-icon/, `${relativePath} must render shared Material Symbols`);
   assert.match(page, /<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">/, `${relativePath} must expose browser safe areas through the shared viewport metadata`);

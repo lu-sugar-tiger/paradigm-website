@@ -334,7 +334,7 @@ function renderTeamwearLanding(template, model, colorById, instagramUrl) {
     currentPath: "/teamwear",
     bodyClass: "site-shell reference-page teamwear-page teamwear-story-shell",
     main,
-    styles: ["teamwear.css?v=20260829c", "teamwear-story.css?v=20260831g"],
+    styles: ["teamwear.css?v=20260829c", "teamwear-story.css?v=20260902a"],
     scripts: ["teamwear-options.js?v=20260828a", "teamwear.js?v=20260831a", "media-zoom.js?v=20260831c"],
     head: `  <meta property="og:title" content="${html(model.name)} | Paradigm">\n  <meta property="og:description" content="${html(`${model.name} is a reversible basketball uniform system composed by Paradigm for the whole roster.`)}">\n  <meta property="og:image" content="https://prdm.tw/assets/images/teamwear/campaign/hero-desktop.webp">\n  <meta property="og:type" content="website">`
   });

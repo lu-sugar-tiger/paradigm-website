@@ -174,7 +174,7 @@
 
   function render(container, status, index, query, suffix, pageSurface = false, sequenceEntry = false) {
     const normalizedQuery = core.normalize(query);
-    const suggestions = suggestionsSuppressed ? [] : core.suggestions(index, query);
+    const suggestions = pageSurface || suggestionsSuppressed ? [] : core.suggestions(index, query);
     const children = [];
     let pages = [];
     let products = [];
@@ -182,7 +182,7 @@
     if (suggestions.length > 0) children.push(suggestionGroup(suggestions, suffix));
 
     if (normalizedQuery) {
-      pages = core.rankRecords(index.pages, query);
+      if (!pageSurface) pages = core.rankRecords(index.pages, query);
       products = core.rankRecords(index.products, query);
       if (pages.length > 0) children.push(pageGroup(pages, suffix));
       if (products.length > 0) children.push(productGroup(products, suffix));
@@ -191,9 +191,13 @@
     container.replaceChildren(...children);
     if (sequenceEntry) prepareOverlaySequence(children);
     container.setAttribute("aria-busy", "false");
-    status.textContent = normalizedQuery
-      ? `${pages.length} page results and ${products.length} product results for ${query.trim()}.`
-      : `${suggestions.length} suggested searches.`;
+    status.textContent = pageSurface
+      ? normalizedQuery
+        ? `${products.length} product result${products.length === 1 ? "" : "s"} for ${query.trim()}.`
+        : "Search the product catalog."
+      : normalizedQuery
+        ? `${pages.length} page results and ${products.length} product results for ${query.trim()}.`
+        : `${suggestions.length} suggested searches.`;
   }
 
   function updateSubmit() {

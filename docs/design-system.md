@@ -81,7 +81,7 @@ Product-detail information uses 16px vertical padding at every range. Its horizo
 
 `.container` is active throughout headers, footers, catalogs, product pages, and Teamwear. `.reference-page` is also active on all current public page templates; it deliberately lets selected catalog and product structures reach the viewport edges until the responsive 960px / 1280px maximum. Do not remove either as unused legacy. Shared header and footer content apply `--layout-shell-gutter-inline` inside the centered reference region, producing 1216px of inner content at Large. Teamwear main containers use the same nested model with their independent `--space-7` Base and `--space-9` Medium/Large gutters, producing 1152px of inner content once the reference region reaches 1280px.
 
-Teamwear rails remain tied to the physical layout viewport rather than a visual-canvas cap. Each rail viewport is an inline-size query container so its initial and terminal scroll padding can combine the actual centered reference-region offset with the Teamwear inner gutter, including the stable browser scrollbar gutter. The first card therefore aligns exactly with ordinary section content. The floating action continues to use the separately defined page edge. Rails use mandatory start-edge snap scrolling. Their gap is one spacing level below the Teamwear content gutter: `--space-6` at Base and `--space-8` from Medium upward. Base cards equal the inner content-region width minus one rail gap. Medium and Large cards equal `(inner content-region width - 1.5 rail gaps) / 1.5`, expressed equivalently in CSS as `inner content-region width / 1.5 - rail gap`. Teamwear motion uses the shared structural motion roles below; component dimensions such as 40px and 48px controls use size roles rather than spacing tokens. Radius roles describe shape only and must never be used as gaps or padding.
+Teamwear rails remain tied to the physical layout viewport rather than a visual-canvas cap. Each rail viewport is an inline-size query container so its initial and terminal scroll padding can combine the actual centered reference-region offset with the Teamwear inner gutter, including the stable browser scrollbar gutter. The first card therefore aligns exactly with ordinary section content. The floating action continues to use the separately defined page edge. Rails use mandatory start-edge snap scrolling. Their gap is one spacing level below the Teamwear content gutter: `--space-6` at Base and `--space-8` from Medium upward. Base cards equal the inner content-region width minus one rail gap. Medium and Large cards equal `(reference container - 2 content gutters + 1 outer margin - 2 rail gaps) / 2`; the one-sided outer margin is zero until the layout viewport exceeds the capped reference container. Teamwear motion uses the shared structural motion roles below; component dimensions such as 40px and 48px controls use size roles rather than spacing tokens. Radius roles describe shape only and must never be used as gaps or padding.
 
 The unused generic `.split` recipe, `.spec-list`, `.spec-card`, and the old 1px grid gaps have been removed. Active catalog seams are true `--space-1` (2px) grid gaps exposing `Surface Mid`; they are not outlines. Active 1px borders reference Outline Low directly rather than using a border alias.
 
@@ -97,7 +97,7 @@ Structural motion combines Apple-style spatial continuity with Material 3's expl
 
 Cross-document page motion is progressive enhancement. Catalog routes form the hierarchy All (depth 0), subcollections and Search (depth 1), then product detail (depth 2). Teamwear forms Landing (depth 0) then Customize (depth 1). Moving deeper enters from inline-end while the previous page recedes 24% toward inline-start; moving upward reverses the same path. Same-depth, cross-family, and unknown routes fade through. `/` and `/collections/all` are equivalent and do not animate between each other. Navigation from an open Search or menu overlay fades through instead of inheriting the covered page's direction. Direct loads, reloads, external navigation, unsupported browsers, and native browser navigation gestures remain native.
 
-Search and navigation share one overlay state contract: `closed`, `opening`, `open`, and `closing`. The background reveals downward from the top using clipping plus opacity; the Material close symbol follows after 40ms, then the Search field or first navigation group at 80ms, and later groups in 40ms steps. Closing reverses and compresses the sequence into no more than 280ms. The controller must remain interruptible, retain focus containment and restoration, and never delay destination navigation. Search results sequence only on the first completed render of each open cycle, not after each keystroke.
+Search and navigation share one overlay state contract: `closed`, `opening`, `open`, and `closing`. The background reveals downward from the top using clipping plus opacity; the Material close symbol follows after 40ms, then the Search field or first navigation group at 80ms, and later groups in 40ms steps. Closing reverses and compresses the sequence into no more than 280ms. The controller must remain interruptible, retain focus containment and restoration, and never delay destination navigation. Search results sequence only on the first completed render of each open cycle, not after each keystroke. The active scroll owner holds one stable scrollbar gutter. At rest, the root viewport owns it. While Search or navigation is opening, open, or closing, the root releases it and the full-viewport overlay takes ownership; the fixed header reserves the same track so its controls remain stationary. This transfer prevents a nested second gutter from shrinking or recentering overlay content. Overlays use `overflow-y: auto`; never force overflow, synthesize extra content height, or calculate scrollbar compensation in JavaScript.
 
 Teamwear hero and section entrances use the structural 400ms enter role. Rail cards appear once in DOM order with a 40ms stagger and 12px travel. During native rail scrolling, each card's photo content moves at most 16px toward the rail center while its copy moves at most 8px in the opposite direction; both are neutral at center. Photo tracks include 16px of non-scaled inline bleed so parallax cannot expose an empty edge. Geometry reads and CSS-variable writes are batched in `requestAnimationFrame`, and the native scroll, snap, touch zoom, keyboard, and rail-control behaviors remain authoritative.
 
@@ -119,19 +119,19 @@ Traditional Chinese remains on the local `--font-cjk` stack: PingFang TC, Noto S
 
 | Role | Size / line height | Default weight | Token prefix |
 | --- | --- | --- | --- |
-| Small | 10px / 13.333px | Regular | `--type-small-*` |
-| Body | 12px / 16px | Regular | `--type-body-*` |
-| h6 | 12px / 16px | Semi Bold | `--type-h6-*` |
-| h5 | 14px / 18.667px | Semi Bold | `--type-h5-*` |
-| h4 | 16px / 21.333px | Semi Bold | `--type-h4-*` |
-| h3 | 20px / 26.667px | Semi Bold | `--type-h3-*` |
-| h2 | 24px / 32px | Semi Bold | `--type-h2-*` |
-| h1 | 32px / 42.667px | Semi Bold | `--type-h1-*` |
+| Small | 10px / 13.333px | 350 | `--type-small-*` |
+| Body | 12px / 16px | 350 | `--type-body-*` |
+| h6 | 12px / 16px | Medium 500 | `--type-h6-*` |
+| h5 | 14px / 18.667px | Medium 500 | `--type-h5-*` |
+| h4 | 16px / 21.333px | Medium 500 | `--type-h4-*` |
+| h3 | 20px / 26.667px | Medium 500 | `--type-h3-*` |
+| h2 | 24px / 32px | Medium 500 | `--type-h2-*` |
+| h1 | 32px / 42.667px | Medium 500 | `--type-h1-*` |
 
 Each role has `size`, `line-height`, and `weight` tokens. `.type-h1` through `.type-h6` apply the complete visual roles independently from the semantic document outline. The previous h1–h5 roles shifted intact to h2–h6, making room for the new 32px h1. Existing semantic headings and explicit Teamwear role classes were remapped to those shifted roles so their rendered sizes do not change. `body` supplies the Body role, `.type-body` reapplies it explicitly, and `small` and `.type-small` consume the complete Small role. Brand and drawer navigation remain component-specific roles.
 
 Legacy `--text-xs`, `--text-sm`, `--text-base`, `--text-lg`, `--text-xl`, and `--text-hero` tokens are removed. Components consume the semantic roles directly; every breadcrumb uses the complete Body role.
-Catalog product names use the complete h6 role: 12px size, 16px line height, and Semi Bold weight.
+Catalog product names use the complete h6 role: 12px size, 16px line height, and Medium 500 weight.
 Catalog product names and prices use the 4px `--space-2` box-to-box gap. The card-body minimum height is derived from both 16px line roles, that gap, and the 8px bottom padding so flex distribution cannot enlarge the rendered gap.
 
 Font weight is a separate semantic axis. All nine CSS weight values are available as tokens even when a weight is not currently used:
@@ -156,11 +156,11 @@ Style modifiers remain independent from whole-text roles:
 | --- | --- | --- |
 | Normal | Uses the surrounding role's base weight and normal style | Default text behavior |
 | Italic | Changes only `font-style` to Italic | `<em>` or `.text-italic` |
-| Strong | Adds 200 to the surrounding semantic base weight, capped at Black 900 | `<strong>` or `.text-strong` |
+| Strong | Adds 150 to the surrounding semantic base weight, capped at Black 900 | `<strong>` or `.text-strong` |
 
-Examples: Regular becomes Semi Bold, Medium becomes Bold, Bold becomes Black, and Extra Bold is capped at Black.
+Examples: Body 350 becomes Medium 500, heading Medium 500 becomes 650, Bold 700 becomes 850, and Extra Bold 800 is capped at Black 900.
 
-State-driven emphasis must use the same Strong calculation instead of replacing a component's base role. Selected chips therefore remain Body text and resolve from Regular 400 to Strong Body at Semi Bold 600. Unselected chips remain Body Regular. Primary and secondary buttons are not state-emphasis variations; they use the complete h5 role, including its default Semi Bold 600 weight.
+State-driven emphasis must use the same Strong calculation instead of replacing a component's base role. Selected chips therefore remain Body text and resolve from 350 to Strong Body at Medium 500. Unselected chips remain Body 350. Primary and secondary buttons are not state-emphasis variations; they use the complete h5 role, including its default Medium 500 weight.
 
 Component roles own their default weights just like the Markdown-style roles. The Brand role owns Extra Bold 800 through `--type-brand-weight`; components must not assign a standalone weight in place of their role. Body content that explicitly resets native browser emphasis, including rich-description table headings, uses `--type-body-weight` rather than a raw Regular token.
 
@@ -177,7 +177,7 @@ Use either a paragraph margin or a parent layout gap to create the same intended
 
 ## Iconography
 
-Interface icons use the outlined Google Material Symbols font. `renderIcon()` owns the semantic icon-name map, and each generated page requests only that mapped subset from Google Fonts with `opsz 24`, the active `wght` range of 400–700, `FILL 0`, and `GRAD -25`. The global CSS configuration applies the same fixed grade through `--material-icon-grade`, while every symbol inherits or explicitly adopts the semantic weight of its accompanying text. External and Search arrows match their labels; Add-On moves from Regular 400 `add` to Strong Body 600 `check`; Teamwear process and material-bento symbols match their H5 600 headings. Standalone controls without visible companion text retain Body Regular 400. Ligature names must retain `text-transform: none`.
+Interface icons use the outlined Google Material Symbols font. `renderIcon()` owns the semantic icon-name map, and each generated page requests only that mapped subset from Google Fonts with `opsz 24`, a `wght` range of 100–700 that contains every active interface-icon weight, `FILL 0`, and `GRAD 0`. The global CSS configuration fixes grade through `--material-icon-grade` and derives every symbol weight from its owning semantic text role through `--material-icon-weight-offset: 100`: icon weight equals text weight minus 100. Body 350 controls and arrows use icon weight 250; H5/H6 500 controls and arrows use 400; the selected Add-On label moves to Strong Body 500 while its `check` uses 400. Standalone header and rail controls inherit Body 350 and therefore use icon weight 250. Ligature names must retain `text-transform: none`.
 
 When a Material Symbol should appear visually equal in prominence to adjacent Body text, use the established `20px / 12px` ratio: `--icon-size-small` over `--type-body-size`, or `5:3` (`1.666667×`). This is an optical relationship rather than a universal geometric rule. Directional indicators such as the external-link arrow instead match the label's font size at `1em`, remain separated by `--space-1` (2px), and are vertically centered without entering the label's layout width.
 
