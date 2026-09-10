@@ -65,6 +65,7 @@ for (const model of teamwear.models) {
     assert.ok(Number.isInteger(quantity.priceAdjustment) && quantity.priceAdjustment >= 0, `${model.id} ${quantity.id} must define a non-negative integer price adjustment`);
   });
   assert.ok(Array.isArray(model.addOns) && model.addOns.length > 0, `${model.id} must define its add-ons in centralized data`);
+  assert.equal(model.addOns.find((addOn) => addOn.id === "A01")?.name, "Front Pockets on Shorts", `${model.id} A01 must use the approved add-on name`);
   model.addOns.forEach((addOn) => {
     assert.ok(Number.isInteger(addOn.priceAdjustment) && addOn.priceAdjustment >= 0, `${model.id} ${addOn.id} must define a non-negative integer price adjustment`);
   });
@@ -179,6 +180,7 @@ assert.throws(
 );
 
 const footerFixture = renderSiteFooter();
+assert.match(footerFixture, /<a class="font-credit-link" href="\/font-credits\/">Font credits<\/a>/, "Every footer must provide access to font attribution");
 assert.match(footerFixture, /<span class="external-link__label interface-label">Instagram<\/span><span class="material-symbols-outlined material-icon external-link__indicator"[^>]*>arrow_outward<\/span>/, "footers must retain Instagram as an interface label with a trailing external arrow");
 assert.match(footerFixture, /<span class="external-link__label interface-label">Shopee<\/span><span class="material-symbols-outlined material-icon external-link__indicator"[^>]*>arrow_outward<\/span>/, "footers must retain Shopee as an interface label with a trailing external arrow");
 assert.equal((footerFixture.match(/data-external-link-description/g) || []).length, 2, "each footer external link must describe its new-tab behavior");
@@ -240,6 +242,7 @@ assert.match(productBreadcrumb, /<span class="breadcrumb__current" aria-current=
 assert.doesNotMatch(productBreadcrumb, /breadcrumb__current interface-label[^>]*data-product-breadcrumb-title/, "product breadcrumb titles must stay outside the interface-label role");
 
 const headerFixture = renderSiteHeader();
+assert.match(headerFixture, /class="dropdown dropdown--text" data-dropdown>\s*<select id="menu-language-native"/, "menu region control must reuse the underlined dropdown variant");
 assert.equal((headerFixture.match(/data-search-toggle/g) || []).length, 1, "shared headers must render one Search toggle");
 assert.equal((headerFixture.match(/data-nav-toggle/g) || []).length, 1, "shared headers must render one navigation toggle");
 assert.equal((headerFixture.match(/data-search-submit/g) || []).length, 1, "shared headers must render one Search submit control inside the overlay");
@@ -300,8 +303,8 @@ assert.match(descriptionFixture, /<th scope="row">Width<\/th>/, "rich-descriptio
 
 assert.match(components, /\.choice-option--chip\s*\{[\s\S]*?flex:\s*1 1 0/, "chips must share equal flexible widths");
 assert.match(components, /\.choice-option--chip\s*\{[\s\S]*?height:\s*var\(--choice-size\)/, "all chip variations must retain the shared 32px height token");
-assert.match(components, /\.choice-option--chip-add-on\s*\{[\s\S]*?display:\s*grid;[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\) var\(--choice-size\);[\s\S]*?padding:\s*0;/, "add-on chips must reserve a square right-end icon column without changing chip height");
-assert.match(components, /\.choice-option--chip-add-on > \.choice-option__label\s*\{[\s\S]*?width:\s*100%;[\s\S]*?padding-inline:\s*var\(--space-3\);[\s\S]*?text-align:\s*center;/, "add-on chip text must center within the remaining left region");
+assert.match(components, /\.choice-option--chip-add-on,\s*\.dropdown__trigger\s*\{[\s\S]*?display:\s*grid;[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\) var\(--choice-size\);[\s\S]*?padding:\s*0;/, "add-on chips must reserve a square right-end icon column without changing chip height");
+assert.match(components, /\.choice-option--chip-add-on > \.choice-option__label,\s*\.dropdown__label\s*\{[\s\S]*?width:\s*100%;[\s\S]*?padding-inline:\s*var\(--space-3\);[\s\S]*?text-align:\s*center;/, "add-on chip text must center within the remaining left region");
 assert.match(components, /\.choice-option__state-icon\s*\{[\s\S]*?width:\s*var\(--choice-size\);[\s\S]*?height:\s*var\(--choice-size\);[\s\S]*?align-self:\s*center;[\s\S]*?justify-self:\s*end;[\s\S]*?margin-inline-end:\s*-1px;/, "add-on chip icons must occupy a tokenized square flush with the right edge without changing chip height");
 assert.match(components, /\.choice-option__state-symbol\s*\{[\s\S]*?font-size:\s*var\(--icon-size-small\);/, "add-on chip symbols must use the shared 20px icon token");
 assert.doesNotMatch(components, /choice-option__state-symbol--(?:add|check)/, "add-on chips must not coexist as layered plus and check nodes");
@@ -450,6 +453,7 @@ const generatedPages = [
   "teamwear/index.html",
   "teamwear/customize/index.html",
   "search/index.html",
+  "font-credits/index.html",
   ...source.products.filter((product) => product.variants.some((variant) => variant.visible)).map((product) => `products/${product.productNumber}/index.html`)
 ];
 for (const relativePath of generatedPages) {
@@ -464,12 +468,14 @@ for (const relativePath of generatedPages) {
     assert.match(tag, /^<div class="teamwear-rail-card__surface" data-media-zoom-surface>$/, `${relativePath} must use backing-surface markers only on explicit photo-card media surfaces`);
   });
   assert.match(page, /Generated by scripts\/build-site\.mjs/, `${relativePath} must carry the generated banner`);
-  assert.match(page, /assets\/css\/tokens\.css\?v=20260901b/, `${relativePath} must cache-bust the shared typography, target, icon, safe-area, media-layer, and motion tokens`);
+  assert.match(page, /assets\/css\/fonts\.css\?v=20260909b/, `${relativePath} must load the shared Reforma Negra font face`);
+  assert.match(page, /assets\/css\/tokens\.css\?v=20260909c/, `${relativePath} must cache-bust the shared typography, target, icon, safe-area, media-layer, and motion tokens`);
   assert.match(page, /assets\/css\/motion\.css\?v=20260831a/, `${relativePath} must load the shared motion layer`);
-  assert.match(page, /assets\/css\/components\.css\?v=20260902g/, `${relativePath} must cache-bust shared interaction-target, overlay, static resting toggle, paired-icon, floating-action, media-source, and transferred stable overlay-gutter rules`);
+  assert.match(page, /assets\/css\/base\.css\?v=20260909c/, `${relativePath} must cache-bust the shared visual-role font behavior`);
+assert.match(page, /assets\/css\/components\.css\?v=20260909g/, `${relativePath} must cache-bust shared interaction-target, overlay, static resting toggle, paired-icon, floating-action, media-source, and transferred stable overlay-gutter rules`);
   assert.match(page, /assets\/css\/reset\.css\?v=20260829a/, `${relativePath} must cache-bust the stable scrollbar-gutter reset`);
   assert.match(page, /assets\/js\/page-transitions\.js\?v=20260831a/, `${relativePath} must load the early route-motion controller`);
-  assert.match(page, /assets\/js\/app\.js\?v=20260831a/, `${relativePath} must cache-bust the shared overlay behavior`);
+  assert.match(page, /assets\/js\/app\.js\?v=20260908a/, `${relativePath} must cache-bust the shared overlay behavior`);
   assert.match(page, /assets\/js\/search-core\.js\?v=20260829b/, `${relativePath} must load the shared search matcher`);
   assert.match(page, /assets\/js\/search\.js\?v=20260902a/, `${relativePath} must load the shared Search interface`);
   assert.match(page, /assets\/js\/choices\.js\?v=20260831c/, `${relativePath} must cache-bust the shared choice and floating-action controller`);
@@ -479,7 +485,7 @@ for (const relativePath of generatedPages) {
     assert.doesNotMatch(page, /media-zoom\.js/, `${relativePath} must not load media inspection outside opted-in page families`);
   }
   if (relativePath === "teamwear/index.html") {
-    assert.match(page, /assets\/css\/teamwear-story\.css\?v=20260902a/, `${relativePath} must cache-bust the restored 32px Teamwear rail treatment`);
+    assert.match(page, /assets\/css\/teamwear-story\.css\?v=20260909b/, `${relativePath} must cache-bust the flattened product and full-viewport fabric treatment`);
   }
   assert.match(page, /rel="preconnect" href="https:\/\/fonts\.googleapis\.com"/, `${relativePath} must preconnect to Google Fonts CSS`);
   assert.match(page, /rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin/, `${relativePath} must preconnect to Google font files`);
@@ -523,15 +529,16 @@ for (const relativePath of generatedPages) {
   }
   if (relativePath === "teamwear/customize/index.html") {
     assert.match(page, /assets\/js\/choices\.js\?v=20260831c/, "Teamwear Customize must cache-bust the current shared choice controller");
-    assert.match(page, /assets\/js\/teamwear-options\.js\?v=20260828a/, "Teamwear Customize must cache-bust centralized model, quantity, and add-on data");
+    assert.match(page, /assets\/js\/teamwear-options\.js\?v=20260908a/, "Teamwear Customize must cache-bust centralized model, quantity, and add-on data");
     assert.match(page, /<h1[^>]*>PE Basketball Teamwear<\/h1>/, "Teamwear Customize must render the approved product name");
     assert.match(page, /assets\/js\/teamwear\.js\?v=20260831a/, "Teamwear Customize must cache-bust current shared Teamwear behavior");
     assert.match(page, /<p class="product-detail__price" data-teamwear-price data-generated-component="product-detail-price">NT\$1,580<\/p>/, "Teamwear Customize must expose its centralized NT$1,580 price for controlled add-on updates");
     assert.match(page, /data-choice-kind="chip" data-choice-variant="add-on" data-choice-title="Add-On"/, "Teamwear Customize must render the centralized Add-On chip variation");
     assert.match(page, /data-choice-kind="chip" data-choice-title="Quantity"[\s\S]*?value="Q01"[\s\S]*?&lt;10[\s\S]*?value="Q02"[\s\S]*?10~19[\s\S]*?value="Q03" checked[\s\S]*?&gt;19/, "Teamwear Customize must render three escaped quantity chips with >19 selected by default");
-    assert.match(page, /type="checkbox"[^>]*name="teamwear-add-on"[^>]*value="A01"(?![^>]* checked)/, "Front Pockets must begin as an unselected add-on");
-    assert.equal((page.match(/data-choice-state-symbol/g) || []).length, 1, "Teamwear Customize must render exactly one state-symbol node for Front Pockets");
-    assert.match(page, /data-choice-state-symbol data-choice-unselected-symbol="add" data-choice-selected-symbol="check"[^>]*>add<\//, "Front Pockets must initialize its single state symbol to plus");
+    assert.match(page, /data-choice-label="Front Pockets on Shorts"[\s\S]*?type="checkbox"[^>]*name="teamwear-add-on"[^>]*value="A01"(?![^>]* checked)/, "Front Pockets on Shorts must begin as an unselected add-on");
+    assert.match(page, /choice-option__label interface-label[^>]*>Front Pockets on Shorts<\//, "Teamwear Customize must render the approved add-on label");
+    assert.equal((page.match(/data-choice-state-symbol/g) || []).length, 1, "Teamwear Customize must render exactly one state-symbol node for Front Pockets on Shorts");
+    assert.match(page, /data-choice-state-symbol data-choice-unselected-symbol="add" data-choice-selected-symbol="check"[^>]*>add<\//, "Front Pockets on Shorts must initialize its single state symbol to plus");
     assert.match(page, /data-choice-title="Pattern"[\s\S]*?data-choice-title="Quantity"[\s\S]*?data-choice-title="Add-On"[\s\S]*?data-primary-action-inline-mount="teamwear-customize-primary-action"/, "Quantity and Add-On must sit after Pattern and before Direct Message in that order");
     assert.doesNotMatch(page, /data-summary-code/, "Teamwear Customize must not replace the product-detail price with a selection code");
   }

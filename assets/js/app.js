@@ -14,7 +14,7 @@
   }, true);
 
   function focusableNodes(scope) {
-    return Array.from(scope.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])')).filter((node) => !node.hidden);
+    return Array.from(scope.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])')).filter((node) => !node.closest('[hidden], [inert]') && node.getClientRects().length > 0);
   }
 
   function setPageInert(inert) {
@@ -91,6 +91,7 @@
         });
       },
       close(restoreFocus = true, immediate = false) {
+        overlay.dispatchEvent(new CustomEvent("paradigm:overlay-close", { bubbles: true }));
         const version = ++stateVersion;
         clearFallback();
         overlay.dataset.overlayState = immediate ? STATES.closed : STATES.closing;

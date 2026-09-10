@@ -29,6 +29,7 @@ export const MATERIAL_ICON_NAMES = Object.freeze({
   check: "check",
   close: "close",
   drop: "water_drop",
+  expand: "expand_more",
   external: "arrow_outward",
   grid: "grid_view",
   image: "image",
@@ -251,7 +252,30 @@ ${childMarkup}
           <ul class="drawer-nav__groups" role="list">
 ${navigationMarkup}
           </ul>
+          ${renderDropdown({ id: "menu-language", label: "Language", name: "language", selectedValue: "taiwan", variant: "text", options: [{ value: "taiwan", label: "Taiwan" }, { value: "international", label: "International" }] })}
         </nav>
+      </div>
+    </div>
+  </div>`;
+}
+
+export function renderDropdown({ id, label, name, options, selectedValue, variant = "boxed" }) {
+  if (!["boxed", "text"].includes(variant)) throw new Error(`Unsupported dropdown variant: ${variant}`);
+  if (!options?.length || new Set(options.map((option) => option.value)).size !== options.length) throw new Error("Dropdown requires unique options");
+  const selected = options.find((option) => option.value === selectedValue) || options[0];
+  const valueMarkup = `<span data-dropdown-value>${html(selected.label)}</span>`;
+  const iconMarkup = `<span class="material-symbols-outlined material-icon choice-option__state-symbol${variant === "text" ? " dropdown__text-indicator" : ""}" aria-hidden="true">${MATERIAL_ICON_NAMES.expand}</span>`;
+  return `<div class="dropdown${variant === "text" ? " dropdown--text" : ""}" data-dropdown>
+    <select id="${html(id)}-native" class="dropdown__native interface-label" name="${html(name)}" aria-label="${html(label)}" data-dropdown-native>
+      ${options.map((option) => `<option value="${html(option.value)}"${option === selected ? " selected" : ""}>${html(option.label)}</option>`).join("\n")}
+    </select>
+    <div class="dropdown__enhanced" hidden>
+      <button type="button" class="dropdown__trigger" data-selected="true" data-availability="${selected.availability === "unavailable" ? "unavailable" : "available"}" aria-label="${html(label)}: ${html(selected.label)}" data-dropdown-label="${html(label)}" aria-haspopup="listbox" aria-expanded="false" aria-controls="${html(id)}-list">
+        <span class="dropdown__label interface-label">${variant === "text" ? `<span class="dropdown__text-content">${valueMarkup}${iconMarkup}</span>` : valueMarkup}${options.map((option) => `<span class="dropdown__sizer" aria-hidden="true">${html(option.label)}</span>`).join("")}</span>
+        ${variant === "text" ? "" : `<span class="choice-option__state-icon" aria-hidden="true">${iconMarkup}</span>`}
+      </button>
+      <div id="${html(id)}-list" class="dropdown__options" role="listbox" aria-label="${html(label)}" hidden>
+        ${options.map((option, index) => `<div class="dropdown__option interface-label" role="option" tabindex="-1" data-value="${html(option.value)}" data-availability="${option.availability === "unavailable" ? "unavailable" : "available"}" aria-selected="${option === selected}"${option.availability === "unavailable" ? ` aria-describedby="${html(id)}-unavailable-${index}"` : ""}>${html(option.label)}${option.availability === "unavailable" ? `<span class="visually-hidden" id="${html(id)}-unavailable-${index}">Unavailable</span>` : ""}</div>`).join("\n")}
       </div>
     </div>
   </div>`;
@@ -265,6 +289,7 @@ export function renderSiteFooter() {
       <div class="footer-meta">
         <span>Paradigm Co., Ltd.</span>
         <span>Copyright © <span data-current-year>2026</span> All Rights Reserved.</span>
+        <a class="font-credit-link" href="/font-credits/">Font credits</a>
       </div>
     </div>
   </footer>`;
@@ -412,13 +437,13 @@ export function renderDocument({
   scripts = [],
   head = ""
 }) {
-  const baseStyles = ["tokens.css?v=20260901b", "motion.css?v=20260831a", "reset.css?v=20260829a", "base.css", "layout.css", "components.css?v=20260902g", "pages.css?v=20260829a", "color-options.css"];
+const baseStyles = ["fonts.css?v=20260909b", "tokens.css?v=20260909c", "motion.css?v=20260831a", "reset.css?v=20260829a", "base.css?v=20260909c", "layout.css", "components.css?v=20260909g", "pages.css?v=20260829a", "color-options.css"];
   const styleMarkup = [...baseStyles, ...styles].map((file) => `  <link rel="stylesheet" href="${html(asset(root, `assets/css/${file}`))}">`).join("\n");
   const isDataScript = (file) => ["catalog.js", "teamwear-options.js"].includes(file.split("?")[0]);
   const dataScripts = scripts.filter(isDataScript);
   const interactionScripts = scripts.filter((file) => !isDataScript(file));
   const earlyMotionScript = `  <script src="${html(asset(root, "assets/js/page-transitions.js?v=20260831a"))}"></script>`;
-  const scriptMarkup = ["app.js?v=20260831a", "search-core.js?v=20260829b", "search.js?v=20260902a", ...dataScripts, "choices.js?v=20260831c", ...interactionScripts].map((file) => `  <script defer src="${html(asset(root, `assets/js/${file}`))}"></script>`).join("\n");
+  const scriptMarkup = ["app.js?v=20260908a", "dropdown.js?v=20260908b", "language-preference.js?v=20260908a", "search-core.js?v=20260829b", "search.js?v=20260902a", ...dataScripts, "choices.js?v=20260831c", ...interactionScripts].map((file) => `  <script defer src="${html(asset(root, `assets/js/${file}`))}"></script>`).join("\n");
   const document = `<!doctype html>
 <!-- Generated by scripts/build-site.mjs. Do not edit this file directly. -->
 <html lang="${html(lang)}">

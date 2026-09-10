@@ -108,6 +108,8 @@ assert.match(
   /\.teamwear-title--brand-gradient\s*\{[\s\S]*?background\s*:\s*var\(--gradient-brand-title\)/,
   "Teamwear Brand Title utility must consume the prepared gradient token"
 );
+const baseCssText = await readFile(path.join(ROOT, "assets/css/base.css"), "utf8");
+assert.doesNotMatch(baseCssText, /::selection\b/, "Text selection must retain the browser and operating-system default colors");
 
 const semanticHexValues = new Set(
   [...tokensText.matchAll(/--color-[a-z0-9-]+\s*:\s*(#[0-9a-f]{6})\s*;/gi)]

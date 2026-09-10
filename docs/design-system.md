@@ -8,7 +8,7 @@ The current Figma work uses a restrained editorial system. Base semantic color v
 
 | Semantic role | High | Mid | Low | Website use |
 | --- | --- | --- | --- | --- |
-| Brand | `#a6192e` | — | `#ff808b` | Brand emphasis, selection highlight, and the lighter title-gradient stop |
+| Brand | `#a6192e` | — | `#ff808b` | Brand emphasis and the title-gradient stops |
 | Background | `#ffffff` | `#f7f7f7` | `#efefef` | Document and full-width page-section layers |
 | On Background | `#181818` | `#404040` | `#808080` | Content placed directly on a Background layer |
 | Surface | `#ffffff` | `#f7f7f7` | `#efefef` | Cards, galleries, panels, and subdued controls |
@@ -26,7 +26,7 @@ The current Figma work uses a restrained editorial system. Base semantic color v
 - Figma's purple `#8a38f5` component-boundary color is a canvas/prototype aid and is never an interface token
 - the visitor's browser/OS default `sans-serif` for all interface and brand text until a website font is licensed
 - an 8px-centered spacing rhythm, with 4px for compact details and 2px for intentional catalog-grid gaps
-- a Markdown-style text-role scale with one 4:3 line-height ratio: Small 10px, Body 12px, h6 12px, h5 14px, h4 16px, h3 20px, h2 24px, and h1 32px
+- a Markdown-style text-role scale with one 4:3 line-height ratio: Small 10px, Body 12px, h6 12px, h5 14px, h4 16px, h3 20px, h2 24px, and h1 32px through Medium; at Large, h3 becomes 32px, h2 becomes 48px, and h1 becomes 64px
 - square product controls and actions; rounded corners are reserved for Teamwear editorial cards and accordions
 - choice availability and selection are independent states: available/unavailable plus selected/unselected; unavailable choices remain selectable and never need blank filler controls
 - choice visuals follow one availability x selection matrix across swatches and chips: available/unselected uses no backing fill with Outline Low and regular Body text; available/selected uses no backing fill with Outline High and emphasized Body text; unavailable/unselected uses Container Low with no outline and regular On Container Low text; unavailable/selected uses Container Low with an On Container Low outline and emphasized On Container Low text. For swatches, the backing fill is the inset area behind the registered color block.
@@ -35,6 +35,8 @@ The current Figma work uses a restrained editorial system. Base semantic color v
 Figma variable names are mirrored in `assets/css/tokens.css` when the website has a defined use for them, with Brand Low documented as a deliberate extension. Shared components consume the semantic role names directly: Brand, Background, On Background, Surface, On Surface, Container, On Container, and Outline. Components reference outline roles directly instead of routing them through border aliases. Convenience aliases such as `--color-text` or `--color-action` are intentionally prohibited. Product colorways stay separate so a garment swatch cannot accidentally become an interface role.
 
 The Brand Title gradient is `Brand → Brand Low → Brand` at 105°. It is a composed gradient token, not another semantic color role. Teamwear section titles apply it through `.teamwear-title--brand-gradient` while retaining a Brand fallback for forced-colors mode.
+
+Text selection uses the visitor's native browser and operating-system colors. The website does not override `::selection` with a Brand tint.
 
 Background roles are layered by responsibility: the document and page use `Background Mid`, elevated cards and galleries use `Surface High`, subdued controls use `Surface Low`, and catalog-grid gaps expose `Surface Mid`. Backgrounds belong to full-width page sections; `.container` constrains content without clipping the section color.
 
@@ -56,6 +58,8 @@ The primitive spacing scale is shared across layout and components:
 | `--space-8` | 48px | Standard section spacing |
 | `--space-9` | 64px | Large section and editorial spacing |
 
+The Teamwear landing shell overrides `--primary-action-floating-bottom-gap` to `--space-7` (32px) for its Large floating action. Below Large, the fixed full-width action remains flush with the viewport bottom; safe-area padding stays inside the button. Other pages retain the shared floating-gap default.
+
 The primitive scale deliberately stops at 64px. Responsive layout consumes semantic roles so future adjustments can be made without finding every component:
 
 | Semantic role | Base | Medium | Large |
@@ -72,7 +76,11 @@ The responsive system has three layout ranges. Base and Medium retain mobile int
 | --- | --- | --- | --- | --- |
 | Base | Below 768px | 2 columns | Single column, gallery carousel, fixed purchase action | Mobile composition, 16px gutter |
 | Medium | 768–1023px | 3 columns | Single column, gallery carousel, fixed purchase action | Mobile composition, 32px gutter |
-| Large | 1024px and above | 3 columns | Gapless 5-column grid: gallery spans 3, information spans 2; stacked gallery and static action | Desktop headings, FAQ split, three-column bento, 32px gutter |
+| Large | 1024px and above | 3 columns | Gapless 5-column grid: gallery spans 3, information spans 2; stacked gallery and static action | Desktop headings, FAQ split, viewport fabric media, 32px gutter |
+
+Teamwear colorway rails display 21 flattened square images (three patterns by seven Road colors) on white canvases. Each pattern's `railImages` mapping in `data/teamwear-options.json` selects the independent file; live CSS recoloring and half-image clipping are not used. The customizer gallery and original source pair images remain unchanged. Replace the mapped files with real square photography when available; see `assets/images/teamwear/rail/README.md`.
+
+The fabric section retains its heading but no bento grid. Its 1200px square source fills the viewport width and a `--teamwear-material-media-height: 100svh` frame with centered `object-fit: cover`. This naturally creates portrait crops on narrow views and landscape crops on wider views, without a 1440px cap or rounded corners.
 
 Large product-detail columns stretch to the same grid-row height. No fixed or content-specific height is imposed on the information panel.
 Product-detail information uses 16px vertical padding at every range. Its horizontal padding is 16px at Base and follows the global 32px gutter from Medium onward; the Medium padding change does not alter its single-column carousel composition. Product Size uses the shared chip variation without a visual label while retaining its accessible legend. Product Header to Color uses 16px `--space-5`; the Color label retains the shared 8px `--space-3` internal gap; Color controls to Size controls use 24px `--space-6`; Size controls to description use 32px `--space-7` when the action is fixed. At Large, the static action uses the same 32px separation before the action and description.
@@ -99,9 +107,11 @@ Cross-document page motion is progressive enhancement. Catalog routes form the h
 
 Search and navigation share one overlay state contract: `closed`, `opening`, `open`, and `closing`. The background reveals downward from the top using clipping plus opacity. The active resting Search or menu glyph does not animate: it remains fixed beneath a non-interactive overlay-colored cover, while only that control's Material close symbol follows after 40ms. The Search field or first navigation group follows at 80ms, and later groups follow in 40ms steps. Closing reverses and compresses the sequence into no more than 280ms; the cover remains until closing completes, then reveals the unchanged resting glyph. The controller must remain interruptible, retain focus containment and restoration, and never delay destination navigation. Search results sequence only on the first completed render of each open cycle, not after each keystroke. The active scroll owner holds one stable scrollbar gutter. At rest, the root viewport owns it. While Search or navigation is opening, open, or closing, the root releases it and the full-viewport overlay takes ownership; the fixed header reserves the same track so its controls remain stationary. This transfer prevents a nested second gutter from shrinking or recentering overlay content. Overlays use `overflow-y: auto`; never force overflow, synthesize extra content height, or calculate scrollbar compensation in JavaScript.
 
-Teamwear hero and section entrances use the structural 400ms enter role. Rail cards appear once in DOM order with a 40ms stagger and 12px travel. During native rail scrolling, each card's photo content moves at most 16px toward the rail center while its copy moves at most 8px in the opposite direction; both are neutral at center. Photo tracks include 16px of non-scaled inline bleed so parallax cannot expose an empty edge. Geometry reads and CSS-variable writes are batched in `requestAnimationFrame`, and the native scroll, snap, touch zoom, keyboard, and rail-control behaviors remain authoritative.
+Teamwear rail entrances consume the shared short stagger token. Photos keep a fixed crop. The copy reading zone spans all complete presentation slots, derived from the viewport, initial content edge, card width, and gap. Every card in that zone stays opaque and aligned, including the card moving between two desktop positions. Outside the zone, text fades and translates toward its respective edge. `--rail-copy-enter-range` and `--rail-copy-exit-range` are card-width fractions (0.5 each); the spatial curves alias shared exit and enter curves respectively. `--rail-copy-offset` uses `--space-7` at base width and `--space-9` from medium upward, one spacing level above the rail gap. The spatial ranges and 700ms settling duration remain unchanged; the increased offset affects text displacement, not rail timing. Opacity and translation are independently mapped from position, with no timed copy fade or half-visible threshold. Card overflow is visible so translated copy can cross the photo boundary; photo wrappers retain their own clipping and the rail scrollport clips at viewport edges. Existing trailing padding must remain at least as large as the maximum copy offset so translated copy cannot extend the scroll range. Reduced motion leaves all copy opaque and removes translation. Arrow and mouse-release settling use `--rail-settle-duration` (shared medium/700ms) and `--rail-settle-ease` (editorial), and cancel on pointer, wheel, keyboard, resize, or preference changes. Mouse dragging starts on photos; native touch scrolling and snapping remain browser-controlled rather than duration-token-controlled. These settings are a project adaptation of the Apple reference, not Apple's measured constants.
 
 The Large Teamwear `fixed-to-float` primary action uses one shared `entering → floating → exiting → inline` state path. When its inline mount passes above the viewport, the fixed action enters from 12px toward block-end with opacity over the 400ms enter role. Returning to the inline mount reverses that path over the 200ms exit role before fixed positioning is removed. A scroll-direction reversal retargets from the current rendered opacity and translation rather than waiting for completion. Base and Medium retain their existing fixed full-width action, and reduced motion settles either position immediately. The action never scales, bounces, docks into the footer, or delays activation.
+
+The menu region dropdown joins the navigation sequence: Product enters at 80ms, Teamwear at 120ms, and the region control at 160ms, each using the shared 400ms fade and 12px travel. Closing reverses the order: region at 0ms, Teamwear at 40ms, Product at 80ms, using the shared 200ms exit. Dropdown selection and keyboard behavior remain unchanged.
 
 `prefers-reduced-motion: reduce` disables page sliding, overlay sequencing, Teamwear entrances, card staggering, and rail parallax. Content must render immediately and remain operable; motion is never the only state indicator.
 
@@ -113,22 +123,28 @@ Retail product-detail and Teamwear Customize galleries additionally use `data-me
 
 ## Typography
 
-The website loads the Google Fonts Roboto variable family at the Semi Condensed width (`wdth 87.5`) across its complete Thin through Black range (`wght 100..900`). `renderDocument()` owns the preconnects and shared stylesheet request, uses `display=swap`, and places the font resource before local CSS. `--font-latin` and `--font-brand` resolve to Roboto, while every component continues to consume the composed `--font-sans` or `--font-brand` role rather than a page-local family.
+The website loads the Google Fonts Roboto variable family at the Semi Condensed width (`wdth 87.5`) across its complete Thin through Black range (`wght 100..900`). `renderDocument()` owns the preconnects and shared stylesheet request, uses `display=swap`, and places the font resource before local CSS. `--font-latin` resolves to Roboto and `--font-sans` composes the standard text stack. Roboto's proposed minus-100 weight remapping is deferred; existing weight values remain unchanged. The former Brand typography role was removed because the active logo is an image and no interface component consumed it.
+
+Visual H1–H3 roles use `--font-heading`: Reforma1969, followed by `--font-sans`. `assets/css/fonts.css` declares only the original self-hosted upright Negra 700 WOFF2 (31,220 bytes) with `font-display: swap`. Both default titles (semantic weight request 500) and Strong titles (650) select Negra 700, the sole available Reforma face; there is no interpolation. Keeping those semantic requests preserves the existing CJK and failed-font fallback weights. Gris, Blanca, and italic files are not shipped. Fonts load on demand, with no blanket preload on catalog/search pages whose headings use smaller roles.
+
+H1–H3 display treatment uses `--type-heading-width-scale: 0.9` and `--type-heading-tracking: -0.05em` (design-tool tracking −50, or −50/1000 em). Reforma is static, so `scale: 0.9 1` compresses the rendered heading horizontally without editing its font file or changing its height. Tracking participates in line wrapping before scaling; the CSS line box and existing line-height are retained. The default transform origin is left center; the centered Teamwear hero overrides the origin to center. This treatment applies to the whole heading, including inline Strong and any fallback glyphs, and does not animate. Explicit smaller roles, Body breadcrumbs, and H5 product-detail title overrides reset scale and tracking. No custom kerning or text feature overrides are applied: `font-kerning` remains browser-default `auto`.
+
+Family selection follows visual roles, not HTML heading levels: an unclassed semantic h1 uses the H3 font and scale; `.type-h1`–`.type-h3` use Reforma, while `.type-h4`–`.type-h6`, `.type-body`, and `.type-small` explicitly restore Roboto. The product-detail header overrides semantic h1 to the H5 visual role and therefore retains Roboto, as do catalog product-card names and breadcrumb headings. The shared footer links to `/font-credits/`, which carries the required Reforma attribution, source and CC BY-ND 4.0 links, and the original license/disclaimer at `/assets/fonts/reforma/LICENSE.txt`. Keep the supplied font binaries unchanged.
 
 Traditional Chinese remains on the local `--font-cjk` stack: PingFang TC, Noto Sans CJK TC, Noto Sans TC, Source Han Sans TC, Microsoft JhengHei, then the generic sans-serif fallback. The Android-oriented Noto families and Source Han Sans TC are checked before the Windows-specific Microsoft JhengHei face. 阿里巴巴普惠體TC is intentionally deferred and must not be requested or bundled. Do not set `font-stretch` globally: the Google stylesheet supplies Roboto's 87.5% face, while CJK fallback faces retain their native width. Type is defined by semantic roles rather than by page:
 
-| Role | Size / line height | Default weight | Token prefix |
-| --- | --- | --- | --- |
-| Small | 10px / 13.333px | 350 | `--type-small-*` |
-| Body | 12px / 16px | 350 | `--type-body-*` |
-| h6 | 12px / 16px | Medium 500 | `--type-h6-*` |
-| h5 | 14px / 18.667px | Medium 500 | `--type-h5-*` |
-| h4 | 16px / 21.333px | Medium 500 | `--type-h4-*` |
-| h3 | 20px / 26.667px | Medium 500 | `--type-h3-*` |
-| h2 | 24px / 32px | Medium 500 | `--type-h2-*` |
-| h1 | 32px / 42.667px | Medium 500 | `--type-h1-*` |
+| Role | Base / Medium size and line height | Large size and line height | Default weight | Token prefix |
+| --- | --- | --- | --- | --- |
+| Small | 10px / 13.333px | unchanged | 350 | `--type-small-*` |
+| Body | 12px / 16px | unchanged | 350 | `--type-body-*` |
+| h6 | 12px / 16px | unchanged | Medium 500 | `--type-h6-*` |
+| h5 | 14px / 18.667px | unchanged | Medium 500 | `--type-h5-*` |
+| h4 | 16px / 21.333px | unchanged | Medium 500 | `--type-h4-*` |
+| h3 | 20px / 26.667px | 32px / 42.667px | Medium 500 | `--type-h3-*` |
+| h2 | 24px / 32px | 48px / 64px | Medium 500 | `--type-h2-*` |
+| h1 | 32px / 42.667px | 64px / 85.333px | Medium 500 | `--type-h1-*` |
 
-Each role has `size`, `line-height`, and `weight` tokens. `.type-h1` through `.type-h6` apply the complete visual roles independently from the semantic document outline. The previous h1–h5 roles shifted intact to h2–h6, making room for the new 32px h1. Existing semantic headings and explicit Teamwear role classes were remapped to those shifted roles so their rendered sizes do not change. `body` supplies the Body role, `.type-body` reapplies it explicitly, and `small` and `.type-small` consume the complete Small role. Brand and drawer navigation remain component-specific roles.
+Each role has `size`, `line-height`, and `weight` tokens. `.type-h1` through `.type-h6` apply the complete visual roles independently from the semantic document outline. The previous h1–h5 roles shifted intact to h2–h6, making room for the 32px Base and Medium h1. Existing semantic headings and explicit Teamwear role classes were remapped to those shifted roles. At the shared 64rem Large breakpoint, only h1, h2, and h3 change to 64px, 48px, and 32px respectively; their line heights retain the 4:3 ratio. `body` supplies the Body role, `.type-body` reapplies it explicitly, and `small` and `.type-small` consume the complete Small role. Drawer navigation remains a component-specific role.
 
 Legacy `--text-xs`, `--text-sm`, `--text-base`, `--text-lg`, `--text-xl`, and `--text-hero` tokens are removed. Components consume the semantic roles directly; every breadcrumb uses the complete Body role.
 Catalog product names use the complete h6 role: 12px size, 16px line height, and Medium 500 weight.
@@ -162,7 +178,7 @@ Examples: Body 350 becomes Medium 500, heading Medium 500 becomes 650, Bold 700 
 
 State-driven emphasis must use the same Strong calculation instead of replacing a component's base role. Selected chips therefore remain Body text and resolve from 350 to Strong Body at Medium 500. Unselected chips remain Body 350. Primary and secondary buttons are not state-emphasis variations; they use the complete h5 role, including its default Medium 500 weight.
 
-Component roles own their default weights just like the Markdown-style roles. The Brand role owns Extra Bold 800 through `--type-brand-weight`; components must not assign a standalone weight in place of their role. Body content that explicitly resets native browser emphasis, including rich-description table headings, uses `--type-body-weight` rather than a raw Regular token.
+Component roles own their default weights just like the Markdown-style roles; components must not assign a standalone weight in place of their role. Body content that explicitly resets native browser emphasis, including rich-description table headings, uses `--type-body-weight` rather than a raw Regular token. Extra Bold 800 remains available in the complete primitive weight scale even though no current role consumes it.
 
 Paragraph spacing is also a typography decision. Relative values are calculated from the consuming text role's own font size:
 
@@ -185,12 +201,12 @@ When a Material Symbol should appear visually equal in prominence to adjacent Bo
 
 The system is partially consistent, not yet project-wide:
 
-- All active pages load the same foundation stack in the same order: tokens, reset, base, layout, components, then pages. Teamwear adds its two scoped stylesheets after that stack.
+- All active pages load the same foundation stack in the same order: local font faces, tokens, motion, reset, base, layout, components, pages, and color options. Teamwear adds its two scoped stylesheets after that stack.
 - The shared storefront shell uses the Figma-derived semantic color roles directly, the default sans-serif family, common layout variables, full-viewport navigation, and reusable component classes.
 - Shared storefront color usage is strict: literal colors and undeclared color aliases fail `scripts/validate-color-system.mjs`. Teamwear garment colorways remain scoped merchandising data rather than interface roles.
 - Typography weights and relative paragraph roles are enforced by `scripts/validate-typography-system.mjs`; component CSS may not introduce raw numeric font weights.
 - The generic `--text-*` scale overlaps with the semantic Markdown-style `--type-*` roles. New component work should use Small, Body, or h1 through h6; the generic scale should be migrated and then deprecated.
-- Teamwear uses `.type-h1` for the 32px hero title and `.type-h2` with the Brand Title gradient for 24px section titles. Child and card titles remain semantic h3 elements but use the 14px `.type-h5` visual role. Eyebrows remain semantic h5 elements and use the default shifted h6 visual role at 12px. Its text stacks retain Standard paragraph spacing and default tracking.
+- Teamwear uses `.type-h1` for its 32px Base/Medium and 64px Large hero title, and `.type-h2` with the Brand Title gradient for its 24px Base/Medium and 48px Large section titles. These display roles use the shared 90% horizontal width and −50 tracking. Child and card titles remain semantic h3 elements but use the 14px `.type-h5` visual role. Eyebrows remain semantic h5 elements and use the default shifted h6 visual role at 12px. Smaller roles retain default tracking, and text stacks retain Standard paragraph spacing.
 - Interface icons use the outlined Google Material Symbols font through `renderIcon()`. The renderer owns the semantic-to-Material name map, and the generated document loads only the mapped symbols. Do not add hand-drawn SVG icon assets or inline SVG icon markup.
 - Draft imagery and copy must read naturally in the composition. Do not render labels, captions, notes, or badges that announce placeholder status.
 

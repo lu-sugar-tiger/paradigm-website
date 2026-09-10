@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import vm from "node:vm";
 import { fileURLToPath } from "node:url";
+import { withoutStaticHeadingScale } from "./lib/typography-validation.mjs";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const read = (relativePath) => readFile(path.join(ROOT, relativePath), "utf8");
@@ -132,13 +133,20 @@ assert.match(docs, /entering → floating → exiting → inline[\s\S]*?12px tow
 
 assert.match(teamwearStory, /\.teamwear-hero__media[\s\S]*?opacity var\(--motion-duration-enter\) var\(--motion-ease-enter\)/, "Teamwear hero media must fade over the shared 400ms entrance");
 assert.match(teamwearStory, /\.teamwear-hero__content\s*\{[\s\S]*?translate:\s*0 var\(--motion-distance-entrance\)[\s\S]*?calc\(var\(--motion-stagger-short\) \+ var\(--motion-stagger-short\)\)/, "Teamwear hero copy must follow with the 24px entrance role after two 40ms staggers");
-assert.match(teamwear, /querySelectorAll\("\.teamwear-rail-card\[data-section-reveal\]"\)[\s\S]*?index \* 40/, "rail cards must reveal in DOM order with 40ms staggering");
-assert.match(teamwear, /const railRect = rail\.getBoundingClientRect\(\)[\s\S]*?const positions = cards\.map[\s\S]*?cards\.forEach[\s\S]*?--rail-photo-offset[\s\S]*?-16[\s\S]*?--rail-copy-offset[\s\S]*?\* 8/, "rail parallax must read all geometry before writing bounded opposed offsets");
-assert.match(teamwearStory, /\.teamwear-rail-card__photo-track[\s\S]*?width:\s*calc\(100% \+ var\(--space-5\) \+ var\(--space-5\)\)[\s\S]*?--rail-photo-offset/, "rail photos must own 16px non-scaled bleed on each inline edge");
-assert.match(teamwearStory, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?teamwear-rail-card__photo-track[\s\S]*?translate:\s*0 0/, "reduced motion must reveal Teamwear content and remove parallax");
+assert.match(teamwear, /--rail-card-delay[\s\S]*?--motion-stagger-short/, "Rail entrance stagger must consume the shared short stagger token");
+assert.match(tokens, /--rail-copy-enter-range:\s*0\.5;/, "Rail copy entry must span half a card width");
+assert.match(tokens, /--rail-copy-exit-range:\s*0\.5;/, "Rail copy exit must span half a card width");
+assert.match(teamwearStory, /--rail-copy-offset:\s*var\(--space-7\)/, "Base rail copy displacement must use space-7");
+assert.match(teamwearStory, /\.teamwear-rail-card\s*\{[^}]*overflow:\s*visible;/, "Rail copy must be able to paint beyond its card boundary");
+assert.match(teamwearStory, /\.teamwear-rail-card__media\s*\{[^}]*overflow:\s*hidden;/, "Photo cropping must remain contained independently of copy");
+assert.match(teamwearStory, /@media \(min-width: 48rem\)[\s\S]*?--rail-copy-offset:\s*var\(--space-9\)/, "Medium and large rail copy displacement must use space-9");
+assert.doesNotMatch(teamwear, /visibleFraction|travel:.*1 - opacity/, "Copy must not couple travel to visibility-based opacity");
+assert.match(teamwear, /end: edge \+ \(slots - 1\)/, "The reading plateau must cover all complete slots");
+assert.match(teamwear, /reducedMotion \|\| \(!left && !right\).*opacity: 1, travel: 0/, "Reduced motion and plateau copy must remain readable");
+assert.match(teamwear, /getPropertyValue\("--rail-settle-duration"\)/, "Programmatic settling must read its duration token");
 assert.match(teamwear, /reducedMotionQuery\.addEventListener\("change"[\s\S]*?railUpdates\.get\(rail\)\?\.\(\)/, "Teamwear must dynamically tear down and restore rail motion when the preference changes");
 
-const combinedMotion = `${motion}\n${components}\n${teamwearStory}\n${pageTransitions}\n${app}\n${search}\n${choices}\n${teamwear}`;
+const combinedMotion = `${motion}\n${withoutStaticHeadingScale(components, "components.css")}\n${teamwearStory}\n${pageTransitions}\n${app}\n${search}\n${choices}\n${teamwear}`;
 assert.doesNotMatch(combinedMotion, /\bscale\s*\(|(^|[;{])\s*scale\s*:/m, "motion production code must not scale or zoom interface layers");
 assert.match(docs, /Apple-style spatial continuity with Material 3's explicit web transition values/, "the design system must distinguish spatial principles from explicit timing values");
 assert.match(docs, /response 350ms and damping ratio 1; damping \.8 is reserved for real momentum gestures/, "future spring defaults and the momentum-only exception must be documented");
@@ -157,10 +165,10 @@ const generatedPages = [
 for (const relativePath of generatedPages) {
   const page = await read(relativePath);
   const earlyController = page.search(/<script src="(?:\.\.\/)*assets\/js\/page-transitions\.js\?v=20260831a"><\/script>/);
-  const deferredApp = page.search(/<script defer src="(?:\.\.\/)*assets\/js\/app\.js\?v=20260831a"><\/script>/);
+  const deferredApp = page.search(/<script defer src="(?:\.\.\/)*assets\/js\/app\.js\?v=20260908a"><\/script>/);
   assert.ok(earlyController >= 0 && deferredApp > earlyController, `${relativePath} must load the route controller early and before deferred behavior`);
   assert.match(page, /assets\/css\/motion\.css\?v=20260831a/, `${relativePath} must load the cache-busted global motion stylesheet`);
-  assert.match(page, /assets\/css\/components\.css\?v=20260902g/, `${relativePath} must load the cache-busted shared floating-action, static resting toggle, media-source motion, and transferred stable overlay gutter`);
+assert.match(page, /assets\/css\/components\.css\?v=20260909g/, `${relativePath} must load the cache-busted shared floating-action, static resting toggle, media-source motion, and transferred stable overlay gutter`);
   assert.match(page, /assets\/js\/choices\.js\?v=20260831c/, `${relativePath} must load the cache-busted floating-action state controller`);
 }
 

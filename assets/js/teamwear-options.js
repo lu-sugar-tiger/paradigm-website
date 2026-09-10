@@ -30,7 +30,7 @@ window.PARADIGM_TEAMWEAR = {
       "addOns": [
         {
           "id": "A01",
-          "name": "Front Pockets",
+          "name": "Front Pockets on Shorts",
           "priceAdjustment": 200,
           "availability": "available"
         }
@@ -44,19 +44,46 @@ window.PARADIGM_TEAMWEAR = {
           "id": "P01",
           "name": "Essential",
           "availability": "available",
-          "preview": "assets/images/teamwear/teamwear-essential-pair-v3.webp"
+          "preview": "assets/images/teamwear/teamwear-essential-pair-v3.webp",
+          "railImages": {
+            "wine": "assets/images/teamwear/rail/p01-wine.webp",
+            "cardinal": "assets/images/teamwear/rail/p01-cardinal.webp",
+            "azure": "assets/images/teamwear/rail/p01-azure.webp",
+            "midnight": "assets/images/teamwear/rail/p01-midnight.webp",
+            "sapphire": "assets/images/teamwear/rail/p01-sapphire.webp",
+            "mocha": "assets/images/teamwear/rail/p01-mocha.webp",
+            "black": "assets/images/teamwear/rail/p01-black.webp"
+          }
         },
         {
           "id": "P02",
           "name": "Classic",
           "availability": "available",
-          "preview": "assets/images/teamwear/teamwear-classic-pair-v3.webp"
+          "preview": "assets/images/teamwear/teamwear-classic-pair-v3.webp",
+          "railImages": {
+            "wine": "assets/images/teamwear/rail/p02-wine.webp",
+            "cardinal": "assets/images/teamwear/rail/p02-cardinal.webp",
+            "azure": "assets/images/teamwear/rail/p02-azure.webp",
+            "midnight": "assets/images/teamwear/rail/p02-midnight.webp",
+            "sapphire": "assets/images/teamwear/rail/p02-sapphire.webp",
+            "mocha": "assets/images/teamwear/rail/p02-mocha.webp",
+            "black": "assets/images/teamwear/rail/p02-black.webp"
+          }
         },
         {
           "id": "P03",
           "name": "Signature",
           "availability": "available",
-          "preview": "assets/images/teamwear/teamwear-signature-pair-v3.webp"
+          "preview": "assets/images/teamwear/teamwear-signature-pair-v3.webp",
+          "railImages": {
+            "wine": "assets/images/teamwear/rail/p03-wine.webp",
+            "cardinal": "assets/images/teamwear/rail/p03-cardinal.webp",
+            "azure": "assets/images/teamwear/rail/p03-azure.webp",
+            "midnight": "assets/images/teamwear/rail/p03-midnight.webp",
+            "sapphire": "assets/images/teamwear/rail/p03-sapphire.webp",
+            "mocha": "assets/images/teamwear/rail/p03-mocha.webp",
+            "black": "assets/images/teamwear/rail/p03-black.webp"
+          }
         }
       ],
       "colors": [

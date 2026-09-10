@@ -34,7 +34,7 @@
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           Array.from(entry.target.querySelectorAll(".teamwear-rail-card[data-section-reveal]")).forEach((card, index) => {
-            card.style.setProperty("--rail-card-delay", `${index * 40}ms`);
+            card.style.setProperty("--rail-card-delay", `calc(${index} * var(--motion-stagger-short))`);
             card.classList.add("is-visible");
           });
           revealObserver.unobserve(entry.target);
@@ -48,32 +48,70 @@
     return Math.min(maximum, Math.max(minimum, value));
   }
 
+  // Evaluate shared CSS curves against spatial progress as well as settle time.
+  function motionCurve(value) {
+    const values = value.match(/-?\d*\.?\d+/g)?.map(Number);
+    if (values?.length !== 4) return (progress) => progress;
+    const [x1, y1, x2, y2] = values;
+    const sample = (t, a, b) => 3 * (1 - t) ** 2 * t * a + 3 * (1 - t) * t ** 2 * b + t ** 3;
+    return (progress) => {
+      if (progress <= 0 || progress >= 1) return clamp(progress, 0, 1);
+      let low = 0;
+      let high = 1;
+      for (let iteration = 0; iteration < 20; iteration += 1) {
+        const middle = (low + high) / 2;
+        if (sample(middle, x1, x2) < progress) low = middle;
+        else high = middle;
+      }
+      return sample((low + high) / 2, y1, y2);
+    };
+  }
+
   rails.forEach((rail) => {
     const controls = document.querySelector(`[aria-controls="${rail.id}"]`)?.closest(".teamwear-rail-controls");
     const previousButton = controls?.querySelector("[data-rail-previous]");
     const nextButton = controls?.querySelector("[data-rail-next]");
     const cards = Array.from(rail.querySelectorAll(".teamwear-rail-card"));
     let railFrame = 0;
+    let settleFrame = 0;
+    let geometry;
 
-    function updateParallax() {
+    function refreshGeometry() {
+      const style = getComputedStyle(rail);
+      const width = cards[0]?.getBoundingClientRect().width || 1;
+      const gap = parseFloat(style.columnGap) || 0;
+      const edge = parseFloat(style.paddingLeft) || 0;
+      const slots = Math.max(1, Math.floor((rail.clientWidth - edge + gap + 1) / (width + gap)));
+      geometry = {
+        width, step: width + gap, start: edge,
+        end: edge + (slots - 1) * (width + gap),
+        enterRange: width * parseFloat(style.getPropertyValue("--rail-copy-enter-range")),
+        exitRange: width * parseFloat(style.getPropertyValue("--rail-copy-exit-range")),
+        enterCurve: motionCurve(style.getPropertyValue("--rail-copy-enter-curve")),
+        exitCurve: motionCurve(style.getPropertyValue("--rail-copy-exit-curve")),
+        settleCurve: motionCurve(style.getPropertyValue("--rail-settle-ease")),
+        duration: parseFloat(style.getPropertyValue("--rail-settle-duration"))
+      };
+    }
+
+    function updateCopyVisibility() {
       railFrame = 0;
-      if (reducedMotion) {
-        cards.forEach((card) => {
-          card.style.setProperty("--rail-photo-offset", "0px");
-          card.style.setProperty("--rail-copy-offset", "0px");
-        });
-        return;
-      }
       const railRect = rail.getBoundingClientRect();
-      const railCenter = railRect.left + railRect.width / 2;
       const positions = cards.map((card) => {
         const rect = card.getBoundingClientRect();
-        const range = Math.max(1, (railRect.width + rect.width) / 2);
-        return clamp((rect.left + rect.width / 2 - railCenter) / range, -1, 1);
+        const position = rect.left - railRect.left;
+        // The plateau spans every complete presentation slot, not one active card.
+        const left = Math.max(0, geometry.start - position - 1);
+        const right = Math.max(0, position - geometry.end - 1);
+        if (reducedMotion || (!left && !right)) return { opacity: 1, travel: 0 };
+        const progress = clamp((left || right) / (left ? geometry.exitRange : geometry.enterRange), 0, 1);
+        // Spatial curves are independent of velocity: reversing retraces exactly.
+        const opacity = left ? 1 - geometry.exitCurve(progress) : geometry.enterCurve(1 - progress);
+        return { opacity, travel: (left ? -1 : 1) * progress };
       });
       cards.forEach((card, index) => {
-        card.style.setProperty("--rail-photo-offset", `${positions[index] * -16}px`);
-        card.style.setProperty("--rail-copy-offset", `${positions[index] * 8}px`);
+        card.style.setProperty("--rail-copy-opacity", positions[index].opacity);
+        card.style.setProperty("--rail-copy-travel", positions[index].travel);
       });
     }
 
@@ -81,10 +119,35 @@
       if (railFrame) return;
       railFrame = window.requestAnimationFrame(() => {
         updateControls();
-        updateParallax();
+        updateCopyVisibility();
       });
     }
     railUpdates.set(rail, queueRailFrame);
+
+    function cancelSettle() {
+      cancelAnimationFrame(settleFrame);
+      settleFrame = 0;
+      rail.classList.remove("is-settling");
+    }
+
+    function settleTo(target) {
+      cancelSettle();
+      const start = rail.scrollLeft;
+      const end = clamp(target, 0, Math.max(0, rail.scrollWidth - rail.clientWidth));
+      if (reducedMotion || Math.abs(end - start) <= 1) {
+        rail.scrollTo({ left: end, behavior: "instant" });
+        return;
+      }
+      rail.classList.add("is-settling");
+      const started = performance.now();
+      function tick(now) {
+        const progress = clamp((now - started) / geometry.duration, 0, 1);
+        rail.scrollLeft = start + (end - start) * geometry.settleCurve(progress);
+        if (progress < 1) settleFrame = requestAnimationFrame(tick);
+        else cancelSettle();
+      }
+      settleFrame = requestAnimationFrame(tick);
+    }
 
     function updateControls() {
       if (!previousButton || !nextButton) return;
@@ -106,14 +169,54 @@
       const distance = (firstCard?.getBoundingClientRect().width || rail.clientWidth * 0.8) + gap;
       const currentIndex = Math.round(rail.scrollLeft / distance);
       const targetIndex = clamp(currentIndex + direction, 0, Math.max(0, cards.length - 1));
-      rail.scrollTo({ left: targetIndex * distance, behavior: reducedMotion ? "auto" : "smooth" });
+      settleTo(targetIndex * distance);
     }
 
     previousButton?.addEventListener("click", () => scrollRail(-1));
     nextButton?.addEventListener("click", () => scrollRail(1));
+    let drag = null;
+    rail.addEventListener("pointerdown", (event) => {
+      cancelSettle();
+      const media = event.target.closest(".teamwear-rail-card__media");
+      if (!media || event.pointerType !== "mouse" || event.button !== 0) return;
+      event.preventDefault();
+      drag = { id: event.pointerId, x: event.clientX, left: rail.scrollLeft };
+      rail.classList.add("is-pointer-dragging");
+      rail.setPointerCapture(event.pointerId);
+    });
+    rail.addEventListener("pointermove", (event) => {
+      if (!drag || event.pointerId !== drag.id) return;
+      rail.scrollLeft = drag.left + drag.x - event.clientX;
+    });
+    function finishDrag(event) {
+      if (!drag || event.pointerId !== drag.id) return;
+      const gap = Number.parseFloat(getComputedStyle(rail).columnGap) || 0;
+      const step = cards[0].getBoundingClientRect().width + gap;
+      const target = Math.round(rail.scrollLeft / step) * step;
+      const pointerId = drag.id;
+      drag = null;
+      settleTo(target);
+      rail.classList.remove("is-pointer-dragging");
+      if (rail.hasPointerCapture(pointerId)) rail.releasePointerCapture(pointerId);
+    }
+    rail.addEventListener("pointerup", finishDrag);
+    rail.addEventListener("pointercancel", finishDrag);
+    rail.addEventListener("lostpointercapture", finishDrag);
+    rail.addEventListener("dragstart", (event) => {
+      if (event.target.closest(".teamwear-rail-card__media")) event.preventDefault();
+    });
     rail.addEventListener("scroll", queueRailFrame, { passive: true });
-    if ("ResizeObserver" in window) new ResizeObserver(queueRailFrame).observe(rail);
-    else window.addEventListener("resize", queueRailFrame, { passive: true });
+    rail.addEventListener("wheel", cancelSettle, { passive: true });
+    rail.addEventListener("keydown", cancelSettle);
+    reducedMotionQuery.addEventListener("change", cancelSettle);
+    function resizeRail() {
+      cancelSettle();
+      refreshGeometry();
+      queueRailFrame();
+    }
+    if ("ResizeObserver" in window) new ResizeObserver(resizeRail).observe(rail);
+    else window.addEventListener("resize", resizeRail, { passive: true });
+    refreshGeometry();
     queueRailFrame();
   });
 
@@ -145,7 +248,7 @@
       const colorName = card.dataset.colorName || "Road";
       card.classList.add("is-updating");
       if (!image) return;
-      image.src = `../${preview.preview}`;
+      image.src = `../${preview.railImages[card.dataset.colorId]}`;
       image.alt = `${preview.name} ${model.name} ${colorName} Road uniform rendering`;
       const finishUpdate = () => {
         card.classList.remove("is-updating");

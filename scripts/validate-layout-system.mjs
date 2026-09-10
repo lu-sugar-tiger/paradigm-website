@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { withoutStaticHeadingScale } from "./lib/typography-validation.mjs";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const CSS_DIRECTORY = path.join(ROOT, "assets", "css");
@@ -71,12 +72,18 @@ const productionCssEntries = await Promise.all(
 );
 
 const cssScaleTransformPattern = /\bscale\s*\(/;
+const individualScalePattern = /(^|[;\{])\s*scale\s*:/m;
+assert.doesNotMatch(withoutStaticHeadingScale('.type-h1 { scale: var(--type-heading-width-scale) 1; }', 'base.css'), individualScalePattern);
+assert.match(withoutStaticHeadingScale('.type-h1:hover { scale: var(--type-heading-width-scale) 1; }', 'base.css'), individualScalePattern, "The static title exception must not allow hover scaling");
+assert.match(withoutStaticHeadingScale('.type-h1 { scale: 1.1; }', 'base.css'), individualScalePattern, "The static title exception must not allow arbitrary scales");
+assert.match(withoutStaticHeadingScale('.type-h1 { scale: var(--type-heading-width-scale) 1; }', 'pages.css'), individualScalePattern, "The static title exception must not allow page-local duplication");
 assert.doesNotMatch("filter: grayscale(1);", cssScaleTransformPattern, "The CSS scale validator must not reject grayscale filters");
 for (const [file, source] of productionCssEntries) {
   assert.doesNotMatch(source, /@media[^\{]*\(\s*(?:any-)?hover\s*:/, `${file} must not gate interaction styling by hover capability`);
   assert.doesNotMatch(source, /@media[^\{]*\(\s*(?:any-)?pointer\s*:/, `${file} must not gate interaction styling by pointer capability`);
   assert.doesNotMatch(source, cssScaleTransformPattern, `${file} must not use scale() effects`);
-  assert.doesNotMatch(source, /(^|[;\{])\s*scale\s*:/m, `${file} must not use the individual scale property`);
+  assert.doesNotMatch(withoutStaticHeadingScale(source, file), /(^|[;\{])\s*scale\s*:/m, `${file} may only use the approved static heading scale`);
+  assert.doesNotMatch(source, /transition(?:-property)?\s*:[^;{}]*\bscale\b/, `${file} must not animate the heading width treatment`);
 }
 
 const spacingScale = new Map([
@@ -273,8 +280,26 @@ assert.match(teamwearStory, /--teamwear-rail-chevron-mask:\s*url\("data:image\/s
 assert.match(teamwearStory, /\.teamwear-rail-button--previous\s*\{[\s\S]*?--teamwear-rail-chevron-mask:\s*url\("data:image\/svg\+xml,[^;]+M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z[^;]+"\);/, "The previous rail control must retain the official Material chevron geometry as its transparent cutout");
 assert.match(teamwearStory, /\.teamwear-rail-button::before\s*\{[\s\S]*?background:\s*var\(--color-container-low\);[\s\S]*?-webkit-mask:\s*var\(--teamwear-rail-chevron-mask\) center \/ 100% 100% no-repeat;[\s\S]*?mask:\s*var\(--teamwear-rail-chevron-mask\) center \/ 100% 100% no-repeat;/, "Teamwear rail circles must use the original semantic color and reveal the photograph through the Material chevron");
 assert.match(teamwearStory, /\.teamwear-rail-button \.material-icon\s*\{[\s\S]*?width:\s*var\(--icon-size\);[\s\S]*?height:\s*var\(--icon-size\);[\s\S]*?opacity:\s*0;[\s\S]*?font-size:\s*var\(--icon-size\);/, "Rail controls must retain the centralized Material Symbol markup without painting a second glyph over the cutout");
-assert.match(teamwearStory, /\.teamwear-stacked-row__icon\s*\{[\s\S]*?--font-weight-base:\s*var\(--type-h5-weight\);/, "Teamwear process icons must derive from their accompanying H5 heading role");
-assert.match(teamwearStory, /\.teamwear-material__bento \.material-icon\s*\{[\s\S]*?--font-weight-base:\s*var\(--type-h5-weight\);/, "Teamwear material-bento icons must derive from their accompanying H5 heading role");
+assert.doesNotMatch(teamwearTemplate + teamwearStory, /ICON_\w+_STACKED|teamwear-stacked-row__icon/, "Process rows must not retain icons or an icon column");
+for (const step of [1, 2, 3]) assert.ok(teamwearTemplate.includes(`>Step ${step}</h5>`), `Process must label Step ${step}`);
+for (const name of ["NTUESOE", "SCS Tchill", "TKUWREE"]) assert.ok(teamwearTemplate.includes(`<div class="teamwear-rail-card__copy"><h3 class="type-h5">${name}</h3></div>`), `${name} must have title-only card copy`);
+assert.doesNotMatch(teamwearStory + teamwearTemplate, /teamwear-material__bento/, "Teamwear fabric section must not retain the removed bento grid");
+assert.match(teamwearStory, /--teamwear-material-media-height:\s*100svh;\s*height:\s*var\(--teamwear-material-media-height\)/, "Fabric photography must occupy a stable viewport-height frame");
+assert.match(teamwearTemplate, /rail\/fabric-square\.webp[^>]*width="1200" height="1200"/, "Fabric media must use the square source asset");
+assert.doesNotMatch(teamwearStory, /mix-blend-mode:\s*color|clip-path:\s*inset\(0 50%/, "Landing product images must be flattened rather than recolored or half-cropped at runtime");
+assert.match(teamwearBehavior, /preview\.railImages\[card\.dataset\.colorId\]/, "Pattern changes must select a separate flattened image for each color");
+const railModel = JSON.parse(await readFile(path.join(ROOT, "data/teamwear-options.json"), "utf8")).models[0];
+const railImagePaths = [];
+for (const pattern of railModel.patterns) {
+  for (const color of railModel.colors) {
+    const imagePath = pattern.railImages?.[color.colorId];
+    assert.ok(imagePath, `${pattern.id}/${color.colorId} needs a flattened rail image`);
+    const imageBytes = await readFile(path.join(ROOT, imagePath));
+    assert.equal(imageBytes.toString("ascii", 8, 12), "WEBP", `${imagePath} must be a real WebP asset`);
+    railImagePaths.push(imagePath);
+  }
+}
+assert.equal(new Set(railImagePaths).size, railModel.patterns.length * railModel.colors.length, "Every pattern/color combination must have its own replaceable image");
 assert.match(teamwearStory, /\.teamwear-rail-button\[hidden\]\s*\{[\s\S]*?display:\s*none;/, "Unavailable Teamwear rail directions must override the authored button display rule");
 assert.doesNotMatch(teamwearStory, /\.teamwear-rail-button[^\{]*\{[^}]*transition\s*:/, "Teamwear rail buttons must not animate hover-state changes");
 assert.doesNotMatch(teamwearStory, /\.teamwear-rail-button[^\{]*:hover/, "Teamwear rail buttons must not define a hover effect");
@@ -282,7 +307,7 @@ assert.match(teamwearTemplate, /teamwear-highlights__viewport">\s*\{\{HIGHLIGHT_
 assert.match(teamwearTemplate, /teamwear-colorway__viewport">\s*\{\{COLORWAY_CONTROLS\}\}\s*<div class="teamwear-colorway__rail"/, "Colorway controls must be generated inside their rail viewport");
 assert.match(teamwearTemplate, /teamwear-gallery__viewport">\s*\{\{GALLERY_CONTROLS\}\}\s*<div class="teamwear-gallery__rail"/, "Gallery controls must be generated inside their rail viewport");
 assert.match(teamwearBehavior, /const atStart = rail\.scrollLeft <= 1;[\s\S]*?const lastCard = rail\.querySelector\("\.teamwear-rail-card:last-child"\);[\s\S]*?const railRight = rail\.getBoundingClientRect\(\)\.right;[\s\S]*?const lastCardRight = lastCard\?\.getBoundingClientRect\(\)\.right \|\| railRight;[\s\S]*?const atEnd = maximumScroll <= 1 \|\| lastCardRight <= railRight \+ 1;[\s\S]*?previousButton\.hidden = atStart;[\s\S]*?nextButton\.hidden = atEnd;/, "Teamwear rail controls must show only Previous as soon as the final card is fully visible");
-assert.match(teamwearBehavior, /const currentIndex = Math\.round\(rail\.scrollLeft \/ distance\);[\s\S]*?const targetIndex = clamp\(currentIndex \+ direction, 0, Math\.max\(0, cards\.length - 1\)\);[\s\S]*?rail\.scrollTo\(\{ left: targetIndex \* distance, behavior:/, "Teamwear rail buttons must target exact card-plus-gap snap positions instead of relative or clamped final movement");
+assert.match(teamwearBehavior, /const currentIndex = Math\.round\(rail\.scrollLeft \/ distance\);[\s\S]*?const targetIndex = clamp\(currentIndex \+ direction, 0, Math\.max\(0, cards\.length - 1\)\);[\s\S]*?settleTo\(targetIndex \* distance\)/, "Teamwear rail buttons must target exact card-plus-gap snap positions");
 assert.match(teamwearStory, /\.teamwear-rail-card__media\s*\{[\s\S]*?cursor:\s*grab;[\s\S]*?\}[\s\S]*?\.teamwear-rail-card__media:active\s*\{[\s\S]*?cursor:\s*grabbing;/, "Only Teamwear card photo media must show grab and grabbing cursors");
 assert.equal((teamwearTemplate.match(/<article class="teamwear-faq__item">/g) || []).length, 5, "Teamwear FAQ must render five static question-and-answer rows");
 assert.doesNotMatch(teamwearTemplate, /<details|<summary|<i aria-hidden="true"><\/i>/, "Teamwear FAQ must not retain disclosure markup or icons");
@@ -295,12 +320,9 @@ assert.match(
   /\.teamwear-story-page\.reveal-ready \.teamwear-rail-card\[data-section-reveal\]\s*\{[\s\S]*?translate:\s*0 var\(--motion-distance-component\);[\s\S]*?var\(--rail-card-delay, 0ms\)/,
   "Teamwear rail cards must use the centralized 12px entrance and per-card delay"
 );
-assert.match(teamwearStory, /\.teamwear-rail-card__photo-track\s*\{[\s\S]*?width:\s*calc\(100% \+ var\(--space-5\) \+ var\(--space-5\)\);[\s\S]*?translate:\s*var\(--rail-photo-offset, 0px\) 0;/, "Teamwear rail photos must provide 16px inline bleed and consume the bounded photo offset");
 assert.match(teamwearTemplate, /teamwear-rail-card__surface" data-media-zoom-surface><div class="teamwear-rail-card__media" data-media-zoom-touch/, "Teamwear rail media must declare the centralized zoom source and backing-surface relationship");
 assert.doesNotMatch(teamwearStory, /media-zoom-(?:source|surface)-active/, "Teamwear layout CSS must not duplicate the centralized floating-zoom state");
-assert.match(teamwearStory, /\.teamwear-rail-card__copy\s*\{[\s\S]*?translate:\s*var\(--rail-copy-offset, 0px\) 0;/, "Teamwear rail copy must consume its opposed offset");
-assert.match(teamwearBehavior, /card\.style\.setProperty\("--rail-card-delay", `\$\{index \* 40\}ms`\)/, "Teamwear cards must reveal in DOM order with a 40ms stagger");
-assert.match(teamwearBehavior, /getBoundingClientRect\(\)[\s\S]*?--rail-photo-offset[\s\S]*?positions\[index\] \* -16[\s\S]*?--rail-copy-offset[\s\S]*?positions\[index\] \* 8/, "Teamwear rails must read geometry before writing bounded opposed 16px and 8px offsets");
+assert.match(teamwearBehavior, /--rail-card-delay[\s\S]*?--motion-stagger-short/, "Rail entrance stagger must consume the shared short stagger token");
 assert.match(teamwearBehavior, /reducedMotionQuery\.addEventListener\("change"[\s\S]*?rails\.forEach\(\(rail\) => railUpdates\.get\(rail\)\?\.\(\)\)/, "Teamwear rail motion must tear down and resume when the reduced-motion preference changes");
 assert.match(teamwearStory, /\.teamwear-story-page \.teamwear-hero\s*\{[\s\S]*?width:\s*100%;[\s\S]*?margin-inline:\s*auto;[\s\S]*?padding:\s*0/, "Teamwear hero must span the complete viewport width without extra top padding");
 assert.match(teamwearStory, /\.teamwear-material__media\s*\{[\s\S]*?width:\s*100%;[\s\S]*?margin-inline:\s*auto;/, "Teamwear full-bleed material media must span the complete viewport width");
@@ -332,7 +354,6 @@ assert.match(largeTeamwear, /\.teamwear-rail-controls\s*\{[\s\S]*?position:\s*ab
 assert.match(largeTeamwear, /\.teamwear-rail-button\s*\{[\s\S]*?pointer-events:\s*auto;/, "Overlay rail buttons must remain independently clickable");
 assert.match(largeTeamwear, /\.teamwear-process__layout\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 2fr\) minmax\(0, 3fr\);[\s\S]*?gap:\s*0;/, "Teamwear process content must use the 2fr/3fr Large split without a column gap");
 assert.match(largeTeamwear, /\.teamwear-process__layout > \.teamwear-section-heading\s*\{[\s\S]*?padding-inline-end:\s*var\(--space-9\)/, "Teamwear process heading must create its Large separation with 64px inner-end padding");
-assert.match(largeTeamwear, /\.teamwear-material__bento\s*\{[\s\S]*?repeat\(3,/, "Teamwear bento must gain three columns at Large");
 assert.match(largeTeamwear, /\.teamwear-story-page \.teamwear-faq__layout\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 2fr\) minmax\(0, 3fr\);[\s\S]*?gap:\s*0;/, "Teamwear FAQ must use the 2fr/3fr Large split without a column gap");
 assert.match(largeTeamwear, /\.teamwear-story-page \.teamwear-faq__heading\s*\{[\s\S]*?padding-inline-end:\s*var\(--space-9\)/, "Teamwear FAQ heading must create its Large separation with 64px inner-end padding");
 assert.doesNotMatch(teamwearStory, /(?:gap|padding|margin(?:-(?:top|right|bottom|left))?)\s*:\s*(?:2|4|8|12|16|24|32|48|64|72|80|96|128)px/, "Teamwear spacing must consume system tokens");
@@ -371,10 +392,11 @@ assert.match(teamwear, /--teamwear-content-edge:\s*max\([\s\S]*?var\(--layout-gu
 assert.doesNotMatch(teamwear, /--teamwear-reference-edge:/, "Teamwear must not retain the superseded outer-reference action edge");
 assert.match(teamwear, /--layout-page-gutter:\s*var\(--teamwear-content-edge\)/, "The Teamwear floating action must align to the 1280px reference offset plus the 64px inner gutter");
 assert.match(components, /\.choice-option--chip\s*\{[\s\S]*?flex:\s*1 1 0/, "Shared chip choices must expand equally");
-assert.match(components, /\.choice-option--chip-add-on\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\) var\(--choice-size\)/, "Add-on chips must reserve one tokenized square icon column");
+assert.match(components, /\.choice-option--chip-add-on,\s*\.dropdown__trigger\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\) var\(--choice-size\)/, "Add-on chips must reserve one tokenized square icon column");
 assert.match(components, /\.choice-option__state-symbol\s*\{[\s\S]*?font-size:\s*var\(--icon-size-small\)/, "Add-on state symbols must use the 20px icon token");
 assert.match(components, /\.choice-option--swatch\s*\{/, "Shared swatch choices must remain available");
 assert.match(tokens, /--primary-action-floating-bottom-gap:\s*var\(--space-9\);/, "Large floating actions must use the 64px spacing token for their bottom gap");
+assert.match(teamwearStory, /\.teamwear-story-shell\s*\{\s*--primary-action-floating-bottom-gap:\s*var\(--space-7\);/, "Teamwear landing must override the floating bottom gap to space-7");
 assert.match(tokens, /--primary-action-floating-clearance:\s*calc\([\s\S]*?var\(--primary-action-content-clearance\)[\s\S]*?var\(--primary-action-floating-bottom-gap\)/, "The footer must reserve the calculated floating-action and bottom-gap footprint");
 assert.match(components, /data-action-behavior="fixed-to-float"\]\.is-floating\s*\{[\s\S]*?var\(--layout-page-gutter\)[\s\S]*?var\(--primary-action-floating-bottom-gap\)/, "Large floating actions must use the page gutter on the right and the fixed semantic gap on the bottom");
 assert.match(largeComponents, /data-action-behavior="fixed-to-float"\]\.is-floating\s*\{[\s\S]*?opacity:\s*0;[\s\S]*?translate:\s*0 var\(--motion-distance-component\);[\s\S]*?opacity var\(--motion-duration-exit\) var\(--motion-ease-exit\)[\s\S]*?translate var\(--motion-duration-exit\) var\(--motion-ease-exit\)/, "Large floating actions must reverse out with the shared 12px and 200ms exit roles");

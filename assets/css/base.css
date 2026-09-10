@@ -13,6 +13,7 @@ body {
 }
 
 :where(small, .type-small) {
+  font-family: var(--font-sans);
   --font-weight-base: var(--type-small-weight);
   font-size: var(--type-small-size);
   font-weight: var(--font-weight-base);
@@ -20,6 +21,7 @@ body {
 }
 
 :where(.type-body) {
+  font-family: var(--font-sans);
   --font-weight-base: var(--type-body-weight);
   font-size: var(--type-body-size);
   font-weight: var(--font-weight-base);
@@ -27,6 +29,10 @@ body {
 }
 
 :where(h1) {
+  scale: var(--type-heading-width-scale) 1;
+  transform-origin: var(--type-heading-origin);
+  letter-spacing: var(--type-heading-tracking);
+  font-family: var(--font-heading);
   --font-weight-base: var(--type-h3-weight);
   font-size: var(--type-h3-size);
   font-weight: var(--font-weight-base);
@@ -34,6 +40,7 @@ body {
 }
 
 :where(h2) {
+  font-family: var(--font-sans);
   --font-weight-base: var(--type-h4-weight);
   font-size: var(--type-h4-size);
   font-weight: var(--font-weight-base);
@@ -41,6 +48,7 @@ body {
 }
 
 :where(h3) {
+  font-family: var(--font-sans);
   --font-weight-base: var(--type-h5-weight);
   font-size: var(--type-h5-size);
   font-weight: var(--font-weight-base);
@@ -48,6 +56,7 @@ body {
 }
 
 :where(h4) {
+  font-family: var(--font-sans);
   --font-weight-base: var(--type-h5-weight);
   font-size: var(--type-h5-size);
   font-weight: var(--font-weight-base);
@@ -55,6 +64,7 @@ body {
 }
 
 :where(h5) {
+  font-family: var(--font-sans);
   --font-weight-base: var(--type-h6-weight);
   font-size: var(--type-h6-size);
   font-weight: var(--font-weight-base);
@@ -62,6 +72,7 @@ body {
 }
 
 :where(h6) {
+  font-family: var(--font-sans);
   --font-weight-base: var(--type-h6-weight);
   font-size: var(--type-h6-size);
   font-weight: var(--font-weight-base);
@@ -69,6 +80,10 @@ body {
 }
 
 .type-h1 {
+  scale: var(--type-heading-width-scale) 1;
+  transform-origin: var(--type-heading-origin);
+  letter-spacing: var(--type-heading-tracking);
+  font-family: var(--font-heading);
   --font-weight-base: var(--type-h1-weight);
   font-size: var(--type-h1-size);
   font-weight: var(--font-weight-base);
@@ -76,6 +91,10 @@ body {
 }
 
 .type-h2 {
+  scale: var(--type-heading-width-scale) 1;
+  transform-origin: var(--type-heading-origin);
+  letter-spacing: var(--type-heading-tracking);
+  font-family: var(--font-heading);
   --font-weight-base: var(--type-h2-weight);
   font-size: var(--type-h2-size);
   font-weight: var(--font-weight-base);
@@ -83,6 +102,10 @@ body {
 }
 
 .type-h3 {
+  scale: var(--type-heading-width-scale) 1;
+  transform-origin: var(--type-heading-origin);
+  letter-spacing: var(--type-heading-tracking);
+  font-family: var(--font-heading);
   --font-weight-base: var(--type-h3-weight);
   font-size: var(--type-h3-size);
   font-weight: var(--font-weight-base);
@@ -90,6 +113,7 @@ body {
 }
 
 .type-h4 {
+  font-family: var(--font-sans);
   --font-weight-base: var(--type-h4-weight);
   font-size: var(--type-h4-size);
   font-weight: var(--font-weight-base);
@@ -97,6 +121,7 @@ body {
 }
 
 .type-h5 {
+  font-family: var(--font-sans);
   --font-weight-base: var(--type-h5-weight);
   font-size: var(--type-h5-size);
   font-weight: var(--font-weight-base);
@@ -104,6 +129,7 @@ body {
 }
 
 .type-h6 {
+  font-family: var(--font-sans);
   --font-weight-base: var(--type-h6-weight);
   font-size: var(--type-h6-size);
   font-weight: var(--font-weight-base);
@@ -117,16 +143,22 @@ body {
   );
 }
 
+/* Explicit smaller roles must not inherit display-title treatment. */
+.type-small,
+.type-body,
+.type-h4,
+.type-h5,
+.type-h6 {
+  scale: none;
+  letter-spacing: 0;
+}
+
 :where(em, .text-italic) {
   font-style: var(--font-style-italic);
 }
 
 main {
   display: block;
-}
-
-::selection {
-  background: color-mix(in srgb, var(--color-brand) 12%, transparent);
 }
 
 :where(a, button, input, select, textarea, summary, [tabindex]) {

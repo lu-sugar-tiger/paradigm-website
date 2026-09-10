@@ -32,12 +32,16 @@ const TEXT_ROLES = new Map([
   ["h5", { size: "0.875rem", lineHeight: "1.166667rem", weight: "var(--font-weight-medium)" }],
   ["h6", { size: "0.75rem", lineHeight: "1rem", weight: "var(--font-weight-medium)" }]
 ]);
-const COMPONENT_TEXT_ROLES = new Set(["brand"]);
+const LARGE_TEXT_ROLES = new Map([
+  ["h1", { size: "4rem", lineHeight: "5.333333rem" }],
+  ["h2", { size: "3rem", lineHeight: "4rem" }],
+  ["h3", { size: "2rem", lineHeight: "2.666667rem" }]
+]);
 const FONT_FAMILIES = new Map([
   ["font-latin", '"Roboto"'],
   ["font-cjk", '"PingFang TC", "Noto Sans CJK TC", "Noto Sans TC", "Source Han Sans TC", "Microsoft JhengHei"'],
   ["font-sans", "var(--font-latin), var(--font-cjk), sans-serif"],
-  ["font-brand", "var(--font-latin), sans-serif"]
+  ["font-heading", '"Reforma1969", var(--font-sans)']
 ]);
 const ROBOTO_STYLESHEET = "https://fonts.googleapis.com/css2?family=Roboto:wdth,wght@87.5,100..900&display=swap";
 
@@ -95,7 +99,7 @@ for (const [name, value] of WEIGHTS) {
 assert.equal(propertyValue(tokens, "--font-weight-strong-offset"), "150", "Strong must add 150 to the surrounding role weight");
 assert.equal(propertyValue(tokens, "--font-style-normal"), "normal", "Normal style modifier must be tokenized");
 assert.equal(propertyValue(tokens, "--font-style-italic"), "italic", "Italic style modifier must be tokenized");
-assert.equal(propertyValue(tokens, "--type-brand-weight"), "var(--font-weight-extra-bold)", "Brand must own its default weight");
+assert.doesNotMatch(tokens, /--(?:font|type)-brand\b/, "The unused Brand typography role must remain removed");
 
 for (const [name, value] of PARAGRAPH_SPACING) {
   assert.equal(
@@ -119,6 +123,17 @@ for (const [name, role] of TEXT_ROLES) {
   );
 }
 
+const largeTokens = tokens.match(/@media \(min-width: 64rem\) \{\s*:root \{([\s\S]*?)\}\s*\}/)?.[1] || "";
+assert.ok(largeTokens, "Large typography overrides must use the shared 64rem breakpoint");
+for (const [name, role] of LARGE_TEXT_ROLES) {
+  assert.equal(propertyValue(largeTokens, `--type-${name}-size`), role.size, `Large ${name} size must equal ${role.size}`);
+  assert.equal(
+    propertyValue(largeTokens, `--type-${name}-line-height`),
+    role.lineHeight,
+    `Large ${name} line height must preserve the Body 12/16 ratio`
+  );
+}
+
 const cssFiles = (await readdir(CSS_DIRECTORY))
   .filter((file) => file.endsWith(".css"))
   .map((file) => path.join(CSS_DIRECTORY, file));
@@ -133,7 +148,9 @@ for (const filePath of cssFiles) {
     violations.push(`${relativePath}: legacy typography reference ${match[1]} is prohibited`);
   }
 
-  for (const match of withoutComments.matchAll(/font-weight\s*:\s*([^;]+);/g)) {
+  // Font-face descriptors describe the original files, not interface role weights.
+  const withoutFontFaces = withoutComments.replace(/@font-face\s*\{[^}]*\}/g, "");
+  for (const match of withoutFontFaces.matchAll(/font-weight\s*:\s*([^;]+);/g)) {
     const value = match[1].trim();
     if (
       value !== "var(--font-weight-base)" &&
@@ -150,7 +167,7 @@ for (const filePath of cssFiles) {
 
 
   for (const match of withoutComments.matchAll(/--font-weight-base\s*:\s*var\(--type-([a-z0-9-]+)-weight\)/g)) {
-    if (!TEXT_ROLES.has(match[1]) && !COMPONENT_TEXT_ROLES.has(match[1])) {
+    if (!TEXT_ROLES.has(match[1])) {
       violations.push(`${relativePath}: unknown text-role weight ${match[1]}`);
     }
   }
@@ -168,6 +185,37 @@ for (const filePath of cssFiles) {
 }
 
 const base = await readFile(path.join(CSS_DIRECTORY, "base.css"), "utf8");
+assert.equal(propertyValue(tokens, "--type-heading-width-scale"), "0.9");
+assert.equal(propertyValue(tokens, "--type-heading-tracking"), "-0.05em");
+for (const selector of [":where(h1)", ".type-h1", ".type-h2", ".type-h3"]) {
+  const declarations = collectRules(base).find(rule => rule.selector === selector)?.declarations || "";
+  assert.equal(propertyValue(declarations, "scale"), "var(--type-heading-width-scale) 1", `${selector} must preserve height at 90% horizontal scale`);
+  assert.equal(propertyValue(declarations, "letter-spacing"), "var(--type-heading-tracking)", `${selector} must use -50 tracking`);
+}
+for (const role of TEXT_ROLES.keys()) {
+  const rule = collectRules(base).find(({ selector }) => selector.includes(`.type-${role}`));
+  const family = ["h1", "h2", "h3"].includes(role) ? "var(--font-heading)" : "var(--font-sans)";
+  assert.equal(propertyValue(rule?.declarations || "", "font-family"), family, `${role} must explicitly select its visual-role font`);
+}
+assert.equal(propertyValue(collectRules(base).find(({ selector }) => selector === ":where(h1)").declarations, "font-family"), "var(--font-heading)", "Default semantic h1 retains the Reforma h3 visual role");
+const fontCss = await readFile(path.join(CSS_DIRECTORY, "fonts.css"), "utf8");
+const fontFaces = [...fontCss.matchAll(/@font-face\s*\{([^}]*)\}/g)];
+assert.equal(fontFaces.length, 1, "Only upright Negra may be declared");
+for (const face of fontFaces) {
+  const name = "Negra";
+  assert.equal(propertyValue(face[1], "font-family"), '"Reforma1969"');
+  assert.equal(propertyValue(face[1], "font-weight"), "700");
+  assert.equal(propertyValue(face[1], "font-style"), "normal");
+  assert.equal(propertyValue(face[1], "font-display"), "swap");
+  assert.equal(propertyValue(face[1], "src"), `url("../fonts/reforma/Reforma1969-${name}.woff2") format("woff2")`);
+  const font = await readFile(path.join(ROOT, "assets/fonts/reforma", `Reforma1969-${name}.woff2`));
+  assert.equal(font.toString("ascii", 0, 4), "wOF2", `${name} must be a real WOFF2 asset`);
+}
+const license = await readFile(path.join(ROOT, "assets/fonts/reforma/LICENSE.txt"), "utf8");
+assert.match(license, /Creative Commons BY-ND 4.0/);
+const credits = await readFile(path.join(ROOT, "font-credits/index.html"), "utf8");
+assert.match(credits, /Reforma, PampaType \/ Universidad Nacional de Córdoba \[AR\]/);
+assert.match(credits, /assets\/fonts\/reforma\/LICENSE\.txt/);
 assert.doesNotMatch(base, /font-stretch\s*:/, "Global typography must not stretch CJK system fallbacks");
 assert.match(base, /:where\(strong, \.text-strong\)/, "Strong element and modifier class must share one rule");
 assert.match(base, /var\(--font-weight-strong-offset\)/, "Strong must use the +150 token");
@@ -198,6 +246,7 @@ for (const [semanticElement, shiftedRole] of [
 }
 
 const components = await readFile(path.join(CSS_DIRECTORY, "components.css"), "utf8");
+assert.equal(propertyValue(collectRules(components).find(({ selector }) => selector === ".product-detail__header h1").declarations, "font-family"), "var(--font-sans)", "Product-detail H5 title overrides must not inherit the default semantic h1 Reforma font");
 assert.match(
   components,
   /\.material-symbols-outlined\s*\{[^}]*--material-icon-weight:\s*calc\(var\(--font-weight-base\) - var\(--material-icon-weight-offset\)\);[^}]*font-weight:\s*var\(--material-icon-weight\);[^}]*font-variation-settings:\s*"FILL" 0, "wght" var\(--material-icon-weight\), "GRAD" var\(--material-icon-grade\), "opsz" 24;/,
@@ -228,7 +277,7 @@ assert.match(
 );
 
 const teamwearStory = await readFile(path.join(CSS_DIRECTORY, "teamwear-story.css"), "utf8");
-assert.doesNotMatch(teamwearStory, /letter-spacing\s*:/, "Teamwear must use default tracking");
+assert.doesNotMatch(teamwearStory, /letter-spacing\s*:/, "Teamwear must inherit shared role tracking, without page-local overrides");
 assert.doesNotMatch(teamwearStory, /text-shadow\s*:/, "Teamwear text must not use invented text effects");
 assert.match(
   teamwearStory,
@@ -277,6 +326,8 @@ assert.match(renderer, /<link rel="preconnect" href="https:\/\/fonts\.gstatic\.c
 assert.doesNotMatch(renderer, /alibabafonts|AlibabaSansTC/i, "The shared renderer must not request the deferred Alibaba webfont");
 
 const rootMarkup = await readFile(path.join(ROOT, "index.html"), "utf8");
+assert.ok(rootMarkup.includes('assets/css/fonts.css?v=20260909b'), "Generated pages load centralized local font faces");
+assert.match(rootMarkup, /href="\/font-credits\/">Font credits<\/a>/, "Font attribution must be accessible from the shared footer");
 const escapedRobotoStylesheet = ROBOTO_STYLESHEET.replaceAll("&", "&amp;");
 assert.equal((rootMarkup.match(/rel="preconnect" href="https:\/\/fonts\.googleapis\.com"/g) || []).length, 1, "Generated pages must preconnect to Google Fonts CSS once");
 assert.equal((rootMarkup.match(/rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin/g) || []).length, 1, "Generated pages must preconnect to Google font files once");

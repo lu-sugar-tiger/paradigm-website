@@ -1,0 +1,9 @@
+/* Original Reforma 1969 Negra. Attribution and license: /font-credits/.
+   The sole Reforma face serves normal and Strong heading role requests. */
+@font-face {
+  font-family: "Reforma1969";
+  src: url("../fonts/reforma/Reforma1969-Negra.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}

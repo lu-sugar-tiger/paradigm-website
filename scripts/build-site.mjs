@@ -283,7 +283,7 @@ function renderTeamwearColorwayCards(model, colorById) {
   return model.colors.map((option) => {
     const color = colorById.get(option.colorId);
     return `        <article class="teamwear-rail-card teamwear-colorway-card teamwear-colorway--${html(color.id)}" data-colorway-card data-color-id="${html(color.id)}" data-color-name="${html(color.name)}" data-section-reveal>
-          <div class="teamwear-rail-card__surface" data-media-zoom-surface><div class="teamwear-rail-card__media teamwear-colorway-card__media" data-media-zoom-touch><div class="teamwear-rail-card__photo-track"><img src="../${html(selectedPattern.preview)}" alt="${html(selectedPattern.name)} ${html(model.name)} ${html(color.name)} Road uniform rendering" width="1254" height="1254" loading="lazy" data-colorway-image></div></div></div>
+          <div class="teamwear-rail-card__surface" data-media-zoom-surface><div class="teamwear-rail-card__media teamwear-colorway-card__media" data-media-zoom-touch><div class="teamwear-rail-card__photo-track"><img src="../${html(selectedPattern.railImages[color.id])}" alt="${html(selectedPattern.name)} ${html(model.name)} ${html(color.name)} Road uniform rendering" width="1080" height="1080" loading="lazy" data-colorway-image></div></div></div>
           <div class="teamwear-rail-card__copy"><h3 class="type-h5">${html(color.name)}</h3></div>
         </article>`;
   }).join("\n");
@@ -312,15 +312,6 @@ function renderTeamwearLanding(template, model, colorById, instagramUrl) {
   const main = applyTemplate(template, {
     MODEL_NAME: html(model.name),
     PRIMARY_ACTION: primaryAction.split("\n").map((line) => `      ${line}`).join("\n"),
-    ICON_GRID_STACKED: renderIcon("grid", "..", "teamwear-stacked-row__icon"),
-    ICON_DROP_STACKED: renderIcon("drop", "..", "teamwear-stacked-row__icon"),
-    ICON_SHIRT_STACKED: renderIcon("shirt", "..", "teamwear-stacked-row__icon"),
-    ICON_DROP: renderIcon("drop", ".."),
-    ICON_CARE: renderIcon("care", ".."),
-    ICON_GRID: renderIcon("grid", ".."),
-    ICON_SHIRT: renderIcon("shirt", ".."),
-    ICON_LAYERS: renderIcon("layers", ".."),
-    ICON_IMAGE: renderIcon("image", ".."),
     HIGHLIGHT_CONTROLS: renderRailControls({ label: "Highlights", railId: "teamwear-highlights-rail", root: ".." }).split("\n").map((line) => `      ${line}`).join("\n"),
     COLORWAY_CONTROLS: renderRailControls({ label: "Colorway", railId: "teamwear-colorways-rail", root: ".." }).split("\n").map((line) => `      ${line}`).join("\n"),
     GALLERY_CONTROLS: renderRailControls({ label: "Customer stories", railId: "teamwear-gallery-rail", root: ".." }).split("\n").map((line) => `      ${line}`).join("\n"),
@@ -335,8 +326,8 @@ function renderTeamwearLanding(template, model, colorById, instagramUrl) {
     currentPath: "/teamwear",
     bodyClass: "site-shell reference-page teamwear-page teamwear-story-shell",
     main,
-    styles: ["teamwear.css?v=20260829c", "teamwear-story.css?v=20260902a"],
-    scripts: ["teamwear-options.js?v=20260828a", "teamwear.js?v=20260831a", "media-zoom.js?v=20260831c"],
+    styles: ["teamwear.css?v=20260829c", "teamwear-story.css?v=20260909b"],
+    scripts: ["teamwear-options.js?v=20260909a", "teamwear.js?v=20260909a", "media-zoom.js?v=20260831c"],
     head: `  <meta property="og:title" content="${html(model.name)} | Paradigm">\n  <meta property="og:description" content="${html(`${model.name} is a reversible basketball uniform system composed by Paradigm for the whole roster.`)}">\n  <meta property="og:image" content="https://prdm.tw/assets/images/teamwear/campaign/hero-desktop.webp">\n  <meta property="og:type" content="website">`
   });
 }
@@ -420,7 +411,7 @@ function renderTeamwearCustomize(template, model, colorById, instagramUrl) {
     bodyClass: "site-shell reference-page reference-page--detail teamwear-customize-page",
     main,
     styles: ["teamwear.css?v=20260829c"],
-    scripts: ["teamwear-options.js?v=20260828a", "teamwear.js?v=20260831a", "media-zoom.js?v=20260831c"]
+    scripts: ["teamwear-options.js?v=20260908a", "teamwear.js?v=20260831a", "media-zoom.js?v=20260831c"]
   });
 }
 
@@ -495,6 +486,15 @@ const collectionPages = [
 ];
 collectionPages.forEach((page) => outputs.set(page.output, renderCollectionPage({ ...page, products })));
 outputs.set("search/index.html", renderSearchPage());
+outputs.set("font-credits/index.html", renderDocument({
+  title: "Font credits | Paradigm",
+  description: "Typeface credits and licenses for the Paradigm website.",
+  canonical: "https://prdm.tw/font-credits/",
+  root: "..",
+  currentPath: "/font-credits/",
+  bodyClass: "site-shell",
+  main: await readTemplate("font-credits.html")
+}));
 
 products.forEach((product) => {
   const related = rankRelatedProducts(products, product);
