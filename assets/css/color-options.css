@@ -11,6 +11,9 @@
   --color-option-wine: #7d1119;
   --color-option-azure: #17629b;
   --color-option-sapphire: #154bb0;
+  --color-option-burgundy: #7d1119;
+  --color-option-ivy: #254a3d;
+  --color-option-royalty: #154bb0;
 }
 
 .choice-option--color-black,
@@ -66,4 +69,19 @@
 .choice-option--color-sapphire,
 .teamwear-colorway--sapphire {
   --choice-color: var(--color-option-sapphire);
+}
+
+.choice-option--color-burgundy,
+.teamwear-colorway--burgundy {
+  --choice-color: var(--color-option-burgundy);
+}
+
+.choice-option--color-ivy,
+.teamwear-colorway--ivy {
+  --choice-color: var(--color-option-ivy);
+}
+
+.choice-option--color-royalty,
+.teamwear-colorway--royalty {
+  --choice-color: var(--color-option-royalty);
 }

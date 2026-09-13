@@ -3,15 +3,15 @@
 
   <section class="product-detail">
     <div class="container">
-      <div class="product-detail__panel" data-product-detail data-product-number="{{PRODUCT_NUMBER}}" data-notification-title="{{TITLE}}">
-        <div class="product-detail__gallery" data-product-gallery{{PRODUCT_GALLERY_ZOOM}} aria-label="{{TITLE}} images">
+      <div class="product-detail__panel" data-product-detail data-item-code="{{ITEM_CODE}}" data-notification-title="{{NAME}}">
+        <div class="product-detail__gallery" data-product-gallery{{PRODUCT_GALLERY_ZOOM}} aria-label="{{NAME}} images">
 {{PRODUCT_MEDIA}}
         </div>
         <article class="product-detail__summary">
           <div class="product-detail__header">
             <div>
               <p class="product-detail__label" data-product-category>{{CATEGORY}}</p>
-              <h1 data-product-title>{{TITLE}}</h1>
+              <h1 data-product-name>{{NAME}}</h1>
             </div>
             {{PRICE}}
           </div>

@@ -57,7 +57,7 @@
       .sort((left, right) => (
         right.score - left.score
         || left.index - right.index
-        || String(left.record.title).localeCompare(String(right.record.title))
+        || String(left.record.name ?? left.record.title).localeCompare(String(right.record.name ?? right.record.title))
       ))
       .map((entry) => entry.record);
   }

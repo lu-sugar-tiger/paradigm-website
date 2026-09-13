@@ -4,17 +4,21 @@ Paradigm's product source is the Google Sheet [商品列表](https://docs.google
 
 ## Source mapping
 
+The local snapshot uses schema version 4 and canonical lower-camelCase item fields. See [the complete item schema](item-schema.md) for all identifier components, color/size codes, lots, aliases, normalization rules, and the source-to-website generation. Sheet labels are import aliases, not JSON keys.
+
 | Sheet field | Website behavior |
 | --- | --- |
-| `商品型號` | Groups all rows into one product and becomes `/products/{商品型號}`. |
-| `商品名稱` | Product title. |
-| `商品定價` | Display price. |
-| `商品連結` | External Shopee purchase URL. |
-| `商品文案` | Google Doc source. Import from the first bullet through the last non-empty line. |
+| `商品型號` | `code`: groups all rows into one item and becomes `/products/{code}`. |
+| `商品名稱` | `name`: product name. |
+| `商品定價` | `listPrice`: numeric list price. |
+| `商品售價` | `salePrice`: numeric selling price, or `null` when unspecified; display this when supplied, otherwise `listPrice`. |
+| `商品連結`, `連結` | `link`: external purchase URL, currently Shopee. |
+| `商品文案` | `descriptionSource`: Google Doc source. Import from the first bullet through the last non-empty line. |
 | `商品圖片 0` | Main image. |
 | `商品圖片 1` … `商品圖片 9` | Gallery images in column order. |
-| `存貨單位` | Variant SKU. It may be kept in the repository snapshot and browser catalog, but is not rendered on the website. |
-| `商品顏色`, `商品尺寸` | Variant options, deduplicated from visible rows. |
+| `存貨單位` | `variants[].sku`: kept in the repository snapshot and browser catalog, but not rendered on the website. |
+| `商品顏色名稱` / `商品顏色`, `商品尺寸名稱` / `商品尺寸` | `variants[].colorName`, `variants[].sizeName`: source option names; website options are deduplicated from visible rows. |
+| `存貨批次`, `存貨批次單位` | `variants[].lots[].code`, `variants[].lots[].id`: optional batch identities, without inventory logic. |
 | `顯示` | A product is published when at least one of its variant rows is `TRUE`. Hidden rows do not create visible options. |
 | `售罄` | Disables the corresponding option on product detail pages. The purchase action becomes `Sold out` when every visible variant is sold out. Collection cards do not show a sold-out state. |
 
@@ -22,7 +26,8 @@ Category is not present in the sheet. The current deterministic mapping is: shor
 
 ## Files and responsibilities
 
-- `data/products-source.json` is the connector-captured snapshot used for generation. It includes grouped product fields, Doc copy, local image paths, source modification times, and variant SKUs when captured.
+- `data/products-source.json` is the connector-captured snapshot used for generation. Version 4 stores grouped `items`, Doc copy, local image paths, source modification times, and variant SKUs.
+- `scripts/lib/item-schema.mjs` defines canonical aliases, resolved Sheet-row mapping, identity validation, migration, and the shared display-price formatter. `scripts/validate-item-schema.mjs` exercises that contract without accessing Drive.
 - `scripts/lib/rich-description.mjs` preserves ordinary source text and blank paragraphs in source order, turns dash-only lines into horizontal dividers without changing their neighbors, identifies hashtag lines, and turns positively detected rectangular size blocks into semantic tables. The same contract serves Product Detail and Teamwear Customize.
 - `scripts/build-site.mjs` builds the catalog and every shared static page. `scripts/build-product-catalog.mjs` delegates to it for backward compatibility.
 - `scripts/templates/product-page.html` is product composition only; the shared shell, choices, actions, product cards, navigation, and footer come from `scripts/lib/site-renderers.mjs`.
@@ -34,13 +39,14 @@ Category is not present in the sheet. The current deterministic mapping is: shor
 
 1. Read spreadsheet metadata first and record its `modifiedTime`. Resolve the exact `網站參照` tab and read a bounded range, currently `A1:U200`.
 2. Read rich-link chip metadata for `商品文案` and `商品圖片` cells. Plain cell values contain chip labels, not the underlying Drive URLs.
-3. Group rows by `商品型號`. Carry product-level values from whichever row contains them and retain variant SKU, visibility, and sold-out flags.
+3. Map resolved rows with `mapSheetItemRow()` and group by flat `itemCode`, then map to nested `items[].code` and the schema paths documented above. Trim alignment whitespace only at the Sheet scalar/header boundary, never in fetched Doc text. Carry item-level values from whichever row contains them; resolve conflicts explicitly. Retain variant SKU, color/size codes and names, visibility, sold-out flags, and any supplied lot records. Review unmapped headers. Do not silently deduplicate source rows.
 4. For every linked Google Doc, read the current file and record its file ID and `modifiedTime`. Copy from the first bullet through the last non-empty line, then apply the complete product-description contract below.
 5. For every linked image, record file ID and `modifiedTime`, then download the original through an authenticated Drive session. Pass that local source to `scripts/generate-product-images.mjs`; `商品圖片 0` remains first only in the product-media relationship and is never encoded into a generated filename.
 6. If a product has no sheet image links, preserve existing real product photography in `localImages`. If no real photography exists, use the shared decorative fallback defined in `data/product-image-fallback.json`.
 7. Update `data/products-source.json`, then regenerate and validate:
 
    ```powershell
+   node scripts/validate-item-schema.mjs
    node scripts/build-site.mjs
    node scripts/build-site.mjs --check
    node scripts/validate-product-catalog.mjs

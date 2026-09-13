@@ -24,7 +24,7 @@
 
   function searchIndex() {
     if (!searchIndexPromise) {
-      searchIndexPromise = fetch("/assets/data/search-index.json?v=20260830a", { credentials: "same-origin" })
+      searchIndexPromise = fetch("/assets/data/search-index.json?v=20260910a", { credentials: "same-origin" })
         .then((response) => {
           if (!response.ok) throw new Error(`Search index request failed with ${response.status}`);
           return response.json();
@@ -75,9 +75,9 @@
       media.append(image);
     }
     const body = element("div", "product-card__body");
-    body.append(element("h3", "product-card__title", product.title));
+    body.append(element("h3", "product-card__title", product.name));
     const footer = element("div", "product-card__footer");
-    footer.append(element("span", "product-card__price", product.price));
+    footer.append(element("span", "product-card__price", product.priceLabel));
     body.append(footer);
     link.append(media, body);
     return link;
@@ -184,7 +184,7 @@
 
     if (normalizedQuery) {
       if (!pageSurface) pages = core.rankRecords(index.pages, query);
-      products = core.rankRecords(index.products, query);
+      products = core.rankRecords(index.items, query);
       if (pages.length > 0) children.push(pageGroup(pages, suffix));
       if (products.length > 0) children.push(productGroup(products, suffix));
     }

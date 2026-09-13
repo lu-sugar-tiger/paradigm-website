@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
+import { validateItemCatalog } from "./lib/item-schema.mjs";
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { categoryForTitle, productFamilyKey, rankRelatedProducts } from "./lib/product-relations.mjs";
+import { categoryForName, productFamilyKey, rankRelatedProducts } from "./lib/product-relations.mjs";
 import { normalizeDescriptionSource, transformDescription } from "./lib/rich-description.mjs";
 import { renderBreadcrumb, renderChoiceGroup, renderDescription, renderPageHeadline, renderPrimaryAction, renderProductDetailPrice, renderProductGrid, renderRailControls, renderSiteFooter, renderSiteHeader } from "./lib/site-renderers.mjs";
 
@@ -27,7 +28,7 @@ async function listRepositoryFiles(directory = ROOT, prefix = "") {
 const [colors, teamwear, source, tokens, reset, components, teamwearStory, pages, choices, search, mediaZoom, rendererSource, productTemplate, teamwearTemplate, customizeTemplate] = await Promise.all([
   read("data/colors.json").then(JSON.parse),
   read("data/teamwear-options.json").then(JSON.parse),
-  read("data/products-source.json").then(JSON.parse),
+  read("data/products-source.json").then(JSON.parse).then(validateItemCatalog),
   read("assets/css/tokens.css"),
   read("assets/css/reset.css"),
   read("assets/css/components.css"),
@@ -44,10 +45,11 @@ const [colors, teamwear, source, tokens, reset, components, teamwearStory, pages
 
 const colorIds = new Set(colors.colors.map((color) => color.id));
 const colorNames = new Set(colors.colors.map((color) => color.name));
-const visibleProducts = source.products
+const visibleProducts = source.items
   .filter((product) => product.variants.some((variant) => variant.visible))
-  .map((product) => ({ ...product, category: categoryForTitle(product.title) }));
-const visibleProductByNumber = new Map(visibleProducts.map((product) => [product.productNumber, product]));
+  .sort((left, right) => Number(right.sequence) - Number(left.sequence))
+  .map((product) => ({ ...product, category: categoryForName(product.name) }));
+const visibleItemByCode = new Map(visibleProducts.map((product) => [product.code, product]));
 assert.equal(colorIds.size, colors.colors.length, "canonical color ids must be unique");
 assert.equal(colorNames.size, colors.colors.length, "canonical color names must be unique");
 
@@ -94,8 +96,8 @@ assert.throws(
   "Google Doc description sources must require document metadata"
 );
 
-source.products.flatMap((product) => product.variants.filter((variant) => variant.visible)).forEach((variant) => {
-  assert.ok(colorNames.has(variant.color), `product color ${variant.color} must resolve through colors.json`);
+source.items.flatMap((product) => product.variants.filter((variant) => variant.visible)).forEach((variant) => {
+  assert.ok(colorNames.has(variant.colorName), `product color ${variant.colorName} must resolve through colors.json`);
 });
 
 const fixture = renderChoiceGroup({
@@ -242,7 +244,7 @@ assert.match(productBreadcrumb, /<span class="breadcrumb__current" aria-current=
 assert.doesNotMatch(productBreadcrumb, /breadcrumb__current interface-label[^>]*data-product-breadcrumb-title/, "product breadcrumb titles must stay outside the interface-label role");
 
 const headerFixture = renderSiteHeader();
-assert.match(headerFixture, /class="dropdown dropdown--text" data-dropdown>\s*<select id="menu-language-native"/, "menu region control must reuse the underlined dropdown variant");
+assert.match(headerFixture, /class="dropdown dropdown--text" data-dropdown data-dropdown-align="start">\s*<select id="menu-language-native"/, "menu region control must reuse the underlined dropdown variant");
 assert.equal((headerFixture.match(/data-search-toggle/g) || []).length, 1, "shared headers must render one Search toggle");
 assert.equal((headerFixture.match(/data-nav-toggle/g) || []).length, 1, "shared headers must render one navigation toggle");
 assert.equal((headerFixture.match(/data-search-submit/g) || []).length, 1, "shared headers must render one Search submit control inside the overlay");
@@ -278,7 +280,7 @@ assert.match(railControlsFixture, /data-rail-next hidden>[\s\S]*?>chevron_right<
 assert.doesNotMatch(railControlsFixture, />arrow_forward<\//, "Rail controls must not rotate or reuse the forward-arrow symbol");
 
 const productGridFixture = renderProductGrid([
-  { productNumber: "FIXTURE", title: "Fixture product", price: "NT$1", image: null, alt: "" }
+  { code: "FIXTURE", name: "Fixture product", priceLabel: "NT$1", image: null, alt: "" }
 ]);
 assert.match(productGridFixture, /^<div class="auto-grid product-grid" data-generated-component="product-grid">/, "product grids must expose one controlled vertical-feed class contract");
 assert.doesNotMatch(productGridFixture, /marquee-strip/, "product grids must not expose the removed carousel variation");
@@ -369,7 +371,8 @@ assert.match(rendererSource, /const touchZoom = image && !media\?\.isFallback \?
 assert.match(search, /if \(product\.media\?\.src\) \{[\s\S]*?if \(!product\.media\.isFallback\) media\.dataset\.mediaZoomTouch = "";/, "Search product cards must opt only their populated non-fallback photo media into touch inspection");
 assert.match(productTemplate, /data-product-gallery\{\{PRODUCT_GALLERY_ZOOM\}\}/, "retail detail galleries must conditionally opt non-fallback photography into shared Large inspection");
 assert.match(customizeTemplate, /data-builder-preview data-media-zoom-gallery/, "Teamwear Customize must opt into shared Large inspection");
-assert.equal((customizeTemplate.match(/data-media-zoom-touch/g) || []).length, 3, "every Teamwear Customize gallery image must opt into touch inspection");
+assert.match(customizeTemplate, /\{\{COVER_IMAGE\}\}/, "Teamwear Customize must render its configured responsive cover");
+assert.equal(((await read("teamwear/customize/index.html")).match(/data-media-zoom-touch/g) || []).length, 3, "every Teamwear Customize gallery image must opt into touch inspection");
 assert.equal((teamwearTemplate.match(/data-media-zoom-touch/g) || []).length, 7, "authored Teamwear highlight and customer-gallery photos must opt into touch inspection");
 assert.equal((teamwearTemplate.match(/data-media-zoom-surface/g) || []).length, 7, "authored Teamwear rail photos must declare their immediate backing surfaces");
 assert.match(await read("scripts/build-site.mjs"), /teamwear-rail-card__surface" data-media-zoom-surface[^\n]*teamwear-colorway-card__media" data-media-zoom-touch/, "generated Teamwear colorways must use the shared source-surface contract");
@@ -454,7 +457,7 @@ const generatedPages = [
   "teamwear/customize/index.html",
   "search/index.html",
   "font-credits/index.html",
-  ...source.products.filter((product) => product.variants.some((variant) => variant.visible)).map((product) => `products/${product.productNumber}/index.html`)
+  ...source.items.filter((product) => product.variants.some((variant) => variant.visible)).map((product) => `products/${product.code}/index.html`)
 ];
 for (const relativePath of generatedPages) {
   const page = await read(relativePath);
@@ -469,16 +472,16 @@ for (const relativePath of generatedPages) {
   });
   assert.match(page, /Generated by scripts\/build-site\.mjs/, `${relativePath} must carry the generated banner`);
   assert.match(page, /assets\/css\/fonts\.css\?v=20260909b/, `${relativePath} must load the shared Reforma Negra font face`);
-  assert.match(page, /assets\/css\/tokens\.css\?v=20260909c/, `${relativePath} must cache-bust the shared typography, target, icon, safe-area, media-layer, and motion tokens`);
+  assert.match(page, /assets\/css\/tokens\.css\?v=20260911a/, `${relativePath} must cache-bust the shared typography, target, icon, safe-area, media-layer, and motion tokens`);
   assert.match(page, /assets\/css\/motion\.css\?v=20260831a/, `${relativePath} must load the shared motion layer`);
-  assert.match(page, /assets\/css\/base\.css\?v=20260909c/, `${relativePath} must cache-bust the shared visual-role font behavior`);
-assert.match(page, /assets\/css\/components\.css\?v=20260909g/, `${relativePath} must cache-bust shared interaction-target, overlay, static resting toggle, paired-icon, floating-action, media-source, and transferred stable overlay-gutter rules`);
+  assert.match(page, /assets\/css\/base\.css\?v=20260911a/, `${relativePath} must cache-bust the shared visual-role font behavior`);
+assert.match(page, /assets\/css\/components\.css\?v=20260911a/, `${relativePath} must cache-bust shared interaction-target, overlay, static resting toggle, paired-icon, floating-action, media-source, and transferred stable overlay-gutter rules`);
   assert.match(page, /assets\/css\/reset\.css\?v=20260829a/, `${relativePath} must cache-bust the stable scrollbar-gutter reset`);
   assert.match(page, /assets\/js\/page-transitions\.js\?v=20260831a/, `${relativePath} must load the early route-motion controller`);
   assert.match(page, /assets\/js\/app\.js\?v=20260908a/, `${relativePath} must cache-bust the shared overlay behavior`);
-  assert.match(page, /assets\/js\/search-core\.js\?v=20260829b/, `${relativePath} must load the shared search matcher`);
-  assert.match(page, /assets\/js\/search\.js\?v=20260902a/, `${relativePath} must load the shared Search interface`);
-  assert.match(page, /assets\/js\/choices\.js\?v=20260831c/, `${relativePath} must cache-bust the shared choice and floating-action controller`);
+  assert.match(page, /assets\/js\/search-core\.js\?v=20260910a/, `${relativePath} must load the shared search matcher`);
+  assert.match(page, /assets\/js\/search\.js\?v=20260910a/, `${relativePath} must load the shared Search interface`);
+  assert.match(page, /assets\/js\/choices\.js\?v=20260910a/, `${relativePath} must cache-bust the shared choice and floating-action controller`);
   if (/^(?:index\.html|collections\/|products\/|teamwear\/|search\/)/.test(relativePath)) {
     assert.match(page, /assets\/js\/media-zoom\.js\?v=20260831c/, `${relativePath} must cache-bust the shared media inspection behavior`);
   } else {
@@ -505,7 +508,8 @@ assert.match(page, /assets\/css\/components\.css\?v=20260909g/, `${relativePath}
     assert.match(page, /data-generated-component="page-headline"/, `${relativePath} must use the shared page-headline renderer`);
   }
   if (/^(?:index\.html|collections\/)/.test(relativePath)) {
-    assert.match(page, /page-headline__action--text[^>]*><span class="interface-label">Refine<\/span>/, `${relativePath} must render the catalog Refine text action`);
+    assert.match(page, /data-dropdown-grouped data-dropdown-align="end"/, `${relativePath} must render Refine through the shared grouped dropdown`);
+    assert.match(page, /data-dropdown-value>Refine<\/span>/, `${relativePath} must preserve the Refine label`);
   }
   if (/^(?:products\/|teamwear\/customize\/)/.test(relativePath)) {
     assert.match(page, /data-generated-component="rich-description"/, `${relativePath} must use the shared rich-description renderer`);
@@ -528,10 +532,10 @@ assert.match(page, /assets\/css\/components\.css\?v=20260909g/, `${relativePath}
     assert.match(page, /assets\/js\/media-zoom\.js\?v=20260831c/, "Search must load touch inspection for dynamically rendered product-card photos");
   }
   if (relativePath === "teamwear/customize/index.html") {
-    assert.match(page, /assets\/js\/choices\.js\?v=20260831c/, "Teamwear Customize must cache-bust the current shared choice controller");
-    assert.match(page, /assets\/js\/teamwear-options\.js\?v=20260908a/, "Teamwear Customize must cache-bust centralized model, quantity, and add-on data");
+    assert.match(page, /assets\/js\/choices\.js\?v=20260910a/, "Teamwear Customize must cache-bust the current shared choice controller");
+    assert.match(page, /assets\/js\/teamwear-options\.js\?v=20260913a/, "Teamwear Customize must cache-bust centralized configuration and media data");
     assert.match(page, /<h1[^>]*>PE Basketball Teamwear<\/h1>/, "Teamwear Customize must render the approved product name");
-    assert.match(page, /assets\/js\/teamwear\.js\?v=20260831a/, "Teamwear Customize must cache-bust current shared Teamwear behavior");
+    assert.match(page, /assets\/js\/teamwear\.js\?v=20260913a/, "Teamwear Customize must cache-bust current shared Teamwear behavior");
     assert.match(page, /<p class="product-detail__price" data-teamwear-price data-generated-component="product-detail-price">NT\$1,580<\/p>/, "Teamwear Customize must expose its centralized NT$1,580 price for controlled add-on updates");
     assert.match(page, /data-choice-kind="chip" data-choice-variant="add-on" data-choice-title="Add-On"/, "Teamwear Customize must render the centralized Add-On chip variation");
     assert.match(page, /data-choice-kind="chip" data-choice-title="Quantity"[\s\S]*?value="Q01"[\s\S]*?&lt;10[\s\S]*?value="Q02"[\s\S]*?10~19[\s\S]*?value="Q03" checked[\s\S]*?&gt;19/, "Teamwear Customize must render three escaped quantity chips with >19 selected by default");
@@ -555,16 +559,16 @@ assert.match(page, /assets\/css\/components\.css\?v=20260909g/, `${relativePath}
   }
   if (relativePath.startsWith("products/")) {
     const currentProductNumber = relativePath.split("/")[1];
-    const currentProduct = visibleProductByNumber.get(currentProductNumber);
-    const expectedProductNumbers = rankRelatedProducts(visibleProducts, currentProduct).map((product) => product.productNumber);
-    const actualProductNumbers = [...page.matchAll(/<a class="product-card" href="\/products\/([^"]+)">/g)].map((match) => match[1]);
+    const currentProduct = visibleItemByCode.get(currentProductNumber);
+    const expectedItemCodes = rankRelatedProducts(visibleProducts, currentProduct).map((product) => product.code);
+    const actualItemCodes = [...page.matchAll(/<a class="product-card" href="\/products\/([^"]+)">/g)].map((match) => match[1]);
     assert.match(page, /class="breadcrumb__current" aria-current="page" data-product-breadcrumb-title/, `${relativePath} product breadcrumb title must preserve authored casing`);
     assert.match(page, /<section class="section section--tight product-feed-section">[\s\S]*?<div class="auto-grid product-grid"/, `${relativePath} must place the shared feed after a tokenized divider boundary`);
     assert.match(page, /<div class="auto-grid product-grid" data-generated-component="product-grid">/, `${relativePath} must use the shared vertical product feed`);
     assert.doesNotMatch(page, /marquee-strip/, `${relativePath} must not render the removed product carousel`);
-    assert.equal(actualProductNumbers.length, visibleProducts.length - 1, `${relativePath} must render every other visible product`);
-    assert.ok(!actualProductNumbers.includes(currentProductNumber), `${relativePath} must exclude its current product`);
-    assert.deepEqual(actualProductNumbers, expectedProductNumbers, `${relativePath} must preserve the family-category-catalog similarity order`);
+    assert.equal(actualItemCodes.length, visibleProducts.length - 1, `${relativePath} must render every other visible product`);
+    assert.ok(!actualItemCodes.includes(currentProductNumber), `${relativePath} must exclude its current product`);
+    assert.deepEqual(actualItemCodes, expectedItemCodes, `${relativePath} must preserve the family-category-catalog similarity order`);
   }
   if (relativePath === "teamwear/index.html") {
     assert.match(page, /<body class="[^"]*teamwear-story-shell/, "Teamwear landing must own its page-positioned header behavior");
@@ -576,11 +580,11 @@ assert.match(page, /assets\/css\/components\.css\?v=20260909g/, `${relativePath}
   }
 }
 
-const relatedNumbersFor = (productNumber) => rankRelatedProducts(visibleProducts, visibleProductByNumber.get(productNumber)).map((product) => product.productNumber);
+const relatedCodesFor = (code) => rankRelatedProducts(visibleProducts, visibleItemByCode.get(code)).map((product) => product.code);
 assert.equal(productFamilyKey("14001"), null, "products without an alphabetic prefix must not share a family key");
-assert.deepEqual(relatedNumbersFor("ED14001").slice(0, 3), ["ED14024", "ED23002", "ED24014"], "Everyday products must rank by family, then category, then catalog order");
-assert.equal(relatedNumbersFor("PH14010")[0], "PH14011", "Football jerseys must rank their matching family first");
-assert.equal(relatedNumbersFor("GM42022")[0], "GM42023", "Training shorts must rank their matching family first");
+assert.deepEqual(relatedCodesFor("ED14001").slice(0, 3), ["ED14024", "ED24014", "ED23002"], "Everyday products must rank by family, then category, then newest-first catalog order");
+assert.equal(relatedCodesFor("PH14010")[0], "PH14011", "Football jerseys must rank their matching family first");
+assert.equal(relatedCodesFor("GM42022")[0], "GM42023", "Training shorts must rank their matching family first");
 
 const repositoryFiles = await listRepositoryFiles();
 const svgFiles = repositoryFiles.filter((relativePath) => relativePath.toLowerCase().endsWith(".svg")).sort();

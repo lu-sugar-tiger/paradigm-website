@@ -83,20 +83,24 @@ python -m http.server 8000
 
 ## 商品資料
 
-商品來源快照位於 `data/products-source.json`。`scripts/build-site.mjs` 會從集中資料與共用 renderer 產生商品、商品分類、Teamwear、導覽、頁尾、選項與主要操作；`scripts/build-product-catalog.mjs` 保留為相容入口。產生檔帶有 do-not-edit 標記，請勿直接修改。每個商品都有穩定且唯一的 `productNumber`：
+商品來源快照位於 `data/products-source.json`，使用 schema version 4：`items[]` 中的 `code`、`name`、`lineCode`、`typeCode`、`sequence`、`listPrice`、`salePrice`、`link`、`descriptionSource`，以及 variants 中的 `sku`、`colorCode`、`colorName`、`sizeCode`、`sizeName` 與 `lots[].code`／`lots[].id`。欄位採 lower camelCase；識別碼保留字串與前導零。完整欄位對照與匯入規則見 [item schema](docs/item-schema.md)。
+
+`scripts/build-site.mjs` 驗證並直接讀取來源 schema，從集中資料與共用 renderer 產生商品、商品分類、Teamwear、導覽、頁尾、選項與主要操作；`scripts/build-product-catalog.mjs` 保留為相容入口。產生檔帶有 do-not-edit 標記，請勿直接修改。下方是網站 `items[]` 呈現模型的示意；與來源採同樣命名，另加 `priceLabel`、圖片呈現資料與文案 tokens，不再轉回舊欄位名稱。公開網址不變：
 
 ```js
 {
   slug: "everyday-tee",
-  productNumber: "ED14001",
-  title: "PRDM Everyday Tee",
+  code: "ED14001",
+  name: "PRDM Everyday Tee",
   category: "SS Tops",
-  price: "NT$1,180",
+  listPrice: 590,
+  salePrice: null,
+  priceLabel: "NT$590",
   image: "assets/images/everyday-tee.webp",
   images: ["assets/images/everyday-tee.webp"],
   colors: [{ label: "Black", colorId: "black" }],
   sizes: ["M", "L", "XL"],
-  variants: [{ sku: "...", color: "Black", size: "M", visible: true, soldOut: false }],
+  variants: [{ sku: "ED14001-C01-S1", colorCode: "C01", colorName: "Black", sizeCode: "S1", sizeName: "M", visible: true, soldOut: false, lots: [] }],
   description: [
     { type: "text", text: "• 100% cotton" },
     { type: "blank", text: "\n" },
@@ -111,18 +115,18 @@ python -m http.server 8000
     },
     { type: "hashtag", text: "#ED14001" }
   ],
-  shopeeUrl: "https://shopee.tw/..."
+  link: "https://shopee.tw/..."
 }
 ```
 
 常用欄位：
 
-- `productNumber`：網址與資料查找使用的商品編號，不含 `#`
-- `title`、`category`、`price`：商品基本資料
+- `code`：網址與資料查找使用的商品編號，不含 `#`
+- `name`、`category`、`listPrice`、`salePrice`：商品基本資料；`priceLabel` 是以 `salePrice ?? listPrice` 產生的顯示字串
 - `image`、`images`、`media`、`alt`：商品圖片與替代文字；`media[].derivatives` 提供 540、1080、2160 短邊的 content-addressed WebP 與 `srcset` 資料；沒有真實圖片時 `image` 為 `null`、`images` 與 `media` 為空陣列
 - `colors`、`sizes`、`variants`：款式與尺寸資料；`sku` 可以保留於資料但不顯示在網站
-- `copy`：普通文字與空白段落依來源順序保留；空白段落以可選取的 `U+000A` 表示，單獨破折號只轉成單行水平線，已確認的矩形尺寸資料轉為無格線表格
-- `shopeeUrl`：外部 Shopee 商品連結
+- `description`：由來源的 `descriptionSource` 產生；普通文字與空白段落依來源順序保留；空白段落以可選取的 `U+000A` 表示，單獨破折號只轉成單行水平線，已確認的矩形尺寸資料轉為無格線表格
+- `link`：外部購買連結，目前導向 Shopee
 
 商品同步與文案正規化規則詳見 `docs/product-sync.md`。
 

@@ -179,8 +179,11 @@ export function renderPageHeadline({ breadcrumb, trailingAction, root = "" }) {
   const breadcrumbMarkup = renderBreadcrumb({ ...breadcrumb, root: breadcrumb.root ?? root });
   let trailingMarkup = "";
   if (trailingAction) {
-    if (!["icon", "text"].includes(trailingAction.kind)) throw new Error(`Unsupported page-headline action kind: ${trailingAction.kind}`);
+    if (!["icon", "text", "dropdown"].includes(trailingAction.kind)) throw new Error(`Unsupported page-headline action kind: ${trailingAction.kind}`);
     if (!trailingAction.label) throw new Error("Page-headline actions require a label.");
+    if (trailingAction.kind === "dropdown") {
+      trailingMarkup = `\n    ${renderDropdown(trailingAction)}`;
+    } else {
     if (trailingAction.kind === "icon" && !trailingAction.icon) throw new Error("Icon page-headline actions require an icon.");
     const actionContent = trailingAction.kind === "icon"
       ? renderIcon(trailingAction.icon, root, "page-headline__action-icon")
@@ -188,6 +191,7 @@ export function renderPageHeadline({ breadcrumb, trailingAction, root = "" }) {
     const accessibleLabel = trailingAction.kind === "icon" ? ` aria-label="${html(trailingAction.label)}"` : "";
     trailingMarkup = `
     <button class="page-headline__action page-headline__action--${html(trailingAction.kind)}" type="button"${accessibleLabel}>${actionContent}</button>`;
+    }
   }
   return `<section class="page-headline" data-generated-component="page-headline">
   <div class="container page-headline__row">
@@ -259,21 +263,54 @@ ${navigationMarkup}
   </div>`;
 }
 
-export function renderDropdown({ id, label, name, options, selectedValue, variant = "boxed" }) {
-  if (!["boxed", "text"].includes(variant)) throw new Error(`Unsupported dropdown variant: ${variant}`);
-  if (!options?.length || new Set(options.map((option) => option.value)).size !== options.length) throw new Error("Dropdown requires unique options");
-  const selected = options.find((option) => option.value === selectedValue) || options[0];
+function renderDropdownTrigger({ id, label, selected, options, variant, grouped = false }) {
   const valueMarkup = `<span data-dropdown-value>${html(selected.label)}</span>`;
   const iconMarkup = `<span class="material-symbols-outlined material-icon choice-option__state-symbol${variant === "text" ? " dropdown__text-indicator" : ""}" aria-hidden="true">${MATERIAL_ICON_NAMES.expand}</span>`;
-  return `<div class="dropdown${variant === "text" ? " dropdown--text" : ""}" data-dropdown>
+  return `<button type="button" class="dropdown__trigger" data-selected="true" data-availability="${selected.availability === "unavailable" ? "unavailable" : "available"}" aria-label="${html(grouped ? label : `${label}: ${selected.label}`)}" data-dropdown-label="${html(label)}"${grouped ? "" : ' aria-haspopup="listbox"'} aria-expanded="false" aria-controls="${html(id)}-list">
+        <span class="dropdown__label interface-label">${variant === "text" ? `<span class="dropdown__text-content">${valueMarkup}${iconMarkup}</span>` : valueMarkup}${options.map((option) => `<span class="dropdown__sizer" aria-hidden="true">${html(option.label)}</span>`).join("")}</span>
+        ${variant === "text" ? "" : `<span class="choice-option__state-icon" aria-hidden="true">${iconMarkup}</span>`}
+      </button>`;
+}
+
+function renderDropdownGroups(id, groups) {
+  if (!groups.length || new Set(groups.map((group) => group.name)).size !== groups.length) throw new Error("Dropdown requires unique groups");
+  return groups.map((group) => {
+    if (!["single", "multiple", "range"].includes(group.kind)) throw new Error(`Unsupported dropdown group: ${group.kind}`);
+    const groupId = `${id}-${group.name}`;
+    let controls;
+    if (group.kind === "range") {
+      controls = `<div class="dropdown__range">${["min", "max"].map((bound) => `<label class="dropdown__range-label" for="${html(groupId)}-${bound}"><span>${bound === "min" ? "Min" : "Max"}${group.unit ? ` (${html(group.unit)})` : ""}</span><input id="${html(groupId)}-${bound}" type="number" inputmode="decimal" name="${html(group.name)}-${bound}" min="${html(group.min)}" max="${html(group.max)}" step="${html(group.step || 1)}" placeholder="${html(group[bound])}" data-range-bound="${bound}"></label>`).join("")}</div>`;
+    } else {
+      if (!group.options?.length || new Set(group.options.map((option) => option.value)).size !== group.options.length) throw new Error("Dropdown group requires unique options");
+      controls = `<div class="dropdown__choices">${group.options.map((option) => `<label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="${group.kind === "single" ? "radio" : "checkbox"}" name="${html(group.name)}" value="${html(option.value)}"${option.value === group.selectedValue || option.selected ? " checked" : ""}><span>${html(option.label)}</span>${renderIcon("check", "", "dropdown__choice-check")}</label>`).join("\n")}</div>`;
+    }
+    return `<fieldset class="dropdown__group" data-dropdown-group="${html(group.kind)}"><legend class="interface-label">${html(group.label)}</legend>${controls}</fieldset>`;
+  }).join("\n");
+}
+
+export function renderDropdown({ id, label, name, options, selectedValue, variant = "boxed", groups, align = "start" }) {
+  if (!["boxed", "text"].includes(variant)) throw new Error(`Unsupported dropdown variant: ${variant}`);
+  if (!["start", "end"].includes(align)) throw new Error(`Unsupported dropdown alignment: ${align}`);
+  if (groups) {
+    return `<div class="dropdown${variant === "text" ? " dropdown--text" : ""}" data-dropdown data-dropdown-grouped data-dropdown-align="${align}">
+    <div class="dropdown__enhanced" hidden>
+      ${renderDropdownTrigger({ id, label, selected: { label }, options: [{ label }], variant, grouped: true })}
+      <form id="${html(id)}-list" class="dropdown__options dropdown__panel" aria-label="${html(label)}" novalidate hidden>
+        <div class="dropdown__groups">${renderDropdownGroups(id, groups)}</div>
+        <p class="dropdown__error" role="alert" data-dropdown-error hidden></p>
+        <div class="dropdown__footer"><output aria-live="polite" data-dropdown-status></output><button class="dropdown__text-action interface-label" type="reset">Clear all</button><button class="dropdown__text-action interface-label" type="button" data-dropdown-close>Done</button></div>
+      </form>
+    </div>
+  </div>`;
+  }
+  if (!options?.length || new Set(options.map((option) => option.value)).size !== options.length) throw new Error("Dropdown requires unique options");
+  const selected = options.find((option) => option.value === selectedValue) || options[0];
+  return `<div class="dropdown${variant === "text" ? " dropdown--text" : ""}" data-dropdown data-dropdown-align="${align}">
     <select id="${html(id)}-native" class="dropdown__native interface-label" name="${html(name)}" aria-label="${html(label)}" data-dropdown-native>
       ${options.map((option) => `<option value="${html(option.value)}"${option === selected ? " selected" : ""}>${html(option.label)}</option>`).join("\n")}
     </select>
     <div class="dropdown__enhanced" hidden>
-      <button type="button" class="dropdown__trigger" data-selected="true" data-availability="${selected.availability === "unavailable" ? "unavailable" : "available"}" aria-label="${html(label)}: ${html(selected.label)}" data-dropdown-label="${html(label)}" aria-haspopup="listbox" aria-expanded="false" aria-controls="${html(id)}-list">
-        <span class="dropdown__label interface-label">${variant === "text" ? `<span class="dropdown__text-content">${valueMarkup}${iconMarkup}</span>` : valueMarkup}${options.map((option) => `<span class="dropdown__sizer" aria-hidden="true">${html(option.label)}</span>`).join("")}</span>
-        ${variant === "text" ? "" : `<span class="choice-option__state-icon" aria-hidden="true">${iconMarkup}</span>`}
-      </button>
+      ${renderDropdownTrigger({ id, label, selected, options, variant })}
       <div id="${html(id)}-list" class="dropdown__options" role="listbox" aria-label="${html(label)}" hidden>
         ${options.map((option, index) => `<div class="dropdown__option interface-label" role="option" tabindex="-1" data-value="${html(option.value)}" data-availability="${option.availability === "unavailable" ? "unavailable" : "available"}" aria-selected="${option === selected}"${option.availability === "unavailable" ? ` aria-describedby="${html(id)}-unavailable-${index}"` : ""}>${html(option.label)}${option.availability === "unavailable" ? `<span class="visually-hidden" id="${html(id)}-unavailable-${index}">Unavailable</span>` : ""}</div>`).join("\n")}
       </div>
@@ -396,16 +433,16 @@ export function renderProductCard(product, root = "") {
     })
     : "";
   const touchZoom = image && !media?.isFallback ? " data-media-zoom-touch" : "";
-  return `<a class="product-card" href="/products/${html(product.productNumber)}">
+  return `<a class="product-card" href="/products/${html(product.code)}">
   <div class="product-card__media"${touchZoom}>${image}</div>
   <div class="product-card__body">
-    <h3 class="product-card__title">${html(product.title)}</h3>
-    <div class="product-card__footer"><span class="product-card__price">${html(product.price)}</span></div>
+    <h3 class="product-card__title">${html(product.name)}</h3>
+    <div class="product-card__footer"><span class="product-card__price">${html(product.priceLabel)}</span></div>
   </div>
 </a>`;
 }
 
-export function renderResponsiveProductImage({ media, alt, root = "", sizes, loading = "", touchZoom = false }) {
+export function renderResponsiveProductImage({ media, alt, root = "", sizes, loading = "", touchZoom = false, dataAttribute = "" }) {
   if (!media?.src) throw new Error("Responsive product images require a fallback source.");
   const resolvedPath = (source) => asset(root, source);
   const srcset = imageSrcset(media, resolvedPath);
@@ -413,9 +450,11 @@ export function renderResponsiveProductImage({ media, alt, root = "", sizes, loa
   const loadingAttribute = loading ? ` loading="${html(loading)}"` : "";
   const zoomAttribute = touchZoom ? " data-media-zoom-touch" : "";
   const fallbackAttribute = media.isFallback ? " data-product-image-fallback" : "";
+  if (dataAttribute && !/^data-[a-z][a-z0-9-]*$/.test(dataAttribute)) throw new Error("Invalid image data attribute.");
+  const behaviorAttribute = dataAttribute ? ` ${dataAttribute}` : "";
   const width = media.width || 1;
   const height = media.height || 1;
-  return `<img src="${html(resolvedPath(media.src))}"${responsiveAttributes} alt="${html(alt)}" width="${html(width)}" height="${html(height)}"${loadingAttribute}${zoomAttribute}${fallbackAttribute}>`;
+  return `<img src="${html(resolvedPath(media.src))}"${responsiveAttributes} alt="${html(alt)}" width="${html(width)}" height="${html(height)}"${loadingAttribute}${zoomAttribute}${fallbackAttribute}${behaviorAttribute}>`;
 }
 
 export function renderProductGrid(products, root = "") {
@@ -437,13 +476,13 @@ export function renderDocument({
   scripts = [],
   head = ""
 }) {
-const baseStyles = ["fonts.css?v=20260909b", "tokens.css?v=20260909c", "motion.css?v=20260831a", "reset.css?v=20260829a", "base.css?v=20260909c", "layout.css", "components.css?v=20260909g", "pages.css?v=20260829a", "color-options.css"];
+const baseStyles = ["fonts.css?v=20260909b", "tokens.css?v=20260911a", "motion.css?v=20260831a", "reset.css?v=20260829a", "base.css?v=20260911a", "layout.css", "components.css?v=20260911a", "pages.css?v=20260829a", "color-options.css?v=20260913a"];
   const styleMarkup = [...baseStyles, ...styles].map((file) => `  <link rel="stylesheet" href="${html(asset(root, `assets/css/${file}`))}">`).join("\n");
   const isDataScript = (file) => ["catalog.js", "teamwear-options.js"].includes(file.split("?")[0]);
   const dataScripts = scripts.filter(isDataScript);
   const interactionScripts = scripts.filter((file) => !isDataScript(file));
   const earlyMotionScript = `  <script src="${html(asset(root, "assets/js/page-transitions.js?v=20260831a"))}"></script>`;
-  const scriptMarkup = ["app.js?v=20260908a", "dropdown.js?v=20260908b", "language-preference.js?v=20260908a", "search-core.js?v=20260829b", "search.js?v=20260902a", ...dataScripts, "choices.js?v=20260831c", ...interactionScripts].map((file) => `  <script defer src="${html(asset(root, `assets/js/${file}`))}"></script>`).join("\n");
+  const scriptMarkup = ["app.js?v=20260908a", "dropdown.js?v=20260910a", "language-preference.js?v=20260908a", "search-core.js?v=20260910a", "search.js?v=20260910a", ...dataScripts, "choices.js?v=20260910a", ...interactionScripts].map((file) => `  <script defer src="${html(asset(root, `assets/js/${file}`))}"></script>`).join("\n");
   const document = `<!doctype html>
 <!-- Generated by scripts/build-site.mjs. Do not edit this file directly. -->
 <html lang="${html(lang)}">

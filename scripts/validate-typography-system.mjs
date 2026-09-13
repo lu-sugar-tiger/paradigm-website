@@ -187,10 +187,12 @@ for (const filePath of cssFiles) {
 const base = await readFile(path.join(CSS_DIRECTORY, "base.css"), "utf8");
 assert.equal(propertyValue(tokens, "--type-heading-width-scale"), "0.9");
 assert.equal(propertyValue(tokens, "--type-heading-tracking"), "-0.05em");
+assert.equal(propertyValue(tokens, "--type-heading-transform"), "uppercase");
 for (const selector of [":where(h1)", ".type-h1", ".type-h2", ".type-h3"]) {
   const declarations = collectRules(base).find(rule => rule.selector === selector)?.declarations || "";
   assert.equal(propertyValue(declarations, "scale"), "var(--type-heading-width-scale) 1", `${selector} must preserve height at 90% horizontal scale`);
   assert.equal(propertyValue(declarations, "letter-spacing"), "var(--type-heading-tracking)", `${selector} must use -50 tracking`);
+  assert.equal(propertyValue(declarations, "text-transform"), "var(--type-heading-transform)", `${selector} must display uppercase without changing source copy`);
 }
 for (const role of TEXT_ROLES.keys()) {
   const rule = collectRules(base).find(({ selector }) => selector.includes(`.type-${role}`));

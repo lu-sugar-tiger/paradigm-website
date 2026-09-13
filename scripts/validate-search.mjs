@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { validateItemCatalog } from "./lib/item-schema.mjs";
 import { readFile } from "node:fs/promises";
 import vm from "node:vm";
 import { fileURLToPath } from "node:url";
@@ -10,7 +11,7 @@ const json = async (relativePath) => JSON.parse(await read(relativePath));
 const [config, index, source, searchPage, searchCoreSource, searchClient, app, renderer, build, components, pages] = await Promise.all([
   json("data/search.json"),
   json("assets/data/search-index.json"),
-  json("data/products-source.json"),
+  json("data/products-source.json").then(validateItemCatalog),
   read("search/index.html"),
   read("assets/js/search-core.js"),
   read("assets/js/search.js"),
@@ -42,30 +43,35 @@ assert.deepEqual(
   "Search page titles must reuse interface-label casing only where the established interface does"
 );
 
-const visibleProductNumbers = source.products
+const visibleItemCodes = source.items
   .filter((product) => product.variants.some((variant) => variant.visible))
-  .map((product) => product.productNumber);
-assert.equal(visibleProductNumbers.length, 19, "the product source must still expose the expected 19 visible products");
-assert.equal(index.schemaVersion, 1, "the generated Search index schema must be versioned");
+  .sort((left, right) => Number(right.sequence) - Number(left.sequence))
+  .map((product) => product.code);
+assert.equal(visibleItemCodes.length, 19, "the product source must still expose the expected 19 visible products");
+assert.equal(index.schemaVersion, 2, "the generated Search index schema must be versioned");
+assert.equal(Object.hasOwn(index, "products"), false, "Search must use items");
 assert.deepEqual(index.popularKeywords, config.popularKeywords, "the generated index must preserve popular-search order");
 assert.equal(index.pages.length, 8, "the generated index must contain every controlled page and external link");
 assert.deepEqual(index.pages.filter((page) => page.external).map((page) => page.title), ["Instagram", "Shopee"], "the generated index must preserve the external-link contract");
 assert.deepEqual(index.pages.map((page) => page.interfaceLabel), config.pages.map((page) => page.interfaceLabel), "the generated index must preserve each page title's established casing role");
-assert.equal(index.products.length, visibleProductNumbers.length, "the generated index must contain every visible product");
-assert.deepEqual(index.products.map((product) => product.productNumber), visibleProductNumbers, "the generated index must preserve visible product order");
-for (const product of index.products) {
-  for (const field of ["title", "productNumber", "category", "productType", "family", "price", "url", "alt"]) {
-    assert.equal(typeof product[field], "string", `${product.productNumber} must include ${field}`);
+assert.equal(index.items.length, visibleItemCodes.length, "the generated index must contain every visible product");
+assert.deepEqual(index.items.map((product) => product.code), visibleItemCodes, "the generated index must preserve newest-first catalog order");
+for (const product of index.items) {
+  for (const field of ["productNumber", "itemCode", "itemName", "title", "price", "shopeeUrl", "productType"]) {
+    assert.equal(Object.hasOwn(product, field), false, `Search item must not restore ${field}`);
   }
-  assert.ok(Array.isArray(product.colors), `${product.productNumber} must include colors`);
-  assert.ok(Array.isArray(product.searchTerms), `${product.productNumber} must include structured search terms`);
-  assert.equal("media" in product, true, `${product.productNumber} must include the card-media field`);
+  for (const field of ["name", "code", "category", "type", "family", "priceLabel", "url", "alt"]) {
+    assert.equal(typeof product[field], "string", `${product.code} must include ${field}`);
+  }
+  assert.ok(Array.isArray(product.colors), `${product.code} must include colors`);
+  assert.ok(Array.isArray(product.searchTerms), `${product.code} must include structured search terms`);
+  assert.equal("media" in product, true, `${product.code} must include the card-media field`);
   if (product.media) {
-    assert.equal(typeof product.media.src, "string", `${product.productNumber} card media must include a source`);
-    assert.ok(Array.isArray(product.media.derivatives), `${product.productNumber} must include responsive card media`);
+    assert.equal(typeof product.media.src, "string", `${product.code} card media must include a source`);
+    assert.ok(Array.isArray(product.media.derivatives), `${product.code} must include responsive card media`);
   }
-  assert.equal("description" in product, false, `${product.productNumber} must not include long descriptions`);
-  assert.equal("shopeeUrl" in product, false, `${product.productNumber} must not expose purchase data in Search`);
+  assert.equal("description" in product, false, `${product.code} must not include long descriptions`);
+  assert.equal("link" in product, false, `${product.code} must not expose purchase data in Search`);
 }
 for (const label of ["Hoodie", "Tee", "Crewneck", "Everyday", "Black", "AW Tops"]) {
   assert.ok(index.vocabulary.some((entry) => entry.toLowerCase() === label.toLowerCase()), `Search vocabulary must include ${label}`);
@@ -75,21 +81,21 @@ const context = vm.createContext({ globalThis: {} });
 vm.runInContext(searchCoreSource, context, { filename: "search-core.js" });
 const core = context.globalThis.PARADIGM_SEARCH_CORE;
 assert.ok(core, "the Search matcher must expose its shared browser API");
-const numbersFor = (query) => Array.from(core.rankRecords(index.products, query), (product) => product.productNumber);
+const codesFor = (query) => Array.from(core.rankRecords(index.items, query), (product) => product.code);
 const pagesFor = (query) => Array.from(core.rankRecords(index.pages, query), (page) => page.title);
 assert.equal(core.normalize("  HoOdIe!!!  "), "hoodie", "matching must ignore casing, whitespace, and punctuation");
 assert.equal(core.titleCase("ss TOPS"), "SS Tops", "suggestions must use title case while preserving controlled acronyms");
 assert.deepEqual(Array.from(core.suggestions(index, "")), config.popularKeywords, "blank Search must use the exact manual suggestions");
 assert.ok(Array.from(core.suggestions(index, "hoo")).includes("Hoodie"), "current-input suggestions must include matching product types");
 assert.ok(Array.from(core.suggestions(index, "tee")).every((label) => label === core.titleCase(label)), "every generated suggestion must use title case");
-assert.ok(numbersFor("hoodie").length > 0 && numbersFor("hoodie").every((number) => index.products.find((product) => product.productNumber === number).productType === "Hoodie"), "hoodie must return only matching Hoodie products");
+assert.ok(codesFor("hoodie").length > 0 && codesFor("hoodie").every((number) => index.items.find((product) => product.code === number).type === "Hoodie"), "hoodie must return only matching Hoodie products");
 assert.ok(pagesFor("teamwear").includes("PE Basketball Teamwear"), "teamwear must return its canonical page");
 assert.deepEqual(pagesFor("instagram"), ["Instagram"], "Instagram must be searchable as a page result");
 assert.deepEqual(pagesFor("shopee"), ["Shopee"], "Shopee must be searchable as a page result");
-assert.deepEqual(numbersFor("Everyday Tee"), ["ED14001", "ED14024"], "every query token must match a structured field");
-assert.deepEqual(numbersFor("ED14001"), ["ED14001"], "exact product-number matching must work");
-assert.deepEqual(numbersFor(" eD-14001!! "), ["ED14001"], "product-number matching must tolerate whitespace, casing, and punctuation");
-assert.deepEqual(numbersFor("result-that-does-not-exist"), [], "no-result queries must remain empty");
+assert.deepEqual(codesFor("Everyday Tee"), ["ED14024", "ED14001"], "every query token must match a structured field, with catalog order breaking relevance ties");
+assert.deepEqual(codesFor("ED14001"), ["ED14001"], "exact product-number matching must work");
+assert.deepEqual(codesFor(" eD-14001!! "), ["ED14001"], "product-number matching must tolerate whitespace, casing, and punctuation");
+assert.deepEqual(codesFor("result-that-does-not-exist"), [], "no-result queries must remain empty");
 
 assert.match(searchPage, /<meta name="robots" content="noindex,follow">/, "the generated Search route must be noindex,follow");
 assert.match(searchPage, /<link rel="canonical" href="https:\/\/prdm\.tw\/search">/, "the generated Search route must have the stable canonical URL");
@@ -105,7 +111,7 @@ assert.match(searchPage, /data-overlay-state="closed" data-search-overlay/, "the
 assert.doesNotMatch(searchPage, /data-search-(?:open|close)-symbol/, "Search must not replace icon text during state changes");
 assert.match(searchPage, /autocomplete="off"[^>]*data-search-input/, "the Search input must be ready for immediate user input");
 assert.match(searchPage, /placeholder="SEARCH PRDM\.TW"/, "the Search field must use the approved uppercase prompt");
-assert.match(searchClient, /fetch\("\/assets\/data\/search-index\.json\?v=20260830a"/, "the Search index must be lazy-loaded with a cache version");
+assert.match(searchClient, /fetch\("\/assets\/data\/search-index\.json\?v=20260910a"/, "the Search index must be lazy-loaded with a cache version");
 assert.match(searchClient, /new URLSearchParams\(\{ q: query\.trim\(\) \}\)/, "Search navigation must safely encode the query");
 assert.match(searchClient, /window\.location\.assign\(searchUrl\(query\)\)/, "Enter and the trailing action must navigate to the shareable Search route");
 assert.match(searchClient, /pageTitle\.textContent = label/, "the results breadcrumb must safely preserve query casing");
@@ -186,4 +192,4 @@ assert.match(pages, /\.search-page__results \.search-result-group--products\s*\{
 assert.match(build, /outputs\.set\("assets\/data\/search-index\.json"/, "the static generator must own the Search index");
 assert.match(build, /outputs\.set\("search\/index\.html"/, "the static generator must own the Search route");
 
-console.log(`SEARCH_OK pages=${index.pages.length} products=${index.products.length} popular=${index.popularKeywords.length}`);
+console.log(`SEARCH_OK pages=${index.pages.length} products=${index.items.length} popular=${index.popularKeywords.length}`);

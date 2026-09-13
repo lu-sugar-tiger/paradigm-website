@@ -52,8 +52,8 @@
   function productForGroup(group) {
     const detail = group.closest("[data-product-detail]");
     if (!detail) return null;
-    const catalog = window.PARADIGM_CATALOG || { products: [] };
-    return catalog.products.find((product) => product.productNumber === detail.dataset.productNumber) || null;
+    const catalog = window.PARADIGM_CATALOG || { items: [] };
+    return catalog.items.find((product) => product.code === detail.dataset.itemCode) || null;
   }
 
   function selectedProductValues(detail) {
@@ -62,8 +62,8 @@
     const sizeGroup = groups.find((group) => group.dataset.choiceKind === "chip");
     return {
       colorId: checkedOption(colorGroup)?.dataset.choiceId || "",
-      color: groupLabel(colorGroup),
-      size: groupLabel(sizeGroup)
+      colorName: groupLabel(colorGroup),
+      sizeName: groupLabel(sizeGroup)
     };
   }
 
@@ -73,12 +73,12 @@
     const sizeGroup = detail.querySelector('[data-choice-kind="chip"]');
 
     colorGroup?.querySelectorAll("[data-choice-option]").forEach((option) => {
-      const available = product.variants.some((variant) => variant.visible && !variant.soldOut && variant.color === option.dataset.choiceLabel && variant.size === selected.size);
+      const available = product.variants.some((variant) => variant.visible && !variant.soldOut && variant.colorName === option.dataset.choiceLabel && variant.sizeName === selected.sizeName);
       option.dataset.availability = available ? "available" : "unavailable";
       updateAccessibleAvailability(option, !available);
     });
     sizeGroup?.querySelectorAll("[data-choice-option]").forEach((option) => {
-      const available = product.variants.some((variant) => variant.visible && !variant.soldOut && variant.size === option.dataset.choiceLabel && variant.color === selected.color);
+      const available = product.variants.some((variant) => variant.visible && !variant.soldOut && variant.sizeName === option.dataset.choiceLabel && variant.colorName === selected.colorName);
       option.dataset.availability = available ? "available" : "unavailable";
       updateAccessibleAvailability(option, !available);
     });
@@ -104,7 +104,7 @@
 
   function exactProductSelectionUnavailable(detail, product) {
     const selected = selectedProductValues(detail);
-    const variants = product.variants.filter((variant) => variant.visible && variant.color === selected.color && variant.size === selected.size);
+    const variants = product.variants.filter((variant) => variant.visible && variant.colorName === selected.colorName && variant.sizeName === selected.sizeName);
     return !variants.length || variants.every((variant) => variant.soldOut);
   }
 
@@ -128,11 +128,11 @@
     const context = action.closest("[data-notification-title], [data-product-detail], [data-teamwear-form]");
     const title = context?.dataset.notificationTitle || document.querySelector("h1")?.textContent?.trim() || document.title;
     const detail = action.closest("[data-product-detail]");
-    const productNumber = detail?.dataset.productNumber;
+    const itemCode = detail?.dataset.itemCode;
     const teamwearForm = action.closest("[data-teamwear-form]");
     const modelCode = teamwearForm?.dataset.teamwearModel;
     const lines = ["Paradigm notification request", `Item: ${title}`];
-    if (productNumber) lines.push(`Product number: ${productNumber}`);
+    if (itemCode) lines.push(`Product number: ${itemCode}`);
     if (modelCode) lines.push(`Model: ${modelCode}`);
     lines.push(...values, "Please notify me when this selection is available.");
     return lines.join("\n");

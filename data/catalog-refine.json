@@ -1,0 +1,23 @@
+{
+  "groups": [
+    {
+      "name": "sort", "label": "Sort", "kind": "single", "selectedValue": "newest",
+      "options": [
+        { "value": "newest", "label": "Newest first" },
+        { "value": "oldest", "label": "Oldest first" },
+        { "value": "price-asc", "label": "Price: low to high" },
+        { "value": "price-desc", "label": "Price: high to low" }
+      ]
+    },
+    { "name": "color", "label": "Color", "kind": "multiple", "field": "colors" },
+    {
+      "name": "line", "label": "Line", "kind": "multiple", "field": "lineCode",
+      "labels": { "AE": "Aesthetics", "BD": "Cosmos", "BT": "Intelligence", "ED": "Everyday", "GM": "Training", "PD": "Paradigm", "PH": "Partnership / Sponsorship", "TL": "Timeless" }
+    },
+    {
+      "name": "type", "label": "Type", "kind": "multiple", "field": "typeCode",
+      "labels": { "14": "Tee / Football Jersey", "23": "Crewneck", "24": "Hoodie", "42": "Shorts" }
+    },
+    { "name": "price", "label": "Price range", "kind": "range", "unit": "NT$", "step": 1 }
+  ]
+}

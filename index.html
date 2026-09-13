@@ -14,20 +14,22 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,100..700,0,0&amp;icon_names=add,apparel,arrow_forward,arrow_outward,check,chevron_left,chevron_right,close,expand_more,grid_view,image,laundry,layers,menu,search,water_drop&amp;display=block">
   <script src="assets/js/page-transitions.js?v=20260831a"></script>
   <link rel="stylesheet" href="assets/css/fonts.css?v=20260909b">
-  <link rel="stylesheet" href="assets/css/tokens.css?v=20260909c">
+  <link rel="stylesheet" href="assets/css/tokens.css?v=20260911a">
   <link rel="stylesheet" href="assets/css/motion.css?v=20260831a">
   <link rel="stylesheet" href="assets/css/reset.css?v=20260829a">
-  <link rel="stylesheet" href="assets/css/base.css?v=20260909c">
+  <link rel="stylesheet" href="assets/css/base.css?v=20260911a">
   <link rel="stylesheet" href="assets/css/layout.css">
-  <link rel="stylesheet" href="assets/css/components.css?v=20260909g">
+  <link rel="stylesheet" href="assets/css/components.css?v=20260911a">
   <link rel="stylesheet" href="assets/css/pages.css?v=20260829a">
-  <link rel="stylesheet" href="assets/css/color-options.css">
+  <link rel="stylesheet" href="assets/css/color-options.css?v=20260913a">
   <script defer src="assets/js/app.js?v=20260908a"></script>
-  <script defer src="assets/js/dropdown.js?v=20260908b"></script>
+  <script defer src="assets/js/dropdown.js?v=20260910a"></script>
   <script defer src="assets/js/language-preference.js?v=20260908a"></script>
-  <script defer src="assets/js/search-core.js?v=20260829b"></script>
-  <script defer src="assets/js/search.js?v=20260902a"></script>
-  <script defer src="assets/js/choices.js?v=20260831c"></script>
+  <script defer src="assets/js/search-core.js?v=20260910a"></script>
+  <script defer src="assets/js/search.js?v=20260910a"></script>
+  <script defer src="assets/js/catalog.js?v=20260910b"></script>
+  <script defer src="assets/js/choices.js?v=20260910a"></script>
+  <script defer src="assets/js/catalog-refine.js?v=20260910a"></script>
   <script defer src="assets/js/media-zoom.js?v=20260831c"></script>
 </head>
 <body class="site-shell reference-page product-page" data-root="">
@@ -80,7 +82,7 @@
             </ul>
           </li>
           </ul>
-          <div class="dropdown dropdown--text" data-dropdown>
+          <div class="dropdown dropdown--text" data-dropdown data-dropdown-align="start">
     <select id="menu-language-native" class="dropdown__native interface-label" name="language" aria-label="Language" data-dropdown-native>
       <option value="taiwan" selected>Taiwan</option>
 <option value="international">International</option>
@@ -101,7 +103,7 @@
     </div>
   </div>
 
-  <main class="page">
+  <main class="page" data-catalog>
     <section class="page-headline" data-generated-component="page-headline">
       <div class="container page-headline__row">
         <nav class="breadcrumb breadcrumb--hierarchy" aria-label="Breadcrumb" data-generated-component="breadcrumb">
@@ -109,106 +111,72 @@
             <li class="breadcrumb__item"><h1 class="breadcrumb__current interface-label" aria-current="page">All</h1></li>
           </ol>
         </nav>
-        <button class="page-headline__action page-headline__action--text" type="button"><span class="interface-label">Refine</span></button>
+        <div class="dropdown dropdown--text" data-dropdown data-dropdown-grouped data-dropdown-align="end">
+        <div class="dropdown__enhanced" hidden>
+          <button type="button" class="dropdown__trigger" data-selected="true" data-availability="available" aria-label="Refine" data-dropdown-label="Refine" aria-expanded="false" aria-controls="catalog-refine-list">
+            <span class="dropdown__label interface-label"><span class="dropdown__text-content"><span data-dropdown-value>Refine</span><span class="material-symbols-outlined material-icon choice-option__state-symbol dropdown__text-indicator" aria-hidden="true">expand_more</span></span><span class="dropdown__sizer" aria-hidden="true">Refine</span></span>
+
+          </button>
+          <form id="catalog-refine-list" class="dropdown__options dropdown__panel" aria-label="Refine" novalidate hidden>
+            <div class="dropdown__groups"><fieldset class="dropdown__group" data-dropdown-group="single"><legend class="interface-label">Sort</legend><div class="dropdown__choices"><label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="radio" name="sort" value="newest" checked><span>Newest first</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label>
+    <label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="radio" name="sort" value="oldest"><span>Oldest first</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label>
+    <label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="radio" name="sort" value="price-asc"><span>Price: low to high</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label>
+    <label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="radio" name="sort" value="price-desc"><span>Price: high to low</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label></div></fieldset>
+    <fieldset class="dropdown__group" data-dropdown-group="multiple"><legend class="interface-label">Color</legend><div class="dropdown__choices"><label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="checkbox" name="color" value="black"><span>Black</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label>
+    <label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="checkbox" name="color" value="cardinal"><span>Cardinal</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label>
+    <label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="checkbox" name="color" value="grey"><span>Grey</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label>
+    <label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="checkbox" name="color" value="midnight"><span>Midnight</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label>
+    <label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="checkbox" name="color" value="mocha"><span>Mocha</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label>
+    <label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="checkbox" name="color" value="mud"><span>Mud</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label>
+    <label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="checkbox" name="color" value="shadow"><span>Shadow</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label>
+    <label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="checkbox" name="color" value="white"><span>White</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label></div></fieldset>
+    <fieldset class="dropdown__group" data-dropdown-group="multiple"><legend class="interface-label">Line</legend><div class="dropdown__choices"><label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="checkbox" name="line" value="AE"><span>Aesthetics</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label>
+    <label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="checkbox" name="line" value="BD"><span>Cosmos</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label>
+    <label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="checkbox" name="line" value="ED"><span>Everyday</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label>
+    <label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="checkbox" name="line" value="BT"><span>Intelligence</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label>
+    <label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="checkbox" name="line" value="PD"><span>Paradigm</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label>
+    <label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="checkbox" name="line" value="PH"><span>Partnership / Sponsorship</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label>
+    <label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="checkbox" name="line" value="TL"><span>Timeless</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label>
+    <label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="checkbox" name="line" value="GM"><span>Training</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label></div></fieldset>
+    <fieldset class="dropdown__group" data-dropdown-group="multiple"><legend class="interface-label">Type</legend><div class="dropdown__choices"><label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="checkbox" name="type" value="23"><span>Crewneck</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label>
+    <label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="checkbox" name="type" value="24"><span>Hoodie</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label>
+    <label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="checkbox" name="type" value="42"><span>Shorts</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label>
+    <label class="dropdown__option dropdown__choice interface-label" data-availability="available"><input class="visually-hidden" type="checkbox" name="type" value="14"><span>Tee / Football Jersey</span><span class="material-symbols-outlined material-icon dropdown__choice-check" aria-hidden="true">check</span></label></div></fieldset>
+    <fieldset class="dropdown__group" data-dropdown-group="range"><legend class="interface-label">Price range</legend><div class="dropdown__range"><label class="dropdown__range-label" for="catalog-refine-price-min"><span>Min (NT$)</span><input id="catalog-refine-price-min" type="number" inputmode="decimal" name="price-min" min="590" max="1380" step="1" placeholder="590" data-range-bound="min"></label><label class="dropdown__range-label" for="catalog-refine-price-max"><span>Max (NT$)</span><input id="catalog-refine-price-max" type="number" inputmode="decimal" name="price-max" min="590" max="1380" step="1" placeholder="1380" data-range-bound="max"></label></div></fieldset></div>
+            <p class="dropdown__error" role="alert" data-dropdown-error hidden></p>
+            <div class="dropdown__footer"><output aria-live="polite" data-dropdown-status></output><button class="dropdown__text-action interface-label" type="reset">Clear all</button><button class="dropdown__text-action interface-label" type="button" data-dropdown-close>Done</button></div>
+          </form>
+        </div>
+      </div>
       </div>
     </section>
     <section class="section section--tight"><div class="container">
       <div class="auto-grid product-grid" data-generated-component="product-grid">
-      <a class="product-card" href="/products/ED14001">
-        <div class="product-card__media" data-media-zoom-touch><img src="assets/images/products/everyday-tee.webp" alt="PRDM Everyday Tee product image" width="1" height="1" loading="lazy"></div>
+      <a class="product-card" href="/products/ED14024">
+        <div class="product-card__media" data-media-zoom-touch><img src="assets/images/catalog/3a/3a4d8d1d4a54393c6092-1080x1080.webp" srcset="assets/images/catalog/59/599a22252cda2eb00f2a-540x540.webp 540w, assets/images/catalog/3a/3a4d8d1d4a54393c6092-1080x1080.webp 1080w, assets/images/catalog/93/939986dd5d2f15917d01-2160x2160.webp 2160w" sizes="(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw" alt="PRDM Everyday Tee product image" width="1080" height="1080" loading="lazy"></div>
         <div class="product-card__body">
           <h3 class="product-card__title">PRDM Everyday Tee</h3>
           <div class="product-card__footer"><span class="product-card__price">NT$590</span></div>
         </div>
       </a>
-      <a class="product-card" href="/products/ED23002">
-        <div class="product-card__media"><img src="assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp" srcset="assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp 540w, assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp 1080w, assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp 2160w" sizes="(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw" alt="" width="1080" height="1080" loading="lazy" data-product-image-fallback></div>
+      <a class="product-card" href="/products/GM42023">
+        <div class="product-card__media" data-media-zoom-touch><img src="assets/images/products/training-shorts.webp" alt="PRDM Training Shorts product image" width="1" height="1" loading="lazy"></div>
         <div class="product-card__body">
-          <h3 class="product-card__title">PRDM Everyday Crewneck</h3>
-          <div class="product-card__footer"><span class="product-card__price">NT$990</span></div>
-        </div>
-      </a>
-      <a class="product-card" href="/products/PD23006">
-        <div class="product-card__media"><img src="assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp" srcset="assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp 540w, assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp 1080w, assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp 2160w" sizes="(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw" alt="" width="1080" height="1080" loading="lazy" data-product-image-fallback></div>
-        <div class="product-card__body">
-          <h3 class="product-card__title">PRDM Paradigm Crewneck</h3>
+          <h3 class="product-card__title">PRDM Training Shorts</h3>
           <div class="product-card__footer"><span class="product-card__price">NT$1,180</span></div>
         </div>
       </a>
-      <a class="product-card" href="/products/PD14007">
-        <div class="product-card__media"><img src="assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp" srcset="assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp 540w, assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp 1080w, assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp 2160w" sizes="(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw" alt="" width="1080" height="1080" loading="lazy" data-product-image-fallback></div>
+      <a class="product-card" href="/products/GM42022">
+        <div class="product-card__media" data-media-zoom-touch><img src="assets/images/products/training-shorts.webp" alt="PRDM Training Shorts product image" width="1" height="1" loading="lazy"></div>
         <div class="product-card__body">
-          <h3 class="product-card__title">PRDM Paradigm Tee</h3>
-          <div class="product-card__footer"><span class="product-card__price">NT$790</span></div>
-        </div>
-      </a>
-      <a class="product-card" href="/products/AE14008">
-        <div class="product-card__media" data-media-zoom-touch><img src="assets/images/products/aesthetics-tee.webp" alt="PRDM Aesthetics Tee product image" width="1" height="1" loading="lazy"></div>
-        <div class="product-card__body">
-          <h3 class="product-card__title">PRDM Aesthetics Tee</h3>
-          <div class="product-card__footer"><span class="product-card__price">NT$790</span></div>
-        </div>
-      </a>
-      <a class="product-card" href="/products/TL14009">
-        <div class="product-card__media"><img src="assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp" srcset="assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp 540w, assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp 1080w, assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp 2160w" sizes="(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw" alt="" width="1080" height="1080" loading="lazy" data-product-image-fallback></div>
-        <div class="product-card__body">
-          <h3 class="product-card__title">PRDM Timeless Tee</h3>
-          <div class="product-card__footer"><span class="product-card__price">NT$790</span></div>
-        </div>
-      </a>
-      <a class="product-card" href="/products/PH14010">
-        <div class="product-card__media" data-media-zoom-touch><img src="assets/images/products/partnership-football-jersey.webp" alt="PRDM Partnership Football Jersey product image" width="1" height="1" loading="lazy"></div>
-        <div class="product-card__body">
-          <h3 class="product-card__title">PRDM Partnership Football Jersey</h3>
-          <div class="product-card__footer"><span class="product-card__price">NT$990</span></div>
-        </div>
-      </a>
-      <a class="product-card" href="/products/PH14011">
-        <div class="product-card__media"><img src="assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp" srcset="assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp 540w, assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp 1080w, assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp 2160w" sizes="(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw" alt="" width="1080" height="1080" loading="lazy" data-product-image-fallback></div>
-        <div class="product-card__body">
-          <h3 class="product-card__title">PRDM Sponsorship Football Jersey</h3>
-          <div class="product-card__footer"><span class="product-card__price">NT$990</span></div>
-        </div>
-      </a>
-      <a class="product-card" href="/products/ED24014">
-        <div class="product-card__media"><img src="assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp" srcset="assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp 540w, assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp 1080w, assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp 2160w" sizes="(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw" alt="" width="1080" height="1080" loading="lazy" data-product-image-fallback></div>
-        <div class="product-card__body">
-          <h3 class="product-card__title">PRDM Everyday Hoodie</h3>
+          <h3 class="product-card__title">PRDM Training Shorts</h3>
           <div class="product-card__footer"><span class="product-card__price">NT$1,180</span></div>
         </div>
       </a>
-      <a class="product-card" href="/products/PD24015">
-        <div class="product-card__media" data-media-zoom-touch><img src="assets/images/products/paradigm-hoodie.webp" alt="PRDM Paradigm Hoodie product image" width="1" height="1" loading="lazy"></div>
+      <a class="product-card" href="/products/BD24021">
+        <div class="product-card__media" data-media-zoom-touch><img src="assets/images/products/BD24021/cosmos-hoodie-01.webp" alt="PRDM Cosmos Hoodie product image" width="1" height="1" loading="lazy"></div>
         <div class="product-card__body">
-          <h3 class="product-card__title">PRDM Paradigm Hoodie</h3>
-          <div class="product-card__footer"><span class="product-card__price">NT$1,380</span></div>
-        </div>
-      </a>
-      <a class="product-card" href="/products/AE23016">
-        <div class="product-card__media"><img src="assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp" srcset="assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp 540w, assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp 1080w, assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp 2160w" sizes="(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw" alt="" width="1080" height="1080" loading="lazy" data-product-image-fallback></div>
-        <div class="product-card__body">
-          <h3 class="product-card__title">PRDM Aesthetics Crewneck</h3>
-          <div class="product-card__footer"><span class="product-card__price">NT$1,180</span></div>
-        </div>
-      </a>
-      <a class="product-card" href="/products/AE24017">
-        <div class="product-card__media"><img src="assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp" srcset="assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp 540w, assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp 1080w, assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp 2160w" sizes="(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw" alt="" width="1080" height="1080" loading="lazy" data-product-image-fallback></div>
-        <div class="product-card__body">
-          <h3 class="product-card__title">PRDM Aesthetics Hoodie</h3>
-          <div class="product-card__footer"><span class="product-card__price">NT$1,380</span></div>
-        </div>
-      </a>
-      <a class="product-card" href="/products/TL23018">
-        <div class="product-card__media" data-media-zoom-touch><img src="assets/images/products/timeless-crewneck.webp" alt="PRDM Timeless Crewneck product image" width="1" height="1" loading="lazy"></div>
-        <div class="product-card__body">
-          <h3 class="product-card__title">PRDM Timeless Crewneck</h3>
-          <div class="product-card__footer"><span class="product-card__price">NT$1,180</span></div>
-        </div>
-      </a>
-      <a class="product-card" href="/products/TL24019">
-        <div class="product-card__media"><img src="assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp" srcset="assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp 540w, assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp 1080w, assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp 2160w" sizes="(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw" alt="" width="1080" height="1080" loading="lazy" data-product-image-fallback></div>
-        <div class="product-card__body">
-          <h3 class="product-card__title">PRDM Timeless Hoodie</h3>
+          <h3 class="product-card__title">PRDM Cosmos Hoodie</h3>
           <div class="product-card__footer"><span class="product-card__price">NT$1,380</span></div>
         </div>
       </a>
@@ -219,35 +187,107 @@
           <div class="product-card__footer"><span class="product-card__price">NT$1,380</span></div>
         </div>
       </a>
-      <a class="product-card" href="/products/BD24021">
-        <div class="product-card__media" data-media-zoom-touch><img src="assets/images/products/BD24021/cosmos-hoodie-01.webp" alt="PRDM Cosmos Hoodie product image" width="1" height="1" loading="lazy"></div>
+      <a class="product-card" href="/products/TL24019">
+        <div class="product-card__media"><img src="assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp" srcset="assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp 540w, assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp 1080w, assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp 2160w" sizes="(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw" alt="" width="1080" height="1080" loading="lazy" data-product-image-fallback></div>
         <div class="product-card__body">
-          <h3 class="product-card__title">PRDM Cosmos Hoodie</h3>
+          <h3 class="product-card__title">PRDM Timeless Hoodie</h3>
           <div class="product-card__footer"><span class="product-card__price">NT$1,380</span></div>
         </div>
       </a>
-      <a class="product-card" href="/products/GM42022">
-        <div class="product-card__media" data-media-zoom-touch><img src="assets/images/products/training-shorts.webp" alt="PRDM Training Shorts product image" width="1" height="1" loading="lazy"></div>
+      <a class="product-card" href="/products/TL23018">
+        <div class="product-card__media" data-media-zoom-touch><img src="assets/images/products/timeless-crewneck.webp" alt="PRDM Timeless Crewneck product image" width="1" height="1" loading="lazy"></div>
         <div class="product-card__body">
-          <h3 class="product-card__title">PRDM Training Shorts</h3>
+          <h3 class="product-card__title">PRDM Timeless Crewneck</h3>
           <div class="product-card__footer"><span class="product-card__price">NT$1,180</span></div>
         </div>
       </a>
-      <a class="product-card" href="/products/GM42023">
-        <div class="product-card__media" data-media-zoom-touch><img src="assets/images/products/training-shorts.webp" alt="PRDM Training Shorts product image" width="1" height="1" loading="lazy"></div>
+      <a class="product-card" href="/products/AE24017">
+        <div class="product-card__media"><img src="assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp" srcset="assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp 540w, assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp 1080w, assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp 2160w" sizes="(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw" alt="" width="1080" height="1080" loading="lazy" data-product-image-fallback></div>
         <div class="product-card__body">
-          <h3 class="product-card__title">PRDM Training Shorts</h3>
+          <h3 class="product-card__title">PRDM Aesthetics Hoodie</h3>
+          <div class="product-card__footer"><span class="product-card__price">NT$1,380</span></div>
+        </div>
+      </a>
+      <a class="product-card" href="/products/AE23016">
+        <div class="product-card__media"><img src="assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp" srcset="assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp 540w, assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp 1080w, assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp 2160w" sizes="(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw" alt="" width="1080" height="1080" loading="lazy" data-product-image-fallback></div>
+        <div class="product-card__body">
+          <h3 class="product-card__title">PRDM Aesthetics Crewneck</h3>
           <div class="product-card__footer"><span class="product-card__price">NT$1,180</span></div>
         </div>
       </a>
-      <a class="product-card" href="/products/ED14024">
-        <div class="product-card__media" data-media-zoom-touch><img src="assets/images/catalog/3a/3a4d8d1d4a54393c6092-1080x1080.webp" srcset="assets/images/catalog/59/599a22252cda2eb00f2a-540x540.webp 540w, assets/images/catalog/3a/3a4d8d1d4a54393c6092-1080x1080.webp 1080w, assets/images/catalog/93/939986dd5d2f15917d01-2160x2160.webp 2160w" sizes="(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw" alt="PRDM Everyday Tee product image" width="1080" height="1080" loading="lazy"></div>
+      <a class="product-card" href="/products/PD24015">
+        <div class="product-card__media" data-media-zoom-touch><img src="assets/images/products/paradigm-hoodie.webp" alt="PRDM Paradigm Hoodie product image" width="1" height="1" loading="lazy"></div>
+        <div class="product-card__body">
+          <h3 class="product-card__title">PRDM Paradigm Hoodie</h3>
+          <div class="product-card__footer"><span class="product-card__price">NT$1,380</span></div>
+        </div>
+      </a>
+      <a class="product-card" href="/products/ED24014">
+        <div class="product-card__media"><img src="assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp" srcset="assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp 540w, assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp 1080w, assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp 2160w" sizes="(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw" alt="" width="1080" height="1080" loading="lazy" data-product-image-fallback></div>
+        <div class="product-card__body">
+          <h3 class="product-card__title">PRDM Everyday Hoodie</h3>
+          <div class="product-card__footer"><span class="product-card__price">NT$1,180</span></div>
+        </div>
+      </a>
+      <a class="product-card" href="/products/PH14011">
+        <div class="product-card__media"><img src="assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp" srcset="assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp 540w, assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp 1080w, assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp 2160w" sizes="(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw" alt="" width="1080" height="1080" loading="lazy" data-product-image-fallback></div>
+        <div class="product-card__body">
+          <h3 class="product-card__title">PRDM Sponsorship Football Jersey</h3>
+          <div class="product-card__footer"><span class="product-card__price">NT$990</span></div>
+        </div>
+      </a>
+      <a class="product-card" href="/products/PH14010">
+        <div class="product-card__media" data-media-zoom-touch><img src="assets/images/products/partnership-football-jersey.webp" alt="PRDM Partnership Football Jersey product image" width="1" height="1" loading="lazy"></div>
+        <div class="product-card__body">
+          <h3 class="product-card__title">PRDM Partnership Football Jersey</h3>
+          <div class="product-card__footer"><span class="product-card__price">NT$990</span></div>
+        </div>
+      </a>
+      <a class="product-card" href="/products/TL14009">
+        <div class="product-card__media"><img src="assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp" srcset="assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp 540w, assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp 1080w, assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp 2160w" sizes="(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw" alt="" width="1080" height="1080" loading="lazy" data-product-image-fallback></div>
+        <div class="product-card__body">
+          <h3 class="product-card__title">PRDM Timeless Tee</h3>
+          <div class="product-card__footer"><span class="product-card__price">NT$790</span></div>
+        </div>
+      </a>
+      <a class="product-card" href="/products/AE14008">
+        <div class="product-card__media" data-media-zoom-touch><img src="assets/images/products/aesthetics-tee.webp" alt="PRDM Aesthetics Tee product image" width="1" height="1" loading="lazy"></div>
+        <div class="product-card__body">
+          <h3 class="product-card__title">PRDM Aesthetics Tee</h3>
+          <div class="product-card__footer"><span class="product-card__price">NT$790</span></div>
+        </div>
+      </a>
+      <a class="product-card" href="/products/PD14007">
+        <div class="product-card__media"><img src="assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp" srcset="assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp 540w, assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp 1080w, assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp 2160w" sizes="(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw" alt="" width="1080" height="1080" loading="lazy" data-product-image-fallback></div>
+        <div class="product-card__body">
+          <h3 class="product-card__title">PRDM Paradigm Tee</h3>
+          <div class="product-card__footer"><span class="product-card__price">NT$790</span></div>
+        </div>
+      </a>
+      <a class="product-card" href="/products/PD23006">
+        <div class="product-card__media"><img src="assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp" srcset="assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp 540w, assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp 1080w, assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp 2160w" sizes="(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw" alt="" width="1080" height="1080" loading="lazy" data-product-image-fallback></div>
+        <div class="product-card__body">
+          <h3 class="product-card__title">PRDM Paradigm Crewneck</h3>
+          <div class="product-card__footer"><span class="product-card__price">NT$1,180</span></div>
+        </div>
+      </a>
+      <a class="product-card" href="/products/ED23002">
+        <div class="product-card__media"><img src="assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp" srcset="assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp 540w, assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp 1080w, assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp 2160w" sizes="(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw" alt="" width="1080" height="1080" loading="lazy" data-product-image-fallback></div>
+        <div class="product-card__body">
+          <h3 class="product-card__title">PRDM Everyday Crewneck</h3>
+          <div class="product-card__footer"><span class="product-card__price">NT$990</span></div>
+        </div>
+      </a>
+      <a class="product-card" href="/products/ED14001">
+        <div class="product-card__media" data-media-zoom-touch><img src="assets/images/products/everyday-tee.webp" alt="PRDM Everyday Tee product image" width="1" height="1" loading="lazy"></div>
         <div class="product-card__body">
           <h3 class="product-card__title">PRDM Everyday Tee</h3>
           <div class="product-card__footer"><span class="product-card__price">NT$590</span></div>
         </div>
       </a>
       </div>
+      <p class="catalog-empty" data-catalog-empty hidden>No products match these filters. Try another selection or clear all filters.</p>
+      <p class="visually-hidden" aria-live="polite" data-catalog-status></p>
     </div></section>
   </main>
 

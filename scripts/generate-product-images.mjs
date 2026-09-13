@@ -3,6 +3,7 @@ import { access, mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { validateItemCatalog } from "./lib/item-schema.mjs";
 import {
   PRODUCT_IMAGE_HASH_PREFIX_LENGTH,
   PRODUCT_IMAGE_SHORT_EDGES,
@@ -159,9 +160,9 @@ export async function generateProductImageDerivatives({
 }
 
 async function updateCatalog(catalogPath, outputDir) {
-  const catalog = JSON.parse(await readFile(catalogPath, "utf8"));
+  const catalog = validateItemCatalog(JSON.parse(await readFile(catalogPath, "utf8")));
   let processed = 0;
-  for (const product of catalog.products || []) {
+  for (const product of catalog.items) {
     for (const image of product.images || []) {
       if (!image.localPath) continue;
       const inputPath = path.resolve(ROOT, image.localPath);
@@ -176,7 +177,6 @@ async function updateCatalog(catalogPath, outputDir) {
       processed += 1;
     }
   }
-  catalog.schemaVersion = Math.max(Number(catalog.schemaVersion) || 1, 2);
   await writeFile(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`, "utf8");
   return { processed, catalogPath: path.relative(ROOT, catalogPath).split(path.sep).join("/") };
 }

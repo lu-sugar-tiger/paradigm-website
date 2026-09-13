@@ -43,82 +43,1066 @@
           "id": "P01",
           "name": "Essential",
           "availability": "available",
-          "preview": "assets/images/teamwear/teamwear-essential-pair-v3.webp",
-          "railImages": {
-            "wine": "assets/images/teamwear/rail/p01-wine.webp",
-            "cardinal": "assets/images/teamwear/rail/p01-cardinal.webp",
-            "azure": "assets/images/teamwear/rail/p01-azure.webp",
-            "midnight": "assets/images/teamwear/rail/p01-midnight.webp",
-            "sapphire": "assets/images/teamwear/rail/p01-sapphire.webp",
-            "mocha": "assets/images/teamwear/rail/p01-mocha.webp",
-            "black": "assets/images/teamwear/rail/p01-black.webp"
+          "mediaByColor": {
+            "black": {
+              "src": "assets/images/teamwear/uniforms/fc/fc3bdcaaffc3014139e4-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Essential_C01.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 2077426,
+                "sha256": "2628c4662359aea172abbeab3a3d508cfe0715adc59abb2e3fd71a10c8693f1a"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/cb/cb132d58e100e9226a24-540x540.webp",
+                  "bytes": 28182,
+                  "sha256": "cb132d58e100e9226a24d009695d4d26e7f204eef701ea81cc68b6837543acfc"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/fc/fc3bdcaaffc3014139e4-1080x1080.webp",
+                  "bytes": 82358,
+                  "sha256": "fc3bdcaaffc3014139e45c611d548c6c97fad6d49ef101f0dd58b45429bc550e"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/49/493fb74e1c195392f27f-2160x2160.webp",
+                  "bytes": 261066,
+                  "sha256": "493fb74e1c195392f27fa0c162b9c8107f49c4cff6716e078c84dacb987c34f4"
+                }
+              ]
+            },
+            "burgundy": {
+              "src": "assets/images/teamwear/uniforms/1d/1dd44be7a43f9d3fe505-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Essential_C11.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 3468256,
+                "sha256": "f831e33a6a9b0badab35b1f40723bbec98756a6c3eb2ab86884db6d4079042f1"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/71/71308c385a88e1bc88fa-540x540.webp",
+                  "bytes": 40358,
+                  "sha256": "71308c385a88e1bc88faee7c4e2f0f44ae7fb17da1df2c38a488d1e6387c2ee5"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/1d/1dd44be7a43f9d3fe505-1080x1080.webp",
+                  "bytes": 135492,
+                  "sha256": "1dd44be7a43f9d3fe50521b1ff83568588e18cbcee5c2bb330d206824399218d"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/24/24566b3bd5151caa3b1c-2160x2160.webp",
+                  "bytes": 474750,
+                  "sha256": "24566b3bd5151caa3b1c03a2b3cd158fe10221a03dfd5b921ac75c21d4862277"
+                }
+              ]
+            },
+            "cardinal": {
+              "src": "assets/images/teamwear/uniforms/15/15bf7161b0cc371d9dfb-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Essential_C13.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 4120654,
+                "sha256": "c45034f27506a8c83912b52bb449a4d1378084a3669baebba34b2fe31bf73713"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/ef/efb207dc8c6464687d92-540x540.webp",
+                  "bytes": 51256,
+                  "sha256": "efb207dc8c6464687d92b5bf379648d8d8644b180420945378e45cb304fe4823"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/15/15bf7161b0cc371d9dfb-1080x1080.webp",
+                  "bytes": 182608,
+                  "sha256": "15bf7161b0cc371d9dfbddf7a0b6f56eae538d12b0883120b6808d084aa1213a"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/d1/d1cb38a1f6be9d05dc5b-2160x2160.webp",
+                  "bytes": 633908,
+                  "sha256": "d1cb38a1f6be9d05dc5bdaeb3de8d5b190166edeaaf5cfa70feec0fb3cdfb66e"
+                }
+              ]
+            },
+            "mocha": {
+              "src": "assets/images/teamwear/uniforms/34/34f26b5209eaf1dd191a-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Essential_C21.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 3154193,
+                "sha256": "d23bb3e7bd0415b1974faa38ee391446aeb131cbf2328265141a0596df4fb913"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/fa/faccec2b32f421ca65bc-540x540.webp",
+                  "bytes": 39278,
+                  "sha256": "faccec2b32f421ca65bc7b513dbbd02876a1c69530096966ede4fd193811df69"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/34/34f26b5209eaf1dd191a-1080x1080.webp",
+                  "bytes": 125902,
+                  "sha256": "34f26b5209eaf1dd191af84d11fa1edfadc31f2d65736afeff27397c2d5dacab"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/c6/c62faa668d993a66b9eb-2160x2160.webp",
+                  "bytes": 431754,
+                  "sha256": "c62faa668d993a66b9eb6e66a8eee79479257a9f9d7305b8172f3955859ce640"
+                }
+              ]
+            },
+            "ivy": {
+              "src": "assets/images/teamwear/uniforms/e7/e7d76209de59e8da5c8a-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Essential_C53.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 3192168,
+                "sha256": "57277e0d8b39a9206e937bb52430b709329c027d2e266695fa084f51f92d1a0d"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/f5/f555b520ee403b9e65d5-540x540.webp",
+                  "bytes": 39316,
+                  "sha256": "f555b520ee403b9e65d5eaaa57ed09aafaae41b994ef80d6fd8032faa317dd9a"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/e7/e7d76209de59e8da5c8a-1080x1080.webp",
+                  "bytes": 129196,
+                  "sha256": "e7d76209de59e8da5c8a744123478e6cf8a6599c829f61a9db64b95e2203e6f2"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/c5/c515dd510433bfad2c68-2160x2160.webp",
+                  "bytes": 438924,
+                  "sha256": "c515dd510433bfad2c6897d7224b7133526352f6b2c12ba0dd4387cfced65300"
+                }
+              ]
+            },
+            "midnight": {
+              "src": "assets/images/teamwear/uniforms/95/9591bf5d38f131837652-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Essential_C61.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 3563452,
+                "sha256": "2c0bcc1c1a460f0c8c3d501eaefa02c6c20f13f5ca70a775488f0d19ac26db77"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/bd/bd54c1b48760bc1a6a5a-540x540.webp",
+                  "bytes": 41754,
+                  "sha256": "bd54c1b48760bc1a6a5ae291179c3b59e9ef57694405d2425a8487bd2ce4fa05"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/95/9591bf5d38f131837652-1080x1080.webp",
+                  "bytes": 139586,
+                  "sha256": "9591bf5d38f131837652a1e7dab242f3129958d67ac991096ba457d8f626e26f"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/7e/7e77cd7582a8e34d34fc-2160x2160.webp",
+                  "bytes": 476438,
+                  "sha256": "7e77cd7582a8e34d34fca17c6620537ce1f1f8831fbb5ec032d430f218fe783c"
+                }
+              ]
+            },
+            "royalty": {
+              "src": "assets/images/teamwear/uniforms/b7/b7ce5ebedfbad4b61278-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Essential_C63.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 4229645,
+                "sha256": "5ead264299d56760426e979c437ba679f3e66765dd4dae56ceada92de5403daf"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/d3/d3561c50cf52b7d77db3-540x540.webp",
+                  "bytes": 47432,
+                  "sha256": "d3561c50cf52b7d77db3dbe53d0da46ce0b9d5703d272642a6f8f0a5ba8ab4e9"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/b7/b7ce5ebedfbad4b61278-1080x1080.webp",
+                  "bytes": 169270,
+                  "sha256": "b7ce5ebedfbad4b61278e8086699be1e3c4057e9649518e635923415defc747a"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/05/05e0fedce95becc77ab2-2160x2160.webp",
+                  "bytes": 587386,
+                  "sha256": "05e0fedce95becc77ab21e65624a73afa76fe0081bc0dc9b2643e26e729f1e8d"
+                }
+              ]
+            }
           }
         },
         {
           "id": "P02",
           "name": "Classic",
           "availability": "available",
-          "preview": "assets/images/teamwear/teamwear-classic-pair-v3.webp",
-          "railImages": {
-            "wine": "assets/images/teamwear/rail/p02-wine.webp",
-            "cardinal": "assets/images/teamwear/rail/p02-cardinal.webp",
-            "azure": "assets/images/teamwear/rail/p02-azure.webp",
-            "midnight": "assets/images/teamwear/rail/p02-midnight.webp",
-            "sapphire": "assets/images/teamwear/rail/p02-sapphire.webp",
-            "mocha": "assets/images/teamwear/rail/p02-mocha.webp",
-            "black": "assets/images/teamwear/rail/p02-black.webp"
+          "mediaByColor": {
+            "black": {
+              "src": "assets/images/teamwear/uniforms/5b/5b3537dac6ae949d65c4-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Classic_C01.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 2306086,
+                "sha256": "4a20e0be66046c444585c20fa5b44476ec978278d9dc0e782dd14985afad1986"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/9b/9bd63a9d9149813323a3-540x540.webp",
+                  "bytes": 36542,
+                  "sha256": "9bd63a9d9149813323a3b3f96e3da0619d90e2aeb1421ae7241b07683b87e3ed"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/5b/5b3537dac6ae949d65c4-1080x1080.webp",
+                  "bytes": 102484,
+                  "sha256": "5b3537dac6ae949d65c4f124e4a8017d2c7028ea36a6bf00ad851394638f40c2"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/ec/ecfb81d07d3bd426cc80-2160x2160.webp",
+                  "bytes": 313534,
+                  "sha256": "ecfb81d07d3bd426cc802006feae025def6a9c4c725886a08be8bf1f596ffd4e"
+                }
+              ]
+            },
+            "burgundy": {
+              "src": "assets/images/teamwear/uniforms/6b/6b7d82b342548ebb1316-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Classic_C11.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 3802258,
+                "sha256": "3e727c32e0e8c03d8c73bf89dee42b60d93b17346dd5798606931e46bdb9838a"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/9c/9cb8779a392807449123-540x540.webp",
+                  "bytes": 51610,
+                  "sha256": "9cb8779a392807449123c06fc609f01c8de5800515e758e6ba09fce3f08f7fa2"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/6b/6b7d82b342548ebb1316-1080x1080.webp",
+                  "bytes": 161940,
+                  "sha256": "6b7d82b342548ebb13165eb33235ee9e3b73e02a54e0f23ff1069a4316ae741f"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/7e/7e9f663b694b8011050f-2160x2160.webp",
+                  "bytes": 538356,
+                  "sha256": "7e9f663b694b8011050fbc5ae701908613312d398b7e12f6d6e27ecb7afeadd9"
+                }
+              ]
+            },
+            "cardinal": {
+              "src": "assets/images/teamwear/uniforms/48/480aef4bc07b4a066e33-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Classic_C13.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 4370088,
+                "sha256": "f91684e6d7274735569c01353e736b8a47e4eed640e811c5dafcc85fcb16dc5d"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/21/21b6c3bb71cb08c96d90-540x540.webp",
+                  "bytes": 59768,
+                  "sha256": "21b6c3bb71cb08c96d900b05d86cd083c5983ac936ac95d93def697cc1cf8dd7"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/48/480aef4bc07b4a066e33-1080x1080.webp",
+                  "bytes": 201702,
+                  "sha256": "480aef4bc07b4a066e334e72ff63a7c2ba20f83b7efb67b930a3a89120689e07"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/bf/bffc557d5bb7832b1e80-2160x2160.webp",
+                  "bytes": 679192,
+                  "sha256": "bffc557d5bb7832b1e80788492ad810d855ced118760dbf82b906f4a0b75bd8a"
+                }
+              ]
+            },
+            "mocha": {
+              "src": "assets/images/teamwear/uniforms/36/36e0adf7415f3cf68ac4-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Classic_C21.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 3467414,
+                "sha256": "42ab8b0891cf7905a27289049da947545026acdd4124d681584edb84ec333d43"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/86/86a58e92355655080c90-540x540.webp",
+                  "bytes": 49682,
+                  "sha256": "86a58e92355655080c9012c6982ccdfefec6eec625f1f269ac6b350a355f8d7c"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/36/36e0adf7415f3cf68ac4-1080x1080.webp",
+                  "bytes": 150706,
+                  "sha256": "36e0adf7415f3cf68ac492f531f2ac9f7b26649982ab618f1aa08bc05ffc35c7"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/49/49c95ff229a33b54e492-2160x2160.webp",
+                  "bytes": 491988,
+                  "sha256": "49c95ff229a33b54e4924ea39e10473ae495f2d38d3b218f6533d8cfe11bf9c6"
+                }
+              ]
+            },
+            "ivy": {
+              "src": "assets/images/teamwear/uniforms/37/37224498be9b2975f5a5-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Classic_C53.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 3514213,
+                "sha256": "cfa72b6d219234ca33926ee6db3c243341f984e383b2f31163771d58e618e2cf"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/bc/bc82d6887dfee2cf84b1-540x540.webp",
+                  "bytes": 50030,
+                  "sha256": "bc82d6887dfee2cf84b183ff723575e4d9f2a490db9a6bdf713ac7e3b607ac4a"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/37/37224498be9b2975f5a5-1080x1080.webp",
+                  "bytes": 155398,
+                  "sha256": "37224498be9b2975f5a546f4b266923ed91aa4b05923a68faf7d5bdba9fd4c64"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/8a/8a5eef520a75c200665a-2160x2160.webp",
+                  "bytes": 500754,
+                  "sha256": "8a5eef520a75c200665a7e6767e7a416d44840c3891c1b92237b90cfc698576c"
+                }
+              ]
+            },
+            "midnight": {
+              "src": "assets/images/teamwear/uniforms/23/2340193ec54196aea9ab-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Classic_C61.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 3716936,
+                "sha256": "3696402fff8945db0bd153c754d1870daa5ea4797a26993c9f563d81fecbeef2"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/5c/5c942a27d24b4ba644f8-540x540.webp",
+                  "bytes": 49594,
+                  "sha256": "5c942a27d24b4ba644f89e843331adf302ca202dd9387fd3b60a67c9fa9f7541"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/23/2340193ec54196aea9ab-1080x1080.webp",
+                  "bytes": 156456,
+                  "sha256": "2340193ec54196aea9ab13bfc1a5f365ccb35caf0e884b9553f8ed6186c326fc"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/50/5022f4ed5d35a82db2b9-2160x2160.webp",
+                  "bytes": 512832,
+                  "sha256": "5022f4ed5d35a82db2b97df86b6a39f4615ab8a3e394c87bb70b16bd1dc5a700"
+                }
+              ]
+            },
+            "royalty": {
+              "src": "assets/images/teamwear/uniforms/17/170619ebdf74fff3e035-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Classic_C63.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 4513764,
+                "sha256": "60871fb37f72b41a21eec521a1afc3512c4274ffb130f43d892a61dc3ef53d9b"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/12/12cb7434f93dea4e0b1e-540x540.webp",
+                  "bytes": 57304,
+                  "sha256": "12cb7434f93dea4e0b1e142a22b365ab7ff36c7aa2a0a94f495d7c4ac79aae4e"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/17/170619ebdf74fff3e035-1080x1080.webp",
+                  "bytes": 191528,
+                  "sha256": "170619ebdf74fff3e0357c9e2e7580d7ef92cbdb977f53e03a852497f256c828"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/52/525baf0346efbbd99e68-2160x2160.webp",
+                  "bytes": 643472,
+                  "sha256": "525baf0346efbbd99e6802d739166c858eb04fecc730c192a950bd7974867566"
+                }
+              ]
+            }
           }
         },
         {
           "id": "P03",
           "name": "Signature",
           "availability": "available",
-          "preview": "assets/images/teamwear/teamwear-signature-pair-v3.webp",
-          "railImages": {
-            "wine": "assets/images/teamwear/rail/p03-wine.webp",
-            "cardinal": "assets/images/teamwear/rail/p03-cardinal.webp",
-            "azure": "assets/images/teamwear/rail/p03-azure.webp",
-            "midnight": "assets/images/teamwear/rail/p03-midnight.webp",
-            "sapphire": "assets/images/teamwear/rail/p03-sapphire.webp",
-            "mocha": "assets/images/teamwear/rail/p03-mocha.webp",
-            "black": "assets/images/teamwear/rail/p03-black.webp"
+          "mediaByColor": {
+            "black": {
+              "src": "assets/images/teamwear/uniforms/3f/3f99951600e6ac23f9a3-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Signature_C01.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 2460214,
+                "sha256": "74d2a559dcb50310a92c23b82a45bc470f0007b56a82811cbc1cb2821a385cf8"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/df/dfaa0e581b2dc8ca8f20-540x540.webp",
+                  "bytes": 44062,
+                  "sha256": "dfaa0e581b2dc8ca8f20c64652e7b7b916801d52f887ade144dffe9a7969c291"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/3f/3f99951600e6ac23f9a3-1080x1080.webp",
+                  "bytes": 120408,
+                  "sha256": "3f99951600e6ac23f9a30672454774818bede0fe9a4f8f4548865e2205f82129"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/89/89fc859928030ad4d1e9-2160x2160.webp",
+                  "bytes": 346832,
+                  "sha256": "89fc859928030ad4d1e90ad64c5cc32b6e882079bede7e84f1f7cb3120325421"
+                }
+              ]
+            },
+            "burgundy": {
+              "src": "assets/images/teamwear/uniforms/a7/a7bcfb00f78896cfbe57-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Signature_C11.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 3894802,
+                "sha256": "eee1c000a4411a0c40aba81e54fa9272624b022bb723fcdac02715e124ac38bf"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/dc/dccd0e9852a8a80256ff-540x540.webp",
+                  "bytes": 59034,
+                  "sha256": "dccd0e9852a8a80256ffa69c14f9fe2f651bffeba5d08f0fd8d50f0d9b995b31"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/a7/a7bcfb00f78896cfbe57-1080x1080.webp",
+                  "bytes": 175834,
+                  "sha256": "a7bcfb00f78896cfbe571dedab13581d397c92e3fa9a2db8b8161dfdbff25ce1"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/0b/0b0c40e5b87539f3c669-2160x2160.webp",
+                  "bytes": 558336,
+                  "sha256": "0b0c40e5b87539f3c669a5ea50e14de728896a143acdd1bd5809027c3aa41699"
+                }
+              ]
+            },
+            "cardinal": {
+              "src": "assets/images/teamwear/uniforms/43/4368c08e2725c2645940-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Signature_C13.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 4477402,
+                "sha256": "69c07311d74005dc7d11f0ab2e46f4b647e5822658479a4f0f52e206decc7448"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/bd/bd1f5b9589efd6c2d491-540x540.webp",
+                  "bytes": 63386,
+                  "sha256": "bd1f5b9589efd6c2d4911e66547b81d1edae6d13144c93bb34c8298d42df9e63"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/43/4368c08e2725c2645940-1080x1080.webp",
+                  "bytes": 207916,
+                  "sha256": "4368c08e2725c26459405e55baac16473b98b9cc9d3cdf3fc085479df4536eb7"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/ab/ab11d3a84ddc41a62eff-2160x2160.webp",
+                  "bytes": 685264,
+                  "sha256": "ab11d3a84ddc41a62eff5d3fc9712dc00fc61ea25583b64006dffa07a50b1e30"
+                }
+              ]
+            },
+            "mocha": {
+              "src": "assets/images/teamwear/uniforms/a5/a5b887c0adbb05dfcd5a-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Signature_C21.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 3583535,
+                "sha256": "3160eff04017eb1e2ca62abbe0af4aa47083e20d23e9b4ce1758171a62abbf6d"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/30/305dc0d4b28e1e4d895a-540x540.webp",
+                  "bytes": 60206,
+                  "sha256": "305dc0d4b28e1e4d895a12b89e8239ef0cd2636db98082ed739ae015ef8b6168"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/a5/a5b887c0adbb05dfcd5a-1080x1080.webp",
+                  "bytes": 172510,
+                  "sha256": "a5b887c0adbb05dfcd5ae2a0b3cb96f2a25da56d32be975e37b6dc505926afdc"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/11/11a444a301a0ac9c5160-2160x2160.webp",
+                  "bytes": 514542,
+                  "sha256": "11a444a301a0ac9c51607bb8985890a6e1d8da14639e146e021b29c9c9753f89"
+                }
+              ]
+            },
+            "ivy": {
+              "src": "assets/images/teamwear/uniforms/8d/8d657e9cf98239847606-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Signature_C53.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 3644430,
+                "sha256": "453430e774f52b5080aaa41fe9f4c0f60c065b2c5655d940b6660dc56d1aa430"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/93/93b5ad9e2c0ab88d5f6e-540x540.webp",
+                  "bytes": 60562,
+                  "sha256": "93b5ad9e2c0ab88d5f6efeb8a854382c843b2f840e85f92df6eeb8ccba1fce80"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/8d/8d657e9cf98239847606-1080x1080.webp",
+                  "bytes": 176232,
+                  "sha256": "8d657e9cf98239847606805f6e1b735c7afb7e81a4d5f60a55f16d58bc5202d0"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/47/4786141107a49150300a-2160x2160.webp",
+                  "bytes": 532668,
+                  "sha256": "4786141107a49150300aa5e87eace9272bbe7cbd801c87447c8a1263b76718ab"
+                }
+              ]
+            },
+            "midnight": {
+              "src": "assets/images/teamwear/uniforms/33/33ceb21d9c045ae3b56f-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Signature_C61-20.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 3983182,
+                "sha256": "e7e76586d29cd2638439a7137e98f936e5a8aebbf612a0c05c4d641a25b9161d"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/95/951b844c814c403d3794-540x540.webp",
+                  "bytes": 60102,
+                  "sha256": "951b844c814c403d3794e3d8854c15239a63961be349fc10e078489ed49c11c8"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/33/33ceb21d9c045ae3b56f-1080x1080.webp",
+                  "bytes": 175476,
+                  "sha256": "33ceb21d9c045ae3b56f11cc5602405d6241639034e8e063a7a778bdf1acf56d"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/b0/b0bec714ffb9be8ba09b-2160x2160.webp",
+                  "bytes": 544034,
+                  "sha256": "b0bec714ffb9be8ba09b124c2e9442dcbf286d0e154720f3fd4135cf527d8814"
+                }
+              ]
+            },
+            "royalty": {
+              "src": "assets/images/teamwear/uniforms/37/379089ad32d83e24f941-1080x1080.webp",
+              "width": 1080,
+              "height": 1080,
+              "source": {
+                "filename": "#HW12999_PeBasketballJersey_Drawing[0.4.0]_Signature_C61-21.jpg",
+                "width": 4500,
+                "height": 4500,
+                "bytes": 4646027,
+                "sha256": "8ed53ecb14d60e0a4f3d9debdf8029ea6b2fd7614379f63484fb717fb1b4f46b"
+              },
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/teamwear/uniforms/b2/b29662ac3ff799a3620d-540x540.webp",
+                  "bytes": 65348,
+                  "sha256": "b29662ac3ff799a3620dbde7290643a2c218f0b1fbe5073d2e4253ff955d9ae4"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/teamwear/uniforms/37/379089ad32d83e24f941-1080x1080.webp",
+                  "bytes": 203840,
+                  "sha256": "379089ad32d83e24f9411917ccf75d0ad70b14afb750ab5d2e19099eed35c95d"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/teamwear/uniforms/11/111449826fea213153e4-2160x2160.webp",
+                  "bytes": 660934,
+                  "sha256": "111449826fea213153e42d2f44fd36e156e10e5ac1e2e6152068cdad73189a09"
+                }
+              ]
+            }
           }
         }
       ],
       "colors": [
         {
           "id": "C01",
-          "colorId": "wine",
+          "colorId": "black",
           "availability": "available"
         },
         {
-          "id": "C02",
+          "id": "C11",
+          "colorId": "burgundy",
+          "availability": "available"
+        },
+        {
+          "id": "C13",
           "colorId": "cardinal",
           "availability": "available"
         },
         {
-          "id": "C03",
-          "colorId": "azure",
-          "availability": "available"
-        },
-        {
-          "id": "C04",
-          "colorId": "midnight",
-          "availability": "available"
-        },
-        {
-          "id": "C05",
-          "colorId": "sapphire",
-          "availability": "available"
-        },
-        {
-          "id": "C06",
+          "id": "C21",
           "colorId": "mocha",
           "availability": "available"
         },
         {
-          "id": "C07",
-          "colorId": "black",
+          "id": "C41",
+          "colorId": "ivy",
+          "availability": "available"
+        },
+        {
+          "id": "C61",
+          "colorId": "midnight",
+          "availability": "available"
+        },
+        {
+          "id": "C63",
+          "colorId": "royalty",
           "availability": "available"
         }
       ]

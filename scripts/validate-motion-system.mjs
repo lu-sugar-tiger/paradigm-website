@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { validateItemCatalog } from "./lib/item-schema.mjs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import vm from "node:vm";
@@ -25,7 +26,7 @@ const [tokens, motion, pageTransitions, components, app, search, choices, teamwe
   read("assets/js/teamwear.js"),
   read("scripts/lib/site-renderers.mjs"),
   read("docs/design-system.md"),
-  read("data/products-source.json").then(JSON.parse)
+  read("data/products-source.json").then(JSON.parse).then(validateItemCatalog)
 ]);
 
 const exactTokens = new Map([
@@ -160,7 +161,7 @@ const generatedPages = [
   "search/index.html",
   "teamwear/index.html",
   "teamwear/customize/index.html",
-  ...source.products.filter((product) => product.variants.some((variant) => variant.visible)).map((product) => `products/${product.productNumber}/index.html`)
+  ...source.items.filter((product) => product.variants.some((variant) => variant.visible)).map((product) => `products/${product.code}/index.html`)
 ];
 for (const relativePath of generatedPages) {
   const page = await read(relativePath);
@@ -168,8 +169,8 @@ for (const relativePath of generatedPages) {
   const deferredApp = page.search(/<script defer src="(?:\.\.\/)*assets\/js\/app\.js\?v=20260908a"><\/script>/);
   assert.ok(earlyController >= 0 && deferredApp > earlyController, `${relativePath} must load the route controller early and before deferred behavior`);
   assert.match(page, /assets\/css\/motion\.css\?v=20260831a/, `${relativePath} must load the cache-busted global motion stylesheet`);
-assert.match(page, /assets\/css\/components\.css\?v=20260909g/, `${relativePath} must load the cache-busted shared floating-action, static resting toggle, media-source motion, and transferred stable overlay gutter`);
-  assert.match(page, /assets\/js\/choices\.js\?v=20260831c/, `${relativePath} must load the cache-busted floating-action state controller`);
+assert.match(page, /assets\/css\/components\.css\?v=20260911a/, `${relativePath} must load the cache-busted shared floating-action, static resting toggle, media-source motion, and transferred stable overlay gutter`);
+  assert.match(page, /assets\/js\/choices\.js\?v=20260910a/, `${relativePath} must load the cache-busted floating-action state controller`);
 }
 
 console.log(`MOTION_SYSTEM_OK routes=${cases.length} pages=${generatedPages.length}`);

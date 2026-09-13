@@ -10,6 +10,9 @@
     { "id": "white", "name": "White", "value": "#f2f0e9" },
     { "id": "wine", "name": "Wine", "value": "#7d1119" },
     { "id": "azure", "name": "Azure", "value": "#17629b" },
-    { "id": "sapphire", "name": "Sapphire", "value": "#154bb0" }
+    { "id": "sapphire", "name": "Sapphire", "value": "#154bb0" },
+    { "id": "burgundy", "name": "Burgundy", "value": "#7d1119" },
+    { "id": "ivy", "name": "Ivy", "value": "#254a3d" },
+    { "id": "royalty", "name": "Royalty", "value": "#154bb0" }
   ]
 }

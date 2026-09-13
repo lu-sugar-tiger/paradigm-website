@@ -5,8 +5,10 @@ import {
   normalizeDescriptionSource,
   transformDescription
 } from "./lib/rich-description.mjs";
-import { categoryForTitle, rankRelatedProducts } from "./lib/product-relations.mjs";
+import { categoryForName, rankRelatedProducts } from "./lib/product-relations.mjs";
 import { resolveProductMedia } from "./lib/product-images.mjs";
+import { itemPriceLabel, validateItemCatalog } from "./lib/item-schema.mjs";
+import { buildCatalogRefineGroups } from "./lib/catalog-refine.mjs";
 import {
   html,
   renderChoiceGroup,
@@ -66,7 +68,7 @@ function applyTemplate(template, values) {
 }
 
 function optionAvailability(product, field, value, selected) {
-  const otherField = field === "color" ? "size" : "color";
+  const otherField = field === "colorName" ? "sizeName" : "colorName";
   return product.variants.some((variant) => (
     variant.visible &&
     !variant.soldOut &&
@@ -82,32 +84,32 @@ function selectedProductVariant(product) {
 
 function renderProductMain(template, product, relatedProducts) {
   const selectedVariant = selectedProductVariant(product);
-  const selected = { color: selectedVariant?.color || product.colors[0]?.label, size: selectedVariant?.size || product.sizes[0] };
+  const selected = { colorName: selectedVariant?.colorName || product.colors[0]?.label, sizeName: selectedVariant?.sizeName || product.sizes[0] };
   const resolvedUnavailable = !selectedVariant || selectedVariant.soldOut;
   const colorChoices = renderChoiceGroup({
     kind: "swatch",
     title: "Color",
-    inputName: `product-${product.productNumber}-color`,
-    selectedValue: product.colors.find((color) => color.label === selected.color)?.id,
+    inputName: `product-${product.code}-color`,
+    selectedValue: product.colors.find((color) => color.label === selected.colorName)?.id,
     primaryActionId: "product-primary-action",
     options: product.colors.map((color) => ({
       id: color.id,
       label: color.label,
       colorId: color.colorId,
-      availability: optionAvailability(product, "color", color.label, selected)
+      availability: optionAvailability(product, "colorName", color.label, selected)
     }))
   });
   const sizeChoices = renderChoiceGroup({
     kind: "chip",
     title: "Size",
-    inputName: `product-${product.productNumber}-size`,
-    selectedValue: selected.size,
+    inputName: `product-${product.code}-size`,
+    selectedValue: selected.sizeName,
     primaryActionId: "product-primary-action",
     showLabel: false,
     options: product.sizes.map((size) => ({
       id: size,
       label: size,
-      availability: optionAvailability(product, "size", size, selected)
+      availability: optionAvailability(product, "sizeName", size, selected)
     }))
   });
   const primaryAction = renderPrimaryAction({
@@ -116,14 +118,14 @@ function renderProductMain(template, product, relatedProducts) {
     initialIntent: resolvedUnavailable ? "notify" : "purchase",
     behavior: "fixed-to-static",
     label: "Buy on Shopee",
-    href: product.shopeeUrl,
+    href: product.link,
     target: "_blank",
     external: true,
     root: "../.."
   });
   const media = product.media.map((image, index) => `          ${renderResponsiveProductImage({
     media: image,
-    alt: index === 0 ? product.alt : `${product.title}, view ${index + 1}`,
+    alt: index === 0 ? product.alt : `${product.name}, view ${index + 1}`,
     root: "../..",
     sizes: "(min-width: 80rem) 768px, (min-width: 64rem) 60vw, 100vw",
     loading: index ? "lazy" : "",
@@ -136,19 +138,19 @@ function renderProductMain(template, product, relatedProducts) {
       items: [
         { label: "All", href: "/collections/all" },
         { label: product.category, href: `/collections/${categoryPath(product.category)}`, dataAttribute: "data-product-breadcrumb-category" },
-        { label: product.title, current: true, dataAttribute: "data-product-breadcrumb-title" }
+        { label: product.name, current: true, dataAttribute: "data-product-breadcrumb-title" }
       ]
     }
   });
 
   return applyTemplate(template, {
     PAGE_HEADLINE: pageHeadline.split("\n").map((line) => `  ${line}`).join("\n"),
-    TITLE: html(product.title),
-    PRODUCT_NUMBER: html(product.productNumber),
+    NAME: html(product.name),
+    ITEM_CODE: html(product.code),
     CATEGORY: html(product.category),
     PRODUCT_GALLERY_ZOOM: product.imageSource === "fallback" ? "" : " data-media-zoom-gallery",
     PRODUCT_MEDIA: media,
-    PRICE: renderProductDetailPrice({ price: product.price, dataAttribute: "data-product-price" }),
+    PRICE: renderProductDetailPrice({ price: product.priceLabel, dataAttribute: "data-product-price" }),
     COLOR_CHOICES: colorChoices.split("\n").map((line) => `            ${line}`).join("\n"),
     SIZE_CHOICES: sizeChoices.split("\n").map((line) => `            ${line}`).join("\n"),
     PRIMARY_ACTION: primaryAction.split("\n").map((line) => `          ${line}`).join("\n"),
@@ -166,12 +168,14 @@ function renderCollectionPage({ title, category, pathName, root, products }) {
   const pageHeadline = renderPageHeadline({
     root,
     breadcrumb: { variant: "hierarchy", items },
-    trailingAction: { kind: "text", label: "Refine" }
+    trailingAction: { kind: "dropdown", id: "catalog-refine", label: "Refine", variant: "text", align: "end", groups: buildCatalogRefineGroups(refineConfig, filtered) }
   });
-  const main = `  <main class="page">
+  const main = `  <main class="page" data-catalog>
 ${pageHeadline.split("\n").map((line) => `    ${line}`).join("\n")}
     <section class="section section--tight"><div class="container">
 ${renderProductGrid(filtered, root).split("\n").map((line) => `      ${line}`).join("\n")}
+      <p class="catalog-empty" data-catalog-empty hidden>No products match these filters. Try another selection or clear all filters.</p>
+      <p class="visually-hidden" aria-live="polite" data-catalog-status></p>
     </div></section>
   </main>`;
   return renderDocument({
@@ -183,7 +187,7 @@ ${renderProductGrid(filtered, root).split("\n").map((line) => `      ${line}`).j
     currentPath,
     bodyClass: "site-shell reference-page product-page",
     main,
-    scripts: ["media-zoom.js?v=20260831c"]
+    scripts: ["catalog.js?v=20260910b", "catalog-refine.js?v=20260910a", "media-zoom.js?v=20260831c"]
   });
 }
 
@@ -241,34 +245,34 @@ function buildSearchIndex(searchConfig, products) {
     searchTerms: [page.title, page.summary, ...page.keywords]
   }));
   const searchProducts = products.map((product) => {
-    const type = productType(product.title);
-    const family = productFamily(product.title);
+    const type = productType(product.name);
+    const family = productFamily(product.name);
     const colors = product.colors.map((color) => color.label);
     return {
-      productNumber: product.productNumber,
-      title: product.title,
+      code: product.code,
+      name: product.name,
       category: product.category,
       colors,
-      productType: type,
+      type,
       family,
-      price: product.price,
-      url: `/products/${product.productNumber}`,
+      priceLabel: product.priceLabel,
+      url: `/products/${product.code}`,
       media: product.media[0] || null,
       alt: product.alt,
-      searchTerms: [product.title, product.productNumber, product.category, ...colors, type, family]
+      searchTerms: [product.name, product.code, product.category, ...colors, type, family]
     };
   });
   const vocabulary = uniqueLabels([
     ...searchConfig.popularKeywords,
     ...pages.flatMap((page) => [page.title, ...page.keywords]),
-    ...searchProducts.flatMap((product) => [product.family, product.productType, product.category, ...product.colors])
+    ...searchProducts.flatMap((product) => [product.family, product.type, product.category, ...product.colors])
   ]);
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     popularKeywords: searchConfig.popularKeywords,
     vocabulary,
     pages,
-    products: searchProducts
+    items: searchProducts
   };
 }
 
@@ -282,8 +286,16 @@ function renderTeamwearColorwayCards(model, colorById) {
   const selectedPattern = model.patterns.find((pattern) => pattern.id === "P02") || model.patterns[0];
   return model.colors.map((option) => {
     const color = colorById.get(option.colorId);
+    const image = renderResponsiveProductImage({
+      media: selectedPattern.mediaByColor[color.id],
+      alt: `${selectedPattern.name} ${model.name} in ${color.name}, front and back`,
+      root: "..",
+      sizes: "(min-width: 80rem) 600px, (min-width: 48rem) 50vw, 100vw",
+      loading: "lazy",
+      dataAttribute: "data-colorway-image"
+    });
     return `        <article class="teamwear-rail-card teamwear-colorway-card teamwear-colorway--${html(color.id)}" data-colorway-card data-color-id="${html(color.id)}" data-color-name="${html(color.name)}" data-section-reveal>
-          <div class="teamwear-rail-card__surface" data-media-zoom-surface><div class="teamwear-rail-card__media teamwear-colorway-card__media" data-media-zoom-touch><div class="teamwear-rail-card__photo-track"><img src="../${html(selectedPattern.railImages[color.id])}" alt="${html(selectedPattern.name)} ${html(model.name)} ${html(color.name)} Road uniform rendering" width="1080" height="1080" loading="lazy" data-colorway-image></div></div></div>
+          <div class="teamwear-rail-card__surface" data-media-zoom-surface><div class="teamwear-rail-card__media teamwear-colorway-card__media" data-media-zoom-touch><div class="teamwear-rail-card__photo-track">${image}</div></div></div>
           <div class="teamwear-rail-card__copy"><h3 class="type-h5">${html(color.name)}</h3></div>
         </article>`;
   }).join("\n");
@@ -327,7 +339,7 @@ function renderTeamwearLanding(template, model, colorById, instagramUrl) {
     bodyClass: "site-shell reference-page teamwear-page teamwear-story-shell",
     main,
     styles: ["teamwear.css?v=20260829c", "teamwear-story.css?v=20260909b"],
-    scripts: ["teamwear-options.js?v=20260909a", "teamwear.js?v=20260909a", "media-zoom.js?v=20260831c"],
+    scripts: ["teamwear-options.js?v=20260913a", "teamwear.js?v=20260913a", "media-zoom.js?v=20260831c"],
     head: `  <meta property="og:title" content="${html(model.name)} | Paradigm">\n  <meta property="og:description" content="${html(`${model.name} is a reversible basketball uniform system composed by Paradigm for the whole roster.`)}">\n  <meta property="og:image" content="https://prdm.tw/assets/images/teamwear/campaign/hero-desktop.webp">\n  <meta property="og:type" content="website">`
   });
 }
@@ -335,7 +347,7 @@ function renderTeamwearLanding(template, model, colorById, instagramUrl) {
 function renderTeamwearCustomize(template, model, colorById, instagramUrl) {
   const actionId = "teamwear-customize-primary-action";
   const selectedPattern = model.patterns.find((pattern) => pattern.id === "P02") || model.patterns[0];
-  const selectedColor = model.colors.find((color) => color.id === "C06") || model.colors[0];
+  const selectedColor = model.colors.find((color) => color.colorId === "mocha") || model.colors[0];
   const colors = renderChoiceGroup({
     kind: "swatch",
     title: "Color",
@@ -394,6 +406,14 @@ function renderTeamwearCustomize(template, model, colorById, instagramUrl) {
     PAGE_HEADLINE: pageHeadline.split("\n").map((line) => `  ${line}`).join("\n"),
     MODEL_CODE: html(model.code),
     MODEL_NAME: html(model.name),
+    COVER_IMAGE: renderResponsiveProductImage({
+      media: selectedPattern.mediaByColor[selectedColor.colorId],
+      alt: `${selectedPattern.name} ${model.name} in ${colorById.get(selectedColor.colorId).name}, front and back`,
+      root: "../..",
+      sizes: "(min-width: 80rem) 768px, (min-width: 64rem) 60vw, 100vw",
+      touchZoom: true,
+      dataAttribute: "data-builder-cover"
+    }),
     PRICE: renderProductDetailPrice({ price: priceLabel(model.price), dataAttribute: "data-teamwear-price" }),
     COLOR_CHOICES: colors.split("\n").map((line) => `          ${line}`).join("\n"),
     PATTERN_CHOICES: patterns.split("\n").map((line) => `          ${line}`).join("\n"),
@@ -404,33 +424,36 @@ function renderTeamwearCustomize(template, model, colorById, instagramUrl) {
   });
   return renderDocument({
     title: `Build ${model.name} | Paradigm Teamwear`,
-    description: `Preview ${model.name} in three patterns and seven colors, with Home and Road sides shown together.`,
+    description: `Preview ${model.name} in three patterns and seven colors, with front and back views shown together.`,
     canonical: "https://prdm.tw/teamwear/customize",
     root: "../..",
     currentPath: "/teamwear/customize",
     bodyClass: "site-shell reference-page reference-page--detail teamwear-customize-page",
     main,
     styles: ["teamwear.css?v=20260829c"],
-    scripts: ["teamwear-options.js?v=20260908a", "teamwear.js?v=20260831a", "media-zoom.js?v=20260831c"]
+    scripts: ["teamwear-options.js?v=20260913a", "teamwear.js?v=20260913a", "media-zoom.js?v=20260831c"]
   });
 }
 
-const [source, colorRegistry, teamwearData, searchConfig, productImageFallback, productTemplate, teamwearTemplate, customizeTemplate] = await Promise.all([
-  readJson("data/products-source.json"),
+const [source, colorRegistry, teamwearData, searchConfig, productImageFallback, productTemplate, teamwearTemplate, customizeTemplate, refineConfig] = await Promise.all([
+  readJson("data/products-source.json").then(validateItemCatalog),
   readJson("data/colors.json"),
   readJson("data/teamwear-options.json"),
   readJson("data/search.json"),
   readJson("data/product-image-fallback.json"),
   readTemplate("product-page.html"),
   readTemplate("teamwear-page.html"),
-  readTemplate("teamwear-customize.html")
+  readTemplate("teamwear-customize.html"),
+  readJson("data/catalog-refine.json")
 ]);
 
 const colorByName = new Map(colorRegistry.colors.map((color) => [color.name, color]));
 const colorById = new Map(colorRegistry.colors.map((color) => [color.id, color]));
-const products = source.products.filter((entry) => entry.variants.some((variant) => variant.visible)).map((entry) => {
+// ItemSequence is stored as sequence; higher values represent newer products.
+const products = source.items.filter((entry) => entry.variants.some((variant) => variant.visible))
+  .sort((left, right) => Number(right.sequence) - Number(left.sequence)).map((entry) => {
   const visibleVariants = entry.variants.filter((variant) => variant.visible);
-  const colors = unique(visibleVariants.map((variant) => variant.color)).map((label) => {
+  const colors = unique(visibleVariants.map((variant) => variant.colorName)).map((label) => {
     const color = colorByName.get(label);
     if (!color) throw new Error(`Missing canonical color definition for "${label}".`);
     return { id: color.id, colorId: color.id, label: color.name };
@@ -440,31 +463,36 @@ const products = source.products.filter((entry) => entry.variants.some((variant)
   const usesFallback = media.some((image) => image.isFallback);
   const descriptionSource = normalizeDescriptionSource({
     type: "google-doc",
-    content: entry.document?.content || "",
-    documentId: entry.document?.id || "",
-    modifiedTime: entry.document?.modifiedTime || ""
-  }, `${entry.productNumber} description`);
+    content: entry.descriptionSource?.content || "",
+    documentId: entry.descriptionSource?.id || "",
+    modifiedTime: entry.descriptionSource?.modifiedTime || ""
+  }, `${entry.code} description`);
   return {
-    slug: slugFor(entry.title),
-    productNumber: entry.productNumber,
-    title: entry.title,
-    category: categoryForTitle(entry.title),
-    price: priceLabel(entry.price),
+    slug: slugFor(entry.name),
+    code: entry.code,
+    name: entry.name,
+    lineCode: entry.lineCode,
+    typeCode: entry.typeCode,
+    sequence: entry.sequence,
+    category: categoryForName(entry.name),
+    listPrice: entry.listPrice,
+    salePrice: entry.salePrice,
+    priceLabel: itemPriceLabel(entry),
     image: mediaPaths[0] || null,
     images: mediaPaths,
     media,
     imageSource: usesFallback ? "fallback" : entry.imageSource,
-    alt: usesFallback ? "" : `${entry.title} product image`,
+    alt: usesFallback ? "" : `${entry.name} product image`,
     colors,
-    sizes: unique(visibleVariants.map((variant) => variant.size)),
-    variants: entry.variants.map(({ sku, color, size, visible, soldOut }) => ({ ...(sku ? { sku } : {}), color, size, visible, soldOut })),
+    sizes: unique(visibleVariants.map((variant) => variant.sizeName)),
+    variants: entry.variants.map((variant) => ({ ...variant })),
     soldOut: visibleVariants.every((variant) => variant.soldOut),
     description: transformDescription(descriptionSource.content),
-    shopeeUrl: entry.shopeeUrl,
+    link: entry.link,
     source: {
       spreadsheetModifiedTime: source.source.spreadsheetModifiedTime,
-      documentId: entry.document?.id || null,
-      documentModifiedTime: entry.document?.modifiedTime || null,
+      documentId: entry.descriptionSource?.id || null,
+      documentModifiedTime: entry.descriptionSource?.modifiedTime || null,
       imageFiles: entry.images.map((image) => ({ id: image.id, modifiedTime: image.modifiedTime, localPath: image.localPath }))
     }
   };
@@ -472,7 +500,7 @@ const products = source.products.filter((entry) => entry.variants.some((variant)
 
 const outputs = new Map();
 const catalogBanner = `// Generated by scripts/build-site.mjs.\n// Source: ${source.source.spreadsheetUrl} (${source.source.sheetName})\n// Spreadsheet modified: ${source.source.spreadsheetModifiedTime}\n// Edit centralized data sources and rerun the build; do not hand-edit this file.\n`;
-outputs.set("assets/js/catalog.js", `${catalogBanner}window.PARADIGM_CATALOG = ${JSON.stringify({ products }, null, 2)};\n`);
+outputs.set("assets/js/catalog.js", `${catalogBanner}window.PARADIGM_CATALOG = ${JSON.stringify({ schemaVersion: source.schemaVersion, items: products }, null, 2)};\n`);
 outputs.set("assets/js/teamwear-options.js", `// Generated by scripts/build-site.mjs from data/teamwear-options.json.\nwindow.PARADIGM_TEAMWEAR = ${JSON.stringify(teamwearData, null, 2)};\n`);
 outputs.set("assets/css/color-options.css", renderColorOptionsCss(colorRegistry.colors));
 outputs.set("assets/data/search-index.json", `${JSON.stringify(buildSearchIndex(searchConfig, products), null, 2)}\n`);
@@ -499,16 +527,16 @@ outputs.set("font-credits/index.html", renderDocument({
 products.forEach((product) => {
   const related = rankRelatedProducts(products, product);
   const main = renderProductMain(productTemplate, product, related);
-  outputs.set(`products/${product.productNumber}/index.html`, renderDocument({
+  outputs.set(`products/${product.code}/index.html`, renderDocument({
     lang: "zh-Hant",
-    title: `Paradigm | ${product.title}`,
-    description: `${product.title} by Paradigm.`,
-    canonical: `https://prdm.tw/products/${product.productNumber}`,
+    title: `Paradigm | ${product.name}`,
+    description: `${product.name} by Paradigm.`,
+    canonical: `https://prdm.tw/products/${product.code}`,
     root: "../..",
-    currentPath: `/products/${product.productNumber}`,
+    currentPath: `/products/${product.code}`,
     bodyClass: "site-shell reference-page reference-page--detail",
     main,
-    scripts: ["catalog.js", "media-zoom.js?v=20260831c"]
+    scripts: ["catalog.js?v=20260910a", "media-zoom.js?v=20260831c"]
   }));
 });
 

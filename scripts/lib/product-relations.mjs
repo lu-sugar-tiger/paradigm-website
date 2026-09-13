@@ -1,22 +1,22 @@
-export function categoryForTitle(title) {
-  if (/Shorts/i.test(title)) return "Bottoms";
-  if (/(Hoodie|Crewneck)/i.test(title)) return "AW Tops";
+export function categoryForName(name) {
+  if (/Shorts/i.test(name)) return "Bottoms";
+  if (/(Hoodie|Crewneck)/i.test(name)) return "AW Tops";
   return "SS Tops";
 }
 
-export function productFamilyKey(productNumber) {
-  const normalized = String(productNumber ?? "").trim().toUpperCase();
+export function productFamilyKey(code) {
+  const normalized = String(code ?? "").trim().toUpperCase();
   return normalized.match(/^[A-Z]+/)?.[0] ?? null;
 }
 
 export function rankRelatedProducts(products, currentProduct) {
-  const currentFamily = productFamilyKey(currentProduct.productNumber);
+  const currentFamily = productFamilyKey(currentProduct.code);
   return products
     .map((product, catalogIndex) => ({ product, catalogIndex }))
-    .filter(({ product }) => product.productNumber !== currentProduct.productNumber)
+    .filter(({ product }) => product.code !== currentProduct.code)
     .sort((left, right) => {
-      const leftFamilyMatch = currentFamily !== null && productFamilyKey(left.product.productNumber) === currentFamily;
-      const rightFamilyMatch = currentFamily !== null && productFamilyKey(right.product.productNumber) === currentFamily;
+      const leftFamilyMatch = currentFamily !== null && productFamilyKey(left.product.code) === currentFamily;
+      const rightFamilyMatch = currentFamily !== null && productFamilyKey(right.product.code) === currentFamily;
       if (leftFamilyMatch !== rightFamilyMatch) return Number(rightFamilyMatch) - Number(leftFamilyMatch);
 
       const leftCategoryMatch = left.product.category === currentProduct.category;

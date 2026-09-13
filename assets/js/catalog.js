@@ -3,5625 +3,19 @@
 // Spreadsheet modified: 2026-08-06T06:44:34.564Z
 // Edit centralized data sources and rerun the build; do not hand-edit this file.
 window.PARADIGM_CATALOG = {
-  "products": [
+  "schemaVersion": 4,
+  "items": [
     {
       "slug": "everyday-tee",
-      "productNumber": "ED14001",
-      "title": "PRDM Everyday Tee",
+      "code": "ED14024",
+      "name": "PRDM Everyday Tee",
+      "lineCode": "ED",
+      "typeCode": "14",
+      "sequence": "024",
       "category": "SS Tops",
-      "price": "NT$590",
-      "image": "assets/images/products/everyday-tee.webp",
-      "images": [
-        "assets/images/products/everyday-tee.webp"
-      ],
-      "media": [
-        {
-          "src": "assets/images/products/everyday-tee.webp",
-          "derivatives": []
-        }
-      ],
-      "imageSource": "preserved-existing",
-      "alt": "PRDM Everyday Tee product image",
-      "colors": [
-        {
-          "id": "black",
-          "colorId": "black",
-          "label": "Black"
-        },
-        {
-          "id": "grey",
-          "colorId": "grey",
-          "label": "Grey"
-        },
-        {
-          "id": "white",
-          "colorId": "white",
-          "label": "White"
-        }
-      ],
-      "sizes": [
-        "M",
-        "L",
-        "XL"
-      ],
-      "variants": [
-        {
-          "sku": "ED14001-C01-S1",
-          "color": "Black",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "ED14001-C01-S2",
-          "color": "Black",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "ED14001-C01-S3",
-          "color": "Black",
-          "size": "L",
-          "visible": false,
-          "soldOut": false
-        },
-        {
-          "sku": "ED14001-C01-S4",
-          "color": "Black",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "ED14001-C05-S1",
-          "color": "Grey",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "ED14001-C05-S2",
-          "color": "Grey",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "ED14001-C05-S3",
-          "color": "Grey",
-          "size": "L",
-          "visible": false,
-          "soldOut": false
-        },
-        {
-          "sku": "ED14001-C05-S4",
-          "color": "Grey",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "ED14001-C09-S1",
-          "color": "White",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "ED14001-C09-S2",
-          "color": "White",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "ED14001-C09-S3",
-          "color": "White",
-          "size": "L",
-          "visible": false,
-          "soldOut": false
-        },
-        {
-          "sku": "ED14001-C09-S4",
-          "color": "White",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        }
-      ],
-      "soldOut": false,
-      "description": [
-        {
-          "type": "text",
-          "text": "• 100% combed cotton of 230 g/sqm"
-        },
-        {
-          "type": "text",
-          "text": "• Loose fit and longer-back cutting"
-        },
-        {
-          "type": "text",
-          "text": "• Signature tab on sleeve"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這是一款略微寬鬆的重磅短 T"
-        },
-        {
-          "type": "text",
-          "text": "為了將流行元素和不變的經典結合"
-        },
-        {
-          "type": "text",
-          "text": "我們做了超多次的調整甚至重新設定"
-        },
-        {
-          "type": "text",
-          "text": "最終打造出這款適合約會也適合日常的寬鬆短 T"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "基於輪廓立體度和透氣性的考量"
-        },
-        {
-          "type": "text",
-          "text": "採用手感紮實的重磅精梳棉製成"
-        },
-        {
-          "type": "text",
-          "text": "營造份量感同時帶來優異的穿著體驗"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "為了高質感的寬鬆風格並兼顧身材比例的修飾"
-        },
-        {
-          "type": "text",
-          "text": "以自然的寬大輪廓配合前短後長的下襬設定"
-        },
-        {
-          "type": "text",
-          "text": "同時還能提升活動的方便性"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "因為對於耐用性的追求"
-        },
-        {
-          "type": "text",
-          "text": "我們嘗試了多種不同的領口工法"
-        },
-        {
-          "type": "text",
-          "text": "最終選擇較費工的 20mm 羅紋包邊領口"
-        },
-        {
-          "type": "text",
-          "text": "這樣最耐穿而且也增強了領口處的層次感"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "左側袖口以品牌小紅標點綴"
-        },
-        {
-          "type": "text",
-          "text": "讓整體設計簡約俐落但不單調"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "上等的面料配合誰穿誰帥的版型"
-        },
-        {
-          "type": "text",
-          "text": "等你實際穿上就能立刻感受到它的獨特魅力"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "table",
-          "sourceLines": [
-            "　　 　 M　　 L",
-            "肩寬　50.0　51.5",
-            "胸寬　55.5　57.5",
-            "袖長　25.5　27.5",
-            "衣長　72.0　76.0　(cm)"
-          ],
-          "columnCount": 4,
-          "header": [
-            "",
-            "M",
-            "L",
-            ""
-          ],
-          "body": [
-            [
-              "肩寬",
-              "50.0",
-              "51.5",
-              ""
-            ],
-            [
-              "胸寬",
-              "55.5",
-              "57.5",
-              ""
-            ],
-            [
-              "袖長",
-              "25.5",
-              "27.5",
-              ""
-            ],
-            [
-              "衣長",
-              "72.0",
-              "76.0",
-              "(cm)"
-            ]
-          ]
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≤ 176 拿 M"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≥ 176 拿 L　(cm)"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "hashtag",
-          "text": "#ED14001-S13"
-        }
-      ],
-      "shopeeUrl": "https://shopee.tw/product/74187402/19381601041",
-      "source": {
-        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
-        "documentId": "1r5QyrbtyNySj0rJYbG9k3lW_sPFP4FfUgZNRnEBta5w",
-        "documentModifiedTime": "2023-07-08T08:21:32.098Z",
-        "imageFiles": []
-      }
-    },
-    {
-      "slug": "everyday-crewneck",
-      "productNumber": "ED23002",
-      "title": "PRDM Everyday Crewneck",
-      "category": "AW Tops",
-      "price": "NT$990",
-      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-      "images": [
-        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
-      ],
-      "media": [
-        {
-          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-          "width": 1080,
-          "height": 1080,
-          "isFallback": true,
-          "derivatives": [
-            {
-              "shortEdge": 540,
-              "width": 540,
-              "height": 540,
-              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
-              "bytes": 3112,
-              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
-            },
-            {
-              "shortEdge": 1080,
-              "width": 1080,
-              "height": 1080,
-              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-              "bytes": 7424,
-              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
-            },
-            {
-              "shortEdge": 2160,
-              "width": 2160,
-              "height": 2160,
-              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
-              "bytes": 18982,
-              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
-            }
-          ]
-        }
-      ],
-      "imageSource": "fallback",
-      "alt": "",
-      "colors": [
-        {
-          "id": "black",
-          "colorId": "black",
-          "label": "Black"
-        },
-        {
-          "id": "grey",
-          "colorId": "grey",
-          "label": "Grey"
-        }
-      ],
-      "sizes": [
-        "M",
-        "L",
-        "XL"
-      ],
-      "variants": [
-        {
-          "sku": "ED23002-C01-S1",
-          "color": "Black",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "ED23002-C01-S2",
-          "color": "Black",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "ED23002-C01-S3",
-          "color": "Black",
-          "size": "L",
-          "visible": false,
-          "soldOut": false
-        },
-        {
-          "sku": "ED23002-C01-S4",
-          "color": "Black",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "ED23002-C05-S1",
-          "color": "Grey",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "ED23002-C05-S2",
-          "color": "Grey",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "ED23002-C05-S3",
-          "color": "Grey",
-          "size": "L",
-          "visible": false,
-          "soldOut": false
-        },
-        {
-          "sku": "ED23002-C05-S4",
-          "color": "Grey",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        }
-      ],
-      "soldOut": false,
-      "description": [
-        {
-          "type": "text",
-          "text": "• 100% cotton loopback jersey of 350 g/sqm"
-        },
-        {
-          "type": "text",
-          "text": "• Loose fit and longer-back cutting"
-        },
-        {
-          "type": "text",
-          "text": "• Signature tab on sleeve"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這是一款略微寬鬆的重磅毛圈布大學 T"
-        },
-        {
-          "type": "text",
-          "text": "考量到台灣的冬季極為短暫"
-        },
-        {
-          "type": "text",
-          "text": "特別選用手感紮實的重磅毛圈布來製作"
-        },
-        {
-          "type": "text",
-          "text": "重磅毛圈布比起刷毛內裏更加實穿"
-        },
-        {
-          "type": "text",
-          "text": "同時也能改善一般毛圈布輕薄、柔軟的缺點"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "為了呈現自然的寬大輪廓並修飾身材比例"
-        },
-        {
-          "type": "text",
-          "text": "我們設計出較寬鬆的袖攏與前短後長的下襬"
-        },
-        {
-          "type": "text",
-          "text": "單穿之外也適合在內側搭配一件白 T"
-        },
-        {
-          "type": "text",
-          "text": "在領口與下擺處完美露出、點綴整體風格"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "因為對於最初功能性的追求"
-        },
-        {
-          "type": "text",
-          "text": "在領口處以較寬的復古羅紋包邊"
-        },
-        {
-          "type": "text",
-          "text": "疊加於最費工的鑲嵌型羅紋裁片"
-        },
-        {
-          "type": "text",
-          "text": "加強領口彈性、壽命及層次感"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "左側袖口以品牌小紅標點綴"
-        },
-        {
-          "type": "text",
-          "text": "讓整體設計簡約俐落但不單調"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "最實穿的重磅毛圈布面料搭配寬鬆輪廓"
-        },
-        {
-          "type": "text",
-          "text": "為你營造兼顧質感與舒適的日常"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "table",
-          "sourceLines": [
-            "　　 　 M　　 L",
-            "肩寬　60.0　61.5",
-            "胸寬　66.0　68.5",
-            "袖長　56.0　58.0",
-            "衣長　71.0　75.0　(cm)"
-          ],
-          "columnCount": 4,
-          "header": [
-            "",
-            "M",
-            "L",
-            ""
-          ],
-          "body": [
-            [
-              "肩寬",
-              "60.0",
-              "61.5",
-              ""
-            ],
-            [
-              "胸寬",
-              "66.0",
-              "68.5",
-              ""
-            ],
-            [
-              "袖長",
-              "56.0",
-              "58.0",
-              ""
-            ],
-            [
-              "衣長",
-              "71.0",
-              "75.0",
-              "(cm)"
-            ]
-          ]
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≤ 176 拿 M"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≥ 176 拿 L　(cm)"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "hashtag",
-          "text": "#ED23002-S13"
-        }
-      ],
-      "shopeeUrl": "https://shopee.tw/product/74187402/23447622978",
-      "source": {
-        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
-        "documentId": "1UjbimaxbdT0idlUXEWtChAMq9-n2gDXcsZSHhf5XOPc",
-        "documentModifiedTime": "2023-10-30T16:19:32.433Z",
-        "imageFiles": []
-      }
-    },
-    {
-      "slug": "paradigm-crewneck",
-      "productNumber": "PD23006",
-      "title": "PRDM Paradigm Crewneck",
-      "category": "AW Tops",
-      "price": "NT$1,180",
-      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-      "images": [
-        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
-      ],
-      "media": [
-        {
-          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-          "width": 1080,
-          "height": 1080,
-          "isFallback": true,
-          "derivatives": [
-            {
-              "shortEdge": 540,
-              "width": 540,
-              "height": 540,
-              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
-              "bytes": 3112,
-              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
-            },
-            {
-              "shortEdge": 1080,
-              "width": 1080,
-              "height": 1080,
-              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-              "bytes": 7424,
-              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
-            },
-            {
-              "shortEdge": 2160,
-              "width": 2160,
-              "height": 2160,
-              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
-              "bytes": 18982,
-              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
-            }
-          ]
-        }
-      ],
-      "imageSource": "fallback",
-      "alt": "",
-      "colors": [
-        {
-          "id": "black",
-          "colorId": "black",
-          "label": "Black"
-        },
-        {
-          "id": "grey",
-          "colorId": "grey",
-          "label": "Grey"
-        }
-      ],
-      "sizes": [
-        "M",
-        "L",
-        "XL"
-      ],
-      "variants": [
-        {
-          "sku": "PD23006-C01-S1",
-          "color": "Black",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PD23006-C01-S2",
-          "color": "Black",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PD23006-C01-S3",
-          "color": "Black",
-          "size": "L",
-          "visible": false,
-          "soldOut": false
-        },
-        {
-          "sku": "PD23006-C01-S4",
-          "color": "Black",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PD23006-C05-S1",
-          "color": "Grey",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PD23006-C05-S2",
-          "color": "Grey",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PD23006-C05-S3",
-          "color": "Grey",
-          "size": "L",
-          "visible": false,
-          "soldOut": false
-        },
-        {
-          "sku": "PD23006-C05-S4",
-          "color": "Grey",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        }
-      ],
-      "soldOut": false,
-      "description": [
-        {
-          "type": "text",
-          "text": "• Printed graphics on front and back"
-        },
-        {
-          "type": "text",
-          "text": "• 100% cotton loopback jersey of 350 g/sqm"
-        },
-        {
-          "type": "text",
-          "text": "• Wide silhouette and longer-back cutting"
-        },
-        {
-          "type": "text",
-          "text": "• Signature tab on sleeve"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "Paradigm 款式是我們的定番系列"
-        },
-        {
-          "type": "text",
-          "text": "印有象徵著品牌經典的圖樣"
-        },
-        {
-          "type": "text",
-          "text": "為了忠實傳達品牌信念"
-        },
-        {
-          "type": "text",
-          "text": "我們採用最純粹、不張揚的字體呈現"
-        },
-        {
-          "type": "text",
-          "text": "成為語言與思想的透明載體"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這款印花大學 T 的面料設定"
-        },
-        {
-          "type": "text",
-          "text": "同樣是優秀的重磅毛圈布"
-        },
-        {
-          "type": "text",
-          "text": "兼顧外觀的立體度以及在台灣的實穿性"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "寬鬆的袖管讓整體輪廓的寬鬆感更自然"
-        },
-        {
-          "type": "text",
-          "text": "領口是最費工的鑲嵌型羅紋裁片"
-        },
-        {
-          "type": "text",
-          "text": "加強領口彈性、壽命及層次感"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "我們在每個細節上的雕琢"
-        },
-        {
-          "type": "text",
-          "text": "都是為了讓你在低調中感受美好"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "table",
-          "sourceLines": [
-            "　　 　 M　　 L　　 XL",
-            "肩寬　60.0　63.0　64.5",
-            "胸寬　66.0　71.0　73.5",
-            "袖長　56.0　57.0　59.0",
-            "衣長　71.0　73.0　77.0　(cm)"
-          ],
-          "columnCount": 5,
-          "header": [
-            "",
-            "M",
-            "L",
-            "XL",
-            ""
-          ],
-          "body": [
-            [
-              "肩寬",
-              "60.0",
-              "63.0",
-              "64.5",
-              ""
-            ],
-            [
-              "胸寬",
-              "66.0",
-              "71.0",
-              "73.5",
-              ""
-            ],
-            [
-              "袖長",
-              "56.0",
-              "57.0",
-              "59.0",
-              ""
-            ],
-            [
-              "衣長",
-              "71.0",
-              "73.0",
-              "77.0",
-              "(cm)"
-            ]
-          ]
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≤ 173 拿 M"
-        },
-        {
-          "type": "text",
-          "text": "建議身高∊173~178 拿 L"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≥ 178 拿 XL　(cm)"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "hashtag",
-          "text": "#PD23006"
-        }
-      ],
-      "shopeeUrl": "https://shopee.tw/product/74187402/22073115003",
-      "source": {
-        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
-        "documentId": "1RiakemYNGRFtFiwIBMcc7lXKclykfWhh7-RbFHYxJM4",
-        "documentModifiedTime": "2023-11-14T14:08:06.091Z",
-        "imageFiles": []
-      }
-    },
-    {
-      "slug": "paradigm-tee",
-      "productNumber": "PD14007",
-      "title": "PRDM Paradigm Tee",
-      "category": "SS Tops",
-      "price": "NT$790",
-      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-      "images": [
-        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
-      ],
-      "media": [
-        {
-          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-          "width": 1080,
-          "height": 1080,
-          "isFallback": true,
-          "derivatives": [
-            {
-              "shortEdge": 540,
-              "width": 540,
-              "height": 540,
-              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
-              "bytes": 3112,
-              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
-            },
-            {
-              "shortEdge": 1080,
-              "width": 1080,
-              "height": 1080,
-              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-              "bytes": 7424,
-              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
-            },
-            {
-              "shortEdge": 2160,
-              "width": 2160,
-              "height": 2160,
-              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
-              "bytes": 18982,
-              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
-            }
-          ]
-        }
-      ],
-      "imageSource": "fallback",
-      "alt": "",
-      "colors": [
-        {
-          "id": "black",
-          "colorId": "black",
-          "label": "Black"
-        },
-        {
-          "id": "grey",
-          "colorId": "grey",
-          "label": "Grey"
-        },
-        {
-          "id": "white",
-          "colorId": "white",
-          "label": "White"
-        }
-      ],
-      "sizes": [
-        "M",
-        "L",
-        "XL"
-      ],
-      "variants": [
-        {
-          "sku": "PD14007-C01-S1",
-          "color": "Black",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PD14007-C01-S2",
-          "color": "Black",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PD14007-C01-S3",
-          "color": "Black",
-          "size": "L",
-          "visible": false,
-          "soldOut": false
-        },
-        {
-          "sku": "PD14007-C01-S4",
-          "color": "Black",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PD14007-C05-S1",
-          "color": "Grey",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PD14007-C05-S2",
-          "color": "Grey",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PD14007-C05-S3",
-          "color": "Grey",
-          "size": "L",
-          "visible": false,
-          "soldOut": false
-        },
-        {
-          "sku": "PD14007-C05-S4",
-          "color": "Grey",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PD14007-C09-S1",
-          "color": "White",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PD14007-C09-S2",
-          "color": "White",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PD14007-C09-S3",
-          "color": "White",
-          "size": "L",
-          "visible": false,
-          "soldOut": false
-        },
-        {
-          "sku": "PD14007-C09-S4",
-          "color": "White",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        }
-      ],
-      "soldOut": false,
-      "description": [
-        {
-          "type": "text",
-          "text": "• Printed graphics on front and back"
-        },
-        {
-          "type": "text",
-          "text": "• 100% combed cotton of 230 g/sqm"
-        },
-        {
-          "type": "text",
-          "text": "• Wide silhouette and longer-back cutting"
-        },
-        {
-          "type": "text",
-          "text": "• Signature tab on sleeve"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這是一款象徵著品牌經典的印花短 T"
-        },
-        {
-          "type": "text",
-          "text": "Paradigm 是典範的意思"
-        },
-        {
-          "type": "text",
-          "text": "在科學史的範疇中用來描述群體對世界運行的共同認知"
-        },
-        {
-          "type": "text",
-          "text": "典範並非單一或不變的"
-        },
-        {
-          "type": "text",
-          "text": "當主流理論不再能解釋科學現象"
-        },
-        {
-          "type": "text",
-          "text": "另類科學家就會推動世界進入革命科學期"
-        },
-        {
-          "type": "text",
-          "text": "原本的另類科學理論贏得共識成為新的典範"
-        },
-        {
-          "type": "text",
-          "text": "這就是科學發展中典範轉移的過程"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "為了忠實傳遞品牌的信念"
-        },
-        {
-          "type": "text",
-          "text": "我們採用最純粹的手法"
-        },
-        {
-          "type": "text",
-          "text": "以毫不張揚的字體作為語言與思想單純的載體"
-        },
-        {
-          "type": "text",
-          "text": "在細節處不斷雕琢只為了完美融合其形態與機能"
-        },
-        {
-          "type": "text",
-          "text": "讓人專注於其真意而避免任何多餘的思考"
-        },
-        {
-          "type": "text",
-          "text": "這樣的信念未來還會繼續體現在更多作品上"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這款印花短 T 的材質、版型、細節設定"
-        },
-        {
-          "type": "text",
-          "text": "同樣採用手感優異的重磅精梳棉、"
-        },
-        {
-          "type": "text",
-          "text": "自然的寬大輪廓與前短後長的剪裁、"
-        },
-        {
-          "type": "text",
-          "text": "極度耐穿的領口與左側袖口的品牌小紅標"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "看似平凡實則細節出色"
-        },
-        {
-          "type": "text",
-          "text": "這樣低調的美好正是我們最想要帶給你的"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "table",
-          "sourceLines": [
-            "　　 　 M　　 L　　 XL",
-            "肩寬　50.0　53.0　54.5",
-            "胸寬　55.5　60.0　62.5",
-            "袖長　25.5　26.5　28.5",
-            "衣長　72.0　74.0　78.0　(cm)"
-          ],
-          "columnCount": 5,
-          "header": [
-            "",
-            "M",
-            "L",
-            "XL",
-            ""
-          ],
-          "body": [
-            [
-              "肩寬",
-              "50.0",
-              "53.0",
-              "54.5",
-              ""
-            ],
-            [
-              "胸寬",
-              "55.5",
-              "60.0",
-              "62.5",
-              ""
-            ],
-            [
-              "袖長",
-              "25.5",
-              "26.5",
-              "28.5",
-              ""
-            ],
-            [
-              "衣長",
-              "72.0",
-              "74.0",
-              "78.0",
-              "(cm)"
-            ]
-          ]
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≤ 173 拿 M"
-        },
-        {
-          "type": "text",
-          "text": "建議身高∊173~178 拿 L"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≥ 178 拿 XL　(cm)"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "hashtag",
-          "text": "#PD14007"
-        }
-      ],
-      "shopeeUrl": "https://shopee.tw/product/74187402/19981596028",
-      "source": {
-        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
-        "documentId": "1alwdm9Z8eezPMx2qso12CGBoK7nnFPirlpqxgjdVXl8",
-        "documentModifiedTime": "2024-10-06T10:09:03.462Z",
-        "imageFiles": []
-      }
-    },
-    {
-      "slug": "aesthetics-tee",
-      "productNumber": "AE14008",
-      "title": "PRDM Aesthetics Tee",
-      "category": "SS Tops",
-      "price": "NT$790",
-      "image": "assets/images/products/aesthetics-tee.webp",
-      "images": [
-        "assets/images/products/aesthetics-tee.webp"
-      ],
-      "media": [
-        {
-          "src": "assets/images/products/aesthetics-tee.webp",
-          "derivatives": []
-        }
-      ],
-      "imageSource": "preserved-existing",
-      "alt": "PRDM Aesthetics Tee product image",
-      "colors": [
-        {
-          "id": "black",
-          "colorId": "black",
-          "label": "Black"
-        },
-        {
-          "id": "white",
-          "colorId": "white",
-          "label": "White"
-        }
-      ],
-      "sizes": [
-        "M",
-        "L",
-        "XL"
-      ],
-      "variants": [
-        {
-          "sku": "AE14008-C01-S1",
-          "color": "Black",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "AE14008-C01-S2",
-          "color": "Black",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "AE14008-C01-S3",
-          "color": "Black",
-          "size": "L",
-          "visible": false,
-          "soldOut": false
-        },
-        {
-          "sku": "AE14008-C01-S4",
-          "color": "Black",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "AE14008-C09-S1",
-          "color": "White",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "AE14008-C09-S2",
-          "color": "White",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "AE14008-C09-S3",
-          "color": "White",
-          "size": "L",
-          "visible": false,
-          "soldOut": false
-        },
-        {
-          "sku": "AE14008-C09-S4",
-          "color": "White",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        }
-      ],
-      "soldOut": false,
-      "description": [
-        {
-          "type": "text",
-          "text": "• Printed graphics on front and back"
-        },
-        {
-          "type": "text",
-          "text": "• 100% combed cotton of 230 g/sqm"
-        },
-        {
-          "type": "text",
-          "text": "• Wide silhouette and longer-back cutting"
-        },
-        {
-          "type": "text",
-          "text": "• Signature tab on sleeve"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這是一款彰顯品牌美學的印花短 T"
-        },
-        {
-          "type": "text",
-          "text": "Aesthetics 是美學及審美的意思"
-        },
-        {
-          "type": "text",
-          "text": "探討著人對美與藝術的評價，例如："
-        },
-        {
-          "type": "text",
-          "text": "具象主義，強調作品模仿真實世界而形塑寫實的美"
-        },
-        {
-          "type": "text",
-          "text": "形式主義，注重作品的構圖與手法是否符合美的原則"
-        },
-        {
-          "type": "text",
-          "text": "表現主義，重視作品為觀看者帶來的情緒反應……"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "為了體現品牌高雅的美學"
-        },
-        {
-          "type": "text",
-          "text": "我們採用精緻的書寫體呈現美學系列 Logo"
-        },
-        {
-          "type": "text",
-          "text": "首波系列作品選用珊瑚粉與寶藍的配色"
-        },
-        {
-          "type": "text",
-          "text": "每一處細節都嘗試著詮釋美學的多重觀點"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這款印花短 T 的材質、版型、細節設定"
-        },
-        {
-          "type": "text",
-          "text": "同樣採用手感優異的重磅精梳棉、"
-        },
-        {
-          "type": "text",
-          "text": "自然的寬大輪廓與前短後長的剪裁、"
-        },
-        {
-          "type": "text",
-          "text": "極度耐穿的領口與左側袖口的品牌小紅標"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "衣服本身優異的設定配合好的圖樣設計"
-        },
-        {
-          "type": "text",
-          "text": "吸引你的注意力並引起愉悅的情緒"
-        },
-        {
-          "type": "text",
-          "text": "這就是我們所要追求的審美體驗"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "table",
-          "sourceLines": [
-            "　　 　 M　　 L　　 XL",
-            "肩寬　50.0　53.0　54.5",
-            "胸寬　55.5　60.0　62.5",
-            "袖長　25.5　26.5　28.5",
-            "衣長　72.0　74.0　78.0　(cm)"
-          ],
-          "columnCount": 5,
-          "header": [
-            "",
-            "M",
-            "L",
-            "XL",
-            ""
-          ],
-          "body": [
-            [
-              "肩寬",
-              "50.0",
-              "53.0",
-              "54.5",
-              ""
-            ],
-            [
-              "胸寬",
-              "55.5",
-              "60.0",
-              "62.5",
-              ""
-            ],
-            [
-              "袖長",
-              "25.5",
-              "26.5",
-              "28.5",
-              ""
-            ],
-            [
-              "衣長",
-              "72.0",
-              "74.0",
-              "78.0",
-              "(cm)"
-            ]
-          ]
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≤ 173 拿 M"
-        },
-        {
-          "type": "text",
-          "text": "建議身高∊173~178 拿 L"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≥ 178 拿 XL　(cm)"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "hashtag",
-          "text": "#AE14008"
-        }
-      ],
-      "shopeeUrl": "https://shopee.tw/product/74187402/23547627231",
-      "source": {
-        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
-        "documentId": "1ZTYOjqKVtN6kTEyBGZvSVm4JBtvqm5iecBDcQTGTMc4",
-        "documentModifiedTime": "2023-07-09T10:35:20.364Z",
-        "imageFiles": []
-      }
-    },
-    {
-      "slug": "timeless-tee",
-      "productNumber": "TL14009",
-      "title": "PRDM Timeless Tee",
-      "category": "SS Tops",
-      "price": "NT$790",
-      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-      "images": [
-        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
-      ],
-      "media": [
-        {
-          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-          "width": 1080,
-          "height": 1080,
-          "isFallback": true,
-          "derivatives": [
-            {
-              "shortEdge": 540,
-              "width": 540,
-              "height": 540,
-              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
-              "bytes": 3112,
-              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
-            },
-            {
-              "shortEdge": 1080,
-              "width": 1080,
-              "height": 1080,
-              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-              "bytes": 7424,
-              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
-            },
-            {
-              "shortEdge": 2160,
-              "width": 2160,
-              "height": 2160,
-              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
-              "bytes": 18982,
-              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
-            }
-          ]
-        }
-      ],
-      "imageSource": "fallback",
-      "alt": "",
-      "colors": [
-        {
-          "id": "black",
-          "colorId": "black",
-          "label": "Black"
-        },
-        {
-          "id": "white",
-          "colorId": "white",
-          "label": "White"
-        }
-      ],
-      "sizes": [
-        "M",
-        "L",
-        "XL"
-      ],
-      "variants": [
-        {
-          "sku": "TL14009-C01-S1",
-          "color": "Black",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "TL14009-C01-S2",
-          "color": "Black",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "TL14009-C01-S3",
-          "color": "Black",
-          "size": "L",
-          "visible": false,
-          "soldOut": false
-        },
-        {
-          "sku": "TL14009-C01-S4",
-          "color": "Black",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "TL14009-C09-S1",
-          "color": "White",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "TL14009-C09-S2",
-          "color": "White",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "TL14009-C09-S3",
-          "color": "White",
-          "size": "L",
-          "visible": false,
-          "soldOut": false
-        },
-        {
-          "sku": "TL14009-C09-S4",
-          "color": "White",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        }
-      ],
-      "soldOut": false,
-      "description": [
-        {
-          "type": "text",
-          "text": "• Printed graphics on front and back"
-        },
-        {
-          "type": "text",
-          "text": "• 100% combed cotton of 230 g/sqm"
-        },
-        {
-          "type": "text",
-          "text": "• Wide silhouette and longer-back cutting"
-        },
-        {
-          "type": "text",
-          "text": "• Signature tab on sleeve"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這是一款在探討品牌理念的印花短 T"
-        },
-        {
-          "type": "text",
-          "text": "Timeless 一般翻作永恆"
-        },
-        {
-          "type": "text",
-          "text": "是一個超越時間性的概念"
-        },
-        {
-          "type": "text",
-          "text": "正如我們所追求的創作境界"
-        },
-        {
-          "type": "text",
-          "text": "就是在時間的維度之外"
-        },
-        {
-          "type": "text",
-          "text": "也能有當代藝術性的展現"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "我們從不追求浮誇的剪裁與結構"
-        },
-        {
-          "type": "text",
-          "text": "而是回歸最本質性的原型"
-        },
-        {
-          "type": "text",
-          "text": "改良成現在流行而未來也不會過時的型態"
-        },
-        {
-          "type": "text",
-          "text": "同時技巧性地融入當季創意來創造變化"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這款印花短 T 的材質、版型、細節設定"
-        },
-        {
-          "type": "text",
-          "text": "同樣採用手感優異的重磅精梳棉、"
-        },
-        {
-          "type": "text",
-          "text": "自然的寬大輪廓與前短後長的剪裁、"
-        },
-        {
-          "type": "text",
-          "text": "極度耐穿的領口與左側袖口的品牌小紅標"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "將基礎的短 T 版型改良成現在流行的自然寬大輪廓"
-        },
-        {
-          "type": "text",
-          "text": "配合低調又超好看的復古科技感圖樣設計"
-        },
-        {
-          "type": "text",
-          "text": "相信你很快就能理解我們所謂的品牌理念"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "table",
-          "sourceLines": [
-            "　　 　 M　　 L　　 XL",
-            "肩寬　50.0　53.0　54.5",
-            "胸寬　55.5　60.0　62.5",
-            "袖長　25.5　26.5　28.5",
-            "衣長　72.0　74.0　78.0　(cm)"
-          ],
-          "columnCount": 5,
-          "header": [
-            "",
-            "M",
-            "L",
-            "XL",
-            ""
-          ],
-          "body": [
-            [
-              "肩寬",
-              "50.0",
-              "53.0",
-              "54.5",
-              ""
-            ],
-            [
-              "胸寬",
-              "55.5",
-              "60.0",
-              "62.5",
-              ""
-            ],
-            [
-              "袖長",
-              "25.5",
-              "26.5",
-              "28.5",
-              ""
-            ],
-            [
-              "衣長",
-              "72.0",
-              "74.0",
-              "78.0",
-              "(cm)"
-            ]
-          ]
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≤ 173 拿 M"
-        },
-        {
-          "type": "text",
-          "text": "建議身高∊173~178 拿 L"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≥ 178 拿 XL　(cm)"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "hashtag",
-          "text": "#TL14009"
-        }
-      ],
-      "shopeeUrl": "https://shopee.tw/product/74187402/10299499306",
-      "source": {
-        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
-        "documentId": "1uvVHm8KEXhkbwuPISepZ_mgYtSYbQJP2WZT47oej2q0",
-        "documentModifiedTime": "2023-08-04T19:43:16.186Z",
-        "imageFiles": []
-      }
-    },
-    {
-      "slug": "partnership-football-jersey",
-      "productNumber": "PH14010",
-      "title": "PRDM Partnership Football Jersey",
-      "category": "SS Tops",
-      "price": "NT$990",
-      "image": "assets/images/products/partnership-football-jersey.webp",
-      "images": [
-        "assets/images/products/partnership-football-jersey.webp"
-      ],
-      "media": [
-        {
-          "src": "assets/images/products/partnership-football-jersey.webp",
-          "derivatives": []
-        }
-      ],
-      "imageSource": "preserved-existing",
-      "alt": "PRDM Partnership Football Jersey product image",
-      "colors": [
-        {
-          "id": "black",
-          "colorId": "black",
-          "label": "Black"
-        },
-        {
-          "id": "white",
-          "colorId": "white",
-          "label": "White"
-        },
-        {
-          "id": "cardinal",
-          "colorId": "cardinal",
-          "label": "Cardinal"
-        }
-      ],
-      "sizes": [
-        "M",
-        "L",
-        "XL"
-      ],
-      "variants": [
-        {
-          "sku": "PH14010-C01-S4",
-          "color": "Black",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PH14010-C01-S5",
-          "color": "Black",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PH14010-C01-S6",
-          "color": "Black",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PH14010-C09-S4",
-          "color": "White",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PH14010-C09-S5",
-          "color": "White",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PH14010-C09-S6",
-          "color": "White",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PH14010-C13-S4",
-          "color": "Cardinal",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PH14010-C13-S5",
-          "color": "Cardinal",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PH14010-C13-S6",
-          "color": "Cardinal",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        }
-      ],
-      "soldOut": false,
-      "description": [
-        {
-          "type": "text",
-          "text": "• Printed graphics, embroidery and all-over pattern"
-        },
-        {
-          "type": "text",
-          "text": "• 100% premium polyester"
-        },
-        {
-          "type": "text",
-          "text": "• Wide silhouette and striped ribbing"
-        },
-        {
-          "type": "text",
-          "text": "• Signature tab on sleeve"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這是一款全新的運動休閒短 T"
-        },
-        {
-          "type": "text",
-          "text": "為了結合運動服飾的機能與休閒服飾的質感"
-        },
-        {
-          "type": "text",
-          "text": "我們選擇從足球衣的型態切入"
-        },
-        {
-          "type": "text",
-          "text": "打造現代生活必備的運動休閒系列"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "對於運動型態與休閒型態的權衡"
-        },
-        {
-          "type": "text",
-          "text": "採用手感紮實的重磅面料來中和運動氣息"
-        },
-        {
-          "type": "text",
-          "text": "同時加入特殊涼感纖維以維持必備機能"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "為了兼顧不同穿著風格的需求"
-        },
-        {
-          "type": "text",
-          "text": "正常尺寸的版型設定為歐美流行的合身輪廓"
-        },
-        {
-          "type": "text",
-          "text": "拿大一號則可以穿出亞洲持續延燒的寬鬆風格"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "因為要在休閒場合享受運動服飾的舒適"
-        },
-        {
-          "type": "text",
-          "text": "也要在運動時追求休閒服飾的風格與魅力"
-        },
-        {
-          "type": "text",
-          "text": "我們自各項賽事的復古球衣汲取靈感"
-        },
-        {
-          "type": "text",
-          "text": "在領口及袖口都採用厚實的羅紋滾邊"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "Athleisure、Blokecore、Clean Fit 的流行都有段時間了"
-        },
-        {
-          "type": "text",
-          "text": "我們推出運動休閒系列不是要追逐潮流"
-        },
-        {
-          "type": "text",
-          "text": "而是要結合時代中最單純的形式與機能"
-        },
-        {
-          "type": "text",
-          "text": "這樣的美學曾是新潮的象徵"
-        },
-        {
-          "type": "text",
-          "text": "也將成為永恆的趨勢"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "table",
-          "sourceLines": [
-            "　　 　 M　　 L　　 XL",
-            "肩寬　53.0　54.5　56.0",
-            "胸寬　56.5　59.0　61.5",
-            "袖長　23.5　24.5　25.5",
-            "衣長　71.0　73.0　75.0　(cm)"
-          ],
-          "columnCount": 5,
-          "header": [
-            "",
-            "M",
-            "L",
-            "XL",
-            ""
-          ],
-          "body": [
-            [
-              "肩寬",
-              "53.0",
-              "54.5",
-              "56.0",
-              ""
-            ],
-            [
-              "胸寬",
-              "56.5",
-              "59.0",
-              "61.5",
-              ""
-            ],
-            [
-              "袖長",
-              "23.5",
-              "24.5",
-              "25.5",
-              ""
-            ],
-            [
-              "衣長",
-              "71.0",
-              "73.0",
-              "75.0",
-              "(cm)"
-            ]
-          ]
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≤ 173 拿 M"
-        },
-        {
-          "type": "text",
-          "text": "建議身高∊173~178 拿 L"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≥ 178 拿 XL　(cm)"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "hashtag",
-          "text": "#PH14010"
-        }
-      ],
-      "shopeeUrl": "https://shopee.tw/product/74187402/23179857649",
-      "source": {
-        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
-        "documentId": "1kMpoFwEuRWvOvXjbZ8zTKJgfyjytFuZtX6_W9lPle3Y",
-        "documentModifiedTime": "2023-09-06T13:31:58.241Z",
-        "imageFiles": []
-      }
-    },
-    {
-      "slug": "sponsorship-football-jersey",
-      "productNumber": "PH14011",
-      "title": "PRDM Sponsorship Football Jersey",
-      "category": "SS Tops",
-      "price": "NT$990",
-      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-      "images": [
-        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
-      ],
-      "media": [
-        {
-          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-          "width": 1080,
-          "height": 1080,
-          "isFallback": true,
-          "derivatives": [
-            {
-              "shortEdge": 540,
-              "width": 540,
-              "height": 540,
-              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
-              "bytes": 3112,
-              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
-            },
-            {
-              "shortEdge": 1080,
-              "width": 1080,
-              "height": 1080,
-              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-              "bytes": 7424,
-              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
-            },
-            {
-              "shortEdge": 2160,
-              "width": 2160,
-              "height": 2160,
-              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
-              "bytes": 18982,
-              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
-            }
-          ]
-        }
-      ],
-      "imageSource": "fallback",
-      "alt": "",
-      "colors": [
-        {
-          "id": "black",
-          "colorId": "black",
-          "label": "Black"
-        },
-        {
-          "id": "white",
-          "colorId": "white",
-          "label": "White"
-        },
-        {
-          "id": "cardinal",
-          "colorId": "cardinal",
-          "label": "Cardinal"
-        }
-      ],
-      "sizes": [
-        "M",
-        "L",
-        "XL"
-      ],
-      "variants": [
-        {
-          "sku": "PH14011-C01-S4",
-          "color": "Black",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PH14011-C01-S5",
-          "color": "Black",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PH14011-C01-S6",
-          "color": "Black",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PH14011-C09-S4",
-          "color": "White",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PH14011-C09-S5",
-          "color": "White",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PH14011-C09-S6",
-          "color": "White",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PH14011-C13-S4",
-          "color": "Cardinal",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PH14011-C13-S5",
-          "color": "Cardinal",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PH14011-C13-S6",
-          "color": "Cardinal",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PH14011-C01-S4",
-          "color": "Black",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "PH14011-C09-S4",
-          "color": "White",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        }
-      ],
-      "soldOut": false,
-      "description": [
-        {
-          "type": "text",
-          "text": "• Printed graphics and all-over pattern"
-        },
-        {
-          "type": "text",
-          "text": "• Premium polyester and striped ribbing"
-        },
-        {
-          "type": "text",
-          "text": "• Moderately wide silhouette"
-        },
-        {
-          "type": "text",
-          "text": "• Signature tab on sleeve"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這是一款全新的運動休閒短 T"
-        },
-        {
-          "type": "text",
-          "text": "為了結合運動服飾的機能與休閒服飾的質感"
-        },
-        {
-          "type": "text",
-          "text": "我們選擇從足球衣的型態切入"
-        },
-        {
-          "type": "text",
-          "text": "打造現代生活必備的運動休閒系列"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "對於運動型態與休閒型態的權衡"
-        },
-        {
-          "type": "text",
-          "text": "採用手感紮實的重磅面料來中和運動氣息"
-        },
-        {
-          "type": "text",
-          "text": "同時加入特殊涼感纖維以維持必備機能"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "為了兼顧不同穿著風格的需求"
-        },
-        {
-          "type": "text",
-          "text": "正常尺寸的版型設定為歐美流行的合身輪廓"
-        },
-        {
-          "type": "text",
-          "text": "拿大一號則可以穿出亞洲持續延燒的寬鬆風格"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "因為要在休閒場合享受運動服飾的舒適"
-        },
-        {
-          "type": "text",
-          "text": "也要在運動時追求休閒服飾的風格與魅力"
-        },
-        {
-          "type": "text",
-          "text": "我們自各項賽事的復古球衣汲取靈感"
-        },
-        {
-          "type": "text",
-          "text": "在領口及袖口都採用厚實的羅紋滾邊"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "Athleisure、Blokecore、Clean Fit 的流行都有段時間了"
-        },
-        {
-          "type": "text",
-          "text": "我們推出運動休閒系列不是要追逐潮流"
-        },
-        {
-          "type": "text",
-          "text": "而是要結合時代中最單純的形式與機能"
-        },
-        {
-          "type": "text",
-          "text": "這樣的美學曾是新潮的象徵"
-        },
-        {
-          "type": "text",
-          "text": "也將成為永恆的趨勢"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "table",
-          "sourceLines": [
-            "　　 　 M　　 L　　 XL",
-            "肩寬　53.0　54.5　56.0",
-            "胸寬　56.5　59.0　61.5",
-            "袖長　23.5　24.5　25.5",
-            "衣長　71.0　73.0　75.0　(cm)"
-          ],
-          "columnCount": 5,
-          "header": [
-            "",
-            "M",
-            "L",
-            "XL",
-            ""
-          ],
-          "body": [
-            [
-              "肩寬",
-              "53.0",
-              "54.5",
-              "56.0",
-              ""
-            ],
-            [
-              "胸寬",
-              "56.5",
-              "59.0",
-              "61.5",
-              ""
-            ],
-            [
-              "袖長",
-              "23.5",
-              "24.5",
-              "25.5",
-              ""
-            ],
-            [
-              "衣長",
-              "71.0",
-              "73.0",
-              "75.0",
-              "(cm)"
-            ]
-          ]
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≤ 173 拿 M"
-        },
-        {
-          "type": "text",
-          "text": "建議身高∊173~178 拿 L"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≥ 178 拿 XL　(cm)"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "hashtag",
-          "text": "#PH14011"
-        }
-      ],
-      "shopeeUrl": "https://shopee.tw/product/74187402/20584010303",
-      "source": {
-        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
-        "documentId": "1ZAaP4MaDIt0A9fR2qJm9PTLemTWdX_qLPXVR5KvmvNQ",
-        "documentModifiedTime": "2023-09-10T13:55:34.875Z",
-        "imageFiles": []
-      }
-    },
-    {
-      "slug": "everyday-hoodie",
-      "productNumber": "ED24014",
-      "title": "PRDM Everyday Hoodie",
-      "category": "AW Tops",
-      "price": "NT$1,180",
-      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-      "images": [
-        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
-      ],
-      "media": [
-        {
-          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-          "width": 1080,
-          "height": 1080,
-          "isFallback": true,
-          "derivatives": [
-            {
-              "shortEdge": 540,
-              "width": 540,
-              "height": 540,
-              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
-              "bytes": 3112,
-              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
-            },
-            {
-              "shortEdge": 1080,
-              "width": 1080,
-              "height": 1080,
-              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-              "bytes": 7424,
-              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
-            },
-            {
-              "shortEdge": 2160,
-              "width": 2160,
-              "height": 2160,
-              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
-              "bytes": 18982,
-              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
-            }
-          ]
-        }
-      ],
-      "imageSource": "fallback",
-      "alt": "",
-      "colors": [
-        {
-          "id": "black",
-          "colorId": "black",
-          "label": "Black"
-        },
-        {
-          "id": "midnight",
-          "colorId": "midnight",
-          "label": "Midnight"
-        }
-      ],
-      "sizes": [
-        "M",
-        "L",
-        "XL"
-      ],
-      "variants": [
-        {
-          "sku": "ED24014-C01-S4",
-          "color": "Black",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "ED24014-C01-S5",
-          "color": "Black",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "ED24014-C01-S6",
-          "color": "Black",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "ED24014-C61-S4",
-          "color": "Midnight",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "ED24014-C61-S5",
-          "color": "Midnight",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "ED24014-C61-S6",
-          "color": "Midnight",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        }
-      ],
-      "soldOut": false,
-      "description": [
-        {
-          "type": "text",
-          "text": "• 100% cotton loopback jersey of 350 g/sqm"
-        },
-        {
-          "type": "text",
-          "text": "• Boxy silhouette and longer-back cutting"
-        },
-        {
-          "type": "text",
-          "text": "• Watch pocket inside the kangaroo pocket"
-        },
-        {
-          "type": "text",
-          "text": "• Signature tab on sleeve"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這是一款寬鬆、微短版的重磅毛圈布帽 T"
-        },
-        {
-          "type": "text",
-          "text": "考量到台灣的副熱帶氣候、日益嚴重的全球暖化"
-        },
-        {
-          "type": "text",
-          "text": "特別選用手感紮實的重磅毛圈布來製作"
-        },
-        {
-          "type": "text",
-          "text": "重磅毛圈布比起刷毛內裏更加實穿"
-        },
-        {
-          "type": "text",
-          "text": "同時也能改善一般毛圈布輕薄、柔軟的缺點"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "目前 Paradigm® 的基礎款式仍秉持 Mono-Material 的原則"
-        },
-        {
-          "type": "text",
-          "text": "面料與輔料皆採用單一天然素材製成"
-        },
-        {
-          "type": "text",
-          "text": "純棉面料有著最好的親膚性、透氣性"
-        },
-        {
-          "type": "text",
-          "text": "因此能帶來最舒適的穿著感受"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "為了呈現連貫的寬鬆感"
-        },
-        {
-          "type": "text",
-          "text": "我們採用垂墜感優異的面料與極寬鬆的袖管設定"
-        },
-        {
-          "type": "text",
-          "text": "微短版的衣長有助於修飾身形比例"
-        },
-        {
-          "type": "text",
-          "text": "如果你想要追求更短版的效果"
-        },
-        {
-          "type": "text",
-          "text": "也可以選擇著用小一號的尺寸"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "因為我們在極簡外觀下仍對功能性有所追求"
-        },
-        {
-          "type": "text",
-          "text": "在口袋內側額外增加了隱藏小口袋"
-        },
-        {
-          "type": "text",
-          "text": "便於放置零錢或是鑰匙、卡片、耳機……"
-        },
-        {
-          "type": "text",
-          "text": "這樣的設定也會延續到我們未來的單品"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "最實穿的重磅毛圈布、寬短版輪廓、隱藏小口袋"
-        },
-        {
-          "type": "text",
-          "text": "為你顧及冬季的每個日常細節"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "table",
-          "sourceLines": [
-            "　　 　 M　　 L　　 XL",
-            "肩寬　60.0　62.5　65.0",
-            "胸寬　63.0　65.5　68.0",
-            "袖長　60.0　61.5　63.0",
-            "衣長　68.5　71.0　73.5　(cm)"
-          ],
-          "columnCount": 5,
-          "header": [
-            "",
-            "M",
-            "L",
-            "XL",
-            ""
-          ],
-          "body": [
-            [
-              "肩寬",
-              "60.0",
-              "62.5",
-              "65.0",
-              ""
-            ],
-            [
-              "胸寬",
-              "63.0",
-              "65.5",
-              "68.0",
-              ""
-            ],
-            [
-              "袖長",
-              "60.0",
-              "61.5",
-              "63.0",
-              ""
-            ],
-            [
-              "衣長",
-              "68.5",
-              "71.0",
-              "73.5",
-              "(cm)"
-            ]
-          ]
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≤ 173 拿 M"
-        },
-        {
-          "type": "text",
-          "text": "建議身高∊173~178 拿 L"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≥ 178 拿 XL　(cm)"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "hashtag",
-          "text": "#ED24014"
-        }
-      ],
-      "shopeeUrl": "https://shopee.tw/product/74187402/16896877458",
-      "source": {
-        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
-        "documentId": "1ol0PufPtJbophXjd6Bg7jCvSVy3ETyUGaTzA2BTYwpo",
-        "documentModifiedTime": "2023-12-14T13:14:36.190Z",
-        "imageFiles": []
-      }
-    },
-    {
-      "slug": "paradigm-hoodie",
-      "productNumber": "PD24015",
-      "title": "PRDM Paradigm Hoodie",
-      "category": "AW Tops",
-      "price": "NT$1,380",
-      "image": "assets/images/products/paradigm-hoodie.webp",
-      "images": [
-        "assets/images/products/paradigm-hoodie.webp"
-      ],
-      "media": [
-        {
-          "src": "assets/images/products/paradigm-hoodie.webp",
-          "derivatives": []
-        }
-      ],
-      "imageSource": "preserved-existing",
-      "alt": "PRDM Paradigm Hoodie product image",
-      "colors": [
-        {
-          "id": "black",
-          "colorId": "black",
-          "label": "Black"
-        },
-        {
-          "id": "midnight",
-          "colorId": "midnight",
-          "label": "Midnight"
-        }
-      ],
-      "sizes": [
-        "M",
-        "L",
-        "XL"
-      ],
-      "variants": [
-        {
-          "sku": "PD24015-C01-S4",
-          "color": "Black",
-          "size": "M",
-          "visible": true,
-          "soldOut": true
-        },
-        {
-          "sku": "PD24015-C01-S5",
-          "color": "Black",
-          "size": "L",
-          "visible": true,
-          "soldOut": true
-        },
-        {
-          "sku": "PD24015-C01-S6",
-          "color": "Black",
-          "size": "XL",
-          "visible": true,
-          "soldOut": true
-        },
-        {
-          "sku": "PD24015-C61-S4",
-          "color": "Midnight",
-          "size": "M",
-          "visible": true,
-          "soldOut": true
-        },
-        {
-          "sku": "PD24015-C61-S5",
-          "color": "Midnight",
-          "size": "L",
-          "visible": true,
-          "soldOut": true
-        },
-        {
-          "sku": "PD24015-C61-S6",
-          "color": "Midnight",
-          "size": "XL",
-          "visible": true,
-          "soldOut": true
-        }
-      ],
-      "soldOut": true,
-      "description": [
-        {
-          "type": "text",
-          "text": "• Printed graphics on front and back"
-        },
-        {
-          "type": "text",
-          "text": "• 100% cotton loopback jersey of 350 g/sqm"
-        },
-        {
-          "type": "text",
-          "text": "• Boxy silhouette and longer-back cutting"
-        },
-        {
-          "type": "text",
-          "text": "• Watch pocket inside the kangaroo pocket"
-        },
-        {
-          "type": "text",
-          "text": "• Signature tab on sleeve"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "Paradigm 款式是我們的定番系列"
-        },
-        {
-          "type": "text",
-          "text": "印有象徵著品牌經典的圖樣"
-        },
-        {
-          "type": "text",
-          "text": "為了忠實傳達品牌信念"
-        },
-        {
-          "type": "text",
-          "text": "我們採用最純粹、不張揚的字體呈現"
-        },
-        {
-          "type": "text",
-          "text": "成為語言與思想的透明載體"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這款印花帽 T 的面料設定"
-        },
-        {
-          "type": "text",
-          "text": "同樣是最適合台灣的重磅毛圈布"
-        },
-        {
-          "type": "text",
-          "text": "兼顧外觀的立體度以及優異的舒適度、實穿性"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "極寬的袖管讓整體輪廓的寬鬆感更一致"
-        },
-        {
-          "type": "text",
-          "text": "微短版的衣長有助於修飾身形比例"
-        },
-        {
-          "type": "text",
-          "text": "選擇小一號的尺寸可以穿出更短版的效果"
-        },
-        {
-          "type": "text",
-          "text": "我們在口袋內側額外增加了隱藏小口袋"
-        },
-        {
-          "type": "text",
-          "text": "便於放置零錢或是鑰匙、卡片、耳機……"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "我們在面料、版型、機能上努力"
-        },
-        {
-          "type": "text",
-          "text": "就是要為你打造這款最強帽 T"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "table",
-          "sourceLines": [
-            "　　 　 M　　 L　　 XL",
-            "肩寬　60.0　62.5　65.0",
-            "胸寬　63.0　65.5　68.0",
-            "袖長　60.0　61.5　63.0",
-            "衣長　68.5　71.0　73.5　(cm)"
-          ],
-          "columnCount": 5,
-          "header": [
-            "",
-            "M",
-            "L",
-            "XL",
-            ""
-          ],
-          "body": [
-            [
-              "肩寬",
-              "60.0",
-              "62.5",
-              "65.0",
-              ""
-            ],
-            [
-              "胸寬",
-              "63.0",
-              "65.5",
-              "68.0",
-              ""
-            ],
-            [
-              "袖長",
-              "60.0",
-              "61.5",
-              "63.0",
-              ""
-            ],
-            [
-              "衣長",
-              "68.5",
-              "71.0",
-              "73.5",
-              "(cm)"
-            ]
-          ]
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≤ 173 拿 M"
-        },
-        {
-          "type": "text",
-          "text": "建議身高∊173~178 拿 L"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≥ 178 拿 XL　(cm)"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "hashtag",
-          "text": "#PD24015"
-        }
-      ],
-      "shopeeUrl": "https://shopee.tw/product/74187402/24954802571",
-      "source": {
-        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
-        "documentId": "1KQSh_asCWjez3inG646Y_t3afxyfbdaaZBryy88opuw",
-        "documentModifiedTime": "2023-12-17T13:43:01.981Z",
-        "imageFiles": []
-      }
-    },
-    {
-      "slug": "aesthetics-crewneck",
-      "productNumber": "AE23016",
-      "title": "PRDM Aesthetics Crewneck",
-      "category": "AW Tops",
-      "price": "NT$1,180",
-      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-      "images": [
-        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
-      ],
-      "media": [
-        {
-          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-          "width": 1080,
-          "height": 1080,
-          "isFallback": true,
-          "derivatives": [
-            {
-              "shortEdge": 540,
-              "width": 540,
-              "height": 540,
-              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
-              "bytes": 3112,
-              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
-            },
-            {
-              "shortEdge": 1080,
-              "width": 1080,
-              "height": 1080,
-              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-              "bytes": 7424,
-              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
-            },
-            {
-              "shortEdge": 2160,
-              "width": 2160,
-              "height": 2160,
-              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
-              "bytes": 18982,
-              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
-            }
-          ]
-        }
-      ],
-      "imageSource": "fallback",
-      "alt": "",
-      "colors": [
-        {
-          "id": "black",
-          "colorId": "black",
-          "label": "Black"
-        },
-        {
-          "id": "grey",
-          "colorId": "grey",
-          "label": "Grey"
-        }
-      ],
-      "sizes": [
-        "M",
-        "L",
-        "XL"
-      ],
-      "variants": [
-        {
-          "sku": "AE23016-C01-S1",
-          "color": "Black",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "AE23016-C01-S2",
-          "color": "Black",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "AE23016-C01-S4",
-          "color": "Black",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "AE23016-C05-S1",
-          "color": "Grey",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "AE23016-C05-S2",
-          "color": "Grey",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "AE23016-C05-S4",
-          "color": "Grey",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        }
-      ],
-      "soldOut": false,
-      "description": [
-        {
-          "type": "text",
-          "text": "• Printed graphics on front and back"
-        },
-        {
-          "type": "text",
-          "text": "• 100% cotton loopback jersey of 350 g/sqm"
-        },
-        {
-          "type": "text",
-          "text": "• Wide silhouette and longer-back cutting"
-        },
-        {
-          "type": "text",
-          "text": "• Signature tab on sleeve"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "Aesthetics 款式是我們的定番系列"
-        },
-        {
-          "type": "text",
-          "text": "以精美的書寫體彰顯品牌美學"
-        },
-        {
-          "type": "text",
-          "text": "在這系列我們喜歡選用較跳脫的配色"
-        },
-        {
-          "type": "text",
-          "text": "兼顧明度、飽和度的流行色彩"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這款印花大學 T 的面料設定"
-        },
-        {
-          "type": "text",
-          "text": "同樣是優秀的重磅毛圈布"
-        },
-        {
-          "type": "text",
-          "text": "兼顧外觀的立體度以及在台灣的實穿性"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "寬鬆的袖管讓整體輪廓的寬鬆感更自然"
-        },
-        {
-          "type": "text",
-          "text": "領口是最費工的鑲嵌型羅紋裁片"
-        },
-        {
-          "type": "text",
-          "text": "加強領口彈性、壽命及層次感"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "我們在每個細節上的雕琢"
-        },
-        {
-          "type": "text",
-          "text": "都是為了讓你在低調中感受美好"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "table",
-          "sourceLines": [
-            "　　 　 M　　 L　　 XL",
-            "肩寬　60.0　63.0　64.5",
-            "胸寬　66.0　71.0　73.5",
-            "袖長　56.0　57.0　59.0",
-            "衣長　71.0　73.0　77.0　(cm)"
-          ],
-          "columnCount": 5,
-          "header": [
-            "",
-            "M",
-            "L",
-            "XL",
-            ""
-          ],
-          "body": [
-            [
-              "肩寬",
-              "60.0",
-              "63.0",
-              "64.5",
-              ""
-            ],
-            [
-              "胸寬",
-              "66.0",
-              "71.0",
-              "73.5",
-              ""
-            ],
-            [
-              "袖長",
-              "56.0",
-              "57.0",
-              "59.0",
-              ""
-            ],
-            [
-              "衣長",
-              "71.0",
-              "73.0",
-              "77.0",
-              "(cm)"
-            ]
-          ]
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≤ 173 拿 M"
-        },
-        {
-          "type": "text",
-          "text": "建議身高∊173~178 拿 L"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≥ 178 拿 XL　(cm)"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "hashtag",
-          "text": "#AE23016"
-        }
-      ],
-      "shopeeUrl": "https://shopee.tw/product/74187402/25104801884",
-      "source": {
-        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
-        "documentId": "14r-yXVpvkjhhFNzxcvIVACwO4DvjDOYoH6LreYOXNcA",
-        "documentModifiedTime": "2023-12-21T17:47:20.050Z",
-        "imageFiles": []
-      }
-    },
-    {
-      "slug": "aesthetics-hoodie",
-      "productNumber": "AE24017",
-      "title": "PRDM Aesthetics Hoodie",
-      "category": "AW Tops",
-      "price": "NT$1,380",
-      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-      "images": [
-        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
-      ],
-      "media": [
-        {
-          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-          "width": 1080,
-          "height": 1080,
-          "isFallback": true,
-          "derivatives": [
-            {
-              "shortEdge": 540,
-              "width": 540,
-              "height": 540,
-              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
-              "bytes": 3112,
-              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
-            },
-            {
-              "shortEdge": 1080,
-              "width": 1080,
-              "height": 1080,
-              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-              "bytes": 7424,
-              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
-            },
-            {
-              "shortEdge": 2160,
-              "width": 2160,
-              "height": 2160,
-              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
-              "bytes": 18982,
-              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
-            }
-          ]
-        }
-      ],
-      "imageSource": "fallback",
-      "alt": "",
-      "colors": [
-        {
-          "id": "black",
-          "colorId": "black",
-          "label": "Black"
-        },
-        {
-          "id": "midnight",
-          "colorId": "midnight",
-          "label": "Midnight"
-        }
-      ],
-      "sizes": [
-        "M",
-        "L",
-        "XL"
-      ],
-      "variants": [
-        {
-          "sku": "AE24017-C01-S4",
-          "color": "Black",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "AE24017-C01-S5",
-          "color": "Black",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "AE24017-C01-S6",
-          "color": "Black",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "AE24017-C61-S4",
-          "color": "Midnight",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "AE24017-C61-S5",
-          "color": "Midnight",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "AE24017-C61-S6",
-          "color": "Midnight",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        }
-      ],
-      "soldOut": false,
-      "description": [
-        {
-          "type": "text",
-          "text": "• Printed graphics on front and back"
-        },
-        {
-          "type": "text",
-          "text": "• 100% cotton loopback jersey of 350 g/sqm"
-        },
-        {
-          "type": "text",
-          "text": "• Boxy silhouette and longer-back cutting"
-        },
-        {
-          "type": "text",
-          "text": "• Watch pocket inside the kangaroo pocket"
-        },
-        {
-          "type": "text",
-          "text": "• Signature tab on sleeve"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "Aesthetics 款式是我們的定番系列"
-        },
-        {
-          "type": "text",
-          "text": "以精美的書寫體彰顯品牌美學"
-        },
-        {
-          "type": "text",
-          "text": "在這系列我們喜歡選用較跳脫的配色"
-        },
-        {
-          "type": "text",
-          "text": "兼顧明度、飽和度的流行色彩"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這款印花帽 T 的面料設定"
-        },
-        {
-          "type": "text",
-          "text": "同樣是最適合台灣的重磅毛圈布"
-        },
-        {
-          "type": "text",
-          "text": "兼顧外觀的立體度以及優異的舒適度、實穿性"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "極寬的袖管讓整體輪廓的寬鬆感更一致"
-        },
-        {
-          "type": "text",
-          "text": "微短版的衣長有助於修飾身形比例"
-        },
-        {
-          "type": "text",
-          "text": "選擇小一號的尺寸可以穿出更短版的效果"
-        },
-        {
-          "type": "text",
-          "text": "我們在口袋內側額外增加了隱藏小口袋"
-        },
-        {
-          "type": "text",
-          "text": "便於放置零錢或是鑰匙、卡片、耳機……"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "我們在面料、版型、機能上努力"
-        },
-        {
-          "type": "text",
-          "text": "就是要為你打造這款最強帽 T"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "table",
-          "sourceLines": [
-            "　　 　 M　　 L　　 XL",
-            "肩寬　60.0　62.5　65.0",
-            "胸寬　63.0　65.5　68.0",
-            "袖長　60.0　61.5　63.0",
-            "衣長　68.5　71.0　73.5　(cm)"
-          ],
-          "columnCount": 5,
-          "header": [
-            "",
-            "M",
-            "L",
-            "XL",
-            ""
-          ],
-          "body": [
-            [
-              "肩寬",
-              "60.0",
-              "62.5",
-              "65.0",
-              ""
-            ],
-            [
-              "胸寬",
-              "63.0",
-              "65.5",
-              "68.0",
-              ""
-            ],
-            [
-              "袖長",
-              "60.0",
-              "61.5",
-              "63.0",
-              ""
-            ],
-            [
-              "衣長",
-              "68.5",
-              "71.0",
-              "73.5",
-              "(cm)"
-            ]
-          ]
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≤ 173 拿 M"
-        },
-        {
-          "type": "text",
-          "text": "建議身高∊173~178 拿 L"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≥ 178 拿 XL　(cm)"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "hashtag",
-          "text": "#AE24017"
-        }
-      ],
-      "shopeeUrl": "https://shopee.tw/product/74187402/25254807185",
-      "source": {
-        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
-        "documentId": "1DtFGhWxl5jfVhzU2-xSMmHlHW5em4hg4MbHwGQIxVZ4",
-        "documentModifiedTime": "2023-12-23T10:26:39.626Z",
-        "imageFiles": []
-      }
-    },
-    {
-      "slug": "timeless-crewneck",
-      "productNumber": "TL23018",
-      "title": "PRDM Timeless Crewneck",
-      "category": "AW Tops",
-      "price": "NT$1,180",
-      "image": "assets/images/products/timeless-crewneck.webp",
-      "images": [
-        "assets/images/products/timeless-crewneck.webp"
-      ],
-      "media": [
-        {
-          "src": "assets/images/products/timeless-crewneck.webp",
-          "derivatives": []
-        }
-      ],
-      "imageSource": "preserved-existing",
-      "alt": "PRDM Timeless Crewneck product image",
-      "colors": [
-        {
-          "id": "black",
-          "colorId": "black",
-          "label": "Black"
-        },
-        {
-          "id": "grey",
-          "colorId": "grey",
-          "label": "Grey"
-        }
-      ],
-      "sizes": [
-        "M",
-        "L",
-        "XL"
-      ],
-      "variants": [
-        {
-          "sku": "TL23018-C01-S1",
-          "color": "Black",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "TL23018-C01-S2",
-          "color": "Black",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "TL23018-C01-S4",
-          "color": "Black",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "TL23018-C05-S1",
-          "color": "Grey",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "TL23018-C05-S2",
-          "color": "Grey",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "TL23018-C05-S4",
-          "color": "Grey",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        }
-      ],
-      "soldOut": false,
-      "description": [
-        {
-          "type": "text",
-          "text": "• Printed graphics on front and back"
-        },
-        {
-          "type": "text",
-          "text": "• 100% cotton loopback jersey of 350 g/sqm"
-        },
-        {
-          "type": "text",
-          "text": "• Wide silhouette and longer-back cutting"
-        },
-        {
-          "type": "text",
-          "text": "• Signature tab on sleeve"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "Timeless 系列旨在傳達品牌的初衷"
-        },
-        {
-          "type": "text",
-          "text": "我們不追求浮誇的剪裁與結構"
-        },
-        {
-          "type": "text",
-          "text": "而是回歸最本質性的經典原型"
-        },
-        {
-          "type": "text",
-          "text": "改良成現在流行而未來也不會過時的型態"
-        },
-        {
-          "type": "text",
-          "text": "同時技巧性地融入當季創意"
-        },
-        {
-          "type": "text",
-          "text": "打造簡約百搭的設計風格"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這款印花大學 T 的面料設定"
-        },
-        {
-          "type": "text",
-          "text": "同樣是優秀的重磅毛圈布"
-        },
-        {
-          "type": "text",
-          "text": "兼顧外觀的立體度以及在台灣的實穿性"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "寬鬆的袖管讓整體輪廓的寬鬆感更自然"
-        },
-        {
-          "type": "text",
-          "text": "領口是最費工的鑲嵌型羅紋裁片"
-        },
-        {
-          "type": "text",
-          "text": "加強領口彈性、壽命及層次感"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "我們在每個細節上的雕琢"
-        },
-        {
-          "type": "text",
-          "text": "都是為了讓你在低調中感受美好"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "table",
-          "sourceLines": [
-            "　　 　 M　　 L　　 XL",
-            "肩寬　60.0　63.0　64.5",
-            "胸寬　66.0　71.0　73.5",
-            "袖長　56.0　57.0　59.0",
-            "衣長　71.0　73.0　77.0　(cm)"
-          ],
-          "columnCount": 5,
-          "header": [
-            "",
-            "M",
-            "L",
-            "XL",
-            ""
-          ],
-          "body": [
-            [
-              "肩寬",
-              "60.0",
-              "63.0",
-              "64.5",
-              ""
-            ],
-            [
-              "胸寬",
-              "66.0",
-              "71.0",
-              "73.5",
-              ""
-            ],
-            [
-              "袖長",
-              "56.0",
-              "57.0",
-              "59.0",
-              ""
-            ],
-            [
-              "衣長",
-              "71.0",
-              "73.0",
-              "77.0",
-              "(cm)"
-            ]
-          ]
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≤ 173 拿 M"
-        },
-        {
-          "type": "text",
-          "text": "建議身高∊173~178 拿 L"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≥ 178 拿 XL　(cm)"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "hashtag",
-          "text": "#TL23018"
-        }
-      ],
-      "shopeeUrl": "https://shopee.tw/product/74187402/25854802717",
-      "source": {
-        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
-        "documentId": "1WS2VZgv14arGXC4LNo18eG_z747s9tgvpGy9QFRd50Q",
-        "documentModifiedTime": "2023-12-24T06:42:06.135Z",
-        "imageFiles": []
-      }
-    },
-    {
-      "slug": "timeless-hoodie",
-      "productNumber": "TL24019",
-      "title": "PRDM Timeless Hoodie",
-      "category": "AW Tops",
-      "price": "NT$1,380",
-      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-      "images": [
-        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
-      ],
-      "media": [
-        {
-          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-          "width": 1080,
-          "height": 1080,
-          "isFallback": true,
-          "derivatives": [
-            {
-              "shortEdge": 540,
-              "width": 540,
-              "height": 540,
-              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
-              "bytes": 3112,
-              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
-            },
-            {
-              "shortEdge": 1080,
-              "width": 1080,
-              "height": 1080,
-              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-              "bytes": 7424,
-              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
-            },
-            {
-              "shortEdge": 2160,
-              "width": 2160,
-              "height": 2160,
-              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
-              "bytes": 18982,
-              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
-            }
-          ]
-        }
-      ],
-      "imageSource": "fallback",
-      "alt": "",
-      "colors": [
-        {
-          "id": "black",
-          "colorId": "black",
-          "label": "Black"
-        },
-        {
-          "id": "midnight",
-          "colorId": "midnight",
-          "label": "Midnight"
-        }
-      ],
-      "sizes": [
-        "M",
-        "L",
-        "XL"
-      ],
-      "variants": [
-        {
-          "sku": "TL24019-C01-S4",
-          "color": "Black",
-          "size": "M",
-          "visible": true,
-          "soldOut": true
-        },
-        {
-          "sku": "TL24019-C01-S5",
-          "color": "Black",
-          "size": "L",
-          "visible": true,
-          "soldOut": true
-        },
-        {
-          "sku": "TL24019-C01-S6",
-          "color": "Black",
-          "size": "XL",
-          "visible": true,
-          "soldOut": true
-        },
-        {
-          "sku": "TL24019-C61-S4",
-          "color": "Midnight",
-          "size": "M",
-          "visible": true,
-          "soldOut": true
-        },
-        {
-          "sku": "TL24019-C61-S5",
-          "color": "Midnight",
-          "size": "L",
-          "visible": true,
-          "soldOut": true
-        },
-        {
-          "sku": "TL24019-C61-S6",
-          "color": "Midnight",
-          "size": "XL",
-          "visible": true,
-          "soldOut": true
-        }
-      ],
-      "soldOut": true,
-      "description": [
-        {
-          "type": "text",
-          "text": "• Printed graphics on front and back"
-        },
-        {
-          "type": "text",
-          "text": "• 100% cotton loopback jersey of 350 g/sqm"
-        },
-        {
-          "type": "text",
-          "text": "• Boxy silhouette and longer-back cutting"
-        },
-        {
-          "type": "text",
-          "text": "• Watch pocket inside the kangaroo pocket"
-        },
-        {
-          "type": "text",
-          "text": "• Signature tab on sleeve"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "Timeless 系列旨在傳達品牌的初衷"
-        },
-        {
-          "type": "text",
-          "text": "我們不追求浮誇的剪裁與結構"
-        },
-        {
-          "type": "text",
-          "text": "而是回歸最本質性的經典原型"
-        },
-        {
-          "type": "text",
-          "text": "改良成現在流行而未來也不會過時的型態"
-        },
-        {
-          "type": "text",
-          "text": "同時技巧性地融入當季創意"
-        },
-        {
-          "type": "text",
-          "text": "打造簡約百搭的設計風格"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這款印花帽 T 的面料設定"
-        },
-        {
-          "type": "text",
-          "text": "同樣是最適合台灣的重磅毛圈布"
-        },
-        {
-          "type": "text",
-          "text": "兼顧外觀的立體度以及優異的舒適度、實穿性"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "極寬的袖管讓整體輪廓的寬鬆感更一致"
-        },
-        {
-          "type": "text",
-          "text": "微短版的衣長有助於修飾身形比例"
-        },
-        {
-          "type": "text",
-          "text": "選擇小一號的尺寸可以穿出更短版的效果"
-        },
-        {
-          "type": "text",
-          "text": "我們在口袋內側額外增加了隱藏小口袋"
-        },
-        {
-          "type": "text",
-          "text": "便於放置零錢或是鑰匙、卡片、耳機……"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "我們在面料、版型、機能上努力"
-        },
-        {
-          "type": "text",
-          "text": "就是要為你打造這款最強帽 T"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "table",
-          "sourceLines": [
-            "　　 　 M　　 L　　 XL",
-            "肩寬　60.0　62.5　65.0",
-            "胸寬　63.0　65.5　68.0",
-            "袖長　60.0　61.5　63.0",
-            "衣長　68.5　71.0　73.5　(cm)"
-          ],
-          "columnCount": 5,
-          "header": [
-            "",
-            "M",
-            "L",
-            "XL",
-            ""
-          ],
-          "body": [
-            [
-              "肩寬",
-              "60.0",
-              "62.5",
-              "65.0",
-              ""
-            ],
-            [
-              "胸寬",
-              "63.0",
-              "65.5",
-              "68.0",
-              ""
-            ],
-            [
-              "袖長",
-              "60.0",
-              "61.5",
-              "63.0",
-              ""
-            ],
-            [
-              "衣長",
-              "68.5",
-              "71.0",
-              "73.5",
-              "(cm)"
-            ]
-          ]
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≤ 173 拿 M"
-        },
-        {
-          "type": "text",
-          "text": "建議身高∊173~178 拿 L"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 ≥ 178 拿 XL　(cm)"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "hashtag",
-          "text": "#TL24019"
-        }
-      ],
-      "shopeeUrl": "https://shopee.tw/product/74187402/24704802748",
-      "source": {
-        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
-        "documentId": "1BD7R-S2ynPZqkP3XD1m3M8QxW8bR4sb_UXK9-RLO4Bc",
-        "documentModifiedTime": "2023-12-24T06:42:26.227Z",
-        "imageFiles": []
-      }
-    },
-    {
-      "slug": "intelligence-hoodie",
-      "productNumber": "BT24020",
-      "title": "PRDM Intelligence Hoodie",
-      "category": "AW Tops",
-      "price": "NT$1,380",
-      "image": "assets/images/products/intelligence-hoodie.webp",
-      "images": [
-        "assets/images/products/intelligence-hoodie.webp"
-      ],
-      "media": [
-        {
-          "src": "assets/images/products/intelligence-hoodie.webp",
-          "derivatives": []
-        }
-      ],
-      "imageSource": "preserved-existing",
-      "alt": "PRDM Intelligence Hoodie product image",
-      "colors": [
-        {
-          "id": "black",
-          "colorId": "black",
-          "label": "Black"
-        },
-        {
-          "id": "midnight",
-          "colorId": "midnight",
-          "label": "Midnight"
-        }
-      ],
-      "sizes": [
-        "M",
-        "L",
-        "XL"
-      ],
-      "variants": [
-        {
-          "sku": "BT24020-C01-S4",
-          "color": "Black",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "BT24020-C01-S5",
-          "color": "Black",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "BT24020-C01-S6",
-          "color": "Black",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "BT24020-C61-S4",
-          "color": "Midnight",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "BT24020-C61-S5",
-          "color": "Midnight",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "BT24020-C61-S6",
-          "color": "Midnight",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        }
-      ],
-      "soldOut": false,
-      "description": [
-        {
-          "type": "text",
-          "text": "• Printed graphics on front and back"
-        },
-        {
-          "type": "text",
-          "text": "• 100% cotton loopback jersey of 350 g/m²"
-        },
-        {
-          "type": "text",
-          "text": "• Boxy silhouette and longer-back cutting"
-        },
-        {
-          "type": "text",
-          "text": "• Watch pocket inside the kangaroo pocket"
-        },
-        {
-          "type": "text",
-          "text": "• Signature tab on sleeve"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "「Authentic」作為韋氏辭典的年度關鍵字"
-        },
-        {
-          "type": "text",
-          "text": "揭示了生成式人工智慧的瘋狂擴張"
-        },
-        {
-          "type": "text",
-          "text": "此時世界的真實性已不再是理所當然"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "人類已然置身於一個真假難辨的世界"
-        },
-        {
-          "type": "text",
-          "text": "我們無法使用言語來識別敵友"
-        },
-        {
-          "type": "text",
-          "text": "抑或使用 reCAPTCHA v2 進行人機驗證"
-        },
-        {
-          "type": "text",
-          "text": "為證明自己是人類而辯解看似可笑"
-        },
-        {
-          "type": "text",
-          "text": "卻是我們無可迴避的文明危機"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "為打造古往今來之間恆真的美學"
-        },
-        {
-          "type": "text",
-          "text": "Paradigm® 將「Authentic」列入品牌核心理念"
-        },
-        {
-          "type": "text",
-          "text": "未來也將持續演示這個世界運作的真相"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這款印花帽 T 的面料是最適合台灣的重磅毛圈布"
-        },
-        {
-          "type": "text",
-          "text": "兼顧外觀的立體度以及優異的舒適度、實穿性"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "極寬的袖管讓整體輪廓的寬鬆感更一致"
-        },
-        {
-          "type": "text",
-          "text": "微短版的衣長有助於修飾身形比例"
-        },
-        {
-          "type": "text",
-          "text": "選擇小一號的尺寸可以穿出更短版的效果"
-        },
-        {
-          "type": "text",
-          "text": "我們在口袋內側額外增加了隱藏小口袋"
-        },
-        {
-          "type": "text",
-          "text": "便於放置零錢或是鑰匙、卡片、耳機……"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "table",
-          "sourceLines": [
-            "　　　 M　　L　　XL",
-            "肩寬　𝟨𝟢.𝟢　𝟨𝟤.𝟧　𝟨𝟧.𝟢",
-            "胸寬　𝟨𝟥.𝟢　𝟨𝟧.𝟧　𝟨𝟪.𝟢",
-            "袖長　𝟨𝟢.𝟢　𝟨𝟣.𝟧　𝟨𝟥.𝟢",
-            "衣長　𝟨𝟪.𝟧　𝟩𝟣.𝟢　𝟩𝟥.𝟧　(cm)"
-          ],
-          "columnCount": 5,
-          "header": [
-            "",
-            "M",
-            "L",
-            "XL",
-            ""
-          ],
-          "body": [
-            [
-              "肩寬",
-              "𝟨𝟢.𝟢",
-              "𝟨𝟤.𝟧",
-              "𝟨𝟧.𝟢",
-              ""
-            ],
-            [
-              "胸寬",
-              "𝟨𝟥.𝟢",
-              "𝟨𝟧.𝟧",
-              "𝟨𝟪.𝟢",
-              ""
-            ],
-            [
-              "袖長",
-              "𝟨𝟢.𝟢",
-              "𝟨𝟣.𝟧",
-              "𝟨𝟥.𝟢",
-              ""
-            ],
-            [
-              "衣長",
-              "𝟨𝟪.𝟧",
-              "𝟩𝟣.𝟢",
-              "𝟩𝟥.𝟧",
-              "(cm)"
-            ]
-          ]
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 < 173 著用 M"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 173~178 著用 L"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 > 178 著用 XL　(cm)"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "hashtag",
-          "text": "#BT24020"
-        }
-      ],
-      "shopeeUrl": "https://shopee.tw/product/74187402/24506235365",
-      "source": {
-        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
-        "documentId": "1XnJjClFY5CUWQWak1-s07nFMCv0Iwnwi8gF9uVXQVKU",
-        "documentModifiedTime": "2026-08-06T06:25:39.010Z",
-        "imageFiles": []
-      }
-    },
-    {
-      "slug": "cosmos-hoodie",
-      "productNumber": "BD24021",
-      "title": "PRDM Cosmos Hoodie",
-      "category": "AW Tops",
-      "price": "NT$1,380",
-      "image": "assets/images/products/BD24021/cosmos-hoodie-01.webp",
-      "images": [
-        "assets/images/products/BD24021/cosmos-hoodie-01.webp",
-        "assets/images/products/BD24021/cosmos-hoodie-02.webp",
-        "assets/images/products/BD24021/cosmos-hoodie-03.webp",
-        "assets/images/products/BD24021/cosmos-hoodie-04.webp",
-        "assets/images/products/BD24021/cosmos-hoodie-05.webp",
-        "assets/images/products/BD24021/cosmos-hoodie-06.webp",
-        "assets/images/products/BD24021/cosmos-hoodie-07.webp"
-      ],
-      "media": [
-        {
-          "src": "assets/images/products/BD24021/cosmos-hoodie-01.webp",
-          "derivatives": []
-        },
-        {
-          "src": "assets/images/products/BD24021/cosmos-hoodie-02.webp",
-          "derivatives": []
-        },
-        {
-          "src": "assets/images/products/BD24021/cosmos-hoodie-03.webp",
-          "derivatives": []
-        },
-        {
-          "src": "assets/images/products/BD24021/cosmos-hoodie-04.webp",
-          "derivatives": []
-        },
-        {
-          "src": "assets/images/products/BD24021/cosmos-hoodie-05.webp",
-          "derivatives": []
-        },
-        {
-          "src": "assets/images/products/BD24021/cosmos-hoodie-06.webp",
-          "derivatives": []
-        },
-        {
-          "src": "assets/images/products/BD24021/cosmos-hoodie-07.webp",
-          "derivatives": []
-        }
-      ],
-      "imageSource": "preserved-existing",
-      "alt": "PRDM Cosmos Hoodie product image",
-      "colors": [
-        {
-          "id": "black",
-          "colorId": "black",
-          "label": "Black"
-        },
-        {
-          "id": "midnight",
-          "colorId": "midnight",
-          "label": "Midnight"
-        }
-      ],
-      "sizes": [
-        "M",
-        "L",
-        "XL"
-      ],
-      "variants": [
-        {
-          "sku": "BD24021-C01-S4",
-          "color": "Black",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "BD24021-C01-S5",
-          "color": "Black",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "BD24021-C01-S6",
-          "color": "Black",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "BD24021-C61-S4",
-          "color": "Midnight",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "BD24021-C61-S5",
-          "color": "Midnight",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
-        },
-        {
-          "sku": "BD24021-C61-S6",
-          "color": "Midnight",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
-        }
-      ],
-      "soldOut": false,
-      "description": [
-        {
-          "type": "text",
-          "text": "• Printed graphics on front and back"
-        },
-        {
-          "type": "text",
-          "text": "• 100% cotton loopback jersey of 350 g/m²"
-        },
-        {
-          "type": "text",
-          "text": "• Boxy silhouette and longer-back cutting"
-        },
-        {
-          "type": "text",
-          "text": "• Watch pocket inside the kangaroo pocket"
-        },
-        {
-          "type": "text",
-          "text": "• Signature tab on sleeve"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "西元 1543 年  波蘭教士哥白尼出版《天體運行論》"
-        },
-        {
-          "type": "text",
-          "text": "提出近乎異端的日心說  為科學革命揭開序幕"
-        },
-        {
-          "type": "text",
-          "text": "哥白尼指出月球公轉、地球自轉及地球公轉等現象"
-        },
-        {
-          "type": "text",
-          "text": "此後百年內由伽利略、克卜勒的實際觀測支持"
-        },
-        {
-          "type": "text",
-          "text": "終於讓歐洲世界開始接受地球並非宇宙的中心"
-        },
-        {
-          "type": "text",
-          "text": "天體以橢圓軌道公轉因此成為宇宙運行的新典範"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "然而  以銀河系的座標來說"
-        },
-        {
-          "type": "text",
-          "text": "地球並非在一個平面的橢圓軌道上繞太陽公轉"
-        },
-        {
-          "type": "text",
-          "text": "地球公轉的黃道面與銀河系的盤面有著 60° 的夾角"
-        },
-        {
-          "type": "text",
-          "text": "而隨著太陽以 230 km/s 的速度繞行銀河系"
-        },
-        {
-          "type": "text",
-          "text": "地球移動的軌跡實際上是以太陽為軸心的螺旋狀"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "後繼科學家在五百年來不斷改良或挑戰"
-        },
-        {
-          "type": "text",
-          "text": "無論是否能成為主流常態科學"
-        },
-        {
-          "type": "text",
-          "text": "都已在科學史上留下永恆的註記"
-        },
-        {
-          "type": "text",
-          "text": "正如 Paradigm® 致力於奠定穿搭新典範"
-        },
-        {
-          "type": "text",
-          "text": "推動符合當代潮流、不易過時的簡約美學"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這款印花帽Ｔ的面料是最適合台灣的重磅毛圈布"
-        },
-        {
-          "type": "text",
-          "text": "兼顧外觀的立體度以及優異的舒適度、實穿性"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "極寬的袖管讓整體輪廓的寬鬆感更一致"
-        },
-        {
-          "type": "text",
-          "text": "微短版的衣長有助於修飾身形比例"
-        },
-        {
-          "type": "text",
-          "text": "選擇小一號的尺寸可以穿出更短版的效果"
-        },
-        {
-          "type": "text",
-          "text": "我們在口袋內側額外增加了隱藏小口袋"
-        },
-        {
-          "type": "text",
-          "text": "便於放置零錢或是鑰匙、卡片、耳機……"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "table",
-          "sourceLines": [
-            "　　　 M　　L　　XL",
-            "肩寬　𝟨𝟢.𝟢　𝟨𝟤.𝟧　𝟨𝟧.𝟢",
-            "胸寬　𝟨𝟥.𝟢　𝟨𝟧.𝟧　𝟨𝟪.𝟢",
-            "袖長　𝟨𝟢.𝟢　𝟨𝟣.𝟧　𝟨𝟥.𝟢",
-            "衣長　𝟨𝟪.𝟧　𝟩𝟣.𝟢　𝟩𝟥.𝟧　(cm)"
-          ],
-          "columnCount": 5,
-          "header": [
-            "",
-            "M",
-            "L",
-            "XL",
-            ""
-          ],
-          "body": [
-            [
-              "肩寬",
-              "𝟨𝟢.𝟢",
-              "𝟨𝟤.𝟧",
-              "𝟨𝟧.𝟢",
-              ""
-            ],
-            [
-              "胸寬",
-              "𝟨𝟥.𝟢",
-              "𝟨𝟧.𝟧",
-              "𝟨𝟪.𝟢",
-              ""
-            ],
-            [
-              "袖長",
-              "𝟨𝟢.𝟢",
-              "𝟨𝟣.𝟧",
-              "𝟨𝟥.𝟢",
-              ""
-            ],
-            [
-              "衣長",
-              "𝟨𝟪.𝟧",
-              "𝟩𝟣.𝟢",
-              "𝟩𝟥.𝟧",
-              "(cm)"
-            ]
-          ]
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 < 173 著用 M"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 173~178 著用 L"
-        },
-        {
-          "type": "text",
-          "text": "建議身高 > 178 著用 XL　(cm)"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "hashtag",
-          "text": "#BD24021"
-        }
-      ],
-      "shopeeUrl": "https://shopee.tw/product/74187402/24756231227",
-      "source": {
-        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
-        "documentId": "1drTbvQ1ERiWXfSORGyMs4p-Xv8_GdHW4SwKvXiZQT3g",
-        "documentModifiedTime": "2026-08-06T06:27:25.053Z",
-        "imageFiles": []
-      }
-    },
-    {
-      "slug": "training-shorts",
-      "productNumber": "GM42022",
-      "title": "PRDM Training Shorts",
-      "category": "Bottoms",
-      "price": "NT$1,180",
-      "image": "assets/images/products/training-shorts.webp",
-      "images": [
-        "assets/images/products/training-shorts.webp"
-      ],
-      "media": [
-        {
-          "src": "assets/images/products/training-shorts.webp",
-          "derivatives": []
-        }
-      ],
-      "imageSource": "preserved-existing",
-      "alt": "PRDM Training Shorts product image",
-      "colors": [
-        {
-          "id": "mocha",
-          "colorId": "mocha",
-          "label": "Mocha"
-        }
-      ],
-      "sizes": [
-        "M",
-        "L",
-        "XL"
-      ],
-      "variants": [
-        {
-          "sku": "GM42022-C21-S4",
-          "color": "Mocha",
-          "size": "M",
-          "visible": true,
-          "soldOut": true
-        },
-        {
-          "sku": "GM42022-C21-S5",
-          "color": "Mocha",
-          "size": "L",
-          "visible": true,
-          "soldOut": true
-        },
-        {
-          "sku": "GM42022-C21-S6",
-          "color": "Mocha",
-          "size": "XL",
-          "visible": true,
-          "soldOut": true
-        }
-      ],
-      "soldOut": true,
-      "description": [
-        {
-          "type": "text",
-          "text": "• 100% polyester mesh fabric"
-        },
-        {
-          "type": "text",
-          "text": "• 100% polyester recycled lining ⸺ TOPGREEN®"
-        },
-        {
-          "type": "text",
-          "text": "• 100% polyester drawstring with coated ends"
-        },
-        {
-          "type": "text",
-          "text": "• Watch pocket & key ring inside front pocket"
-        },
-        {
-          "type": "text",
-          "text": "• No-drop openings within front pockets"
-        },
-        {
-          "type": "text",
-          "text": "• Signature tab on hem"
-        },
-        {
-          "type": "text",
-          "text": "• Made in Taiwan"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "在副熱帶的炎熱氣候下"
-        },
-        {
-          "type": "text",
-          "text": "我們將實用機能巧妙注入這款網眼短褲"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "外層以經典的網眼面料呈現復古氛圍"
-        },
-        {
-          "type": "text",
-          "text": "內層選用 TOPGREEN® 寶特瓶回收紗製成"
-        },
-        {
-          "type": "text",
-          "text": "榮獲全球 GRS 及台灣綠色環保標章認證"
-        },
-        {
-          "type": "text",
-          "text": "在追求風格的同時也能為地球盡一份心力"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "為了拉長腿部比例來修飾身形"
-        },
-        {
-          "type": "text",
-          "text": "我們反覆雕琢現下流行的較短褲長"
-        },
-        {
-          "type": "text",
-          "text": "並且選用與肌膚相近的棕色系"
-        },
-        {
-          "type": "text",
-          "text": "維持下半身的視覺連貫性"
-        },
-        {
-          "type": "text",
-          "text": "即使是較矮小的身形也能輕鬆駕馭"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "致力於融合極簡外觀與日常機能"
-        },
-        {
-          "type": "text",
-          "text": "我們在口袋內側額外縫製機能小袋"
-        },
-        {
-          "type": "text",
-          "text": "並且設計了隱藏式的鑰匙扣環"
-        },
-        {
-          "type": "text",
-          "text": "更獨創「防噴袋口」設計以防物品掉落"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "考量到 Mono-Material 原則"
-        },
-        {
-          "type": "text",
-          "text": "褲頭採用精心訂製的聚酯纖維抽繩"
-        },
-        {
-          "type": "text",
-          "text": "搭配繩頭別富質感的浸膠做法"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這款網眼短褲將成為你最常著用的選擇"
-        },
-        {
-          "type": "text",
-          "text": "陪伴你度過一個清爽舒適的夏日"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "table",
-          "sourceLines": [
-            "　　　　 M　　L　　XL",
-            "褲頭寬　𝟥𝟦.𝟢　𝟥𝟩.𝟢　𝟦𝟤.𝟢",
-            "褲腳寬　𝟥𝟥.𝟢　𝟥𝟦.𝟧　𝟥𝟩.𝟢",
-            "內側長　𝟣𝟥.𝟧　𝟣𝟦.𝟧　𝟣𝟧.𝟧",
-            "外側長　𝟥𝟩.𝟧　𝟥𝟫.𝟢　𝟦𝟢.𝟧　(cm)"
-          ],
-          "columnCount": 5,
-          "header": [
-            "",
-            "M",
-            "L",
-            "XL",
-            ""
-          ],
-          "body": [
-            [
-              "褲頭寬",
-              "𝟥𝟦.𝟢",
-              "𝟥𝟩.𝟢",
-              "𝟦𝟤.𝟢",
-              ""
-            ],
-            [
-              "褲腳寬",
-              "𝟥𝟥.𝟢",
-              "𝟥𝟦.𝟧",
-              "𝟥𝟩.𝟢",
-              ""
-            ],
-            [
-              "內側長",
-              "𝟣𝟥.𝟧",
-              "𝟣𝟦.𝟧",
-              "𝟣𝟧.𝟧",
-              ""
-            ],
-            [
-              "外側長",
-              "𝟥𝟩.𝟧",
-              "𝟥𝟫.𝟢",
-              "𝟦𝟢.𝟧",
-              "(cm)"
-            ]
-          ]
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "建議腰圍 < 80 著用 M"
-        },
-        {
-          "type": "text",
-          "text": "建議腰圍 80~90 著用 L"
-        },
-        {
-          "type": "text",
-          "text": "建議腰圍 > 90 著用 XL　(cm)"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "hashtag",
-          "text": "#GM42022"
-        }
-      ],
-      "shopeeUrl": "https://shopee.tw/product/74187402/41405643937",
-      "source": {
-        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
-        "documentId": "1Y-96P4VITWHtaJ77h5je-XzcqEZ-XP1LdtImTT5riM4",
-        "documentModifiedTime": "2026-08-06T06:02:26.162Z",
-        "imageFiles": []
-      }
-    },
-    {
-      "slug": "training-shorts",
-      "productNumber": "GM42023",
-      "title": "PRDM Training Shorts",
-      "category": "Bottoms",
-      "price": "NT$1,180",
-      "image": "assets/images/products/training-shorts.webp",
-      "images": [
-        "assets/images/products/training-shorts.webp"
-      ],
-      "media": [
-        {
-          "src": "assets/images/products/training-shorts.webp",
-          "derivatives": []
-        }
-      ],
-      "imageSource": "preserved-existing",
-      "alt": "PRDM Training Shorts product image",
-      "colors": [
-        {
-          "id": "mud",
-          "colorId": "mud",
-          "label": "Mud"
-        }
-      ],
-      "sizes": [
-        "M",
-        "L",
-        "XL"
-      ],
-      "variants": [
-        {
-          "sku": "GM42023-C22-S4",
-          "color": "Mud",
-          "size": "M",
-          "visible": true,
-          "soldOut": true
-        },
-        {
-          "sku": "GM42023-C22-S5",
-          "color": "Mud",
-          "size": "L",
-          "visible": true,
-          "soldOut": true
-        },
-        {
-          "sku": "GM42023-C22-S6",
-          "color": "Mud",
-          "size": "XL",
-          "visible": true,
-          "soldOut": true
-        }
-      ],
-      "soldOut": true,
-      "description": [
-        {
-          "type": "text",
-          "text": "• 100% polyester mesh fabric"
-        },
-        {
-          "type": "text",
-          "text": "• 100% polyester recycled lining ⸺ TOPGREEN®"
-        },
-        {
-          "type": "text",
-          "text": "• 100% polyester drawstring with coated ends"
-        },
-        {
-          "type": "text",
-          "text": "• Watch pocket & key ring inside front pocket"
-        },
-        {
-          "type": "text",
-          "text": "• No-drop openings within front pockets"
-        },
-        {
-          "type": "text",
-          "text": "• Signature tab on hem"
-        },
-        {
-          "type": "text",
-          "text": "• Made in Taiwan"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "在副熱帶的炎熱氣候下"
-        },
-        {
-          "type": "text",
-          "text": "我們將實用機能巧妙注入這款網眼短褲"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "外層以經典的網眼面料呈現復古氛圍"
-        },
-        {
-          "type": "text",
-          "text": "內層選用 TOPGREEN® 寶特瓶回收紗製成"
-        },
-        {
-          "type": "text",
-          "text": "榮獲全球 GRS 及台灣綠色環保標章認證"
-        },
-        {
-          "type": "text",
-          "text": "在追求風格的同時也能為地球盡一份心力"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "為了拉長腿部比例來修飾身形"
-        },
-        {
-          "type": "text",
-          "text": "我們反覆雕琢現下流行的較短褲長"
-        },
-        {
-          "type": "text",
-          "text": "並且選用與肌膚相近的棕色系"
-        },
-        {
-          "type": "text",
-          "text": "維持下半身的視覺連貫性"
-        },
-        {
-          "type": "text",
-          "text": "即使是較矮小的身形也能輕鬆駕馭"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "致力於融合極簡外觀與日常機能"
-        },
-        {
-          "type": "text",
-          "text": "我們在口袋內側額外縫製機能小袋"
-        },
-        {
-          "type": "text",
-          "text": "並且設計了隱藏式的鑰匙扣環"
-        },
-        {
-          "type": "text",
-          "text": "更獨創「防噴袋口」設計以防物品掉落"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "考量到 Mono-Material 原則"
-        },
-        {
-          "type": "text",
-          "text": "褲頭採用精心訂製的聚酯纖維抽繩"
-        },
-        {
-          "type": "text",
-          "text": "搭配繩頭別富質感的浸膠做法"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "這款網眼短褲將成為你最常著用的選擇"
-        },
-        {
-          "type": "text",
-          "text": "陪伴你度過一個清爽舒適的夏日"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "divider",
-          "text": "-"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "table",
-          "sourceLines": [
-            "　　　　 M　　L　　XL",
-            "褲頭寬　𝟥𝟦.𝟢　𝟥𝟩.𝟢　𝟦𝟤.𝟢",
-            "褲腳寬　𝟥𝟥.𝟢　𝟥𝟦.𝟧　𝟥𝟩.𝟢",
-            "內側長　𝟣𝟥.𝟧　𝟣𝟦.𝟧　𝟣𝟧.𝟧",
-            "外側長　𝟥𝟩.𝟧　𝟥𝟫.𝟢　𝟦𝟢.𝟧　(cm)"
-          ],
-          "columnCount": 5,
-          "header": [
-            "",
-            "M",
-            "L",
-            "XL",
-            ""
-          ],
-          "body": [
-            [
-              "褲頭寬",
-              "𝟥𝟦.𝟢",
-              "𝟥𝟩.𝟢",
-              "𝟦𝟤.𝟢",
-              ""
-            ],
-            [
-              "褲腳寬",
-              "𝟥𝟥.𝟢",
-              "𝟥𝟦.𝟧",
-              "𝟥𝟩.𝟢",
-              ""
-            ],
-            [
-              "內側長",
-              "𝟣𝟥.𝟧",
-              "𝟣𝟦.𝟧",
-              "𝟣𝟧.𝟧",
-              ""
-            ],
-            [
-              "外側長",
-              "𝟥𝟩.𝟧",
-              "𝟥𝟫.𝟢",
-              "𝟦𝟢.𝟧",
-              "(cm)"
-            ]
-          ]
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "text",
-          "text": "建議腰圍 < 80 著用 M"
-        },
-        {
-          "type": "text",
-          "text": "建議腰圍 80~90 著用 L"
-        },
-        {
-          "type": "text",
-          "text": "建議腰圍 > 90 著用 XL　(cm)"
-        },
-        {
-          "type": "blank",
-          "text": "\n"
-        },
-        {
-          "type": "hashtag",
-          "text": "#GM42023"
-        }
-      ],
-      "shopeeUrl": "https://shopee.tw/product/74187402/40105649000",
-      "source": {
-        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
-        "documentId": "1k6CPp6rKsWWB9YMjy9WtPLiiDTqSy7B5XSPj_uhYREk",
-        "documentModifiedTime": "2026-08-06T06:03:40.052Z",
-        "imageFiles": []
-      }
-    },
-    {
-      "slug": "everyday-tee",
-      "productNumber": "ED14024",
-      "title": "PRDM Everyday Tee",
-      "category": "SS Tops",
-      "price": "NT$590",
+      "listPrice": 590,
+      "salePrice": null,
+      "priceLabel": "NT$590",
       "image": "assets/images/catalog/3a/3a4d8d1d4a54393c6092-1080x1080.webp",
       "images": [
         "assets/images/catalog/3a/3a4d8d1d4a54393c6092-1080x1080.webp",
@@ -5861,67 +255,94 @@ window.PARADIGM_CATALOG = {
       ],
       "variants": [
         {
+          "visible": true,
+          "soldOut": false,
           "sku": "ED14024-C03-S5",
-          "color": "Shadow",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
+          "lots": [],
+          "colorCode": "C03",
+          "colorName": "Shadow",
+          "sizeCode": "S5",
+          "sizeName": "M"
         },
         {
+          "visible": true,
+          "soldOut": false,
           "sku": "ED14024-C03-S6",
-          "color": "Shadow",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
+          "lots": [],
+          "colorCode": "C03",
+          "colorName": "Shadow",
+          "sizeCode": "S6",
+          "sizeName": "L"
         },
         {
+          "visible": true,
+          "soldOut": false,
           "sku": "ED14024-C03-S7",
-          "color": "Shadow",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
+          "lots": [],
+          "colorCode": "C03",
+          "colorName": "Shadow",
+          "sizeCode": "S7",
+          "sizeName": "XL"
         },
         {
+          "visible": true,
+          "soldOut": false,
           "sku": "ED14024-C05-S5",
-          "color": "Grey",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S5",
+          "sizeName": "M"
         },
         {
+          "visible": true,
+          "soldOut": false,
           "sku": "ED14024-C05-S6",
-          "color": "Grey",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S6",
+          "sizeName": "L"
         },
         {
+          "visible": true,
+          "soldOut": false,
           "sku": "ED14024-C05-S7",
-          "color": "Grey",
-          "size": "XL",
-          "visible": true,
-          "soldOut": false
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S7",
+          "sizeName": "XL"
         },
         {
+          "visible": true,
+          "soldOut": false,
           "sku": "ED14024-C09-S5",
-          "color": "White",
-          "size": "M",
-          "visible": true,
-          "soldOut": false
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S5",
+          "sizeName": "M"
         },
         {
+          "visible": true,
+          "soldOut": false,
           "sku": "ED14024-C09-S6",
-          "color": "White",
-          "size": "L",
-          "visible": true,
-          "soldOut": false
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S6",
+          "sizeName": "L"
         },
         {
-          "sku": "ED14024-C09-S7",
-          "color": "White",
-          "size": "XL",
           "visible": true,
-          "soldOut": false
+          "soldOut": false,
+          "sku": "ED14024-C09-S7",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S7",
+          "sizeName": "XL"
         }
       ],
       "soldOut": false,
@@ -6131,7 +552,7 @@ window.PARADIGM_CATALOG = {
           "text": "#ED14024"
         }
       ],
-      "shopeeUrl": "https://shopee.tw/product/74187402/51965487881",
+      "link": "https://shopee.tw/product/74187402/51965487881",
       "source": {
         "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
         "documentId": "1LTnLM21NKGVWx89M3Nm4mPdc5szFyIA4Qd90gh6-P5w",
@@ -6178,6 +599,6098 @@ window.PARADIGM_CATALOG = {
             "localPath": "assets/images/products/ED14024/ed14024-07.webp"
           }
         ]
+      }
+    },
+    {
+      "slug": "training-shorts",
+      "code": "GM42023",
+      "name": "PRDM Training Shorts",
+      "lineCode": "GM",
+      "typeCode": "42",
+      "sequence": "023",
+      "category": "Bottoms",
+      "listPrice": 1180,
+      "salePrice": null,
+      "priceLabel": "NT$1,180",
+      "image": "assets/images/products/training-shorts.webp",
+      "images": [
+        "assets/images/products/training-shorts.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/products/training-shorts.webp",
+          "derivatives": []
+        }
+      ],
+      "imageSource": "preserved-existing",
+      "alt": "PRDM Training Shorts product image",
+      "colors": [
+        {
+          "id": "mud",
+          "colorId": "mud",
+          "label": "Mud"
+        }
+      ],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "GM42023-C22-S4",
+          "lots": [],
+          "colorCode": "C22",
+          "colorName": "Mud",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "GM42023-C22-S5",
+          "lots": [],
+          "colorCode": "C22",
+          "colorName": "Mud",
+          "sizeCode": "S5",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "GM42023-C22-S6",
+          "lots": [],
+          "colorCode": "C22",
+          "colorName": "Mud",
+          "sizeCode": "S6",
+          "sizeName": "XL"
+        }
+      ],
+      "soldOut": true,
+      "description": [
+        {
+          "type": "text",
+          "text": "• 100% polyester mesh fabric"
+        },
+        {
+          "type": "text",
+          "text": "• 100% polyester recycled lining ⸺ TOPGREEN®"
+        },
+        {
+          "type": "text",
+          "text": "• 100% polyester drawstring with coated ends"
+        },
+        {
+          "type": "text",
+          "text": "• Watch pocket & key ring inside front pocket"
+        },
+        {
+          "type": "text",
+          "text": "• No-drop openings within front pockets"
+        },
+        {
+          "type": "text",
+          "text": "• Signature tab on hem"
+        },
+        {
+          "type": "text",
+          "text": "• Made in Taiwan"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "在副熱帶的炎熱氣候下"
+        },
+        {
+          "type": "text",
+          "text": "我們將實用機能巧妙注入這款網眼短褲"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "外層以經典的網眼面料呈現復古氛圍"
+        },
+        {
+          "type": "text",
+          "text": "內層選用 TOPGREEN® 寶特瓶回收紗製成"
+        },
+        {
+          "type": "text",
+          "text": "榮獲全球 GRS 及台灣綠色環保標章認證"
+        },
+        {
+          "type": "text",
+          "text": "在追求風格的同時也能為地球盡一份心力"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "為了拉長腿部比例來修飾身形"
+        },
+        {
+          "type": "text",
+          "text": "我們反覆雕琢現下流行的較短褲長"
+        },
+        {
+          "type": "text",
+          "text": "並且選用與肌膚相近的棕色系"
+        },
+        {
+          "type": "text",
+          "text": "維持下半身的視覺連貫性"
+        },
+        {
+          "type": "text",
+          "text": "即使是較矮小的身形也能輕鬆駕馭"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "致力於融合極簡外觀與日常機能"
+        },
+        {
+          "type": "text",
+          "text": "我們在口袋內側額外縫製機能小袋"
+        },
+        {
+          "type": "text",
+          "text": "並且設計了隱藏式的鑰匙扣環"
+        },
+        {
+          "type": "text",
+          "text": "更獨創「防噴袋口」設計以防物品掉落"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "考量到 Mono-Material 原則"
+        },
+        {
+          "type": "text",
+          "text": "褲頭採用精心訂製的聚酯纖維抽繩"
+        },
+        {
+          "type": "text",
+          "text": "搭配繩頭別富質感的浸膠做法"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這款網眼短褲將成為你最常著用的選擇"
+        },
+        {
+          "type": "text",
+          "text": "陪伴你度過一個清爽舒適的夏日"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "table",
+          "sourceLines": [
+            "　　　　 M　　L　　XL",
+            "褲頭寬　𝟥𝟦.𝟢　𝟥𝟩.𝟢　𝟦𝟤.𝟢",
+            "褲腳寬　𝟥𝟥.𝟢　𝟥𝟦.𝟧　𝟥𝟩.𝟢",
+            "內側長　𝟣𝟥.𝟧　𝟣𝟦.𝟧　𝟣𝟧.𝟧",
+            "外側長　𝟥𝟩.𝟧　𝟥𝟫.𝟢　𝟦𝟢.𝟧　(cm)"
+          ],
+          "columnCount": 5,
+          "header": [
+            "",
+            "M",
+            "L",
+            "XL",
+            ""
+          ],
+          "body": [
+            [
+              "褲頭寬",
+              "𝟥𝟦.𝟢",
+              "𝟥𝟩.𝟢",
+              "𝟦𝟤.𝟢",
+              ""
+            ],
+            [
+              "褲腳寬",
+              "𝟥𝟥.𝟢",
+              "𝟥𝟦.𝟧",
+              "𝟥𝟩.𝟢",
+              ""
+            ],
+            [
+              "內側長",
+              "𝟣𝟥.𝟧",
+              "𝟣𝟦.𝟧",
+              "𝟣𝟧.𝟧",
+              ""
+            ],
+            [
+              "外側長",
+              "𝟥𝟩.𝟧",
+              "𝟥𝟫.𝟢",
+              "𝟦𝟢.𝟧",
+              "(cm)"
+            ]
+          ]
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "建議腰圍 < 80 著用 M"
+        },
+        {
+          "type": "text",
+          "text": "建議腰圍 80~90 著用 L"
+        },
+        {
+          "type": "text",
+          "text": "建議腰圍 > 90 著用 XL　(cm)"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "hashtag",
+          "text": "#GM42023"
+        }
+      ],
+      "link": "https://shopee.tw/product/74187402/40105649000",
+      "source": {
+        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
+        "documentId": "1k6CPp6rKsWWB9YMjy9WtPLiiDTqSy7B5XSPj_uhYREk",
+        "documentModifiedTime": "2026-08-06T06:03:40.052Z",
+        "imageFiles": []
+      }
+    },
+    {
+      "slug": "training-shorts",
+      "code": "GM42022",
+      "name": "PRDM Training Shorts",
+      "lineCode": "GM",
+      "typeCode": "42",
+      "sequence": "022",
+      "category": "Bottoms",
+      "listPrice": 1180,
+      "salePrice": null,
+      "priceLabel": "NT$1,180",
+      "image": "assets/images/products/training-shorts.webp",
+      "images": [
+        "assets/images/products/training-shorts.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/products/training-shorts.webp",
+          "derivatives": []
+        }
+      ],
+      "imageSource": "preserved-existing",
+      "alt": "PRDM Training Shorts product image",
+      "colors": [
+        {
+          "id": "mocha",
+          "colorId": "mocha",
+          "label": "Mocha"
+        }
+      ],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "GM42022-C21-S4",
+          "lots": [],
+          "colorCode": "C21",
+          "colorName": "Mocha",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "GM42022-C21-S5",
+          "lots": [],
+          "colorCode": "C21",
+          "colorName": "Mocha",
+          "sizeCode": "S5",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "GM42022-C21-S6",
+          "lots": [],
+          "colorCode": "C21",
+          "colorName": "Mocha",
+          "sizeCode": "S6",
+          "sizeName": "XL"
+        }
+      ],
+      "soldOut": true,
+      "description": [
+        {
+          "type": "text",
+          "text": "• 100% polyester mesh fabric"
+        },
+        {
+          "type": "text",
+          "text": "• 100% polyester recycled lining ⸺ TOPGREEN®"
+        },
+        {
+          "type": "text",
+          "text": "• 100% polyester drawstring with coated ends"
+        },
+        {
+          "type": "text",
+          "text": "• Watch pocket & key ring inside front pocket"
+        },
+        {
+          "type": "text",
+          "text": "• No-drop openings within front pockets"
+        },
+        {
+          "type": "text",
+          "text": "• Signature tab on hem"
+        },
+        {
+          "type": "text",
+          "text": "• Made in Taiwan"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "在副熱帶的炎熱氣候下"
+        },
+        {
+          "type": "text",
+          "text": "我們將實用機能巧妙注入這款網眼短褲"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "外層以經典的網眼面料呈現復古氛圍"
+        },
+        {
+          "type": "text",
+          "text": "內層選用 TOPGREEN® 寶特瓶回收紗製成"
+        },
+        {
+          "type": "text",
+          "text": "榮獲全球 GRS 及台灣綠色環保標章認證"
+        },
+        {
+          "type": "text",
+          "text": "在追求風格的同時也能為地球盡一份心力"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "為了拉長腿部比例來修飾身形"
+        },
+        {
+          "type": "text",
+          "text": "我們反覆雕琢現下流行的較短褲長"
+        },
+        {
+          "type": "text",
+          "text": "並且選用與肌膚相近的棕色系"
+        },
+        {
+          "type": "text",
+          "text": "維持下半身的視覺連貫性"
+        },
+        {
+          "type": "text",
+          "text": "即使是較矮小的身形也能輕鬆駕馭"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "致力於融合極簡外觀與日常機能"
+        },
+        {
+          "type": "text",
+          "text": "我們在口袋內側額外縫製機能小袋"
+        },
+        {
+          "type": "text",
+          "text": "並且設計了隱藏式的鑰匙扣環"
+        },
+        {
+          "type": "text",
+          "text": "更獨創「防噴袋口」設計以防物品掉落"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "考量到 Mono-Material 原則"
+        },
+        {
+          "type": "text",
+          "text": "褲頭採用精心訂製的聚酯纖維抽繩"
+        },
+        {
+          "type": "text",
+          "text": "搭配繩頭別富質感的浸膠做法"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這款網眼短褲將成為你最常著用的選擇"
+        },
+        {
+          "type": "text",
+          "text": "陪伴你度過一個清爽舒適的夏日"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "table",
+          "sourceLines": [
+            "　　　　 M　　L　　XL",
+            "褲頭寬　𝟥𝟦.𝟢　𝟥𝟩.𝟢　𝟦𝟤.𝟢",
+            "褲腳寬　𝟥𝟥.𝟢　𝟥𝟦.𝟧　𝟥𝟩.𝟢",
+            "內側長　𝟣𝟥.𝟧　𝟣𝟦.𝟧　𝟣𝟧.𝟧",
+            "外側長　𝟥𝟩.𝟧　𝟥𝟫.𝟢　𝟦𝟢.𝟧　(cm)"
+          ],
+          "columnCount": 5,
+          "header": [
+            "",
+            "M",
+            "L",
+            "XL",
+            ""
+          ],
+          "body": [
+            [
+              "褲頭寬",
+              "𝟥𝟦.𝟢",
+              "𝟥𝟩.𝟢",
+              "𝟦𝟤.𝟢",
+              ""
+            ],
+            [
+              "褲腳寬",
+              "𝟥𝟥.𝟢",
+              "𝟥𝟦.𝟧",
+              "𝟥𝟩.𝟢",
+              ""
+            ],
+            [
+              "內側長",
+              "𝟣𝟥.𝟧",
+              "𝟣𝟦.𝟧",
+              "𝟣𝟧.𝟧",
+              ""
+            ],
+            [
+              "外側長",
+              "𝟥𝟩.𝟧",
+              "𝟥𝟫.𝟢",
+              "𝟦𝟢.𝟧",
+              "(cm)"
+            ]
+          ]
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "建議腰圍 < 80 著用 M"
+        },
+        {
+          "type": "text",
+          "text": "建議腰圍 80~90 著用 L"
+        },
+        {
+          "type": "text",
+          "text": "建議腰圍 > 90 著用 XL　(cm)"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "hashtag",
+          "text": "#GM42022"
+        }
+      ],
+      "link": "https://shopee.tw/product/74187402/41405643937",
+      "source": {
+        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
+        "documentId": "1Y-96P4VITWHtaJ77h5je-XzcqEZ-XP1LdtImTT5riM4",
+        "documentModifiedTime": "2026-08-06T06:02:26.162Z",
+        "imageFiles": []
+      }
+    },
+    {
+      "slug": "cosmos-hoodie",
+      "code": "BD24021",
+      "name": "PRDM Cosmos Hoodie",
+      "lineCode": "BD",
+      "typeCode": "24",
+      "sequence": "021",
+      "category": "AW Tops",
+      "listPrice": 1380,
+      "salePrice": null,
+      "priceLabel": "NT$1,380",
+      "image": "assets/images/products/BD24021/cosmos-hoodie-01.webp",
+      "images": [
+        "assets/images/products/BD24021/cosmos-hoodie-01.webp",
+        "assets/images/products/BD24021/cosmos-hoodie-02.webp",
+        "assets/images/products/BD24021/cosmos-hoodie-03.webp",
+        "assets/images/products/BD24021/cosmos-hoodie-04.webp",
+        "assets/images/products/BD24021/cosmos-hoodie-05.webp",
+        "assets/images/products/BD24021/cosmos-hoodie-06.webp",
+        "assets/images/products/BD24021/cosmos-hoodie-07.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/products/BD24021/cosmos-hoodie-01.webp",
+          "derivatives": []
+        },
+        {
+          "src": "assets/images/products/BD24021/cosmos-hoodie-02.webp",
+          "derivatives": []
+        },
+        {
+          "src": "assets/images/products/BD24021/cosmos-hoodie-03.webp",
+          "derivatives": []
+        },
+        {
+          "src": "assets/images/products/BD24021/cosmos-hoodie-04.webp",
+          "derivatives": []
+        },
+        {
+          "src": "assets/images/products/BD24021/cosmos-hoodie-05.webp",
+          "derivatives": []
+        },
+        {
+          "src": "assets/images/products/BD24021/cosmos-hoodie-06.webp",
+          "derivatives": []
+        },
+        {
+          "src": "assets/images/products/BD24021/cosmos-hoodie-07.webp",
+          "derivatives": []
+        }
+      ],
+      "imageSource": "preserved-existing",
+      "alt": "PRDM Cosmos Hoodie product image",
+      "colors": [
+        {
+          "id": "black",
+          "colorId": "black",
+          "label": "Black"
+        },
+        {
+          "id": "midnight",
+          "colorId": "midnight",
+          "label": "Midnight"
+        }
+      ],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "BD24021-C01-S4",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "BD24021-C01-S5",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S5",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "BD24021-C01-S6",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S6",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "BD24021-C61-S4",
+          "lots": [],
+          "colorCode": "C61",
+          "colorName": "Midnight",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "BD24021-C61-S5",
+          "lots": [],
+          "colorCode": "C61",
+          "colorName": "Midnight",
+          "sizeCode": "S5",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "BD24021-C61-S6",
+          "lots": [],
+          "colorCode": "C61",
+          "colorName": "Midnight",
+          "sizeCode": "S6",
+          "sizeName": "XL"
+        }
+      ],
+      "soldOut": false,
+      "description": [
+        {
+          "type": "text",
+          "text": "• Printed graphics on front and back"
+        },
+        {
+          "type": "text",
+          "text": "• 100% cotton loopback jersey of 350 g/m²"
+        },
+        {
+          "type": "text",
+          "text": "• Boxy silhouette and longer-back cutting"
+        },
+        {
+          "type": "text",
+          "text": "• Watch pocket inside the kangaroo pocket"
+        },
+        {
+          "type": "text",
+          "text": "• Signature tab on sleeve"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "西元 1543 年  波蘭教士哥白尼出版《天體運行論》"
+        },
+        {
+          "type": "text",
+          "text": "提出近乎異端的日心說  為科學革命揭開序幕"
+        },
+        {
+          "type": "text",
+          "text": "哥白尼指出月球公轉、地球自轉及地球公轉等現象"
+        },
+        {
+          "type": "text",
+          "text": "此後百年內由伽利略、克卜勒的實際觀測支持"
+        },
+        {
+          "type": "text",
+          "text": "終於讓歐洲世界開始接受地球並非宇宙的中心"
+        },
+        {
+          "type": "text",
+          "text": "天體以橢圓軌道公轉因此成為宇宙運行的新典範"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "然而  以銀河系的座標來說"
+        },
+        {
+          "type": "text",
+          "text": "地球並非在一個平面的橢圓軌道上繞太陽公轉"
+        },
+        {
+          "type": "text",
+          "text": "地球公轉的黃道面與銀河系的盤面有著 60° 的夾角"
+        },
+        {
+          "type": "text",
+          "text": "而隨著太陽以 230 km/s 的速度繞行銀河系"
+        },
+        {
+          "type": "text",
+          "text": "地球移動的軌跡實際上是以太陽為軸心的螺旋狀"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "後繼科學家在五百年來不斷改良或挑戰"
+        },
+        {
+          "type": "text",
+          "text": "無論是否能成為主流常態科學"
+        },
+        {
+          "type": "text",
+          "text": "都已在科學史上留下永恆的註記"
+        },
+        {
+          "type": "text",
+          "text": "正如 Paradigm® 致力於奠定穿搭新典範"
+        },
+        {
+          "type": "text",
+          "text": "推動符合當代潮流、不易過時的簡約美學"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這款印花帽Ｔ的面料是最適合台灣的重磅毛圈布"
+        },
+        {
+          "type": "text",
+          "text": "兼顧外觀的立體度以及優異的舒適度、實穿性"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "極寬的袖管讓整體輪廓的寬鬆感更一致"
+        },
+        {
+          "type": "text",
+          "text": "微短版的衣長有助於修飾身形比例"
+        },
+        {
+          "type": "text",
+          "text": "選擇小一號的尺寸可以穿出更短版的效果"
+        },
+        {
+          "type": "text",
+          "text": "我們在口袋內側額外增加了隱藏小口袋"
+        },
+        {
+          "type": "text",
+          "text": "便於放置零錢或是鑰匙、卡片、耳機……"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "table",
+          "sourceLines": [
+            "　　　 M　　L　　XL",
+            "肩寬　𝟨𝟢.𝟢　𝟨𝟤.𝟧　𝟨𝟧.𝟢",
+            "胸寬　𝟨𝟥.𝟢　𝟨𝟧.𝟧　𝟨𝟪.𝟢",
+            "袖長　𝟨𝟢.𝟢　𝟨𝟣.𝟧　𝟨𝟥.𝟢",
+            "衣長　𝟨𝟪.𝟧　𝟩𝟣.𝟢　𝟩𝟥.𝟧　(cm)"
+          ],
+          "columnCount": 5,
+          "header": [
+            "",
+            "M",
+            "L",
+            "XL",
+            ""
+          ],
+          "body": [
+            [
+              "肩寬",
+              "𝟨𝟢.𝟢",
+              "𝟨𝟤.𝟧",
+              "𝟨𝟧.𝟢",
+              ""
+            ],
+            [
+              "胸寬",
+              "𝟨𝟥.𝟢",
+              "𝟨𝟧.𝟧",
+              "𝟨𝟪.𝟢",
+              ""
+            ],
+            [
+              "袖長",
+              "𝟨𝟢.𝟢",
+              "𝟨𝟣.𝟧",
+              "𝟨𝟥.𝟢",
+              ""
+            ],
+            [
+              "衣長",
+              "𝟨𝟪.𝟧",
+              "𝟩𝟣.𝟢",
+              "𝟩𝟥.𝟧",
+              "(cm)"
+            ]
+          ]
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 < 173 著用 M"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 173~178 著用 L"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 > 178 著用 XL　(cm)"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "hashtag",
+          "text": "#BD24021"
+        }
+      ],
+      "link": "https://shopee.tw/product/74187402/24756231227",
+      "source": {
+        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
+        "documentId": "1drTbvQ1ERiWXfSORGyMs4p-Xv8_GdHW4SwKvXiZQT3g",
+        "documentModifiedTime": "2026-08-06T06:27:25.053Z",
+        "imageFiles": []
+      }
+    },
+    {
+      "slug": "intelligence-hoodie",
+      "code": "BT24020",
+      "name": "PRDM Intelligence Hoodie",
+      "lineCode": "BT",
+      "typeCode": "24",
+      "sequence": "020",
+      "category": "AW Tops",
+      "listPrice": 1380,
+      "salePrice": null,
+      "priceLabel": "NT$1,380",
+      "image": "assets/images/products/intelligence-hoodie.webp",
+      "images": [
+        "assets/images/products/intelligence-hoodie.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/products/intelligence-hoodie.webp",
+          "derivatives": []
+        }
+      ],
+      "imageSource": "preserved-existing",
+      "alt": "PRDM Intelligence Hoodie product image",
+      "colors": [
+        {
+          "id": "black",
+          "colorId": "black",
+          "label": "Black"
+        },
+        {
+          "id": "midnight",
+          "colorId": "midnight",
+          "label": "Midnight"
+        }
+      ],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "BT24020-C01-S4",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "BT24020-C01-S5",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S5",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "BT24020-C01-S6",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S6",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "BT24020-C61-S4",
+          "lots": [],
+          "colorCode": "C61",
+          "colorName": "Midnight",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "BT24020-C61-S5",
+          "lots": [],
+          "colorCode": "C61",
+          "colorName": "Midnight",
+          "sizeCode": "S5",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "BT24020-C61-S6",
+          "lots": [],
+          "colorCode": "C61",
+          "colorName": "Midnight",
+          "sizeCode": "S6",
+          "sizeName": "XL"
+        }
+      ],
+      "soldOut": false,
+      "description": [
+        {
+          "type": "text",
+          "text": "• Printed graphics on front and back"
+        },
+        {
+          "type": "text",
+          "text": "• 100% cotton loopback jersey of 350 g/m²"
+        },
+        {
+          "type": "text",
+          "text": "• Boxy silhouette and longer-back cutting"
+        },
+        {
+          "type": "text",
+          "text": "• Watch pocket inside the kangaroo pocket"
+        },
+        {
+          "type": "text",
+          "text": "• Signature tab on sleeve"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "「Authentic」作為韋氏辭典的年度關鍵字"
+        },
+        {
+          "type": "text",
+          "text": "揭示了生成式人工智慧的瘋狂擴張"
+        },
+        {
+          "type": "text",
+          "text": "此時世界的真實性已不再是理所當然"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "人類已然置身於一個真假難辨的世界"
+        },
+        {
+          "type": "text",
+          "text": "我們無法使用言語來識別敵友"
+        },
+        {
+          "type": "text",
+          "text": "抑或使用 reCAPTCHA v2 進行人機驗證"
+        },
+        {
+          "type": "text",
+          "text": "為證明自己是人類而辯解看似可笑"
+        },
+        {
+          "type": "text",
+          "text": "卻是我們無可迴避的文明危機"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "為打造古往今來之間恆真的美學"
+        },
+        {
+          "type": "text",
+          "text": "Paradigm® 將「Authentic」列入品牌核心理念"
+        },
+        {
+          "type": "text",
+          "text": "未來也將持續演示這個世界運作的真相"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這款印花帽 T 的面料是最適合台灣的重磅毛圈布"
+        },
+        {
+          "type": "text",
+          "text": "兼顧外觀的立體度以及優異的舒適度、實穿性"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "極寬的袖管讓整體輪廓的寬鬆感更一致"
+        },
+        {
+          "type": "text",
+          "text": "微短版的衣長有助於修飾身形比例"
+        },
+        {
+          "type": "text",
+          "text": "選擇小一號的尺寸可以穿出更短版的效果"
+        },
+        {
+          "type": "text",
+          "text": "我們在口袋內側額外增加了隱藏小口袋"
+        },
+        {
+          "type": "text",
+          "text": "便於放置零錢或是鑰匙、卡片、耳機……"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "table",
+          "sourceLines": [
+            "　　　 M　　L　　XL",
+            "肩寬　𝟨𝟢.𝟢　𝟨𝟤.𝟧　𝟨𝟧.𝟢",
+            "胸寬　𝟨𝟥.𝟢　𝟨𝟧.𝟧　𝟨𝟪.𝟢",
+            "袖長　𝟨𝟢.𝟢　𝟨𝟣.𝟧　𝟨𝟥.𝟢",
+            "衣長　𝟨𝟪.𝟧　𝟩𝟣.𝟢　𝟩𝟥.𝟧　(cm)"
+          ],
+          "columnCount": 5,
+          "header": [
+            "",
+            "M",
+            "L",
+            "XL",
+            ""
+          ],
+          "body": [
+            [
+              "肩寬",
+              "𝟨𝟢.𝟢",
+              "𝟨𝟤.𝟧",
+              "𝟨𝟧.𝟢",
+              ""
+            ],
+            [
+              "胸寬",
+              "𝟨𝟥.𝟢",
+              "𝟨𝟧.𝟧",
+              "𝟨𝟪.𝟢",
+              ""
+            ],
+            [
+              "袖長",
+              "𝟨𝟢.𝟢",
+              "𝟨𝟣.𝟧",
+              "𝟨𝟥.𝟢",
+              ""
+            ],
+            [
+              "衣長",
+              "𝟨𝟪.𝟧",
+              "𝟩𝟣.𝟢",
+              "𝟩𝟥.𝟧",
+              "(cm)"
+            ]
+          ]
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 < 173 著用 M"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 173~178 著用 L"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 > 178 著用 XL　(cm)"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "hashtag",
+          "text": "#BT24020"
+        }
+      ],
+      "link": "https://shopee.tw/product/74187402/24506235365",
+      "source": {
+        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
+        "documentId": "1XnJjClFY5CUWQWak1-s07nFMCv0Iwnwi8gF9uVXQVKU",
+        "documentModifiedTime": "2026-08-06T06:25:39.010Z",
+        "imageFiles": []
+      }
+    },
+    {
+      "slug": "timeless-hoodie",
+      "code": "TL24019",
+      "name": "PRDM Timeless Hoodie",
+      "lineCode": "TL",
+      "typeCode": "24",
+      "sequence": "019",
+      "category": "AW Tops",
+      "listPrice": 1380,
+      "salePrice": null,
+      "priceLabel": "NT$1,380",
+      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+      "images": [
+        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "isFallback": true,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
+              "bytes": 3112,
+              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+              "bytes": 7424,
+              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
+              "bytes": 18982,
+              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            }
+          ]
+        }
+      ],
+      "imageSource": "fallback",
+      "alt": "",
+      "colors": [
+        {
+          "id": "black",
+          "colorId": "black",
+          "label": "Black"
+        },
+        {
+          "id": "midnight",
+          "colorId": "midnight",
+          "label": "Midnight"
+        }
+      ],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "TL24019-C01-S4",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "TL24019-C01-S5",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S5",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "TL24019-C01-S6",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S6",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "TL24019-C61-S4",
+          "lots": [],
+          "colorCode": "C61",
+          "colorName": "Midnight",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "TL24019-C61-S5",
+          "lots": [],
+          "colorCode": "C61",
+          "colorName": "Midnight",
+          "sizeCode": "S5",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "TL24019-C61-S6",
+          "lots": [],
+          "colorCode": "C61",
+          "colorName": "Midnight",
+          "sizeCode": "S6",
+          "sizeName": "XL"
+        }
+      ],
+      "soldOut": true,
+      "description": [
+        {
+          "type": "text",
+          "text": "• Printed graphics on front and back"
+        },
+        {
+          "type": "text",
+          "text": "• 100% cotton loopback jersey of 350 g/sqm"
+        },
+        {
+          "type": "text",
+          "text": "• Boxy silhouette and longer-back cutting"
+        },
+        {
+          "type": "text",
+          "text": "• Watch pocket inside the kangaroo pocket"
+        },
+        {
+          "type": "text",
+          "text": "• Signature tab on sleeve"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "Timeless 系列旨在傳達品牌的初衷"
+        },
+        {
+          "type": "text",
+          "text": "我們不追求浮誇的剪裁與結構"
+        },
+        {
+          "type": "text",
+          "text": "而是回歸最本質性的經典原型"
+        },
+        {
+          "type": "text",
+          "text": "改良成現在流行而未來也不會過時的型態"
+        },
+        {
+          "type": "text",
+          "text": "同時技巧性地融入當季創意"
+        },
+        {
+          "type": "text",
+          "text": "打造簡約百搭的設計風格"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這款印花帽 T 的面料設定"
+        },
+        {
+          "type": "text",
+          "text": "同樣是最適合台灣的重磅毛圈布"
+        },
+        {
+          "type": "text",
+          "text": "兼顧外觀的立體度以及優異的舒適度、實穿性"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "極寬的袖管讓整體輪廓的寬鬆感更一致"
+        },
+        {
+          "type": "text",
+          "text": "微短版的衣長有助於修飾身形比例"
+        },
+        {
+          "type": "text",
+          "text": "選擇小一號的尺寸可以穿出更短版的效果"
+        },
+        {
+          "type": "text",
+          "text": "我們在口袋內側額外增加了隱藏小口袋"
+        },
+        {
+          "type": "text",
+          "text": "便於放置零錢或是鑰匙、卡片、耳機……"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "我們在面料、版型、機能上努力"
+        },
+        {
+          "type": "text",
+          "text": "就是要為你打造這款最強帽 T"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "table",
+          "sourceLines": [
+            "　　 　 M　　 L　　 XL",
+            "肩寬　60.0　62.5　65.0",
+            "胸寬　63.0　65.5　68.0",
+            "袖長　60.0　61.5　63.0",
+            "衣長　68.5　71.0　73.5　(cm)"
+          ],
+          "columnCount": 5,
+          "header": [
+            "",
+            "M",
+            "L",
+            "XL",
+            ""
+          ],
+          "body": [
+            [
+              "肩寬",
+              "60.0",
+              "62.5",
+              "65.0",
+              ""
+            ],
+            [
+              "胸寬",
+              "63.0",
+              "65.5",
+              "68.0",
+              ""
+            ],
+            [
+              "袖長",
+              "60.0",
+              "61.5",
+              "63.0",
+              ""
+            ],
+            [
+              "衣長",
+              "68.5",
+              "71.0",
+              "73.5",
+              "(cm)"
+            ]
+          ]
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≤ 173 拿 M"
+        },
+        {
+          "type": "text",
+          "text": "建議身高∊173~178 拿 L"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≥ 178 拿 XL　(cm)"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "hashtag",
+          "text": "#TL24019"
+        }
+      ],
+      "link": "https://shopee.tw/product/74187402/24704802748",
+      "source": {
+        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
+        "documentId": "1BD7R-S2ynPZqkP3XD1m3M8QxW8bR4sb_UXK9-RLO4Bc",
+        "documentModifiedTime": "2023-12-24T06:42:26.227Z",
+        "imageFiles": []
+      }
+    },
+    {
+      "slug": "timeless-crewneck",
+      "code": "TL23018",
+      "name": "PRDM Timeless Crewneck",
+      "lineCode": "TL",
+      "typeCode": "23",
+      "sequence": "018",
+      "category": "AW Tops",
+      "listPrice": 1180,
+      "salePrice": null,
+      "priceLabel": "NT$1,180",
+      "image": "assets/images/products/timeless-crewneck.webp",
+      "images": [
+        "assets/images/products/timeless-crewneck.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/products/timeless-crewneck.webp",
+          "derivatives": []
+        }
+      ],
+      "imageSource": "preserved-existing",
+      "alt": "PRDM Timeless Crewneck product image",
+      "colors": [
+        {
+          "id": "black",
+          "colorId": "black",
+          "label": "Black"
+        },
+        {
+          "id": "grey",
+          "colorId": "grey",
+          "label": "Grey"
+        }
+      ],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "TL23018-C01-S1",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S1",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "TL23018-C01-S2",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S2",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "TL23018-C01-S4",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S4",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "TL23018-C05-S1",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S1",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "TL23018-C05-S2",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S2",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "TL23018-C05-S4",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S4",
+          "sizeName": "XL"
+        }
+      ],
+      "soldOut": false,
+      "description": [
+        {
+          "type": "text",
+          "text": "• Printed graphics on front and back"
+        },
+        {
+          "type": "text",
+          "text": "• 100% cotton loopback jersey of 350 g/sqm"
+        },
+        {
+          "type": "text",
+          "text": "• Wide silhouette and longer-back cutting"
+        },
+        {
+          "type": "text",
+          "text": "• Signature tab on sleeve"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "Timeless 系列旨在傳達品牌的初衷"
+        },
+        {
+          "type": "text",
+          "text": "我們不追求浮誇的剪裁與結構"
+        },
+        {
+          "type": "text",
+          "text": "而是回歸最本質性的經典原型"
+        },
+        {
+          "type": "text",
+          "text": "改良成現在流行而未來也不會過時的型態"
+        },
+        {
+          "type": "text",
+          "text": "同時技巧性地融入當季創意"
+        },
+        {
+          "type": "text",
+          "text": "打造簡約百搭的設計風格"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這款印花大學 T 的面料設定"
+        },
+        {
+          "type": "text",
+          "text": "同樣是優秀的重磅毛圈布"
+        },
+        {
+          "type": "text",
+          "text": "兼顧外觀的立體度以及在台灣的實穿性"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "寬鬆的袖管讓整體輪廓的寬鬆感更自然"
+        },
+        {
+          "type": "text",
+          "text": "領口是最費工的鑲嵌型羅紋裁片"
+        },
+        {
+          "type": "text",
+          "text": "加強領口彈性、壽命及層次感"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "我們在每個細節上的雕琢"
+        },
+        {
+          "type": "text",
+          "text": "都是為了讓你在低調中感受美好"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "table",
+          "sourceLines": [
+            "　　 　 M　　 L　　 XL",
+            "肩寬　60.0　63.0　64.5",
+            "胸寬　66.0　71.0　73.5",
+            "袖長　56.0　57.0　59.0",
+            "衣長　71.0　73.0　77.0　(cm)"
+          ],
+          "columnCount": 5,
+          "header": [
+            "",
+            "M",
+            "L",
+            "XL",
+            ""
+          ],
+          "body": [
+            [
+              "肩寬",
+              "60.0",
+              "63.0",
+              "64.5",
+              ""
+            ],
+            [
+              "胸寬",
+              "66.0",
+              "71.0",
+              "73.5",
+              ""
+            ],
+            [
+              "袖長",
+              "56.0",
+              "57.0",
+              "59.0",
+              ""
+            ],
+            [
+              "衣長",
+              "71.0",
+              "73.0",
+              "77.0",
+              "(cm)"
+            ]
+          ]
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≤ 173 拿 M"
+        },
+        {
+          "type": "text",
+          "text": "建議身高∊173~178 拿 L"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≥ 178 拿 XL　(cm)"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "hashtag",
+          "text": "#TL23018"
+        }
+      ],
+      "link": "https://shopee.tw/product/74187402/25854802717",
+      "source": {
+        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
+        "documentId": "1WS2VZgv14arGXC4LNo18eG_z747s9tgvpGy9QFRd50Q",
+        "documentModifiedTime": "2023-12-24T06:42:06.135Z",
+        "imageFiles": []
+      }
+    },
+    {
+      "slug": "aesthetics-hoodie",
+      "code": "AE24017",
+      "name": "PRDM Aesthetics Hoodie",
+      "lineCode": "AE",
+      "typeCode": "24",
+      "sequence": "017",
+      "category": "AW Tops",
+      "listPrice": 1380,
+      "salePrice": null,
+      "priceLabel": "NT$1,380",
+      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+      "images": [
+        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "isFallback": true,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
+              "bytes": 3112,
+              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+              "bytes": 7424,
+              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
+              "bytes": 18982,
+              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            }
+          ]
+        }
+      ],
+      "imageSource": "fallback",
+      "alt": "",
+      "colors": [
+        {
+          "id": "black",
+          "colorId": "black",
+          "label": "Black"
+        },
+        {
+          "id": "midnight",
+          "colorId": "midnight",
+          "label": "Midnight"
+        }
+      ],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "AE24017-C01-S4",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "AE24017-C01-S5",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S5",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "AE24017-C01-S6",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S6",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "AE24017-C61-S4",
+          "lots": [],
+          "colorCode": "C61",
+          "colorName": "Midnight",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "AE24017-C61-S5",
+          "lots": [],
+          "colorCode": "C61",
+          "colorName": "Midnight",
+          "sizeCode": "S5",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "AE24017-C61-S6",
+          "lots": [],
+          "colorCode": "C61",
+          "colorName": "Midnight",
+          "sizeCode": "S6",
+          "sizeName": "XL"
+        }
+      ],
+      "soldOut": false,
+      "description": [
+        {
+          "type": "text",
+          "text": "• Printed graphics on front and back"
+        },
+        {
+          "type": "text",
+          "text": "• 100% cotton loopback jersey of 350 g/sqm"
+        },
+        {
+          "type": "text",
+          "text": "• Boxy silhouette and longer-back cutting"
+        },
+        {
+          "type": "text",
+          "text": "• Watch pocket inside the kangaroo pocket"
+        },
+        {
+          "type": "text",
+          "text": "• Signature tab on sleeve"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "Aesthetics 款式是我們的定番系列"
+        },
+        {
+          "type": "text",
+          "text": "以精美的書寫體彰顯品牌美學"
+        },
+        {
+          "type": "text",
+          "text": "在這系列我們喜歡選用較跳脫的配色"
+        },
+        {
+          "type": "text",
+          "text": "兼顧明度、飽和度的流行色彩"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這款印花帽 T 的面料設定"
+        },
+        {
+          "type": "text",
+          "text": "同樣是最適合台灣的重磅毛圈布"
+        },
+        {
+          "type": "text",
+          "text": "兼顧外觀的立體度以及優異的舒適度、實穿性"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "極寬的袖管讓整體輪廓的寬鬆感更一致"
+        },
+        {
+          "type": "text",
+          "text": "微短版的衣長有助於修飾身形比例"
+        },
+        {
+          "type": "text",
+          "text": "選擇小一號的尺寸可以穿出更短版的效果"
+        },
+        {
+          "type": "text",
+          "text": "我們在口袋內側額外增加了隱藏小口袋"
+        },
+        {
+          "type": "text",
+          "text": "便於放置零錢或是鑰匙、卡片、耳機……"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "我們在面料、版型、機能上努力"
+        },
+        {
+          "type": "text",
+          "text": "就是要為你打造這款最強帽 T"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "table",
+          "sourceLines": [
+            "　　 　 M　　 L　　 XL",
+            "肩寬　60.0　62.5　65.0",
+            "胸寬　63.0　65.5　68.0",
+            "袖長　60.0　61.5　63.0",
+            "衣長　68.5　71.0　73.5　(cm)"
+          ],
+          "columnCount": 5,
+          "header": [
+            "",
+            "M",
+            "L",
+            "XL",
+            ""
+          ],
+          "body": [
+            [
+              "肩寬",
+              "60.0",
+              "62.5",
+              "65.0",
+              ""
+            ],
+            [
+              "胸寬",
+              "63.0",
+              "65.5",
+              "68.0",
+              ""
+            ],
+            [
+              "袖長",
+              "60.0",
+              "61.5",
+              "63.0",
+              ""
+            ],
+            [
+              "衣長",
+              "68.5",
+              "71.0",
+              "73.5",
+              "(cm)"
+            ]
+          ]
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≤ 173 拿 M"
+        },
+        {
+          "type": "text",
+          "text": "建議身高∊173~178 拿 L"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≥ 178 拿 XL　(cm)"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "hashtag",
+          "text": "#AE24017"
+        }
+      ],
+      "link": "https://shopee.tw/product/74187402/25254807185",
+      "source": {
+        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
+        "documentId": "1DtFGhWxl5jfVhzU2-xSMmHlHW5em4hg4MbHwGQIxVZ4",
+        "documentModifiedTime": "2023-12-23T10:26:39.626Z",
+        "imageFiles": []
+      }
+    },
+    {
+      "slug": "aesthetics-crewneck",
+      "code": "AE23016",
+      "name": "PRDM Aesthetics Crewneck",
+      "lineCode": "AE",
+      "typeCode": "23",
+      "sequence": "016",
+      "category": "AW Tops",
+      "listPrice": 1180,
+      "salePrice": null,
+      "priceLabel": "NT$1,180",
+      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+      "images": [
+        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "isFallback": true,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
+              "bytes": 3112,
+              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+              "bytes": 7424,
+              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
+              "bytes": 18982,
+              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            }
+          ]
+        }
+      ],
+      "imageSource": "fallback",
+      "alt": "",
+      "colors": [
+        {
+          "id": "black",
+          "colorId": "black",
+          "label": "Black"
+        },
+        {
+          "id": "grey",
+          "colorId": "grey",
+          "label": "Grey"
+        }
+      ],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "AE23016-C01-S1",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S1",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "AE23016-C01-S2",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S2",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "AE23016-C01-S4",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S4",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "AE23016-C05-S1",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S1",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "AE23016-C05-S2",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S2",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "AE23016-C05-S4",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S4",
+          "sizeName": "XL"
+        }
+      ],
+      "soldOut": false,
+      "description": [
+        {
+          "type": "text",
+          "text": "• Printed graphics on front and back"
+        },
+        {
+          "type": "text",
+          "text": "• 100% cotton loopback jersey of 350 g/sqm"
+        },
+        {
+          "type": "text",
+          "text": "• Wide silhouette and longer-back cutting"
+        },
+        {
+          "type": "text",
+          "text": "• Signature tab on sleeve"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "Aesthetics 款式是我們的定番系列"
+        },
+        {
+          "type": "text",
+          "text": "以精美的書寫體彰顯品牌美學"
+        },
+        {
+          "type": "text",
+          "text": "在這系列我們喜歡選用較跳脫的配色"
+        },
+        {
+          "type": "text",
+          "text": "兼顧明度、飽和度的流行色彩"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這款印花大學 T 的面料設定"
+        },
+        {
+          "type": "text",
+          "text": "同樣是優秀的重磅毛圈布"
+        },
+        {
+          "type": "text",
+          "text": "兼顧外觀的立體度以及在台灣的實穿性"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "寬鬆的袖管讓整體輪廓的寬鬆感更自然"
+        },
+        {
+          "type": "text",
+          "text": "領口是最費工的鑲嵌型羅紋裁片"
+        },
+        {
+          "type": "text",
+          "text": "加強領口彈性、壽命及層次感"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "我們在每個細節上的雕琢"
+        },
+        {
+          "type": "text",
+          "text": "都是為了讓你在低調中感受美好"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "table",
+          "sourceLines": [
+            "　　 　 M　　 L　　 XL",
+            "肩寬　60.0　63.0　64.5",
+            "胸寬　66.0　71.0　73.5",
+            "袖長　56.0　57.0　59.0",
+            "衣長　71.0　73.0　77.0　(cm)"
+          ],
+          "columnCount": 5,
+          "header": [
+            "",
+            "M",
+            "L",
+            "XL",
+            ""
+          ],
+          "body": [
+            [
+              "肩寬",
+              "60.0",
+              "63.0",
+              "64.5",
+              ""
+            ],
+            [
+              "胸寬",
+              "66.0",
+              "71.0",
+              "73.5",
+              ""
+            ],
+            [
+              "袖長",
+              "56.0",
+              "57.0",
+              "59.0",
+              ""
+            ],
+            [
+              "衣長",
+              "71.0",
+              "73.0",
+              "77.0",
+              "(cm)"
+            ]
+          ]
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≤ 173 拿 M"
+        },
+        {
+          "type": "text",
+          "text": "建議身高∊173~178 拿 L"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≥ 178 拿 XL　(cm)"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "hashtag",
+          "text": "#AE23016"
+        }
+      ],
+      "link": "https://shopee.tw/product/74187402/25104801884",
+      "source": {
+        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
+        "documentId": "14r-yXVpvkjhhFNzxcvIVACwO4DvjDOYoH6LreYOXNcA",
+        "documentModifiedTime": "2023-12-21T17:47:20.050Z",
+        "imageFiles": []
+      }
+    },
+    {
+      "slug": "paradigm-hoodie",
+      "code": "PD24015",
+      "name": "PRDM Paradigm Hoodie",
+      "lineCode": "PD",
+      "typeCode": "24",
+      "sequence": "015",
+      "category": "AW Tops",
+      "listPrice": 1380,
+      "salePrice": null,
+      "priceLabel": "NT$1,380",
+      "image": "assets/images/products/paradigm-hoodie.webp",
+      "images": [
+        "assets/images/products/paradigm-hoodie.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/products/paradigm-hoodie.webp",
+          "derivatives": []
+        }
+      ],
+      "imageSource": "preserved-existing",
+      "alt": "PRDM Paradigm Hoodie product image",
+      "colors": [
+        {
+          "id": "black",
+          "colorId": "black",
+          "label": "Black"
+        },
+        {
+          "id": "midnight",
+          "colorId": "midnight",
+          "label": "Midnight"
+        }
+      ],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "PD24015-C01-S4",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "PD24015-C01-S5",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S5",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "PD24015-C01-S6",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S6",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "PD24015-C61-S4",
+          "lots": [],
+          "colorCode": "C61",
+          "colorName": "Midnight",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "PD24015-C61-S5",
+          "lots": [],
+          "colorCode": "C61",
+          "colorName": "Midnight",
+          "sizeCode": "S5",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "PD24015-C61-S6",
+          "lots": [],
+          "colorCode": "C61",
+          "colorName": "Midnight",
+          "sizeCode": "S6",
+          "sizeName": "XL"
+        }
+      ],
+      "soldOut": true,
+      "description": [
+        {
+          "type": "text",
+          "text": "• Printed graphics on front and back"
+        },
+        {
+          "type": "text",
+          "text": "• 100% cotton loopback jersey of 350 g/sqm"
+        },
+        {
+          "type": "text",
+          "text": "• Boxy silhouette and longer-back cutting"
+        },
+        {
+          "type": "text",
+          "text": "• Watch pocket inside the kangaroo pocket"
+        },
+        {
+          "type": "text",
+          "text": "• Signature tab on sleeve"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "Paradigm 款式是我們的定番系列"
+        },
+        {
+          "type": "text",
+          "text": "印有象徵著品牌經典的圖樣"
+        },
+        {
+          "type": "text",
+          "text": "為了忠實傳達品牌信念"
+        },
+        {
+          "type": "text",
+          "text": "我們採用最純粹、不張揚的字體呈現"
+        },
+        {
+          "type": "text",
+          "text": "成為語言與思想的透明載體"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這款印花帽 T 的面料設定"
+        },
+        {
+          "type": "text",
+          "text": "同樣是最適合台灣的重磅毛圈布"
+        },
+        {
+          "type": "text",
+          "text": "兼顧外觀的立體度以及優異的舒適度、實穿性"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "極寬的袖管讓整體輪廓的寬鬆感更一致"
+        },
+        {
+          "type": "text",
+          "text": "微短版的衣長有助於修飾身形比例"
+        },
+        {
+          "type": "text",
+          "text": "選擇小一號的尺寸可以穿出更短版的效果"
+        },
+        {
+          "type": "text",
+          "text": "我們在口袋內側額外增加了隱藏小口袋"
+        },
+        {
+          "type": "text",
+          "text": "便於放置零錢或是鑰匙、卡片、耳機……"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "我們在面料、版型、機能上努力"
+        },
+        {
+          "type": "text",
+          "text": "就是要為你打造這款最強帽 T"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "table",
+          "sourceLines": [
+            "　　 　 M　　 L　　 XL",
+            "肩寬　60.0　62.5　65.0",
+            "胸寬　63.0　65.5　68.0",
+            "袖長　60.0　61.5　63.0",
+            "衣長　68.5　71.0　73.5　(cm)"
+          ],
+          "columnCount": 5,
+          "header": [
+            "",
+            "M",
+            "L",
+            "XL",
+            ""
+          ],
+          "body": [
+            [
+              "肩寬",
+              "60.0",
+              "62.5",
+              "65.0",
+              ""
+            ],
+            [
+              "胸寬",
+              "63.0",
+              "65.5",
+              "68.0",
+              ""
+            ],
+            [
+              "袖長",
+              "60.0",
+              "61.5",
+              "63.0",
+              ""
+            ],
+            [
+              "衣長",
+              "68.5",
+              "71.0",
+              "73.5",
+              "(cm)"
+            ]
+          ]
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≤ 173 拿 M"
+        },
+        {
+          "type": "text",
+          "text": "建議身高∊173~178 拿 L"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≥ 178 拿 XL　(cm)"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "hashtag",
+          "text": "#PD24015"
+        }
+      ],
+      "link": "https://shopee.tw/product/74187402/24954802571",
+      "source": {
+        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
+        "documentId": "1KQSh_asCWjez3inG646Y_t3afxyfbdaaZBryy88opuw",
+        "documentModifiedTime": "2023-12-17T13:43:01.981Z",
+        "imageFiles": []
+      }
+    },
+    {
+      "slug": "everyday-hoodie",
+      "code": "ED24014",
+      "name": "PRDM Everyday Hoodie",
+      "lineCode": "ED",
+      "typeCode": "24",
+      "sequence": "014",
+      "category": "AW Tops",
+      "listPrice": 1180,
+      "salePrice": null,
+      "priceLabel": "NT$1,180",
+      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+      "images": [
+        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "isFallback": true,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
+              "bytes": 3112,
+              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+              "bytes": 7424,
+              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
+              "bytes": 18982,
+              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            }
+          ]
+        }
+      ],
+      "imageSource": "fallback",
+      "alt": "",
+      "colors": [
+        {
+          "id": "black",
+          "colorId": "black",
+          "label": "Black"
+        },
+        {
+          "id": "midnight",
+          "colorId": "midnight",
+          "label": "Midnight"
+        }
+      ],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED24014-C01-S4",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED24014-C01-S5",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S5",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED24014-C01-S6",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S6",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED24014-C61-S4",
+          "lots": [],
+          "colorCode": "C61",
+          "colorName": "Midnight",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED24014-C61-S5",
+          "lots": [],
+          "colorCode": "C61",
+          "colorName": "Midnight",
+          "sizeCode": "S5",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED24014-C61-S6",
+          "lots": [],
+          "colorCode": "C61",
+          "colorName": "Midnight",
+          "sizeCode": "S6",
+          "sizeName": "XL"
+        }
+      ],
+      "soldOut": false,
+      "description": [
+        {
+          "type": "text",
+          "text": "• 100% cotton loopback jersey of 350 g/sqm"
+        },
+        {
+          "type": "text",
+          "text": "• Boxy silhouette and longer-back cutting"
+        },
+        {
+          "type": "text",
+          "text": "• Watch pocket inside the kangaroo pocket"
+        },
+        {
+          "type": "text",
+          "text": "• Signature tab on sleeve"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這是一款寬鬆、微短版的重磅毛圈布帽 T"
+        },
+        {
+          "type": "text",
+          "text": "考量到台灣的副熱帶氣候、日益嚴重的全球暖化"
+        },
+        {
+          "type": "text",
+          "text": "特別選用手感紮實的重磅毛圈布來製作"
+        },
+        {
+          "type": "text",
+          "text": "重磅毛圈布比起刷毛內裏更加實穿"
+        },
+        {
+          "type": "text",
+          "text": "同時也能改善一般毛圈布輕薄、柔軟的缺點"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "目前 Paradigm® 的基礎款式仍秉持 Mono-Material 的原則"
+        },
+        {
+          "type": "text",
+          "text": "面料與輔料皆採用單一天然素材製成"
+        },
+        {
+          "type": "text",
+          "text": "純棉面料有著最好的親膚性、透氣性"
+        },
+        {
+          "type": "text",
+          "text": "因此能帶來最舒適的穿著感受"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "為了呈現連貫的寬鬆感"
+        },
+        {
+          "type": "text",
+          "text": "我們採用垂墜感優異的面料與極寬鬆的袖管設定"
+        },
+        {
+          "type": "text",
+          "text": "微短版的衣長有助於修飾身形比例"
+        },
+        {
+          "type": "text",
+          "text": "如果你想要追求更短版的效果"
+        },
+        {
+          "type": "text",
+          "text": "也可以選擇著用小一號的尺寸"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "因為我們在極簡外觀下仍對功能性有所追求"
+        },
+        {
+          "type": "text",
+          "text": "在口袋內側額外增加了隱藏小口袋"
+        },
+        {
+          "type": "text",
+          "text": "便於放置零錢或是鑰匙、卡片、耳機……"
+        },
+        {
+          "type": "text",
+          "text": "這樣的設定也會延續到我們未來的單品"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "最實穿的重磅毛圈布、寬短版輪廓、隱藏小口袋"
+        },
+        {
+          "type": "text",
+          "text": "為你顧及冬季的每個日常細節"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "table",
+          "sourceLines": [
+            "　　 　 M　　 L　　 XL",
+            "肩寬　60.0　62.5　65.0",
+            "胸寬　63.0　65.5　68.0",
+            "袖長　60.0　61.5　63.0",
+            "衣長　68.5　71.0　73.5　(cm)"
+          ],
+          "columnCount": 5,
+          "header": [
+            "",
+            "M",
+            "L",
+            "XL",
+            ""
+          ],
+          "body": [
+            [
+              "肩寬",
+              "60.0",
+              "62.5",
+              "65.0",
+              ""
+            ],
+            [
+              "胸寬",
+              "63.0",
+              "65.5",
+              "68.0",
+              ""
+            ],
+            [
+              "袖長",
+              "60.0",
+              "61.5",
+              "63.0",
+              ""
+            ],
+            [
+              "衣長",
+              "68.5",
+              "71.0",
+              "73.5",
+              "(cm)"
+            ]
+          ]
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≤ 173 拿 M"
+        },
+        {
+          "type": "text",
+          "text": "建議身高∊173~178 拿 L"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≥ 178 拿 XL　(cm)"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "hashtag",
+          "text": "#ED24014"
+        }
+      ],
+      "link": "https://shopee.tw/product/74187402/16896877458",
+      "source": {
+        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
+        "documentId": "1ol0PufPtJbophXjd6Bg7jCvSVy3ETyUGaTzA2BTYwpo",
+        "documentModifiedTime": "2023-12-14T13:14:36.190Z",
+        "imageFiles": []
+      }
+    },
+    {
+      "slug": "sponsorship-football-jersey",
+      "code": "PH14011",
+      "name": "PRDM Sponsorship Football Jersey",
+      "lineCode": "PH",
+      "typeCode": "14",
+      "sequence": "011",
+      "category": "SS Tops",
+      "listPrice": 990,
+      "salePrice": null,
+      "priceLabel": "NT$990",
+      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+      "images": [
+        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "isFallback": true,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
+              "bytes": 3112,
+              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+              "bytes": 7424,
+              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
+              "bytes": 18982,
+              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            }
+          ]
+        }
+      ],
+      "imageSource": "fallback",
+      "alt": "",
+      "colors": [
+        {
+          "id": "black",
+          "colorId": "black",
+          "label": "Black"
+        },
+        {
+          "id": "white",
+          "colorId": "white",
+          "label": "White"
+        },
+        {
+          "id": "cardinal",
+          "colorId": "cardinal",
+          "label": "Cardinal"
+        }
+      ],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PH14011-C01-S4",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PH14011-C01-S5",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S5",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PH14011-C01-S6",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S6",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PH14011-C09-S4",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PH14011-C09-S5",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S5",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PH14011-C09-S6",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S6",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PH14011-C13-S4",
+          "lots": [],
+          "colorCode": "C13",
+          "colorName": "Cardinal",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PH14011-C13-S5",
+          "lots": [],
+          "colorCode": "C13",
+          "colorName": "Cardinal",
+          "sizeCode": "S5",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PH14011-C13-S6",
+          "lots": [],
+          "colorCode": "C13",
+          "colorName": "Cardinal",
+          "sizeCode": "S6",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PH14011-C01-S4",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PH14011-C09-S4",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        }
+      ],
+      "soldOut": false,
+      "description": [
+        {
+          "type": "text",
+          "text": "• Printed graphics and all-over pattern"
+        },
+        {
+          "type": "text",
+          "text": "• Premium polyester and striped ribbing"
+        },
+        {
+          "type": "text",
+          "text": "• Moderately wide silhouette"
+        },
+        {
+          "type": "text",
+          "text": "• Signature tab on sleeve"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這是一款全新的運動休閒短 T"
+        },
+        {
+          "type": "text",
+          "text": "為了結合運動服飾的機能與休閒服飾的質感"
+        },
+        {
+          "type": "text",
+          "text": "我們選擇從足球衣的型態切入"
+        },
+        {
+          "type": "text",
+          "text": "打造現代生活必備的運動休閒系列"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "對於運動型態與休閒型態的權衡"
+        },
+        {
+          "type": "text",
+          "text": "採用手感紮實的重磅面料來中和運動氣息"
+        },
+        {
+          "type": "text",
+          "text": "同時加入特殊涼感纖維以維持必備機能"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "為了兼顧不同穿著風格的需求"
+        },
+        {
+          "type": "text",
+          "text": "正常尺寸的版型設定為歐美流行的合身輪廓"
+        },
+        {
+          "type": "text",
+          "text": "拿大一號則可以穿出亞洲持續延燒的寬鬆風格"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "因為要在休閒場合享受運動服飾的舒適"
+        },
+        {
+          "type": "text",
+          "text": "也要在運動時追求休閒服飾的風格與魅力"
+        },
+        {
+          "type": "text",
+          "text": "我們自各項賽事的復古球衣汲取靈感"
+        },
+        {
+          "type": "text",
+          "text": "在領口及袖口都採用厚實的羅紋滾邊"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "Athleisure、Blokecore、Clean Fit 的流行都有段時間了"
+        },
+        {
+          "type": "text",
+          "text": "我們推出運動休閒系列不是要追逐潮流"
+        },
+        {
+          "type": "text",
+          "text": "而是要結合時代中最單純的形式與機能"
+        },
+        {
+          "type": "text",
+          "text": "這樣的美學曾是新潮的象徵"
+        },
+        {
+          "type": "text",
+          "text": "也將成為永恆的趨勢"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "table",
+          "sourceLines": [
+            "　　 　 M　　 L　　 XL",
+            "肩寬　53.0　54.5　56.0",
+            "胸寬　56.5　59.0　61.5",
+            "袖長　23.5　24.5　25.5",
+            "衣長　71.0　73.0　75.0　(cm)"
+          ],
+          "columnCount": 5,
+          "header": [
+            "",
+            "M",
+            "L",
+            "XL",
+            ""
+          ],
+          "body": [
+            [
+              "肩寬",
+              "53.0",
+              "54.5",
+              "56.0",
+              ""
+            ],
+            [
+              "胸寬",
+              "56.5",
+              "59.0",
+              "61.5",
+              ""
+            ],
+            [
+              "袖長",
+              "23.5",
+              "24.5",
+              "25.5",
+              ""
+            ],
+            [
+              "衣長",
+              "71.0",
+              "73.0",
+              "75.0",
+              "(cm)"
+            ]
+          ]
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≤ 173 拿 M"
+        },
+        {
+          "type": "text",
+          "text": "建議身高∊173~178 拿 L"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≥ 178 拿 XL　(cm)"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "hashtag",
+          "text": "#PH14011"
+        }
+      ],
+      "link": "https://shopee.tw/product/74187402/20584010303",
+      "source": {
+        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
+        "documentId": "1ZAaP4MaDIt0A9fR2qJm9PTLemTWdX_qLPXVR5KvmvNQ",
+        "documentModifiedTime": "2023-09-10T13:55:34.875Z",
+        "imageFiles": []
+      }
+    },
+    {
+      "slug": "partnership-football-jersey",
+      "code": "PH14010",
+      "name": "PRDM Partnership Football Jersey",
+      "lineCode": "PH",
+      "typeCode": "14",
+      "sequence": "010",
+      "category": "SS Tops",
+      "listPrice": 990,
+      "salePrice": null,
+      "priceLabel": "NT$990",
+      "image": "assets/images/products/partnership-football-jersey.webp",
+      "images": [
+        "assets/images/products/partnership-football-jersey.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/products/partnership-football-jersey.webp",
+          "derivatives": []
+        }
+      ],
+      "imageSource": "preserved-existing",
+      "alt": "PRDM Partnership Football Jersey product image",
+      "colors": [
+        {
+          "id": "black",
+          "colorId": "black",
+          "label": "Black"
+        },
+        {
+          "id": "white",
+          "colorId": "white",
+          "label": "White"
+        },
+        {
+          "id": "cardinal",
+          "colorId": "cardinal",
+          "label": "Cardinal"
+        }
+      ],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PH14010-C01-S4",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PH14010-C01-S5",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S5",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PH14010-C01-S6",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S6",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PH14010-C09-S4",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PH14010-C09-S5",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S5",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PH14010-C09-S6",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S6",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PH14010-C13-S4",
+          "lots": [],
+          "colorCode": "C13",
+          "colorName": "Cardinal",
+          "sizeCode": "S4",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PH14010-C13-S5",
+          "lots": [],
+          "colorCode": "C13",
+          "colorName": "Cardinal",
+          "sizeCode": "S5",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PH14010-C13-S6",
+          "lots": [],
+          "colorCode": "C13",
+          "colorName": "Cardinal",
+          "sizeCode": "S6",
+          "sizeName": "XL"
+        }
+      ],
+      "soldOut": false,
+      "description": [
+        {
+          "type": "text",
+          "text": "• Printed graphics, embroidery and all-over pattern"
+        },
+        {
+          "type": "text",
+          "text": "• 100% premium polyester"
+        },
+        {
+          "type": "text",
+          "text": "• Wide silhouette and striped ribbing"
+        },
+        {
+          "type": "text",
+          "text": "• Signature tab on sleeve"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這是一款全新的運動休閒短 T"
+        },
+        {
+          "type": "text",
+          "text": "為了結合運動服飾的機能與休閒服飾的質感"
+        },
+        {
+          "type": "text",
+          "text": "我們選擇從足球衣的型態切入"
+        },
+        {
+          "type": "text",
+          "text": "打造現代生活必備的運動休閒系列"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "對於運動型態與休閒型態的權衡"
+        },
+        {
+          "type": "text",
+          "text": "採用手感紮實的重磅面料來中和運動氣息"
+        },
+        {
+          "type": "text",
+          "text": "同時加入特殊涼感纖維以維持必備機能"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "為了兼顧不同穿著風格的需求"
+        },
+        {
+          "type": "text",
+          "text": "正常尺寸的版型設定為歐美流行的合身輪廓"
+        },
+        {
+          "type": "text",
+          "text": "拿大一號則可以穿出亞洲持續延燒的寬鬆風格"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "因為要在休閒場合享受運動服飾的舒適"
+        },
+        {
+          "type": "text",
+          "text": "也要在運動時追求休閒服飾的風格與魅力"
+        },
+        {
+          "type": "text",
+          "text": "我們自各項賽事的復古球衣汲取靈感"
+        },
+        {
+          "type": "text",
+          "text": "在領口及袖口都採用厚實的羅紋滾邊"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "Athleisure、Blokecore、Clean Fit 的流行都有段時間了"
+        },
+        {
+          "type": "text",
+          "text": "我們推出運動休閒系列不是要追逐潮流"
+        },
+        {
+          "type": "text",
+          "text": "而是要結合時代中最單純的形式與機能"
+        },
+        {
+          "type": "text",
+          "text": "這樣的美學曾是新潮的象徵"
+        },
+        {
+          "type": "text",
+          "text": "也將成為永恆的趨勢"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "table",
+          "sourceLines": [
+            "　　 　 M　　 L　　 XL",
+            "肩寬　53.0　54.5　56.0",
+            "胸寬　56.5　59.0　61.5",
+            "袖長　23.5　24.5　25.5",
+            "衣長　71.0　73.0　75.0　(cm)"
+          ],
+          "columnCount": 5,
+          "header": [
+            "",
+            "M",
+            "L",
+            "XL",
+            ""
+          ],
+          "body": [
+            [
+              "肩寬",
+              "53.0",
+              "54.5",
+              "56.0",
+              ""
+            ],
+            [
+              "胸寬",
+              "56.5",
+              "59.0",
+              "61.5",
+              ""
+            ],
+            [
+              "袖長",
+              "23.5",
+              "24.5",
+              "25.5",
+              ""
+            ],
+            [
+              "衣長",
+              "71.0",
+              "73.0",
+              "75.0",
+              "(cm)"
+            ]
+          ]
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≤ 173 拿 M"
+        },
+        {
+          "type": "text",
+          "text": "建議身高∊173~178 拿 L"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≥ 178 拿 XL　(cm)"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "hashtag",
+          "text": "#PH14010"
+        }
+      ],
+      "link": "https://shopee.tw/product/74187402/23179857649",
+      "source": {
+        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
+        "documentId": "1kMpoFwEuRWvOvXjbZ8zTKJgfyjytFuZtX6_W9lPle3Y",
+        "documentModifiedTime": "2023-09-06T13:31:58.241Z",
+        "imageFiles": []
+      }
+    },
+    {
+      "slug": "timeless-tee",
+      "code": "TL14009",
+      "name": "PRDM Timeless Tee",
+      "lineCode": "TL",
+      "typeCode": "14",
+      "sequence": "009",
+      "category": "SS Tops",
+      "listPrice": 790,
+      "salePrice": null,
+      "priceLabel": "NT$790",
+      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+      "images": [
+        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "isFallback": true,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
+              "bytes": 3112,
+              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+              "bytes": 7424,
+              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
+              "bytes": 18982,
+              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            }
+          ]
+        }
+      ],
+      "imageSource": "fallback",
+      "alt": "",
+      "colors": [
+        {
+          "id": "black",
+          "colorId": "black",
+          "label": "Black"
+        },
+        {
+          "id": "white",
+          "colorId": "white",
+          "label": "White"
+        }
+      ],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "TL14009-C01-S1",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S1",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "TL14009-C01-S2",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S2",
+          "sizeName": "L"
+        },
+        {
+          "visible": false,
+          "soldOut": false,
+          "sku": "TL14009-C01-S3",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S3",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "TL14009-C01-S4",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S4",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "TL14009-C09-S1",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S1",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "TL14009-C09-S2",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S2",
+          "sizeName": "L"
+        },
+        {
+          "visible": false,
+          "soldOut": false,
+          "sku": "TL14009-C09-S3",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S3",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "TL14009-C09-S4",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S4",
+          "sizeName": "XL"
+        }
+      ],
+      "soldOut": false,
+      "description": [
+        {
+          "type": "text",
+          "text": "• Printed graphics on front and back"
+        },
+        {
+          "type": "text",
+          "text": "• 100% combed cotton of 230 g/sqm"
+        },
+        {
+          "type": "text",
+          "text": "• Wide silhouette and longer-back cutting"
+        },
+        {
+          "type": "text",
+          "text": "• Signature tab on sleeve"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這是一款在探討品牌理念的印花短 T"
+        },
+        {
+          "type": "text",
+          "text": "Timeless 一般翻作永恆"
+        },
+        {
+          "type": "text",
+          "text": "是一個超越時間性的概念"
+        },
+        {
+          "type": "text",
+          "text": "正如我們所追求的創作境界"
+        },
+        {
+          "type": "text",
+          "text": "就是在時間的維度之外"
+        },
+        {
+          "type": "text",
+          "text": "也能有當代藝術性的展現"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "我們從不追求浮誇的剪裁與結構"
+        },
+        {
+          "type": "text",
+          "text": "而是回歸最本質性的原型"
+        },
+        {
+          "type": "text",
+          "text": "改良成現在流行而未來也不會過時的型態"
+        },
+        {
+          "type": "text",
+          "text": "同時技巧性地融入當季創意來創造變化"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這款印花短 T 的材質、版型、細節設定"
+        },
+        {
+          "type": "text",
+          "text": "同樣採用手感優異的重磅精梳棉、"
+        },
+        {
+          "type": "text",
+          "text": "自然的寬大輪廓與前短後長的剪裁、"
+        },
+        {
+          "type": "text",
+          "text": "極度耐穿的領口與左側袖口的品牌小紅標"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "將基礎的短 T 版型改良成現在流行的自然寬大輪廓"
+        },
+        {
+          "type": "text",
+          "text": "配合低調又超好看的復古科技感圖樣設計"
+        },
+        {
+          "type": "text",
+          "text": "相信你很快就能理解我們所謂的品牌理念"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "table",
+          "sourceLines": [
+            "　　 　 M　　 L　　 XL",
+            "肩寬　50.0　53.0　54.5",
+            "胸寬　55.5　60.0　62.5",
+            "袖長　25.5　26.5　28.5",
+            "衣長　72.0　74.0　78.0　(cm)"
+          ],
+          "columnCount": 5,
+          "header": [
+            "",
+            "M",
+            "L",
+            "XL",
+            ""
+          ],
+          "body": [
+            [
+              "肩寬",
+              "50.0",
+              "53.0",
+              "54.5",
+              ""
+            ],
+            [
+              "胸寬",
+              "55.5",
+              "60.0",
+              "62.5",
+              ""
+            ],
+            [
+              "袖長",
+              "25.5",
+              "26.5",
+              "28.5",
+              ""
+            ],
+            [
+              "衣長",
+              "72.0",
+              "74.0",
+              "78.0",
+              "(cm)"
+            ]
+          ]
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≤ 173 拿 M"
+        },
+        {
+          "type": "text",
+          "text": "建議身高∊173~178 拿 L"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≥ 178 拿 XL　(cm)"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "hashtag",
+          "text": "#TL14009"
+        }
+      ],
+      "link": "https://shopee.tw/product/74187402/10299499306",
+      "source": {
+        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
+        "documentId": "1uvVHm8KEXhkbwuPISepZ_mgYtSYbQJP2WZT47oej2q0",
+        "documentModifiedTime": "2023-08-04T19:43:16.186Z",
+        "imageFiles": []
+      }
+    },
+    {
+      "slug": "aesthetics-tee",
+      "code": "AE14008",
+      "name": "PRDM Aesthetics Tee",
+      "lineCode": "AE",
+      "typeCode": "14",
+      "sequence": "008",
+      "category": "SS Tops",
+      "listPrice": 790,
+      "salePrice": null,
+      "priceLabel": "NT$790",
+      "image": "assets/images/products/aesthetics-tee.webp",
+      "images": [
+        "assets/images/products/aesthetics-tee.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/products/aesthetics-tee.webp",
+          "derivatives": []
+        }
+      ],
+      "imageSource": "preserved-existing",
+      "alt": "PRDM Aesthetics Tee product image",
+      "colors": [
+        {
+          "id": "black",
+          "colorId": "black",
+          "label": "Black"
+        },
+        {
+          "id": "white",
+          "colorId": "white",
+          "label": "White"
+        }
+      ],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "AE14008-C01-S1",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S1",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "AE14008-C01-S2",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S2",
+          "sizeName": "L"
+        },
+        {
+          "visible": false,
+          "soldOut": false,
+          "sku": "AE14008-C01-S3",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S3",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "AE14008-C01-S4",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S4",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "AE14008-C09-S1",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S1",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "AE14008-C09-S2",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S2",
+          "sizeName": "L"
+        },
+        {
+          "visible": false,
+          "soldOut": false,
+          "sku": "AE14008-C09-S3",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S3",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "AE14008-C09-S4",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S4",
+          "sizeName": "XL"
+        }
+      ],
+      "soldOut": false,
+      "description": [
+        {
+          "type": "text",
+          "text": "• Printed graphics on front and back"
+        },
+        {
+          "type": "text",
+          "text": "• 100% combed cotton of 230 g/sqm"
+        },
+        {
+          "type": "text",
+          "text": "• Wide silhouette and longer-back cutting"
+        },
+        {
+          "type": "text",
+          "text": "• Signature tab on sleeve"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這是一款彰顯品牌美學的印花短 T"
+        },
+        {
+          "type": "text",
+          "text": "Aesthetics 是美學及審美的意思"
+        },
+        {
+          "type": "text",
+          "text": "探討著人對美與藝術的評價，例如："
+        },
+        {
+          "type": "text",
+          "text": "具象主義，強調作品模仿真實世界而形塑寫實的美"
+        },
+        {
+          "type": "text",
+          "text": "形式主義，注重作品的構圖與手法是否符合美的原則"
+        },
+        {
+          "type": "text",
+          "text": "表現主義，重視作品為觀看者帶來的情緒反應……"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "為了體現品牌高雅的美學"
+        },
+        {
+          "type": "text",
+          "text": "我們採用精緻的書寫體呈現美學系列 Logo"
+        },
+        {
+          "type": "text",
+          "text": "首波系列作品選用珊瑚粉與寶藍的配色"
+        },
+        {
+          "type": "text",
+          "text": "每一處細節都嘗試著詮釋美學的多重觀點"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這款印花短 T 的材質、版型、細節設定"
+        },
+        {
+          "type": "text",
+          "text": "同樣採用手感優異的重磅精梳棉、"
+        },
+        {
+          "type": "text",
+          "text": "自然的寬大輪廓與前短後長的剪裁、"
+        },
+        {
+          "type": "text",
+          "text": "極度耐穿的領口與左側袖口的品牌小紅標"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "衣服本身優異的設定配合好的圖樣設計"
+        },
+        {
+          "type": "text",
+          "text": "吸引你的注意力並引起愉悅的情緒"
+        },
+        {
+          "type": "text",
+          "text": "這就是我們所要追求的審美體驗"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "table",
+          "sourceLines": [
+            "　　 　 M　　 L　　 XL",
+            "肩寬　50.0　53.0　54.5",
+            "胸寬　55.5　60.0　62.5",
+            "袖長　25.5　26.5　28.5",
+            "衣長　72.0　74.0　78.0　(cm)"
+          ],
+          "columnCount": 5,
+          "header": [
+            "",
+            "M",
+            "L",
+            "XL",
+            ""
+          ],
+          "body": [
+            [
+              "肩寬",
+              "50.0",
+              "53.0",
+              "54.5",
+              ""
+            ],
+            [
+              "胸寬",
+              "55.5",
+              "60.0",
+              "62.5",
+              ""
+            ],
+            [
+              "袖長",
+              "25.5",
+              "26.5",
+              "28.5",
+              ""
+            ],
+            [
+              "衣長",
+              "72.0",
+              "74.0",
+              "78.0",
+              "(cm)"
+            ]
+          ]
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≤ 173 拿 M"
+        },
+        {
+          "type": "text",
+          "text": "建議身高∊173~178 拿 L"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≥ 178 拿 XL　(cm)"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "hashtag",
+          "text": "#AE14008"
+        }
+      ],
+      "link": "https://shopee.tw/product/74187402/23547627231",
+      "source": {
+        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
+        "documentId": "1ZTYOjqKVtN6kTEyBGZvSVm4JBtvqm5iecBDcQTGTMc4",
+        "documentModifiedTime": "2023-07-09T10:35:20.364Z",
+        "imageFiles": []
+      }
+    },
+    {
+      "slug": "paradigm-tee",
+      "code": "PD14007",
+      "name": "PRDM Paradigm Tee",
+      "lineCode": "PD",
+      "typeCode": "14",
+      "sequence": "007",
+      "category": "SS Tops",
+      "listPrice": 790,
+      "salePrice": null,
+      "priceLabel": "NT$790",
+      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+      "images": [
+        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "isFallback": true,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
+              "bytes": 3112,
+              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+              "bytes": 7424,
+              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
+              "bytes": 18982,
+              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            }
+          ]
+        }
+      ],
+      "imageSource": "fallback",
+      "alt": "",
+      "colors": [
+        {
+          "id": "black",
+          "colorId": "black",
+          "label": "Black"
+        },
+        {
+          "id": "grey",
+          "colorId": "grey",
+          "label": "Grey"
+        },
+        {
+          "id": "white",
+          "colorId": "white",
+          "label": "White"
+        }
+      ],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PD14007-C01-S1",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S1",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PD14007-C01-S2",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S2",
+          "sizeName": "L"
+        },
+        {
+          "visible": false,
+          "soldOut": false,
+          "sku": "PD14007-C01-S3",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S3",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PD14007-C01-S4",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S4",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PD14007-C05-S1",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S1",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PD14007-C05-S2",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S2",
+          "sizeName": "L"
+        },
+        {
+          "visible": false,
+          "soldOut": false,
+          "sku": "PD14007-C05-S3",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S3",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PD14007-C05-S4",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S4",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PD14007-C09-S1",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S1",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PD14007-C09-S2",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S2",
+          "sizeName": "L"
+        },
+        {
+          "visible": false,
+          "soldOut": false,
+          "sku": "PD14007-C09-S3",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S3",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PD14007-C09-S4",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S4",
+          "sizeName": "XL"
+        }
+      ],
+      "soldOut": false,
+      "description": [
+        {
+          "type": "text",
+          "text": "• Printed graphics on front and back"
+        },
+        {
+          "type": "text",
+          "text": "• 100% combed cotton of 230 g/sqm"
+        },
+        {
+          "type": "text",
+          "text": "• Wide silhouette and longer-back cutting"
+        },
+        {
+          "type": "text",
+          "text": "• Signature tab on sleeve"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這是一款象徵著品牌經典的印花短 T"
+        },
+        {
+          "type": "text",
+          "text": "Paradigm 是典範的意思"
+        },
+        {
+          "type": "text",
+          "text": "在科學史的範疇中用來描述群體對世界運行的共同認知"
+        },
+        {
+          "type": "text",
+          "text": "典範並非單一或不變的"
+        },
+        {
+          "type": "text",
+          "text": "當主流理論不再能解釋科學現象"
+        },
+        {
+          "type": "text",
+          "text": "另類科學家就會推動世界進入革命科學期"
+        },
+        {
+          "type": "text",
+          "text": "原本的另類科學理論贏得共識成為新的典範"
+        },
+        {
+          "type": "text",
+          "text": "這就是科學發展中典範轉移的過程"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "為了忠實傳遞品牌的信念"
+        },
+        {
+          "type": "text",
+          "text": "我們採用最純粹的手法"
+        },
+        {
+          "type": "text",
+          "text": "以毫不張揚的字體作為語言與思想單純的載體"
+        },
+        {
+          "type": "text",
+          "text": "在細節處不斷雕琢只為了完美融合其形態與機能"
+        },
+        {
+          "type": "text",
+          "text": "讓人專注於其真意而避免任何多餘的思考"
+        },
+        {
+          "type": "text",
+          "text": "這樣的信念未來還會繼續體現在更多作品上"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這款印花短 T 的材質、版型、細節設定"
+        },
+        {
+          "type": "text",
+          "text": "同樣採用手感優異的重磅精梳棉、"
+        },
+        {
+          "type": "text",
+          "text": "自然的寬大輪廓與前短後長的剪裁、"
+        },
+        {
+          "type": "text",
+          "text": "極度耐穿的領口與左側袖口的品牌小紅標"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "看似平凡實則細節出色"
+        },
+        {
+          "type": "text",
+          "text": "這樣低調的美好正是我們最想要帶給你的"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "table",
+          "sourceLines": [
+            "　　 　 M　　 L　　 XL",
+            "肩寬　50.0　53.0　54.5",
+            "胸寬　55.5　60.0　62.5",
+            "袖長　25.5　26.5　28.5",
+            "衣長　72.0　74.0　78.0　(cm)"
+          ],
+          "columnCount": 5,
+          "header": [
+            "",
+            "M",
+            "L",
+            "XL",
+            ""
+          ],
+          "body": [
+            [
+              "肩寬",
+              "50.0",
+              "53.0",
+              "54.5",
+              ""
+            ],
+            [
+              "胸寬",
+              "55.5",
+              "60.0",
+              "62.5",
+              ""
+            ],
+            [
+              "袖長",
+              "25.5",
+              "26.5",
+              "28.5",
+              ""
+            ],
+            [
+              "衣長",
+              "72.0",
+              "74.0",
+              "78.0",
+              "(cm)"
+            ]
+          ]
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≤ 173 拿 M"
+        },
+        {
+          "type": "text",
+          "text": "建議身高∊173~178 拿 L"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≥ 178 拿 XL　(cm)"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "hashtag",
+          "text": "#PD14007"
+        }
+      ],
+      "link": "https://shopee.tw/product/74187402/19981596028",
+      "source": {
+        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
+        "documentId": "1alwdm9Z8eezPMx2qso12CGBoK7nnFPirlpqxgjdVXl8",
+        "documentModifiedTime": "2024-10-06T10:09:03.462Z",
+        "imageFiles": []
+      }
+    },
+    {
+      "slug": "paradigm-crewneck",
+      "code": "PD23006",
+      "name": "PRDM Paradigm Crewneck",
+      "lineCode": "PD",
+      "typeCode": "23",
+      "sequence": "006",
+      "category": "AW Tops",
+      "listPrice": 1180,
+      "salePrice": null,
+      "priceLabel": "NT$1,180",
+      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+      "images": [
+        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "isFallback": true,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
+              "bytes": 3112,
+              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+              "bytes": 7424,
+              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
+              "bytes": 18982,
+              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            }
+          ]
+        }
+      ],
+      "imageSource": "fallback",
+      "alt": "",
+      "colors": [
+        {
+          "id": "black",
+          "colorId": "black",
+          "label": "Black"
+        },
+        {
+          "id": "grey",
+          "colorId": "grey",
+          "label": "Grey"
+        }
+      ],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PD23006-C01-S1",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S1",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PD23006-C01-S2",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S2",
+          "sizeName": "L"
+        },
+        {
+          "visible": false,
+          "soldOut": false,
+          "sku": "PD23006-C01-S3",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S3",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PD23006-C01-S4",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S4",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PD23006-C05-S1",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S1",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PD23006-C05-S2",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S2",
+          "sizeName": "L"
+        },
+        {
+          "visible": false,
+          "soldOut": false,
+          "sku": "PD23006-C05-S3",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S3",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "PD23006-C05-S4",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S4",
+          "sizeName": "XL"
+        }
+      ],
+      "soldOut": false,
+      "description": [
+        {
+          "type": "text",
+          "text": "• Printed graphics on front and back"
+        },
+        {
+          "type": "text",
+          "text": "• 100% cotton loopback jersey of 350 g/sqm"
+        },
+        {
+          "type": "text",
+          "text": "• Wide silhouette and longer-back cutting"
+        },
+        {
+          "type": "text",
+          "text": "• Signature tab on sleeve"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "Paradigm 款式是我們的定番系列"
+        },
+        {
+          "type": "text",
+          "text": "印有象徵著品牌經典的圖樣"
+        },
+        {
+          "type": "text",
+          "text": "為了忠實傳達品牌信念"
+        },
+        {
+          "type": "text",
+          "text": "我們採用最純粹、不張揚的字體呈現"
+        },
+        {
+          "type": "text",
+          "text": "成為語言與思想的透明載體"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這款印花大學 T 的面料設定"
+        },
+        {
+          "type": "text",
+          "text": "同樣是優秀的重磅毛圈布"
+        },
+        {
+          "type": "text",
+          "text": "兼顧外觀的立體度以及在台灣的實穿性"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "寬鬆的袖管讓整體輪廓的寬鬆感更自然"
+        },
+        {
+          "type": "text",
+          "text": "領口是最費工的鑲嵌型羅紋裁片"
+        },
+        {
+          "type": "text",
+          "text": "加強領口彈性、壽命及層次感"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "我們在每個細節上的雕琢"
+        },
+        {
+          "type": "text",
+          "text": "都是為了讓你在低調中感受美好"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "table",
+          "sourceLines": [
+            "　　 　 M　　 L　　 XL",
+            "肩寬　60.0　63.0　64.5",
+            "胸寬　66.0　71.0　73.5",
+            "袖長　56.0　57.0　59.0",
+            "衣長　71.0　73.0　77.0　(cm)"
+          ],
+          "columnCount": 5,
+          "header": [
+            "",
+            "M",
+            "L",
+            "XL",
+            ""
+          ],
+          "body": [
+            [
+              "肩寬",
+              "60.0",
+              "63.0",
+              "64.5",
+              ""
+            ],
+            [
+              "胸寬",
+              "66.0",
+              "71.0",
+              "73.5",
+              ""
+            ],
+            [
+              "袖長",
+              "56.0",
+              "57.0",
+              "59.0",
+              ""
+            ],
+            [
+              "衣長",
+              "71.0",
+              "73.0",
+              "77.0",
+              "(cm)"
+            ]
+          ]
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≤ 173 拿 M"
+        },
+        {
+          "type": "text",
+          "text": "建議身高∊173~178 拿 L"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≥ 178 拿 XL　(cm)"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "hashtag",
+          "text": "#PD23006"
+        }
+      ],
+      "link": "https://shopee.tw/product/74187402/22073115003",
+      "source": {
+        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
+        "documentId": "1RiakemYNGRFtFiwIBMcc7lXKclykfWhh7-RbFHYxJM4",
+        "documentModifiedTime": "2023-11-14T14:08:06.091Z",
+        "imageFiles": []
+      }
+    },
+    {
+      "slug": "everyday-crewneck",
+      "code": "ED23002",
+      "name": "PRDM Everyday Crewneck",
+      "lineCode": "ED",
+      "typeCode": "23",
+      "sequence": "002",
+      "category": "AW Tops",
+      "listPrice": 990,
+      "salePrice": null,
+      "priceLabel": "NT$990",
+      "image": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+      "images": [
+        "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+          "width": 1080,
+          "height": 1080,
+          "isFallback": true,
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
+              "bytes": 3112,
+              "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+              "bytes": 7424,
+              "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
+              "bytes": 18982,
+              "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            }
+          ]
+        }
+      ],
+      "imageSource": "fallback",
+      "alt": "",
+      "colors": [
+        {
+          "id": "black",
+          "colorId": "black",
+          "label": "Black"
+        },
+        {
+          "id": "grey",
+          "colorId": "grey",
+          "label": "Grey"
+        }
+      ],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED23002-C01-S1",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S1",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED23002-C01-S2",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S2",
+          "sizeName": "L"
+        },
+        {
+          "visible": false,
+          "soldOut": false,
+          "sku": "ED23002-C01-S3",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S3",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED23002-C01-S4",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S4",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED23002-C05-S1",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S1",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED23002-C05-S2",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S2",
+          "sizeName": "L"
+        },
+        {
+          "visible": false,
+          "soldOut": false,
+          "sku": "ED23002-C05-S3",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S3",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED23002-C05-S4",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S4",
+          "sizeName": "XL"
+        }
+      ],
+      "soldOut": false,
+      "description": [
+        {
+          "type": "text",
+          "text": "• 100% cotton loopback jersey of 350 g/sqm"
+        },
+        {
+          "type": "text",
+          "text": "• Loose fit and longer-back cutting"
+        },
+        {
+          "type": "text",
+          "text": "• Signature tab on sleeve"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這是一款略微寬鬆的重磅毛圈布大學 T"
+        },
+        {
+          "type": "text",
+          "text": "考量到台灣的冬季極為短暫"
+        },
+        {
+          "type": "text",
+          "text": "特別選用手感紮實的重磅毛圈布來製作"
+        },
+        {
+          "type": "text",
+          "text": "重磅毛圈布比起刷毛內裏更加實穿"
+        },
+        {
+          "type": "text",
+          "text": "同時也能改善一般毛圈布輕薄、柔軟的缺點"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "為了呈現自然的寬大輪廓並修飾身材比例"
+        },
+        {
+          "type": "text",
+          "text": "我們設計出較寬鬆的袖攏與前短後長的下襬"
+        },
+        {
+          "type": "text",
+          "text": "單穿之外也適合在內側搭配一件白 T"
+        },
+        {
+          "type": "text",
+          "text": "在領口與下擺處完美露出、點綴整體風格"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "因為對於最初功能性的追求"
+        },
+        {
+          "type": "text",
+          "text": "在領口處以較寬的復古羅紋包邊"
+        },
+        {
+          "type": "text",
+          "text": "疊加於最費工的鑲嵌型羅紋裁片"
+        },
+        {
+          "type": "text",
+          "text": "加強領口彈性、壽命及層次感"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "左側袖口以品牌小紅標點綴"
+        },
+        {
+          "type": "text",
+          "text": "讓整體設計簡約俐落但不單調"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "最實穿的重磅毛圈布面料搭配寬鬆輪廓"
+        },
+        {
+          "type": "text",
+          "text": "為你營造兼顧質感與舒適的日常"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "table",
+          "sourceLines": [
+            "　　 　 M　　 L",
+            "肩寬　60.0　61.5",
+            "胸寬　66.0　68.5",
+            "袖長　56.0　58.0",
+            "衣長　71.0　75.0　(cm)"
+          ],
+          "columnCount": 4,
+          "header": [
+            "",
+            "M",
+            "L",
+            ""
+          ],
+          "body": [
+            [
+              "肩寬",
+              "60.0",
+              "61.5",
+              ""
+            ],
+            [
+              "胸寬",
+              "66.0",
+              "68.5",
+              ""
+            ],
+            [
+              "袖長",
+              "56.0",
+              "58.0",
+              ""
+            ],
+            [
+              "衣長",
+              "71.0",
+              "75.0",
+              "(cm)"
+            ]
+          ]
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≤ 176 拿 M"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≥ 176 拿 L　(cm)"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "hashtag",
+          "text": "#ED23002-S13"
+        }
+      ],
+      "link": "https://shopee.tw/product/74187402/23447622978",
+      "source": {
+        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
+        "documentId": "1UjbimaxbdT0idlUXEWtChAMq9-n2gDXcsZSHhf5XOPc",
+        "documentModifiedTime": "2023-10-30T16:19:32.433Z",
+        "imageFiles": []
+      }
+    },
+    {
+      "slug": "everyday-tee",
+      "code": "ED14001",
+      "name": "PRDM Everyday Tee",
+      "lineCode": "ED",
+      "typeCode": "14",
+      "sequence": "001",
+      "category": "SS Tops",
+      "listPrice": 590,
+      "salePrice": null,
+      "priceLabel": "NT$590",
+      "image": "assets/images/products/everyday-tee.webp",
+      "images": [
+        "assets/images/products/everyday-tee.webp"
+      ],
+      "media": [
+        {
+          "src": "assets/images/products/everyday-tee.webp",
+          "derivatives": []
+        }
+      ],
+      "imageSource": "preserved-existing",
+      "alt": "PRDM Everyday Tee product image",
+      "colors": [
+        {
+          "id": "black",
+          "colorId": "black",
+          "label": "Black"
+        },
+        {
+          "id": "grey",
+          "colorId": "grey",
+          "label": "Grey"
+        },
+        {
+          "id": "white",
+          "colorId": "white",
+          "label": "White"
+        }
+      ],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED14001-C01-S1",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S1",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED14001-C01-S2",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S2",
+          "sizeName": "L"
+        },
+        {
+          "visible": false,
+          "soldOut": false,
+          "sku": "ED14001-C01-S3",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S3",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED14001-C01-S4",
+          "lots": [],
+          "colorCode": "C01",
+          "colorName": "Black",
+          "sizeCode": "S4",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED14001-C05-S1",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S1",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED14001-C05-S2",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S2",
+          "sizeName": "L"
+        },
+        {
+          "visible": false,
+          "soldOut": false,
+          "sku": "ED14001-C05-S3",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S3",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED14001-C05-S4",
+          "lots": [],
+          "colorCode": "C05",
+          "colorName": "Grey",
+          "sizeCode": "S4",
+          "sizeName": "XL"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED14001-C09-S1",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S1",
+          "sizeName": "M"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED14001-C09-S2",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S2",
+          "sizeName": "L"
+        },
+        {
+          "visible": false,
+          "soldOut": false,
+          "sku": "ED14001-C09-S3",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S3",
+          "sizeName": "L"
+        },
+        {
+          "visible": true,
+          "soldOut": false,
+          "sku": "ED14001-C09-S4",
+          "lots": [],
+          "colorCode": "C09",
+          "colorName": "White",
+          "sizeCode": "S4",
+          "sizeName": "XL"
+        }
+      ],
+      "soldOut": false,
+      "description": [
+        {
+          "type": "text",
+          "text": "• 100% combed cotton of 230 g/sqm"
+        },
+        {
+          "type": "text",
+          "text": "• Loose fit and longer-back cutting"
+        },
+        {
+          "type": "text",
+          "text": "• Signature tab on sleeve"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "這是一款略微寬鬆的重磅短 T"
+        },
+        {
+          "type": "text",
+          "text": "為了將流行元素和不變的經典結合"
+        },
+        {
+          "type": "text",
+          "text": "我們做了超多次的調整甚至重新設定"
+        },
+        {
+          "type": "text",
+          "text": "最終打造出這款適合約會也適合日常的寬鬆短 T"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "基於輪廓立體度和透氣性的考量"
+        },
+        {
+          "type": "text",
+          "text": "採用手感紮實的重磅精梳棉製成"
+        },
+        {
+          "type": "text",
+          "text": "營造份量感同時帶來優異的穿著體驗"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "為了高質感的寬鬆風格並兼顧身材比例的修飾"
+        },
+        {
+          "type": "text",
+          "text": "以自然的寬大輪廓配合前短後長的下襬設定"
+        },
+        {
+          "type": "text",
+          "text": "同時還能提升活動的方便性"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "因為對於耐用性的追求"
+        },
+        {
+          "type": "text",
+          "text": "我們嘗試了多種不同的領口工法"
+        },
+        {
+          "type": "text",
+          "text": "最終選擇較費工的 20mm 羅紋包邊領口"
+        },
+        {
+          "type": "text",
+          "text": "這樣最耐穿而且也增強了領口處的層次感"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "左側袖口以品牌小紅標點綴"
+        },
+        {
+          "type": "text",
+          "text": "讓整體設計簡約俐落但不單調"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "上等的面料配合誰穿誰帥的版型"
+        },
+        {
+          "type": "text",
+          "text": "等你實際穿上就能立刻感受到它的獨特魅力"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "divider",
+          "text": "-"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "table",
+          "sourceLines": [
+            "　　 　 M　　 L",
+            "肩寬　50.0　51.5",
+            "胸寬　55.5　57.5",
+            "袖長　25.5　27.5",
+            "衣長　72.0　76.0　(cm)"
+          ],
+          "columnCount": 4,
+          "header": [
+            "",
+            "M",
+            "L",
+            ""
+          ],
+          "body": [
+            [
+              "肩寬",
+              "50.0",
+              "51.5",
+              ""
+            ],
+            [
+              "胸寬",
+              "55.5",
+              "57.5",
+              ""
+            ],
+            [
+              "袖長",
+              "25.5",
+              "27.5",
+              ""
+            ],
+            [
+              "衣長",
+              "72.0",
+              "76.0",
+              "(cm)"
+            ]
+          ]
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≤ 176 拿 M"
+        },
+        {
+          "type": "text",
+          "text": "建議身高 ≥ 176 拿 L　(cm)"
+        },
+        {
+          "type": "blank",
+          "text": "\n"
+        },
+        {
+          "type": "hashtag",
+          "text": "#ED14001-S13"
+        }
+      ],
+      "link": "https://shopee.tw/product/74187402/19381601041",
+      "source": {
+        "spreadsheetModifiedTime": "2026-08-06T06:44:34.564Z",
+        "documentId": "1r5QyrbtyNySj0rJYbG9k3lW_sPFP4FfUgZNRnEBta5w",
+        "documentModifiedTime": "2023-07-08T08:21:32.098Z",
+        "imageFiles": []
       }
     }
   ]

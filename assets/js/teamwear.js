@@ -237,6 +237,21 @@
     return scope?.querySelector(`[data-choice-kind="${kind}"] [data-choice-option]:has(input:checked)`);
   }
 
+  function updateUniformImage(image, media, root, alt) {
+    if (!image || !media) return false;
+    const src = `${root}/${media.src}`;
+    if (image.getAttribute("src") === src) return false;
+    image.srcset = media.derivatives.map((entry) => `${root}/${entry.path} ${entry.width}w`).join(", ");
+    image.width = media.width;
+    image.height = media.height;
+    image.alt = alt;
+    if (image.getAttribute("aria-haspopup") === "dialog") {
+      image.setAttribute("aria-label", `${alt}. Open enlarged image gallery.`);
+    }
+    image.src = src;
+    return true;
+  }
+
   function updateColorwayRail() {
     if (!patternPicker || !colorwayRail) return;
     const option = checkedChoice(patternPicker, "chip");
@@ -246,10 +261,10 @@
     colorwayRail.querySelectorAll("[data-colorway-card]").forEach((card) => {
       const image = card.querySelector("[data-colorway-image]");
       const colorName = card.dataset.colorName || "Road";
-      card.classList.add("is-updating");
       if (!image) return;
-      image.src = `../${preview.railImages[card.dataset.colorId]}`;
-      image.alt = `${preview.name} ${model.name} ${colorName} Road uniform rendering`;
+      card.classList.add("is-updating");
+      updateUniformImage(image, preview.mediaByColor[card.dataset.colorId], "..",
+        `${preview.name} ${model.name} in ${colorName}, front and back`);
       const finishUpdate = () => {
         card.classList.remove("is-updating");
         railUpdates.get(colorwayRail)?.();
@@ -302,6 +317,17 @@
     if (price) price.textContent = priceLabel(totalPrice());
   }
 
+  function updateBuilderCover() {
+    const pattern = patternById.get(selectedOption("chip")?.dataset.choiceId);
+    const color = colorByOptionId.get(selectedOption("swatch")?.dataset.choiceId);
+    if (!pattern || !color) return;
+    const gallery = document.querySelector("[data-builder-preview]");
+    const changed = updateUniformImage(gallery?.querySelector("[data-builder-cover]"),
+      pattern.mediaByColor[color.colorId], "../..",
+      `${pattern.name} ${model.name} in ${colorNameById.get(color.id)}, front and back`);
+    if (changed) gallery.scrollLeft = 0;
+  }
+
   function inquiryText() {
     const pattern = selectedOption("chip");
     const color = selectedOption("swatch");
@@ -330,7 +356,10 @@
     textarea.remove();
   }
 
-  form.addEventListener("change", updateBuilderPrice);
+  form.addEventListener("change", () => {
+    updateBuilderPrice();
+    updateBuilderCover();
+  });
   const action = form.querySelector("[data-primary-action]");
   action?.addEventListener("click", () => {
     if (action.dataset.actionIntent === "notify") return;
@@ -339,4 +368,5 @@
     navigator.clipboard?.writeText(text).catch(() => {});
   });
   updateBuilderPrice();
+  updateBuilderCover();
 })();

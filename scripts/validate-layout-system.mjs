@@ -287,12 +287,12 @@ assert.doesNotMatch(teamwearStory + teamwearTemplate, /teamwear-material__bento/
 assert.match(teamwearStory, /--teamwear-material-media-height:\s*100svh;\s*height:\s*var\(--teamwear-material-media-height\)/, "Fabric photography must occupy a stable viewport-height frame");
 assert.match(teamwearTemplate, /rail\/fabric-square\.webp[^>]*width="1200" height="1200"/, "Fabric media must use the square source asset");
 assert.doesNotMatch(teamwearStory, /mix-blend-mode:\s*color|clip-path:\s*inset\(0 50%/, "Landing product images must be flattened rather than recolored or half-cropped at runtime");
-assert.match(teamwearBehavior, /preview\.railImages\[card\.dataset\.colorId\]/, "Pattern changes must select a separate flattened image for each color");
+assert.match(teamwearBehavior, /preview\.mediaByColor\[card\.dataset\.colorId\]/, "Pattern changes must select the supplied responsive image for each color");
 const railModel = JSON.parse(await readFile(path.join(ROOT, "data/teamwear-options.json"), "utf8")).models[0];
 const railImagePaths = [];
 for (const pattern of railModel.patterns) {
   for (const color of railModel.colors) {
-    const imagePath = pattern.railImages?.[color.colorId];
+    const imagePath = pattern.mediaByColor?.[color.colorId]?.src;
     assert.ok(imagePath, `${pattern.id}/${color.colorId} needs a flattened rail image`);
     const imageBytes = await readFile(path.join(ROOT, imagePath));
     assert.equal(imageBytes.toString("ascii", 8, 12), "WEBP", `${imagePath} must be a real WebP asset`);
