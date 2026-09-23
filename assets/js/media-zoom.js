@@ -474,6 +474,7 @@
     if (overlayState && !overlayState.overlay.contains(event.target)) overlayState.overlay.focus({ preventScroll: true });
   });
 
+  document.addEventListener("paradigm:product-media-change", setLargeGalleryMode);
   window.addEventListener("resize", () => {
     if (resizeFrame) return;
     resizeFrame = window.requestAnimationFrame(() => {

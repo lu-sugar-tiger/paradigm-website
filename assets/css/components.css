@@ -1384,7 +1384,6 @@ img.media-zoom-source-active {
 .dropdown__text-action:focus-visible { outline: var(--focus-ring-width) solid var(--color-outline-high); outline-offset: var(--focus-ring-offset); }
 .page-headline__row > .dropdown { flex: 0 0 auto; }
 .product-grid > [hidden] { display: none; }
-.catalog-empty { padding-block: var(--space-7); color: var(--color-on-surface-low); }
 
 .button {
   display: inline-flex;

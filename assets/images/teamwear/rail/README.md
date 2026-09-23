@@ -6,6 +6,6 @@ Each pattern's `mediaByColor` mapping in `data/teamwear-options.json` is shared 
 
 Color codes: C01 Black, C11 Burgundy, C13 Cardinal, C21 Mocha, C41 Ivy, C61 Midnight, C63 Royalty. The supplied batch's C53 filenames mean C41 Ivy; Signature C61-20 means C61 Midnight and C61-21 means C63 Royalty. These aliases were confirmed by the owner. Corrected filenames are accepted too; duplicate candidates fail preflight.
 
-`fabric-square.webp` is a 1200 × 1200 center crop of the existing campaign fabric macro. The landing section displays it full-width and 100svh tall with centered cover cropping. The heading is outside the photograph. No bento grid remains.
+The 1200 × 1200 `fabric-square.webp` and its section source are archived under `_archive/teamwear-fabric/`. The public landing page omits the entire fabric section.
 
 To reimport the supplied 0.4.0 artwork from `assets/temp`, run `node scripts/import-teamwear-images.mjs` with the existing Sharp tooling exposed via `NODE_PATH`, then `node scripts/build-site.mjs`. The old `generate-teamwear-rail-images.mjs` command delegates to this importer and no longer creates tinted renders. Source originals remain untouched; normal site builds use committed derivatives and do not need the temp folder. Validate with `node scripts/validate-teamwear-media.mjs`.

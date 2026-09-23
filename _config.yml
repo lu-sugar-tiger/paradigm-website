@@ -1,0 +1,4 @@
+# GitHub Pages publishes main:/ through Jekyll. Keep retained feature source
+# in Git without publishing it. Do not bypass this with a .nojekyll file.
+exclude:
+  - _archive

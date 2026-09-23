@@ -62,7 +62,7 @@ for (const model of teamwear.models) {
   assert.equal(descriptionTokens.find((token) => token.type === "hashtag")?.text, `#${model.code}`, `${model.id} hashtag must preserve its model code`);
   assert.ok(Number.isInteger(model.price) && model.price > 0, `${model.id} must define a positive integer price`);
   assert.equal(model.quantities.length, 3, `${model.id} must define the three controlled quantity tiers`);
-  assert.deepEqual(model.quantities.map((quantity) => [quantity.label, quantity.priceAdjustment]), [["<10", 200], ["10~19", 100], [">19", 0]], `${model.id} quantity tiers must preserve their approved labels and NT-dollar adjustments`);
+  assert.deepEqual(model.quantities.map((quantity) => [quantity.label, quantity.priceAdjustment]), [["≤ 9", 200], ["10~19", 0], ["≥ 20", 0]], `${model.id} quantity tiers must preserve their approved labels and NT-dollar adjustments`);
   model.quantities.forEach((quantity) => {
     assert.ok(Number.isInteger(quantity.priceAdjustment) && quantity.priceAdjustment >= 0, `${model.id} ${quantity.id} must define a non-negative integer price adjustment`);
   });
@@ -182,7 +182,7 @@ assert.throws(
 );
 
 const footerFixture = renderSiteFooter();
-assert.match(footerFixture, /<a class="font-credit-link" href="\/font-credits\/">Font credits<\/a>/, "Every footer must provide access to font attribution");
+assert.match(footerFixture, /<a class="footer-link interface-label" href="\/font-credits\/">Credits<\/a>/, "Every footer must provide access to credits as a shared footer link");
 assert.match(footerFixture, /<span class="external-link__label interface-label">Instagram<\/span><span class="material-symbols-outlined material-icon external-link__indicator"[^>]*>arrow_outward<\/span>/, "footers must retain Instagram as an interface label with a trailing external arrow");
 assert.match(footerFixture, /<span class="external-link__label interface-label">Shopee<\/span><span class="material-symbols-outlined material-icon external-link__indicator"[^>]*>arrow_outward<\/span>/, "footers must retain Shopee as an interface label with a trailing external arrow");
 assert.equal((footerFixture.match(/data-external-link-description/g) || []).length, 2, "each footer external link must describe its new-tab behavior");
@@ -252,13 +252,13 @@ assert.doesNotMatch(headerFixture, /Shopping bag|shopping_bag/, "shared headers 
 assert.match(headerFixture, /<a class="drawer-nav__parent interface-label" href="\/collections\/all" aria-current="page">Product<\/a>/, "the clickable Product parent must own the all-products destination and interface-label casing");
 assert.match(headerFixture, /<a class="drawer-nav__child interface-label" href="\/collections\/ss-tops">SS Tops<\/a>[\s\S]*?<a class="drawer-nav__child interface-label" href="\/collections\/aw-tops">AW Tops<\/a>[\s\S]*?<a class="drawer-nav__child interface-label" href="\/collections\/bottoms">Bottoms<\/a>/, "Product children must render in their controlled directory order");
 assert.match(headerFixture, /<a class="drawer-nav__parent interface-label" href="\/teamwear">Teamwear<\/a>[\s\S]*?<a class="drawer-nav__child interface-label" href="\/teamwear">Basketball<\/a>/, "Teamwear and Basketball must both link to the Teamwear overview");
-assert.equal((headerFixture.match(/aria-current="page"/g) || []).length, 1, "the default all-products navigation must expose one current-page marker");
+assert.equal((headerFixture.match(/aria-current="page"/g) || []).length, 2, "the default all-products navigation must expose one current-page marker per responsive navigation");
 const subcollectionHeaderFixture = renderSiteHeader({ currentPath: "/collections/ss-tops" });
 assert.match(subcollectionHeaderFixture, /href="\/collections\/ss-tops" aria-current="page">SS Tops<\/a>/, "a product subcollection must own the current-page marker on its route");
-assert.equal((subcollectionHeaderFixture.match(/aria-current="page"/g) || []).length, 1, "product subcollection navigation must expose one current-page marker");
+assert.equal((subcollectionHeaderFixture.match(/aria-current="page"/g) || []).length, 2, "product subcollection navigation must expose one current-page marker per responsive navigation");
 const teamwearHeaderFixture = renderSiteHeader({ currentPath: "/teamwear/customize" });
 assert.match(teamwearHeaderFixture, /href="\/teamwear" aria-current="page">Basketball<\/a>/, "Basketball must own the current-page marker throughout Teamwear");
-assert.equal((teamwearHeaderFixture.match(/aria-current="page"/g) || []).length, 1, "Teamwear navigation must expose one current-page marker");
+assert.equal((teamwearHeaderFixture.match(/aria-current="page"/g) || []).length, 2, "Teamwear navigation must expose one current-page marker per responsive navigation");
 assert.doesNotMatch(headerFixture, /drawer-nav__divider|role="separator"/, "the navigation directory must not render a divider element or hairline");
 assert.match(reset, /html\s*\{[\s\S]*?scrollbar-gutter:\s*stable;/, "the root scrollbar gutter must remain stable while navigation locks page scrolling");
 assert.match(components, /html:has\(body\[data-overlay-state\]\)\s*\{[^}]*scrollbar-gutter:\s*auto;/, "an open overlay must take ownership of the root scrollbar track instead of stacking a second gutter");
@@ -372,12 +372,17 @@ assert.match(search, /if \(product\.media\?\.src\) \{[\s\S]*?if \(!product\.medi
 assert.match(productTemplate, /data-product-gallery\{\{PRODUCT_GALLERY_ZOOM\}\}/, "retail detail galleries must conditionally opt non-fallback photography into shared Large inspection");
 assert.match(customizeTemplate, /data-builder-preview data-media-zoom-gallery/, "Teamwear Customize must opt into shared Large inspection");
 assert.match(customizeTemplate, /\{\{COVER_IMAGE\}\}/, "Teamwear Customize must render its configured responsive cover");
-assert.equal(((await read("teamwear/customize/index.html")).match(/data-media-zoom-touch/g) || []).length, 3, "every Teamwear Customize gallery image must opt into touch inspection");
+const teamwearPhotography = JSON.parse(await read("data/teamwear-photography.json"));
+assert.match(customizeTemplate, /\{\{GALLERY_IMAGES\}\}/, "Teamwear Customize must render supplied photography from the shared manifest");
+assert.equal(((await read("teamwear/customize/index.html")).match(/data-media-zoom-touch/g) || []).length, 1 + teamwearPhotography.customGallery.length, "the configuration cover and every supplied Teamwear gallery photo must opt into touch inspection");
 assert.equal((teamwearTemplate.match(/data-media-zoom-touch/g) || []).length, 7, "authored Teamwear highlight and customer-gallery photos must opt into touch inspection");
 assert.equal((teamwearTemplate.match(/data-media-zoom-surface/g) || []).length, 7, "authored Teamwear rail photos must declare their immediate backing surfaces");
 assert.match(await read("scripts/build-site.mjs"), /teamwear-rail-card__surface" data-media-zoom-surface[^\n]*teamwear-colorway-card__media" data-media-zoom-touch/, "generated Teamwear colorways must use the shared source-surface contract");
 assert.doesNotMatch(teamwearTemplate.match(/<section class="teamwear-hero"[\s\S]*?<\/section>/)?.[0] || "", /data-media-zoom-touch/, "Teamwear hero media must stay outside product inspection");
-assert.doesNotMatch(teamwearTemplate.match(/<section class="teamwear-material"[\s\S]*?<\/section>/)?.[0] || "", /data-media-zoom-touch/, "Teamwear fabric media must stay outside product inspection");
+for (const markup of [teamwearTemplate, await read("teamwear/index.html")]) {
+  assert.doesNotMatch(markup, /teamwear-material|material-title|Construction\.|Made for players\.|Light<wbr>Weight|Quick<wbr>Dry|Smooth<wbr>Print|fabric-square\.webp/, "The public Teamwear landing page must omit the fabric eyebrow, title, feature copy, and image");
+  assert.match(markup, /class="teamwear-colorways"[\s\S]*?<\/section>\s*<section class="teamwear-gallery"/, "The colorways section must lead directly into the athletes gallery");
+}
 assert.match(components, /\[data-media-zoom-touch\],[\s\S]*?\[data-media-zoom-gallery\] img\s*\{[\s\S]*?touch-action:\s*pan-x pan-y;/, "zoom targets must preserve native one-finger panning");
 assert.match(mediaZoom, /const TOUCH_ZOOM_MIN = 1;[\s\S]*?const TOUCH_ZOOM_MAX = 4;/, "touch product inspection must remain bounded from 1x through 4x");
 assert.match(mediaZoom, /touches\.length >= 2[\s\S]*?startTouchGesture[\s\S]*?event\.preventDefault\(\)/, "touch inspection must activate only after a second touch reaches the same media target");
@@ -472,23 +477,23 @@ for (const relativePath of generatedPages) {
   });
   assert.match(page, /Generated by scripts\/build-site\.mjs/, `${relativePath} must carry the generated banner`);
   assert.match(page, /assets\/css\/fonts\.css\?v=20260909b/, `${relativePath} must load the shared Reforma Negra font face`);
-  assert.match(page, /assets\/css\/tokens\.css\?v=20260911a/, `${relativePath} must cache-bust the shared typography, target, icon, safe-area, media-layer, and motion tokens`);
+  assert.match(page, /assets\/css\/tokens\.css\?v=20260916a/, `${relativePath} must cache-bust the shared typography, target, icon, safe-area, media-layer, and motion tokens`);
   assert.match(page, /assets\/css\/motion\.css\?v=20260831a/, `${relativePath} must load the shared motion layer`);
-  assert.match(page, /assets\/css\/base\.css\?v=20260911a/, `${relativePath} must cache-bust the shared visual-role font behavior`);
-assert.match(page, /assets\/css\/components\.css\?v=20260911a/, `${relativePath} must cache-bust shared interaction-target, overlay, static resting toggle, paired-icon, floating-action, media-source, and transferred stable overlay-gutter rules`);
+  assert.match(page, /assets\/css\/base\.css\?v=20260916b/, `${relativePath} must cache-bust the shared visual-role font behavior`);
+assert.match(page, /assets\/css\/components\.css\?v=20260923a/, `${relativePath} must cache-bust shared interaction-target, overlay, static resting toggle, paired-icon, floating-action, media-source, and transferred stable overlay-gutter rules`);
   assert.match(page, /assets\/css\/reset\.css\?v=20260829a/, `${relativePath} must cache-bust the stable scrollbar-gutter reset`);
   assert.match(page, /assets\/js\/page-transitions\.js\?v=20260831a/, `${relativePath} must load the early route-motion controller`);
-  assert.match(page, /assets\/js\/app\.js\?v=20260908a/, `${relativePath} must cache-bust the shared overlay behavior`);
+  assert.match(page, /assets\/js\/app\.js\?v=20260914a/, `${relativePath} must cache-bust the shared overlay behavior`);
   assert.match(page, /assets\/js\/search-core\.js\?v=20260910a/, `${relativePath} must load the shared search matcher`);
-  assert.match(page, /assets\/js\/search\.js\?v=20260910a/, `${relativePath} must load the shared Search interface`);
-  assert.match(page, /assets\/js\/choices\.js\?v=20260910a/, `${relativePath} must cache-bust the shared choice and floating-action controller`);
+  assert.match(page, /assets\/js\/search\.js\?v=20260922a/, `${relativePath} must load the shared Search interface`);
+  assert.match(page, /assets\/js\/choices\.js\?v=20260922a/, `${relativePath} must cache-bust the shared choice and floating-action controller`);
   if (/^(?:index\.html|collections\/|products\/|teamwear\/|search\/)/.test(relativePath)) {
-    assert.match(page, /assets\/js\/media-zoom\.js\?v=20260831c/, `${relativePath} must cache-bust the shared media inspection behavior`);
+    assert.match(page, /assets\/js\/media-zoom\.js\?v=20260922a/, `${relativePath} must cache-bust the shared media inspection behavior`);
   } else {
     assert.doesNotMatch(page, /media-zoom\.js/, `${relativePath} must not load media inspection outside opted-in page families`);
   }
   if (relativePath === "teamwear/index.html") {
-    assert.match(page, /assets\/css\/teamwear-story\.css\?v=20260909b/, `${relativePath} must cache-bust the flattened product and full-viewport fabric treatment`);
+    assert.match(page, /assets\/css\/teamwear-story\.css\?v=20260922a/, `${relativePath} must cache-bust the Teamwear stylesheet after removing the fabric section`);
   }
   assert.match(page, /rel="preconnect" href="https:\/\/fonts\.googleapis\.com"/, `${relativePath} must preconnect to Google Fonts CSS`);
   assert.match(page, /rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin/, `${relativePath} must preconnect to Google font files`);
@@ -508,8 +513,7 @@ assert.match(page, /assets\/css\/components\.css\?v=20260911a/, `${relativePath}
     assert.match(page, /data-generated-component="page-headline"/, `${relativePath} must use the shared page-headline renderer`);
   }
   if (/^(?:index\.html|collections\/)/.test(relativePath)) {
-    assert.match(page, /data-dropdown-grouped data-dropdown-align="end"/, `${relativePath} must render Refine through the shared grouped dropdown`);
-    assert.match(page, /data-dropdown-value>Refine<\/span>/, `${relativePath} must preserve the Refine label`);
+    assert.doesNotMatch(page, /catalog-refine|data-dropdown-grouped/, `${relativePath} must omit archived Refine from the public catalog`);
   }
   if (/^(?:products\/|teamwear\/customize\/)/.test(relativePath)) {
     assert.match(page, /data-generated-component="rich-description"/, `${relativePath} must use the shared rich-description renderer`);
@@ -529,16 +533,16 @@ assert.match(page, /assets\/css\/components\.css\?v=20260911a/, `${relativePath}
     assert.doesNotMatch(page, /class="product-card__media" data-media-zoom-touch><img[^>]*data-product-image-fallback/, `${relativePath} fallback catalog media must not opt into touch inspection`);
   }
   if (relativePath === "search/index.html") {
-    assert.match(page, /assets\/js\/media-zoom\.js\?v=20260831c/, "Search must load touch inspection for dynamically rendered product-card photos");
+    assert.match(page, /assets\/js\/media-zoom\.js\?v=20260922a/, "Search must load touch inspection for dynamically rendered product-card photos");
   }
   if (relativePath === "teamwear/customize/index.html") {
-    assert.match(page, /assets\/js\/choices\.js\?v=20260910a/, "Teamwear Customize must cache-bust the current shared choice controller");
-    assert.match(page, /assets\/js\/teamwear-options\.js\?v=20260913a/, "Teamwear Customize must cache-bust centralized configuration and media data");
+    assert.match(page, /assets\/js\/choices\.js\?v=20260922a/, "Teamwear Customize must cache-bust the current shared choice controller");
+    assert.match(page, /assets\/js\/teamwear-options\.js\?v=20260917b/, "Teamwear Customize must cache-bust centralized configuration and media data");
     assert.match(page, /<h1[^>]*>PE Basketball Teamwear<\/h1>/, "Teamwear Customize must render the approved product name");
     assert.match(page, /assets\/js\/teamwear\.js\?v=20260913a/, "Teamwear Customize must cache-bust current shared Teamwear behavior");
     assert.match(page, /<p class="product-detail__price" data-teamwear-price data-generated-component="product-detail-price">NT\$1,580<\/p>/, "Teamwear Customize must expose its centralized NT$1,580 price for controlled add-on updates");
     assert.match(page, /data-choice-kind="chip" data-choice-variant="add-on" data-choice-title="Add-On"/, "Teamwear Customize must render the centralized Add-On chip variation");
-    assert.match(page, /data-choice-kind="chip" data-choice-title="Quantity"[\s\S]*?value="Q01"[\s\S]*?&lt;10[\s\S]*?value="Q02"[\s\S]*?10~19[\s\S]*?value="Q03" checked[\s\S]*?&gt;19/, "Teamwear Customize must render three escaped quantity chips with >19 selected by default");
+    assert.match(page, /data-choice-kind="chip" data-choice-title="Quantity"[\s\S]*?value="Q01"[\s\S]*?≤ 9[\s\S]*?value="Q02"[\s\S]*?10~19[\s\S]*?value="Q03" checked[\s\S]*?≥ 20/, "Teamwear Customize must render three quantity chips with ≥ 20 selected by default");
     assert.match(page, /data-choice-label="Front Pockets on Shorts"[\s\S]*?type="checkbox"[^>]*name="teamwear-add-on"[^>]*value="A01"(?![^>]* checked)/, "Front Pockets on Shorts must begin as an unselected add-on");
     assert.match(page, /choice-option__label interface-label[^>]*>Front Pockets on Shorts<\//, "Teamwear Customize must render the approved add-on label");
     assert.equal((page.match(/data-choice-state-symbol/g) || []).length, 1, "Teamwear Customize must render exactly one state-symbol node for Front Pockets on Shorts");

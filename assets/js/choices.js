@@ -84,6 +84,37 @@
     });
   }
 
+  function syncProductSource(detail, product, revealImage = false) {
+    const selected = selectedProductValues(detail);
+    const variant = product.variants.find((variant) => variant.visible && variant.colorName === selected.colorName && variant.sizeName === selected.sizeName)
+      || product.variants.find((variant) => variant.visible && variant.colorName === selected.colorName);
+    const action = detail.querySelector("[data-primary-action]");
+    if (action) action.dataset.actionDefaultHref = variant?.link || product.link;
+    if (!revealImage || !variant?.imageId) return;
+    const media = product.variantMedia?.[variant.imageId];
+    const gallery = detail.querySelector("[data-product-gallery]");
+    if (!media || !gallery) return;
+    const resolve = (path) => new URL(`../../${path}`, document.baseURI).href;
+    let image = Array.from(gallery.querySelectorAll("img")).find((image) => image.src === resolve(media.src));
+    if (!image) {
+      image = gallery.querySelector("img")?.cloneNode(false) || document.createElement("img");
+      image.src = resolve(media.src);
+      if (media.derivatives?.length) image.srcset = media.derivatives.map((entry) => `${resolve(entry.path)} ${entry.width}w`).join(", ");
+      else image.removeAttribute("srcset");
+      image.width = media.width || 1;
+      image.height = media.height || 1;
+      image.alt = `${product.name}, ${variant.colorName}`;
+      image.removeAttribute("data-product-image-fallback");
+      image.setAttribute("data-media-zoom-touch", "");
+    }
+    image.loading = "eager";
+    gallery.setAttribute("data-media-zoom-gallery", "");
+    gallery.prepend(image);
+    // A horizontal snap gallery otherwise keeps its previous visible slide anchored.
+    gallery.scrollTo({ left: 0, top: 0, behavior: "instant" });
+    document.dispatchEvent(new CustomEvent("paradigm:product-media-change"));
+  }
+
   function updateAccessibleAvailability(option, unavailable) {
     const input = option.querySelector('input[type="radio"]');
     let text = option.querySelector("[data-choice-availability-text]");
@@ -302,7 +333,10 @@
     group.addEventListener("change", () => {
       const detail = group.closest("[data-product-detail]");
       const product = productForGroup(group);
-      if (detail && product) recalculateProductAvailability(detail, product);
+      if (detail && product) {
+        recalculateProductAvailability(detail, product);
+        syncProductSource(detail, product, group.dataset.choiceKind === "swatch");
+      }
       announceSelection(group);
       const action = document.getElementById(group.dataset.primaryActionId);
       if (action) syncAction(action);
@@ -313,7 +347,10 @@
   document.querySelectorAll("[data-product-detail]").forEach((detail) => {
     const group = detail.querySelector("[data-choice-group]");
     const product = group ? productForGroup(group) : null;
-    if (product) recalculateProductAvailability(detail, product);
+    if (product) {
+      recalculateProductAvailability(detail, product);
+      syncProductSource(detail, product);
+    }
   });
 
   document.querySelectorAll("[data-primary-action]").forEach((action) => {

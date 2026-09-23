@@ -23,14 +23,14 @@ const PARAGRAPH_SPACING = new Map([
   ["relaxed", "1em"]
 ]);
 const TEXT_ROLES = new Map([
-  ["small", { size: "0.625rem", lineHeight: "0.833333rem", weight: "350" }],
-  ["body", { size: "0.75rem", lineHeight: "1rem", weight: "350" }],
-  ["h1", { size: "2rem", lineHeight: "2.666667rem", weight: "var(--font-weight-medium)" }],
-  ["h2", { size: "1.5rem", lineHeight: "2rem", weight: "var(--font-weight-medium)" }],
-  ["h3", { size: "1.25rem", lineHeight: "1.666667rem", weight: "var(--font-weight-medium)" }],
-  ["h4", { size: "1rem", lineHeight: "1.333333rem", weight: "var(--font-weight-medium)" }],
-  ["h5", { size: "0.875rem", lineHeight: "1.166667rem", weight: "var(--font-weight-medium)" }],
-  ["h6", { size: "0.75rem", lineHeight: "1rem", weight: "var(--font-weight-medium)" }]
+  ["small", { size: "0.625rem", lineHeight: "0.833333rem", weight: "var(--font-weight-regular)" }],
+  ["body", { size: "0.75rem", lineHeight: "1rem", weight: "var(--font-weight-regular)" }],
+  ["h1", { size: "2rem", lineHeight: "2.666667rem", weight: "550" }],
+  ["h2", { size: "1.5rem", lineHeight: "2rem", weight: "550" }],
+  ["h3", { size: "1.25rem", lineHeight: "1.666667rem", weight: "550" }],
+  ["h4", { size: "1rem", lineHeight: "1.333333rem", weight: "550" }],
+  ["h5", { size: "0.875rem", lineHeight: "1.166667rem", weight: "550" }],
+  ["h6", { size: "0.75rem", lineHeight: "1rem", weight: "550" }]
 ]);
 const LARGE_TEXT_ROLES = new Map([
   ["h1", { size: "4rem", lineHeight: "5.333333rem" }],
@@ -329,7 +329,7 @@ assert.doesNotMatch(renderer, /alibabafonts|AlibabaSansTC/i, "The shared rendere
 
 const rootMarkup = await readFile(path.join(ROOT, "index.html"), "utf8");
 assert.ok(rootMarkup.includes('assets/css/fonts.css?v=20260909b'), "Generated pages load centralized local font faces");
-assert.match(rootMarkup, /href="\/font-credits\/">Font credits<\/a>/, "Font attribution must be accessible from the shared footer");
+assert.match(rootMarkup, /href="\/font-credits\/">Credits<\/a>/, "Font attribution must be accessible from the shared footer");
 const escapedRobotoStylesheet = ROBOTO_STYLESHEET.replaceAll("&", "&amp;");
 assert.equal((rootMarkup.match(/rel="preconnect" href="https:\/\/fonts\.googleapis\.com"/g) || []).length, 1, "Generated pages must preconnect to Google Fonts CSS once");
 assert.equal((rootMarkup.match(/rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin/g) || []).length, 1, "Generated pages must preconnect to Google font files once");

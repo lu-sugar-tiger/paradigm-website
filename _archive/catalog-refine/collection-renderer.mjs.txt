@@ -1,0 +1,33 @@
+function renderCollectionPage({ title, category, pathName, root, products }) {
+  const currentPath = pathName === "home" ? "/" : `/collections/${pathName}`;
+  const filtered = category === "all" ? products : products.filter((product) => product.category === category);
+  const items = category === "all"
+    ? [{ label: title, current: true, headingLevel: 1, interfaceLabel: true }]
+    : [{ label: "All", href: "/collections/all" }, { label: title, current: true, headingLevel: 1, interfaceLabel: true }];
+  const pageHeadline = renderPageHeadline({
+    root,
+    breadcrumb: { variant: "hierarchy", items },
+    trailingAction: refineConfig.publicEnabled === true
+      ? { kind: "dropdown", id: "catalog-refine", label: "Refine", variant: "text", align: "end", groups: buildCatalogRefineGroups(refineConfig, filtered) }
+      : undefined
+  });
+  const main = `  <main class="page" data-catalog>
+${pageHeadline.split("\n").map((line) => `    ${line}`).join("\n")}
+    <section class="section section--tight"><div class="container">
+${renderProductGrid(filtered, root).split("\n").map((line) => `      ${line}`).join("\n")}${refineConfig.publicEnabled === true ? `
+      <p class="catalog-empty" data-catalog-empty hidden>No products match these filters. Try another selection or clear all filters.</p>
+      <p class="visually-hidden" aria-live="polite" data-catalog-status></p>` : ""}
+    </div></section>
+  </main>`;
+  return renderDocument({
+    lang: "zh-Hant",
+    title: pathName === "home" ? "Paradigm" : `Paradigm | ${title}`,
+    description: category === "all" ? "Browse all Paradigm products and collections." : `Browse Paradigm ${title}.`,
+    canonical: pathName === "home" ? "https://prdm.tw/" : `https://prdm.tw/collections/${pathName}`,
+    root,
+    currentPath,
+    bodyClass: "site-shell reference-page product-page",
+    main,
+    scripts: ["catalog.js?v=20260922a", ...(refineConfig.publicEnabled === true ? ["catalog-refine.js?v=20260910a"] : []), "media-zoom.js?v=20260922a"]
+  });
+}

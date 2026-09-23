@@ -24,7 +24,7 @@
 
   function searchIndex() {
     if (!searchIndexPromise) {
-      searchIndexPromise = fetch("/assets/data/search-index.json?v=20260910a", { credentials: "same-origin" })
+      searchIndexPromise = fetch("/assets/data/search-index.json?v=20260922a", { credentials: "same-origin" })
         .then((response) => {
           if (!response.ok) throw new Error(`Search index request failed with ${response.status}`);
           return response.json();

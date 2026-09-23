@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import vm from "node:vm";
-import { buildCatalogRefineGroups } from "./lib/catalog-refine.mjs";
+import { buildCatalogRefineGroups } from "../_archive/catalog-refine/catalog-refine.mjs";
 import { renderDropdown } from "./lib/site-renderers.mjs";
 
 const read = (file) => readFile(new URL(`../${file}`, import.meta.url), "utf8");
-const config = JSON.parse(await read("data/catalog-refine.json"));
+const config = JSON.parse(await read("_archive/catalog-refine/catalog-refine.json"));
 const sandbox = { window: {} };
 vm.runInNewContext(await read("assets/js/catalog.js"), sandbox);
 const products = JSON.parse(JSON.stringify(sandbox.window.PARADIGM_CATALOG.items));
@@ -33,11 +33,13 @@ assert.throws(() => renderDropdown({ groups: [groups[0], groups[0]] }), /unique 
 const custom = renderDropdown({ id: "custom", label: "Custom", groups: [{ name: "finish", label: "Finish", kind: "multiple", options: [{ value: "<value>", label: "A & B" }] }] });
 assert.match(custom, /value="&lt;value&gt;"/);
 assert.match(custom, /A &amp; B/);
-for (const route of ["index.html", "collections/all/index.html", "collections/ss-tops/index.html", "collections/aw-tops/index.html", "collections/bottoms/index.html"]) {
+for (const [route, category] of [["index.html", "all"], ["collections/all/index.html", "all"], ["collections/ss-tops/index.html", "SS Tops"], ["collections/aw-tops/index.html", "AW Tops"], ["collections/bottoms/index.html", "Bottoms"]]) {
   const page = await read(route);
   assert.match(page, /data-catalog>/, route);
-  assert.match(page, /data-dropdown-grouped/, route);
-  assert.match(page, /assets\/js\/catalog-refine\.js\?v=/, route);
-  assert.match(page, /data-catalog-empty hidden/, route);
+  assert.doesNotMatch(page, /catalog-refine|data-dropdown-grouped|data-catalog-(?:empty|status)/, `${route} must omit archived Refine controls, script, and status`);
+  const expected = products.filter((product) => category === "all" || product.category === category)
+    .sort((left, right) => Number(right.sequence) - Number(left.sequence)).map((product) => product.code);
+  const rendered = [...page.matchAll(/class="product-card" href="\/products\/([^"]+)"/g)].map((match) => match[1]);
+  assert.deepEqual(rendered, expected, `${route} must render all collection products latest first without JavaScript`);
 }
-console.log("CATALOG_REFINE_OK groups=5 configured=true canonicalCodes=true nativeControls=true collectionScoped=true");
+console.log(`CATALOG_REFINE_OK archived=true latestFirst=true groups=5 configured=true canonicalCodes=true nativeControls=true collectionScoped=true`);

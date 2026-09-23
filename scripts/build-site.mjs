@@ -6,9 +6,8 @@ import {
   transformDescription
 } from "./lib/rich-description.mjs";
 import { categoryForName, rankRelatedProducts } from "./lib/product-relations.mjs";
-import { resolveProductMedia } from "./lib/product-images.mjs";
+import { resolveProductMedia, responsiveMediaFromSource } from "./lib/product-images.mjs";
 import { itemPriceLabel, validateItemCatalog } from "./lib/item-schema.mjs";
-import { buildCatalogRefineGroups } from "./lib/catalog-refine.mjs";
 import {
   html,
   renderChoiceGroup,
@@ -27,6 +26,7 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const CHECK_MODE = process.argv.includes("--check");
 const readJson = (relativePath) => readFile(path.join(ROOT, relativePath), "utf8").then(JSON.parse);
 const readTemplate = (name) => readFile(path.join(ROOT, "scripts", "templates", name), "utf8");
+const heroVideo = await readJson("data/teamwear-video.json");
 
 function unique(values) {
   return [...new Set(values.filter(Boolean))];
@@ -82,7 +82,7 @@ function selectedProductVariant(product) {
     || product.variants.find((variant) => variant.visible);
 }
 
-function renderProductMain(template, product, relatedProducts) {
+function renderProductMain(template, product, relatedProducts, itemCodes) {
   const selectedVariant = selectedProductVariant(product);
   const selected = { colorName: selectedVariant?.colorName || product.colors[0]?.label, sizeName: selectedVariant?.sizeName || product.sizes[0] };
   const resolvedUnavailable = !selectedVariant || selectedVariant.soldOut;
@@ -154,7 +154,7 @@ function renderProductMain(template, product, relatedProducts) {
     COLOR_CHOICES: colorChoices.split("\n").map((line) => `            ${line}`).join("\n"),
     SIZE_CHOICES: sizeChoices.split("\n").map((line) => `            ${line}`).join("\n"),
     PRIMARY_ACTION: primaryAction.split("\n").map((line) => `          ${line}`).join("\n"),
-    DESCRIPTION: renderDescription({ tokens: product.description }).split("\n").map((line) => `          ${line}`).join("\n"),
+    DESCRIPTION: renderDescription({ tokens: product.description, itemCodes, currentItemCode: product.code }).split("\n").map((line) => `          ${line}`).join("\n"),
     RELATED_PRODUCTS: renderProductGrid(relatedProducts, "../..")
   });
 }
@@ -167,15 +167,12 @@ function renderCollectionPage({ title, category, pathName, root, products }) {
     : [{ label: "All", href: "/collections/all" }, { label: title, current: true, headingLevel: 1, interfaceLabel: true }];
   const pageHeadline = renderPageHeadline({
     root,
-    breadcrumb: { variant: "hierarchy", items },
-    trailingAction: { kind: "dropdown", id: "catalog-refine", label: "Refine", variant: "text", align: "end", groups: buildCatalogRefineGroups(refineConfig, filtered) }
+    breadcrumb: { variant: "hierarchy", items }
   });
   const main = `  <main class="page" data-catalog>
 ${pageHeadline.split("\n").map((line) => `    ${line}`).join("\n")}
     <section class="section section--tight"><div class="container">
 ${renderProductGrid(filtered, root).split("\n").map((line) => `      ${line}`).join("\n")}
-      <p class="catalog-empty" data-catalog-empty hidden>No products match these filters. Try another selection or clear all filters.</p>
-      <p class="visually-hidden" aria-live="polite" data-catalog-status></p>
     </div></section>
   </main>`;
   return renderDocument({
@@ -187,7 +184,7 @@ ${renderProductGrid(filtered, root).split("\n").map((line) => `      ${line}`).j
     currentPath,
     bodyClass: "site-shell reference-page product-page",
     main,
-    scripts: ["catalog.js?v=20260910b", "catalog-refine.js?v=20260910a", "media-zoom.js?v=20260831c"]
+    scripts: ["catalog.js?v=20260922a", "media-zoom.js?v=20260922a"]
   });
 }
 
@@ -219,7 +216,7 @@ ${pageHeadline.split("\n").map((line) => `    ${line}`).join("\n")}
     bodyClass: "site-shell reference-page search-page",
     main,
     head: '  <meta name="robots" content="noindex,follow">',
-    scripts: ["media-zoom.js?v=20260831c"]
+    scripts: ["media-zoom.js?v=20260922a"]
   });
 }
 
@@ -301,7 +298,27 @@ function renderTeamwearColorwayCards(model, colorById) {
   }).join("\n");
 }
 
-function renderTeamwearLanding(template, model, colorById, instagramUrl) {
+function teamwearPhoto(photography, id) {
+  const photo = photography.photos.find((entry) => entry.id === id);
+  if (!photo?.media?.src) throw new Error(`Missing imported Teamwear photograph: ${id}`);
+  return photo;
+}
+
+function renderTeamwearPhoto(photography, id, { root = "..", touchZoom = false } = {}) {
+  const photo = teamwearPhoto(photography, id);
+  return renderResponsiveProductImage({
+    media: photo.media,
+    alt: photo.alt,
+    root,
+    sizes: touchZoom
+      ? "(min-width: 80rem) 768px, (min-width: 64rem) 60vw, 100vw"
+      : "(min-width: 80rem) 600px, (min-width: 48rem) 50vw, 100vw",
+    loading: "lazy",
+    touchZoom
+  });
+}
+
+function renderTeamwearLanding(template, model, colorById, instagramUrl, photography) {
   const actionId = "teamwear-primary-action";
   const primaryAction = renderPrimaryAction({
     id: actionId,
@@ -323,11 +340,25 @@ function renderTeamwearLanding(template, model, colorById, instagramUrl) {
   });
   const main = applyTemplate(template, {
     MODEL_NAME: html(model.name),
+    HERO_MEDIA: `<div class="teamwear-hero__media">
+      <picture>
+${[...heroVideo.variants].reverse().filter((variant) => variant.minWidth).map((variant) => `        <source media="(min-width: ${variant.minWidth / 16}rem)" srcset="../${html(variant.poster)}">`).join("\n")}
+        <img src="../${html(heroVideo.variants[0].poster)}" alt="Basketball players in white and brown teamwear playing on an outdoor court at night" width="1080" height="1920" fetchpriority="high">
+      </picture>
+      <video id="teamwear-hero-video" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback aria-hidden="true" tabindex="-1" ${heroVideo.variants.map((variant) => `data-video-${variant.id}="../${html(variant.src)}"`).join(" ")}></video>
+    </div>`,
+    HERO_VIDEO_CONTROL: `<div class="container teamwear-hero__controls"><button class="icon-button teamwear-hero__toggle" type="button" aria-label="Play background video" aria-controls="teamwear-hero-video" data-hero-video-toggle hidden><span data-video-play>${renderIcon("play", "..")}</span><span data-video-pause hidden>${renderIcon("pause", "..")}</span></button></div>`,
     PRIMARY_ACTION: primaryAction.split("\n").map((line) => `      ${line}`).join("\n"),
     HIGHLIGHT_CONTROLS: renderRailControls({ label: "Highlights", railId: "teamwear-highlights-rail", root: ".." }).split("\n").map((line) => `      ${line}`).join("\n"),
     COLORWAY_CONTROLS: renderRailControls({ label: "Colorway", railId: "teamwear-colorways-rail", root: ".." }).split("\n").map((line) => `      ${line}`).join("\n"),
     GALLERY_CONTROLS: renderRailControls({ label: "Customer stories", railId: "teamwear-gallery-rail", root: ".." }).split("\n").map((line) => `      ${line}`).join("\n"),
     COLORWAY_CARDS: renderTeamwearColorwayCards(model, colorById),
+    ...Object.fromEntries(Object.entries(photography.highlights).map(([slot, id]) =>
+      [`HIGHLIGHT_${slot}_IMAGE`, renderTeamwearPhoto(photography, id)])),
+    ...Object.fromEntries(photography.athletes.flatMap((id, index) => [
+      [`ATHLETE_${index + 1}_IMAGE`, renderTeamwearPhoto(photography, id)],
+      [`ATHLETE_${index + 1}_NAME`, html(teamwearPhoto(photography, id).team)]
+    ])),
     PATTERN_CHOICES: patterns.split("\n").map((line) => `      ${line}`).join("\n")
   });
   return renderDocument({
@@ -338,13 +369,13 @@ function renderTeamwearLanding(template, model, colorById, instagramUrl) {
     currentPath: "/teamwear",
     bodyClass: "site-shell reference-page teamwear-page teamwear-story-shell",
     main,
-    styles: ["teamwear.css?v=20260829c", "teamwear-story.css?v=20260909b"],
-    scripts: ["teamwear-options.js?v=20260913a", "teamwear.js?v=20260913a", "media-zoom.js?v=20260831c"],
+    styles: ["teamwear.css?v=20260829c", "teamwear-story.css?v=20260922a"],
+    scripts: ["teamwear-options.js?v=20260917b", "teamwear.js?v=20260913a", "hero-video.js?v=20260918a", "media-zoom.js?v=20260922a"],
     head: `  <meta property="og:title" content="${html(model.name)} | Paradigm">\n  <meta property="og:description" content="${html(`${model.name} is a reversible basketball uniform system composed by Paradigm for the whole roster.`)}">\n  <meta property="og:image" content="https://prdm.tw/assets/images/teamwear/campaign/hero-desktop.webp">\n  <meta property="og:type" content="website">`
   });
 }
 
-function renderTeamwearCustomize(template, model, colorById, instagramUrl) {
+function renderTeamwearCustomize(template, model, colorById, instagramUrl, itemCodes, photography) {
   const actionId = "teamwear-customize-primary-action";
   const selectedPattern = model.patterns.find((pattern) => pattern.id === "P02") || model.patterns[0];
   const selectedColor = model.colors.find((color) => color.colorId === "mocha") || model.colors[0];
@@ -401,7 +432,7 @@ function renderTeamwearCustomize(template, model, colorById, instagramUrl) {
     }
   });
   const descriptionSource = normalizeDescriptionSource(model.descriptionSource, `${model.id} description`);
-  const description = renderDescription({ tokens: transformDescription(descriptionSource.content) });
+  const description = renderDescription({ tokens: transformDescription(descriptionSource.content), itemCodes });
   const main = applyTemplate(template, {
     PAGE_HEADLINE: pageHeadline.split("\n").map((line) => `  ${line}`).join("\n"),
     MODEL_CODE: html(model.code),
@@ -414,6 +445,8 @@ function renderTeamwearCustomize(template, model, colorById, instagramUrl) {
       touchZoom: true,
       dataAttribute: "data-builder-cover"
     }),
+    GALLERY_IMAGES: photography.customGallery.map((id) =>
+      `          ${renderTeamwearPhoto(photography, id, { root: "../..", touchZoom: true })}`).join("\n"),
     PRICE: renderProductDetailPrice({ price: priceLabel(model.price), dataAttribute: "data-teamwear-price" }),
     COLOR_CHOICES: colors.split("\n").map((line) => `          ${line}`).join("\n"),
     PATTERN_CHOICES: patterns.split("\n").map((line) => `          ${line}`).join("\n"),
@@ -431,11 +464,11 @@ function renderTeamwearCustomize(template, model, colorById, instagramUrl) {
     bodyClass: "site-shell reference-page reference-page--detail teamwear-customize-page",
     main,
     styles: ["teamwear.css?v=20260829c"],
-    scripts: ["teamwear-options.js?v=20260913a", "teamwear.js?v=20260913a", "media-zoom.js?v=20260831c"]
+    scripts: ["teamwear-options.js?v=20260917b", "teamwear.js?v=20260913a", "media-zoom.js?v=20260922a"]
   });
 }
 
-const [source, colorRegistry, teamwearData, searchConfig, productImageFallback, productTemplate, teamwearTemplate, customizeTemplate, refineConfig] = await Promise.all([
+const [source, colorRegistry, teamwearData, searchConfig, productImageFallback, productTemplate, teamwearTemplate, customizeTemplate, teamwearPhotography] = await Promise.all([
   readJson("data/products-source.json").then(validateItemCatalog),
   readJson("data/colors.json"),
   readJson("data/teamwear-options.json"),
@@ -444,7 +477,7 @@ const [source, colorRegistry, teamwearData, searchConfig, productImageFallback, 
   readTemplate("product-page.html"),
   readTemplate("teamwear-page.html"),
   readTemplate("teamwear-customize.html"),
-  readJson("data/catalog-refine.json")
+  readJson("data/teamwear-photography.json")
 ]);
 
 const colorByName = new Map(colorRegistry.colors.map((color) => [color.name, color]));
@@ -481,6 +514,7 @@ const products = source.items.filter((entry) => entry.variants.some((variant) =>
     image: mediaPaths[0] || null,
     images: mediaPaths,
     media,
+    variantMedia: Object.fromEntries((entry.variantImages || []).map((image) => [image.id, responsiveMediaFromSource(image)])),
     imageSource: usesFallback ? "fallback" : entry.imageSource,
     alt: usesFallback ? "" : `${entry.name} product image`,
     colors,
@@ -526,7 +560,7 @@ outputs.set("font-credits/index.html", renderDocument({
 
 products.forEach((product) => {
   const related = rankRelatedProducts(products, product);
-  const main = renderProductMain(productTemplate, product, related);
+  const main = renderProductMain(productTemplate, product, related, products.map((item) => item.code));
   outputs.set(`products/${product.code}/index.html`, renderDocument({
     lang: "zh-Hant",
     title: `Paradigm | ${product.name}`,
@@ -536,13 +570,13 @@ products.forEach((product) => {
     currentPath: `/products/${product.code}`,
     bodyClass: "site-shell reference-page reference-page--detail",
     main,
-    scripts: ["catalog.js?v=20260910a", "media-zoom.js?v=20260831c"]
+    scripts: ["catalog.js?v=20260922a", "media-zoom.js?v=20260922a"]
   }));
 });
 
 const teamwearModel = teamwearData.models[0];
-outputs.set("teamwear/index.html", renderTeamwearLanding(teamwearTemplate, teamwearModel, colorById, teamwearData.instagramUrl));
-outputs.set("teamwear/customize/index.html", renderTeamwearCustomize(customizeTemplate, teamwearModel, colorById, teamwearData.instagramUrl));
+outputs.set("teamwear/index.html", renderTeamwearLanding(teamwearTemplate, teamwearModel, colorById, teamwearData.instagramUrl, teamwearPhotography));
+outputs.set("teamwear/customize/index.html", renderTeamwearCustomize(customizeTemplate, teamwearModel, colorById, teamwearData.instagramUrl, products.map((item) => item.code), teamwearPhotography));
 
 const mismatches = [];
 for (const [relativePath, content] of outputs) {

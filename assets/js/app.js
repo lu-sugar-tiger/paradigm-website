@@ -139,13 +139,19 @@
 
   const drawer = document.querySelector("[data-nav-drawer]");
   const navToggle = document.querySelector("[data-nav-toggle]");
-  setupOverlay({
+  const drawerController = setupOverlay({
     overlay: drawer,
     toggle: navToggle,
     openClass: "nav-open",
     openLabel: "Open navigation",
     closeLabel: "Close navigation",
     initialFocus: () => navToggle
+  });
+  window.matchMedia('(min-width: 64rem)').addEventListener('change', (event) => {
+    if (event.matches && drawer?.getAttribute('aria-hidden') === 'false') {
+      drawerController?.close(false, true);
+      document.querySelector('[data-header-parent]')?.focus({ preventScroll: true });
+    }
   });
 
   const searchOverlay = document.querySelector("[data-search-overlay]");

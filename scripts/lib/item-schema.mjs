@@ -21,6 +21,7 @@ export const ITEM_FIELDS = Object.freeze({
   link: ["商品連結", "連結", "Link"],
   descriptionSource: ["商品文案", "DescriptionSource"],
   visible: ["顯示", "Visible"],
+  hidden: ["隱藏", "Hidden"],
   soldOut: ["售罄", "SoldOut"]
 });
 
@@ -151,13 +152,17 @@ export function mapSheetItemRow(headers, values, { aliases = {} } = {}) {
     if (value == null || value === "") continue;
     let normalized = value;
     if (["listPrice", "salePrice"].includes(field)) normalized = price(value, field);
-    else if (["visible", "soldOut"].includes(field)) normalized = boolean(value, field);
+    else if (["visible", "hidden", "soldOut"].includes(field)) normalized = boolean(value, field);
     else {
       assert.equal(typeof value, "string", `${field} must be text`);
       if (["link", "descriptionSource"].includes(field)) linkValue(value);
       if (["itemCode", "itemLineCode", "itemTypeCode", "itemSequence", "itemColorCode", "itemSizeCode", "sku", "lotCode", "lotId"].includes(field)) normalized = code(value);
     }
     assignMatching(fields, field, normalized);
+  }
+  if (Object.hasOwn(fields, "hidden")) {
+    assignMatching(fields, "visible", !fields.hidden);
+    delete fields.hidden;
   }
   const record = completeItemIdentifiers(fields);
   if (record.descriptionSource) record.descriptionSource = { link: record.descriptionSource };

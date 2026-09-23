@@ -35,6 +35,12 @@ export function splitDescriptionTableCells(line) {
   return String(line).split(FLEXIBLE_SPACE_RUN).filter(Boolean);
 }
 
+// Render-only substitution for the mathematical sans-serif digits in size copy.
+// Do not normalize other characters or mutate the source/table tokens.
+export function regularTableFigures(text) {
+  return String(text).replace(/[\u{1D7E2}-\u{1D7EB}]/gu, (digit) => String(digit.codePointAt(0) - 0x1D7E2));
+}
+
 export function isFlexibleBlank(line) {
   return String(line).replace(FLEXIBLE_SPACE_ALL, "") === "";
 }

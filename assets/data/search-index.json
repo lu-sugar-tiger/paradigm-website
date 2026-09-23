@@ -47,18 +47,19 @@
     "Shopee",
     "shop",
     "store",
-    "Shadow",
-    "Grey",
+    "Cosmos",
+    "Charcoal",
+    "Dove",
     "White",
+    "Timeless",
+    "Aesthetics",
     "Training",
     "Mud",
     "Mocha",
-    "Cosmos",
     "Black",
     "Midnight",
     "Intelligence",
-    "Timeless",
-    "Aesthetics",
+    "Grey",
     "Sponsorship",
     "Cardinal",
     "Partnership"
@@ -245,20 +246,20 @@
   ],
   "items": [
     {
-      "code": "ED14024",
-      "name": "PRDM Everyday Tee",
+      "code": "BD14028",
+      "name": "PRDM Cosmos Tee",
       "category": "SS Tops",
       "colors": [
-        "Shadow",
-        "Grey",
+        "Charcoal",
+        "Dove",
         "White"
       ],
       "type": "Tee",
-      "family": "Everyday",
-      "priceLabel": "NT$590",
-      "url": "/products/ED14024",
+      "family": "Cosmos",
+      "priceLabel": "NT$790",
+      "url": "/products/BD14028",
       "media": {
-        "src": "assets/images/catalog/3a/3a4d8d1d4a54393c6092-1080x1080.webp",
+        "src": "assets/images/catalog/f3/f34516468a99b633c3df-1080x1080.webp",
         "width": 1080,
         "height": 1080,
         "derivatives": [
@@ -266,19 +267,219 @@
             "shortEdge": 540,
             "width": 540,
             "height": 540,
-            "path": "assets/images/catalog/59/599a22252cda2eb00f2a-540x540.webp"
+            "path": "assets/images/catalog/79/79afa83f2de068925989-540x540.webp"
           },
           {
             "shortEdge": 1080,
             "width": 1080,
             "height": 1080,
-            "path": "assets/images/catalog/3a/3a4d8d1d4a54393c6092-1080x1080.webp"
+            "path": "assets/images/catalog/f3/f34516468a99b633c3df-1080x1080.webp"
           },
           {
             "shortEdge": 2160,
             "width": 2160,
             "height": 2160,
-            "path": "assets/images/catalog/93/939986dd5d2f15917d01-2160x2160.webp"
+            "path": "assets/images/catalog/68/68b710958cf38f7e157e-2160x2160.webp"
+          }
+        ]
+      },
+      "alt": "PRDM Cosmos Tee product image",
+      "searchTerms": [
+        "PRDM Cosmos Tee",
+        "BD14028",
+        "SS Tops",
+        "Charcoal",
+        "Dove",
+        "White",
+        "Tee",
+        "Cosmos"
+      ]
+    },
+    {
+      "code": "TL14027",
+      "name": "PRDM Timeless Tee",
+      "category": "SS Tops",
+      "colors": [
+        "Charcoal",
+        "Dove",
+        "White"
+      ],
+      "type": "Tee",
+      "family": "Timeless",
+      "priceLabel": "NT$790",
+      "url": "/products/TL14027",
+      "media": {
+        "src": "assets/images/catalog/1d/1df20bc2c5af7d674774-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/catalog/c7/c7b63451067dca6bb265-540x540.webp"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/catalog/1d/1df20bc2c5af7d674774-1080x1080.webp"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/catalog/fd/fdc65d9fc1240256cd0c-2160x2160.webp"
+          }
+        ]
+      },
+      "alt": "PRDM Timeless Tee product image",
+      "searchTerms": [
+        "PRDM Timeless Tee",
+        "TL14027",
+        "SS Tops",
+        "Charcoal",
+        "Dove",
+        "White",
+        "Tee",
+        "Timeless"
+      ]
+    },
+    {
+      "code": "AE14026",
+      "name": "PRDM Aesthetics Tee",
+      "category": "SS Tops",
+      "colors": [
+        "Charcoal",
+        "Dove",
+        "White"
+      ],
+      "type": "Tee",
+      "family": "Aesthetics",
+      "priceLabel": "NT$790",
+      "url": "/products/AE14026",
+      "media": {
+        "src": "assets/images/catalog/18/18ebd288420060dcf5dd-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/catalog/92/92335a97777d1cd6affc-540x540.webp"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/catalog/18/18ebd288420060dcf5dd-1080x1080.webp"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/catalog/4e/4ebbf14dcac46fa9ef4e-2160x2160.webp"
+          }
+        ]
+      },
+      "alt": "PRDM Aesthetics Tee product image",
+      "searchTerms": [
+        "PRDM Aesthetics Tee",
+        "AE14026",
+        "SS Tops",
+        "Charcoal",
+        "Dove",
+        "White",
+        "Tee",
+        "Aesthetics"
+      ]
+    },
+    {
+      "code": "PD14025",
+      "name": "PRDM Paradigm Tee",
+      "category": "SS Tops",
+      "colors": [
+        "Charcoal",
+        "Dove",
+        "White"
+      ],
+      "type": "Tee",
+      "family": "Paradigm",
+      "priceLabel": "NT$790",
+      "url": "/products/PD14025",
+      "media": {
+        "src": "assets/images/catalog/ea/eaaddd211381ffe4f1db-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/catalog/d3/d3e3b53a7c4d1d301713-540x540.webp"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/catalog/ea/eaaddd211381ffe4f1db-1080x1080.webp"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/catalog/57/57f544a9c02364bf9453-2160x2160.webp"
+          }
+        ]
+      },
+      "alt": "PRDM Paradigm Tee product image",
+      "searchTerms": [
+        "PRDM Paradigm Tee",
+        "PD14025",
+        "SS Tops",
+        "Charcoal",
+        "Dove",
+        "White",
+        "Tee",
+        "Paradigm"
+      ]
+    },
+    {
+      "code": "ED14024",
+      "name": "PRDM Everyday Tee",
+      "category": "SS Tops",
+      "colors": [
+        "Charcoal",
+        "Dove",
+        "White"
+      ],
+      "type": "Tee",
+      "family": "Everyday",
+      "priceLabel": "NT$590",
+      "url": "/products/ED14024",
+      "media": {
+        "src": "assets/images/catalog/41/41ec3d3962d5da3dcde4-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/catalog/8b/8bd848cdf3e434986024-540x540.webp"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/catalog/41/41ec3d3962d5da3dcde4-1080x1080.webp"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/catalog/f9/f92c9f5bad97b8b8a5d2-2160x2160.webp"
           }
         ]
       },
@@ -287,8 +488,8 @@
         "PRDM Everyday Tee",
         "ED14024",
         "SS Tops",
-        "Shadow",
-        "Grey",
+        "Charcoal",
+        "Dove",
         "White",
         "Tee",
         "Everyday"
@@ -306,8 +507,29 @@
       "priceLabel": "NT$1,180",
       "url": "/products/GM42023",
       "media": {
-        "src": "assets/images/products/training-shorts.webp",
-        "derivatives": []
+        "src": "assets/images/catalog/e6/e64acabea698759c3bf8-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/catalog/b3/b30647948da7cb13a404-540x540.webp"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/catalog/e6/e64acabea698759c3bf8-1080x1080.webp"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/catalog/cb/cbae527494089786166a-2160x2160.webp"
+          }
+        ]
       },
       "alt": "PRDM Training Shorts product image",
       "searchTerms": [
@@ -331,8 +553,29 @@
       "priceLabel": "NT$1,180",
       "url": "/products/GM42022",
       "media": {
-        "src": "assets/images/products/training-shorts.webp",
-        "derivatives": []
+        "src": "assets/images/catalog/65/658c9c1c91edd2adad8a-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/catalog/90/901721be9b7b1de9da6a-540x540.webp"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/catalog/65/658c9c1c91edd2adad8a-1080x1080.webp"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/catalog/87/8717043513133d4dd16e-2160x2160.webp"
+          }
+        ]
       },
       "alt": "PRDM Training Shorts product image",
       "searchTerms": [
@@ -357,8 +600,29 @@
       "priceLabel": "NT$1,380",
       "url": "/products/BD24021",
       "media": {
-        "src": "assets/images/products/BD24021/cosmos-hoodie-01.webp",
-        "derivatives": []
+        "src": "assets/images/catalog/c3/c3c16ac62dbf4b03eb53-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/catalog/32/32fe767967d81fc367eb-540x540.webp"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/catalog/c3/c3c16ac62dbf4b03eb53-1080x1080.webp"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/catalog/66/6685b84a051c93c36723-2160x2160.webp"
+          }
+        ]
       },
       "alt": "PRDM Cosmos Hoodie product image",
       "searchTerms": [
@@ -384,8 +648,29 @@
       "priceLabel": "NT$1,380",
       "url": "/products/BT24020",
       "media": {
-        "src": "assets/images/products/intelligence-hoodie.webp",
-        "derivatives": []
+        "src": "assets/images/catalog/4c/4c32f8c4f839d0df0f3b-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/catalog/d1/d175959bfae4e4695591-540x540.webp"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/catalog/4c/4c32f8c4f839d0df0f3b-1080x1080.webp"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/catalog/e8/e890691cebf23f6cc33c-2160x2160.webp"
+          }
+        ]
       },
       "alt": "PRDM Intelligence Hoodie product image",
       "searchTerms": [
@@ -411,38 +696,31 @@
       "priceLabel": "NT$1,380",
       "url": "/products/TL24019",
       "media": {
-        "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+        "src": "assets/images/catalog/b6/b6fd8750bcf9e4e27cfe-1080x1080.webp",
         "width": 1080,
         "height": 1080,
-        "isFallback": true,
         "derivatives": [
           {
             "shortEdge": 540,
             "width": 540,
             "height": 540,
-            "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
-            "bytes": 3112,
-            "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            "path": "assets/images/catalog/a6/a60eba747a93b250e2e8-540x540.webp"
           },
           {
             "shortEdge": 1080,
             "width": 1080,
             "height": 1080,
-            "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-            "bytes": 7424,
-            "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            "path": "assets/images/catalog/b6/b6fd8750bcf9e4e27cfe-1080x1080.webp"
           },
           {
             "shortEdge": 2160,
             "width": 2160,
             "height": 2160,
-            "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
-            "bytes": 18982,
-            "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            "path": "assets/images/catalog/2c/2c9e18ccc5c7f16af3a5-2160x2160.webp"
           }
         ]
       },
-      "alt": "",
+      "alt": "PRDM Timeless Hoodie product image",
       "searchTerms": [
         "PRDM Timeless Hoodie",
         "TL24019",
@@ -466,8 +744,29 @@
       "priceLabel": "NT$1,180",
       "url": "/products/TL23018",
       "media": {
-        "src": "assets/images/products/timeless-crewneck.webp",
-        "derivatives": []
+        "src": "assets/images/catalog/bc/bcd4d672b78f7b80a0d7-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/catalog/64/646d33be62b357b06a99-540x540.webp"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/catalog/bc/bcd4d672b78f7b80a0d7-1080x1080.webp"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/catalog/53/5394013a3021370fab2b-2160x2160.webp"
+          }
+        ]
       },
       "alt": "PRDM Timeless Crewneck product image",
       "searchTerms": [
@@ -493,38 +792,31 @@
       "priceLabel": "NT$1,380",
       "url": "/products/AE24017",
       "media": {
-        "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+        "src": "assets/images/catalog/d2/d204273df4ecce469d5f-1080x1080.webp",
         "width": 1080,
         "height": 1080,
-        "isFallback": true,
         "derivatives": [
           {
             "shortEdge": 540,
             "width": 540,
             "height": 540,
-            "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
-            "bytes": 3112,
-            "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            "path": "assets/images/catalog/82/82142e54634f2ba66730-540x540.webp"
           },
           {
             "shortEdge": 1080,
             "width": 1080,
             "height": 1080,
-            "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-            "bytes": 7424,
-            "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            "path": "assets/images/catalog/d2/d204273df4ecce469d5f-1080x1080.webp"
           },
           {
             "shortEdge": 2160,
             "width": 2160,
             "height": 2160,
-            "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
-            "bytes": 18982,
-            "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            "path": "assets/images/catalog/96/96b25aa56b9a46d95d3a-2160x2160.webp"
           }
         ]
       },
-      "alt": "",
+      "alt": "PRDM Aesthetics Hoodie product image",
       "searchTerms": [
         "PRDM Aesthetics Hoodie",
         "AE24017",
@@ -548,38 +840,31 @@
       "priceLabel": "NT$1,180",
       "url": "/products/AE23016",
       "media": {
-        "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+        "src": "assets/images/catalog/81/81be672f7f52aa60265a-1080x1080.webp",
         "width": 1080,
         "height": 1080,
-        "isFallback": true,
         "derivatives": [
           {
             "shortEdge": 540,
             "width": 540,
             "height": 540,
-            "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
-            "bytes": 3112,
-            "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            "path": "assets/images/catalog/84/84003c0c9f2393e5e14c-540x540.webp"
           },
           {
             "shortEdge": 1080,
             "width": 1080,
             "height": 1080,
-            "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-            "bytes": 7424,
-            "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            "path": "assets/images/catalog/81/81be672f7f52aa60265a-1080x1080.webp"
           },
           {
             "shortEdge": 2160,
             "width": 2160,
             "height": 2160,
-            "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
-            "bytes": 18982,
-            "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            "path": "assets/images/catalog/71/714cb1554e80de31d6b1-2160x2160.webp"
           }
         ]
       },
-      "alt": "",
+      "alt": "PRDM Aesthetics Crewneck product image",
       "searchTerms": [
         "PRDM Aesthetics Crewneck",
         "AE23016",
@@ -603,8 +888,29 @@
       "priceLabel": "NT$1,380",
       "url": "/products/PD24015",
       "media": {
-        "src": "assets/images/products/paradigm-hoodie.webp",
-        "derivatives": []
+        "src": "assets/images/catalog/26/26ff6497fe13794131b4-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/catalog/e3/e3140baf455a7f6dcdf3-540x540.webp"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/catalog/26/26ff6497fe13794131b4-1080x1080.webp"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/catalog/b0/b010730d456d8955a8cb-2160x2160.webp"
+          }
+        ]
       },
       "alt": "PRDM Paradigm Hoodie product image",
       "searchTerms": [
@@ -630,38 +936,31 @@
       "priceLabel": "NT$1,180",
       "url": "/products/ED24014",
       "media": {
-        "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+        "src": "assets/images/catalog/53/53c79e7decb45e72e1a6-1080x1080.webp",
         "width": 1080,
         "height": 1080,
-        "isFallback": true,
         "derivatives": [
           {
             "shortEdge": 540,
             "width": 540,
             "height": 540,
-            "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
-            "bytes": 3112,
-            "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            "path": "assets/images/catalog/d6/d6958de56c2ebff2cee6-540x540.webp"
           },
           {
             "shortEdge": 1080,
             "width": 1080,
             "height": 1080,
-            "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-            "bytes": 7424,
-            "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            "path": "assets/images/catalog/53/53c79e7decb45e72e1a6-1080x1080.webp"
           },
           {
             "shortEdge": 2160,
             "width": 2160,
             "height": 2160,
-            "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
-            "bytes": 18982,
-            "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            "path": "assets/images/catalog/72/7267a91b81e4aedfe41e-2160x2160.webp"
           }
         ]
       },
-      "alt": "",
+      "alt": "PRDM Everyday Hoodie product image",
       "searchTerms": [
         "PRDM Everyday Hoodie",
         "ED24014",
@@ -686,38 +985,31 @@
       "priceLabel": "NT$990",
       "url": "/products/PH14011",
       "media": {
-        "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+        "src": "assets/images/catalog/76/76e6b21fb5cafb183618-1080x1080.webp",
         "width": 1080,
         "height": 1080,
-        "isFallback": true,
         "derivatives": [
           {
             "shortEdge": 540,
             "width": 540,
             "height": 540,
-            "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
-            "bytes": 3112,
-            "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            "path": "assets/images/catalog/66/66b858ac12a66c98743d-540x540.webp"
           },
           {
             "shortEdge": 1080,
             "width": 1080,
             "height": 1080,
-            "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-            "bytes": 7424,
-            "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            "path": "assets/images/catalog/76/76e6b21fb5cafb183618-1080x1080.webp"
           },
           {
             "shortEdge": 2160,
             "width": 2160,
             "height": 2160,
-            "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
-            "bytes": 18982,
-            "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            "path": "assets/images/catalog/e9/e9dc986fd2b6688d16c2-2160x2160.webp"
           }
         ]
       },
-      "alt": "",
+      "alt": "PRDM Sponsorship Football Jersey product image",
       "searchTerms": [
         "PRDM Sponsorship Football Jersey",
         "PH14011",
@@ -743,8 +1035,29 @@
       "priceLabel": "NT$990",
       "url": "/products/PH14010",
       "media": {
-        "src": "assets/images/products/partnership-football-jersey.webp",
-        "derivatives": []
+        "src": "assets/images/catalog/f6/f63a7e465edf6d0624bf-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/catalog/20/20d00147fbcdf7177375-540x540.webp"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/catalog/f6/f63a7e465edf6d0624bf-1080x1080.webp"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/catalog/65/6512649e5c8f360e174e-2160x2160.webp"
+          }
+        ]
       },
       "alt": "PRDM Partnership Football Jersey product image",
       "searchTerms": [
@@ -771,38 +1084,31 @@
       "priceLabel": "NT$790",
       "url": "/products/TL14009",
       "media": {
-        "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+        "src": "assets/images/catalog/b5/b59bcd967b547c6d7fbd-1080x1080.webp",
         "width": 1080,
         "height": 1080,
-        "isFallback": true,
         "derivatives": [
           {
             "shortEdge": 540,
             "width": 540,
             "height": 540,
-            "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
-            "bytes": 3112,
-            "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            "path": "assets/images/catalog/5b/5b06467d3f9690c99d27-540x540.webp"
           },
           {
             "shortEdge": 1080,
             "width": 1080,
             "height": 1080,
-            "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-            "bytes": 7424,
-            "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            "path": "assets/images/catalog/b5/b59bcd967b547c6d7fbd-1080x1080.webp"
           },
           {
             "shortEdge": 2160,
             "width": 2160,
             "height": 2160,
-            "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
-            "bytes": 18982,
-            "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            "path": "assets/images/catalog/c1/c19c70a4a454f3fdc4a3-2160x2160.webp"
           }
         ]
       },
-      "alt": "",
+      "alt": "PRDM Timeless Tee product image",
       "searchTerms": [
         "PRDM Timeless Tee",
         "TL14009",
@@ -826,8 +1132,29 @@
       "priceLabel": "NT$790",
       "url": "/products/AE14008",
       "media": {
-        "src": "assets/images/products/aesthetics-tee.webp",
-        "derivatives": []
+        "src": "assets/images/catalog/74/743cc422a04b4df467b8-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/catalog/6e/6e0477239b8f553ff838-540x540.webp"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/catalog/74/743cc422a04b4df467b8-1080x1080.webp"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/catalog/f5/f53a5bcb15d65dc1aa82-2160x2160.webp"
+          }
+        ]
       },
       "alt": "PRDM Aesthetics Tee product image",
       "searchTerms": [
@@ -854,38 +1181,31 @@
       "priceLabel": "NT$790",
       "url": "/products/PD14007",
       "media": {
-        "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+        "src": "assets/images/catalog/16/16cedb640c07bf0969a8-1080x1080.webp",
         "width": 1080,
         "height": 1080,
-        "isFallback": true,
         "derivatives": [
           {
             "shortEdge": 540,
             "width": 540,
             "height": 540,
-            "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
-            "bytes": 3112,
-            "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            "path": "assets/images/catalog/7d/7ddcccd3ed25af249c6f-540x540.webp"
           },
           {
             "shortEdge": 1080,
             "width": 1080,
             "height": 1080,
-            "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-            "bytes": 7424,
-            "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            "path": "assets/images/catalog/16/16cedb640c07bf0969a8-1080x1080.webp"
           },
           {
             "shortEdge": 2160,
             "width": 2160,
             "height": 2160,
-            "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
-            "bytes": 18982,
-            "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            "path": "assets/images/catalog/e5/e5f9bb71b9ff9c4d3726-2160x2160.webp"
           }
         ]
       },
-      "alt": "",
+      "alt": "PRDM Paradigm Tee product image",
       "searchTerms": [
         "PRDM Paradigm Tee",
         "PD14007",
@@ -910,38 +1230,31 @@
       "priceLabel": "NT$1,180",
       "url": "/products/PD23006",
       "media": {
-        "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+        "src": "assets/images/catalog/e1/e13479ab81614d340926-1080x1080.webp",
         "width": 1080,
         "height": 1080,
-        "isFallback": true,
         "derivatives": [
           {
             "shortEdge": 540,
             "width": 540,
             "height": 540,
-            "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
-            "bytes": 3112,
-            "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            "path": "assets/images/catalog/b5/b52dba769528edbbba47-540x540.webp"
           },
           {
             "shortEdge": 1080,
             "width": 1080,
             "height": 1080,
-            "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-            "bytes": 7424,
-            "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            "path": "assets/images/catalog/e1/e13479ab81614d340926-1080x1080.webp"
           },
           {
             "shortEdge": 2160,
             "width": 2160,
             "height": 2160,
-            "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
-            "bytes": 18982,
-            "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            "path": "assets/images/catalog/86/8679cfe701d040b63b9d-2160x2160.webp"
           }
         ]
       },
-      "alt": "",
+      "alt": "PRDM Paradigm Crewneck product image",
       "searchTerms": [
         "PRDM Paradigm Crewneck",
         "PD23006",
@@ -965,38 +1278,31 @@
       "priceLabel": "NT$990",
       "url": "/products/ED23002",
       "media": {
-        "src": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
+        "src": "assets/images/catalog/6a/6a7bcbe73897e2fd028a-1080x1080.webp",
         "width": 1080,
         "height": 1080,
-        "isFallback": true,
         "derivatives": [
           {
             "shortEdge": 540,
             "width": 540,
             "height": 540,
-            "path": "assets/images/catalog/c5/c5a5b6daf47017d0462e-540x540.webp",
-            "bytes": 3112,
-            "sha256": "c5a5b6daf47017d0462e1668338e9af6fb32dfdbb33953826b65bead1865e7b5"
+            "path": "assets/images/catalog/d8/d87899e946676d2b0c22-540x540.webp"
           },
           {
             "shortEdge": 1080,
             "width": 1080,
             "height": 1080,
-            "path": "assets/images/catalog/27/27e2396ea0cbe31ca519-1080x1080.webp",
-            "bytes": 7424,
-            "sha256": "27e2396ea0cbe31ca519d2701fb32ef468c75b7d102e25d40a18f1ddec93d4d6"
+            "path": "assets/images/catalog/6a/6a7bcbe73897e2fd028a-1080x1080.webp"
           },
           {
             "shortEdge": 2160,
             "width": 2160,
             "height": 2160,
-            "path": "assets/images/catalog/29/2970400186c493cc4794-2160x2160.webp",
-            "bytes": 18982,
-            "sha256": "2970400186c493cc4794594ac44c52f9f010c620cc7e25696507fc5ff2f2dc5c"
+            "path": "assets/images/catalog/2e/2ea61ee2b2bf6f8afa16-2160x2160.webp"
           }
         ]
       },
-      "alt": "",
+      "alt": "PRDM Everyday Crewneck product image",
       "searchTerms": [
         "PRDM Everyday Crewneck",
         "ED23002",
@@ -1021,8 +1327,29 @@
       "priceLabel": "NT$590",
       "url": "/products/ED14001",
       "media": {
-        "src": "assets/images/products/everyday-tee.webp",
-        "derivatives": []
+        "src": "assets/images/catalog/1d/1dc40d30c94d9489f30d-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/catalog/52/524c1c0d75632091b5d3-540x540.webp"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/catalog/1d/1dc40d30c94d9489f30d-1080x1080.webp"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/catalog/be/be4d4fb141f02df91ee6-2160x2160.webp"
+          }
+        ]
       },
       "alt": "PRDM Everyday Tee product image",
       "searchTerms": [

@@ -34,8 +34,9 @@ Paths below are relative to an item in `items[]`.
 | 商品售價 / SalePrice | `salePrice` | Numeric selling price, or `null` when unspecified |
 | 商品連結 / 連結 / Link | `link` | Purchase destination; currently Shopee |
 | 商品文案 | `descriptionSource` | Resolved Doc record, including exact `content` and `modifiedTime` |
-| 商品圖片 0 … 商品圖片 9 | `images[]` | Ordered source-image records; index 0 is the main image |
-| 顯示 | `variants[].visible` | Boolean publication flag |
+| 商品圖片 0 … 商品圖片 8 | `images[]` | Ordered gallery records; index 0 is the main image; nonempty source replaces old gallery |
+| 商品圖片 9 | `variantImages[]`, `variants[].imageId` | Color/variant photo; shared across blank rows of the same item and color; independent of gallery replacement |
+| 隱藏 (current), 顯示 (legacy) | `variants[].visible` | Invert 隱藏; 顯示 is positive visibility; contradictory flags fail |
 | 售罄 | `variants[].soldOut` | Boolean detail-page availability flag |
 
 `colorCode` is a business identifier, not the website's semantic `colorId` in `data/colors.json`. They must not be substituted for one another.

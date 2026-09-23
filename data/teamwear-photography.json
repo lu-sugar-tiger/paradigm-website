@@ -1,0 +1,396 @@
+{
+  "schemaVersion": 1,
+  "photos": [
+    {
+      "id": "ntuesoe-01",
+      "team": "NTUESOE",
+      "alt": "NTUESOE players in white and brown basketball uniforms driving toward the hoop at night",
+      "source": {
+        "filename": "251203_臺北-古亭河濱公園籃球場_NTUESOE_01.jpg",
+        "width": 4500,
+        "height": 4500,
+        "bytes": 13041942,
+        "sha256": "aaae9f3e5f42ca2dd3195b9a3a57f5c5dad3b4f3d5db51e6ec0b166104130b8a"
+      },
+      "transform": {
+        "format": "webp",
+        "quality": 100,
+        "resize": "short-edge",
+        "shortEdges": [
+          540,
+          1080,
+          2160
+        ]
+      },
+      "media": {
+        "src": "assets/images/teamwear/photography/fd/fd366f7f31e415c2e57c-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/teamwear/photography/fa/fa218214405f10cc0361-540x540.webp",
+            "bytes": 79602,
+            "sha256": "fa218214405f10cc03614f8f969d03cd08ca48560e9c7d1ff79c0adbb89aaeb1"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/teamwear/photography/fd/fd366f7f31e415c2e57c-1080x1080.webp",
+            "bytes": 308786,
+            "sha256": "fd366f7f31e415c2e57c801c02bb4066313e62de7bd4a14eb8d63a63f18532a0"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/teamwear/photography/45/4507d817ca75b1db7f36-2160x2160.webp",
+            "bytes": 1629662,
+            "sha256": "4507d817ca75b1db7f36443054bb46407a605d8a21111ee18e980ea13cbc3478"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ntuesoe-02",
+      "team": "NTUESOE",
+      "alt": "NTUESOE player in a white jersey dribbling against a defender in a brown uniform",
+      "source": {
+        "filename": "251203_臺北-古亭河濱公園籃球場_NTUESOE_02.jpg",
+        "width": 4500,
+        "height": 4500,
+        "bytes": 14095445,
+        "sha256": "e180214a64e91ae7530bf0fc1c78c6b7594dcf3ac3ef00ef45e03192e45981a9"
+      },
+      "transform": {
+        "format": "webp",
+        "quality": 100,
+        "resize": "short-edge",
+        "shortEdges": [
+          540,
+          1080,
+          2160
+        ]
+      },
+      "media": {
+        "src": "assets/images/teamwear/photography/94/940724701e7dbf500e4a-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/teamwear/photography/53/53a1bdf35d1a9b3085d6-540x540.webp",
+            "bytes": 80114,
+            "sha256": "53a1bdf35d1a9b3085d699969d059c873d9ba2ca8cc6adfd800172ad0bc40a06"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/teamwear/photography/94/940724701e7dbf500e4a-1080x1080.webp",
+            "bytes": 323418,
+            "sha256": "940724701e7dbf500e4a07ac410e2c17f8b0cfc6fd908e485dfd272a0541c00f"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/teamwear/photography/b7/b72a3e27852c1dca1a5a-2160x2160.webp",
+            "bytes": 1756342,
+            "sha256": "b72a3e27852c1dca1a5a7d70af12369a7627c7e3064f9cefbc9921b87939ec33"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ntuesoe-03",
+      "team": "NTUESOE",
+      "alt": "NTUESOE players wearing white and brown uniforms during a game on an outdoor basketball court",
+      "source": {
+        "filename": "251203_臺北-古亭河濱公園籃球場_NTUESOE_03.jpg",
+        "width": 4500,
+        "height": 4500,
+        "bytes": 14122523,
+        "sha256": "963f7125269cf24a91b3facf6aeec60a2b28eb7147c0d16c1dccccbf1a3e5427"
+      },
+      "transform": {
+        "format": "webp",
+        "quality": 100,
+        "resize": "short-edge",
+        "shortEdges": [
+          540,
+          1080,
+          2160
+        ]
+      },
+      "media": {
+        "src": "assets/images/teamwear/photography/ca/ca2d2da1d8ed43caa821-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/teamwear/photography/64/647493f38c186c4dd519-540x540.webp",
+            "bytes": 111878,
+            "sha256": "647493f38c186c4dd5197504adb56496b58c95dc739b5856be40e4b39658ec29"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/teamwear/photography/ca/ca2d2da1d8ed43caa821-1080x1080.webp",
+            "bytes": 419830,
+            "sha256": "ca2d2da1d8ed43caa821ba53b2d8f0831c40cac3869e615ebce703efcc8e3539"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/teamwear/photography/19/197b9996cc904d47e9b0-2160x2160.webp",
+            "bytes": 2024172,
+            "sha256": "197b9996cc904d47e9b0010e2d900f6aecb724246e06143d39d6e73243d567dc"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ntuesoe-04",
+      "team": "NTUESOE",
+      "alt": "Back view of a white NTUESOE jersey and brown shorts beside a teammate on the court",
+      "source": {
+        "filename": "251203_臺北-古亭河濱公園籃球場_NTUESOE_04.jpg",
+        "width": 4500,
+        "height": 4500,
+        "bytes": 12657672,
+        "sha256": "ad16cc1cb6887f62aea689b1780e27bf2d37faee2d033328256f021d3ae4a668"
+      },
+      "transform": {
+        "format": "webp",
+        "quality": 100,
+        "resize": "short-edge",
+        "shortEdges": [
+          540,
+          1080,
+          2160
+        ]
+      },
+      "media": {
+        "src": "assets/images/teamwear/photography/25/25656540cf7d48d28edd-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/teamwear/photography/16/166ce126cc3b1197e362-540x540.webp",
+            "bytes": 70870,
+            "sha256": "166ce126cc3b1197e362dd7e8e4d15e275db6a8dc06e61fc41b4fec63f1abe20"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/teamwear/photography/25/25656540cf7d48d28edd-1080x1080.webp",
+            "bytes": 321862,
+            "sha256": "25656540cf7d48d28edd8cc8c9e1164885d002fb17f43c9081bc8fa229e427b9"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/teamwear/photography/80/8018bf07f5753d8a1f63-2160x2160.webp",
+            "bytes": 1777538,
+            "sha256": "8018bf07f5753d8a1f63192f1236718ada525e2352510af843c6861a9f3f07d3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ntuesoe-06",
+      "team": "NTUESOE",
+      "alt": "NTUESOE player in a white jersey driving past a defender on a night court",
+      "source": {
+        "filename": "251203_臺北-古亭河濱公園籃球場_NTUESOE_06.jpg",
+        "width": 4500,
+        "height": 4500,
+        "bytes": 15405400,
+        "sha256": "4e6634dcffa697b6e4d46039f19bc40f828c896c622ebef8bb3d937f4fdf5b04"
+      },
+      "transform": {
+        "format": "webp",
+        "quality": 100,
+        "resize": "short-edge",
+        "shortEdges": [
+          540,
+          1080,
+          2160
+        ]
+      },
+      "media": {
+        "src": "assets/images/teamwear/photography/9e/9ecf4531d0a37c8dd0d7-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/teamwear/photography/b0/b067b34046eb2d1f3302-540x540.webp",
+            "bytes": 83034,
+            "sha256": "b067b34046eb2d1f3302ec0cc393a704443b25743bbd3bac50ced6a009d12324"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/teamwear/photography/9e/9ecf4531d0a37c8dd0d7-1080x1080.webp",
+            "bytes": 371260,
+            "sha256": "9ecf4531d0a37c8dd0d793c00930e9ee2841fa0b210bc8bdcfe14ab28ba07277"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/teamwear/photography/b8/b816f12cbd4962d1720d-2160x2160.webp",
+            "bytes": 2005388,
+            "sha256": "b816f12cbd4962d1720ddbd498f6d353bb91fce0617206dc7aebf4ec2cad8520"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ntuesoe-07",
+      "team": "NTUESOE",
+      "alt": "NTUESOE player holding a basketball in a brown jersey with white team lettering and numbers",
+      "source": {
+        "filename": "251203_臺北-古亭河濱公園籃球場_NTUESOE_07.jpg",
+        "width": 4500,
+        "height": 4500,
+        "bytes": 13999212,
+        "sha256": "fb66a223c6ffc33ae9d2af22af7dcdcab17d93a35069ee33901db894fcaf254d"
+      },
+      "transform": {
+        "format": "webp",
+        "quality": 100,
+        "resize": "short-edge",
+        "shortEdges": [
+          540,
+          1080,
+          2160
+        ]
+      },
+      "media": {
+        "src": "assets/images/teamwear/photography/2c/2c12b581bc7d3c3a3a6b-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/teamwear/photography/d6/d6293e01b35f03858db3-540x540.webp",
+            "bytes": 64298,
+            "sha256": "d6293e01b35f03858db3b16c5a98e2e82e821a7726c9005b5c897b6004c8da25"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/teamwear/photography/2c/2c12b581bc7d3c3a3a6b-1080x1080.webp",
+            "bytes": 304780,
+            "sha256": "2c12b581bc7d3c3a3a6bec95261ef39c032cd480ab4dcdaa06cffa043acede7e"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/teamwear/photography/5a/5afb0fa6b849571a3ee0-2160x2160.webp",
+            "bytes": 1763204,
+            "sha256": "5afb0fa6b849571a3ee0df904c133d4218d41dd65dcd9ce1926f22e3db2a2fff"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ntuesoe-08",
+      "team": "NTUESOE",
+      "alt": "NTUESOE player in a brown jersey dribbling on an outdoor basketball court at night",
+      "source": {
+        "filename": "251203_臺北-古亭河濱公園籃球場_NTUESOE_08.jpg",
+        "width": 4500,
+        "height": 4500,
+        "bytes": 18294725,
+        "sha256": "7067c1f6ab03512f9793f1cc9b6ad4de1469186bdde70134ba85d3412838bb8f"
+      },
+      "transform": {
+        "format": "webp",
+        "quality": 100,
+        "resize": "short-edge",
+        "shortEdges": [
+          540,
+          1080,
+          2160
+        ]
+      },
+      "media": {
+        "src": "assets/images/teamwear/photography/bb/bb2444c21379baa294ae-1080x1080.webp",
+        "width": 1080,
+        "height": 1080,
+        "derivatives": [
+          {
+            "shortEdge": 540,
+            "width": 540,
+            "height": 540,
+            "path": "assets/images/teamwear/photography/52/523eea6aae88c2686dc3-540x540.webp",
+            "bytes": 92544,
+            "sha256": "523eea6aae88c2686dc38c80f6015b2f234f7b736a000534b7611da2efd29450"
+          },
+          {
+            "shortEdge": 1080,
+            "width": 1080,
+            "height": 1080,
+            "path": "assets/images/teamwear/photography/bb/bb2444c21379baa294ae-1080x1080.webp",
+            "bytes": 411106,
+            "sha256": "bb2444c21379baa294ae7e3a4cf2f634c0365787ea628d842b1026d922c90e2f"
+          },
+          {
+            "shortEdge": 2160,
+            "width": 2160,
+            "height": 2160,
+            "path": "assets/images/teamwear/photography/7a/7a4ca7e2d9ea5e7bf8c0-2160x2160.webp",
+            "bytes": 2268496,
+            "sha256": "7a4ca7e2d9ea5e7bf8c049f44130a5ca8451319eefcf9640cb3e84368b70a818"
+          }
+        ]
+      }
+    }
+  ],
+  "highlights": {
+    "COMPLETE_SET": "ntuesoe-02",
+    "TWO_SIDES": "ntuesoe-03",
+    "TEAM_IDENTITY": "ntuesoe-04",
+    "PRINT_DETAIL": "ntuesoe-07"
+  },
+  "athletes": [
+    "ntuesoe-01",
+    "ntuesoe-06",
+    "ntuesoe-08"
+  ],
+  "customGallery": [
+    "ntuesoe-01",
+    "ntuesoe-02",
+    "ntuesoe-03",
+    "ntuesoe-04",
+    "ntuesoe-06",
+    "ntuesoe-07",
+    "ntuesoe-08"
+  ]
+}

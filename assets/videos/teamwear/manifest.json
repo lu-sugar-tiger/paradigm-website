@@ -1,0 +1,85 @@
+{
+  "source": "assets/temp/10.mp4",
+  "sourceSha256": "adcc09794abb5c427d3014d4e9c9facbcbcfaeb8d217ad0bf46d316ccc4c5dda",
+  "master": {
+    "path": "assets/temp/teamwear-hero-master.mkv",
+    "width": 2160,
+    "height": 3840,
+    "filter": "spline36",
+    "codec": "ffv1"
+  },
+  "masterSha256": "31ebb76915a4958797871fab808dfe3ccc2e8d0a959b7c07b10f1fbc46c84cc0",
+  "fps": "24000/1001",
+  "sourceFrames": 540,
+  "overlapFrames": 34,
+  "durationToken": "--motion-duration-image",
+  "durationMs": 1400,
+  "outputs": [
+    {
+      "id": "base",
+      "minWidth": 0,
+      "width": 1080,
+      "height": 1920,
+      "scaledHeight": 1920,
+      "src": "assets/videos/teamwear/hero-base.mp4",
+      "poster": "assets/videos/teamwear/hero-base.webp",
+      "cropY": 0,
+      "bytes": 9275343,
+      "sha256": "7c66b08aaa6849919f966f0d4811bb9627a0b24a0c3c44e3c56ce3a72f42f3c8",
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920,
+          "duration": "21.104417",
+          "nb_frames": "506"
+        }
+      ]
+    },
+    {
+      "id": "medium",
+      "minWidth": 768,
+      "width": 1440,
+      "height": 1440,
+      "scaledHeight": 2560,
+      "src": "assets/videos/teamwear/hero-medium.mp4",
+      "poster": "assets/videos/teamwear/hero-medium.webp",
+      "cropY": 672,
+      "bytes": 9364882,
+      "sha256": "44c4a9175b7adeb53f1be521cb02ac4a4c700c6bef68117b1e013fb0e0ca4aa6",
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1440,
+          "height": 1440,
+          "duration": "21.104417",
+          "nb_frames": "506"
+        }
+      ]
+    },
+    {
+      "id": "large",
+      "minWidth": 1024,
+      "width": 1920,
+      "height": 1080,
+      "scaledHeight": 3414,
+      "src": "assets/videos/teamwear/hero-large.mp4",
+      "poster": "assets/videos/teamwear/hero-large.webp",
+      "cropY": 1400,
+      "bytes": 10872800,
+      "sha256": "63017b1bea90dba3e7d60f11c936c704d6aebf1a1cf1e81cbc86c5b9fc4abae7",
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1920,
+          "height": 1080,
+          "duration": "21.104417",
+          "nb_frames": "506"
+        }
+      ]
+    }
+  ]
+}

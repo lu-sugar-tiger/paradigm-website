@@ -30,7 +30,7 @@ https://prdm.tw/teamwear
 
 Collection 使用系列名稱，Product 使用不含 `#` 的商品編號。`#` 在網址中代表 fragment，因此只保留在畫面顯示的商品代碼中。
 
-每個資料夾內的 `index.html` 是靜態 hosting 的實作方式，不應出現在網站導覽、canonical URL 或對外分享連結中。根網址會直接提供全部商品內容；Cloudflare Pages 的 `_redirects` 只用於整理舊網址與含有 `index.html` 的網址。
+每個資料夾內的 `index.html` 是靜態 hosting 的實作方式，不應出現在網站導覽、canonical URL 或對外分享連結中。根網址會直接提供全部商品內容。`_redirects` 是供 Cloudflare Pages 使用的舊網址與 `index.html` 轉址設定；目前 GitHub Pages 不會讀取這份規則，經過 Cloudflare proxy 也不會自動啟用它。
 
 ## 本機開啟方式
 
@@ -63,7 +63,7 @@ python -m http.server 8000
 ```text
 .
 ├── index.html                  # 根網址的全部商品頁
-├── _redirects                 # Cloudflare Pages redirects
+├── _redirects                 # Cloudflare Pages 用；目前 GitHub Pages 不套用
 ├── collections/
 │   ├── all/index.html
 │   ├── ss-tops/index.html
@@ -148,21 +148,27 @@ rg "shopee|instagram|discord|https://" collections products teamwear
 
 ## 部署
 
-正式環境採用 Cloudflare Pages；完整設定請見 `docs/cloudflare-pages-deployment.md`。
+截至 2026-09-22 實際查核，正式站使用 `main` → GitHub Pages → Cloudflare proxy → `prdm.tw`。GitHub Pages 的 source 是 `main` 的根目錄 `/`；正式站回應同時帶有 Cloudflare 與 GitHub origin headers。Cloudflare proxy 與 Cloudflare Pages 是不同的服務。
+
+截至 2026-09-23，使用者尚未決定是否遷移；保留兩個方案：A. 留在 GitHub Pages、不遷移；B. 另行核准後遷移至 Cloudflare Pages。不以商業用途限制作為本次選擇依據，也不預設未來一定遷移。最新本機公開檔案（含尚未發布的進度）約 243.33 MB、736 個檔案，容量目前沒有迫切遷移需求。量測範圍、兩個方案與手動設定項目見 [部署指南](docs/cloudflare-pages-deployment.md)。
 
 商品資料由 Google Sheet 的 `網站參照` 分頁定期同步；欄位規則、Google Docs 文案截取、圖片保留策略、修改時間追蹤與驗證流程請見 `docs/product-sync.md`。
 
 ```text
-Production branch: main
-Framework preset: None
-Build command: 留空
-Build output directory: / 或 .
-Root directory: 留空
+Current hosting: GitHub Pages
+Source branch: main
+Source directory: / (root)
+Custom domain: prdm.tw
+Front proxy: Cloudflare
 ```
 
 Repository：`https://github.com/lu-sugar-tiger/paradigm-website`
 
-日常更新流程：修改 → 本機驗證 → commit → push 到 `main` → 確認 Cloudflare Pages deployment。
+既有更新流程：修改來源 → 本機產生與驗證 → commit → push 到 `main` → 確認 GitHub 的 `pages build and deployment` 成功且 commit SHA 相符 → 檢查正式站。方案 A 繼續使用此流程；只有在使用者要求發布時才執行發布。方案 B 未經另行決定，不建立新主機或變更 DNS。
+
+## 封存中的功能
+
+Catalog Refine 與 Teamwear fabric section 的開發來源保留在 [`_archive/`](./_archive/README.md)，不參與公開頁面產生。`_config.yml` 將封存目錄排除於目前 GitHub Pages 的 Jekyll 發布流程；請勿加入 `.nojekyll` 繞過此設定。正常產生與 push 不會重新啟用這兩項功能。推送前另執行 `node scripts/validate-feature-archive.mjs`。
 
 ## 上線前檢查
 

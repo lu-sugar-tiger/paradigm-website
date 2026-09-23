@@ -139,6 +139,7 @@
     root.addEventListener("focusout", (event) => { if (event.relatedTarget && !root.contains(event.relatedTarget)) close(); });
     document.addEventListener("paradigm:dropdown-open", (event) => { if (event.target !== root) close(); });
     document.addEventListener("paradigm:overlay-open", (event) => { if (!event.target.contains(root)) close(); });
+    root.addEventListener("paradigm:dropdown-close", () => close());
     root.closest("[data-nav-drawer], [data-search-overlay]")?.addEventListener("paradigm:overlay-close", () => close());
     window.addEventListener("resize", queuePosition);
     document.addEventListener("scroll", (event) => { if (!list.contains(event.target)) queuePosition(); }, true);

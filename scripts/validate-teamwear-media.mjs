@@ -59,3 +59,60 @@ assert.match(cover, /srcset="[^"]+540w, [^"]+1080w, [^"]+2160w"/);
 assert.match(cover, /data-media-zoom-touch/);
 assert.doesNotMatch(cover, /loading="lazy"/);
 console.log(`Teamwear media OK: ${model.patterns.length * model.colors.length} configurations, ${paths.size} verified WebPs, responsive rail and default cover.`);
+
+const photography = JSON.parse(await read("data/teamwear-photography.json"));
+const photoById = new Map(photography.photos.map((photo) => [photo.id, photo]));
+assert.equal(photoById.size, 7);
+assert.equal(photography.photos.length, photoById.size, "Photograph IDs must be unique");
+const photographPaths = new Set();
+for (const photo of photography.photos) {
+  assert.equal(photo.team, "NTUESOE");
+  assert.ok(photo.alt.length > 20, "Meaningful photographs need descriptive alt text");
+  assert.deepEqual([photo.source.width, photo.source.height], [4500, 4500]);
+  assert.equal(photo.transform.quality, 100);
+  assert.equal(photo.transform.resize, "short-edge");
+  assert.deepEqual(photo.media.derivatives.map((entry) => entry.shortEdge), [540, 1080, 2160]);
+  assert.equal(photo.media.src, photo.media.derivatives[1].path);
+  assert.deepEqual([photo.media.width, photo.media.height], [1080, 1080]);
+  for (const derivative of photo.media.derivatives) {
+    const bytes = await readFile(path.join(root, derivative.path));
+    const metadata = await sharp(bytes).metadata();
+    assert.equal(metadata.format, "webp");
+    assert.equal(metadata.hasAlpha, false);
+    assert.deepEqual([metadata.width, metadata.height], [derivative.shortEdge, derivative.shortEdge]);
+    assert.equal(bytes.length, derivative.bytes);
+    assert.equal(createHash("sha256").update(bytes).digest("hex"), derivative.sha256);
+    assert.ok(!photographPaths.has(derivative.path));
+    photographPaths.add(derivative.path);
+  }
+}
+const highlightSection = landing.match(/<section class="teamwear-highlights"[\s\S]*?<\/section>/)[0];
+const athleteSection = landing.match(/<section class="teamwear-gallery"[\s\S]*?<\/section>/)[0];
+const customGallery = customize.match(/<div class="product-detail__gallery"[\s\S]*?<\/div>/)[0];
+function assertPhotoSequence(markup, ids, { coverFirst = false, captions = false } = {}) {
+  const images = markup.match(/<img\b[^>]*>/g) || [];
+  assert.equal(images.length, ids.length + Number(coverFirst));
+  ids.forEach((id, index) => {
+    const photo = photoById.get(id);
+    assert.ok(photo, `Unknown photograph reference: ${id}`);
+    const image = images[index + Number(coverFirst)];
+    assert.ok(image.includes(photo.media.src), `Wrong image or order for ${id}`);
+    assert.ok(image.includes(`alt="${photo.alt}"`));
+    assert.match(image, /srcset="[^"]+540w, [^"]+1080w, [^"]+2160w"/);
+    assert.match(image, /loading="lazy"/);
+    assert.match(image, /width="1080" height="1080"/);
+    if (coverFirst) assert.match(image, /data-media-zoom-touch/);
+  });
+  assert.doesNotMatch(markup, /teamwear-court-|teamwear-hero-product-|campaign\//);
+  if (captions) {
+    const names = [...markup.matchAll(/<h3 class="type-h5">([^<]+)<\/h3>/g)].map((match) => match[1]);
+    assert.deepEqual(names, ids.map((id) => photoById.get(id).team));
+  }
+}
+assertPhotoSequence(highlightSection, Object.values(photography.highlights));
+assertPhotoSequence(athleteSection, photography.athletes, { captions: true });
+assertPhotoSequence(customGallery, photography.customGallery, { coverFirst: true });
+assert.deepEqual(new Set([...Object.values(photography.highlights), ...photography.athletes]), new Set(photoById.keys()));
+assert.deepEqual(new Set(photography.customGallery), new Set(photoById.keys()));
+assert.equal(new Set(photography.customGallery).size, photography.customGallery.length);
+console.log(`Teamwear photography OK: ${photoById.size} supplied photos, ${photographPaths.size} verified WebPs, four highlights, three athlete cards, seven gallery photos plus configuration cover.`);

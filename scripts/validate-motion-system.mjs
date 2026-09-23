@@ -166,11 +166,11 @@ const generatedPages = [
 for (const relativePath of generatedPages) {
   const page = await read(relativePath);
   const earlyController = page.search(/<script src="(?:\.\.\/)*assets\/js\/page-transitions\.js\?v=20260831a"><\/script>/);
-  const deferredApp = page.search(/<script defer src="(?:\.\.\/)*assets\/js\/app\.js\?v=20260908a"><\/script>/);
+  const deferredApp = page.search(/<script defer src="(?:\.\.\/)*assets\/js\/app\.js\?v=20260914a"><\/script>/);
   assert.ok(earlyController >= 0 && deferredApp > earlyController, `${relativePath} must load the route controller early and before deferred behavior`);
   assert.match(page, /assets\/css\/motion\.css\?v=20260831a/, `${relativePath} must load the cache-busted global motion stylesheet`);
-assert.match(page, /assets\/css\/components\.css\?v=20260911a/, `${relativePath} must load the cache-busted shared floating-action, static resting toggle, media-source motion, and transferred stable overlay gutter`);
-  assert.match(page, /assets\/js\/choices\.js\?v=20260910a/, `${relativePath} must load the cache-busted floating-action state controller`);
+  assert.match(page, /assets\/css\/components\.css\?v=20260923a/, `${relativePath} must load the cache-busted shared floating-action, static resting toggle, media-source motion, and transferred stable overlay gutter`);
+  assert.match(page, /assets\/js\/choices\.js\?v=20260922a/, `${relativePath} must load the cache-busted floating-action state controller`);
 }
 
 console.log(`MOTION_SYSTEM_OK routes=${cases.length} pages=${generatedPages.length}`);

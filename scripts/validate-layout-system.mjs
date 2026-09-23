@@ -282,10 +282,8 @@ assert.match(teamwearStory, /\.teamwear-rail-button::before\s*\{[\s\S]*?backgrou
 assert.match(teamwearStory, /\.teamwear-rail-button \.material-icon\s*\{[\s\S]*?width:\s*var\(--icon-size\);[\s\S]*?height:\s*var\(--icon-size\);[\s\S]*?opacity:\s*0;[\s\S]*?font-size:\s*var\(--icon-size\);/, "Rail controls must retain the centralized Material Symbol markup without painting a second glyph over the cutout");
 assert.doesNotMatch(teamwearTemplate + teamwearStory, /ICON_\w+_STACKED|teamwear-stacked-row__icon/, "Process rows must not retain icons or an icon column");
 for (const step of [1, 2, 3]) assert.ok(teamwearTemplate.includes(`>Step ${step}</h5>`), `Process must label Step ${step}`);
-for (const name of ["NTUESOE", "SCS Tchill", "TKUWREE"]) assert.ok(teamwearTemplate.includes(`<div class="teamwear-rail-card__copy"><h3 class="type-h5">${name}</h3></div>`), `${name} must have title-only card copy`);
-assert.doesNotMatch(teamwearStory + teamwearTemplate, /teamwear-material__bento/, "Teamwear fabric section must not retain the removed bento grid");
-assert.match(teamwearStory, /--teamwear-material-media-height:\s*100svh;\s*height:\s*var\(--teamwear-material-media-height\)/, "Fabric photography must occupy a stable viewport-height frame");
-assert.match(teamwearTemplate, /rail\/fabric-square\.webp[^>]*width="1200" height="1200"/, "Fabric media must use the square source asset");
+for (const index of [1, 2, 3]) assert.ok(teamwearTemplate.includes(`<div class="teamwear-rail-card__copy"><h3 class="type-h5">{{ATHLETE_${index}_NAME}}</h3></div>`), `Athlete card ${index} must use its supplied team's name and title-only copy`);
+assert.doesNotMatch(teamwearStory + teamwearTemplate, /teamwear-material|material-title|fabric-square\.webp/, "The public Teamwear landing page must omit the complete fabric section and its unused styles");
 assert.doesNotMatch(teamwearStory, /mix-blend-mode:\s*color|clip-path:\s*inset\(0 50%/, "Landing product images must be flattened rather than recolored or half-cropped at runtime");
 assert.match(teamwearBehavior, /preview\.mediaByColor\[card\.dataset\.colorId\]/, "Pattern changes must select the supplied responsive image for each color");
 const railModel = JSON.parse(await readFile(path.join(ROOT, "data/teamwear-options.json"), "utf8")).models[0];
@@ -325,7 +323,6 @@ assert.doesNotMatch(teamwearStory, /media-zoom-(?:source|surface)-active/, "Team
 assert.match(teamwearBehavior, /--rail-card-delay[\s\S]*?--motion-stagger-short/, "Rail entrance stagger must consume the shared short stagger token");
 assert.match(teamwearBehavior, /reducedMotionQuery\.addEventListener\("change"[\s\S]*?rails\.forEach\(\(rail\) => railUpdates\.get\(rail\)\?\.\(\)\)/, "Teamwear rail motion must tear down and resume when the reduced-motion preference changes");
 assert.match(teamwearStory, /\.teamwear-story-page \.teamwear-hero\s*\{[\s\S]*?width:\s*100%;[\s\S]*?margin-inline:\s*auto;[\s\S]*?padding:\s*0/, "Teamwear hero must span the complete viewport width without extra top padding");
-assert.match(teamwearStory, /\.teamwear-material__media\s*\{[\s\S]*?width:\s*100%;[\s\S]*?margin-inline:\s*auto;/, "Teamwear full-bleed material media must span the complete viewport width");
 assert.doesNotMatch(teamwearStory, /layout-canvas-width/, "Teamwear media must not retain the removed 1440px cap");
 assert.match(teamwearStory, /\.teamwear-hero__copy\s*\{[\s\S]*?var\(--layout-section-padding-editorial\)[\s\S]*?var\(--primary-action-fixed-clearance\)/, "Hero copy must derive action clearance from shared primary-action tokens");
 const mediumTeamwear = blockAfter(teamwearStory, "@media (min-width: 48rem)");

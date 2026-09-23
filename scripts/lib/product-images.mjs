@@ -16,7 +16,7 @@ function normalizeDerivative(derivative) {
   };
 }
 
-function responsiveMediaFromSource(image) {
+export function responsiveMediaFromSource(image) {
   const derivatives = (image.derivatives || []).map(normalizeDerivative).filter(Boolean).sort(byShortEdge);
   if (!derivatives.length) {
     return image.localPath ? { src: image.localPath, width: image.width, height: image.height, derivatives: [] } : null;

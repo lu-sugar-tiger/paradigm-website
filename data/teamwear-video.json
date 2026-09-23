@@ -1,0 +1,10 @@
+{
+  "source": "assets/temp/10.mp4",
+  "master": { "path": "assets/temp/teamwear-hero-master.mkv", "width": 2160, "height": 3840, "filter": "spline36", "codec": "ffv1" },
+  "transition": { "durationToken": "--motion-duration-image", "warmRGB": [255, 225, 184], "peakOpacity": 0.38, "cropFocusY": 0.6 },
+  "variants": [
+    { "id": "base", "minWidth": 0, "width": 1080, "height": 1920, "scaledHeight": 1920, "src": "assets/videos/teamwear/hero-base.mp4", "poster": "assets/videos/teamwear/hero-base.webp" },
+    { "id": "medium", "minWidth": 768, "width": 1440, "height": 1440, "scaledHeight": 2560, "src": "assets/videos/teamwear/hero-medium.mp4", "poster": "assets/videos/teamwear/hero-medium.webp" },
+    { "id": "large", "minWidth": 1024, "width": 1920, "height": 1080, "scaledHeight": 3414, "src": "assets/videos/teamwear/hero-large.mp4", "poster": "assets/videos/teamwear/hero-large.webp" }
+  ]
+}

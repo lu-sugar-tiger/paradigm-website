@@ -1,0 +1,33 @@
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { renderSiteHeader } from './lib/site-renderers.mjs';
+const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
+for (const currentPath of ['/', '/collections/ss-tops', '/teamwear/customize']) {
+  const header = renderSiteHeader({ currentPath });
+  const desktop = header.match(/<nav class="header-directory"[\s\S]*?<\/nav>/)[0];
+  assert.equal((desktop.match(/data-header-parent/g)||[]).length, 2);
+  assert.equal((desktop.match(/aria-current="page"/g)||[]).length, 1);
+  assert.match(desktop, /href="\/collections\/all"/);
+  assert.match(desktop, /href="\/teamwear"/);
+  const panels = [...desktop.matchAll(/<ul class="header-directory__panel"[\s\S]*?<\/ul>/g)].map(m=>m[0]);
+  assert.equal(panels.length,2);
+  assert.equal((panels[0].match(/<a /g)||[]).length,3);
+  assert.equal((panels[1].match(/<a /g)||[]).length,1);
+  assert.doesNotMatch(panels.join(''), />Product<|>Teamwear</);
+  assert.equal((header.match(/id="menu-language-native"/g)||[]).length,1);
+}
+const css = await read('assets/css/header-directory.css');
+const js = await read('assets/js/header-directory.js');
+assert.match(css, /@media \(min-width: 64rem\)/);
+assert.match(css, /grid-template-columns: minmax\(0, 1fr\) auto minmax\(0, 1fr\)/);
+assert.match(css, /\[data-nav-toggle\] \{ display: none; \}/);
+assert.match(css, /var\(--type-paragraph-spacing-relaxed\)/);
+assert.match(css, /body.search-open :is\(\.header-directory, \.header-region\)/);
+assert.match(js, /if \(active === group && pinned\) return;/);
+assert.match(js, /event.preventDefault\(\);\s*open\(group, true\)/);
+assert.match(js, /paradigm:overlay-open/);
+assert.match(js, /large.addEventListener\('change', responsive\)/);
+const home = await read('index.html');
+assert.match(home,/header-directory.css\?v=20260914a/);
+assert.match(home,/header-directory.js\?v=20260914a/);
+console.log('HEADER_DIRECTORY_OK data=true parentLinks=true childOnlyPanels=true responsive=true');

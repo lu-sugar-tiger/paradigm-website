@@ -1,0 +1,53 @@
+/* Former shared editorial-padding selector, retained here for restoration. */
+.teamwear-story-page .teamwear-material {
+  padding-block: var(--layout-section-padding-editorial);
+}
+
+/* Full-viewport fabric photograph */
+.teamwear-story-page .teamwear-material {
+  background: var(--color-background-mid);
+  color: var(--color-on-background-high);
+}
+
+.teamwear-material__media {
+  position: relative;
+  top: auto;
+  width: 100%;
+  --teamwear-material-media-height: 100svh;
+  height: var(--teamwear-material-media-height);
+  max-height: none;
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: 0;
+  background: var(--color-surface-low);
+}
+
+.teamwear-material__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.teamwear-material__features {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  pointer-events: none;
+}
+
+.teamwear-material__features > div {
+  grid-row: 2;
+  display: flex;
+  align-items: flex-end;
+  min-width: 0;
+  padding-block: var(--space-5);
+  text-align: left;
+  color: var(--color-on-container-high);
+}
+
+.teamwear-story-page .teamwear-material__features h3 {
+  margin: 0;
+  text-wrap: initial;
+}

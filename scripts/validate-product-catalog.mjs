@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { itemPriceLabel, validateItemCatalog } from "./lib/item-schema.mjs";
+import { renderDescription } from "./lib/site-renderers.mjs";
 import { createHash } from "node:crypto";
 import { access, readFile, stat } from "node:fs/promises";
 import path from "node:path";
@@ -101,8 +102,12 @@ assert.ok(
 assert.ok(!appText.includes("Placeholder image"), "UI must not label missing imagery");
 assert.ok(!appText.includes("buildProductCard"), "collection cards must be generated rather than rebuilt by app.js");
 
-const fallbackSource = await readFile(path.join(ROOT, productImageFallback.sourcePath));
-assert.equal(sha256(fallbackSource), productImageFallback.sourceSha256, "product fallback source hash must match its manifest");
+if (!process.argv.includes("--published-assets-only")) {
+  const fallbackSource = await readFile(path.join(ROOT, productImageFallback.sourcePath));
+  assert.equal(sha256(fallbackSource), productImageFallback.sourceSha256, "product fallback source hash must match its manifest");
+} else {
+  console.log("Published-assets check: original fallback artwork hash is not checked; deployed derivatives are still verified.");
+}
 assert.equal(productImageFallback.sourceWidth, productImageFallback.sourceHeight, "product fallback source must remain square");
 assert.deepEqual(
   productImageFallback.transform,
@@ -251,7 +256,8 @@ for (const product of products) {
   const route = await readFile(routePath, "utf8");
   assert.ok(route.includes(`data-item-code="${product.code}"`), `${product.code} route must target the product`);
   assert.ok(route.includes(`<h1 data-product-name>${product.name}</h1>`), `${product.code} route must include its static name`);
-  assert.ok(route.includes(html(product.description[0].text)), `${product.code} route must include its static document description`);
+  const renderedDescription = renderDescription({ tokens: product.description, itemCodes: products.map((item) => item.code), currentItemCode: product.code });
+  assert.ok(route.includes(renderedDescription.split("\n").map((line) => `          ${line}`).join("\n")), `${product.code} route must include its complete static document description and product links`);
   assert.match(route, /data-generated-component="rich-description"/, `${product.code} route must use the shared rich-description renderer`);
   assert.equal(occurrences(route, /rich-description__blank-line/g), product.description.filter((token) => token.type === "blank").length, `${product.code} route blank-line count must match its description tokens`);
   assert.equal(occurrences(route, /rich-description__divider/g), product.description.filter((token) => token.type === "divider").length, `${product.code} route divider count must match its description tokens`);
@@ -290,7 +296,7 @@ assert.equal(occurrences(allProductsPage, /data-product-image-fallback/g), fallb
 assert.doesNotMatch(allProductsPage, /product-card__media" data-media-zoom-touch><img[^>]*data-product-image-fallback/, "catalog fallback images must not enable touch zoom");
 
 for (const product of source.items) {
-  for (const image of product.images) {
+  for (const image of [...product.images, ...(product.variantImages || [])]) {
     assert.ok(image.id && image.modifiedTime && image.localPath, `${product.code} Drive image state must be complete`);
     await access(path.join(ROOT, image.localPath));
     if (!image.derivatives?.length) continue;

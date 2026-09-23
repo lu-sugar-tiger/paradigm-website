@@ -10,19 +10,19 @@ window.PARADIGM_TEAMWEAR = {
       "quantities": [
         {
           "id": "Q01",
-          "label": "<10",
+          "label": "≤ 9",
           "priceAdjustment": 200,
           "availability": "available"
         },
         {
           "id": "Q02",
           "label": "10~19",
-          "priceAdjustment": 100,
+          "priceAdjustment": 0,
           "availability": "available"
         },
         {
           "id": "Q03",
-          "label": ">19",
+          "label": "≥ 20",
           "priceAdjustment": 0,
           "availability": "available"
         }

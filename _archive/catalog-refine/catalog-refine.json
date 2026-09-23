@@ -1,4 +1,5 @@
 {
+  "publicEnabled": false,
   "groups": [
     {
       "name": "sort", "label": "Sort", "kind": "single", "selectedValue": "newest",

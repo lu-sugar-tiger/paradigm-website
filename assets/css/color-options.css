@@ -3,6 +3,8 @@
   --color-option-black: #111111;
   --color-option-cardinal: #8d1f2d;
   --color-option-grey: #a7a8a6;
+  --color-option-charcoal: #343434;
+  --color-option-dove: #a1a1a1;
   --color-option-midnight: #1b2b68;
   --color-option-mocha: #8a6a50;
   --color-option-mud: #5b483b;
@@ -29,6 +31,16 @@
 .choice-option--color-grey,
 .teamwear-colorway--grey {
   --choice-color: var(--color-option-grey);
+}
+
+.choice-option--color-charcoal,
+.teamwear-colorway--charcoal {
+  --choice-color: var(--color-option-charcoal);
+}
+
+.choice-option--color-dove,
+.teamwear-colorway--dove {
+  --choice-color: var(--color-option-dove);
 }
 
 .choice-option--color-midnight,

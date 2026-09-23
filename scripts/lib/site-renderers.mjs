@@ -1,4 +1,8 @@
 import { imageSrcset } from "./product-images.mjs";
+import { regularTableFigures } from "./rich-description.mjs";
+import { readFileSync } from "node:fs";
+
+const STORE_LINKS = JSON.parse(readFileSync(new URL("../../data/store-links.json", import.meta.url), "utf8"));
 
 const NAV_GROUPS = [
   {
@@ -35,6 +39,8 @@ export const MATERIAL_ICON_NAMES = Object.freeze({
   image: "image",
   layers: "layers",
   menu: "menu",
+  pause: "pause",
+  play: "play_arrow",
   search: "search",
   shirt: "apparel"
 });
@@ -79,9 +85,25 @@ function renderExternalLinkIndicator(root = "") {
   return `${renderIcon("external", root, "external-link__indicator")}<span class="visually-hidden" data-external-link-description> (opens in a new tab)</span>`;
 }
 
-export function renderDescription({ tokens }) {
+export function renderDescription({ tokens, itemCodes = [], currentItemCode = "" }) {
   if (!Array.isArray(tokens) || tokens.length === 0) {
     throw new Error("Rich descriptions require at least one token.");
+  }
+
+  const publishedCodes = new Map(itemCodes.map((code) => [code.toUpperCase(), code]));
+  function linkedText(text) {
+    const mentions = /(?<![A-Za-z0-9_#\/])#([A-Za-z]+[0-9]{5})(?:-[A-Za-z0-9]+)*(?![A-Za-z0-9_-])/g;
+    let result = "";
+    let cursor = 0;
+    for (const match of text.matchAll(mentions)) {
+      if (/\b(?:https?:\/\/|www\.)\S*$/i.test(text.slice(0, match.index))) continue;
+      const code = publishedCodes.get(match[1].toUpperCase());
+      if (!code || code.toUpperCase() === currentItemCode.toUpperCase()) continue;
+      result += html(text.slice(cursor, match.index));
+      result += `<a href="/products/${html(code)}">${html(match[0])}</a>`;
+      cursor = match.index + match[0].length;
+    }
+    return result + html(text.slice(cursor));
   }
 
   const content = tokens.map((token) => {
@@ -93,15 +115,15 @@ export function renderDescription({ tokens }) {
       return `  <div class="rich-description__line rich-description__divider" role="separator">${html(token.text)}</div>`;
     }
     if (token.type === "hashtag") {
-      return `  <p class="rich-description__line rich-description__hashtag">${html(token.text)}</p>`;
+      return `  <p class="rich-description__line rich-description__hashtag">${linkedText(token.text)}</p>`;
     }
     if (token.type === "table") {
       const header = token.header.map((cell, index) => index === 0
-        ? `        <th scope="col" aria-label="Row heading">${html(cell)}</th>`
-        : `        <th scope="col">${html(cell)}</th>`).join("\n");
+        ? `        <th scope="col" aria-label="Row heading">${html(regularTableFigures(cell))}</th>`
+        : `        <th scope="col">${html(regularTableFigures(cell))}</th>`).join("\n");
       const body = token.body.map((row) => `      <tr>\n${row.map((cell, index) => index === 0
-        ? `        <th scope="row">${html(cell)}</th>`
-        : `        <td>${html(cell)}</td>`).join("\n")}\n      </tr>`).join("\n");
+        ? `        <th scope="row">${html(regularTableFigures(cell))}</th>`
+        : `        <td>${html(regularTableFigures(cell))}</td>`).join("\n")}\n      </tr>`).join("\n");
       return `  <div class="rich-description__table-wrap">
     <table class="rich-description__table">
       <thead><tr>
@@ -114,7 +136,7 @@ ${body}
   </div>`;
     }
     if (token.type === "text") {
-      return `  <p class="rich-description__line">${html(token.text)}</p>`;
+      return `  <p class="rich-description__line">${linkedText(token.text)}</p>`;
     }
     throw new Error(`Unsupported rich-description token type: ${token.type}`);
   }).join("\n");
@@ -205,6 +227,16 @@ function isCurrentPath(currentPath, item) {
 }
 
 export function renderSiteHeader({ root = "", currentPath = "/" } = {}) {
+  const desktopNavigation = NAV_GROUPS.map((group, index) => {
+    const childIsCurrent = group.children.some((item) => isCurrentPath(currentPath, item));
+    const parentCurrent = !childIsCurrent && isCurrentPath(currentPath, group) ? ' aria-current="page"' : "";
+    return `<div class="header-directory__group" data-header-group>
+        <a class="header-directory__parent interface-label" href="${group.path}"${parentCurrent} aria-expanded="false" aria-controls="header-subcollections-${index}" aria-describedby="header-navigation-help" data-header-parent>${group.label}</a>
+        <ul class="header-directory__panel" id="header-subcollections-${index}" role="list">
+          ${group.children.map((item) => `<li><a class="header-directory__child interface-label" href="${item.path}"${isCurrentPath(currentPath, item) ? ' aria-current="page"' : ""}>${item.label}</a></li>`).join("\n          ")}
+        </ul>
+      </div>`;
+  }).join("\n      ");
   const navigationMarkup = NAV_GROUPS.map((group) => {
     const childMarkup = group.children.map((item) => {
       const current = isCurrentPath(currentPath, item) ? ' aria-current="page"' : "";
@@ -222,8 +254,13 @@ ${childMarkup}
 
   return `  <header class="site-header">
     <div class="container site-header__inner">
+      <nav class="header-directory" aria-label="Main navigation" data-header-directory>
+        <span class="visually-hidden" id="header-navigation-help">Activate once to keep subcollections open. Activate again to visit the collection. Escape closes the panel.</span>
+        ${desktopNavigation}
+      </nav>
       <a class="site-logo" href="/" aria-label="Paradigm home"><img class="site-logo__image" src="${html(asset(root, "assets/images/brand/aesthetics-logo-initial-a.png"))}" alt=""></a>
       <div class="site-actions" aria-label="Quick actions">
+        <div class="header-region" data-header-region></div>
         <button class="icon-button" type="button" aria-label="Open search" aria-expanded="false" data-search-toggle>${renderToggleIconPair("search", root)}</button>
         <button class="icon-button" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle>${renderToggleIconPair("menu", root)}</button>
       </div>
@@ -322,11 +359,11 @@ export function renderSiteFooter() {
   return `  <footer class="site-footer" data-primary-action-footer-anchor>
     <div class="container site-footer__grid">
       <a class="footer-link external-link" href="https://www.instagram.com/prdm.tw/" target="_blank" rel="noopener noreferrer" data-external-link="true"><span class="footer-link__content"><span class="external-link__label interface-label">Instagram</span>${renderExternalLinkIndicator()}</span></a>
-      <a class="footer-link external-link" href="https://shopee.tw/" target="_blank" rel="noopener noreferrer" data-external-link="true"><span class="footer-link__content"><span class="external-link__label interface-label">Shopee</span>${renderExternalLinkIndicator()}</span></a>
+      <a class="footer-link external-link" href="${html(STORE_LINKS.shopee)}" target="_blank" rel="noopener noreferrer" data-external-link="true"><span class="footer-link__content"><span class="external-link__label interface-label">Shopee</span>${renderExternalLinkIndicator()}</span></a>
+      <a class="footer-link interface-label" href="/font-credits/">Credits</a>
       <div class="footer-meta">
         <span>Paradigm Co., Ltd.</span>
         <span>Copyright © <span data-current-year>2026</span> All Rights Reserved.</span>
-        <a class="font-credit-link" href="/font-credits/">Font credits</a>
       </div>
     </div>
   </footer>`;
@@ -476,13 +513,13 @@ export function renderDocument({
   scripts = [],
   head = ""
 }) {
-const baseStyles = ["fonts.css?v=20260909b", "tokens.css?v=20260911a", "motion.css?v=20260831a", "reset.css?v=20260829a", "base.css?v=20260911a", "layout.css", "components.css?v=20260911a", "pages.css?v=20260829a", "color-options.css?v=20260913a"];
+const baseStyles = ["fonts.css?v=20260909b", "tokens.css?v=20260916a", "motion.css?v=20260831a", "reset.css?v=20260829a", "base.css?v=20260916b", "layout.css", "components.css?v=20260923a", "header-directory.css?v=20260914a", "pages.css?v=20260829a", "color-options.css?v=20260922a"];
   const styleMarkup = [...baseStyles, ...styles].map((file) => `  <link rel="stylesheet" href="${html(asset(root, `assets/css/${file}`))}">`).join("\n");
   const isDataScript = (file) => ["catalog.js", "teamwear-options.js"].includes(file.split("?")[0]);
   const dataScripts = scripts.filter(isDataScript);
   const interactionScripts = scripts.filter((file) => !isDataScript(file));
   const earlyMotionScript = `  <script src="${html(asset(root, "assets/js/page-transitions.js?v=20260831a"))}"></script>`;
-  const scriptMarkup = ["app.js?v=20260908a", "dropdown.js?v=20260910a", "language-preference.js?v=20260908a", "search-core.js?v=20260910a", "search.js?v=20260910a", ...dataScripts, "choices.js?v=20260910a", ...interactionScripts].map((file) => `  <script defer src="${html(asset(root, `assets/js/${file}`))}"></script>`).join("\n");
+  const scriptMarkup = ["app.js?v=20260914a", "dropdown.js?v=20260914a", "language-preference.js?v=20260908a", "header-directory.js?v=20260914a", "search-core.js?v=20260910a", "search.js?v=20260922a", ...dataScripts, "choices.js?v=20260922a", ...interactionScripts].map((file) => `  <script defer src="${html(asset(root, `assets/js/${file}`))}"></script>`).join("\n");
   const document = `<!doctype html>
 <!-- Generated by scripts/build-site.mjs. Do not edit this file directly. -->
 <html lang="${html(lang)}">
