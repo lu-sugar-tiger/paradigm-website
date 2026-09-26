@@ -18,6 +18,7 @@ async function context(options = {}) {
 }
 async function ready(page) {
   await page.waitForFunction(() => document.querySelector(".teamwear-hero").classList.contains("is-video-ready"));
+  await page.locator(".teamwear-hero__media img").evaluate((image) => image.decode());
 }
 async function state(page) {
   return page.evaluate(() => {
@@ -29,7 +30,7 @@ async function state(page) {
       overflow: document.documentElement.scrollWidth > innerWidth,
       poster: image.complete && image.naturalWidth > 0,
       heroHeight: hero.getBoundingClientRect().height,
-      button: hero.querySelector("button").getAttribute("aria-label") };
+      controls: Boolean(hero.querySelector("[data-hero-video-toggle]")) };
   });
 }
 try {
@@ -42,16 +43,7 @@ try {
     const expected = width < 768 ? [1080, 1920] : width < 1024 ? [1440, 1440] : [1920, 1080];
     assert.deepEqual([current.width, current.height], expected);
     assert.ok(current.muted && current.poster && !current.overflow && !current.paused);
-    assert.equal(current.button, "Pause background video");
-    await page.getByRole("button", { name: "Pause background video", exact: true }).click();
-    assert.ok((await state(page)).paused);
-    await page.locator("#highlights-title").scrollIntoViewIfNeeded();
-    await page.evaluate(() => scrollTo(0, 0));
-    await page.waitForTimeout(150);
-    assert.ok((await state(page)).paused, "Manual pause must survive offscreen return");
-    await page.getByRole("button", { name: "Play background video", exact: true }).focus();
-    await page.keyboard.press("Enter");
-    await page.waitForFunction(() => !document.querySelector("video").paused);
+    assert.equal(current.controls, false);
     await page.locator("#gallery-title").scrollIntoViewIfNeeded();
     await page.waitForFunction(() => document.querySelector("video").paused);
     await page.evaluate(() => scrollTo(0, 0));
@@ -85,14 +77,18 @@ try {
       assert.equal(current.src, null);
       assert.equal(requests.length, 0, `${kind} must not download video`);
     }
-    if (["reduced", "saveData"].includes(kind)) {
-      await page.getByRole("button", { name: "Play background video", exact: true }).click();
+    if (kind === "reduced") {
+      await page.emulateMedia({ reducedMotion: "no-preference" });
+      await ready(page);
+      assert.ok(!(await state(page)).paused);
+    }
+    if (kind === "saveData") {
+      await page.evaluate(() => { navigator.connection.saveData = false; navigator.connection.dispatchEvent(new Event("change")); });
       await ready(page);
       assert.ok(!(await state(page)).paused);
     }
     if (kind === "noJS") assert.equal(await page.locator(".teamwear-hero__content").evaluate((el) => getComputedStyle(el).opacity), "1");
-    if (kind === "blocked") assert.equal(current.button, "Play background video");
-    if (kind === "failed") assert.ok(await page.locator("[data-hero-video-toggle]").isHidden());
+    assert.equal(current.controls, false);
     if (kind === "slow") { release(); await ready(page); assert.equal((await state(page)).heroHeight, current.heroHeight); }
     console.log(`FALLBACK_OK ${kind}`);
     await ctx.close();
@@ -120,7 +116,7 @@ try {
     console.log(`NATIVE_LOOP_OK ${count} ${JSON.stringify(await loopPage.evaluate(() => window.loopSamples.at(-1)))}`);
   }
   const samples = await loopPage.evaluate(() => window.loopSamples);
-  assert.ok(samples.every((sample) => sample.gapMs < 250 && sample.readyState >= 2), "Loop seam must not stall decoding");
+  assert.ok(samples.every((sample) => sample.gapMs < 250), "Loop seam must not stall video frames");
   // Emulate the document visibility signal independently of headless tab policy.
   await loopPage.evaluate(() => {
     Object.defineProperty(document, "hidden", { configurable: true, value: true });

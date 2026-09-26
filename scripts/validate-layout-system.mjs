@@ -218,13 +218,13 @@ assert.match(
 );
 
 assert.match(
-  pages,
+  components,
   /\.product-detail__summary \.stack-md\s*\{[\s\S]*?gap:\s*var\(--space-6\);[\s\S]*?margin-top:\s*var\(--space-5\)/,
   "Product Header to Color must use 16px while Color to unlabeled Size choices uses 24px"
 );
 assert.match(
-  pages,
-  /\.reference-page--detail \.rich-description\s*\{[\s\S]*?margin-top:\s*var\(--space-7\)/,
+  components,
+  /\.product-detail__summary \.rich-description\s*\{[\s\S]*?margin-top:\s*var\(--space-7\)/,
   "Detail choices and rich descriptions must use the 32px composition rhythm"
 );
 assert.doesNotMatch(
@@ -233,30 +233,29 @@ assert.doesNotMatch(
   "Border aliases must be removed in favor of direct semantic outline colors"
 );
 
-const mediumPages = blockAfter(pages, "@media (min-width: 48rem)");
 assert.match(
-  mediumPages,
+  mediumComponents,
   /\.product-detail__summary\s*\{[\s\S]*?padding:\s*var\(--space-5\) var\(--space-7\)/,
   "Medium and larger product information must retain 16px vertical padding and align horizontally to the 32px responsive gutter"
 );
 assert.doesNotMatch(
-  mediumPages,
-  /\.product-detail__(?:panel|gallery)\s*\{|grid-template-columns|grid-column/,
+  mediumComponents,
+  /\.product-detail__(?:panel|gallery)\s*\{/,
   "Product detail must retain the Base single-column carousel composition through Medium"
 );
 
-const largePages = blockAfter(pages, "@media (min-width: 64rem)");
 const largeComponents = blockAfter(components, "@media (min-width: 64rem)");
 assert.match(
-  largePages,
+  largeComponents,
   /\.product-detail__panel\s*\{[\s\S]*?grid-template-columns:\s*repeat\(5,\s*minmax\(0,\s*1fr\)\)[\s\S]*?align-items:\s*stretch[\s\S]*?gap:\s*0/,
   "Large product detail must use a gapless equal-height five-column grid"
 );
-assert.match(largePages, /\.product-detail__gallery\s*\{[\s\S]*?grid-column:\s*span 3/, "Large gallery must span three columns");
-assert.match(largePages, /\.product-detail__summary\s*\{[\s\S]*?grid-column:\s*span 2/, "Large information must span two columns");
+assert.match(largeComponents, /\.product-detail__gallery\s*\{[\s\S]*?grid-column:\s*span 3/, "Large gallery must span three columns");
+assert.match(largeComponents, /\.product-detail__summary\s*\{[\s\S]*?grid-column:\s*span 2/, "Large information must span two columns");
 assert.match(largeComponents, /data-action-behavior="fixed-to-static"[\s\S]*?position:\s*static/, "Large purchase and inquiry actions must be static");
 
-for (const declarations of ruleDeclarations(pages, ".reference-page--detail .product-detail__summary")) {
+assert.doesNotMatch(pages, /\.product-detail__|\.rich-description\b/, "Detail component styles must be owned by components.css");
+for (const declarations of ruleDeclarations(components, ".product-detail__summary")) {
   assert.doesNotMatch(declarations, /min-height\s*:/, "Product information must not use a fixed or minimum height");
 }
 

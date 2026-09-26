@@ -35,7 +35,10 @@ function sameValue(rows, getter, label) {
   return values[0];
 }
 
-export function syncCatalog({ previous, sheet, documents, images, storeLink, syncedAt }) {
+export function syncCatalog({ previous, sheet, documents, images, storeLink, syncedAt, imageLayout = "variant-zero" }) {
+  assert.ok(["variant-zero", "legacy"].includes(imageLayout), `Unsupported image layout: ${imageLayout}`);
+  const variantIndex = imageLayout === "legacy" ? 9 : 0;
+  const galleryStart = imageLayout === "legacy" ? 0 : 1;
   const [headers, ...values] = sheet.rows;
   assert.ok(headers.some((header) => String(header).trim() === "隱藏"), "This import requires the verified 隱藏 column");
   const mapped = values.map((values, index) => ({ ...mapSheetItemRow(headers, values), row: index + 2 }));
@@ -68,7 +71,7 @@ export function syncCatalog({ previous, sheet, documents, images, storeLink, syn
       if (!colors.has(row.itemColorCode)) colors.set(row.itemColorCode, []);
       colors.get(row.itemColorCode).push(row);
     }
-    const gallery = (candidates, fallback = []) => Array.from({ length: 9 }, (_, index) =>
+    const gallery = (candidates, fallback = []) => Array.from({ length: 9 }, (_, offset) => galleryStart + offset).map((index) =>
       firstValue(candidates, (row) => row.images?.find((image) => image.index === index))
         || fallback?.find((image) => image.index === index)).filter(Boolean);
     const suppliedGallery = gallery(rows);
@@ -87,10 +90,10 @@ export function syncCatalog({ previous, sheet, documents, images, storeLink, syn
       const link = row.link || firstValue(siblings, (row) => row.link) || itemLink;
       const docLink = row.descriptionSource?.link || firstValue(siblings, (row) => row.descriptionSource?.link) || itemDocLink;
       const colorGallery = gallery([row], gallery(siblings, suppliedGallery));
-      const image9 = row.images?.find((image) => image.index === 9)
-        || firstValue(siblings, (row) => row.images?.find((image) => image.index === 9));
-      // Image 9 never falls through to a different color.
-      const image = image9 ? imageRecord(image9) : old?.variantImages?.find((image) => image.id === oldVariant?.imageId);
+      const variantImage = row.images?.find((image) => image.index === variantIndex)
+        || firstValue(siblings, (row) => row.images?.find((image) => image.index === variantIndex));
+      // A variant image may come from a sibling size, never a different color.
+      const image = variantImage ? imageRecord(variantImage) : old?.variantImages?.find((image) => image.id === oldVariant?.imageId);
       if (image) variantImages.set(image.id, image);
       const variant = {
         visible: row.visible, soldOut: row.soldOut, sku: row.sku,

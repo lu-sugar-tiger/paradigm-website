@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { catalogEntriesForProduct } from "./lib/catalog-entries.mjs";
 import { readFile } from "node:fs/promises";
 import vm from "node:vm";
 import { buildCatalogRefineGroups } from "../_archive/catalog-refine/catalog-refine.mjs";
@@ -38,7 +39,8 @@ for (const [route, category] of [["index.html", "all"], ["collections/all/index.
   assert.match(page, /data-catalog>/, route);
   assert.doesNotMatch(page, /catalog-refine|data-dropdown-grouped|data-catalog-(?:empty|status)/, `${route} must omit archived Refine controls, script, and status`);
   const expected = products.filter((product) => category === "all" || product.category === category)
-    .sort((left, right) => Number(right.sequence) - Number(left.sequence)).map((product) => product.code);
+    .sort((left, right) => Number(right.sequence) - Number(left.sequence))
+    .flatMap(catalogEntriesForProduct).map((product) => product.cardUrl.slice("/products/".length));
   const rendered = [...page.matchAll(/class="product-card" href="\/products\/([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(rendered, expected, `${route} must render all collection products latest first without JavaScript`);
 }

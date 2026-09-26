@@ -22,9 +22,9 @@ const headers = ["存貨單位", "商品名稱", "商品顏色", "商品尺寸",
 const url = (id) => `https://drive.google.com/file/d/${id}/view`;
 const rows = [
   headers,
-  ["ED14001-C01-S1", "　New Tee", "Black", "M", 590, false, false, "", "", "", "", url("black")],
-  ["ED14001-C01-S2", "New Tee", "Black", "L", 590, false, true, "https://shopee.tw/item", url("doc"), url("main"), "", ""],
-  ["ED14001-C09-S1", "New Tee", "White", "M", 590, true, false, "", "", "", url("back"), url("white")],
+  ["ED14001-C01-S1", "　New Tee", "Black", "M", 590, false, false, "", "", url("black"), "", ""],
+  ["ED14001-C01-S2", "New Tee", "Black", "L", 590, false, true, "https://shopee.tw/item", url("doc"), "", url("main"), ""],
+  ["ED14001-C09-S1", "New Tee", "White", "M", 590, true, false, "", "", url("white"), "", url("back")],
   ["ED14001-C09-S2", "New Tee", "White", "L", 590, false, false, "", "", "", "", ""]
 ];
 const documents = { doc: { id: "doc", content: "• Exact  text\n\n-\n\nEnd", modifiedTime: "new" } };
@@ -39,6 +39,7 @@ assert.equal(item.name, "New Tee");
 assert.equal(item.link, "https://shopee.tw/item");
 assert.equal(item.descriptionSource.content, documents.doc.content);
 assert.deepEqual(item.images.map((image) => image.id), ["main", "back"], "Sparse gallery slots inherit across item rows, replacing all old slots");
+assert.deepEqual(item.images.map((image) => image.index), [1, 9], "Gallery uses slots 1–9 in authored order");
 assert.deepEqual(item.localImages, []);
 assert.deepEqual(item.variants.map((variant) => variant.imageId), ["black", "black", "white", "white"]);
 assert.equal(item.variants[2].visible, false);
@@ -46,15 +47,17 @@ assert.equal(item.variants[1].soldOut, true);
 assert.equal(item.variantImages.length, 2, "Color media is stored once, not once per size");
 
 const noGallery = structuredClone(options);
-noGallery.sheet.rows.slice(1).forEach((row) => { row[7] = ""; row[8] = ""; row[9] = ""; row[10] = ""; });
+noGallery.sheet.rows.slice(1).forEach((row) => { row[7] = ""; row[8] = ""; row[10] = ""; row[11] = ""; });
+noGallery.sheet.rows[1][9] = url("black");
+noGallery.sheet.rows[3][9] = url("white");
 const retained = syncCatalog(noGallery).items[0];
 assert.equal(retained.link, options.storeLink, "A missing link must not reuse a stale product URL");
-assert.deepEqual(retained.images, previous.items[0].images, "Image 9 alone never replaces the gallery");
+assert.deepEqual(retained.images, previous.items[0].images, "Variant image 0 alone never replaces the gallery");
 assert.deepEqual(retained.localImages, previous.items[0].localImages);
 assert.deepEqual(retained.descriptionSource, previous.items[0].descriptionSource);
-const noWhite9 = structuredClone(noGallery);
-noWhite9.sheet.rows[3][11] = "";
-assert.equal(syncCatalog(noWhite9).items[0].variants[2].imageId, undefined, "Never assign another color's photo");
+const noWhite0 = structuredClone(noGallery);
+noWhite0.sheet.rows[3][9] = "";
+assert.equal(syncCatalog(noWhite0).items[0].variants[2].imageId, undefined, "Never assign another color's photo");
 const conflicting = structuredClone(options);
 conflicting.sheet.rows[2][1] = "Another name";
 assert.throws(() => syncCatalog(conflicting), /Conflicting ED14001 name/);
@@ -75,6 +78,6 @@ const capturedSheet = JSON.parse(await readFile(new URL("../data/products-sheet.
 const storeLinks = JSON.parse(await readFile(new URL("../data/store-links.json", import.meta.url), "utf8"));
 const capturedDocs = Object.fromEntries(current.items.flatMap((item) => [item.descriptionSource, ...item.variants.map((variant) => variant.descriptionSource)]).filter(Boolean).map((doc) => [doc.id, doc]));
 const capturedImages = Object.fromEntries(current.items.flatMap((item) => [...item.images, ...(item.variantImages || []), ...item.variants.flatMap((variant) => variant.images || [])]).map((image) => [image.id, image]));
-const replayed = syncCatalog({ previous: current, sheet: capturedSheet, documents: capturedDocs, images: capturedImages, storeLink: storeLinks.shopee, syncedAt: current.source.syncedAt });
+const replayed = syncCatalog({ previous: current, sheet: capturedSheet, documents: capturedDocs, images: capturedImages, storeLink: storeLinks.shopee, syncedAt: current.source.syncedAt, imageLayout: "legacy" });
 assert.deepEqual(replayed.items, current.items, "Captured Sheet rows must reproduce every current item, variant, flag, link and inherited relationship");
 console.log("CATALOG_SYNC_OK hidden=true sparseInheritance=true replaceOrPreserve=true colorIsolation=true copyExact=true atomic=true");

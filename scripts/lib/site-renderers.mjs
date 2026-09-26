@@ -39,8 +39,6 @@ export const MATERIAL_ICON_NAMES = Object.freeze({
   image: "image",
   layers: "layers",
   menu: "menu",
-  pause: "pause",
-  play: "play_arrow",
   search: "search",
   shirt: "apparel"
 });
@@ -64,6 +62,57 @@ export function renderProductDetailPrice({ price, dataAttribute = "" }) {
   }
   const attribute = dataAttribute ? ` ${dataAttribute}` : "";
   return `<p class="product-detail__price"${attribute} data-generated-component="product-detail-price">${html(price)}</p>`;
+}
+
+// Page adapters supply already-rendered content; this component owns its structure.
+// Media is rendered in the supplied order. Selection-driven image updates belong
+// to the existing product and Teamwear controllers.
+export function renderProductDetail({
+  variant = "product",
+  code,
+  name,
+  category = "",
+  media,
+  zoom = true,
+  price,
+  choices,
+  primaryAction,
+  description
+}) {
+  if (!["product", "teamwear"].includes(variant)) throw new Error(`Unsupported product-detail variant: ${variant}`);
+  const isTeamwear = variant === "teamwear";
+  const panelAttributes = isTeamwear ? "" : ` data-product-detail data-item-code="${html(code)}" data-notification-title="${html(name)}"`;
+  const summaryAttributes = isTeamwear ? ` data-teamwear-form data-teamwear-model="${html(code)}" data-notification-title="${html(name)}"` : "";
+  const galleryAttribute = isTeamwear ? "data-builder-preview" : "data-product-gallery";
+  const titleAttribute = isTeamwear ? 'id="builder-title"' : "data-product-name";
+  const indent = (markup, spaces) => markup.split("\n").map((line) => `${" ".repeat(spaces)}${line}`).join("\n");
+  const categoryMarkup = category ? `              <p class="product-detail__label" data-product-category>${html(category)}</p>\n` : "";
+
+  return `  <section class="product-detail" data-generated-component="product-detail">
+    <div class="container">
+      <div class="product-detail__panel"${panelAttributes}>
+        <div class="product-detail__gallery" ${galleryAttribute}${zoom ? " data-media-zoom-gallery" : ""} aria-label="${html(name)} images">
+${indent(media.join("\n"), 10)}
+        </div>
+        <article class="product-detail__summary"${summaryAttributes}>
+          <div class="product-detail__header">
+            <div>
+${categoryMarkup}              <h1 ${titleAttribute}>${html(name)}</h1>
+            </div>
+            ${price}
+          </div>
+
+          <div class="stack-md">
+${indent(choices.join("\n"), 12)}
+          </div>
+
+${indent(primaryAction, 10)}
+
+${indent(description, 10)}
+        </article>
+      </div>
+    </div>
+  </section>`;
 }
 
 function asset(root, path) {
@@ -437,7 +486,7 @@ export function renderPrimaryAction({
     throw new Error("Primary-action external state must match its new-tab target.");
   }
   const isNotify = initialIntent === "notify";
-  const actionLabel = isNotify ? "Notify Me" : label;
+  const actionLabel = isNotify ? "Notify me" : label;
   const actionHref = isNotify ? notificationChannel : href;
   const actionTarget = isNotify ? "_blank" : target;
   const actionExternal = isNotify || external;
@@ -459,18 +508,18 @@ export function renderRailControls({ label, railId, root = "" }) {
 }
 
 export function renderProductCard(product, root = "") {
-  const media = product.media?.[0] || (product.image ? { src: product.image, derivatives: [] } : null);
+  const media = product.cardMedia || product.media?.[0] || (product.image ? { src: product.image, derivatives: [] } : null);
   const image = media
     ? renderResponsiveProductImage({
       media,
-      alt: product.alt,
+      alt: product.cardAlt || product.alt,
       root,
       sizes: "(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw",
       loading: "lazy"
     })
     : "";
   const touchZoom = image && !media?.isFallback ? " data-media-zoom-touch" : "";
-  return `<a class="product-card" href="/products/${html(product.code)}">
+  return `<a class="product-card" href="${html(product.cardUrl || `/products/${product.code}`)}">
   <div class="product-card__media"${touchZoom}>${image}</div>
   <div class="product-card__body">
     <h3 class="product-card__title">${html(product.name)}</h3>
@@ -479,7 +528,7 @@ export function renderProductCard(product, root = "") {
 </a>`;
 }
 
-export function renderResponsiveProductImage({ media, alt, root = "", sizes, loading = "", touchZoom = false, dataAttribute = "" }) {
+export function renderResponsiveProductImage({ media, alt, root = "", sizes, loading = "", touchZoom = false, dataAttribute = "", imageId = "", variantImage = false }) {
   if (!media?.src) throw new Error("Responsive product images require a fallback source.");
   const resolvedPath = (source) => asset(root, source);
   const srcset = imageSrcset(media, resolvedPath);
@@ -489,9 +538,10 @@ export function renderResponsiveProductImage({ media, alt, root = "", sizes, loa
   const fallbackAttribute = media.isFallback ? " data-product-image-fallback" : "";
   if (dataAttribute && !/^data-[a-z][a-z0-9-]*$/.test(dataAttribute)) throw new Error("Invalid image data attribute.");
   const behaviorAttribute = dataAttribute ? ` ${dataAttribute}` : "";
+  const identityAttributes = `${imageId ? ` data-product-image-id="${html(imageId)}"` : ""}${variantImage ? " data-product-variant-image" : ""}`;
   const width = media.width || 1;
   const height = media.height || 1;
-  return `<img src="${html(resolvedPath(media.src))}"${responsiveAttributes} alt="${html(alt)}" width="${html(width)}" height="${html(height)}"${loadingAttribute}${zoomAttribute}${fallbackAttribute}${behaviorAttribute}>`;
+  return `<img src="${html(resolvedPath(media.src))}"${responsiveAttributes} alt="${html(alt)}" width="${html(width)}" height="${html(height)}"${loadingAttribute}${zoomAttribute}${fallbackAttribute}${behaviorAttribute}${identityAttributes}>`;
 }
 
 export function renderProductGrid(products, root = "") {
@@ -513,13 +563,13 @@ export function renderDocument({
   scripts = [],
   head = ""
 }) {
-const baseStyles = ["fonts.css?v=20260909b", "tokens.css?v=20260916a", "motion.css?v=20260831a", "reset.css?v=20260829a", "base.css?v=20260916b", "layout.css", "components.css?v=20260923a", "header-directory.css?v=20260914a", "pages.css?v=20260829a", "color-options.css?v=20260922a"];
+const baseStyles = ["fonts.css?v=20260909b", "tokens.css?v=20260916a", "motion.css?v=20260831a", "reset.css?v=20260829a", "base.css?v=20260916b", "layout.css", "components.css?v=20260924a", "header-directory.css?v=20260914a", "pages.css?v=20260923a", "color-options.css?v=20260922a"];
   const styleMarkup = [...baseStyles, ...styles].map((file) => `  <link rel="stylesheet" href="${html(asset(root, `assets/css/${file}`))}">`).join("\n");
   const isDataScript = (file) => ["catalog.js", "teamwear-options.js"].includes(file.split("?")[0]);
   const dataScripts = scripts.filter(isDataScript);
   const interactionScripts = scripts.filter((file) => !isDataScript(file));
   const earlyMotionScript = `  <script src="${html(asset(root, "assets/js/page-transitions.js?v=20260831a"))}"></script>`;
-  const scriptMarkup = ["app.js?v=20260914a", "dropdown.js?v=20260914a", "language-preference.js?v=20260908a", "header-directory.js?v=20260914a", "search-core.js?v=20260910a", "search.js?v=20260922a", ...dataScripts, "choices.js?v=20260922a", ...interactionScripts].map((file) => `  <script defer src="${html(asset(root, `assets/js/${file}`))}"></script>`).join("\n");
+  const scriptMarkup = ["app.js?v=20260914a", "dropdown.js?v=20260914a", "language-preference.js?v=20260908a", "header-directory.js?v=20260914a", "search-core.js?v=20260910a", "search.js?v=20260924a", ...dataScripts, "choices.js?v=20260924a", ...interactionScripts].map((file) => `  <script defer src="${html(asset(root, `assets/js/${file}`))}"></script>`).join("\n");
   const document = `<!doctype html>
 <!-- Generated by scripts/build-site.mjs. Do not edit this file directly. -->
 <html lang="${html(lang)}">

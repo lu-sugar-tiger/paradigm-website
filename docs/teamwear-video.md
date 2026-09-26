@@ -24,6 +24,6 @@ The file begins at source frame 34; its final frame is source frame 33, making t
 
 ## Runtime and fallback
 
-`hero-video.js` loads only on the landing page. Video is muted, looping, inline, and initially source-less so reduced-motion, data-saving, and no-JavaScript visits do not automatically fetch the video. A responsive poster is immediately available and remains underneath until the first decoded video frame. Poster-to-video reveal uses shared entrance duration/easing. The hero control uses existing icon/control/color/focus tokens and shared Material play/pause symbols.
+`hero-video.js` loads only on the landing page. Video is muted, looping, inline, and initially source-less so reduced-motion, data-saving, and no-JavaScript visits do not automatically fetch the video. A responsive poster is immediately available and remains underneath until the first decoded video frame. Poster-to-video reveal uses shared entrance duration/easing.
 
-Autoplay rejection leaves a Play button and poster. Manual pause persists across scrolling and tab changes; offscreen and hidden-document pauses resume only when playback is still wanted. Reduced-motion/data-saving changes stop automatic playback; explicit Play opts in. A media error restores the poster and hides the unusable control. No timer-driven loop animation or `ended` seeking is used.
+The video starts when the hero is visible, and pauses offscreen or while the page is hidden. It resumes when visible again. Reduced-motion or data-saving preferences leave the poster in place; changing either preference updates playback. Autoplay rejection or a media error leaves the poster in place. There is no video control, timer-driven loop animation, or `ended` seeking.

@@ -5,7 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { categoryForName, productFamilyKey, rankRelatedProducts } from "./lib/product-relations.mjs";
 import { normalizeDescriptionSource, transformDescription } from "./lib/rich-description.mjs";
-import { renderBreadcrumb, renderChoiceGroup, renderDescription, renderPageHeadline, renderPrimaryAction, renderProductDetailPrice, renderProductGrid, renderRailControls, renderSiteFooter, renderSiteHeader } from "./lib/site-renderers.mjs";
+import { renderBreadcrumb, renderChoiceGroup, renderDescription, renderPageHeadline, renderPrimaryAction, renderProductDetail, renderProductDetailPrice, renderProductGrid, renderRailControls, renderSiteFooter, renderSiteHeader } from "./lib/site-renderers.mjs";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const read = (relativePath) => readFile(path.join(ROOT, relativePath), "utf8");
@@ -166,7 +166,7 @@ assert.match(actionFixture, /data-action-behavior="fixed-to-static"/, "actions m
 assert.match(actionFixture, /data-action-default-external="true"/, "actions must expose their default external-link state");
 assert.match(actionFixture, /data-action-notify-external="true"/, "notify actions must expose their external-link state");
 assert.match(actionFixture, /data-external-link="true"/, "external actions must expose their current external-link state");
-assert.match(actionFixture, /class="primary-action__content"><span class="external-link__label interface-label" data-primary-action-label>Notify Me<\/span><span class="material-symbols-outlined material-icon external-link__indicator"[^>]*>arrow_outward<\/span>/, "external actions must render an uppercase-role label followed by the trailing Material arrow");
+assert.match(actionFixture, /class="primary-action__content"><span class="external-link__label interface-label" data-primary-action-label>Notify me<\/span><span class="material-symbols-outlined material-icon external-link__indicator"[^>]*>arrow_outward<\/span>/, "external actions must render an uppercase-role label followed by the trailing Material arrow");
 assert.match(actionFixture, /data-external-link-description> \(opens in a new tab\)<\/span>/, "external actions must describe their new-tab behavior accessibly");
 assert.doesNotMatch(actionFixture, /primary-action__icon|data-action-(?:default|notify)-(?:icon|symbol)/, "primary actions must not retain leading-icon or symbol-swapping contracts");
 assert.doesNotMatch(actionFixture, /<svg\b|icons\.svg|#icon-/, "primary actions must not render hand-drawn SVG icons");
@@ -303,6 +303,29 @@ assert.match(descriptionFixture, /class="rich-description__line rich-description
 assert.match(descriptionFixture, /<table class="rich-description__table">/, "rich descriptions must render confirmed tables semantically");
 assert.match(descriptionFixture, /<th scope="row">Width<\/th>/, "rich-description tables must retain row-header semantics");
 
+const detailOptions = {
+  code: 'FIX"TURE',
+  name: "Fixture & product",
+  media: ['<img src="first.webp" alt="First">', '<img src="second.webp" alt="Second">'],
+  price: productDetailPriceFixture,
+  choices: [fixture],
+  primaryAction: '<a href="https://example.com">View</a>',
+  description: descriptionFixture
+};
+const detailFixture = renderProductDetail(detailOptions);
+const teamwearDetailFixture = renderProductDetail({ ...detailOptions, variant: "teamwear" });
+assert.match(detailFixture, /data-item-code="FIX&quot;TURE" data-notification-title="Fixture &amp; product"/, "detail data hooks must escape source values");
+assert.match(detailFixture, /data-product-gallery data-media-zoom-gallery/, "retail details must retain their shared gallery hooks");
+assert.doesNotMatch(renderProductDetail({ ...detailOptions, zoom: false }), /data-media-zoom-gallery/, "fallback galleries must support opting out of inspection");
+assert.match(teamwearDetailFixture, /data-builder-preview data-media-zoom-gallery/, "Teamwear must retain its gallery hooks");
+assert.match(teamwearDetailFixture, /data-teamwear-form data-teamwear-model="FIX&quot;TURE"/, "Teamwear must retain its configuration hooks");
+for (const markup of [detailFixture, teamwearDetailFixture]) {
+  assert.match(markup, /data-generated-component="product-detail"/, "both detail variants must use the shared composition");
+  assert.ok(markup.indexOf('src="first.webp"') < markup.indexOf('src="second.webp"'), "detail rendering must preserve the supplied media order");
+  assert.match(markup, /<h1[^>]*>Fixture &amp; product<\/h1>/, "detail titles must escape source text");
+}
+assert.throws(() => renderProductDetail({ ...detailOptions, variant: "custom" }), /Unsupported product-detail variant/, "detail variations must be explicit");
+
 assert.match(components, /\.choice-option--chip\s*\{[\s\S]*?flex:\s*1 1 0/, "chips must share equal flexible widths");
 assert.match(components, /\.choice-option--chip\s*\{[\s\S]*?height:\s*var\(--choice-size\)/, "all chip variations must retain the shared 32px height token");
 assert.match(components, /\.choice-option--chip-add-on,\s*\.dropdown__trigger\s*\{[\s\S]*?display:\s*grid;[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\) var\(--choice-size\);[\s\S]*?padding:\s*0;/, "add-on chips must reserve a square right-end icon column without changing chip height");
@@ -369,11 +392,11 @@ assert.match(components, /\.product-card\s*\{[\s\S]*?border:\s*0;[\s\S]*?backgro
 assert.match(components, /\.product-card__media\s*\{[\s\S]*?background:\s*transparent;/, "product photos must have no independent fill over the card surface");
 assert.match(rendererSource, /const touchZoom = image && !media\?\.isFallback \? " data-media-zoom-touch" : "";[\s\S]*?class="product-card__media"\$\{touchZoom\}/, "shared product cards must opt in only when populated non-fallback media exists");
 assert.match(search, /if \(product\.media\?\.src\) \{[\s\S]*?if \(!product\.media\.isFallback\) media\.dataset\.mediaZoomTouch = "";/, "Search product cards must opt only their populated non-fallback photo media into touch inspection");
-assert.match(productTemplate, /data-product-gallery\{\{PRODUCT_GALLERY_ZOOM\}\}/, "retail detail galleries must conditionally opt non-fallback photography into shared Large inspection");
-assert.match(customizeTemplate, /data-builder-preview data-media-zoom-gallery/, "Teamwear Customize must opt into shared Large inspection");
-assert.match(customizeTemplate, /\{\{COVER_IMAGE\}\}/, "Teamwear Customize must render its configured responsive cover");
+for (const template of [productTemplate, customizeTemplate]) {
+  assert.match(template, /\{\{PRODUCT_DETAIL\}\}/, "detail pages must compose the shared detail renderer");
+  assert.doesNotMatch(template, /class="product-detail\b|data-(?:product-gallery|builder-preview|teamwear-form)/, "detail templates must not duplicate component structure or hooks");
+}
 const teamwearPhotography = JSON.parse(await read("data/teamwear-photography.json"));
-assert.match(customizeTemplate, /\{\{GALLERY_IMAGES\}\}/, "Teamwear Customize must render supplied photography from the shared manifest");
 assert.equal(((await read("teamwear/customize/index.html")).match(/data-media-zoom-touch/g) || []).length, 1 + teamwearPhotography.customGallery.length, "the configuration cover and every supplied Teamwear gallery photo must opt into touch inspection");
 assert.equal((teamwearTemplate.match(/data-media-zoom-touch/g) || []).length, 7, "authored Teamwear highlight and customer-gallery photos must opt into touch inspection");
 assert.equal((teamwearTemplate.match(/data-media-zoom-surface/g) || []).length, 7, "authored Teamwear rail photos must declare their immediate backing surfaces");
@@ -405,7 +428,7 @@ assert.match(components, /\.product-card__body\s*\{[\s\S]*?padding:\s*0 calc\(va
 assert.match(components, /\.product-card__body\s*\{[\s\S]*?background:\s*transparent;/, "product-card bodies must have no independent fill over the card surface");
 assert.match(components, /\.product-card__title\s*\{[\s\S]*?background:\s*transparent;/, "product names must have no independent fill over the card surface");
 assert.match(components, /\.product-card__title\s*\{[\s\S]*?color:\s*var\(--color-on-surface-high\);/, "product names must use On Surface High over the Surface High card");
-assert.match(components, /\.product-card__category,[\s\S]*?\.product-card__price\s*\{[\s\S]*?background:\s*transparent;[\s\S]*?color:\s*var\(--color-on-surface-low\);/, "product categories and prices must use On Surface Low without an independent fill");
+assert.match(components, /\.product-card__price\s*\{[\s\S]*?background:\s*transparent;[\s\S]*?color:\s*var\(--color-on-surface-low\);/, "product prices must use On Surface Low without an independent fill");
 assert.match(components, /\.product-card__price\s*\{[\s\S]*?display:\s*block;[\s\S]*?width:\s*100%;[\s\S]*?text-align:\s*right;/, "product prices must occupy and align to the complete responsive card-content width");
 const productCardStyles = components.match(/\.product-grid\s*\{[\s\S]*?(?=\.product-detail\s*\{)/)?.[0] || "";
 assert.doesNotMatch(productCardStyles, /--color-on-background-/, "product-card content must not use On Background roles over a Surface fill");
@@ -480,15 +503,16 @@ for (const relativePath of generatedPages) {
   assert.match(page, /assets\/css\/tokens\.css\?v=20260916a/, `${relativePath} must cache-bust the shared typography, target, icon, safe-area, media-layer, and motion tokens`);
   assert.match(page, /assets\/css\/motion\.css\?v=20260831a/, `${relativePath} must load the shared motion layer`);
   assert.match(page, /assets\/css\/base\.css\?v=20260916b/, `${relativePath} must cache-bust the shared visual-role font behavior`);
-assert.match(page, /assets\/css\/components\.css\?v=20260923a/, `${relativePath} must cache-bust shared interaction-target, overlay, static resting toggle, paired-icon, floating-action, media-source, and transferred stable overlay-gutter rules`);
+  assert.match(page, /assets\/css\/components\.css\?v=20260924a/, `${relativePath} must load centralized detail component styles`);
+  assert.match(page, /assets\/css\/pages\.css\?v=20260923a/, `${relativePath} must drop the superseded page-level detail overrides`);
   assert.match(page, /assets\/css\/reset\.css\?v=20260829a/, `${relativePath} must cache-bust the stable scrollbar-gutter reset`);
   assert.match(page, /assets\/js\/page-transitions\.js\?v=20260831a/, `${relativePath} must load the early route-motion controller`);
   assert.match(page, /assets\/js\/app\.js\?v=20260914a/, `${relativePath} must cache-bust the shared overlay behavior`);
   assert.match(page, /assets\/js\/search-core\.js\?v=20260910a/, `${relativePath} must load the shared search matcher`);
-  assert.match(page, /assets\/js\/search\.js\?v=20260922a/, `${relativePath} must load the shared Search interface`);
-  assert.match(page, /assets\/js\/choices\.js\?v=20260922a/, `${relativePath} must cache-bust the shared choice and floating-action controller`);
+  assert.match(page, /assets\/js\/search\.js\?v=20260924a/, `${relativePath} must load the shared Search interface`);
+  assert.match(page, /assets\/js\/choices\.js\?v=20260924a/, `${relativePath} must cache-bust the shared choice and floating-action controller`);
   if (/^(?:index\.html|collections\/|products\/|teamwear\/|search\/)/.test(relativePath)) {
-    assert.match(page, /assets\/js\/media-zoom\.js\?v=20260922a/, `${relativePath} must cache-bust the shared media inspection behavior`);
+    assert.match(page, /assets\/js\/media-zoom\.js\?v=20260924a/, `${relativePath} must cache-bust the shared media inspection behavior`);
   } else {
     assert.doesNotMatch(page, /media-zoom\.js/, `${relativePath} must not load media inspection outside opted-in page families`);
   }
@@ -516,6 +540,9 @@ assert.match(page, /assets\/css\/components\.css\?v=20260923a/, `${relativePath}
     assert.doesNotMatch(page, /catalog-refine|data-dropdown-grouped/, `${relativePath} must omit archived Refine from the public catalog`);
   }
   if (/^(?:products\/|teamwear\/customize\/)/.test(relativePath)) {
+    assert.match(page, /data-generated-component="product-detail"/, `${relativePath} must use the shared detail renderer`);
+    const choiceTitles = [...page.matchAll(/data-choice-title="([^"]+)"/g)].map((match) => match[1]);
+    assert.deepEqual(choiceTitles, relativePath.startsWith("products/") ? ["Color", "Size"] : ["Color", "Pattern", "Quantity", "Add-On"], `${relativePath} must retain its approved choice groups and order`);
     assert.match(page, /data-generated-component="rich-description"/, `${relativePath} must use the shared rich-description renderer`);
     assert.match(page, /data-generated-component="product-detail-price"/, `${relativePath} must use the shared product-detail price renderer`);
     assert.doesNotMatch(page, /class="[^"]*(?:product-copy|size-table)/, `${relativePath} must not render legacy description classes`);
@@ -533,10 +560,10 @@ assert.match(page, /assets\/css\/components\.css\?v=20260923a/, `${relativePath}
     assert.doesNotMatch(page, /class="product-card__media" data-media-zoom-touch><img[^>]*data-product-image-fallback/, `${relativePath} fallback catalog media must not opt into touch inspection`);
   }
   if (relativePath === "search/index.html") {
-    assert.match(page, /assets\/js\/media-zoom\.js\?v=20260922a/, "Search must load touch inspection for dynamically rendered product-card photos");
+    assert.match(page, /assets\/js\/media-zoom\.js\?v=20260924a/, "Search must load touch inspection for dynamically rendered product-card photos");
   }
   if (relativePath === "teamwear/customize/index.html") {
-    assert.match(page, /assets\/js\/choices\.js\?v=20260922a/, "Teamwear Customize must cache-bust the current shared choice controller");
+    assert.match(page, /assets\/js\/choices\.js\?v=20260924a/, "Teamwear Customize must cache-bust the current shared choice controller");
     assert.match(page, /assets\/js\/teamwear-options\.js\?v=20260917b/, "Teamwear Customize must cache-bust centralized configuration and media data");
     assert.match(page, /<h1[^>]*>PE Basketball Teamwear<\/h1>/, "Teamwear Customize must render the approved product name");
     assert.match(page, /assets\/js\/teamwear\.js\?v=20260913a/, "Teamwear Customize must cache-bust current shared Teamwear behavior");
@@ -565,7 +592,7 @@ assert.match(page, /assets\/css\/components\.css\?v=20260923a/, `${relativePath}
     const currentProductNumber = relativePath.split("/")[1];
     const currentProduct = visibleItemByCode.get(currentProductNumber);
     const expectedItemCodes = rankRelatedProducts(visibleProducts, currentProduct).map((product) => product.code);
-    const actualItemCodes = [...page.matchAll(/<a class="product-card" href="\/products\/([^"]+)">/g)].map((match) => match[1]);
+    const actualItemCodes = [...page.matchAll(/<a class="product-card" href="\/products\/([^"]+)">/g)].map((match) => match[1].split("?")[0]);
     assert.match(page, /class="breadcrumb__current" aria-current="page" data-product-breadcrumb-title/, `${relativePath} product breadcrumb title must preserve authored casing`);
     assert.match(page, /<section class="section section--tight product-feed-section">[\s\S]*?<div class="auto-grid product-grid"/, `${relativePath} must place the shared feed after a tokenized divider boundary`);
     assert.match(page, /<div class="auto-grid product-grid" data-generated-component="product-grid">/, `${relativePath} must use the shared vertical product feed`);

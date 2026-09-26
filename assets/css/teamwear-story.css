@@ -206,34 +206,6 @@
   opacity: 1;
 }
 
-.teamwear-hero__controls {
-  position: absolute;
-  inset-inline: 0;
-  top: calc(var(--header-height) + var(--space-5));
-  z-index: 3;
-  display: flex;
-  justify-content: flex-end;
-  pointer-events: none;
-}
-
-.teamwear-hero__toggle {
-  width: var(--control-size-large);
-  height: var(--control-size-large);
-  color: var(--color-on-container-high);
-  background: var(--color-container-high);
-  pointer-events: auto;
-}
-
-.teamwear-hero__toggle .material-icon {
-  width: var(--icon-size);
-  height: var(--icon-size);
-}
-
-.teamwear-hero__toggle[hidden],
-.teamwear-hero__toggle [hidden] {
-  display: none;
-}
-
 .teamwear-hero__shade {
   z-index: 1;
   background: color-mix(in srgb, var(--color-container-high) 36%, transparent);

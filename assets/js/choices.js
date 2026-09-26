@@ -86,33 +86,65 @@
 
   function syncProductSource(detail, product, revealImage = false) {
     const selected = selectedProductValues(detail);
-    const variant = product.variants.find((variant) => variant.visible && variant.colorName === selected.colorName && variant.sizeName === selected.sizeName)
-      || product.variants.find((variant) => variant.visible && variant.colorName === selected.colorName);
+    const variant = product.variants.find((variant) => variant.visible && variant.colorName === selected.colorName && variant.sizeName === selected.sizeName);
     const action = detail.querySelector("[data-primary-action]");
     if (action) action.dataset.actionDefaultHref = variant?.link || product.link;
-    if (!revealImage || !variant?.imageId) return;
-    const media = product.variantMedia?.[variant.imageId];
+    if (revealImage) {
+      const url = new URL(location.href);
+      if (variant) url.searchParams.set("variant", variant.sku);
+      else url.searchParams.delete("variant");
+      history.replaceState(history.state, "", url);
+    }
+
     const gallery = detail.querySelector("[data-product-gallery]");
-    if (!media || !gallery) return;
+    if (!gallery) return;
+    const colorImages = [...new Set(product.variants.filter((candidate) => candidate.visible && candidate.colorName === selected.colorName && candidate.imageId).map((candidate) => candidate.imageId))];
+    const imageId = variant?.imageId || (colorImages.length === 1 ? colorImages[0] : "");
+    const media = product.variantMedia?.[imageId];
     const resolve = (path) => new URL(`../../${path}`, document.baseURI).href;
-    let image = Array.from(gallery.querySelectorAll("img")).find((image) => image.src === resolve(media.src));
+    let image = gallery.querySelector("[data-product-variant-image]");
+    if (!media) {
+      image?.remove();
+      document.dispatchEvent(new CustomEvent("paradigm:product-media-change"));
+      return;
+    }
     if (!image) {
-      image = gallery.querySelector("img")?.cloneNode(false) || document.createElement("img");
+      image = document.createElement("img");
+      image.setAttribute("data-product-variant-image", "");
+      image.setAttribute("data-media-zoom-touch", "");
+      image.sizes = "(min-width: 80rem) 768px, (min-width: 64rem) 60vw, 100vw";
+      gallery.append(image);
+    }
+    if (image.dataset.productImageId !== imageId) {
       image.src = resolve(media.src);
       if (media.derivatives?.length) image.srcset = media.derivatives.map((entry) => `${resolve(entry.path)} ${entry.width}w`).join(", ");
       else image.removeAttribute("srcset");
       image.width = media.width || 1;
       image.height = media.height || 1;
-      image.alt = `${product.name}, ${variant.colorName}`;
-      image.removeAttribute("data-product-image-fallback");
-      image.setAttribute("data-media-zoom-touch", "");
+      image.dataset.productImageId = imageId;
     }
-    image.loading = "eager";
+    image.alt = `${product.name}, ${selected.colorName}${colorImages.length > 1 ? `, ${selected.sizeName}` : ""}`;
     gallery.setAttribute("data-media-zoom-gallery", "");
-    gallery.prepend(image);
-    // A horizontal snap gallery otherwise keeps its previous visible slide anchored.
-    gallery.scrollTo({ left: 0, top: 0, behavior: "instant" });
+    if (revealImage) {
+      gallery.setAttribute("data-variant-revealed", "");
+      image.loading = "eager";
+      if (!window.matchMedia("(min-width: 64rem)").matches) gallery.scrollTo({ left: image.offsetLeft, behavior: "instant" });
+    }
     document.dispatchEvent(new CustomEvent("paradigm:product-media-change"));
+  }
+
+  function selectLinkedProductVariant(detail, product) {
+    const sku = new URLSearchParams(location.search).get("variant");
+    const variant = product.variants.find((candidate) => candidate.visible && candidate.sku === sku);
+    if (!variant) return;
+    const colorId = product.colors.find((color) => color.label === variant.colorName)?.id;
+    const color = Array.from(detail.querySelectorAll('[data-choice-kind="swatch"] [data-choice-option]')).find((option) => option.dataset.choiceId === colorId);
+    const size = Array.from(detail.querySelectorAll('[data-choice-kind="chip"] [data-choice-option]')).find((option) => option.dataset.choiceLabel === variant.sizeName);
+    if (!color || !size) return;
+    color.querySelector("input").checked = true;
+    size.querySelector("input").checked = true;
+    announceSelection(color.closest("[data-choice-group]"));
+    announceSelection(size.closest("[data-choice-group]"));
   }
 
   function updateAccessibleAvailability(option, unavailable) {
@@ -172,7 +204,7 @@
   function setActionState(action, notify) {
     const label = action.querySelector("[data-primary-action-label]");
     const intent = notify ? "notify" : action.dataset.actionDefaultIntent;
-    const nextLabel = notify ? "Notify Me" : action.dataset.actionDefaultLabel;
+    const nextLabel = notify ? "Notify me" : action.dataset.actionDefaultLabel;
     const nextHref = notify ? action.dataset.actionNotifyHref : action.dataset.actionDefaultHref;
     const nextTarget = notify ? "_blank" : action.dataset.actionDefaultTarget;
     const nextExternal = notify
@@ -330,12 +362,20 @@
   groups.forEach((group) => {
     bindRadioKeyboard(group);
     announceSelection(group);
+    group.addEventListener("click", (event) => {
+      if (!event.target.closest('input[type="radio"]')) return;
+      const detail = group.closest("[data-product-detail]");
+      const gallery = detail?.querySelector("[data-product-gallery]");
+      if (!gallery || gallery.hasAttribute("data-variant-revealed")) return;
+      const product = productForGroup(group);
+      if (product) syncProductSource(detail, product, true);
+    });
     group.addEventListener("change", () => {
       const detail = group.closest("[data-product-detail]");
       const product = productForGroup(group);
       if (detail && product) {
         recalculateProductAvailability(detail, product);
-        syncProductSource(detail, product, group.dataset.choiceKind === "swatch");
+        syncProductSource(detail, product, true);
       }
       announceSelection(group);
       const action = document.getElementById(group.dataset.primaryActionId);
@@ -348,6 +388,7 @@
     const group = detail.querySelector("[data-choice-group]");
     const product = group ? productForGroup(group) : null;
     if (product) {
+      selectLinkedProductVariant(detail, product);
       recalculateProductAvailability(detail, product);
       syncProductSource(detail, product);
     }

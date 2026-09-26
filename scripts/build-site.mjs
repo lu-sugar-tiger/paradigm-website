@@ -6,6 +6,7 @@ import {
   transformDescription
 } from "./lib/rich-description.mjs";
 import { categoryForName, rankRelatedProducts } from "./lib/product-relations.mjs";
+import { catalogEntriesForProduct } from "./lib/catalog-entries.mjs";
 import { resolveProductMedia, responsiveMediaFromSource } from "./lib/product-images.mjs";
 import { itemPriceLabel, validateItemCatalog } from "./lib/item-schema.mjs";
 import {
@@ -16,6 +17,7 @@ import {
   renderIcon,
   renderPageHeadline,
   renderPrimaryAction,
+  renderProductDetail,
   renderProductDetailPrice,
   renderProductGrid,
   renderResponsiveProductImage,
@@ -82,8 +84,16 @@ function selectedProductVariant(product) {
     || product.variants.find((variant) => variant.visible);
 }
 
+function selectedProductImageId(product, selectedVariant) {
+  if (selectedVariant?.imageId) return selectedVariant.imageId;
+  const colorImages = unique(product.variants.filter((variant) => variant.visible && variant.colorCode === selectedVariant?.colorCode).map((variant) => variant.imageId));
+  return colorImages.length === 1 ? colorImages[0] : null;
+}
+
 function renderProductMain(template, product, relatedProducts, itemCodes) {
   const selectedVariant = selectedProductVariant(product);
+  const selectedImageId = selectedProductImageId(product, selectedVariant);
+  const selectedMedia = product.variantMedia?.[selectedImageId];
   const selected = { colorName: selectedVariant?.colorName || product.colors[0]?.label, sizeName: selectedVariant?.sizeName || product.sizes[0] };
   const resolvedUnavailable = !selectedVariant || selectedVariant.soldOut;
   const colorChoices = renderChoiceGroup({
@@ -123,14 +133,25 @@ function renderProductMain(template, product, relatedProducts, itemCodes) {
     external: true,
     root: "../.."
   });
-  const media = product.media.map((image, index) => `          ${renderResponsiveProductImage({
+  const media = product.media.map((image, index) => renderResponsiveProductImage({
     media: image,
     alt: index === 0 ? product.alt : `${product.name}, view ${index + 1}`,
     root: "../..",
     sizes: "(min-width: 80rem) 768px, (min-width: 64rem) 60vw, 100vw",
     loading: index ? "lazy" : "",
-    touchZoom: !image.isFallback
-  })}`).join("\n");
+    touchZoom: !image.isFallback,
+    imageId: product.galleryImageIds[index]
+  }));
+  if (selectedMedia) media.push(renderResponsiveProductImage({
+    media: selectedMedia,
+    alt: `${product.name}, ${selectedVariant.colorName}`,
+    root: "../..",
+    sizes: "(min-width: 80rem) 768px, (min-width: 64rem) 60vw, 100vw",
+    loading: "lazy",
+    touchZoom: true,
+    imageId: selectedImageId,
+    variantImage: true
+  }));
   const pageHeadline = renderPageHeadline({
     root: "../..",
     breadcrumb: {
@@ -145,16 +166,17 @@ function renderProductMain(template, product, relatedProducts, itemCodes) {
 
   return applyTemplate(template, {
     PAGE_HEADLINE: pageHeadline.split("\n").map((line) => `  ${line}`).join("\n"),
-    NAME: html(product.name),
-    ITEM_CODE: html(product.code),
-    CATEGORY: html(product.category),
-    PRODUCT_GALLERY_ZOOM: product.imageSource === "fallback" ? "" : " data-media-zoom-gallery",
-    PRODUCT_MEDIA: media,
-    PRICE: renderProductDetailPrice({ price: product.priceLabel, dataAttribute: "data-product-price" }),
-    COLOR_CHOICES: colorChoices.split("\n").map((line) => `            ${line}`).join("\n"),
-    SIZE_CHOICES: sizeChoices.split("\n").map((line) => `            ${line}`).join("\n"),
-    PRIMARY_ACTION: primaryAction.split("\n").map((line) => `          ${line}`).join("\n"),
-    DESCRIPTION: renderDescription({ tokens: product.description, itemCodes, currentItemCode: product.code }).split("\n").map((line) => `          ${line}`).join("\n"),
+    PRODUCT_DETAIL: renderProductDetail({
+      code: product.code,
+      name: product.name,
+      category: product.category,
+      media,
+      zoom: product.imageSource !== "fallback",
+      price: renderProductDetailPrice({ price: product.priceLabel, dataAttribute: "data-product-price" }),
+      choices: [colorChoices, sizeChoices],
+      primaryAction,
+      description: renderDescription({ tokens: product.description, itemCodes, currentItemCode: product.code })
+    }),
     RELATED_PRODUCTS: renderProductGrid(relatedProducts, "../..")
   });
 }
@@ -184,7 +206,7 @@ ${renderProductGrid(filtered, root).split("\n").map((line) => `      ${line}`).j
     currentPath,
     bodyClass: "site-shell reference-page product-page",
     main,
-    scripts: ["catalog.js?v=20260922a", "media-zoom.js?v=20260922a"]
+    scripts: ["catalog.js?v=20260924a", "media-zoom.js?v=20260924a"]
   });
 }
 
@@ -216,7 +238,7 @@ ${pageHeadline.split("\n").map((line) => `    ${line}`).join("\n")}
     bodyClass: "site-shell reference-page search-page",
     main,
     head: '  <meta name="robots" content="noindex,follow">',
-    scripts: ["media-zoom.js?v=20260922a"]
+    scripts: ["media-zoom.js?v=20260924a"]
   });
 }
 
@@ -244,7 +266,7 @@ function buildSearchIndex(searchConfig, products) {
   const searchProducts = products.map((product) => {
     const type = productType(product.name);
     const family = productFamily(product.name);
-    const colors = product.colors.map((color) => color.label);
+    const colors = product.variantLabel ? [product.variantLabel] : product.colors.map((color) => color.label);
     return {
       code: product.code,
       name: product.name,
@@ -253,9 +275,10 @@ function buildSearchIndex(searchConfig, products) {
       type,
       family,
       priceLabel: product.priceLabel,
-      url: `/products/${product.code}`,
-      media: product.media[0] || null,
-      alt: product.alt,
+      url: product.cardUrl || `/products/${product.code}`,
+      media: product.cardMedia || product.media[0] || null,
+      alt: product.cardAlt || product.alt,
+      variantLabel: product.variantLabel || "",
       searchTerms: [product.name, product.code, product.category, ...colors, type, family]
     };
   });
@@ -347,7 +370,6 @@ ${[...heroVideo.variants].reverse().filter((variant) => variant.minWidth).map((v
       </picture>
       <video id="teamwear-hero-video" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback aria-hidden="true" tabindex="-1" ${heroVideo.variants.map((variant) => `data-video-${variant.id}="../${html(variant.src)}"`).join(" ")}></video>
     </div>`,
-    HERO_VIDEO_CONTROL: `<div class="container teamwear-hero__controls"><button class="icon-button teamwear-hero__toggle" type="button" aria-label="Play background video" aria-controls="teamwear-hero-video" data-hero-video-toggle hidden><span data-video-play>${renderIcon("play", "..")}</span><span data-video-pause hidden>${renderIcon("pause", "..")}</span></button></div>`,
     PRIMARY_ACTION: primaryAction.split("\n").map((line) => `      ${line}`).join("\n"),
     HIGHLIGHT_CONTROLS: renderRailControls({ label: "Highlights", railId: "teamwear-highlights-rail", root: ".." }).split("\n").map((line) => `      ${line}`).join("\n"),
     COLORWAY_CONTROLS: renderRailControls({ label: "Colorway", railId: "teamwear-colorways-rail", root: ".." }).split("\n").map((line) => `      ${line}`).join("\n"),
@@ -370,7 +392,7 @@ ${[...heroVideo.variants].reverse().filter((variant) => variant.minWidth).map((v
     bodyClass: "site-shell reference-page teamwear-page teamwear-story-shell",
     main,
     styles: ["teamwear.css?v=20260829c", "teamwear-story.css?v=20260922a"],
-    scripts: ["teamwear-options.js?v=20260917b", "teamwear.js?v=20260913a", "hero-video.js?v=20260918a", "media-zoom.js?v=20260922a"],
+    scripts: ["teamwear-options.js?v=20260917b", "teamwear.js?v=20260913a", "hero-video.js?v=20260924a", "media-zoom.js?v=20260924a"],
     head: `  <meta property="og:title" content="${html(model.name)} | Paradigm">\n  <meta property="og:description" content="${html(`${model.name} is a reversible basketball uniform system composed by Paradigm for the whole roster.`)}">\n  <meta property="og:image" content="https://prdm.tw/assets/images/teamwear/campaign/hero-desktop.webp">\n  <meta property="og:type" content="website">`
   });
 }
@@ -435,25 +457,26 @@ function renderTeamwearCustomize(template, model, colorById, instagramUrl, itemC
   const description = renderDescription({ tokens: transformDescription(descriptionSource.content), itemCodes });
   const main = applyTemplate(template, {
     PAGE_HEADLINE: pageHeadline.split("\n").map((line) => `  ${line}`).join("\n"),
-    MODEL_CODE: html(model.code),
-    MODEL_NAME: html(model.name),
-    COVER_IMAGE: renderResponsiveProductImage({
-      media: selectedPattern.mediaByColor[selectedColor.colorId],
-      alt: `${selectedPattern.name} ${model.name} in ${colorById.get(selectedColor.colorId).name}, front and back`,
-      root: "../..",
-      sizes: "(min-width: 80rem) 768px, (min-width: 64rem) 60vw, 100vw",
-      touchZoom: true,
-      dataAttribute: "data-builder-cover"
-    }),
-    GALLERY_IMAGES: photography.customGallery.map((id) =>
-      `          ${renderTeamwearPhoto(photography, id, { root: "../..", touchZoom: true })}`).join("\n"),
-    PRICE: renderProductDetailPrice({ price: priceLabel(model.price), dataAttribute: "data-teamwear-price" }),
-    COLOR_CHOICES: colors.split("\n").map((line) => `          ${line}`).join("\n"),
-    PATTERN_CHOICES: patterns.split("\n").map((line) => `          ${line}`).join("\n"),
-    QUANTITY_CHOICES: quantities.split("\n").map((line) => `          ${line}`).join("\n"),
-    ADD_ON_CHOICES: addOns.split("\n").map((line) => `          ${line}`).join("\n"),
-    PRIMARY_ACTION: primaryAction.split("\n").map((line) => `        ${line}`).join("\n"),
-    DESCRIPTION: description.split("\n").map((line) => `          ${line}`).join("\n")
+    PRODUCT_DETAIL: renderProductDetail({
+      variant: "teamwear",
+      code: model.code,
+      name: model.name,
+      media: [
+        renderResponsiveProductImage({
+          media: selectedPattern.mediaByColor[selectedColor.colorId],
+          alt: `${selectedPattern.name} ${model.name} in ${colorById.get(selectedColor.colorId).name}, front and back`,
+          root: "../..",
+          sizes: "(min-width: 80rem) 768px, (min-width: 64rem) 60vw, 100vw",
+          touchZoom: true,
+          dataAttribute: "data-builder-cover"
+        }),
+        ...photography.customGallery.map((id) => renderTeamwearPhoto(photography, id, { root: "../..", touchZoom: true }))
+      ],
+      price: renderProductDetailPrice({ price: priceLabel(model.price), dataAttribute: "data-teamwear-price" }),
+      choices: [colors, patterns, quantities, addOns],
+      primaryAction,
+      description
+    })
   });
   return renderDocument({
     title: `Build ${model.name} | Paradigm Teamwear`,
@@ -464,7 +487,7 @@ function renderTeamwearCustomize(template, model, colorById, instagramUrl, itemC
     bodyClass: "site-shell reference-page reference-page--detail teamwear-customize-page",
     main,
     styles: ["teamwear.css?v=20260829c"],
-    scripts: ["teamwear-options.js?v=20260917b", "teamwear.js?v=20260913a", "media-zoom.js?v=20260922a"]
+    scripts: ["teamwear-options.js?v=20260917b", "teamwear.js?v=20260913a", "media-zoom.js?v=20260924a"]
   });
 }
 
@@ -514,6 +537,7 @@ const products = source.items.filter((entry) => entry.variants.some((variant) =>
     image: mediaPaths[0] || null,
     images: mediaPaths,
     media,
+    galleryImageIds: entry.images.length === media.length ? entry.images.map((image) => image.id) : [],
     variantMedia: Object.fromEntries((entry.variantImages || []).map((image) => [image.id, responsiveMediaFromSource(image)])),
     imageSource: usesFallback ? "fallback" : entry.imageSource,
     alt: usesFallback ? "" : `${entry.name} product image`,
@@ -531,13 +555,14 @@ const products = source.items.filter((entry) => entry.variants.some((variant) =>
     }
   };
 });
+const catalogEntries = products.flatMap(catalogEntriesForProduct);
 
 const outputs = new Map();
 const catalogBanner = `// Generated by scripts/build-site.mjs.\n// Source: ${source.source.spreadsheetUrl} (${source.source.sheetName})\n// Spreadsheet modified: ${source.source.spreadsheetModifiedTime}\n// Edit centralized data sources and rerun the build; do not hand-edit this file.\n`;
 outputs.set("assets/js/catalog.js", `${catalogBanner}window.PARADIGM_CATALOG = ${JSON.stringify({ schemaVersion: source.schemaVersion, items: products }, null, 2)};\n`);
 outputs.set("assets/js/teamwear-options.js", `// Generated by scripts/build-site.mjs from data/teamwear-options.json.\nwindow.PARADIGM_TEAMWEAR = ${JSON.stringify(teamwearData, null, 2)};\n`);
 outputs.set("assets/css/color-options.css", renderColorOptionsCss(colorRegistry.colors));
-outputs.set("assets/data/search-index.json", `${JSON.stringify(buildSearchIndex(searchConfig, products), null, 2)}\n`);
+outputs.set("assets/data/search-index.json", `${JSON.stringify(buildSearchIndex(searchConfig, catalogEntries), null, 2)}\n`);
 
 const collectionPages = [
   { output: "index.html", title: "All", category: "all", pathName: "home", root: "" },
@@ -546,7 +571,7 @@ const collectionPages = [
   { output: "collections/aw-tops/index.html", title: "AW Tops", category: "AW Tops", pathName: "aw-tops", root: "../.." },
   { output: "collections/bottoms/index.html", title: "Bottoms", category: "Bottoms", pathName: "bottoms", root: "../.." }
 ];
-collectionPages.forEach((page) => outputs.set(page.output, renderCollectionPage({ ...page, products })));
+collectionPages.forEach((page) => outputs.set(page.output, renderCollectionPage({ ...page, products: catalogEntries })));
 outputs.set("search/index.html", renderSearchPage());
 outputs.set("font-credits/index.html", renderDocument({
   title: "Font credits | Paradigm",
@@ -559,7 +584,7 @@ outputs.set("font-credits/index.html", renderDocument({
 }));
 
 products.forEach((product) => {
-  const related = rankRelatedProducts(products, product);
+  const related = rankRelatedProducts(products, product).map((item) => catalogEntriesForProduct(item)[0]);
   const main = renderProductMain(productTemplate, product, related, products.map((item) => item.code));
   outputs.set(`products/${product.code}/index.html`, renderDocument({
     lang: "zh-Hant",
@@ -570,7 +595,7 @@ products.forEach((product) => {
     currentPath: `/products/${product.code}`,
     bodyClass: "site-shell reference-page reference-page--detail",
     main,
-    scripts: ["catalog.js?v=20260922a", "media-zoom.js?v=20260922a"]
+    scripts: ["catalog.js?v=20260924a", "media-zoom.js?v=20260924a"]
   }));
 });
 

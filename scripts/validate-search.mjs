@@ -47,6 +47,8 @@ const visibleItemCodes = source.items
   .filter((product) => product.variants.some((variant) => variant.visible))
   .sort((left, right) => Number(right.sequence) - Number(left.sequence))
   .map((product) => product.code);
+const catalogPage = await read("collections/all/index.html");
+const catalogUrls = [...catalogPage.matchAll(/<a class="product-card" href="([^"]+)">/g)].map((match) => match[1]);
 assert.ok(visibleItemCodes.length > 0, "the source must expose a non-empty catalog; exact coverage is checked below");
 assert.equal(index.schemaVersion, 2, "the generated Search index schema must be versioned");
 assert.equal(Object.hasOwn(index, "products"), false, "Search must use items");
@@ -54,8 +56,8 @@ assert.deepEqual(index.popularKeywords, config.popularKeywords, "the generated i
 assert.equal(index.pages.length, 8, "the generated index must contain every controlled page and external link");
 assert.deepEqual(index.pages.filter((page) => page.external).map((page) => page.title), ["Instagram", "Shopee"], "the generated index must preserve the external-link contract");
 assert.deepEqual(index.pages.map((page) => page.interfaceLabel), config.pages.map((page) => page.interfaceLabel), "the generated index must preserve each page title's established casing role");
-assert.equal(index.items.length, visibleItemCodes.length, "the generated index must contain every visible product");
-assert.deepEqual(index.items.map((product) => product.code), visibleItemCodes, "the generated index must preserve newest-first catalog order");
+assert.deepEqual(index.items.map((product) => product.url), catalogUrls, "the generated index must contain every catalog variant entry in display order");
+assert.deepEqual([...new Set(index.items.map((product) => product.code))], visibleItemCodes, "the generated index must cover every visible item in newest-first order");
 for (const product of index.items) {
   for (const field of ["productNumber", "itemCode", "itemName", "title", "price", "shopeeUrl", "productType"]) {
     assert.equal(Object.hasOwn(product, field), false, `Search item must not restore ${field}`);
@@ -92,9 +94,9 @@ assert.ok(codesFor("hoodie").length > 0 && codesFor("hoodie").every((number) => 
 assert.ok(pagesFor("teamwear").includes("PE Basketball Teamwear"), "teamwear must return its canonical page");
 assert.deepEqual(pagesFor("instagram"), ["Instagram"], "Instagram must be searchable as a page result");
 assert.deepEqual(pagesFor("shopee"), ["Shopee"], "Shopee must be searchable as a page result");
-assert.deepEqual(codesFor("Everyday Tee"), ["ED14024", "ED14001"], "every query token must match a structured field, with catalog order breaking relevance ties");
-assert.deepEqual(codesFor("ED14001"), ["ED14001"], "exact product-number matching must work");
-assert.deepEqual(codesFor(" eD-14001!! "), ["ED14001"], "product-number matching must tolerate whitespace, casing, and punctuation");
+assert.deepEqual([...new Set(codesFor("Everyday Tee"))], ["ED14024", "ED14001"], "every query token must match a structured field, with catalog order breaking relevance ties");
+assert.deepEqual([...new Set(codesFor("ED14001"))], ["ED14001"], "exact product-number matching must work across variant entries");
+assert.deepEqual([...new Set(codesFor(" eD-14001!! "))], ["ED14001"], "product-number matching must tolerate whitespace, casing, and punctuation");
 assert.deepEqual(codesFor("result-that-does-not-exist"), [], "no-result queries must remain empty");
 
 assert.match(searchPage, /<meta name="robots" content="noindex,follow">/, "the generated Search route must be noindex,follow");
@@ -103,7 +105,7 @@ assert.match(searchPage, /data-search-page-title/, "the Search breadcrumb must e
 assert.match(searchPage, /data-search-page-results/, "the Search route must expose a generated-results mount");
 assert.match(searchClient, /assets\/data\/search-index\.json/, "the Search client must reference the generated local index");
 assert.match(searchClient, /if \(product\.media\?\.src\) \{[\s\S]*?media\.dataset\.mediaZoomTouch = "";/, "Search product-result photos must opt into the shared touch inspection contract");
-assert.match(searchPage, /assets\/js\/media-zoom\.js\?v=20260922a/, "the Search route must load the cache-busted touch inspection module");
+assert.match(searchPage, /assets\/js\/media-zoom\.js\?v=20260924a/, "the Search route must load the cache-busted touch inspection module");
 assert.match(renderer, /data-search-toggle/, "the shared header must expose the Search toggle");
 assert.match(renderer, /data-search-overlay/, "the shared header must render the Search overlay on every page");
 assert.match(searchPage, /data-search-toggle[\s\S]*?toggle-icon--resting[\s\S]*?>search<[\s\S]*?toggle-icon--close[\s\S]*?>close</, "the Search control must render separate stacked resting and close Material symbols");
@@ -111,7 +113,7 @@ assert.match(searchPage, /data-overlay-state="closed" data-search-overlay/, "the
 assert.doesNotMatch(searchPage, /data-search-(?:open|close)-symbol/, "Search must not replace icon text during state changes");
 assert.match(searchPage, /autocomplete="off"[^>]*data-search-input/, "the Search input must be ready for immediate user input");
 assert.match(searchPage, /placeholder="SEARCH PRDM\.TW"/, "the Search field must use the approved uppercase prompt");
-assert.match(searchClient, /fetch\("\/assets\/data\/search-index\.json\?v=20260922a"/, "the Search index must be lazy-loaded with a cache version");
+assert.match(searchClient, /fetch\("\/assets\/data\/search-index\.json\?v=20260924a"/, "the Search index must be lazy-loaded with a cache version");
 assert.match(searchClient, /new URLSearchParams\(\{ q: query\.trim\(\) \}\)/, "Search navigation must safely encode the query");
 assert.match(searchClient, /window\.location\.assign\(searchUrl\(query\)\)/, "Enter and the trailing action must navigate to the shareable Search route");
 assert.match(searchClient, /pageTitle\.textContent = label/, "the results breadcrumb must safely preserve query casing");

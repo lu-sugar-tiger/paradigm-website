@@ -296,6 +296,10 @@
     return node.closest("[data-media-zoom-gallery] img");
   }
 
+  function visibleGalleryImages(gallery) {
+    return Array.from(gallery.querySelectorAll("img")).filter((image) => !image.hidden && getComputedStyle(image).display !== "none");
+  }
+
   function storeLargeImageAttributes(image) {
     if (largeImageAttributes.has(image)) return;
     largeImageAttributes.set(image, {
@@ -331,7 +335,10 @@
 
   function setLargeGalleryMode() {
     const images = Array.from(document.querySelectorAll("[data-media-zoom-gallery] img"));
-    if (largeView.matches) images.forEach(enableLargeGalleryImage);
+    if (largeView.matches) images.forEach((image) => {
+      if (visibleGalleryImages(image.closest("[data-media-zoom-gallery]")).includes(image)) enableLargeGalleryImage(image);
+      else disableLargeGalleryImage(image);
+    });
     else {
       closeOverlay();
       images.forEach(disableLargeGalleryImage);
@@ -389,7 +396,7 @@
   function openOverlay(gallery, selectedIndex, trigger) {
     if (!largeView.matches) return;
     if (overlayState) closeOverlay(false);
-    const sourceImages = Array.from(gallery.querySelectorAll("img"));
+    const sourceImages = visibleGalleryImages(gallery);
     if (!sourceImages.length) return;
 
     const overlay = document.createElement("div");
@@ -448,7 +455,7 @@
     const image = galleryImage(event.target);
     if (!image) return;
     const gallery = image.closest("[data-media-zoom-gallery]");
-    openOverlay(gallery, Array.from(gallery.querySelectorAll("img")).indexOf(image), image);
+    openOverlay(gallery, visibleGalleryImages(gallery).indexOf(image), image);
   });
 
   document.addEventListener("keydown", (event) => {
@@ -467,7 +474,7 @@
     if (!image) return;
     event.preventDefault();
     const gallery = image.closest("[data-media-zoom-gallery]");
-    openOverlay(gallery, Array.from(gallery.querySelectorAll("img")).indexOf(image), image);
+    openOverlay(gallery, visibleGalleryImages(gallery).indexOf(image), image);
   });
 
   document.addEventListener("focusin", (event) => {

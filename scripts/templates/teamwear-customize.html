@@ -1,32 +1,5 @@
 <main class="page">
 {{PAGE_HEADLINE}}
 
-  <section class="product-detail">
-    <div class="container">
-      <div class="product-detail__panel">
-        <div class="product-detail__gallery" data-builder-preview data-media-zoom-gallery aria-label="{{MODEL_NAME}} images">
-          {{COVER_IMAGE}}
-{{GALLERY_IMAGES}}
-        </div>
-
-        <article class="product-detail__summary" data-teamwear-form data-teamwear-model="{{MODEL_CODE}}" data-notification-title="{{MODEL_NAME}}">
-          <div class="product-detail__header">
-            <div><h1 id="builder-title">{{MODEL_NAME}}</h1></div>
-            {{PRICE}}
-          </div>
-
-          <div class="stack-md">
-{{COLOR_CHOICES}}
-{{PATTERN_CHOICES}}
-{{QUANTITY_CHOICES}}
-{{ADD_ON_CHOICES}}
-          </div>
-
-{{PRIMARY_ACTION}}
-
-{{DESCRIPTION}}
-        </article>
-      </div>
-    </div>
-  </section>
+{{PRODUCT_DETAIL}}
 </main>

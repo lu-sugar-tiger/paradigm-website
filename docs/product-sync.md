@@ -6,6 +6,8 @@ Paradigm's product source is the Google Sheet [商品列表](https://docs.google
 
 The local snapshot uses schema version 4 and canonical lower-camelCase item fields. See [the complete item schema](item-schema.md) for all identifier components, color/size codes, lots, aliases, normalization rules, and the source-to-website generation. Sheet labels are import aliases, not JSON keys.
 
+The saved `data/products-sheet.json` and `data/products-source.json` still represent the previous 0–8 gallery / 9 variant capture. The next Sheet sync uses the mapping below. The catalog-sync validator replays the saved capture in explicit `legacy` mode so this pending media migration does not rewrite the current snapshot.
+
 | Sheet field | Website behavior |
 | --- | --- |
 | `商品型號` | `code`: groups all rows into one item and becomes `/products/{code}`. |
@@ -14,14 +16,13 @@ The local snapshot uses schema version 4 and canonical lower-camelCase item fiel
 | `商品售價` | `salePrice`: numeric selling price, or `null` when unspecified; display this when supplied, otherwise `listPrice`. |
 | `商品連結`, `連結` | `link`: external purchase URL. If absent throughout the item, use `data/store-links.json` → `shopee`, also used by the footer. |
 | `商品文案` | `descriptionSource`: Google Doc source. Import from the first bullet through the last non-empty line. |
-| `商品圖片 0` | Main image. |
-| `商品圖片 1` … `商品圖片 8` | Gallery images in column order. |
-| `商品圖片 9` | Color/variant photo: stored once in `variantImages[]`, referenced by `variants[].imageId`. |
-| `存貨單位` | `variants[].sku`: kept in the repository snapshot and browser catalog, but not rendered on the website. |
+| `商品圖片 0` | Variant cover image: stored once in `variantImages[]`, referenced by `variants[].imageId`. Each distinct image-bearing option gets a catalog card linking to the same item route with its option selected. |
+| `商品圖片 1` … `商品圖片 9` | Shared item gallery images in column order. |
+| `存貨單位` | `variants[].sku`: retained in the repository snapshot and browser catalog. Variant card links use it as a query value while the product path and visible product number remain the item code. |
 | `商品顏色名稱` / `商品顏色`, `商品尺寸名稱` / `商品尺寸` | `variants[].colorName`, `variants[].sizeName`: source option names; website options are deduplicated from visible rows. |
 | `存貨批次`, `存貨批次單位` | `variants[].lots[].code`, `variants[].lots[].id`: optional batch identities, without inventory logic. |
 | `隱藏` | `TRUE` → `visible: false`; `FALSE` → `visible: true`. Publish an item if any variant is visible. Require explicit flags. Legacy `顯示` remains a positive alias; contradictory simultaneous flags fail. |
-| `售罄` | Disables the corresponding option on product detail pages. The purchase action becomes `Sold out` when every visible variant is sold out. Collection cards do not show a sold-out state. |
+| `售罄` | Marks the corresponding option unavailable on product detail pages. An unavailable selected combination changes the purchase action to `Notify me`. |
 
 Category is not present in the sheet. The current deterministic mapping is: shorts → `Bottoms`; hoodies and crewnecks → `AW Tops`; tees and jerseys → `SS Tops`.
 
@@ -40,12 +41,12 @@ Category is not present in the sheet. The current deterministic mapping is: shor
 
 ## Sparse rows and replacement rules
 
-1. Resolve a populated cell first, then matching item-code + color-code rows, then the item-code group. Apply independently to purchase links, Doc links, and gallery slots 0–8. Blank size rows must not erase populated siblings.
+1. Resolve a populated cell first, then matching item-code + color-code rows, then the item-code group. Apply independently to purchase links, Doc links, and gallery slots 1–9. Blank size rows must not erase populated siblings.
 2. The first populated value in Sheet order is the item default. Explicit row/color differences remain variant overrides (`link`, `descriptionSource`, `images`). Conflicting item names, duplicate SKUs, missing flags, unresolved files, and omitted previous item codes stop the import. Visible prices must agree; differing hidden-row prices remain variant overrides.
-3. Any supplied gallery slot 0–8 replaces the entire old gallery relationship. Rebuild only from the new resolved slots and clear old `localImages`; never append stale old slots. If every 0–8 cell is blank, preserve existing `images`, `localImages`, and `imageSource` exactly.
-4. Image 9 is independent of gallery replacement. Inherit it within the same item and color regardless of which size row supplies it. Image 9 alone never clears the gallery. Missing image 9 retains that color's previous image when available, never another color's photo.
+3. Any supplied gallery slot 1–9 replaces the entire old gallery relationship. Rebuild only from the new resolved slots and clear old `localImages`; never append stale old slots. If every 1–9 cell is blank, preserve existing `images`, `localImages`, and `imageSource` exactly.
+4. Image 0 is independent of gallery replacement. Inherit it within the same item and color regardless of which size row supplies it. Image 0 alone never clears the gallery. Missing image 0 retains that color's previous image when available, never another color's photo.
 5. Missing purchase links use the shared store URL, never a stale previous product link. Missing Doc links retain previous copy when present. A new visible item still requires a valid description before the site builds.
-6. Initial page/card media remains image 0. Changing color moves its matching photo to the front of the existing gallery without duplicating it. A color photo not already in the gallery is added with responsive sizes and keyboard enlargement. Missing image 9 leaves the gallery unchanged.
+6. Catalog cards use image 0 without an option label and link to `/products/{code}?variant={sku}`. The linked option is selected on the detail page; direct item links select the first available combination. The horizontal detail gallery starts with images 1–9 and places the selected image 0 last. The stacked gallery shows images 1–9 initially, then places the selected image 0 first after an option click. Image 0 is separate from images 1–9, so the same photo appears in both authored positions when supplied in both places. Changing options replaces that slot without reordering other photos. Missing image 0 removes the variant slot without changing the selection or action.
 7. Purchase actions honor variant link overrides. This capture has no differing per-color descriptions/galleries; review their presentation if a future source introduces them rather than silently assuming one description fits all colors.
 
 ## Refresh workflow
@@ -54,7 +55,7 @@ Category is not present in the sheet. The current deterministic mapping is: shor
 2. Read rich-link chip metadata for `商品文案` and `商品圖片` cells. Plain cell values contain chip labels, not the underlying Drive URLs.
 3. Map resolved rows with `mapSheetItemRow()` and group by flat `itemCode`, then map to nested `items[].code` and the schema paths documented above. Trim alignment whitespace only at the Sheet scalar/header boundary, never in fetched Doc text. Carry item-level values from whichever row contains them; resolve conflicts explicitly. Retain variant SKU, color/size codes and names, visibility, sold-out flags, and any supplied lot records. Review unmapped headers. Do not silently deduplicate source rows.
 4. For every linked Google Doc, read the current file and record its file ID and `modifiedTime`. Copy from the first bullet through the last non-empty line, then apply the complete product-description contract below.
-5. For every linked image, record file ID and `modifiedTime`, then download the original through an authenticated Drive session. Pass that local source to `scripts/generate-product-images.mjs`; `商品圖片 0` remains first only in the product-media relationship and is never encoded into a generated filename.
+5. For every linked image, record file ID and `modifiedTime`, then download the original through an authenticated Drive session. Pass that local source to `scripts/generate-product-images.mjs`; the Sheet slot is stored in the catalog relationship and is never encoded into a generated filename.
 6. Apply the sparse/replacement rules above. Do not delete shared image files merely because an item stopped referencing them. If no real photography exists, retain the existing shared decorative fallback defined in `data/product-image-fallback.json`.
 7. Update `data/products-source.json`, then regenerate and validate:
 
@@ -185,3 +186,8 @@ This avoids missing in-place edits to Docs and photos while keeping unchanged im
 - Replaced the galleries of the 21 items that gained image links, including `ED14024` whose earlier gallery had different files. The two items without new gallery links, `ED14001` and `ED23002`, retained their existing photo relationships. `商品圖片 9` still belongs to each row's color code, including when only one size row supplies it.
 - All 23 visible items now have real product photography; none uses the shared decorative fallback. The old fallback assets are untouched. The `--published-assets-only` catalog check verifies deployed derivatives while the ignored original logo source remains unavailable locally.
 - Validation passed for captured-row replay, item schema, product catalog and image hashes, exact description rendering, search, shared components, generation freshness, and `git diff --check`. HTTP browser checks at 390, 768, and 1440px covered all 23 product routes, representative new and retained galleries, color selection, keyboard enlargement, and positive horizontal overflow; no application errors or failed local assets were found. Google Fonts requests failed in the test environment, so external font/icon appearance could not be verified there.
+
+## Source layout note: 2026-09-24 (not synced)
+
+- The Sheet now uses `商品圖片 0` as the cover/variant image and `商品圖片 1`–`商品圖片 9` as regular gallery images. The image content itself was not changed.
+- This is a mapping note only. No Sheet capture, catalog replacement, derivative generation, or site rebuild was performed. The saved catalog still reflects the previous `0`–`8` gallery / `9` variant mapping until the next requested sync.

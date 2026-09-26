@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { itemPriceLabel, validateItemCatalog } from "./lib/item-schema.mjs";
+import { catalogEntriesForProduct } from "./lib/catalog-entries.mjs";
 import { renderDescription } from "./lib/site-renderers.mjs";
 import { createHash } from "node:crypto";
 import { access, readFile, stat } from "node:fs/promises";
@@ -160,6 +161,17 @@ const sourceColorwayLabels = [...new Set(
 assert.ok(sourceColorwayLabels.every((label) => colorByLabel.has(label)), "colors.json must cover every visible product colorway");
 assert.equal(products.length, visibleSources.length, "catalog must include every visible product model");
 assert.equal(new Set(products.map((product) => product.code)).size, products.length, "product numbers must be unique");
+const imageOptionFixture = {
+  code: "BA14001", name: "Bag", alt: "Bag", media: [{ src: "gallery.webp" }],
+  variantMedia: { small: { src: "small.webp" }, large: { src: "large.webp" } },
+  variants: [
+    { sku: "BA14001-C01-S1", visible: true, soldOut: false, colorCode: "C01", colorName: "Black", sizeName: "Small", imageId: "small" },
+    { sku: "BA14001-C01-S2", visible: true, soldOut: false, colorCode: "C01", colorName: "Black", sizeName: "Large", imageId: "large" }
+  ]
+};
+assert.deepEqual(catalogEntriesForProduct(imageOptionFixture).map((entry) => entry.variantLabel), ["Black · Small", "Black · Large"], "future size-specific photographs must create distinct option cards");
+imageOptionFixture.variants[1].imageId = "small";
+assert.equal(catalogEntriesForProduct(imageOptionFixture).length, 1, "sizes sharing one variant image must share one catalog card");
 
 const sourceByCode = new Map(source.items.map((product) => [product.code, product]));
 const fallbackImages = [];
@@ -239,7 +251,7 @@ for (const product of products) {
   const sourceHasPhotography = (sourceProduct.images || []).some((image) => image.localPath)
     || (sourceProduct.localImages || []).some(Boolean);
   if (sourceHasPhotography) {
-    assert.equal(product.image, product.images[0], `${product.code} main image must be image 0`);
+    assert.equal(product.image, product.images[0], `${product.code} item gallery image must be first in source order`);
     for (const image of product.images) await access(path.join(ROOT, image));
     assert.equal(product.media.length, product.images.length, `${product.code} media records must match its image list`);
   } else {
@@ -269,14 +281,21 @@ for (const product of products) {
   });
   assert.ok(!route.includes("{{"), `${product.code} route must not contain template tokens`);
   const galleryMarkup = route.slice(route.indexOf("data-product-gallery"), route.indexOf('<article class="product-detail__summary">'));
-  assert.equal(occurrences(galleryMarkup, /<img src="\.\.\/\.\.\/assets\/images\/(?:catalog|products)\//g), product.images.length, `${product.code} route media count must match images`);
+  const selectedVariant = product.variants.find((variant) => variant.visible && !variant.soldOut) || product.variants.find((variant) => variant.visible);
+  const colorImages = [...new Set(product.variants.filter((variant) => variant.visible && variant.colorCode === selectedVariant?.colorCode && variant.imageId).map((variant) => variant.imageId))];
+  const selectedImageId = selectedVariant?.imageId || (colorImages.length === 1 ? colorImages[0] : null);
+  const hasVariantSlide = Boolean(product.variantMedia?.[selectedImageId]);
+  assert.equal(occurrences(galleryMarkup, /<img src="\.\.\/\.\.\/assets\/images\/(?:catalog|products)\//g), product.images.length + Number(hasVariantSlide), `${product.code} route must render its authored gallery plus the selected variant slot`);
+  assert.equal(occurrences(galleryMarkup, /data-product-variant-image/g), Number(hasVariantSlide), `${product.code} route must have at most one variant slot`);
+  assert.equal(occurrences(galleryMarkup, / data-product-image-id=/g), product.galleryImageIds.length + Number(hasVariantSlide), `${product.code} route must preserve each authored gallery image and the separate variant slot`);
   if (!sourceHasPhotography) {
     assert.equal(occurrences(galleryMarkup, /data-product-image-fallback/g), 1, `${product.code} detail route must mark its fallback image`);
     assert.doesNotMatch(galleryMarkup, /data-media-zoom-gallery|data-media-zoom-touch/, `${product.code} fallback must not enable image zoom`);
   }
   if (product.media.some((image) => image.derivatives.length)) {
-    assert.equal(occurrences(galleryMarkup, / srcset="/g), product.media.filter((image) => image.derivatives.length).length, `${product.code} responsive gallery images must expose srcset`);
-    assert.equal(occurrences(galleryMarkup, / sizes="\(min-width: 80rem\) 768px, \(min-width: 64rem\) 60vw, 100vw"/g), product.media.filter((image) => image.derivatives.length).length, `${product.code} responsive gallery images must expose the detail slot sizes`);
+    const responsiveCount = product.media.filter((image) => image.derivatives.length).length + Number(Boolean(hasVariantSlide && product.variantMedia[selectedImageId].derivatives.length));
+    assert.equal(occurrences(galleryMarkup, / srcset="/g), responsiveCount, `${product.code} responsive gallery images must expose srcset`);
+    assert.equal(occurrences(galleryMarkup, / sizes="\(min-width: 80rem\) 768px, \(min-width: 64rem\) 60vw, 100vw"/g), responsiveCount, `${product.code} responsive gallery images must expose the detail slot sizes`);
   }
   assert.ok(!product.variants.some((variant) => route.includes(variant.sku)), `${product.code} route must not render SKUs`);
   assert.ok(route.includes("Generated by scripts/build-site.mjs"), `${product.code} route must carry the generated banner`);
@@ -292,6 +311,12 @@ for (const product of products) {
 }
 
 const allProductsPage = await readFile(path.join(ROOT, "collections", "all", "index.html"), "utf8");
+const catalogEntries = Array.from(products.flatMap(catalogEntriesForProduct));
+const catalogCardUrls = [...allProductsPage.matchAll(/<a class="product-card" href="([^"]+)">/g)].map((match) => match[1]);
+assert.deepEqual(catalogCardUrls, Array.from(catalogEntries, (entry) => entry.cardUrl), "all-products cards must link every distinct image-bearing option to the shared item route");
+assert.doesNotMatch(allProductsPage, /product-card__category/, "catalog cards must not show option labels");
+const searchIndex = JSON.parse(await readFile(path.join(ROOT, "assets", "data", "search-index.json"), "utf8"));
+assert.deepEqual(searchIndex.items.map((entry) => entry.url), catalogCardUrls, "Search must use the same variant entries and destinations as the catalog");
 assert.equal(occurrences(allProductsPage, /data-product-image-fallback/g), fallbackImages.length, "all-products catalog must render every shared fallback");
 assert.doesNotMatch(allProductsPage, /product-card__media" data-media-zoom-touch><img[^>]*data-product-image-fallback/, "catalog fallback images must not enable touch zoom");
 
