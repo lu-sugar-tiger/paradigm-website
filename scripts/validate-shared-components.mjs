@@ -5,7 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { categoryForName, productFamilyKey, rankRelatedProducts } from "./lib/product-relations.mjs";
 import { normalizeDescriptionSource, transformDescription } from "./lib/rich-description.mjs";
-import { renderBreadcrumb, renderChoiceGroup, renderDescription, renderPageHeadline, renderPrimaryAction, renderProductDetail, renderProductDetailPrice, renderProductGrid, renderRailControls, renderSiteFooter, renderSiteHeader } from "./lib/site-renderers.mjs";
+import { productCardDisplayName, renderBreadcrumb, renderChoiceGroup, renderDescription, renderPageHeadline, renderPrimaryAction, renderProductDetail, renderProductDetailPrice, renderProductGrid, renderRailControls, renderSiteFooter, renderSiteHeader } from "./lib/site-renderers.mjs";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const read = (relativePath) => readFile(path.join(ROOT, relativePath), "utf8");
@@ -284,6 +284,12 @@ const productGridFixture = renderProductGrid([
 ]);
 assert.match(productGridFixture, /^<div class="auto-grid product-grid" data-generated-component="product-grid">/, "product grids must expose one controlled vertical-feed class contract");
 assert.doesNotMatch(productGridFixture, /marquee-strip/, "product grids must not expose the removed carousel variation");
+assert.equal(productCardDisplayName("PRDM Everyday Tee"), "Everyday Tee", "Only the plain PRDM prefix is omitted from card display names");
+assert.equal(productCardDisplayName("PRDM× Partner Tee"), "PRDM× Partner Tee", "Collaboration names beginning PRDM× must stay intact");
+assert.equal(productCardDisplayName("NTUESOE Arch Crewneck"), "NTUESOE Arch Crewneck", "Partner-first product names must stay intact");
+const namedCard = renderProductGrid([{ code: "ED14001", name: "PRDM Everyday Tee", priceLabel: "NT$590", image: null, alt: "" }]);
+assert.match(namedCard, /class="product-card__title">Everyday Tee<\/h3>\s*<span class="product-card__price">NT\$590<\/span>/, "Generated cards must place the display name and price in one row");
+assert.doesNotMatch(namedCard, /product-card__footer|>PRDM Everyday Tee</, "Cards must not retain the old price footer or full plain prefix");
 
 const productDetailPriceFixture = renderProductDetailPrice({ price: "NT$1,580", dataAttribute: "data-product-price" });
 assert.equal(productDetailPriceFixture, '<p class="product-detail__price" data-product-price data-generated-component="product-detail-price">NT$1,580</p>', "product-detail prices must share one renderer and support controlled data hooks");
@@ -387,7 +393,7 @@ assert.match(components, /\.button\s*\{[^}]*--font-weight-base:\s*var\(--type-h5
 assert.match(components, /\.search-form\s*\{[^}]*--font-weight-base:\s*var\(--type-body-weight\);/, "Search action icons must explicitly share the field's Body weight");
 assert.match(components, /\.footer-link\s*\{[^}]*--font-weight-base:\s*var\(--type-body-weight\);[^}]*font-weight:\s*var\(--font-weight-base\);/, "footer external arrows must explicitly share their Body label weight");
 assert.match(components, /\.product-grid\s*\{[\s\S]*?gap:\s*var\(--space-1\);[\s\S]*?background:\s*transparent;/, "product-card sections must share the 2px gap and no-fill background contract");
-assert.match(pages, /\.reference-page--detail \.product-feed-section\s*\{[\s\S]*?margin-top:\s*var\(--space-1\);/, "product-page feeds must expose a 2px Background Mid divider after the product detail");
+assert.match(pages, /\.reference-page--detail \.product-feed-section\s*\{[\s\S]*?margin-top:\s*var\(--space-7\);/, "product-page feeds must start 32px after the product detail");
 assert.match(components, /\.product-card\s*\{[\s\S]*?border:\s*0;[\s\S]*?background:\s*var\(--color-surface-high\);/, "individual product cards must use the Surface High fill without a resting stroke");
 assert.match(components, /\.product-card__media\s*\{[\s\S]*?background:\s*transparent;/, "product photos must have no independent fill over the card surface");
 assert.match(rendererSource, /const touchZoom = image && !media\?\.isFallback \? " data-media-zoom-touch" : "";[\s\S]*?class="product-card__media"\$\{touchZoom\}/, "shared product cards must opt in only when populated non-fallback media exists");
@@ -429,7 +435,9 @@ assert.match(components, /\.product-card__body\s*\{[\s\S]*?background:\s*transpa
 assert.match(components, /\.product-card__title\s*\{[\s\S]*?background:\s*transparent;/, "product names must have no independent fill over the card surface");
 assert.match(components, /\.product-card__title\s*\{[\s\S]*?color:\s*var\(--color-on-surface-high\);/, "product names must use On Surface High over the Surface High card");
 assert.match(components, /\.product-card__price\s*\{[\s\S]*?background:\s*transparent;[\s\S]*?color:\s*var\(--color-on-surface-low\);/, "product prices must use On Surface Low without an independent fill");
-assert.match(components, /\.product-card__price\s*\{[\s\S]*?display:\s*block;[\s\S]*?width:\s*100%;[\s\S]*?text-align:\s*right;/, "product prices must occupy and align to the complete responsive card-content width");
+assert.match(components, /\.product-card__body\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0,\s*1fr\) max-content;[\s\S]*?gap:\s*var\(--space-3\);/, "product names and prices must share a top row with enough space between them");
+assert.match(components, /\.product-card__price\s*\{[\s\S]*?white-space:\s*nowrap;[\s\S]*?text-align:\s*right;/, "product prices must stay aligned with the first name line");
+assert.doesNotMatch(components, /\.product-card__footer\s*\{/, "the removed product-card price footer must not reserve layout space");
 const productCardStyles = components.match(/\.product-grid\s*\{[\s\S]*?(?=\.product-detail\s*\{)/)?.[0] || "";
 assert.doesNotMatch(productCardStyles, /--color-on-background-/, "product-card content must not use On Background roles over a Surface fill");
 assert.doesNotMatch(`${components}\n${pages}`, /marquee-strip/, "the removed horizontal product carousel must not retain CSS overrides");
@@ -503,13 +511,13 @@ for (const relativePath of generatedPages) {
   assert.match(page, /assets\/css\/tokens\.css\?v=20260916a/, `${relativePath} must cache-bust the shared typography, target, icon, safe-area, media-layer, and motion tokens`);
   assert.match(page, /assets\/css\/motion\.css\?v=20260831a/, `${relativePath} must load the shared motion layer`);
   assert.match(page, /assets\/css\/base\.css\?v=20260916b/, `${relativePath} must cache-bust the shared visual-role font behavior`);
-  assert.match(page, /assets\/css\/components\.css\?v=20260924a/, `${relativePath} must load centralized detail component styles`);
-  assert.match(page, /assets\/css\/pages\.css\?v=20260923a/, `${relativePath} must drop the superseded page-level detail overrides`);
+  assert.match(page, /assets\/css\/components\.css\?v=20260927e/, `${relativePath} must load centralized detail component styles`);
+  assert.match(page, /assets\/css\/pages\.css\?v=20260927a/, `${relativePath} must load the updated related-product spacing`);
   assert.match(page, /assets\/css\/reset\.css\?v=20260829a/, `${relativePath} must cache-bust the stable scrollbar-gutter reset`);
   assert.match(page, /assets\/js\/page-transitions\.js\?v=20260831a/, `${relativePath} must load the early route-motion controller`);
   assert.match(page, /assets\/js\/app\.js\?v=20260914a/, `${relativePath} must cache-bust the shared overlay behavior`);
-  assert.match(page, /assets\/js\/search-core\.js\?v=20260910a/, `${relativePath} must load the shared search matcher`);
-  assert.match(page, /assets\/js\/search\.js\?v=20260924a/, `${relativePath} must load the shared Search interface`);
+  assert.match(page, /assets\/js\/search-core\.js\?v=20260927b/, `${relativePath} must load the shared search matcher`);
+  assert.match(page, /assets\/js\/search\.js\?v=20260927b/, `${relativePath} must load the shared Search interface`);
   assert.match(page, /assets\/js\/choices\.js\?v=20260924a/, `${relativePath} must cache-bust the shared choice and floating-action controller`);
   if (/^(?:index\.html|collections\/|products\/|teamwear\/|search\/)/.test(relativePath)) {
     assert.match(page, /assets\/js\/media-zoom\.js\?v=20260924a/, `${relativePath} must cache-bust the shared media inspection behavior`);
@@ -517,7 +525,7 @@ for (const relativePath of generatedPages) {
     assert.doesNotMatch(page, /media-zoom\.js/, `${relativePath} must not load media inspection outside opted-in page families`);
   }
   if (relativePath === "teamwear/index.html") {
-    assert.match(page, /assets\/css\/teamwear-story\.css\?v=20260922a/, `${relativePath} must cache-bust the Teamwear stylesheet after removing the fabric section`);
+    assert.match(page, /assets\/css\/teamwear-story\.css\?v=20260927a/, `${relativePath} must load the current cache-busted Teamwear stylesheet`);
   }
   assert.match(page, /rel="preconnect" href="https:\/\/fonts\.googleapis\.com"/, `${relativePath} must preconnect to Google Fonts CSS`);
   assert.match(page, /rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin/, `${relativePath} must preconnect to Google font files`);
@@ -594,12 +602,12 @@ for (const relativePath of generatedPages) {
     const expectedItemCodes = rankRelatedProducts(visibleProducts, currentProduct).map((product) => product.code);
     const actualItemCodes = [...page.matchAll(/<a class="product-card" href="\/products\/([^"]+)">/g)].map((match) => match[1].split("?")[0]);
     assert.match(page, /class="breadcrumb__current" aria-current="page" data-product-breadcrumb-title/, `${relativePath} product breadcrumb title must preserve authored casing`);
-    assert.match(page, /<section class="section section--tight product-feed-section">[\s\S]*?<div class="auto-grid product-grid"/, `${relativePath} must place the shared feed after a tokenized divider boundary`);
+    assert.match(page, /<section class="section section--tight product-feed-section">[\s\S]*?<div class="auto-grid product-grid"/, `${relativePath} must place the shared feed after the product detail`);
     assert.match(page, /<div class="auto-grid product-grid" data-generated-component="product-grid">/, `${relativePath} must use the shared vertical product feed`);
     assert.doesNotMatch(page, /marquee-strip/, `${relativePath} must not render the removed product carousel`);
     assert.equal(actualItemCodes.length, visibleProducts.length - 1, `${relativePath} must render every other visible product`);
     assert.ok(!actualItemCodes.includes(currentProductNumber), `${relativePath} must exclude its current product`);
-    assert.deepEqual(actualItemCodes, expectedItemCodes, `${relativePath} must preserve the family-category-catalog similarity order`);
+    assert.deepEqual(actualItemCodes, expectedItemCodes, `${relativePath} must preserve the shared vector similarity order`);
   }
   if (relativePath === "teamwear/index.html") {
     assert.match(page, /<body class="[^"]*teamwear-story-shell/, "Teamwear landing must own its page-positioned header behavior");
@@ -613,9 +621,8 @@ for (const relativePath of generatedPages) {
 
 const relatedCodesFor = (code) => rankRelatedProducts(visibleProducts, visibleItemByCode.get(code)).map((product) => product.code);
 assert.equal(productFamilyKey("14001"), null, "products without an alphabetic prefix must not share a family key");
-assert.deepEqual(relatedCodesFor("ED14001").slice(0, 3), ["ED14024", "ED24014", "ED23002"], "Everyday products must rank by family, then category, then newest-first catalog order");
-assert.equal(relatedCodesFor("PH14010")[0], "PH14011", "Football jerseys must rank their matching family first");
-assert.equal(relatedCodesFor("GM42022")[0], "GM42023", "Training shorts must rank their matching family first");
+assert.equal(new Set(relatedCodesFor("ED14001")).size, visibleProducts.length - 1, "related items must be unique");
+assert.ok(!relatedCodesFor("ED14001").includes("ED14001"), "related items must exclude the current item");
 
 const repositoryFiles = await listRepositoryFiles();
 const svgFiles = repositoryFiles.filter((relativePath) => relativePath.toLowerCase().endsWith(".svg")).sort();

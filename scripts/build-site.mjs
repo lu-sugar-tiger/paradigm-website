@@ -6,11 +6,13 @@ import {
   transformDescription
 } from "./lib/rich-description.mjs";
 import { categoryForName, rankRelatedProducts } from "./lib/product-relations.mjs";
+import searchCore from "../assets/js/search-core.js";
 import { catalogEntriesForProduct } from "./lib/catalog-entries.mjs";
 import { resolveProductMedia, responsiveMediaFromSource } from "./lib/product-images.mjs";
 import { itemPriceLabel, validateItemCatalog } from "./lib/item-schema.mjs";
 import {
   html,
+  productCardDisplayName,
   renderChoiceGroup,
   renderDescription,
   renderDocument,
@@ -260,16 +262,19 @@ function buildSearchIndex(searchConfig, products) {
     url: page.url,
     summary: page.summary,
     keywords: page.keywords,
-    external: Boolean(page.external),
-    searchTerms: [page.title, page.summary, ...page.keywords]
+    external: Boolean(page.external)
   }));
+  const descriptions = Object.fromEntries([...new Map(products.map((product) => [product.code, product])).values()]
+    .map((product) => [product.code, searchCore.descriptionTerms(product)]));
   const searchProducts = products.map((product) => {
     const type = productType(product.name);
     const family = productFamily(product.name);
     const colors = product.variantLabel ? [product.variantLabel] : product.colors.map((color) => color.label);
     return {
       code: product.code,
+      sku: product.cardVariantSku || "",
       name: product.name,
+      cardName: productCardDisplayName(product.name),
       category: product.category,
       colors,
       type,
@@ -278,20 +283,21 @@ function buildSearchIndex(searchConfig, products) {
       url: product.cardUrl || `/products/${product.code}`,
       media: product.cardMedia || product.media[0] || null,
       alt: product.cardAlt || product.alt,
-      variantLabel: product.variantLabel || "",
-      searchTerms: [product.name, product.code, product.category, ...colors, type, family]
+      variantLabel: product.variantLabel || ""
     };
   });
   const vocabulary = uniqueLabels([
     ...searchConfig.popularKeywords,
     ...pages.flatMap((page) => [page.title, ...page.keywords]),
-    ...searchProducts.flatMap((product) => [product.family, product.type, product.category, ...product.colors])
+    ...searchProducts.flatMap((product) => [product.cardName, product.family, product.type, product.category, ...product.colors]),
+    ...(searchConfig.descriptivePhrases || [])
   ]);
   return {
-    schemaVersion: 2,
+    schemaVersion: 3,
     popularKeywords: searchConfig.popularKeywords,
     vocabulary,
     pages,
+    descriptions,
     items: searchProducts
   };
 }
@@ -391,7 +397,7 @@ ${[...heroVideo.variants].reverse().filter((variant) => variant.minWidth).map((v
     currentPath: "/teamwear",
     bodyClass: "site-shell reference-page teamwear-page teamwear-story-shell",
     main,
-    styles: ["teamwear.css?v=20260829c", "teamwear-story.css?v=20260922a"],
+    styles: ["teamwear.css?v=20260829c", "teamwear-story.css?v=20260927a"],
     scripts: ["teamwear-options.js?v=20260917b", "teamwear.js?v=20260913a", "hero-video.js?v=20260924a", "media-zoom.js?v=20260924a"],
     head: `  <meta property="og:title" content="${html(model.name)} | Paradigm">\n  <meta property="og:description" content="${html(`${model.name} is a reversible basketball uniform system composed by Paradigm for the whole roster.`)}">\n  <meta property="og:image" content="https://prdm.tw/assets/images/teamwear/campaign/hero-desktop.webp">\n  <meta property="og:type" content="website">`
   });

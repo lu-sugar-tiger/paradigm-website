@@ -814,24 +814,18 @@ body[data-overlay-state] .site-header {
 }
 
 .product-card__body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: var(--space-2);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  align-items: start;
+  gap: var(--space-3);
   min-width: 0;
-  min-height: calc(
-    var(--type-h6-line-height)
-    + var(--space-2)
-    + var(--type-body-line-height)
-    + var(--space-3)
-  );
+  min-height: calc(var(--type-h6-line-height) + var(--space-3));
   padding: 0 calc(var(--layout-shell-gutter-inline) - var(--space-3)) var(--space-3);
   background: transparent;
 }
 
 .product-card__title {
-  display: flex;
-  align-items: center;
+  min-width: 0;
   min-height: var(--type-h6-line-height);
   color: var(--color-on-surface-high);
   font-size: var(--type-h6-size);
@@ -850,15 +844,10 @@ body[data-overlay-state] .site-header {
 }
 
 .product-card__price {
-  display: block;
-  width: 100%;
+  white-space: nowrap;
   text-align: right;
   text-transform: none;
   letter-spacing: 0;
-}
-
-.product-card__footer {
-  display: block;
 }
 
 .product-detail {
@@ -1756,18 +1745,19 @@ body:has(.primary-action[data-action-behavior]) .site-footer__grid {
 @media (min-width: 64rem) {
   .product-detail__panel {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: stretch;
     gap: 0;
-    background: var(--color-surface-high);
+    background: transparent;
   }
 
   .product-detail__gallery {
     position: static;
     display: grid;
-    grid-column: span 3;
+    grid-column: span 2;
     gap: 0;
     aspect-ratio: auto;
+    margin-inline: var(--layout-shell-gutter-inline);
     overflow: visible;
     scroll-snap-type: none;
     overscroll-behavior-inline: auto;
@@ -1787,7 +1777,8 @@ body:has(.primary-action[data-action-behavior]) .site-footer__grid {
   .product-detail__gallery[data-variant-revealed] [data-product-variant-image] { order: -1; }
 
   .product-detail__summary {
-    grid-column: span 2;
+    grid-column: span 1;
+    padding-inline-start: 0;
   }
 
   .product-detail__summary > .primary-action-mount .primary-action {

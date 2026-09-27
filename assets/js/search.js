@@ -24,10 +24,14 @@
 
   function searchIndex() {
     if (!searchIndexPromise) {
-      searchIndexPromise = fetch("/assets/data/search-index.json?v=20260924a", { credentials: "same-origin" })
+      searchIndexPromise = fetch("/assets/data/search-index.json?v=20260927b", { credentials: "same-origin" })
         .then((response) => {
           if (!response.ok) throw new Error(`Search index request failed with ${response.status}`);
           return response.json();
+        })
+        .then((index) => {
+          for (const item of index.items) item.descriptionTerms = index.descriptions?.[item.code] || [];
+          return index;
         });
     }
     return searchIndexPromise;
@@ -75,10 +79,8 @@
       media.append(image);
     }
     const body = element("div", "product-card__body");
-    body.append(element("h3", "product-card__title", product.name));
-    const footer = element("div", "product-card__footer");
-    footer.append(element("span", "product-card__price", product.priceLabel));
-    body.append(footer);
+    body.append(element("h3", "product-card__title", product.cardName));
+    body.append(element("span", "product-card__price", product.priceLabel));
     link.append(media, body);
     return link;
   }

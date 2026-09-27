@@ -161,8 +161,8 @@ assert.doesNotMatch(tokens, /--product-card-rail-(?:width|height)/, "Removed car
 assert.doesNotMatch(`${components}\n${pages}`, /marquee-strip/, "Removed horizontal product-carousel styles must not remain");
 assert.match(
   components,
-  /\.product-card__body\s*\{[\s\S]*?gap:\s*var\(--space-2\)/,
-  "Catalog product names and prices must use the 4px tight internal gap"
+  /\.product-card__body\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0,\s*1fr\) max-content;[\s\S]*?gap:\s*var\(--space-3\)/,
+  "Catalog product names and prices must share a top row with the tokenized 8px gap"
 );
 assert.match(
   components,
@@ -236,7 +236,7 @@ assert.doesNotMatch(
 assert.match(
   mediumComponents,
   /\.product-detail__summary\s*\{[\s\S]*?padding:\s*var\(--space-5\) var\(--space-7\)/,
-  "Medium and larger product information must retain 16px vertical padding and align horizontally to the 32px responsive gutter"
+  "Medium product information must retain 16px vertical and 32px horizontal padding before the Large left-inset override"
 );
 assert.doesNotMatch(
   mediumComponents,
@@ -247,11 +247,11 @@ assert.doesNotMatch(
 const largeComponents = blockAfter(components, "@media (min-width: 64rem)");
 assert.match(
   largeComponents,
-  /\.product-detail__panel\s*\{[\s\S]*?grid-template-columns:\s*repeat\(5,\s*minmax\(0,\s*1fr\)\)[\s\S]*?align-items:\s*stretch[\s\S]*?gap:\s*0/,
-  "Large product detail must use a gapless equal-height five-column grid"
+  /\.product-detail__panel\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\)[\s\S]*?align-items:\s*stretch[\s\S]*?gap:\s*0;[\s\S]*?background:\s*transparent/,
+  "Large product detail must align to the gapless three-column product grid and reveal the page background"
 );
-assert.match(largeComponents, /\.product-detail__gallery\s*\{[\s\S]*?grid-column:\s*span 3/, "Large gallery must span three columns");
-assert.match(largeComponents, /\.product-detail__summary\s*\{[\s\S]*?grid-column:\s*span 2/, "Large information must span two columns");
+assert.match(largeComponents, /\.product-detail__gallery\s*\{[\s\S]*?grid-column:\s*span 2;[\s\S]*?margin-inline:\s*var\(--layout-shell-gutter-inline\)/, "Large gallery bounds must align with the text insets across two columns");
+assert.match(largeComponents, /\.product-detail__summary\s*\{[\s\S]*?grid-column:\s*span 1;[\s\S]*?padding-inline-start:\s*0/, "Large information must occupy the third column with 32px from the gallery image to its text");
 assert.match(largeComponents, /data-action-behavior="fixed-to-static"[\s\S]*?position:\s*static/, "Large purchase and inquiry actions must be static");
 
 assert.doesNotMatch(pages, /\.product-detail__|\.rich-description\b/, "Detail component styles must be owned by components.css");
@@ -322,6 +322,8 @@ assert.doesNotMatch(teamwearStory, /media-zoom-(?:source|surface)-active/, "Team
 assert.match(teamwearBehavior, /--rail-card-delay[\s\S]*?--motion-stagger-short/, "Rail entrance stagger must consume the shared short stagger token");
 assert.match(teamwearBehavior, /reducedMotionQuery\.addEventListener\("change"[\s\S]*?rails\.forEach\(\(rail\) => railUpdates\.get\(rail\)\?\.\(\)\)/, "Teamwear rail motion must tear down and resume when the reduced-motion preference changes");
 assert.match(teamwearStory, /\.teamwear-story-page \.teamwear-hero\s*\{[\s\S]*?width:\s*100%;[\s\S]*?margin-inline:\s*auto;[\s\S]*?padding:\s*0/, "Teamwear hero must span the complete viewport width without extra top padding");
+assert.match(teamwearStory, /\.teamwear-story-page \.teamwear-hero\s*\{[^}]*min-height:\s*calc\(100svh - var\(--header-height\)\);/, "Teamwear hero must fill the viewport below the header");
+assert.match(teamwearStory, /\.teamwear-hero__copy\s*\{[^}]*min-height:\s*calc\(100svh - var\(--header-height\)\);/, "Teamwear hero copy must fill the same viewport area as its media");
 assert.doesNotMatch(teamwearStory, /layout-canvas-width/, "Teamwear media must not retain the removed 1440px cap");
 assert.match(teamwearStory, /\.teamwear-hero__copy\s*\{[\s\S]*?var\(--layout-section-padding-editorial\)[\s\S]*?var\(--primary-action-fixed-clearance\)/, "Hero copy must derive action clearance from shared primary-action tokens");
 const mediumTeamwear = blockAfter(teamwearStory, "@media (min-width: 48rem)");
@@ -405,4 +407,4 @@ assert.doesNotMatch(`${components}\n${teamwearStory}`, /primary-action-dock|is-d
 assert.doesNotMatch(teamwear, /\.teamwear-(?:facts|patterns|pattern-grid|pattern-card|on-court|reversible|feedback|closing)/, "Unused legacy Teamwear landing rules must be removed");
 assert.doesNotMatch(`${components}\n${pages}`, /\.reference-page--teamwear/, "Unused legacy Teamwear page rules must be removed from shared CSS");
 
-console.log("LAYOUT_SYSTEM_OK spacing=2-64 gutters=16-32 sections=24-48-64 media=viewport content=960-1280 catalog=2-3-3 detail=single-single-5col teamwear=mobile-mobile-desktop");
+console.log("LAYOUT_SYSTEM_OK spacing=2-64 gutters=16-32 sections=24-48-64 media=viewport content=960-1280 catalog=2-3-3 detail=single-single-3col teamwear=mobile-mobile-desktop");

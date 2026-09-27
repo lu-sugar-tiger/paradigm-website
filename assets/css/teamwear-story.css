@@ -166,7 +166,7 @@
 .teamwear-story-page .teamwear-hero {
   position: relative;
   width: 100%;
-  min-height: max(42rem, calc(92svh - var(--header-height)));
+  min-height: calc(100svh - var(--header-height));
   margin-inline: auto;
   padding: 0;
   overflow: hidden;
@@ -220,7 +220,7 @@
   align-content: end;
   justify-items: center;
   gap: 0;
-  min-height: max(42rem, calc(92svh - var(--header-height)));
+  min-height: calc(100svh - var(--header-height));
   padding-block:
     var(--layout-section-padding-editorial)
     calc(var(--layout-section-padding-editorial) + var(--primary-action-fixed-clearance));
@@ -249,10 +249,6 @@
   }
 }
 
-.teamwear-hero__content .teamwear-kicker {
-  color: var(--color-on-container-low);
-}
-
 .teamwear-hero__content h1 {
   --type-heading-origin: center;
   max-width: 42rem;
@@ -260,7 +256,6 @@
 
 .teamwear-hero__content > p:last-child {
   max-width: 36rem;
-  color: var(--color-on-container-low);
 }
 
 .teamwear-hero__copy .primary-action-mount {
