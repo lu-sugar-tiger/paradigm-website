@@ -35,7 +35,7 @@ Category is not present in the sheet. The current deterministic mapping is: shor
 - `scripts/lib/rich-description.mjs` preserves ordinary source text and blank paragraphs in source order, turns dash-only lines into horizontal dividers without changing their neighbors, identifies hashtag lines, and turns positively detected rectangular size blocks into semantic tables. The same contract serves Product Detail and Teamwear Customize.
 - `scripts/build-site.mjs` builds the catalog and every shared static page. `scripts/build-product-catalog.mjs` delegates to it for backward compatibility.
 - `scripts/templates/product-page.html` is product composition only; the shared shell, choices, actions, product cards, navigation, and footer come from `scripts/lib/site-renderers.mjs`.
-- `data/colors.json` is the canonical product and Teamwear color registry. Option data stores `colorId`, never a local hex value.
+- `data/colors.json` is the canonical product and Teamwear color registry. Its complete `palette` maps stable item color codes `C01`–`C79` to Hex values, while `colors` maps only current display names and ids to those codes. Product variants retain their existing `colorName` and `colorCode`; Teamwear options retain `colorId` and the matching code as their option id. Names may change later without changing the code-to-Hex identity. No option data stores a local Hex value.
 - `scripts/validate-product-catalog.mjs` verifies source coverage, colorway completeness, routes, images, purchase links, product-detail sold-out behavior, and the exact copy-token contract.
 - `assets/images/catalog/` stores published content-addressed derivatives. Original downloads remain in a local staging directory, not public assets.
 
@@ -79,7 +79,7 @@ Capture reads without writing to Google Drive. Use one local staging directory c
 
 Run `node scripts/sync-product-catalog.mjs <capture-directory>` first. Review `candidate.json` and `report.json`, then rerun with `--apply`. The importer updates the source catalog and resolved Sheet snapshot only after all resources resolve. Generated image families are cached by file ID and modification time; local derivative files must also exist before reuse. Keep staging inputs locally for comparison, but never commit signed download URLs.
 
-Run `validate-catalog-sync.mjs`, `validate-item-schema.mjs`, `build-site.mjs`, `build-site.mjs --check`, `validate-description-rendering.mjs`, and `validate-product-catalog.mjs`. The strict catalog validator requires the original ignored fallback artwork. When it is unavailable, `--published-assets-only` explicitly omits only that original-artwork hash check and still checks every published derivative, image relationship, route, and description. Do not report this mode as a complete original-source audit.
+Run `validate-catalog-sync.mjs`, `validate-item-schema.mjs`, `build-site.mjs`, `build-site.mjs --check`, `validate-description-rendering.mjs`, and `validate-product-catalog.mjs`. The catalog validator checks the original fallback artwork hash when the file is present in `assets/temp`; normal validation also works after temporary staging is cleaned. It always verifies every published fallback derivative, image relationship, route, and description. Use `--require-original-source` for an explicit original-artwork audit, or `--published-assets-only` to skip the original check even when the staging file is present.
 
 - Generate exactly three lossy WebP derivatives at quality `100`, with short edges of `540`, `1080`, and `2160` pixels.
 - Preserve the source aspect ratio without cropping. For example, a 5:4 landscape image produces `675x540`, `1350x1080`, and `2700x2160` derivatives.
@@ -87,7 +87,7 @@ Run `validate-catalog-sync.mjs`, `validate-item-schema.mjs`, `build-site.mjs`, `
 - Store the complete 64-character SHA-256 in `data/products-source.json`. Public filenames start with a 20-character prefix; if that candidate collides with different bytes, the generator extends the prefix until it is unique.
 - Hash the final WebP bytes. Different resolutions therefore have different hashes and paths. Their shared source identity and gallery order remain database relationships.
 - The generated catalog retains `image` and `images` as fallback paths and adds `media[].derivatives` for native `srcset` rendering. Cards and product-detail galleries use the same derivative family with context-specific `sizes` values.
-- The shared missing-photo fallback uses the square `assets/temp/Aesthetics_Logo_InitialA[0.1.1].png` source at `6.25%` opacity over white. It is flattened to opaque RGB WebP at the same three sizes without cropping and is excluded from product-image zoom behavior.
+- The shared missing-photo fallback was generated from the square `assets/temp/Aesthetics_Logo_InitialA[0.1.1].png` source at `6.25%` opacity over white. The original may be removed after import; its published opaque RGB WebP derivatives remain in `assets/images/catalog/` and are excluded from product-image zoom behavior.
 - The generator requires Sharp to be resolvable by Node. No runtime image library is shipped to website visitors.
 
 Generate one image record:

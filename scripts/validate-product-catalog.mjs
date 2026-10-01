@@ -104,8 +104,16 @@ assert.ok(!appText.includes("Placeholder image"), "UI must not label missing ima
 assert.ok(!appText.includes("buildProductCard"), "collection cards must be generated rather than rebuilt by app.js");
 
 if (!process.argv.includes("--published-assets-only")) {
-  const fallbackSource = await readFile(path.join(ROOT, productImageFallback.sourcePath));
-  assert.equal(sha256(fallbackSource), productImageFallback.sourceSha256, "product fallback source hash must match its manifest");
+  let fallbackSource;
+  try {
+    fallbackSource = await readFile(path.join(ROOT, productImageFallback.sourcePath));
+  } catch (error) {
+    if (error.code !== "ENOENT" || process.argv.includes("--require-original-source")) throw error;
+    console.log("Original fallback artwork is absent from temporary staging; deployed derivatives are still verified.");
+  }
+  if (fallbackSource !== undefined) {
+    assert.equal(sha256(fallbackSource), productImageFallback.sourceSha256, "product fallback source hash must match its manifest");
+  }
 } else {
   console.log("Published-assets check: original fallback artwork hash is not checked; deployed derivatives are still verified.");
 }
@@ -140,11 +148,13 @@ const visibleSources = source.items.filter((product) =>
   product.variants.some((variant) => variant.visible)
 );
 assert.ok(Array.isArray(colorRegistry.colors), "canonical colors must be a complete list");
+assert.ok(Array.isArray(colorRegistry.palette), "canonical item color code palette must be a complete list");
+const itemColorValueByCode = new Map(colorRegistry.palette.map(({ code, value }) => [code, value]));
 assert.ok(
-  colorRegistry.colors.every(({ id, name, value }) =>
-    typeof id === "string" && id.length > 0 && typeof name === "string" && name.length > 0 && /^#[0-9a-f]{6}$/i.test(value)
+  colorRegistry.colors.every(({ id, code, name }) =>
+    typeof id === "string" && id.length > 0 && typeof name === "string" && name.length > 0 && itemColorValueByCode.has(code)
   ),
-  "every canonical color must have an id, name, and six-digit value"
+  "every named color must have an id, current name, and canonical item color code"
 );
 assert.equal(
   new Set(colorRegistry.colors.map(({ id }) => id)).size,
@@ -159,6 +169,9 @@ const sourceColorwayLabels = [...new Set(
   )
 )].sort();
 assert.ok(sourceColorwayLabels.every((label) => colorByLabel.has(label)), "colors.json must cover every visible product colorway");
+visibleSources.flatMap((product) => product.variants.filter((variant) => variant.visible)).forEach((variant) => {
+  assert.equal(colorByLabel.get(variant.colorName)?.code, variant.colorCode, `${variant.colorName} must use ${variant.colorCode}`);
+});
 assert.equal(products.length, visibleSources.length, "catalog must include every visible product model");
 assert.equal(new Set(products.map((product) => product.code)).size, products.length, "product numbers must be unique");
 const imageOptionFixture = {

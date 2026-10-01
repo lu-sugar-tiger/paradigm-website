@@ -6,7 +6,8 @@ for (const currentPath of ['/', '/collections/ss-tops', '/teamwear/customize']) 
   const header = renderSiteHeader({ currentPath });
   const desktop = header.match(/<nav class="header-directory"[\s\S]*?<\/nav>/)[0];
   assert.equal((desktop.match(/data-header-parent/g)||[]).length, 2);
-  assert.equal((desktop.match(/aria-current="page"/g)||[]).length, 1);
+  assert.equal((desktop.match(/aria-current="page"/g)||[]).length, currentPath === '/teamwear/customize' ? 0 : 1);
+  if (currentPath === '/teamwear/customize') assert.match(desktop, /href="\/teamwear" data-current-section="true">Basketball<\/a>/);
   assert.match(desktop, /href="\/collections\/all"/);
   assert.match(desktop, /href="\/teamwear"/);
   const panels = [...desktop.matchAll(/<ul class="header-directory__panel"[\s\S]*?<\/ul>/g)].map(m=>m[0]);
@@ -15,8 +16,16 @@ for (const currentPath of ['/', '/collections/ss-tops', '/teamwear/customize']) 
   assert.equal((panels[1].match(/<a /g)||[]).length,1);
   assert.doesNotMatch(panels.join(''), />Product<|>Teamwear</);
   assert.equal((header.match(/id="menu-language-native"/g)||[]).length,1);
+  assert.match(header, /data-search-toggle[\s\S]*?data-storefront-toggle[\s\S]*?data-nav-toggle/);
+  assert.match(header, /data-storefront-toggle>[^]*?>language</);
+  assert.match(header, /data-overlay-state="closed" data-storefront-overlay/);
+  assert.match(header, /value="en-TWD"[^>]* selected>English TWD<\/option>/);
+  assert.equal((header.match(/data-value="(?:zh-TWD|en-TWD|en-USD)"/g) || []).length, 3);
+  assert.doesNotMatch(header, /正體中文|data-value="zh-USD"/);
 }
 const css = await read('assets/css/header-directory.css');
+const components = await read('assets/css/components.css');
+assert.match(components, /\.header-region \.toggle-icon--resting\s*\{\s*font-size: var\(--icon-size-small\);/, 'Globe artwork must use the shared optical size while preserving its control box');
 const js = await read('assets/js/header-directory.js');
 assert.match(css, /@media \(min-width: 64rem\)/);
 assert.match(css, /grid-template-columns: minmax\(0, 1fr\) auto minmax\(0, 1fr\)/);
@@ -28,6 +37,6 @@ assert.match(js, /event.preventDefault\(\);\s*open\(group, true\)/);
 assert.match(js, /paradigm:overlay-open/);
 assert.match(js, /large.addEventListener\('change', responsive\)/);
 const home = await read('index.html');
-assert.match(home,/header-directory.css\?v=20260914a/);
-assert.match(home,/header-directory.js\?v=20260914a/);
+assert.match(home,/header-directory.css\?v=20261001b/);
+assert.match(home,/header-directory.js\?v=20261001a/);
 console.log('HEADER_DIRECTORY_OK data=true parentLinks=true childOnlyPanels=true responsive=true');

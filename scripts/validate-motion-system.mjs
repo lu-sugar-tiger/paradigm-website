@@ -113,7 +113,7 @@ assert.match(app, /document\.body\.style\.overflow = "hidden";[\s\S]*?setPageIne
 assert.match(app, /event\.key === "Escape"[\s\S]*?event\.key !== "Tab"/, "overlays must keep Escape closure and focus containment");
 assert.match(components, /clip-path:\s*inset\(0 0 100% 0\)[\s\S]*?var\(--motion-duration-compact-enter\) var\(--motion-ease-compact-enter\)/, "overlay surfaces must enter from the top with the compact motion role");
 assert.match(components, /\.toggle-icon-stack::before\s*\{[^}]*background:\s*var\(--color-background-high\);[^}]*opacity:\s*0;[^}]*pointer-events:\s*none;/, "the active toggle must own a non-interactive overlay-colored cover for its resting glyph");
-assert.match(components, /body\.nav-open \[data-nav-toggle\] \.toggle-icon-stack::before,\s*body\.search-open \[data-search-toggle\] \.toggle-icon-stack::before\s*\{[^}]*opacity:\s*1;/, "the overlay background cover must occlude only the active resting toggle glyph");
+assert.match(components, /body\.nav-open \[data-nav-toggle\] \.toggle-icon-stack::before,\s*body\.search-open \[data-search-toggle\] \.toggle-icon-stack::before,\s*body\.storefront-open \[data-storefront-toggle\] \.toggle-icon-stack::before\s*\{[^}]*opacity:\s*1;/, "the overlay background cover must occlude only the active resting toggle glyph");
 assert.match(components, /\.toggle-icon--resting\s*\{[^}]*opacity:\s*1;[^}]*translate:\s*0 0;[^}]*transition:\s*none;/, "resting header glyphs must remain static beneath the overlay cover");
 assert.doesNotMatch(components, /data-overlay-state[^}]*\.toggle-icon--resting\s*\{/, "resting header glyphs must have no overlay-state animation");
 assert.match(components, /\.toggle-icon--close\s*\{[^}]*z-index:\s*2;[^}]*transition:[^}]*opacity var\(--motion-duration-exit\)[^}]*translate var\(--motion-duration-exit\)/, "only the close glyph must own the paired-icon transition");
@@ -166,11 +166,11 @@ const generatedPages = [
 for (const relativePath of generatedPages) {
   const page = await read(relativePath);
   const earlyController = page.search(/<script src="(?:\.\.\/)*assets\/js\/page-transitions\.js\?v=20260831a"><\/script>/);
-  const deferredApp = page.search(/<script defer src="(?:\.\.\/)*assets\/js\/app\.js\?v=20260914a"><\/script>/);
+  const deferredApp = page.search(/<script defer src="(?:\.\.\/)*assets\/js\/app\.js\?v=20261001a"><\/script>/);
   assert.ok(earlyController >= 0 && deferredApp > earlyController, `${relativePath} must load the route controller early and before deferred behavior`);
   assert.match(page, /assets\/css\/motion\.css\?v=20260831a/, `${relativePath} must load the cache-busted global motion stylesheet`);
-  assert.match(page, /assets\/css\/components\.css\?v=20260927e/, `${relativePath} must load the cache-busted shared component styles and motion`);
-  assert.match(page, /assets\/js\/choices\.js\?v=20260924a/, `${relativePath} must load the cache-busted floating-action state controller`);
+  assert.match(page, /assets\/css\/components\.css\?v=20261002a/, `${relativePath} must load the cache-busted shared component styles and motion`);
+  assert.match(page, /assets\/js\/choices\.js\?v=20261001a/, `${relativePath} must load the cache-busted floating-action state controller`);
 }
 
 console.log(`MOTION_SYSTEM_OK routes=${cases.length} pages=${generatedPages.length}`);

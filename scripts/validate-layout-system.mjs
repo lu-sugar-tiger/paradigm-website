@@ -299,7 +299,7 @@ for (const pattern of railModel.patterns) {
 assert.equal(new Set(railImagePaths).size, railModel.patterns.length * railModel.colors.length, "Every pattern/color combination must have its own replaceable image");
 assert.match(teamwearStory, /\.teamwear-rail-button\[hidden\]\s*\{[\s\S]*?display:\s*none;/, "Unavailable Teamwear rail directions must override the authored button display rule");
 assert.doesNotMatch(teamwearStory, /\.teamwear-rail-button[^\{]*\{[^}]*transition\s*:/, "Teamwear rail buttons must not animate hover-state changes");
-assert.doesNotMatch(teamwearStory, /\.teamwear-rail-button[^\{]*:hover/, "Teamwear rail buttons must not define a hover effect");
+assert.doesNotMatch(teamwearStory, /\.teamwear-rail-button[^\{]*:hover/, "Teamwear rail buttons must inherit shared control feedback rather than define a page-local hover effect");
 assert.match(teamwearTemplate, /teamwear-highlights__viewport">\s*\{\{HIGHLIGHT_CONTROLS\}\}\s*<div class="teamwear-highlights__rail"/, "Highlight controls must be generated inside their rail viewport");
 assert.match(teamwearTemplate, /teamwear-colorway__viewport">\s*\{\{COLORWAY_CONTROLS\}\}\s*<div class="teamwear-colorway__rail"/, "Colorway controls must be generated inside their rail viewport");
 assert.match(teamwearTemplate, /teamwear-gallery__viewport">\s*\{\{GALLERY_CONTROLS\}\}\s*<div class="teamwear-gallery__rail"/, "Gallery controls must be generated inside their rail viewport");

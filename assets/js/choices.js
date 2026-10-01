@@ -1,4 +1,5 @@
 (function () {
+  const translate = (source, element) => window.PARADIGM_LANGUAGE.text(source, {}, element);
   function checkedOption(group) {
     const input = group?.querySelector("input:checked");
     return input?.closest("[data-choice-option]") || null;
@@ -25,7 +26,7 @@
     syncChoiceStateSymbols(group);
     if (labelValue && option) labelValue.textContent = option.dataset.choiceLabel;
     if (status && selectionLabel) {
-      status.textContent = `${group.dataset.choiceTitle}: ${selectionLabel}${option?.dataset.availability === "unavailable" ? ", unavailable" : ""}`;
+      status.textContent = `${translate(group.dataset.choiceTitle, group)}: ${translate(selectionLabel, group)}${option?.dataset.availability === "unavailable" ? `, ${translate("unavailable", group)}` : ""}`;
     }
   }
 
@@ -84,6 +85,46 @@
     });
   }
 
+  function syncVariantImage(gallery, media, { imageId = "", alt = "", reveal = false, root = "../.." } = {}) {
+    if (!gallery) return;
+    const resolve = (path) => new URL(`${root}/${path}`, document.baseURI).href;
+    let image = gallery.querySelector("[data-product-variant-image]");
+    if (!media?.src) {
+      image?.remove();
+      document.dispatchEvent(new CustomEvent("paradigm:product-media-change"));
+      return;
+    }
+    if (!image) {
+      image = document.createElement("img");
+      image.setAttribute("data-product-variant-image", "");
+      image.setAttribute("data-media-zoom-touch", "");
+      image.sizes = "(min-width: 80rem) 768px, (min-width: 64rem) 60vw, 100vw";
+      gallery.append(image);
+    }
+    const src = resolve(media.src);
+    if ((imageId && image.dataset.productImageId !== imageId) || (!imageId && image.src !== src)) {
+      image.src = src;
+      if (media.derivatives?.length) image.srcset = media.derivatives.map((entry) => `${resolve(entry.path)} ${entry.width}w`).join(", ");
+      else image.removeAttribute("srcset");
+      image.width = media.width || 1;
+      image.height = media.height || 1;
+      if (imageId) image.dataset.productImageId = imageId;
+    }
+    image.removeAttribute("data-l10n-alt");
+    image.removeAttribute("data-l10n-params");
+    image.dataset.sourceAlt = alt;
+    image.alt = window.PARADIGM_LANGUAGE.imageText(alt, image);
+    gallery.setAttribute("data-media-zoom-gallery", "");
+    if (reveal) {
+      gallery.setAttribute("data-variant-revealed", "");
+      image.loading = "eager";
+      if (!window.matchMedia("(min-width: 64rem)").matches) gallery.scrollTo({ left: image.offsetLeft, behavior: "instant" });
+    }
+    document.dispatchEvent(new CustomEvent("paradigm:product-media-change"));
+  }
+
+  window.PARADIGM_VARIANT_GALLERY = { sync: syncVariantImage };
+
   function syncProductSource(detail, product, revealImage = false) {
     const selected = selectedProductValues(detail);
     const variant = product.variants.find((variant) => variant.visible && variant.colorName === selected.colorName && variant.sizeName === selected.sizeName);
@@ -101,36 +142,11 @@
     const colorImages = [...new Set(product.variants.filter((candidate) => candidate.visible && candidate.colorName === selected.colorName && candidate.imageId).map((candidate) => candidate.imageId))];
     const imageId = variant?.imageId || (colorImages.length === 1 ? colorImages[0] : "");
     const media = product.variantMedia?.[imageId];
-    const resolve = (path) => new URL(`../../${path}`, document.baseURI).href;
-    let image = gallery.querySelector("[data-product-variant-image]");
-    if (!media) {
-      image?.remove();
-      document.dispatchEvent(new CustomEvent("paradigm:product-media-change"));
-      return;
-    }
-    if (!image) {
-      image = document.createElement("img");
-      image.setAttribute("data-product-variant-image", "");
-      image.setAttribute("data-media-zoom-touch", "");
-      image.sizes = "(min-width: 80rem) 768px, (min-width: 64rem) 60vw, 100vw";
-      gallery.append(image);
-    }
-    if (image.dataset.productImageId !== imageId) {
-      image.src = resolve(media.src);
-      if (media.derivatives?.length) image.srcset = media.derivatives.map((entry) => `${resolve(entry.path)} ${entry.width}w`).join(", ");
-      else image.removeAttribute("srcset");
-      image.width = media.width || 1;
-      image.height = media.height || 1;
-      image.dataset.productImageId = imageId;
-    }
-    image.alt = `${product.name}, ${selected.colorName}${colorImages.length > 1 ? `, ${selected.sizeName}` : ""}`;
-    gallery.setAttribute("data-media-zoom-gallery", "");
-    if (revealImage) {
-      gallery.setAttribute("data-variant-revealed", "");
-      image.loading = "eager";
-      if (!window.matchMedia("(min-width: 64rem)").matches) gallery.scrollTo({ left: image.offsetLeft, behavior: "instant" });
-    }
-    document.dispatchEvent(new CustomEvent("paradigm:product-media-change"));
+    syncVariantImage(gallery, media, {
+      imageId,
+      alt: `${product.name}, ${selected.colorName}${colorImages.length > 1 ? `, ${selected.sizeName}` : ""}`,
+      reveal: revealImage
+    });
   }
 
   function selectLinkedProductVariant(detail, product) {
@@ -155,7 +171,8 @@
       text.className = "visually-hidden";
       text.dataset.choiceAvailabilityText = "";
       text.id = `${input.id}-availability`;
-      text.textContent = "Unavailable";
+      text.setAttribute("data-l10n", "Unavailable");
+      text.textContent = translate("Unavailable", option);
       option.appendChild(text);
     }
     if (unavailable) input.setAttribute("aria-describedby", text.id);
@@ -220,7 +237,10 @@
       action.removeAttribute("target");
       action.removeAttribute("rel");
     }
-    if (label) label.textContent = nextLabel;
+    if (label) {
+      label.setAttribute("data-l10n", nextLabel);
+      label.textContent = translate(nextLabel, action);
+    }
   }
 
   function syncAction(action) {
@@ -400,5 +420,9 @@
     action.addEventListener("click", () => {
       if (action.dataset.actionIntent === "notify") copyNotification(action);
     });
+  });
+  document.addEventListener("paradigm:language-change", () => {
+    document.querySelectorAll("[data-choice-group]").forEach(announceSelection);
+    document.querySelectorAll("[data-primary-action]").forEach(syncAction);
   });
 })();

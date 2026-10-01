@@ -320,7 +320,7 @@
     image.setAttribute("tabindex", "0");
     image.setAttribute("role", "button");
     image.setAttribute("aria-haspopup", "dialog");
-    image.setAttribute("aria-label", `${image.alt || "Product image"}. Open enlarged image gallery.`);
+    image.setAttribute("aria-label", window.PARADIGM_LANGUAGE.text("{alt}. Open enlarged image gallery.", { alt: image.alt || window.PARADIGM_LANGUAGE.text("Product image") }, image));
   }
 
   function disableLargeGalleryImage(image) {
@@ -403,7 +403,7 @@
     overlay.className = "media-zoom-overlay";
     overlay.setAttribute("role", "dialog");
     overlay.setAttribute("aria-modal", "true");
-    overlay.setAttribute("aria-label", `${gallery.getAttribute("aria-label") || "Product images"} enlarged view`);
+    overlay.setAttribute("aria-label", window.PARADIGM_LANGUAGE.text("{gallery} enlarged view", { gallery: gallery.getAttribute("aria-label") || window.PARADIGM_LANGUAGE.text("Product images") }, gallery));
     overlay.setAttribute("tabindex", "-1");
 
     const column = document.createElement("div");

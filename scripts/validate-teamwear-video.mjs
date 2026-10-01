@@ -34,7 +34,7 @@ assert.ok(videoTag);
 assert.match(videoTag, /muted loop playsinline preload="none"/);
 assert.doesNotMatch(videoTag, /\ssrc=|\sautoplay/, "Defer fetching until motion/data/visibility checks pass");
 assert.doesNotMatch(html, /teamwear-hero-master|assets\/temp\/10/);
-assert.match(html, /<h5 class="teamwear-kicker">PE Basketball Uniform<\/h5>\s*<h1 class="type-h1" id="teamwear-title">Where Taste Meets Teamwear\.<\/h1>\s*<p>From NT\$1580\.<\/p>/);
+assert.match(html, /<h5 class="teamwear-kicker">PE Basketball Uniform<\/h5>\s*<h1 class="type-h1" id="teamwear-title">Where Taste Meets Teamwear\.<\/h1>\s*<p>From <span data-price-twd="1580">NT\$1,580<\/span>\.<\/p>/);
 assert.match(css, /\.teamwear-story-page \.teamwear-hero\s*\{[^}]*color:\s*var\(--color-on-container-high\);/);
 assert.doesNotMatch(css, /\.teamwear-hero__content \.teamwear-kicker\s*\{[^}]*color:|\.teamwear-hero__content > p:last-child\s*\{[^}]*color:/);
 assert.doesNotMatch(html, /data-hero-video-toggle|teamwear-hero__controls|teamwear-hero__toggle|Play background video|Pause background video/);

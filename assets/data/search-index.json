@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "popularKeywords": [
     "Teamwear",
     "Everyday",
@@ -16,24 +16,35 @@
     "All Products",
     "catalog",
     "clothing",
+    "全部商品",
+    "服飾",
+    "目錄",
     "SS Tops",
     "tees",
     "football jersey",
     "jersey",
     "tops",
+    "短Ｔ",
+    "球衣",
+    "上衣",
     "AW Tops",
     "crewneck",
     "crewnecks",
     "hoodies",
+    "大學Ｔ",
+    "帽Ｔ",
     "Bottoms",
     "shorts",
     "training shorts",
+    "短褲",
+    "褲裝",
     "PE Basketball Teamwear",
     "basketball",
     "uniform",
     "uniforms",
     "team",
     "roster",
+    "籃球",
     "Customize PE Basketball Teamwear",
     "customize",
     "customise",
@@ -42,6 +53,10 @@
     "color",
     "quantity",
     "add on",
+    "訂製",
+    "圖樣",
+    "數量",
+    "加購",
     "Instagram",
     "social",
     "Shopee",
@@ -94,7 +109,10 @@
       "keywords": [
         "catalog",
         "all products",
-        "clothing"
+        "clothing",
+        "全部商品",
+        "服飾",
+        "目錄"
       ],
       "external": false
     },
@@ -109,7 +127,10 @@
         "tees",
         "football jersey",
         "jersey",
-        "tops"
+        "tops",
+        "短Ｔ",
+        "球衣",
+        "上衣"
       ],
       "external": false
     },
@@ -124,7 +145,10 @@
         "crewnecks",
         "hoodie",
         "hoodies",
-        "tops"
+        "tops",
+        "大學Ｔ",
+        "帽Ｔ",
+        "上衣"
       ],
       "external": false
     },
@@ -136,7 +160,9 @@
       "keywords": [
         "bottoms",
         "shorts",
-        "training shorts"
+        "training shorts",
+        "短褲",
+        "褲裝"
       ],
       "external": false
     },
@@ -151,7 +177,9 @@
         "uniform",
         "uniforms",
         "team",
-        "roster"
+        "roster",
+        "籃球",
+        "球衣"
       ],
       "external": false
     },
@@ -168,7 +196,11 @@
         "pattern",
         "color",
         "quantity",
-        "add on"
+        "add on",
+        "訂製",
+        "圖樣",
+        "數量",
+        "加購"
       ],
       "external": false
     },
@@ -3017,6 +3049,7 @@
       "type": "Tee",
       "family": "Cosmos",
       "priceLabel": "NT$790",
+      "priceTwd": 790,
       "url": "/products/BD14028?variant=BD14028-C03-S5",
       "media": {
         "src": "assets/images/catalog/cc/cc4ea0acf05935c30e1a-1080x1080.webp",
@@ -3058,6 +3091,7 @@
       "type": "Tee",
       "family": "Cosmos",
       "priceLabel": "NT$790",
+      "priceTwd": 790,
       "url": "/products/BD14028?variant=BD14028-C06-S5",
       "media": {
         "src": "assets/images/catalog/d9/d9caf8e87eeaaedd907e-1080x1080.webp",
@@ -3099,6 +3133,7 @@
       "type": "Tee",
       "family": "Cosmos",
       "priceLabel": "NT$790",
+      "priceTwd": 790,
       "url": "/products/BD14028?variant=BD14028-C09-S5",
       "media": {
         "src": "assets/images/catalog/09/09ecffc513669c97a7d6-1080x1080.webp",
@@ -3140,6 +3175,7 @@
       "type": "Tee",
       "family": "Timeless",
       "priceLabel": "NT$790",
+      "priceTwd": 790,
       "url": "/products/TL14027?variant=TL14027-C03-S5",
       "media": {
         "src": "assets/images/catalog/d9/d97ed6da6447a579c230-1080x1080.webp",
@@ -3181,6 +3217,7 @@
       "type": "Tee",
       "family": "Timeless",
       "priceLabel": "NT$790",
+      "priceTwd": 790,
       "url": "/products/TL14027?variant=TL14027-C06-S5",
       "media": {
         "src": "assets/images/catalog/58/58fa0546ea07ed694ffa-1080x1080.webp",
@@ -3222,6 +3259,7 @@
       "type": "Tee",
       "family": "Timeless",
       "priceLabel": "NT$790",
+      "priceTwd": 790,
       "url": "/products/TL14027?variant=TL14027-C09-S5",
       "media": {
         "src": "assets/images/catalog/92/92af90958ddbb2de8372-1080x1080.webp",
@@ -3263,6 +3301,7 @@
       "type": "Tee",
       "family": "Aesthetics",
       "priceLabel": "NT$790",
+      "priceTwd": 790,
       "url": "/products/AE14026?variant=AE14026-C03-S5",
       "media": {
         "src": "assets/images/catalog/74/74a9417729048894cda9-1080x1080.webp",
@@ -3304,6 +3343,7 @@
       "type": "Tee",
       "family": "Aesthetics",
       "priceLabel": "NT$790",
+      "priceTwd": 790,
       "url": "/products/AE14026?variant=AE14026-C06-S5",
       "media": {
         "src": "assets/images/catalog/57/57dea974c837f2fcdd06-1080x1080.webp",
@@ -3345,6 +3385,7 @@
       "type": "Tee",
       "family": "Aesthetics",
       "priceLabel": "NT$790",
+      "priceTwd": 790,
       "url": "/products/AE14026?variant=AE14026-C09-S5",
       "media": {
         "src": "assets/images/catalog/c0/c0bdcbab832d955ff096-1080x1080.webp",
@@ -3386,6 +3427,7 @@
       "type": "Tee",
       "family": "Paradigm",
       "priceLabel": "NT$790",
+      "priceTwd": 790,
       "url": "/products/PD14025?variant=PD14025-C03-S5",
       "media": {
         "src": "assets/images/catalog/80/809072aed84fa55a8504-1080x1080.webp",
@@ -3427,6 +3469,7 @@
       "type": "Tee",
       "family": "Paradigm",
       "priceLabel": "NT$790",
+      "priceTwd": 790,
       "url": "/products/PD14025?variant=PD14025-C06-S5",
       "media": {
         "src": "assets/images/catalog/f2/f20658e13767af172d13-1080x1080.webp",
@@ -3468,6 +3511,7 @@
       "type": "Tee",
       "family": "Paradigm",
       "priceLabel": "NT$790",
+      "priceTwd": 790,
       "url": "/products/PD14025?variant=PD14025-C09-S5",
       "media": {
         "src": "assets/images/catalog/20/20de0bc714ac7892ff18-1080x1080.webp",
@@ -3509,6 +3553,7 @@
       "type": "Tee",
       "family": "Everyday",
       "priceLabel": "NT$590",
+      "priceTwd": 590,
       "url": "/products/ED14024?variant=ED14024-C03-S5",
       "media": {
         "src": "assets/images/catalog/0f/0f843ce86ef214d4eca3-1080x1080.webp",
@@ -3550,6 +3595,7 @@
       "type": "Tee",
       "family": "Everyday",
       "priceLabel": "NT$590",
+      "priceTwd": 590,
       "url": "/products/ED14024?variant=ED14024-C06-S5",
       "media": {
         "src": "assets/images/catalog/d2/d2f394f50564f208fa8d-1080x1080.webp",
@@ -3591,6 +3637,7 @@
       "type": "Tee",
       "family": "Everyday",
       "priceLabel": "NT$590",
+      "priceTwd": 590,
       "url": "/products/ED14024?variant=ED14024-C09-S5",
       "media": {
         "src": "assets/images/catalog/94/94e9a155e621245522c1-1080x1080.webp",
@@ -3632,6 +3679,7 @@
       "type": "Shorts",
       "family": "Training",
       "priceLabel": "NT$1,180",
+      "priceTwd": 1180,
       "url": "/products/GM42023",
       "media": {
         "src": "assets/images/catalog/e6/e64acabea698759c3bf8-1080x1080.webp",
@@ -3673,6 +3721,7 @@
       "type": "Shorts",
       "family": "Training",
       "priceLabel": "NT$1,180",
+      "priceTwd": 1180,
       "url": "/products/GM42022",
       "media": {
         "src": "assets/images/catalog/65/658c9c1c91edd2adad8a-1080x1080.webp",
@@ -3714,6 +3763,7 @@
       "type": "Hoodie",
       "family": "Cosmos",
       "priceLabel": "NT$1,380",
+      "priceTwd": 1380,
       "url": "/products/BD24021?variant=BD24021-C01-S4",
       "media": {
         "src": "assets/images/catalog/53/5354df296b16483449f5-1080x1080.webp",
@@ -3755,6 +3805,7 @@
       "type": "Hoodie",
       "family": "Cosmos",
       "priceLabel": "NT$1,380",
+      "priceTwd": 1380,
       "url": "/products/BD24021?variant=BD24021-C61-S4",
       "media": {
         "src": "assets/images/catalog/48/484b780bfef1cabacb64-1080x1080.webp",
@@ -3796,6 +3847,7 @@
       "type": "Hoodie",
       "family": "Intelligence",
       "priceLabel": "NT$1,380",
+      "priceTwd": 1380,
       "url": "/products/BT24020?variant=BT24020-C01-S4",
       "media": {
         "src": "assets/images/catalog/c8/c8e138ee263dc4095bce-1080x1080.webp",
@@ -3837,6 +3889,7 @@
       "type": "Hoodie",
       "family": "Intelligence",
       "priceLabel": "NT$1,380",
+      "priceTwd": 1380,
       "url": "/products/BT24020?variant=BT24020-C61-S4",
       "media": {
         "src": "assets/images/catalog/12/120caa8cffa3180e4b3f-1080x1080.webp",
@@ -3878,6 +3931,7 @@
       "type": "Hoodie",
       "family": "Timeless",
       "priceLabel": "NT$1,380",
+      "priceTwd": 1380,
       "url": "/products/TL24019?variant=TL24019-C01-S4",
       "media": {
         "src": "assets/images/catalog/20/20889441ee526dbd58f9-1080x1080.webp",
@@ -3919,6 +3973,7 @@
       "type": "Hoodie",
       "family": "Timeless",
       "priceLabel": "NT$1,380",
+      "priceTwd": 1380,
       "url": "/products/TL24019?variant=TL24019-C61-S4",
       "media": {
         "src": "assets/images/catalog/30/3096c706e380b94f2c6a-1080x1080.webp",
@@ -3960,6 +4015,7 @@
       "type": "Crewneck",
       "family": "Timeless",
       "priceLabel": "NT$1,180",
+      "priceTwd": 1180,
       "url": "/products/TL23018?variant=TL23018-C01-S1",
       "media": {
         "src": "assets/images/catalog/f8/f84c86092a70fe8604f0-1080x1080.webp",
@@ -4001,6 +4057,7 @@
       "type": "Crewneck",
       "family": "Timeless",
       "priceLabel": "NT$1,180",
+      "priceTwd": 1180,
       "url": "/products/TL23018?variant=TL23018-C05-S1",
       "media": {
         "src": "assets/images/catalog/58/58dc333fc5caa1f27837-1080x1080.webp",
@@ -4042,6 +4099,7 @@
       "type": "Hoodie",
       "family": "Aesthetics",
       "priceLabel": "NT$1,380",
+      "priceTwd": 1380,
       "url": "/products/AE24017?variant=AE24017-C01-S4",
       "media": {
         "src": "assets/images/catalog/d2/d2c7a9cb4680895ec9b9-1080x1080.webp",
@@ -4083,6 +4141,7 @@
       "type": "Hoodie",
       "family": "Aesthetics",
       "priceLabel": "NT$1,380",
+      "priceTwd": 1380,
       "url": "/products/AE24017?variant=AE24017-C61-S4",
       "media": {
         "src": "assets/images/catalog/4e/4e7737fc0b26b4c58f9e-1080x1080.webp",
@@ -4124,6 +4183,7 @@
       "type": "Crewneck",
       "family": "Aesthetics",
       "priceLabel": "NT$1,180",
+      "priceTwd": 1180,
       "url": "/products/AE23016?variant=AE23016-C01-S4",
       "media": {
         "src": "assets/images/catalog/97/975def1dd7ecfc7d75bb-1080x1080.webp",
@@ -4165,6 +4225,7 @@
       "type": "Crewneck",
       "family": "Aesthetics",
       "priceLabel": "NT$1,180",
+      "priceTwd": 1180,
       "url": "/products/AE23016?variant=AE23016-C05-S1",
       "media": {
         "src": "assets/images/catalog/62/62e10d8b6835992f7d4d-1080x1080.webp",
@@ -4206,6 +4267,7 @@
       "type": "Hoodie",
       "family": "Paradigm",
       "priceLabel": "NT$1,380",
+      "priceTwd": 1380,
       "url": "/products/PD24015?variant=PD24015-C01-S4",
       "media": {
         "src": "assets/images/catalog/95/959057fe27430f4d0900-1080x1080.webp",
@@ -4247,6 +4309,7 @@
       "type": "Hoodie",
       "family": "Paradigm",
       "priceLabel": "NT$1,380",
+      "priceTwd": 1380,
       "url": "/products/PD24015?variant=PD24015-C61-S4",
       "media": {
         "src": "assets/images/catalog/a2/a2f495b775738b1c7ea9-1080x1080.webp",
@@ -4288,6 +4351,7 @@
       "type": "Hoodie",
       "family": "Everyday",
       "priceLabel": "NT$1,180",
+      "priceTwd": 1180,
       "url": "/products/ED24014?variant=ED24014-C01-S4",
       "media": {
         "src": "assets/images/catalog/12/12c1ee8ae1bb7b09a363-1080x1080.webp",
@@ -4329,6 +4393,7 @@
       "type": "Hoodie",
       "family": "Everyday",
       "priceLabel": "NT$1,180",
+      "priceTwd": 1180,
       "url": "/products/ED24014?variant=ED24014-C61-S4",
       "media": {
         "src": "assets/images/catalog/21/211b8e47ad432d0f1ef3-1080x1080.webp",
@@ -4370,6 +4435,7 @@
       "type": "Football Jersey",
       "family": "Sponsorship",
       "priceLabel": "NT$990",
+      "priceTwd": 990,
       "url": "/products/PH14011?variant=PH14011-C01-S4",
       "media": {
         "src": "assets/images/catalog/9c/9ca34613441a39ad69e8-1080x1080.webp",
@@ -4411,6 +4477,7 @@
       "type": "Football Jersey",
       "family": "Sponsorship",
       "priceLabel": "NT$990",
+      "priceTwd": 990,
       "url": "/products/PH14011?variant=PH14011-C09-S4",
       "media": {
         "src": "assets/images/catalog/57/578500c867155d08cb11-1080x1080.webp",
@@ -4452,6 +4519,7 @@
       "type": "Football Jersey",
       "family": "Sponsorship",
       "priceLabel": "NT$990",
+      "priceTwd": 990,
       "url": "/products/PH14011?variant=PH14011-C13-S4",
       "media": {
         "src": "assets/images/catalog/2e/2eb862dcddfd5ed75dcc-1080x1080.webp",
@@ -4493,6 +4561,7 @@
       "type": "Football Jersey",
       "family": "Partnership",
       "priceLabel": "NT$990",
+      "priceTwd": 990,
       "url": "/products/PH14010?variant=PH14010-C01-S4",
       "media": {
         "src": "assets/images/catalog/11/11de73b712e7889d71f4-1080x1080.webp",
@@ -4534,6 +4603,7 @@
       "type": "Football Jersey",
       "family": "Partnership",
       "priceLabel": "NT$990",
+      "priceTwd": 990,
       "url": "/products/PH14010?variant=PH14010-C09-S4",
       "media": {
         "src": "assets/images/catalog/e9/e93bf8ddb9ceaa894677-1080x1080.webp",
@@ -4575,6 +4645,7 @@
       "type": "Football Jersey",
       "family": "Partnership",
       "priceLabel": "NT$990",
+      "priceTwd": 990,
       "url": "/products/PH14010?variant=PH14010-C13-S5",
       "media": {
         "src": "assets/images/catalog/89/8975b577210154bdd899-1080x1080.webp",
@@ -4616,6 +4687,7 @@
       "type": "Tee",
       "family": "Timeless",
       "priceLabel": "NT$790",
+      "priceTwd": 790,
       "url": "/products/TL14009?variant=TL14009-C01-S2",
       "media": {
         "src": "assets/images/catalog/f5/f5bb27dad932c172935d-1080x1080.webp",
@@ -4657,6 +4729,7 @@
       "type": "Tee",
       "family": "Timeless",
       "priceLabel": "NT$790",
+      "priceTwd": 790,
       "url": "/products/TL14009?variant=TL14009-C09-S1",
       "media": {
         "src": "assets/images/catalog/36/369be8d2d53f40a8321d-1080x1080.webp",
@@ -4698,6 +4771,7 @@
       "type": "Tee",
       "family": "Aesthetics",
       "priceLabel": "NT$790",
+      "priceTwd": 790,
       "url": "/products/AE14008?variant=AE14008-C01-S4",
       "media": {
         "src": "assets/images/catalog/ab/ab354d51bae54b51549c-1080x1080.webp",
@@ -4739,6 +4813,7 @@
       "type": "Tee",
       "family": "Aesthetics",
       "priceLabel": "NT$790",
+      "priceTwd": 790,
       "url": "/products/AE14008?variant=AE14008-C09-S2",
       "media": {
         "src": "assets/images/catalog/d3/d34801c576f1644c9976-1080x1080.webp",
@@ -4780,6 +4855,7 @@
       "type": "Tee",
       "family": "Paradigm",
       "priceLabel": "NT$790",
+      "priceTwd": 790,
       "url": "/products/PD14007?variant=PD14007-C01-S1",
       "media": {
         "src": "assets/images/catalog/cf/cf78bc85cf96fdf73545-1080x1080.webp",
@@ -4821,6 +4897,7 @@
       "type": "Tee",
       "family": "Paradigm",
       "priceLabel": "NT$790",
+      "priceTwd": 790,
       "url": "/products/PD14007?variant=PD14007-C05-S2",
       "media": {
         "src": "assets/images/catalog/b5/b57da0750fa47da21148-1080x1080.webp",
@@ -4862,6 +4939,7 @@
       "type": "Tee",
       "family": "Paradigm",
       "priceLabel": "NT$790",
+      "priceTwd": 790,
       "url": "/products/PD14007?variant=PD14007-C09-S1",
       "media": {
         "src": "assets/images/catalog/89/8991ea213e40b13c1f0e-1080x1080.webp",
@@ -4903,6 +4981,7 @@
       "type": "Crewneck",
       "family": "Paradigm",
       "priceLabel": "NT$1,180",
+      "priceTwd": 1180,
       "url": "/products/PD23006?variant=PD23006-C01-S1",
       "media": {
         "src": "assets/images/catalog/11/11b21184549c68ad1814-1080x1080.webp",
@@ -4944,6 +5023,7 @@
       "type": "Crewneck",
       "family": "Paradigm",
       "priceLabel": "NT$1,180",
+      "priceTwd": 1180,
       "url": "/products/PD23006?variant=PD23006-C05-S1",
       "media": {
         "src": "assets/images/catalog/81/81105a5508dd4b70586c-1080x1080.webp",
@@ -4985,6 +5065,7 @@
       "type": "Crewneck",
       "family": "Everyday",
       "priceLabel": "NT$990",
+      "priceTwd": 990,
       "url": "/products/ED23002?variant=ED23002-C01-S1",
       "media": {
         "src": "assets/images/catalog/1f/1fec9406fae30e4fd985-1080x1080.webp",
@@ -5026,6 +5107,7 @@
       "type": "Crewneck",
       "family": "Everyday",
       "priceLabel": "NT$990",
+      "priceTwd": 990,
       "url": "/products/ED23002?variant=ED23002-C05-S1",
       "media": {
         "src": "assets/images/catalog/ca/ca6e832912f15117c007-1080x1080.webp",
@@ -5067,6 +5149,7 @@
       "type": "Tee",
       "family": "Everyday",
       "priceLabel": "NT$590",
+      "priceTwd": 590,
       "url": "/products/ED14001?variant=ED14001-C01-S1",
       "media": {
         "src": "assets/images/catalog/60/60cfbac98f2f9ddbb091-1080x1080.webp",
@@ -5108,6 +5191,7 @@
       "type": "Tee",
       "family": "Everyday",
       "priceLabel": "NT$590",
+      "priceTwd": 590,
       "url": "/products/ED14001?variant=ED14001-C05-S1",
       "media": {
         "src": "assets/images/catalog/31/319db5ec8a1e0c7be40e-1080x1080.webp",
@@ -5149,6 +5233,7 @@
       "type": "Tee",
       "family": "Everyday",
       "priceLabel": "NT$590",
+      "priceTwd": 590,
       "url": "/products/ED14001?variant=ED14001-C09-S2",
       "media": {
         "src": "assets/images/catalog/19/19dcf7706a3cb78a98f6-1080x1080.webp",

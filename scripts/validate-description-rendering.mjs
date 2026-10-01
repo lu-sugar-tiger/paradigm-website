@@ -3,6 +3,8 @@ import { readFile } from "node:fs/promises";
 import { regularTableFigures, transformDescription } from "./lib/rich-description.mjs";
 import { html, renderDescription } from "./lib/site-renderers.mjs";
 
+const dimensionLabels = { 肩寬: "Shoulder W", 胸寬: "Chest W", 袖長: "Sleeve L", 衣長: "Body L", 褲頭寬: "Waist W", 褲腳寬: "Leg W", 內側長: "Inseam L", 外側長: "Outseam L" };
+
 assert.equal(regularTableFigures("𝟢𝟣𝟤𝟥𝟦𝟧𝟨𝟩𝟪𝟫"), "0123456789");
 assert.equal(regularTableFigures("　𝟨𝟢.𝟢–𝟨𝟧.𝟧 / ≤ ½ １２ 𝟎 cm  "), "　60.0–65.5 / ≤ ½ １２ 𝟎 cm  ");
 
@@ -34,7 +36,7 @@ for (const item of items) {
   const rendered = renderDescription({ tokens, itemCodes, currentItemCode: item.code });
   const cells = [...rendered.matchAll(/<(?:td|th)\b[^>]*>(.*?)<\/(?:td|th)>/g)].map(match => match[1]);
   const sourceCells = tokens.filter(token => token.type === "table").flatMap(token => [...token.header, ...token.body.flat()]);
-  assert.deepEqual(cells, sourceCells.map(cell => html(regularTableFigures(cell))), `${item.code}: exact table-cell conversion`);
+  assert.deepEqual(cells, sourceCells.map(cell => html(regularTableFigures(dimensionLabels[cell] || cell))), `${item.code}: only approved dimension labels may change; values, order and units stay exact`);
   if (sourceCells.some(cell => regularTableFigures(cell) !== cell)) convertedTables++;
   const route = await readFile(new URL(`../products/${item.code}/index.html`, import.meta.url), "utf8");
   const indented = rendered.split("\n").map(line => `          ${line}`).join("\n");

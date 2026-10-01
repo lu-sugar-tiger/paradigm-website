@@ -1,0 +1,133 @@
+import assert from "node:assert/strict";
+import { createRequire } from "node:module";
+import { readFile } from "node:fs/promises";
+const require = createRequire(import.meta.url);
+const { chromium } = require("playwright");
+const browser = await chromium.launch({ channel: "chrome", headless: true });
+const base = process.env.PREVIEW_URL || "http://127.0.0.1:4178";
+const errors = [];
+const catalog = JSON.parse(await readFile("data/products-source.json", "utf8"));
+const soldOut = catalog.items.flatMap(item => item.variants.filter(variant => variant.visible && variant.soldOut).map(variant => ({ code: item.code, sku: variant.sku })))[0];
+async function context(options = {}) {
+  const ctx = await browser.newContext(options);
+  await ctx.route("https://fonts.googleapis.com/**", route => route.abort());
+  await ctx.route("https://fonts.gstatic.com/**", route => route.abort());
+  ctx.on("page", page => page.on("pageerror", error => errors.push(error.message)));
+  return ctx;
+}
+async function selectLanguage(page, value, width) {
+  const button = page.locator(width >= 1024 ? "[data-storefront-toggle]" : "[data-nav-toggle]");
+  await button.focus();
+  await button.press("Enter");
+  await page.waitForFunction(() => document.querySelector('[data-overlay-state="open"]'));
+  const trigger = page.locator("#menu-language-native").locator("..").locator("[data-dropdown-trigger], .dropdown__trigger");
+  await trigger.press("ArrowDown");
+  await page.keyboard.press("Home");
+  const index = ["zh-TWD", "en-TWD", "en-USD"].indexOf(value);
+  for (let step = 0; step < index; step++) await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("Enter");
+  assert.equal(await page.locator("#menu-language-native").inputValue(), value);
+  assert.deepEqual(await page.locator('#menu-language-native option').allTextContents(), ['中文 TWD', 'English TWD', 'English USD']);
+  assert.match(await trigger.getAttribute('aria-label'), new RegExp(value === 'zh-TWD' ? '中文 TWD' : value === 'en-TWD' ? 'English TWD' : 'English USD'));
+  await trigger.press("Escape");
+  await page.waitForFunction(() => !document.querySelector('[data-overlay-state="closing"]'));
+}
+async function overflow(page, label) {
+  await page.waitForTimeout(200);
+  const extra = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  assert.ok(extra <= 0, `${label}: overflow ${extra}`);
+}
+try {
+  for (const width of [320, 390, 768, 1440]) {
+    const ctx = await context({ viewport: { width, height: 900 } });
+    const page = await ctx.newPage();
+    await page.goto(`${base}/products/ED14024/`);
+    await page.waitForFunction(() => window.PARADIGM_LANGUAGE && window.PARADIGM_VARIANT_GALLERY);
+    const tableValues = await page.locator(".rich-description__table td").allTextContents();
+    const fixed = await page.locator(".site-header, .breadcrumb, .site-footer").allTextContents();
+    assert.equal(await page.locator(".rich-description__table tbody th").first().textContent(), "Shoulder W");
+    assert.ok((await page.locator(".rich-description").textContent()).includes("For Height 173~178, Size L"));
+    await selectLanguage(page, "zh-TWD", width);
+    assert.equal(await page.locator("html").getAttribute("lang"), "zh-Hant");
+    assert.equal(await page.locator(".rich-description__table tbody th").first().textContent(), "肩寬");
+    assert.deepEqual(await page.locator(".rich-description__table td").allTextContents(), tableValues);
+    assert.deepEqual(await page.locator(".site-header, .breadcrumb, .site-footer").allTextContents(), fixed);
+    assert.equal(await page.locator("[data-primary-action-label]").textContent(), "Shopee 購買");
+    await overflow(page, `product 中文 ${width}`);
+    await page.goto(`${base}/teamwear/customize/`);
+    await page.waitForFunction(() => window.PARADIGM_LANGUAGE);
+    assert.equal(await page.locator('[data-choice-title="Pattern"] legend').textContent(), "圖樣");
+    assert.equal(await page.locator('[data-choice-title="Add-On"] .choice-option__label').textContent(), "球褲前口袋");
+    assert.equal(await page.locator("[data-primary-action-label]").textContent(), "Instagram 私訊");
+    await page.evaluate(() => {
+      Object.defineProperty(navigator, "clipboard", { configurable: true, value: { writeText: async text => { window.copiedInquiry = text; } } });
+      document.querySelector("[data-primary-action]").addEventListener("click", event => event.preventDefault());
+    });
+    await page.locator("[data-primary-action]").click();
+    const inquiry = await page.evaluate(() => window.copiedInquiry);
+    assert.match(inquiry, /^Paradigm Teamwear inquiry\nModel: PE Basketball Teamwear\nPattern:/);
+    assert.ok(!/[\u3400-\u9fff]/u.test(inquiry));
+    await page.locator('[data-choice-id="A01"]').click();
+    assert.ok((await page.locator("[data-teamwear-price]").textContent()).includes("NT$"));
+    await page.locator('[data-choice-title="Pattern"] [data-choice-id="P01"]').click();
+    assert.ok((await page.locator("[data-product-variant-image]").getAttribute("alt")).includes("正反面"));
+    await overflow(page, `customize 中文 ${width}`);
+    await selectLanguage(page, "en-USD", width);
+    assert.equal(await page.locator('[data-choice-title="Pattern"] legend').textContent(), "Pattern");
+    assert.equal(await page.locator('[data-choice-title="Add-On"] .choice-option__label').textContent(), "Front Pockets on Shorts");
+    assert.match(await page.locator("[data-teamwear-price]").textContent(), /^\$/);
+    await page.reload();
+    assert.equal(await page.locator("#menu-language-native").inputValue(), "en-USD");
+    await selectLanguage(page, "zh-TWD", width);
+    await page.goto(`${base}/products/GM42022/`);
+    assert.equal(await page.locator(".rich-description__table tbody th").first().textContent(), "褲頭寬");
+    await selectLanguage(page, "en-TWD", width);
+    assert.equal(await page.locator(".rich-description__table tbody th").first().textContent(), "Waist W");
+    assert.ok((await page.locator(".rich-description").textContent()).includes("For Waist 80~90, Size L"));
+    await overflow(page, `shorts English ${width}`);
+    await ctx.close();
+    console.log(`LANGUAGE_BROWSER_OK viewport=${width} persistence=true prices=true choices=true tableValues=true sharedShell=true keyboard=true overflow=false`);
+  }
+  const ctx = await context({ viewport: { width: 1440, height: 900 } });
+  const page = await ctx.newPage();
+  await page.goto(`${base}/search?q=hoodie`);
+  await selectLanguage(page, "zh-TWD", 1440);
+  await page.waitForFunction(() => document.querySelector("[data-search-page-status]").textContent.includes("商品結果"));
+  assert.ok((await page.title()).includes("搜尋"));
+  assert.equal(await page.locator("[data-search-page-title]").textContent(), 'Search for "hoodie"');
+  assert.ok(await page.locator(".search-results--page .product-card").count() > 0);
+  await overflow(page, "Search 中文");
+  await page.goto(`${base}/products/${soldOut.code}/?variant=${soldOut.sku}`);
+  assert.equal(await page.locator("[data-primary-action-label]").textContent(), "貨到通知我");
+  await page.evaluate(() => {
+    document.addEventListener("paradigm:notification-copied", event => { window.copiedNotification = event.detail.text; });
+    document.querySelector("[data-primary-action]").addEventListener("click", event => event.preventDefault());
+  });
+  await page.locator("[data-primary-action]").click();
+  const notification = await page.evaluate(() => window.copiedNotification);
+  assert.match(notification, /^Paradigm notification request\nItem:/);
+  assert.match(notification, /Please notify me when this selection is available\./);
+  assert.ok(!/[\u3400-\u9fff]/u.test(notification));
+  await page.locator('[data-media-zoom-gallery] img:visible').first().focus();
+  await page.locator('[data-media-zoom-gallery] img:visible').first().press("Enter");
+  assert.ok((await page.locator(".media-zoom-overlay").getAttribute("aria-label")).includes("放大檢視"));
+  await page.keyboard.press("Escape");
+  await page.goto(`${base}/teamwear/`);
+  assert.equal(await page.locator("#teamwear-title").textContent(), "Where Taste Meets Teamwear.");
+  assert.equal(await page.locator("[data-primary-action-label]").textContent(), "Build yours");
+  assert.equal(await page.locator("html").getAttribute("lang"), "en");
+  await page.goto(`${base}/font-credits/`);
+  assert.equal(await page.locator("#font-credits-title").textContent(), "Font credits");
+  assert.equal(await page.locator("html").getAttribute("lang"), "en");
+  await ctx.close();
+  const plain = await context({ javaScriptEnabled: false, viewport: { width: 390, height: 900 } });
+  const nojs = await plain.newPage();
+  await nojs.goto(`${base}/products/ED14024/`);
+  assert.equal(await nojs.locator(".rich-description__table tbody th").first().textContent(), "Shoulder W");
+  assert.ok((await nojs.locator(".rich-description").textContent()).includes("For Height 173~178, Size L"));
+  assert.equal(await nojs.locator("#menu-language-native").isVisible(), true);
+  await overflow(nojs, "No-JavaScript product");
+  await plain.close();
+  assert.deepEqual(errors, []);
+  console.log("LANGUAGE_BROWSER_OK search=true unavailable=true gallery=true deferredEnglish=true noJS=true pageErrors=0");
+} finally { await browser.close(); }

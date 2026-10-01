@@ -18,7 +18,7 @@
   }
 
   function setPageInert(inert) {
-    document.querySelectorAll("main, footer").forEach((node) => node.toggleAttribute("inert", inert));
+    document.querySelectorAll(".skip-link, main, footer").forEach((node) => node.toggleAttribute("inert", inert));
   }
 
   function setupOverlay({ overlay, toggle, openClass, openLabel, closeLabel, initialFocus }) {
@@ -57,7 +57,7 @@
       }, 360);
     }
 
-    function finishClose(version) {
+    function finishClose(version, restoreFocus) {
       if (version !== stateVersion || overlay.dataset.overlayState !== STATES.closing) return;
       overlay.dataset.overlayState = STATES.closed;
       document.body.classList.remove(openClass);
@@ -65,6 +65,7 @@
       setPageInert(false);
       if (activeOverlay === controller) activeOverlay = null;
       delete document.body.dataset.overlayState;
+      if (restoreFocus && lastFocusedElement?.isConnected) lastFocusedElement.focus({ preventScroll: true });
     }
 
     const controller = {
@@ -73,6 +74,7 @@
         const version = ++stateVersion;
         clearFallback();
         lastFocusedElement = document.activeElement;
+        overlay.inert = false;
         overlay.dataset.overlayState = STATES.opening;
         overlay.setAttribute("aria-hidden", "false");
         toggle.setAttribute("aria-expanded", "true");
@@ -96,16 +98,17 @@
         clearFallback();
         overlay.dataset.overlayState = immediate ? STATES.closed : STATES.closing;
         overlay.setAttribute("aria-hidden", "true");
+        overlay.inert = true;
         toggle.setAttribute("aria-expanded", "false");
         toggle.setAttribute("aria-label", openLabel);
-        if (restoreFocus) (lastFocusedElement || toggle).focus();
+        if (restoreFocus) toggle.focus({ preventScroll: true });
         if (immediate || reducedMotion.matches) {
           overlay.dataset.overlayState = STATES.closing;
-          finishClose(version);
+          finishClose(version, restoreFocus);
           return;
         }
         setBodyState(STATES.closing);
-        afterSurfaceTransition(version, () => finishClose(version));
+        afterSurfaceTransition(version, () => finishClose(version, restoreFocus));
       }
     };
 
@@ -126,6 +129,11 @@
       const focusable = [toggle, ...focusableNodes(overlay)];
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
+      if (document.activeElement !== toggle && !overlay.contains(document.activeElement)) {
+        event.preventDefault();
+        (event.shiftKey ? last : first).focus();
+        return;
+      }
       if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
         last.focus();
@@ -163,6 +171,23 @@
     openLabel: "Open search",
     closeLabel: "Close search",
     initialFocus: () => searchOverlay?.querySelector("[data-search-input]")
+  });
+
+  const storefrontOverlay = document.querySelector("[data-storefront-overlay]");
+  const storefrontToggle = document.querySelector("[data-storefront-toggle]");
+  const storefrontController = setupOverlay({
+    overlay: storefrontOverlay,
+    toggle: storefrontToggle,
+    openClass: "storefront-open",
+    openLabel: "Open region and language",
+    closeLabel: "Close region and language",
+    initialFocus: () => storefrontOverlay?.querySelector(".dropdown__trigger")
+  });
+  window.matchMedia('(min-width: 64rem)').addEventListener('change', (event) => {
+    if (!event.matches && storefrontOverlay?.getAttribute('aria-hidden') === 'false') {
+      storefrontController?.close(false, true);
+      navToggle?.focus({ preventScroll: true });
+    }
   });
 
   document.querySelectorAll("[data-current-year]").forEach((node) => {

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import pricingCore from "../../assets/js/pricing-core.js";
 
 export const ITEM_SCHEMA_VERSION = 4;
 
@@ -279,5 +280,5 @@ export function itemPriceLabel(item) {
   assert.ok(value != null, `Missing website price: ${item.code}`);
   assert.equal(typeof value, "number", "Website price must be numeric");
   price(value, "website price");
-  return `NT$${value.toLocaleString("en-US")}`;
+  return pricingCore.formatPrice(value);
 }

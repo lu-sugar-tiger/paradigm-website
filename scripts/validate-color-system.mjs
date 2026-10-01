@@ -140,12 +140,21 @@ const colorRegistry = JSON.parse(
   await readFile(path.join(ROOT, "data/colors.json"), "utf8")
 );
 assert.ok(Array.isArray(colorRegistry.colors), "canonical colors must be a list");
+assert.ok(Array.isArray(colorRegistry.palette), "item color code palette must be a list");
+assert.equal(colorRegistry.palette.length, 72, "item color code palette must contain all 72 supplied codes");
+const itemColorValueByCode = new Map();
+for (const { code, value } of colorRegistry.palette) {
+  assert.match(code, /^C(?:0[1-9]|[1-7][1-9])$/, "item color codes must use C plus two supplied digits");
+  assert.match(value, /^#[0-9a-f]{6}$/i, `${code} must have a six-digit Hex value`);
+  assert.ok(!itemColorValueByCode.has(code), `duplicate item color code ${code}`);
+  itemColorValueByCode.set(code, value);
+}
 const productHexValues = new Set();
 const productLabels = new Set();
-for (const { id, name, value } of colorRegistry.colors) {
-  assert.ok(id && name && /^#[0-9a-f]{6}$/i.test(value), "each canonical color must have an id, name, and six-digit value");
+for (const { id, code, name } of colorRegistry.colors) {
+  assert.ok(id && name && itemColorValueByCode.has(code), "each named color must have an id, current name, and canonical item color code");
   productLabels.add(name);
-  productHexValues.add(normalizeHex(value));
+  productHexValues.add(normalizeHex(itemColorValueByCode.get(code)));
 }
 assert.equal(productLabels.size, colorRegistry.colors.length, "canonical color names must be unique");
 

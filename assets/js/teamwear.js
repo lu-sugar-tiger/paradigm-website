@@ -301,7 +301,7 @@
   }
 
   function priceLabel(value) {
-    return `NT$${Number(value).toLocaleString("en-US")}`;
+    return window.PARADIGM_PRICING.format(value);
   }
 
   function totalPrice() {
@@ -314,18 +314,27 @@
 
   function updateBuilderPrice() {
     const price = form.querySelector("[data-teamwear-price]");
-    if (price) price.textContent = priceLabel(totalPrice());
+    if (price) {
+      const total = totalPrice();
+      price.dataset.priceTwd = total;
+      price.textContent = priceLabel(total);
+    }
   }
 
-  function updateBuilderCover() {
+  function updateBuilderVariantImage(reveal = false) {
     const pattern = patternById.get(selectedOption("chip")?.dataset.choiceId);
     const color = colorByOptionId.get(selectedOption("swatch")?.dataset.choiceId);
     if (!pattern || !color) return;
-    const gallery = document.querySelector("[data-builder-preview]");
-    const changed = updateUniformImage(gallery?.querySelector("[data-builder-cover]"),
-      pattern.mediaByColor[color.colorId], "../..",
-      `${pattern.name} ${model.name} in ${colorNameById.get(color.id)}, front and back`);
-    if (changed) gallery.scrollLeft = 0;
+    const gallery = form.closest(".product-detail__panel")?.querySelector("[data-builder-preview]");
+    window.PARADIGM_VARIANT_GALLERY?.sync(gallery, pattern.mediaByColor[color.colorId], {
+      alt: `${pattern.name} ${model.name} in ${colorNameById.get(color.id)}, front and back`,
+      reveal
+    });
+  }
+
+  function isBuilderImageChoice(target) {
+    const group = target.closest("[data-choice-group]");
+    return group && ["Color", "Pattern"].includes(group.dataset.choiceTitle);
   }
 
   function inquiryText() {
@@ -356,9 +365,14 @@
     textarea.remove();
   }
 
-  form.addEventListener("change", () => {
+  form.addEventListener("click", (event) => {
+    if (!event.target.closest('input[type="radio"]') || !isBuilderImageChoice(event.target)) return;
+    const gallery = form.closest(".product-detail__panel")?.querySelector("[data-builder-preview]");
+    if (!gallery?.hasAttribute("data-variant-revealed")) updateBuilderVariantImage(true);
+  });
+  form.addEventListener("change", (event) => {
     updateBuilderPrice();
-    updateBuilderCover();
+    if (isBuilderImageChoice(event.target)) updateBuilderVariantImage(true);
   });
   const action = form.querySelector("[data-primary-action]");
   action?.addEventListener("click", () => {
@@ -368,5 +382,9 @@
     navigator.clipboard?.writeText(text).catch(() => {});
   });
   updateBuilderPrice();
-  updateBuilderCover();
+  updateBuilderVariantImage();
+  document.addEventListener("paradigm:language-change", () => {
+    updateBuilderPrice();
+    updateBuilderVariantImage();
+  });
 })();

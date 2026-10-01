@@ -38,10 +38,13 @@
     function sync() {
       if (grouped) return;
       options.forEach((option) => option.setAttribute("aria-selected", String(option.dataset.value === native.value)));
-      const label = native.selectedOptions[0].textContent;
+      const selectedOption = native.selectedOptions[0];
+      const label = selectedOption.textContent;
       trigger.dataset.selected = "true";
       trigger.dataset.availability = options.find((option) => option.dataset.value === native.value)?.dataset.availability || "available";
-      root.querySelector("[data-dropdown-value]").textContent = label;
+      root.querySelector("[data-dropdown-value]").textContent = selectedOption.dataset.dropdownLabel || label;
+      const detail = trigger.querySelector("[data-dropdown-detail]");
+      if (detail) detail.textContent = selectedOption.dataset.dropdownDetail || "";
       trigger.setAttribute("aria-label", `${trigger.dataset.dropdownLabel}: ${label}${trigger.dataset.availability === "unavailable" ? ", unavailable" : ""}`);
     }
     function close(restore = false) {
@@ -140,7 +143,7 @@
     document.addEventListener("paradigm:dropdown-open", (event) => { if (event.target !== root) close(); });
     document.addEventListener("paradigm:overlay-open", (event) => { if (!event.target.contains(root)) close(); });
     root.addEventListener("paradigm:dropdown-close", () => close());
-    root.closest("[data-nav-drawer], [data-search-overlay]")?.addEventListener("paradigm:overlay-close", () => close());
+    document.addEventListener("paradigm:overlay-close", (event) => { if (event.target.contains(root)) close(); });
     window.addEventListener("resize", queuePosition);
     document.addEventListener("scroll", (event) => { if (!list.contains(event.target)) queuePosition(); }, true);
     window.visualViewport?.addEventListener("resize", queuePosition);

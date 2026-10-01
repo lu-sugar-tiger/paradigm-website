@@ -53,12 +53,13 @@ for (const [index, image] of railImages.entries()) {
   assert.match(image, /srcset="[^"]+540w, [^"]+1080w, [^"]+2160w"/);
   assert.match(image, /loading="lazy"/);
 }
-const cover = customize.match(/<img[^>]+data-builder-cover[^>]*>/)?.[0];
-assert.ok(cover?.includes(model.patterns[1].mediaByColor.mocha.src));
-assert.match(cover, /srcset="[^"]+540w, [^"]+1080w, [^"]+2160w"/);
-assert.match(cover, /data-media-zoom-touch/);
-assert.doesNotMatch(cover, /loading="lazy"/);
-console.log(`Teamwear media OK: ${model.patterns.length * model.colors.length} configurations, ${paths.size} verified WebPs, responsive rail and default cover.`);
+const variantImage = customize.match(/<img[^>]+data-product-variant-image[^>]*>/)?.[0];
+assert.ok(variantImage?.includes(model.patterns[1].mediaByColor.mocha.src));
+assert.match(variantImage, /srcset="[^"]+540w, [^"]+1080w, [^"]+2160w"/);
+assert.match(variantImage, /data-media-zoom-touch/);
+assert.match(variantImage, /loading="lazy"/);
+assert.doesNotMatch(customize, /data-builder-cover/, "Teamwear must not keep the old first-slide cover behavior");
+console.log(`Teamwear media OK: ${model.patterns.length * model.colors.length} configurations, ${paths.size} verified WebPs, responsive rail and default variant image.`);
 
 const photography = JSON.parse(await read("data/teamwear-photography.json"));
 const photoById = new Map(photography.photos.map((photo) => [photo.id, photo]));
@@ -89,20 +90,22 @@ for (const photo of photography.photos) {
 const highlightSection = landing.match(/<section class="teamwear-highlights"[\s\S]*?<\/section>/)[0];
 const athleteSection = landing.match(/<section class="teamwear-gallery"[\s\S]*?<\/section>/)[0];
 const customGallery = customize.match(/<div class="product-detail__gallery"[\s\S]*?<\/div>/)[0];
-function assertPhotoSequence(markup, ids, { coverFirst = false, captions = false } = {}) {
+function assertPhotoSequence(markup, ids, { variantLast = false, eagerFirst = false, captions = false } = {}) {
   const images = markup.match(/<img\b[^>]*>/g) || [];
-  assert.equal(images.length, ids.length + Number(coverFirst));
+  assert.equal(images.length, ids.length + Number(variantLast));
   ids.forEach((id, index) => {
     const photo = photoById.get(id);
     assert.ok(photo, `Unknown photograph reference: ${id}`);
-    const image = images[index + Number(coverFirst)];
+    const image = images[index];
     assert.ok(image.includes(photo.media.src), `Wrong image or order for ${id}`);
     assert.ok(image.includes(`alt="${photo.alt}"`));
     assert.match(image, /srcset="[^"]+540w, [^"]+1080w, [^"]+2160w"/);
-    assert.match(image, /loading="lazy"/);
+    if (eagerFirst && index === 0) assert.doesNotMatch(image, /loading="lazy"/);
+    else assert.match(image, /loading="lazy"/);
     assert.match(image, /width="1080" height="1080"/);
-    if (coverFirst) assert.match(image, /data-media-zoom-touch/);
+    if (variantLast) assert.match(image, /data-media-zoom-touch/);
   });
+  if (variantLast) assert.match(images.at(-1), /data-product-variant-image/, "The separate variant image must be last in the horizontal gallery");
   assert.doesNotMatch(markup, /teamwear-court-|teamwear-hero-product-|campaign\//);
   if (captions) {
     const names = [...markup.matchAll(/<h3 class="type-h5">([^<]+)<\/h3>/g)].map((match) => match[1]);
@@ -111,8 +114,8 @@ function assertPhotoSequence(markup, ids, { coverFirst = false, captions = false
 }
 assertPhotoSequence(highlightSection, Object.values(photography.highlights));
 assertPhotoSequence(athleteSection, photography.athletes, { captions: true });
-assertPhotoSequence(customGallery, photography.customGallery, { coverFirst: true });
+assertPhotoSequence(customGallery, photography.customGallery, { variantLast: true, eagerFirst: true });
 assert.deepEqual(new Set([...Object.values(photography.highlights), ...photography.athletes]), new Set(photoById.keys()));
 assert.deepEqual(new Set(photography.customGallery), new Set(photoById.keys()));
 assert.equal(new Set(photography.customGallery).size, photography.customGallery.length);
-console.log(`Teamwear photography OK: ${photoById.size} supplied photos, ${photographPaths.size} verified WebPs, four highlights, three athlete cards, seven gallery photos plus configuration cover.`);
+console.log(`Teamwear photography OK: ${photoById.size} supplied photos, ${photographPaths.size} verified WebPs, four highlights, three athlete cards, seven gallery photos plus a separate variant image.`);

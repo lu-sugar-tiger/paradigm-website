@@ -5,7 +5,7 @@
   const hover = matchMedia('(any-hover: hover)');
   const drawer = document.querySelector('.drawer-nav');
   const region = drawer?.querySelector('[data-dropdown]');
-  const regionSlot = document.querySelector('[data-header-region]');
+  const regionSlot = document.querySelector('[data-storefront-slot]');
   const groups = Array.from(directory.querySelectorAll('[data-header-group]'));
   let active = null;
   let pinned = false;
@@ -25,7 +25,7 @@
   }
   function closeRegion() { region?.dispatchEvent(new Event('paradigm:dropdown-close')); }
   function open(group, pin = false) {
-    if (!large.matches || document.body.classList.contains('search-open')) return;
+    if (!large.matches || document.body.dataset.overlayState) return;
     if (active !== group) close();
     closeRegion();
     active = group;

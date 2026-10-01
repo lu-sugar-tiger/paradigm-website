@@ -1,4 +1,5 @@
 (function () {
+  const translate = (source, params = {}) => window.PARADIGM_LANGUAGE.text(source, params);
   const core = window.PARADIGM_SEARCH_CORE;
   const overlay = document.querySelector("[data-search-overlay]");
   const input = overlay?.querySelector("[data-search-input]");
@@ -24,7 +25,7 @@
 
   function searchIndex() {
     if (!searchIndexPromise) {
-      searchIndexPromise = fetch("/assets/data/search-index.json?v=20260927b", { credentials: "same-origin" })
+      searchIndexPromise = fetch("/assets/data/search-index.json?v=20261001b", { credentials: "same-origin" })
         .then((response) => {
           if (!response.ok) throw new Error(`Search index request failed with ${response.status}`);
           return response.json();
@@ -40,7 +41,7 @@
   function element(tagName, className = "", text = "") {
     const node = document.createElement(tagName);
     if (className) node.className = className;
-    if (text) node.textContent = text;
+    if (text) node.textContent = translate(text);
     return node;
   }
 
@@ -65,7 +66,7 @@
       if (!product.media.isFallback) media.dataset.mediaZoomTouch = "";
       const image = element("img");
       image.src = assetPath(product.media.src);
-      image.alt = product.alt || "";
+      image.alt = window.PARADIGM_LANGUAGE.imageText(product.alt || "", image);
       image.width = product.media.width || 1;
       image.height = product.media.height || 1;
       image.loading = "lazy";
@@ -80,14 +81,16 @@
     }
     const body = element("div", "product-card__body");
     body.append(element("h3", "product-card__title", product.cardName));
-    body.append(element("span", "product-card__price", product.priceLabel));
+    const price = element("span", "product-card__price", window.PARADIGM_PRICING.format(product.priceTwd));
+    price.dataset.priceTwd = product.priceTwd;
+    body.append(price);
     link.append(media, body);
     return link;
   }
 
   function group(label, type, suffix) {
     const section = element("section", `search-result-group search-result-group--${type}`);
-    section.setAttribute("aria-label", label);
+    section.setAttribute("aria-label", translate(label));
     section.dataset.searchResultType = `${suffix}-${type}`;
     return section;
   }
@@ -162,7 +165,7 @@
   function failed(container, status) {
     container.replaceChildren(element("p", "search-status-row", "Search is unavailable. Please try again."));
     container.setAttribute("aria-busy", "false");
-    status.textContent = "Search is unavailable.";
+    status.textContent = translate("Search is unavailable.");
   }
 
   function prepareOverlaySequence(children) {
@@ -196,17 +199,17 @@
     container.setAttribute("aria-busy", "false");
     status.textContent = pageSurface
       ? normalizedQuery
-        ? `${products.length} product result${products.length === 1 ? "" : "s"} for ${query.trim()}.`
-        : "Search the product catalog."
+        ? translate("{count} product result{plural} for {query}.", { count: products.length, plural: products.length === 1 ? "" : "s", query: query.trim() })
+        : translate("Search the product catalog.")
       : normalizedQuery
-        ? `${pages.length} page results and ${products.length} product results for ${query.trim()}.`
-        : `${suggestions.length} suggested searches.`;
+        ? translate("{pages} page results and {products} product results for {query}.", { pages: pages.length, products: products.length, query: query.trim() })
+        : translate("{count} suggested searches.", { count: suggestions.length });
   }
 
   function updateSubmit() {
     const query = input.value.trim();
     submit.disabled = !query;
-    submit.setAttribute("aria-label", query ? `Search for ${query}` : "Search");
+    submit.setAttribute("aria-label", query ? translate("Search for {query}", { query }) : translate("Search"));
   }
 
   function renderOverlay() {
@@ -237,7 +240,7 @@
     if (!pageTitle) return;
     const label = query ? `Search for "${query}"` : "Search";
     pageTitle.textContent = label;
-    document.title = query ? `Paradigm | ${label}` : "Paradigm | Search";
+    document.title = `Paradigm | ${query ? translate('Search for "{query}"', { query }) : translate("Search")}`;
   }
 
   function renderSearchPage(query, updateUrl = false) {
@@ -288,6 +291,12 @@
     sequenceOverlayRender = true;
     updateSubmit();
     renderOverlay();
+  });
+
+  document.addEventListener("paradigm:language-change", () => {
+    updateSubmit();
+    if (pageResults) renderSearchPage(new URLSearchParams(window.location.search).get("q") || "");
+    if (overlay.getAttribute("aria-hidden") === "false") renderOverlay();
   });
 
   updateSubmit();

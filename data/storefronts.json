@@ -1,0 +1,12 @@
+{
+  "defaultValue": "en-TWD",
+  "markets": {
+    "taiwan": { "currency": "TWD" },
+    "international": { "currency": "USD" }
+  },
+  "options": [
+    { "value": "zh-TWD", "label": "中文", "detail": "TWD", "language": "zh-Hant", "market": "taiwan" },
+    { "value": "en-TWD", "label": "English", "detail": "TWD", "language": "en", "market": "taiwan" },
+    { "value": "en-USD", "label": "English", "detail": "USD", "language": "en", "market": "international" }
+  ]
+}

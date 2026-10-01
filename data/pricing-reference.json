@@ -1,0 +1,6 @@
+{
+  "month": "2026-09",
+  "twdPerUsd": 31.716,
+  "source": "https://cpx.cbc.gov.tw/api/OpenData/FTDOpenData_Month",
+  "method": "Geometric average of business-day interbank closing rates"
+}

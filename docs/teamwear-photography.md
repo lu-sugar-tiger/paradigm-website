@@ -8,9 +8,9 @@ The current batch contains seven square NTUESOE basketball photos from `assets/t
 | --- | --- |
 | Highlights: Complete set, Two sides, Team identity, Print detail | 02, 03, 04, 07 |
 | Athletes | 01, 06, 08 |
-| Custom-page gallery after the configurable cover | 01, 02, 03, 04, 06, 07, 08 |
+| Custom-page gallery before the separate variant image | 01, 02, 03, 04, 06, 07, 08 |
 
-All athlete-card captions say NTUESOE, matching the supplied batch rather than attributing its photographs to other teams. The custom-page cover continues to follow the selected pattern and color; the seven subsequent photographs are real-life examples and do not change with that selection.
+All athlete-card captions say NTUESOE, matching the supplied batch rather than attributing its photographs to other teams. The separate custom-page uniform image follows the selected pattern and color; the seven preceding photographs are real-life examples and do not change with that selection. The uniform image is the last horizontal slide and appears first in the stacked gallery only after a Color or Pattern click.
 
 To reimport, keep the manifest's named originals in `assets/temp`, expose the existing Sharp package through `NODE_PATH`, and run:
 

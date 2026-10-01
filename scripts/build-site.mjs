@@ -7,6 +7,9 @@ import {
 } from "./lib/rich-description.mjs";
 import { categoryForName, rankRelatedProducts } from "./lib/product-relations.mjs";
 import searchCore from "../assets/js/search-core.js";
+import pricingCore from "../assets/js/pricing-core.js";
+import { pricingConfigSource } from "./lib/pricing-config.mjs";
+import { localizationSource, copyAttributes } from "./lib/localization.mjs";
 import { catalogEntriesForProduct } from "./lib/catalog-entries.mjs";
 import { resolveProductMedia, responsiveMediaFromSource } from "./lib/product-images.mjs";
 import { itemPriceLabel, validateItemCatalog } from "./lib/item-schema.mjs";
@@ -41,7 +44,7 @@ function slugFor(title) {
 }
 
 function priceLabel(price) {
-  return `NT$${Number(price).toLocaleString("en-US")}`;
+  return pricingCore.formatPrice(price);
 }
 
 function categoryPath(category) {
@@ -174,7 +177,7 @@ function renderProductMain(template, product, relatedProducts, itemCodes) {
       category: product.category,
       media,
       zoom: product.imageSource !== "fallback",
-      price: renderProductDetailPrice({ price: product.priceLabel, dataAttribute: "data-product-price" }),
+      price: renderProductDetailPrice({ price: product.priceLabel, twd: pricingCore.effectiveTwdPrice(product), dataAttribute: "data-product-price" }),
       choices: [colorChoices, sizeChoices],
       primaryAction,
       description: renderDescription({ tokens: product.description, itemCodes, currentItemCode: product.code })
@@ -200,7 +203,7 @@ ${renderProductGrid(filtered, root).split("\n").map((line) => `      ${line}`).j
     </div></section>
   </main>`;
   return renderDocument({
-    lang: "zh-Hant",
+    lang: "en",
     title: pathName === "home" ? "Paradigm" : `Paradigm | ${title}`,
     description: category === "all" ? "Browse all Paradigm products and collections." : `Browse Paradigm ${title}.`,
     canonical: pathName === "home" ? "https://prdm.tw/" : `https://prdm.tw/collections/${pathName}`,
@@ -208,7 +211,7 @@ ${renderProductGrid(filtered, root).split("\n").map((line) => `      ${line}`).j
     currentPath,
     bodyClass: "site-shell reference-page product-page",
     main,
-    scripts: ["catalog.js?v=20260924a", "media-zoom.js?v=20260924a"]
+    scripts: ["catalog.js?v=20260924a", "media-zoom.js?v=20261001a"]
   });
 }
 
@@ -222,10 +225,10 @@ function renderSearchPage() {
   });
   const main = `  <main class="page search-page__main" id="main-content">
 ${pageHeadline.split("\n").map((line) => `    ${line}`).join("\n")}
-    <section class="search-page__results" aria-label="Search results">
+    <section class="search-page__results" aria-label="Search results"${copyAttributes("Search results", "aria-label")}>
       <p class="visually-hidden" aria-live="polite" data-search-page-status></p>
       <div class="container search-results search-results--page" aria-busy="true" data-search-page-results>
-        <p class="search-status-row">Loading search…</p>
+        <p class="search-status-row"${copyAttributes("Loading search…")}>Loading search…</p>
         <noscript><p class="noscript-note">JavaScript is required to search the Paradigm catalog.</p></noscript>
       </div>
     </section>
@@ -240,7 +243,7 @@ ${pageHeadline.split("\n").map((line) => `    ${line}`).join("\n")}
     bodyClass: "site-shell reference-page search-page",
     main,
     head: '  <meta name="robots" content="noindex,follow">',
-    scripts: ["media-zoom.js?v=20260924a"]
+    scripts: ["media-zoom.js?v=20261001a"]
   });
 }
 
@@ -280,6 +283,7 @@ function buildSearchIndex(searchConfig, products) {
       type,
       family,
       priceLabel: product.priceLabel,
+      priceTwd: pricingCore.effectiveTwdPrice(product),
       url: product.cardUrl || `/products/${product.code}`,
       media: product.cardMedia || product.media[0] || null,
       alt: product.cardAlt || product.alt,
@@ -293,7 +297,7 @@ function buildSearchIndex(searchConfig, products) {
     ...(searchConfig.descriptivePhrases || [])
   ]);
   return {
-    schemaVersion: 3,
+    schemaVersion: 4,
     popularKeywords: searchConfig.popularKeywords,
     vocabulary,
     pages,
@@ -333,7 +337,7 @@ function teamwearPhoto(photography, id) {
   return photo;
 }
 
-function renderTeamwearPhoto(photography, id, { root = "..", touchZoom = false } = {}) {
+function renderTeamwearPhoto(photography, id, { root = "..", touchZoom = false, loading = "lazy" } = {}) {
   const photo = teamwearPhoto(photography, id);
   return renderResponsiveProductImage({
     media: photo.media,
@@ -342,7 +346,7 @@ function renderTeamwearPhoto(photography, id, { root = "..", touchZoom = false }
     sizes: touchZoom
       ? "(min-width: 80rem) 768px, (min-width: 64rem) 60vw, 100vw"
       : "(min-width: 80rem) 600px, (min-width: 48rem) 50vw, 100vw",
-    loading: "lazy",
+    loading,
     touchZoom
   });
 }
@@ -369,6 +373,7 @@ function renderTeamwearLanding(template, model, colorById, instagramUrl, photogr
   });
   const main = applyTemplate(template, {
     MODEL_NAME: html(model.name),
+    MODEL_PRICE: `<span data-price-twd="${html(model.price)}">${html(priceLabel(model.price))}</span>`,
     HERO_MEDIA: `<div class="teamwear-hero__media">
       <picture>
 ${[...heroVideo.variants].reverse().filter((variant) => variant.minWidth).map((variant) => `        <source media="(min-width: ${variant.minWidth / 16}rem)" srcset="../${html(variant.poster)}">`).join("\n")}
@@ -398,7 +403,7 @@ ${[...heroVideo.variants].reverse().filter((variant) => variant.minWidth).map((v
     bodyClass: "site-shell reference-page teamwear-page teamwear-story-shell",
     main,
     styles: ["teamwear.css?v=20260829c", "teamwear-story.css?v=20260927a"],
-    scripts: ["teamwear-options.js?v=20260917b", "teamwear.js?v=20260913a", "hero-video.js?v=20260924a", "media-zoom.js?v=20260924a"],
+    scripts: ["teamwear-options.js?v=20260917b", "teamwear.js?v=20261001b", "hero-video.js?v=20260924a", "media-zoom.js?v=20261001a"],
     head: `  <meta property="og:title" content="${html(model.name)} | Paradigm">\n  <meta property="og:description" content="${html(`${model.name} is a reversible basketball uniform system composed by Paradigm for the whole roster.`)}">\n  <meta property="og:image" content="https://prdm.tw/assets/images/teamwear/campaign/hero-desktop.webp">\n  <meta property="og:type" content="website">`
   });
 }
@@ -468,17 +473,20 @@ function renderTeamwearCustomize(template, model, colorById, instagramUrl, itemC
       code: model.code,
       name: model.name,
       media: [
+        ...photography.customGallery.map((id, index) => renderTeamwearPhoto(photography, id, {
+          root: "../..", touchZoom: true, loading: index ? "lazy" : ""
+        })),
         renderResponsiveProductImage({
           media: selectedPattern.mediaByColor[selectedColor.colorId],
           alt: `${selectedPattern.name} ${model.name} in ${colorById.get(selectedColor.colorId).name}, front and back`,
           root: "../..",
           sizes: "(min-width: 80rem) 768px, (min-width: 64rem) 60vw, 100vw",
+          loading: "lazy",
           touchZoom: true,
-          dataAttribute: "data-builder-cover"
-        }),
-        ...photography.customGallery.map((id) => renderTeamwearPhoto(photography, id, { root: "../..", touchZoom: true }))
+          variantImage: true
+        })
       ],
-      price: renderProductDetailPrice({ price: priceLabel(model.price), dataAttribute: "data-teamwear-price" }),
+      price: renderProductDetailPrice({ price: priceLabel(model.price), twd: model.price, dataAttribute: "data-teamwear-price" }),
       choices: [colors, patterns, quantities, addOns],
       primaryAction,
       description
@@ -493,7 +501,7 @@ function renderTeamwearCustomize(template, model, colorById, instagramUrl, itemC
     bodyClass: "site-shell reference-page reference-page--detail teamwear-customize-page",
     main,
     styles: ["teamwear.css?v=20260829c"],
-    scripts: ["teamwear-options.js?v=20260917b", "teamwear.js?v=20260913a", "media-zoom.js?v=20260924a"]
+    scripts: ["teamwear-options.js?v=20260917b", "teamwear.js?v=20261001b", "media-zoom.js?v=20261001a"]
   });
 }
 
@@ -509,8 +517,14 @@ const [source, colorRegistry, teamwearData, searchConfig, productImageFallback, 
   readJson("data/teamwear-photography.json")
 ]);
 
-const colorByName = new Map(colorRegistry.colors.map((color) => [color.name, color]));
-const colorById = new Map(colorRegistry.colors.map((color) => [color.id, color]));
+const itemColorValueByCode = new Map(colorRegistry.palette.map((color) => [color.code, color.value]));
+const colors = colorRegistry.colors.map((color) => {
+  const value = itemColorValueByCode.get(color.code);
+  if (!value) throw new Error(`Missing item color value for ${color.code}.`);
+  return { ...color, value };
+});
+const colorByName = new Map(colors.map((color) => [color.name, color]));
+const colorById = new Map(colors.map((color) => [color.id, color]));
 // ItemSequence is stored as sequence; higher values represent newer products.
 const products = source.items.filter((entry) => entry.variants.some((variant) => variant.visible))
   .sort((left, right) => Number(right.sequence) - Number(left.sequence)).map((entry) => {
@@ -564,10 +578,12 @@ const products = source.items.filter((entry) => entry.variants.some((variant) =>
 const catalogEntries = products.flatMap(catalogEntriesForProduct);
 
 const outputs = new Map();
+outputs.set("assets/js/pricing-config.js", pricingConfigSource);
+outputs.set("assets/js/localization-data.js", localizationSource);
 const catalogBanner = `// Generated by scripts/build-site.mjs.\n// Source: ${source.source.spreadsheetUrl} (${source.source.sheetName})\n// Spreadsheet modified: ${source.source.spreadsheetModifiedTime}\n// Edit centralized data sources and rerun the build; do not hand-edit this file.\n`;
 outputs.set("assets/js/catalog.js", `${catalogBanner}window.PARADIGM_CATALOG = ${JSON.stringify({ schemaVersion: source.schemaVersion, items: products }, null, 2)};\n`);
 outputs.set("assets/js/teamwear-options.js", `// Generated by scripts/build-site.mjs from data/teamwear-options.json.\nwindow.PARADIGM_TEAMWEAR = ${JSON.stringify(teamwearData, null, 2)};\n`);
-outputs.set("assets/css/color-options.css", renderColorOptionsCss(colorRegistry.colors));
+outputs.set("assets/css/color-options.css", renderColorOptionsCss(colors));
 outputs.set("assets/data/search-index.json", `${JSON.stringify(buildSearchIndex(searchConfig, catalogEntries), null, 2)}\n`);
 
 const collectionPages = [
@@ -593,7 +609,7 @@ products.forEach((product) => {
   const related = rankRelatedProducts(products, product).map((item) => catalogEntriesForProduct(item)[0]);
   const main = renderProductMain(productTemplate, product, related, products.map((item) => item.code));
   outputs.set(`products/${product.code}/index.html`, renderDocument({
-    lang: "zh-Hant",
+    lang: "en",
     title: `Paradigm | ${product.name}`,
     description: `${product.name} by Paradigm.`,
     canonical: `https://prdm.tw/products/${product.code}`,
@@ -601,7 +617,7 @@ products.forEach((product) => {
     currentPath: `/products/${product.code}`,
     bodyClass: "site-shell reference-page reference-page--detail",
     main,
-    scripts: ["catalog.js?v=20260924a", "media-zoom.js?v=20260924a"]
+    scripts: ["catalog.js?v=20260924a", "media-zoom.js?v=20261001a"]
   }));
 });
 

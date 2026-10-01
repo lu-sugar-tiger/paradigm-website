@@ -39,6 +39,11 @@
   --color-on-container-mid: #ffffff;
   --color-on-container-low: #808080;
 
+  /* Neutral state variation, equivalent to #101010 screen / #efefef multiply. */
+  --state-variation-strength: 6.27451%;
+  --state-variation-lighten: #ffffff;
+  --state-variation-darken: #000000;
+
   /* No convenience color aliases: components consume the roles above directly. */
 
   /* Latin uses Google-hosted Roboto Semi Condensed; CJK stays on local system faces. */
@@ -182,8 +187,8 @@
   --primary-action-z-index: 80;
   --media-zoom-float-z-index: 120;
   --media-zoom-overlay-z-index: 130;
-  --focus-ring-width: 2px;
-  --focus-ring-offset: 3px;
+  --focus-ring-width: 1px;
+  --focus-ring-offset: 1px;
   --motion-ease-emphasized: cubic-bezier(.2, 0, 0, 1);
   --motion-ease-enter: cubic-bezier(.05, .7, .1, 1);
   --motion-ease-exit: cubic-bezier(.3, 0, .8, .15);

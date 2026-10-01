@@ -51,7 +51,7 @@ const visibleItemCodes = source.items
 const catalogPage = await read("collections/all/index.html");
 const catalogUrls = [...catalogPage.matchAll(/<a class="product-card" href="([^"]+)">/g)].map((match) => match[1]);
 assert.ok(visibleItemCodes.length > 0, "the source must expose a non-empty catalog; exact coverage is checked below");
-assert.equal(index.schemaVersion, 3, "the generated Search index schema must be versioned");
+assert.equal(index.schemaVersion, 4, "the generated Search index schema must include numeric TWD prices");
 assert.deepEqual(Object.keys(index.descriptions).sort(), visibleItemCodes.slice().sort(), "description features must be stored once per visible item");
 assert.equal(Object.hasOwn(index, "products"), false, "Search must use items");
 assert.deepEqual(index.popularKeywords, config.popularKeywords, "the generated index must preserve popular-search order");
@@ -68,6 +68,8 @@ for (const product of index.items) {
     assert.equal(typeof product[field], "string", `${product.code} must include ${field}`);
   }
   assert.equal(product.cardName, productCardDisplayName(product.name), `${product.code} search cards must use the shared display-name rule`);
+  const sourceItem = source.items.find((item) => item.code === product.code);
+  assert.equal(product.priceTwd, sourceItem.salePrice ?? sourceItem.listPrice, "Search must preserve numeric source prices");
   assert.ok(Array.isArray(product.colors), `${product.code} must include colors`);
   assert.equal(Object.hasOwn(product, "searchTerms"), false, `${product.code} must use structured fields without duplicated search terms`);
   assert.equal("media" in product, true, `${product.code} must include the card-media field`);
@@ -126,7 +128,7 @@ assert.match(searchPage, /data-search-page-title/, "the Search breadcrumb must e
 assert.match(searchPage, /data-search-page-results/, "the Search route must expose a generated-results mount");
 assert.match(searchClient, /assets\/data\/search-index\.json/, "the Search client must reference the generated local index");
 assert.match(searchClient, /if \(product\.media\?\.src\) \{[\s\S]*?media\.dataset\.mediaZoomTouch = "";/, "Search product-result photos must opt into the shared touch inspection contract");
-assert.match(searchPage, /assets\/js\/media-zoom\.js\?v=20260924a/, "the Search route must load the cache-busted touch inspection module");
+assert.match(searchPage, /assets\/js\/media-zoom\.js\?v=20261001a/, "the Search route must load the cache-busted touch inspection module");
 assert.match(renderer, /data-search-toggle/, "the shared header must expose the Search toggle");
 assert.match(renderer, /data-search-overlay/, "the shared header must render the Search overlay on every page");
 assert.match(searchPage, /data-search-toggle[\s\S]*?toggle-icon--resting[\s\S]*?>search<[\s\S]*?toggle-icon--close[\s\S]*?>close</, "the Search control must render separate stacked resting and close Material symbols");
@@ -134,7 +136,7 @@ assert.match(searchPage, /data-overlay-state="closed" data-search-overlay/, "the
 assert.doesNotMatch(searchPage, /data-search-(?:open|close)-symbol/, "Search must not replace icon text during state changes");
 assert.match(searchPage, /autocomplete="off"[^>]*data-search-input/, "the Search input must be ready for immediate user input");
 assert.match(searchPage, /placeholder="SEARCH PRDM\.TW"/, "the Search field must use the approved uppercase prompt");
-assert.match(searchClient, /fetch\("\/assets\/data\/search-index\.json\?v=20260927b"/, "the Search index must be lazy-loaded with a cache version");
+assert.match(searchClient, /fetch\("\/assets\/data\/search-index\.json\?v=20261001b"/, "the Search index must be lazy-loaded with a cache version");
 assert.match(searchClient, /new URLSearchParams\(\{ q: query\.trim\(\) \}\)/, "Search navigation must safely encode the query");
 assert.match(searchClient, /window\.location\.assign\(searchUrl\(query\)\)/, "Enter and the trailing action must navigate to the shareable Search route");
 assert.match(searchClient, /pageTitle\.textContent = label/, "the results breadcrumb must safely preserve query casing");
@@ -144,8 +146,8 @@ assert.doesNotMatch(searchClient, /emptyRow|No suggested searches|No page result
 assert.match(searchClient, /const suggestions = pageSurface \|\| suggestionsSuppressed \? \[\] : core\.suggestions\(index, query\);/, "the Search results page must omit keyword suggestions while the overlay retains them");
 assert.match(searchClient, /if \(!pageSurface\) pages = core\.rankRecords\(index\.pages, query\);/, "the Search results page must omit page results while the overlay retains them");
 assert.match(searchClient, /if \(suggestions\.length > 0\)[\s\S]*?if \(pages\.length > 0\)[\s\S]*?if \(products\.length > 0\)/, "Search must append only result types that contain matches");
-assert.match(searchClient, /status\.textContent = pageSurface[\s\S]*?\$\{products\.length\} product result/, "the results-page live status must report only the product catalog results it displays");
-assert.match(searchClient, /section\.setAttribute\("aria-label", label\)/, "result types must retain an accessible name without a visible title");
+assert.match(searchClient, /status\.textContent = pageSurface[\s\S]*?translate\("\{count\} product result\{plural\} for \{query\}\.", \{ count: products\.length/, "the results-page live status must report only the product catalog results it displays");
+assert.match(searchClient, /section\.setAttribute\("aria-label", translate\(label\)\)/, "result types must retain an accessible name without a visible title");
 assert.doesNotMatch(searchClient, /search-suggestion interface-label/, "suggestions must not receive implicit uppercase transformation");
 assert.match(searchClient, /search-page-result__title\$\{page\.interfaceLabel \? " interface-label" : ""\}/, "page results must reuse each page's established interface-label casing role");
 assert.match(searchClient, /suggestion:\s*"search"/, "suggestions must use the Material magnifying-lens leading icon");
