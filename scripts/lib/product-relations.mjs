@@ -1,10 +1,5 @@
 import searchCore from "../../assets/js/search-core.js";
-
-export function categoryForName(name) {
-  if (/Shorts/i.test(name)) return "Bottoms";
-  if (/(Hoodie|Crewneck)/i.test(name)) return "AW Tops";
-  return "SS Tops";
-}
+import { catalogEntriesForProduct } from "./catalog-entries.mjs";
 
 export function productFamilyKey(code) {
   const normalized = String(code ?? "").trim().toUpperCase();
@@ -13,4 +8,15 @@ export function productFamilyKey(code) {
 
 export function rankRelatedProducts(products, currentProduct) {
   return searchCore.rankRelatedProducts(products, currentProduct);
+}
+
+export function relatedCatalogEntries(products, currentProduct) {
+  const entries = new Map();
+  for (const product of rankRelatedProducts(products, currentProduct)) {
+    if (product.code === currentProduct.code) continue;
+    for (const entry of catalogEntriesForProduct(product)) {
+      if (!entries.has(entry.cardUrl)) entries.set(entry.cardUrl, entry);
+    }
+  }
+  return [...entries.values()];
 }

@@ -1,11 +1,23 @@
+# BEGIN COLLECTION REDIRECTS
+/collections/tees/index.html /collections/tees 301
+/collections/crewnecks/index.html /collections/crewnecks 301
+/collections/hoodies/index.html /collections/hoodies 301
+/collections/shorts/index.html /collections/shorts 301
+/collections/ss-tops /collections/tees 301
+/collections/ss-tops/ /collections/tees 301
+/collections/ss-tops/index.html /collections/tees 301
+/collections/aw-tops /collections/all 301
+/collections/aw-tops/ /collections/all 301
+/collections/aw-tops/index.html /collections/all 301
+/collections/bottoms /collections/shorts 301
+/collections/bottoms/ /collections/shorts 301
+/collections/bottoms/index.html /collections/shorts 301
+# END COLLECTION REDIRECTS
 /index.html / 301
 /collections /collections/all 301
 /collections/ /collections/all 301
 /collections/index.html /collections/all 301
 /collections/all/index.html /collections/all 301
-/collections/ss-tops/index.html /collections/ss-tops 301
-/collections/aw-tops/index.html /collections/aw-tops 301
-/collections/bottoms/index.html /collections/bottoms 301
 /collections/core /collections/all 301
 /collections/core/ /collections/all 301
 /collections/core/index.html /collections/all 301

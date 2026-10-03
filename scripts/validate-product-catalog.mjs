@@ -161,16 +161,16 @@ assert.equal(
   colorRegistry.colors.length,
   "canonical color ids must be unique"
 );
-const colorByLabel = new Map(colorRegistry.colors.map((color) => [color.name, color]));
+const colorByCode = new Map(colorRegistry.colors.map((color) => [color.code, color]));
 const colorById = new Map(colorRegistry.colors.map((color) => [color.id, color]));
-const sourceColorwayLabels = [...new Set(
+const sourceColorwayCodes = [...new Set(
   visibleSources.flatMap((product) =>
-    product.variants.filter((variant) => variant.visible).map((variant) => variant.colorName)
+    product.variants.filter((variant) => variant.visible).map((variant) => variant.colorCode)
   )
 )].sort();
-assert.ok(sourceColorwayLabels.every((label) => colorByLabel.has(label)), "colors.json must cover every visible product colorway");
+assert.ok(sourceColorwayCodes.every((code) => colorByCode.has(code)), "colors.json must cover every visible product colorway code");
 visibleSources.flatMap((product) => product.variants.filter((variant) => variant.visible)).forEach((variant) => {
-  assert.equal(colorByLabel.get(variant.colorName)?.code, variant.colorCode, `${variant.colorName} must use ${variant.colorCode}`);
+  assert.ok(colorByCode.has(variant.colorCode), `${variant.colorCode} must resolve independently of its imported name`);
 });
 assert.equal(products.length, visibleSources.length, "catalog must include every visible product model");
 assert.equal(new Set(products.map((product) => product.code)).size, products.length, "product numbers must be unique");
@@ -203,8 +203,9 @@ for (const product of products) {
   assert.ok(product.name && product.category && product.priceLabel, `${product.code} must have display metadata`);
   assert.ok(product.link.startsWith("https://shopee.tw/"), `${product.code} must have a Shopee URL`);
   assert.ok(product.colors.length > 0 && product.sizes.length > 0, `${product.code} must have visible options`);
-  product.colors.forEach(({ label, colorId }) => {
+  product.colors.forEach(({ label, colorId, colorCode }) => {
     assert.equal(colorById.get(colorId)?.name, label, `${product.code} ${label} must reference the canonical color registry`);
+    assert.equal(colorById.get(colorId)?.code, colorCode, `${product.code} ${label} must retain its stable color code`);
   });
   assert.equal(product.variants.length, sourceProduct.variants.length, `${product.code} variant count must match the sheet snapshot`);
   product.variants.forEach((variant, index) => {
@@ -324,6 +325,32 @@ for (const product of products) {
 }
 
 const allProductsPage = await readFile(path.join(ROOT, "collections", "all", "index.html"), "utf8");
+assert.doesNotMatch(allProductsPage, /<script[^>]*src="[^"]*\/catalog\.js/, "Listings must not load the full runtime catalog");
+const catalogImages = [...allProductsPage.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]).filter((tag) => tag.includes('loading="'));
+assert.match(catalogImages[0], /loading="eager" fetchpriority="high"/, "The first catalog image must be immediately discoverable with high priority");
+assert.ok(catalogImages.slice(1).every((tag) => tag.includes('loading="lazy" fetchpriority="low"')), "Remaining cards must use native lazy loading at low priority");
+for (const product of products) {
+  const route = await readFile(path.join(ROOT, "products", product.code, "index.html"), "utf8");
+  assert.doesNotMatch(route, /<script[^>]*src="[^"]*\/catalog\.js/, `${product.code} must not load other products' choice data`);
+  const runtimeTag = route.match(new RegExp(`<script defer src="[^\"]*assets/js/products/${product.code}\\.js\\?v=[a-f0-9]+"></script>`))?.[0];
+  assert.ok(runtimeTag, `${product.code} must load its versioned choice payload`);
+  assert.ok(route.indexOf(runtimeTag) < route.indexOf('assets/js/choices.js'), "Choice data must execute before choice behavior");
+  const runtimeSandbox = { window: {} };
+  vm.runInNewContext(await readFile(path.join(ROOT, "assets/js/products", `${product.code}.js`), "utf8"), runtimeSandbox);
+  const runtime = JSON.parse(JSON.stringify(runtimeSandbox.window.PARADIGM_PRODUCT));
+  assert.equal(runtime.code, product.code);
+  assert.equal(runtime.name, product.name);
+  assert.equal(runtime.link, product.link);
+  assert.deepEqual(runtime.variants.map((variant) => variant.sku), Array.from(product.variants.filter((variant) => variant.visible), (variant) => variant.sku), "All visible SKUs must be available for selection and direct variant links");
+  assert.deepEqual(runtime.colors, JSON.parse(JSON.stringify(product.colors.map(({ id, colorCode }) => ({ id, colorCode })))));
+  for (const variant of runtime.variants) {
+    const original = product.variants.find((entry) => entry.sku === variant.sku);
+    for (const field of ["visible", "soldOut", "colorCode", "sizeName", "link", "imageId"]) assert.equal(variant[field], original[field]);
+    if (variant.imageId && product.variantMedia[variant.imageId]) assert.deepEqual(runtime.variantMedia[variant.imageId], JSON.parse(JSON.stringify(product.variantMedia[variant.imageId])));
+  }
+  assert.equal(Object.hasOwn(runtime, "description"), false, "Rendered prose must not be repeated in runtime choice data");
+  assert.equal(Object.hasOwn(runtime, "media"), false, "Authored gallery records must remain in the HTML instead of runtime choice data");
+}
 const catalogEntries = Array.from(products.flatMap(catalogEntriesForProduct));
 const catalogCardUrls = [...allProductsPage.matchAll(/<a class="product-card" href="([^"]+)">/g)].map((match) => match[1]);
 assert.deepEqual(catalogCardUrls, Array.from(catalogEntries, (entry) => entry.cardUrl), "all-products cards must link every distinct image-bearing option to the shared item route");

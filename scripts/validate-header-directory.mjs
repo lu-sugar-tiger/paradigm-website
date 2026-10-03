@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { renderSiteHeader } from './lib/site-renderers.mjs';
+import { productCategories } from './lib/product-categories.mjs';
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
-for (const currentPath of ['/', '/collections/ss-tops', '/teamwear/customize']) {
+for (const currentPath of ['/', ...productCategories.map(({ path }) => path), '/teamwear/customize']) {
   const header = renderSiteHeader({ currentPath });
   const desktop = header.match(/<nav class="header-directory"[\s\S]*?<\/nav>/)[0];
   assert.equal((desktop.match(/data-header-parent/g)||[]).length, 2);
@@ -12,7 +13,7 @@ for (const currentPath of ['/', '/collections/ss-tops', '/teamwear/customize']) 
   assert.match(desktop, /href="\/teamwear"/);
   const panels = [...desktop.matchAll(/<ul class="header-directory__panel"[\s\S]*?<\/ul>/g)].map(m=>m[0]);
   assert.equal(panels.length,2);
-  assert.equal((panels[0].match(/<a /g)||[]).length,3);
+  assert.equal((panels[0].match(/<a /g)||[]).length,4);
   assert.equal((panels[1].match(/<a /g)||[]).length,1);
   assert.doesNotMatch(panels.join(''), />Product<|>Teamwear</);
   assert.equal((header.match(/id="menu-language-native"/g)||[]).length,1);
@@ -38,5 +39,5 @@ assert.match(js, /paradigm:overlay-open/);
 assert.match(js, /large.addEventListener\('change', responsive\)/);
 const home = await read('index.html');
 assert.match(home,/header-directory.css\?v=20261001b/);
-assert.match(home,/header-directory.js\?v=20261001a/);
+assert.match(home,/header-directory.js\?v=20261002a/);
 console.log('HEADER_DIRECTORY_OK data=true parentLinks=true childOnlyPanels=true responsive=true');

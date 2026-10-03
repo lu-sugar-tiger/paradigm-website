@@ -78,15 +78,18 @@ Use these stable public URL structures so they can later map cleanly to Shopify:
 
 - `/` displays the same all-products catalog as `/collections/all` without redirecting
 - `/collections/all`
-- `/collections/ss-tops`
-- `/collections/aw-tops`
-- `/collections/bottoms`
+- `/collections/tees`
+- `/collections/crewnecks`
+- `/collections/hoodies`
+- `/collections/shorts`
 - `/products/{product-number}`
 - `/lookbook/`
 - `/lookbook/{collection-slug}/`
 - `/teamwear`
 
-Treat `All` as the parent catalog view. `SS Tops`, `AW Tops`, and `Bottoms` are subcollections and should provide a direct path back to `/collections/all`.
+Treat `All` as the parent catalog view. `Tees`, `Crewnecks`, `Hoodies`, and `Shorts` are subcollections and should provide a direct path back to `/collections/all`. Use only `typeCode` for their membership: `14`, `23`, `24`, and `42`, respectively, from `data/product-categories.json`. Keep compatibility redirects for the former collection URLs.
+
+Publish only the four type collections. Keep their titles as `Tees`, `Crewnecks`, `Hoodies`, and `Shorts` without leading codes. Do not publish line collections.
 
 Do not include `index.html` in public links, canonical URLs, or navigation. The static files may still use directory-level `index.html` files internally.
 

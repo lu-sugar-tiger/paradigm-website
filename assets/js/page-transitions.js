@@ -1,4 +1,6 @@
 (function () {
+  // Reserve enhanced component geometry before the first content paint.
+  document.documentElement.dataset.siteEnhanced = "true";
   const TRANSITION_STORAGE_KEY = "paradigm:page-motion";
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -12,7 +14,7 @@
     if (path === "/" || path === "/collections/all") {
       return { family: "catalog", depth: 0, key: "catalog-all" };
     }
-    if (/^\/collections\/(?:ss-tops|aw-tops|bottoms)$/.test(path)) {
+    if (/^\/collections\/[^/]+$/.test(path)) {
       return { family: "catalog", depth: 1, key: path };
     }
     if (path === "/search") return { family: "catalog", depth: 1, key: "search" };
@@ -39,16 +41,19 @@
   }
 
   function setMotionState(type, transition) {
+    // Navigation still completes when the browser cancels or skips its animation.
+    transition?.ready.catch(() => {});
+    const clearMotionState = () => {
+      if (document.documentElement.dataset.pageMotion === type) {
+        delete document.documentElement.dataset.pageMotion;
+      }
+    };
+    transition?.finished.then(clearMotionState, clearMotionState);
     if (type === "none" || reducedMotion.matches) {
       transition?.skipTransition();
       return;
     }
     document.documentElement.dataset.pageMotion = type;
-    transition?.finished.finally(() => {
-      if (document.documentElement.dataset.pageMotion === type) {
-        delete document.documentElement.dataset.pageMotion;
-      }
-    });
   }
 
   function storeMotion(destination, type) {

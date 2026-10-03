@@ -17,7 +17,9 @@
         const value = text(source, params, element);
         if (attribute === "text") {
           const tail = element.dataset.l10nTail || "";
-          element.textContent = (language === "zh-Hant" && element.dataset.l10nOriginal ? element.dataset.l10nOriginal : value + tail);
+          const colorText = language === "zh-Hant" && !element.closest('[data-language-shared="en"]')
+            ? element.dataset.l10nColorZh : element.dataset.l10nColorEn;
+          window.PARADIGM_INLINE_TYPE.set(element, colorText ?? (language === "zh-Hant" && element.dataset.l10nOriginal ? element.dataset.l10nOriginal : value + tail));
         } else element.setAttribute(attribute, value);
       }
     });

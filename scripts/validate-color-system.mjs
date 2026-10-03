@@ -26,6 +26,7 @@ const SHARED_CSS = [
   "assets/css/base.css",
   "assets/css/layout.css",
   "assets/css/components.css",
+  "assets/css/state-variation.css",
   "assets/css/pages.css"
 ];
 const ALL_CSS = [
@@ -153,12 +154,15 @@ const productHexValues = new Set();
 const productLabels = new Set();
 for (const { id, code, name } of colorRegistry.colors) {
   assert.ok(id && name && itemColorValueByCode.has(code), "each named color must have an id, current name, and canonical item color code");
+  assert.match(name, /^\p{Letter}[\p{Letter}\p{Mark}]*$/u, `${code} central color name must be a single word`);
   productLabels.add(name);
   productHexValues.add(normalizeHex(itemColorValueByCode.get(code)));
 }
 assert.equal(productLabels.size, colorRegistry.colors.length, "canonical color names must be unique");
+assert.equal(new Set(colorRegistry.colors.map(({ code }) => code)).size, colorRegistry.colors.length, "canonical named color codes must be unique");
 
-const runtimeFiles = await walk(ROOT);
+// Local browser experiments are ignored outputs, not public runtime pages.
+const runtimeFiles = (await walk(ROOT)).filter((file) => !path.relative(ROOT, file).replaceAll("\\", "/").startsWith("output/playwright/"));
 for (const filePath of runtimeFiles.filter((file) => file.toLowerCase().endsWith(".svg"))) {
   const relativePath = path.relative(ROOT, filePath).replaceAll("\\", "/");
   if (relativePath.toLowerCase().includes("teamwear")) continue;

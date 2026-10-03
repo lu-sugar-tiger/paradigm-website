@@ -12,7 +12,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "BD",
       "typeCode": "14",
       "sequence": "028",
-      "category": "SS Tops",
+      "category": "Tees",
       "listPrice": 790,
       "salePrice": null,
       "priceLabel": "NT$790",
@@ -295,16 +295,19 @@ window.PARADIGM_CATALOG = {
         {
           "id": "charcoal",
           "colorId": "charcoal",
+          "colorCode": "C03",
           "label": "Charcoal"
         },
         {
           "id": "dove",
           "colorId": "dove",
+          "colorCode": "C06",
           "label": "Dove"
         },
         {
           "id": "white",
           "colorId": "white",
+          "colorCode": "C09",
           "label": "White"
         }
       ],
@@ -700,7 +703,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "TL",
       "typeCode": "14",
       "sequence": "027",
-      "category": "SS Tops",
+      "category": "Tees",
       "listPrice": 790,
       "salePrice": null,
       "priceLabel": "NT$790",
@@ -983,16 +986,19 @@ window.PARADIGM_CATALOG = {
         {
           "id": "charcoal",
           "colorId": "charcoal",
+          "colorCode": "C03",
           "label": "Charcoal"
         },
         {
           "id": "dove",
           "colorId": "dove",
+          "colorCode": "C06",
           "label": "Dove"
         },
         {
           "id": "white",
           "colorId": "white",
+          "colorCode": "C09",
           "label": "White"
         }
       ],
@@ -1352,7 +1358,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "AE",
       "typeCode": "14",
       "sequence": "026",
-      "category": "SS Tops",
+      "category": "Tees",
       "listPrice": 790,
       "salePrice": null,
       "priceLabel": "NT$790",
@@ -1635,16 +1641,19 @@ window.PARADIGM_CATALOG = {
         {
           "id": "charcoal",
           "colorId": "charcoal",
+          "colorCode": "C03",
           "label": "Charcoal"
         },
         {
           "id": "dove",
           "colorId": "dove",
+          "colorCode": "C06",
           "label": "Dove"
         },
         {
           "id": "white",
           "colorId": "white",
+          "colorCode": "C09",
           "label": "White"
         }
       ],
@@ -2004,7 +2013,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "PD",
       "typeCode": "14",
       "sequence": "025",
-      "category": "SS Tops",
+      "category": "Tees",
       "listPrice": 790,
       "salePrice": null,
       "priceLabel": "NT$790",
@@ -2287,16 +2296,19 @@ window.PARADIGM_CATALOG = {
         {
           "id": "charcoal",
           "colorId": "charcoal",
+          "colorCode": "C03",
           "label": "Charcoal"
         },
         {
           "id": "dove",
           "colorId": "dove",
+          "colorCode": "C06",
           "label": "Dove"
         },
         {
           "id": "white",
           "colorId": "white",
+          "colorCode": "C09",
           "label": "White"
         }
       ],
@@ -2660,7 +2672,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "ED",
       "typeCode": "14",
       "sequence": "024",
-      "category": "SS Tops",
+      "category": "Tees",
       "listPrice": 590,
       "salePrice": null,
       "priceLabel": "NT$590",
@@ -2943,16 +2955,19 @@ window.PARADIGM_CATALOG = {
         {
           "id": "charcoal",
           "colorId": "charcoal",
+          "colorCode": "C03",
           "label": "Charcoal"
         },
         {
           "id": "dove",
           "colorId": "dove",
+          "colorCode": "C06",
           "label": "Dove"
         },
         {
           "id": "white",
           "colorId": "white",
+          "colorCode": "C09",
           "label": "White"
         }
       ],
@@ -3324,7 +3339,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "GM",
       "typeCode": "42",
       "sequence": "023",
-      "category": "Bottoms",
+      "category": "Shorts",
       "listPrice": 1180,
       "salePrice": null,
       "priceLabel": "NT$1,180",
@@ -3558,6 +3573,7 @@ window.PARADIGM_CATALOG = {
         {
           "id": "mud",
           "colorId": "mud",
+          "colorCode": "C22",
           "label": "Mud"
         }
       ],
@@ -3885,7 +3901,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "GM",
       "typeCode": "42",
       "sequence": "022",
-      "category": "Bottoms",
+      "category": "Shorts",
       "listPrice": 1180,
       "salePrice": null,
       "priceLabel": "NT$1,180",
@@ -4119,6 +4135,7 @@ window.PARADIGM_CATALOG = {
         {
           "id": "mocha",
           "colorId": "mocha",
+          "colorCode": "C21",
           "label": "Mocha"
         }
       ],
@@ -4442,7 +4459,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "BD",
       "typeCode": "24",
       "sequence": "021",
-      "category": "AW Tops",
+      "category": "Hoodies",
       "listPrice": 1380,
       "salePrice": null,
       "priceLabel": "NT$1,380",
@@ -4700,11 +4717,13 @@ window.PARADIGM_CATALOG = {
         {
           "id": "black",
           "colorId": "black",
+          "colorCode": "C01",
           "label": "Black"
         },
         {
           "id": "midnight",
           "colorId": "midnight",
+          "colorCode": "C61",
           "label": "Midnight"
         }
       ],
@@ -5067,7 +5086,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "BT",
       "typeCode": "24",
       "sequence": "020",
-      "category": "AW Tops",
+      "category": "Hoodies",
       "listPrice": 1380,
       "salePrice": null,
       "priceLabel": "NT$1,380",
@@ -5325,11 +5344,13 @@ window.PARADIGM_CATALOG = {
         {
           "id": "black",
           "colorId": "black",
+          "colorCode": "C01",
           "label": "Black"
         },
         {
           "id": "midnight",
           "colorId": "midnight",
+          "colorCode": "C61",
           "label": "Midnight"
         }
       ],
@@ -5672,7 +5693,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "TL",
       "typeCode": "24",
       "sequence": "019",
-      "category": "AW Tops",
+      "category": "Hoodies",
       "listPrice": 1380,
       "salePrice": null,
       "priceLabel": "NT$1,380",
@@ -5930,11 +5951,13 @@ window.PARADIGM_CATALOG = {
         {
           "id": "black",
           "colorId": "black",
+          "colorCode": "C01",
           "label": "Black"
         },
         {
           "id": "midnight",
           "colorId": "midnight",
+          "colorCode": "C61",
           "label": "Midnight"
         }
       ],
@@ -6265,7 +6288,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "TL",
       "typeCode": "23",
       "sequence": "018",
-      "category": "AW Tops",
+      "category": "Crewnecks",
       "listPrice": 1180,
       "salePrice": null,
       "priceLabel": "NT$1,180",
@@ -6523,11 +6546,13 @@ window.PARADIGM_CATALOG = {
         {
           "id": "black",
           "colorId": "black",
+          "colorCode": "C01",
           "label": "Black"
         },
         {
           "id": "grey",
           "colorId": "grey",
+          "colorCode": "C05",
           "label": "Grey"
         }
       ],
@@ -6846,7 +6871,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "AE",
       "typeCode": "24",
       "sequence": "017",
-      "category": "AW Tops",
+      "category": "Hoodies",
       "listPrice": 1380,
       "salePrice": null,
       "priceLabel": "NT$1,380",
@@ -7104,11 +7129,13 @@ window.PARADIGM_CATALOG = {
         {
           "id": "black",
           "colorId": "black",
+          "colorCode": "C01",
           "label": "Black"
         },
         {
           "id": "midnight",
           "colorId": "midnight",
+          "colorCode": "C61",
           "label": "Midnight"
         }
       ],
@@ -7431,7 +7458,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "AE",
       "typeCode": "23",
       "sequence": "016",
-      "category": "AW Tops",
+      "category": "Crewnecks",
       "listPrice": 1180,
       "salePrice": null,
       "priceLabel": "NT$1,180",
@@ -7689,11 +7716,13 @@ window.PARADIGM_CATALOG = {
         {
           "id": "black",
           "colorId": "black",
+          "colorCode": "C01",
           "label": "Black"
         },
         {
           "id": "grey",
           "colorId": "grey",
+          "colorCode": "C05",
           "label": "Grey"
         }
       ],
@@ -8004,7 +8033,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "PD",
       "typeCode": "24",
       "sequence": "015",
-      "category": "AW Tops",
+      "category": "Hoodies",
       "listPrice": 1380,
       "salePrice": null,
       "priceLabel": "NT$1,380",
@@ -8262,11 +8291,13 @@ window.PARADIGM_CATALOG = {
         {
           "id": "black",
           "colorId": "black",
+          "colorCode": "C01",
           "label": "Black"
         },
         {
           "id": "midnight",
           "colorId": "midnight",
+          "colorCode": "C61",
           "label": "Midnight"
         }
       ],
@@ -8593,7 +8624,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "ED",
       "typeCode": "24",
       "sequence": "014",
-      "category": "AW Tops",
+      "category": "Hoodies",
       "listPrice": 1180,
       "salePrice": null,
       "priceLabel": "NT$1,180",
@@ -8878,11 +8909,13 @@ window.PARADIGM_CATALOG = {
         {
           "id": "black",
           "colorId": "black",
+          "colorCode": "C01",
           "label": "Black"
         },
         {
           "id": "midnight",
           "colorId": "midnight",
+          "colorCode": "C61",
           "label": "Midnight"
         }
       ],
@@ -9230,7 +9263,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "PH",
       "typeCode": "14",
       "sequence": "011",
-      "category": "SS Tops",
+      "category": "Tees",
       "listPrice": 990,
       "salePrice": null,
       "priceLabel": "NT$990",
@@ -9567,16 +9600,19 @@ window.PARADIGM_CATALOG = {
         {
           "id": "black",
           "colorId": "black",
+          "colorCode": "C01",
           "label": "Black"
         },
         {
           "id": "white",
           "colorId": "white",
+          "colorCode": "C09",
           "label": "White"
         },
         {
           "id": "cardinal",
           "colorId": "cardinal",
+          "colorCode": "C13",
           "label": "Cardinal"
         }
       ],
@@ -9962,7 +9998,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "PH",
       "typeCode": "14",
       "sequence": "010",
-      "category": "SS Tops",
+      "category": "Tees",
       "listPrice": 990,
       "salePrice": null,
       "priceLabel": "NT$990",
@@ -10299,16 +10335,19 @@ window.PARADIGM_CATALOG = {
         {
           "id": "black",
           "colorId": "black",
+          "colorCode": "C01",
           "label": "Black"
         },
         {
           "id": "white",
           "colorId": "white",
+          "colorCode": "C09",
           "label": "White"
         },
         {
           "id": "cardinal",
           "colorId": "cardinal",
+          "colorCode": "C13",
           "label": "Cardinal"
         }
       ],
@@ -10690,7 +10729,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "TL",
       "typeCode": "14",
       "sequence": "009",
-      "category": "SS Tops",
+      "category": "Tees",
       "listPrice": 790,
       "salePrice": null,
       "priceLabel": "NT$790",
@@ -10948,11 +10987,13 @@ window.PARADIGM_CATALOG = {
         {
           "id": "black",
           "colorId": "black",
+          "colorCode": "C01",
           "label": "Black"
         },
         {
           "id": "white",
           "colorId": "white",
+          "colorCode": "C09",
           "label": "White"
         }
       ],
@@ -11305,7 +11346,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "AE",
       "typeCode": "14",
       "sequence": "008",
-      "category": "SS Tops",
+      "category": "Tees",
       "listPrice": 790,
       "salePrice": null,
       "priceLabel": "NT$790",
@@ -11563,11 +11604,13 @@ window.PARADIGM_CATALOG = {
         {
           "id": "black",
           "colorId": "black",
+          "colorCode": "C01",
           "label": "Black"
         },
         {
           "id": "white",
           "colorId": "white",
+          "colorCode": "C09",
           "label": "White"
         }
       ],
@@ -11920,7 +11963,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "PD",
       "typeCode": "14",
       "sequence": "007",
-      "category": "SS Tops",
+      "category": "Tees",
       "listPrice": 790,
       "salePrice": null,
       "priceLabel": "NT$790",
@@ -12203,16 +12246,19 @@ window.PARADIGM_CATALOG = {
         {
           "id": "black",
           "colorId": "black",
+          "colorCode": "C01",
           "label": "Black"
         },
         {
           "id": "grey",
           "colorId": "grey",
+          "colorCode": "C05",
           "label": "Grey"
         },
         {
           "id": "white",
           "colorId": "white",
+          "colorCode": "C09",
           "label": "White"
         }
       ],
@@ -12621,7 +12667,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "PD",
       "typeCode": "23",
       "sequence": "006",
-      "category": "AW Tops",
+      "category": "Crewnecks",
       "listPrice": 1180,
       "salePrice": null,
       "priceLabel": "NT$1,180",
@@ -12825,11 +12871,13 @@ window.PARADIGM_CATALOG = {
         {
           "id": "black",
           "colorId": "black",
+          "colorCode": "C01",
           "label": "Black"
         },
         {
           "id": "grey",
           "colorId": "grey",
+          "colorCode": "C05",
           "label": "Grey"
         }
       ],
@@ -13156,7 +13204,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "ED",
       "typeCode": "23",
       "sequence": "002",
-      "category": "AW Tops",
+      "category": "Crewnecks",
       "listPrice": 990,
       "salePrice": null,
       "priceLabel": "NT$990",
@@ -13441,11 +13489,13 @@ window.PARADIGM_CATALOG = {
         {
           "id": "black",
           "colorId": "black",
+          "colorCode": "C01",
           "label": "Black"
         },
         {
           "id": "grey",
           "colorId": "grey",
+          "colorCode": "C05",
           "label": "Grey"
         }
       ],
@@ -13799,7 +13849,7 @@ window.PARADIGM_CATALOG = {
       "lineCode": "ED",
       "typeCode": "14",
       "sequence": "001",
-      "category": "SS Tops",
+      "category": "Tees",
       "listPrice": 590,
       "salePrice": null,
       "priceLabel": "NT$590",
@@ -14109,16 +14159,19 @@ window.PARADIGM_CATALOG = {
         {
           "id": "black",
           "colorId": "black",
+          "colorCode": "C01",
           "label": "Black"
         },
         {
           "id": "grey",
           "colorId": "grey",
+          "colorCode": "C05",
           "label": "Grey"
         },
         {
           "id": "white",
           "colorId": "white",
+          "colorCode": "C09",
           "label": "White"
         }
       ],

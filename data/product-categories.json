@@ -1,0 +1,37 @@
+{
+  "categories": [
+    {
+      "typeCode": "14",
+      "title": "Tees",
+      "slug": "tees",
+      "summary": "Explore Paradigm tees and football jerseys.",
+      "keywords": ["tee", "tees", "t shirt", "football jersey", "jersey", "tops", "短Ｔ", "球衣", "上衣"]
+    },
+    {
+      "typeCode": "23",
+      "title": "Crewnecks",
+      "slug": "crewnecks",
+      "summary": "Explore Paradigm crewnecks.",
+      "keywords": ["crewneck", "crewnecks", "sweatshirt", "tops", "大學Ｔ", "上衣"]
+    },
+    {
+      "typeCode": "24",
+      "title": "Hoodies",
+      "slug": "hoodies",
+      "summary": "Explore Paradigm hoodies.",
+      "keywords": ["hoodie", "hoodies", "tops", "帽Ｔ", "連帽", "上衣"]
+    },
+    {
+      "typeCode": "42",
+      "title": "Shorts",
+      "slug": "shorts",
+      "summary": "Explore Paradigm shorts.",
+      "keywords": ["shorts", "training shorts", "bottoms", "短褲", "褲裝"]
+    }
+  ],
+  "legacyRedirects": [
+    { "from": "/collections/ss-tops", "to": "/collections/tees" },
+    { "from": "/collections/aw-tops", "to": "/collections/all" },
+    { "from": "/collections/bottoms", "to": "/collections/shorts" }
+  ]
+}

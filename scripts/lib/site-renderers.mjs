@@ -1,8 +1,11 @@
 import { imageSrcset } from "./product-images.mjs";
 import { regularTableFigures } from "./rich-description.mjs";
+import { itemColors } from "./item-colors.mjs";
+import inlineType from "../../assets/js/inline-type.js";
+import { productCategories } from "./product-categories.mjs";
 import { readFileSync } from "node:fs";
 import { storefronts as STOREFRONTS, pricingConfigVersion } from "./pricing-config.mjs";
-import { copyAttributes, dimensionCopy, recommendationCopy, formatCopy, localizationVersion } from "./localization.mjs";
+import { copyAttributes, dimensionCopy, recommendationCopy, formatCopy, localizationVersion, translations } from "./localization.mjs";
 
 const STORE_LINKS = JSON.parse(readFileSync(new URL("../../data/store-links.json", import.meta.url), "utf8"));
 
@@ -12,11 +15,7 @@ const NAV_GROUPS = [
     path: "/collections/all",
     aliases: ["/"],
     prefixes: ["/collections/", "/products/"],
-    children: [
-      { label: "SS Tops", path: "/collections/ss-tops" },
-      { label: "AW Tops", path: "/collections/aw-tops" },
-      { label: "Bottoms", path: "/collections/bottoms" }
-    ]
+    children: productCategories.map(({ title, path }) => ({ label: title, path }))
   },
   {
     label: "Teamwear",
@@ -90,14 +89,19 @@ export function renderProductDetail({
   const summaryAttributes = isTeamwear ? ` data-teamwear-form data-teamwear-model="${html(code)}" data-notification-title="${html(name)}"` : "";
   const galleryAttribute = isTeamwear ? "data-builder-preview" : "data-product-gallery";
   const titleAttribute = isTeamwear ? 'id="builder-title"' : "data-product-name";
+  const panelClass = media.some(image => !image.includes("data-product-variant-image") && !image.includes("data-product-image-fallback"))
+    ? "product-detail__panel has-thumbnail-rail" : "product-detail__panel";
   const indent = (markup, spaces) => markup.split("\n").map((line) => `${" ".repeat(spaces)}${line}`).join("\n");
   const categoryMarkup = category ? `              <p class="product-detail__label" data-product-category>${html(category)}</p>\n` : "";
 
   return `  <section class="product-detail" data-generated-component="product-detail">
     <div class="container">
-      <div class="product-detail__panel"${panelAttributes}>
-        <div class="product-detail__gallery" ${galleryAttribute}${zoom ? " data-media-zoom-gallery" : ""} aria-label="${html(name)} images"${copyAttributes("{name} images", "aria-label", { name })}>
-${indent(media.join("\n"), 10)}
+      <div class="${panelClass}"${panelAttributes}>
+        <div class="product-detail__media">
+          <aside class="detail-thumbnails" hidden><nav class="detail-thumbnails__rail" aria-label="${html(name)} images"${copyAttributes("{name} images", "aria-label", { name })}></nav></aside>
+          <div class="product-detail__gallery" ${galleryAttribute}${zoom ? " data-media-zoom-gallery" : ""} aria-label="${html(name)} images"${copyAttributes("{name} images", "aria-label", { name })}>
+${indent(media.join("\n"), 12)}
+          </div>
         </div>
         <article class="product-detail__summary"${summaryAttributes}>
           <div class="product-detail__header">
@@ -139,13 +143,23 @@ function renderExternalLinkIndicator(root = "") {
   return `${renderIcon("external", root, "external-link__indicator")}<span class="visually-hidden" data-external-link-description${copyAttributes(" (opens in a new tab)")}> (opens in a new tab)</span>`;
 }
 
-export function renderDescription({ tokens, itemCodes = [], currentItemCode = "" }) {
+export function renderDescription({ tokens, itemCodes = [], currentItemCode = "", colors = itemColors }) {
   if (!Array.isArray(tokens) || tokens.length === 0) {
     throw new Error("Rich descriptions require at least one token.");
   }
 
   const publishedCodes = new Map(itemCodes.map((code) => [code.toUpperCase(), code]));
+  function descriptionCopy(text) {
+    const attributes = copyAttributes(text);
+    if (!attributes) return "";
+    const en = colors.resolveHandles(text);
+    const zh = colors.resolveHandles(translations[text]);
+    return en !== text || zh !== translations[text]
+      ? `${attributes} data-l10n-color-en="${html(en)}" data-l10n-color-zh="${html(zh)}"`
+      : attributes;
+  }
   function linkedText(text) {
+    text = colors.resolveHandles(text);
     const mentions = /(?<![A-Za-z0-9_#\/])#([A-Za-z]+[0-9]{5})(?:-[A-Za-z0-9]+)*(?![A-Za-z0-9_-])/g;
     let result = "";
     let cursor = 0;
@@ -153,11 +167,11 @@ export function renderDescription({ tokens, itemCodes = [], currentItemCode = ""
       if (/\b(?:https?:\/\/|www\.)\S*$/i.test(text.slice(0, match.index))) continue;
       const code = publishedCodes.get(match[1].toUpperCase());
       if (!code || code.toUpperCase() === currentItemCode.toUpperCase()) continue;
-      result += html(text.slice(cursor, match.index));
+      result += inlineType.render(text.slice(cursor, match.index));
       result += `<a href="/products/${html(code)}">${html(match[0])}</a>`;
       cursor = match.index + match[0].length;
     }
-    return result + html(text.slice(cursor));
+    return result + inlineType.render(text.slice(cursor));
   }
 
   const content = tokens.map((token) => {
@@ -173,11 +187,11 @@ export function renderDescription({ tokens, itemCodes = [], currentItemCode = ""
     }
     if (token.type === "table") {
       const header = token.header.map((cell, index) => index === 0
-        ? `        <th scope="col" aria-label="Row heading"${copyAttributes("Row heading", "aria-label")}>${html(regularTableFigures(cell))}</th>`
-        : `        <th scope="col">${html(regularTableFigures(cell))}</th>`).join("\n");
+        ? `        <th scope="col" aria-label="Row heading"${copyAttributes("Row heading", "aria-label")}>${inlineType.render(colors.resolveHandles(regularTableFigures(cell)))}</th>`
+        : `        <th scope="col">${inlineType.render(colors.resolveHandles(regularTableFigures(cell)))}</th>`).join("\n");
       const body = token.body.map((row) => `      <tr>\n${row.map((cell, index) => index === 0
-        ? `        <th scope="row"${copyAttributes(dimensionCopy(cell))}>${html(regularTableFigures(dimensionCopy(cell)))}</th>`
-        : `        <td>${html(regularTableFigures(cell))}</td>`).join("\n")}\n      </tr>`).join("\n");
+        ? `        <th scope="row"${descriptionCopy(dimensionCopy(cell))}>${inlineType.render(colors.resolveHandles(regularTableFigures(dimensionCopy(cell))))}</th>`
+        : `        <td>${inlineType.render(colors.resolveHandles(regularTableFigures(cell)))}</td>`).join("\n")}\n      </tr>`).join("\n");
       return `  <div class="rich-description__table-wrap">
     <table class="rich-description__table">
       <thead><tr>
@@ -192,10 +206,10 @@ ${body}
     if (token.type === "text") {
       const recommendation = recommendationCopy(token.text);
       if (recommendation) {
-        const tail = recommendation.text.slice(formatCopy(recommendation.key, recommendation.params).length);
-        return `  <p class="rich-description__line"${copyAttributes(recommendation.key, "text", recommendation.params)} data-l10n-original="${html(recommendation.original)}" data-l10n-tail="${html(tail)}">${html(recommendation.text)}</p>`;
+        const tail = colors.resolveHandles(recommendation.text.slice(formatCopy(recommendation.key, recommendation.params).length));
+        return `  <p class="rich-description__line"${copyAttributes(recommendation.key, "text", recommendation.params)} data-l10n-original="${html(colors.resolveHandles(recommendation.original))}" data-l10n-tail="${html(tail)}">${inlineType.render(colors.resolveHandles(recommendation.text))}</p>`;
       }
-      const copy = copyAttributes(token.text);
+      const copy = descriptionCopy(token.text);
       const language = !copy && /\p{Script=Han}/u.test(token.text) && !/^[•●]/u.test(token.text) ? ' lang="zh-Hant"' : '';
       return `  <p class="rich-description__line"${copy}${language}>${linkedText(token.text)}</p>`;
     }
@@ -325,7 +339,7 @@ ${childMarkup}
   return `  <header class="site-header" lang="en" data-language-shared="en">
     <div class="container site-header__inner">
       <nav class="header-directory" aria-label="Main navigation" data-header-directory>
-        <span class="visually-hidden" id="header-navigation-help">Activate once to keep subcollections open. Activate again to visit the collection. Escape closes the panel.</span>
+        <span class="visually-hidden" id="header-navigation-help">Hover to preview subcollections. Click or Enter to visit the collection. On touch, tap once to keep subcollections open and again to visit. Arrow keys open the panel; Escape closes it.</span>
         ${desktopNavigation}
       </nav>
       <a class="site-logo" href="/" aria-label="Paradigm home" tabindex="-1"><img class="site-logo__image" src="${html(asset(root, "assets/images/brand/aesthetics-logo-initial-a.png"))}" alt=""></a>
@@ -462,21 +476,26 @@ export function renderSiteFooter() {
 export function renderChoiceGroup({
   kind,
   variant = "default",
+  overflow = "rail",
   title,
   inputName,
   selectedValue,
   primaryActionId,
   showLabel = true,
+  colors = itemColors,
   options
 }) {
   if (!["swatch", "chip"].includes(kind)) throw new Error(`Unsupported choice kind: ${kind}`);
   if (!["default", "add-on"].includes(variant)) throw new Error(`Unsupported choice variant: ${variant}`);
+  if (!["rail", "wrap"].includes(overflow)) throw new Error(`Unsupported choice overflow: ${overflow}`);
   if (variant === "add-on" && kind !== "chip") throw new Error("The add-on choice variant requires chip choices.");
+  if (kind === "swatch") options = options.map((option) => ({ ...option, label: colors.name(option.colorCode, option.label) }));
   const isAddOn = variant === "add-on";
   const selectedOption = options.find((option) => option.id === selectedValue || option.selected) || (isAddOn ? null : options[0]);
   const groupId = `choice-${inputName.replace(/[^a-z0-9_-]+/gi, "-")}`;
+  const displayLabel = (option) => option ? colors.label(option.colorCode, option.label) : title;
   const labelMarkup = kind === "swatch"
-    ? `<span data-choice-label-value>${html(selectedOption?.label || title)}</span>`
+    ? `<span data-choice-label-value>${inlineType.render(displayLabel(selectedOption))}</span>`
     : `<span${copyAttributes(title)}>${html(title)}</span>`;
   const optionMarkup = options.map((option) => {
     const optionId = `${groupId}-${String(option.id).replace(/[^a-z0-9_-]+/gi, "-")}`;
@@ -488,23 +507,26 @@ export function renderChoiceGroup({
     const stateSymbol = selected ? MATERIAL_ICON_NAMES.check : MATERIAL_ICON_NAMES.add;
     const addOnIcon = isAddOn ? `
         <span class="choice-option__state-icon" aria-hidden="true"><span class="material-symbols-outlined material-icon choice-option__state-symbol" data-choice-state-symbol data-choice-unselected-symbol="${html(MATERIAL_ICON_NAMES.add)}" data-choice-selected-symbol="${html(MATERIAL_ICON_NAMES.check)}" aria-hidden="true">${html(stateSymbol)}</span></span>` : "";
-    return `      <label class="choice-option choice-option--${kind}${colorClass}${variantClass}" data-choice-option data-choice-id="${html(option.id)}" data-choice-label="${html(option.label)}" data-availability="${unavailable ? "unavailable" : "available"}"${kind === "swatch" ? ` data-color-id="${html(option.colorId)}" title="${html(option.label)}"` : ""}>
+    return `      <label class="choice-option choice-option--${kind}${colorClass}${variantClass}" data-choice-option data-choice-id="${html(option.id)}" data-choice-label="${html(option.label)}" data-availability="${unavailable ? "unavailable" : "available"}"${kind === "swatch" ? ` data-color-id="${html(option.colorId)}" data-color-code="${html(option.colorCode || "")}" data-choice-display-label="${html(displayLabel(option))}" title="${html(option.label)}"` : ""}>
         <input class="visually-hidden" type="${isAddOn ? "checkbox" : "radio"}" id="${html(optionId)}" name="${html(inputName)}" value="${html(option.id)}"${selected ? " checked" : ""}${unavailable ? ` aria-describedby="${html(descriptionId)}"` : ""}>
         ${kind === "chip" ? `<span class="choice-option__label${isAddOn ? " interface-label" : ""}" aria-hidden="true"${copyAttributes(option.label)}>${html(option.label)}</span>` : ""}${addOnIcon}
-        <span class="visually-hidden">${kind === "chip" ? `<span${copyAttributes(option.label)}>${html(option.label)}</span>` : `<span${copyAttributes(title)}>${html(title)}</span> ${html(option.label)}`}</span>
+        <span class="visually-hidden">${kind === "chip" ? `<span${copyAttributes(option.label)}>${html(option.label)}</span>` : `<span${copyAttributes(title)}>${html(title)}</span> ${html(inlineType.plain(displayLabel(option)))}`}</span>
         ${unavailable ? `<span class="visually-hidden" id="${html(descriptionId)}" data-choice-availability-text${copyAttributes("Unavailable")}>Unavailable</span>` : ""}
       </label>`;
   }).join("\n");
 
-  return `<fieldset class="choice-group choice-group--${kind}${isAddOn ? " choice-group--chip-add-on" : ""}" data-choice-group data-choice-kind="${kind}"${isAddOn ? ' data-choice-variant="add-on"' : ""} data-choice-title="${html(title)}" data-primary-action-id="${html(primaryActionId)}">
+  const rail = overflow === "rail";
+  const sizer = rail && kind === "chip" ? `<div class="choice-group__sizer${isAddOn ? " interface-label" : ""}" aria-hidden="true">${options.map((option) => `<span${copyAttributes(option.label)}>${html(option.label)}</span>`).join("")}</div>` : "";
+  return `<fieldset class="choice-group choice-group--${kind}${isAddOn ? " choice-group--chip-add-on" : ""}${rail ? " choice-group--rail" : ""}" data-choice-group data-choice-kind="${kind}"${isAddOn ? ' data-choice-variant="add-on"' : ""} data-choice-title="${html(title)}" data-primary-action-id="${html(primaryActionId)}">
     <legend class="visually-hidden"${copyAttributes(title)}>${html(title)}</legend>
     <div class="choice-group__layout">
       ${showLabel ? `<div class="choice-group__label" aria-hidden="true">${labelMarkup}</div>` : ""}
       <div class="choice-group__options">
-${optionMarkup}
+${rail ? `        <div class="choice-group__track">\n${optionMarkup}\n        </div>` : optionMarkup}
       </div>
     </div>
     <span class="visually-hidden" aria-live="polite" data-choice-status></span>
+    ${sizer}
   </fieldset>`;
 }
 
@@ -552,7 +574,7 @@ export function productCardDisplayName(name) {
   return name.startsWith("PRDM ") ? name.slice(5) : name;
 }
 
-export function renderProductCard(product, root = "") {
+export function renderProductCard(product, root = "", { priority = false } = {}) {
   const media = product.cardMedia || product.media?.[0] || (product.image ? { src: product.image, derivatives: [] } : null);
   const image = media
     ? renderResponsiveProductImage({
@@ -560,7 +582,8 @@ export function renderProductCard(product, root = "") {
       alt: product.cardAlt || product.alt,
       root,
       sizes: "(min-width: 80rem) 426px, (min-width: 48rem) 33.333vw, 50vw",
-      loading: "lazy"
+      loading: priority ? "eager" : "lazy",
+      fetchPriority: priority ? "high" : "low"
     })
     : "";
   const touchZoom = image && !media?.isFallback ? " data-media-zoom-touch" : "";
@@ -573,12 +596,14 @@ export function renderProductCard(product, root = "") {
 </a>`;
 }
 
-export function renderResponsiveProductImage({ media, alt, root = "", sizes, loading = "", touchZoom = false, dataAttribute = "", imageId = "", variantImage = false }) {
+export function renderResponsiveProductImage({ media, alt, root = "", sizes, loading = "", fetchPriority = "", touchZoom = false, dataAttribute = "", imageId = "", variantImage = false }) {
   if (!media?.src) throw new Error("Responsive product images require a fallback source.");
   const resolvedPath = (source) => asset(root, source);
   const srcset = imageSrcset(media, resolvedPath);
   const responsiveAttributes = srcset ? ` srcset="${html(srcset)}" sizes="${html(sizes)}"` : "";
   const loadingAttribute = loading ? ` loading="${html(loading)}"` : "";
+  if (fetchPriority && !["high", "low", "auto"].includes(fetchPriority)) throw new Error("Invalid image fetch priority.");
+  const priorityAttribute = fetchPriority ? ` fetchpriority="${fetchPriority}"` : "";
   const zoomAttribute = touchZoom ? " data-media-zoom-touch" : "";
   const fallbackAttribute = media.isFallback ? " data-product-image-fallback" : "";
   if (dataAttribute && !/^data-[a-z][a-z0-9-]*$/.test(dataAttribute)) throw new Error("Invalid image data attribute.");
@@ -594,12 +619,12 @@ export function renderResponsiveProductImage({ media, alt, root = "", sizes, loa
   if (uniform) { key = "{pattern} {name} in {color}, front and back"; params = { pattern: uniform[1], name: uniform[2], color: uniform[3] }; }
   else if (view) { key = "{name}, view {number}"; params = { name: view[1], number: view[2] }; }
   else if (product) { key = "{name} product image"; params = { name: product[1] }; }
-  return `<img src="${html(resolvedPath(media.src))}"${responsiveAttributes} alt="${html(alt)}"${copyAttributes(key, "alt", params)} width="${html(width)}" height="${html(height)}"${loadingAttribute}${zoomAttribute}${fallbackAttribute}${behaviorAttribute}${identityAttributes}>`;
+  return `<img src="${html(resolvedPath(media.src))}"${responsiveAttributes} alt="${html(alt)}"${copyAttributes(key, "alt", params)} width="${html(width)}" height="${html(height)}"${loadingAttribute}${priorityAttribute}${zoomAttribute}${fallbackAttribute}${behaviorAttribute}${identityAttributes}>`;
 }
 
-export function renderProductGrid(products, root = "") {
+export function renderProductGrid(products, root = "", { initialViewport = false } = {}) {
   return `<div class="auto-grid product-grid" data-generated-component="product-grid">
-${products.map((product) => renderProductCard(product, root)).join("\n")}
+${products.map((product, index) => renderProductCard(product, root, { priority: initialViewport && index === 0 })).join("\n")}
 </div>`;
 }
 
@@ -616,13 +641,13 @@ export function renderDocument({
   scripts = [],
   head = ""
 }) {
-const baseStyles = ["fonts.css?v=20260909b", "tokens.css?v=20261001a", "motion.css?v=20260831a", "reset.css?v=20260829a", "base.css?v=20260916b", "layout.css", "components.css?v=20261002a", "header-directory.css?v=20261001b", "pages.css?v=20260927a", "color-options.css?v=20260929a"];
+const baseStyles = ["fonts.css?v=20260909b", "tokens.css?v=20261003b", "motion.css?v=20260831a", "reset.css?v=20260829a", "base.css?v=20261003b", "layout.css", "components.css?v=20261003d", "state-variation.css?v=20261003b", "header-directory.css?v=20261001b", "pages.css?v=20261003a", "color-options.css?v=20260929a"];
   const styleMarkup = [...baseStyles, ...styles].map((file) => `  <link rel="stylesheet" href="${html(asset(root, `assets/css/${file}`))}">`).join("\n");
-  const isDataScript = (file) => ["catalog.js", "teamwear-options.js"].includes(file.split("?")[0]);
+  const isDataScript = (file) => ["catalog.js", "teamwear-options.js"].includes(file.split("?")[0]) || /^products\/[^/]+\.js(?:\?|$)/.test(file);
   const dataScripts = scripts.filter(isDataScript);
   const interactionScripts = scripts.filter((file) => !isDataScript(file));
-  const earlyMotionScript = `  <script src="${html(asset(root, "assets/js/page-transitions.js?v=20260831a"))}"></script>`;
-  const scriptMarkup = ["app.js?v=20261001a", "dropdown.js?v=20261001b", `pricing-config.js?v=${pricingConfigVersion}`, "pricing-core.js?v=20261001a", `localization-data.js?v=${localizationVersion}`, "localization.js?v=20261001a", "language-preference.js?v=20261001b", "pricing.js?v=20261001a", "header-directory.js?v=20261001a", "search-core.js?v=20260927b", "search.js?v=20261001b", ...dataScripts, "choices.js?v=20261001a", ...interactionScripts].map((file) => `  <script defer src="${html(asset(root, `assets/js/${file}`))}"></script>`).join("\n");
+  const earlyMotionScript = `  <script src="${html(asset(root, "assets/js/page-transitions.js?v=20261003d"))}"></script>`;
+  const scriptMarkup = ["app.js?v=20261001a", "dropdown.js?v=20261001b", `pricing-config.js?v=${pricingConfigVersion}`, "pricing-core.js?v=20261003a", `localization-data.js?v=${localizationVersion}`, "inline-type.js?v=20261003a", "localization.js?v=20261003a", "language-preference.js?v=20261001b", "pricing.js?v=20261003a", "header-directory.js?v=20261002a", "search-core.js?v=20260927b", "search.js?v=20261003d", ...dataScripts, "choices.js?v=20261003c", ...interactionScripts].map((file) => `  <script defer src="${html(asset(root, `assets/js/${file}`))}"></script>`).join("\n");
   const mainMarkup = main.replace(/<main\b[^>]*>/, (openingTag) => {
     let result = openingTag;
     if (!result.includes('id="main-content"')) result = result.replace(/>$/, ' id="main-content">');
@@ -646,8 +671,8 @@ const baseStyles = ["fonts.css?v=20260909b", "tokens.css?v=20261001a", "motion.c
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="${html(ROBOTO_SEMI_CONDENSED_STYLESHEET)}">
   <link rel="stylesheet" href="${html(MATERIAL_SYMBOLS_STYLESHEET)}">
-${earlyMotionScript}
 ${head ? `${head}\n` : ""}${styleMarkup}
+${earlyMotionScript}
 ${scriptMarkup}
 </head>
 <body class="${html(bodyClass)}" data-root="${html(root)}">

@@ -147,6 +147,13 @@ body {
   );
 }
 
+:where(.text-weak) {
+  font-weight: max(
+    var(--font-weight-thin),
+    calc(var(--font-weight-base, var(--font-weight-regular)) - var(--font-weight-strong-offset))
+  );
+}
+
 /* Explicit smaller roles must not inherit display-title treatment. */
 .type-small,
 .type-body,
@@ -160,6 +167,22 @@ body {
 
 :where(em, .text-italic) {
   font-style: var(--font-style-italic);
+}
+
+/* Inline notation inherits its role; it never consumes the Small role. */
+:where(sup, sub) {
+  font-size: var(--type-script-size);
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+:where(sup) {
+  top: var(--type-sup-offset);
+}
+
+:where(sub) {
+  top: var(--type-sub-offset);
 }
 
 main {

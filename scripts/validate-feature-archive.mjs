@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { readFile, access } from "node:fs/promises";
+import { productCategories } from "./lib/product-categories.mjs";
 
 const read = (file) => readFile(new URL(`../${file}`, import.meta.url), "utf8");
 const exists = async (file) => access(new URL(`../${file}`, import.meta.url)).then(() => true, () => false);
@@ -21,7 +22,7 @@ for (const file of ["data/catalog-refine.json", "scripts/lib/catalog-refine.mjs"
   assert.equal(await exists(file), false, `Archived feature must not remain at its active path: ${file}`);
 }
 assert.doesNotMatch(await read("scripts/build-site.mjs"), /_archive|refineConfig|catalog-refine|fabric-square|teamwear-material/, "Public generation must not load or enable archived features");
-for (const file of ["index.html", "collections/all/index.html", "collections/ss-tops/index.html", "collections/aw-tops/index.html", "collections/bottoms/index.html", "teamwear/index.html", "teamwear/customize/index.html"]) {
+for (const file of ["index.html", "collections/all/index.html", ...productCategories.map(({ slug }) => `collections/${slug}/index.html`), "teamwear/index.html", "teamwear/customize/index.html"]) {
   assert.doesNotMatch(await read(file), /_archive|catalog-refine|data-dropdown-grouped|teamwear-material|material-title|fabric-square/, `${file} must not expose archived features`);
 }
 assert.doesNotMatch(await read("assets/css/teamwear-story.css"), /teamwear-material/, "Archived fabric styles must not ship");

@@ -22,38 +22,60 @@
       : [numerator, 10n ** BigInt(scale)];
   }
 
-  function usdPrice(twd, twdPerUsd) {
-    amount(twd);
-    if (typeof twdPerUsd !== "number" || !Number.isFinite(twdPerUsd) || twdPerUsd <= 0) {
-      throw new TypeError("Reference FX must be positive TWD per USD.");
-    }
-    if (twd === 0) return 0;
-    const [p, pd] = fraction(twd);
-    const [r, rd] = fraction(twdPerUsd);
-    const floorNumerator = p * rd, floorDenominator = pd * r;
-    const anchorNumerator = floorNumerator * 11n, anchorDenominator = floorDenominator * 10n;
-    let candidate = 9n;
-    if (anchorNumerator >= 9n * anchorDenominator) {
-      const lower = 9n + 10n * ((anchorNumerator - 9n * anchorDenominator) / (10n * anchorDenominator));
-      candidate = 2n * anchorNumerator >= (2n * lower + 10n) * anchorDenominator ? lower + 10n : lower;
-    }
+  function floorDivide(numerator, denominator) {
+    const quotient = numerator / denominator;
+    return numerator < 0n && numerator % denominator ? quotient - 1n : quotient;
+  }
+
+  function endingPrice(anchorNumerator, anchorDenominator, floorNumerator, floorDenominator) {
+    // Extending 9 + 10k includes -1 internally; displayed prices stay non-negative.
+    const lower = 9n + 10n * floorDivide(anchorNumerator - 9n * anchorDenominator, 10n * anchorDenominator);
+    let candidate = 2n * anchorNumerator >= (2n * lower + 10n) * anchorDenominator ? lower + 10n : lower;
     if (candidate * floorDenominator < floorNumerator) {
-      candidate = anchorNumerator < 5n * anchorDenominator ? 5n
-        : 5n + 10n * ((anchorNumerator - 5n * anchorDenominator) / (10n * anchorDenominator) + 1n);
+      candidate = 5n + 10n * (floorDivide(anchorNumerator - 5n * anchorDenominator, 10n * anchorDenominator) + 1n);
     }
-    if (candidate > BigInt(Number.MAX_SAFE_INTEGER)) throw new RangeError("Converted price is too large.");
+    if (candidate < 0n || candidate > BigInt(Number.MAX_SAFE_INTEGER)) throw new RangeError("Converted price is out of range.");
     return Number(candidate);
   }
 
-  const numberFormat = new Intl.NumberFormat("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-  function formatPrice(twd, currency = "TWD", reference) {
+  function referenceFraction(twdPerUsd) {
+    if (typeof twdPerUsd !== "number" || !Number.isFinite(twdPerUsd) || twdPerUsd <= 0) {
+      throw new TypeError("Reference FX must be positive TWD per USD.");
+    }
+    return fraction(twdPerUsd);
+  }
+
+  function usdPrice(twd, twdPerUsd) {
     amount(twd);
-    if (currency === "TWD") return `NT$${numberFormat.format(twd)}`;
-    if (currency === "USD") return `$${numberFormat.format(usdPrice(twd, reference?.twdPerUsd))}`;
+    const [r, rd] = referenceFraction(twdPerUsd);
+    if (twd === 0) return 0;
+    const [p, pd] = fraction(twd);
+    const floorNumerator = p * rd, floorDenominator = pd * r;
+    return endingPrice(floorNumerator * 11n, floorDenominator * 10n, floorNumerator, floorDenominator);
+  }
+
+  function usdPriceWithSurcharge(baseTwd, surchargeTwd, twdPerUsd) {
+    const baseUsd = usdPrice(baseTwd, twdPerUsd);
+    const surchargeUsd = usdPrice(surchargeTwd, twdPerUsd);
+    // A single priced group must retain its first-pass ending, including $5/$15.
+    if (baseUsd === 0 || surchargeUsd === 0) return baseUsd + surchargeUsd;
+    const [b, bd] = fraction(baseTwd), [s, sd] = fraction(surchargeTwd);
+    const [r, rd] = referenceFraction(twdPerUsd);
+    const floorNumerator = (b * sd + s * bd) * rd, floorDenominator = bd * sd * r;
+    const sum = BigInt(baseUsd) + BigInt(surchargeUsd);
+    return endingPrice(sum, 1n, floorNumerator, floorDenominator);
+  }
+
+  const numberFormat = new Intl.NumberFormat("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  function formatPrice(twd, currency = "TWD", reference, surchargeTwd = 0) {
+    amount(twd);
+    amount(surchargeTwd);
+    if (currency === "TWD") return `NT$${numberFormat.format(amount(twd + surchargeTwd))}`;
+    if (currency === "USD") return `$${numberFormat.format(usdPriceWithSurcharge(twd, surchargeTwd, reference?.twdPerUsd))}`;
     throw new TypeError(`Unsupported display currency: ${currency}`);
   }
 
-  const api = Object.freeze({ effectiveTwdPrice, usdPrice, formatPrice });
+  const api = Object.freeze({ effectiveTwdPrice, usdPrice, usdPriceWithSurcharge, formatPrice });
   global.PARADIGM_PRICING_CORE = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })(globalThis);

@@ -176,8 +176,8 @@ assert.match(
 );
 assert.match(
   components,
-  /\.breadcrumb\s*\{[\s\S]*?min-width:\s*0;[\s\S]*?flex:\s*1 1 auto;[\s\S]*?overflow-x:\s*auto/,
-  "Breadcrumbs must own overflow without displacing the trailing headline action"
+  /\.breadcrumb\s*\{[\s\S]*?min-width:\s*0;[\s\S]*?flex:\s*1 1 auto;[\s\S]*?overflow-x:\s*clip/,
+  "Breadcrumbs must clip at the headline content boundary without scrolling or displacing the trailing action"
 );
 assert.match(
   components,
@@ -274,11 +274,11 @@ assert.match(teamwearStory, /scroll-snap-type:\s*x mandatory;/, "Teamwear rails 
 assert.match(teamwearStory, /\.teamwear-rail-card\s*\{[\s\S]*?scroll-snap-align:\s*start;[\s\S]*?scroll-snap-stop:\s*always;/, "Every Teamwear rail card must snap its start edge and stop at each card");
 assert.match(teamwearStory, /\.teamwear-highlights__viewport,[\s\S]*?\.teamwear-colorway__viewport,[\s\S]*?\.teamwear-gallery__viewport\s*\{[\s\S]*?position:\s*relative;/, "Every Teamwear rail viewport must establish the overlay positioning context");
 assert.match(teamwearStory, /\.teamwear-rail-controls\s*\{[\s\S]*?display:\s*none;/, "Teamwear rail controls must remain hidden below Large");
-assert.match(teamwearStory, /\.teamwear-rail-button\s*\{[\s\S]*?width:\s*var\(--space-7\);[\s\S]*?height:\s*var\(--space-7\);[\s\S]*?border:\s*0;[\s\S]*?border-radius:\s*var\(--radius-pill\);[\s\S]*?background:\s*transparent;[\s\S]*?box-shadow:\s*none;/, "Teamwear rail controls must use the shared 32px circular visual and interaction box without a border or shadow");
-assert.match(teamwearStory, /--teamwear-rail-chevron-mask:\s*url\("data:image\/svg\+xml,[^;]+M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z[^;]+"\);/, "The next rail control must retain the official Material chevron geometry as its transparent cutout");
-assert.match(teamwearStory, /\.teamwear-rail-button--previous\s*\{[\s\S]*?--teamwear-rail-chevron-mask:\s*url\("data:image\/svg\+xml,[^;]+M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z[^;]+"\);/, "The previous rail control must retain the official Material chevron geometry as its transparent cutout");
-assert.match(teamwearStory, /\.teamwear-rail-button::before\s*\{[\s\S]*?background:\s*var\(--color-container-low\);[\s\S]*?-webkit-mask:\s*var\(--teamwear-rail-chevron-mask\) center \/ 100% 100% no-repeat;[\s\S]*?mask:\s*var\(--teamwear-rail-chevron-mask\) center \/ 100% 100% no-repeat;/, "Teamwear rail circles must use the original semantic color and reveal the photograph through the Material chevron");
-assert.match(teamwearStory, /\.teamwear-rail-button \.material-icon\s*\{[\s\S]*?width:\s*var\(--icon-size\);[\s\S]*?height:\s*var\(--icon-size\);[\s\S]*?opacity:\s*0;[\s\S]*?font-size:\s*var\(--icon-size\);/, "Rail controls must retain the centralized Material Symbol markup without painting a second glyph over the cutout");
+assert.match(components, /\.teamwear-rail-button\s*\{[\s\S]*?width:\s*var\(--space-7\);[\s\S]*?height:\s*var\(--space-7\);[\s\S]*?border:\s*0;[\s\S]*?border-radius:\s*var\(--radius-pill\);[\s\S]*?background:\s*transparent;[\s\S]*?box-shadow:\s*none;/, "Teamwear rail controls must use the shared 32px circular visual and interaction box without a border or shadow");
+assert.match(components, /--teamwear-rail-chevron-mask:\s*url\("data:image\/svg\+xml,[^;]+M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z[^;]+"\);/, "The next rail control must retain the official Material chevron geometry as its transparent cutout");
+assert.match(components, /\.teamwear-rail-button--previous\s*\{[\s\S]*?--teamwear-rail-chevron-mask:\s*url\("data:image\/svg\+xml,[^;]+M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z[^;]+"\);/, "The previous rail control must retain the official Material chevron geometry as its transparent cutout");
+assert.match(components, /\.teamwear-rail-button::before\s*\{[\s\S]*?background:\s*var\(--color-container-low\);[\s\S]*?-webkit-mask:\s*var\(--teamwear-rail-chevron-mask\) center \/ 100% 100% no-repeat;[\s\S]*?mask:\s*var\(--teamwear-rail-chevron-mask\) center \/ 100% 100% no-repeat;/, "Teamwear rail circles must use the original semantic color and reveal the photograph through the Material chevron");
+assert.match(components, /\.teamwear-rail-button \.material-icon\s*\{[\s\S]*?width:\s*var\(--icon-size\);[\s\S]*?height:\s*var\(--icon-size\);[\s\S]*?opacity:\s*0;[\s\S]*?font-size:\s*var\(--icon-size\);/, "Rail controls must retain the centralized Material Symbol markup without painting a second glyph over the cutout");
 assert.doesNotMatch(teamwearTemplate + teamwearStory, /ICON_\w+_STACKED|teamwear-stacked-row__icon/, "Process rows must not retain icons or an icon column");
 for (const step of [1, 2, 3]) assert.ok(teamwearTemplate.includes(`>Step ${step}</h5>`), `Process must label Step ${step}`);
 for (const index of [1, 2, 3]) assert.ok(teamwearTemplate.includes(`<div class="teamwear-rail-card__copy"><h3 class="type-h5">{{ATHLETE_${index}_NAME}}</h3></div>`), `Athlete card ${index} must use its supplied team's name and title-only copy`);
@@ -297,9 +297,9 @@ for (const pattern of railModel.patterns) {
   }
 }
 assert.equal(new Set(railImagePaths).size, railModel.patterns.length * railModel.colors.length, "Every pattern/color combination must have its own replaceable image");
-assert.match(teamwearStory, /\.teamwear-rail-button\[hidden\]\s*\{[\s\S]*?display:\s*none;/, "Unavailable Teamwear rail directions must override the authored button display rule");
-assert.doesNotMatch(teamwearStory, /\.teamwear-rail-button[^\{]*\{[^}]*transition\s*:/, "Teamwear rail buttons must not animate hover-state changes");
-assert.doesNotMatch(teamwearStory, /\.teamwear-rail-button[^\{]*:hover/, "Teamwear rail buttons must inherit shared control feedback rather than define a page-local hover effect");
+assert.match(components, /\.teamwear-rail-button\[hidden\]\s*\{[\s\S]*?display:\s*none;/, "Unavailable Teamwear rail directions must override the authored button display rule");
+assert.doesNotMatch(components, /\.teamwear-rail-button[^\{]*\{[^}]*transition\s*:/, "Teamwear rail buttons must not animate hover-state changes");
+assert.doesNotMatch(components, /\.teamwear-rail-button[^\{]*:hover/, "Teamwear rail buttons must inherit shared control feedback rather than define a page-local hover effect");
 assert.match(teamwearTemplate, /teamwear-highlights__viewport">\s*\{\{HIGHLIGHT_CONTROLS\}\}\s*<div class="teamwear-highlights__rail"/, "Highlight controls must be generated inside their rail viewport");
 assert.match(teamwearTemplate, /teamwear-colorway__viewport">\s*\{\{COLORWAY_CONTROLS\}\}\s*<div class="teamwear-colorway__rail"/, "Colorway controls must be generated inside their rail viewport");
 assert.match(teamwearTemplate, /teamwear-gallery__viewport">\s*\{\{GALLERY_CONTROLS\}\}\s*<div class="teamwear-gallery__rail"/, "Gallery controls must be generated inside their rail viewport");

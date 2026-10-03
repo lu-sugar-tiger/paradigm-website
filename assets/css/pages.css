@@ -43,6 +43,11 @@
   background: var(--color-background-mid);
 }
 
+/* A footer cannot be a stable visual anchor until asynchronous results exist. */
+:root[data-site-enhanced] .search-page:has([data-search-page-results][aria-busy="true"]) .site-footer {
+  visibility: hidden;
+}
+
 .search-page__results .search-results {
   width: min(100%, var(--content-width));
   margin-top: 0;

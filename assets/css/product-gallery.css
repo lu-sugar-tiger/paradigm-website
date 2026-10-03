@@ -1,0 +1,84 @@
+/* Large product gallery navigation; existing gallery and variant rules stay shared. */
+:root[data-site-enhanced] .product-detail__panel.has-thumbnail-rail .detail-thumbnails { display: none; }
+
+@media (min-width: 64rem) {
+  :root[data-site-enhanced] .product-detail__panel.has-thumbnail-rail {
+    --detail-thumbnail-capacity: 9;
+    --detail-sticky-top: var(--header-height);
+    --detail-thumbnail-size: min(var(--space-9), calc((100dvh - var(--header-height) - var(--space-7)) / var(--detail-thumbnail-capacity)));
+    --detail-related-gap: var(--space-1);
+    /* The final column starts at the related grid's third card edge. */
+    grid-template-columns: var(--detail-thumbnail-size) minmax(0, 1fr) calc((100% - var(--detail-related-gap) - var(--detail-related-gap)) / 3);
+  }
+
+  :root[data-site-enhanced] .product-detail__panel.has-thumbnail-rail .product-detail__media {
+    display: grid;
+    grid-column: 1 / 3;
+    grid-row: 1;
+    grid-template-columns: var(--detail-thumbnail-size) minmax(0, 1fr);
+    align-items: stretch;
+    gap: 0;
+  }
+
+  :root[data-site-enhanced] .product-detail__panel.has-thumbnail-rail .detail-thumbnails {
+    display: block;
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    align-self: stretch;
+  }
+
+  :root[data-site-enhanced] .product-detail__panel.has-thumbnail-rail .detail-thumbnails__rail {
+    position: sticky;
+    top: var(--detail-sticky-top);
+    display: grid;
+    gap: 0;
+  }
+
+  :root[data-site-enhanced] .product-detail__panel.has-thumbnail-rail .detail-thumbnail {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-none);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  :root[data-site-enhanced] .product-detail__panel.has-thumbnail-rail .detail-thumbnail img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1;
+  }
+
+  :root[data-site-enhanced] .product-detail__panel.has-thumbnail-rail .detail-thumbnail:is(:hover, :active) img {
+    opacity: var(--state-variation-opacity);
+  }
+
+  :root[data-site-enhanced] .product-detail__panel.has-thumbnail-rail .detail-thumbnail:focus-visible {
+    outline: var(--stroke-width-thin) solid var(--color-outline-high);
+    outline-offset: calc(-1 * var(--stroke-width-thin));
+  }
+
+  :root[data-site-enhanced] .product-detail__panel.has-thumbnail-rail .product-detail__gallery {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    margin-inline: var(--space-5) 0;
+    background: transparent;
+  }
+
+  :root[data-site-enhanced] .product-detail__panel.has-thumbnail-rail .product-detail__gallery > img {
+    scroll-margin-block-start: var(--detail-sticky-top);
+  }
+
+  :root[data-site-enhanced] .product-detail__panel.has-thumbnail-rail .product-detail__summary {
+    grid-column: 3;
+    grid-row: 1;
+    padding-inline: var(--layout-shell-gutter-inline);
+  }
+}

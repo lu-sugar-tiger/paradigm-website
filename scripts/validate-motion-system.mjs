@@ -5,6 +5,7 @@ import path from "node:path";
 import vm from "node:vm";
 import { fileURLToPath } from "node:url";
 import { withoutStaticHeadingScale } from "./lib/typography-validation.mjs";
+import { productCategories } from "./lib/product-categories.mjs";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const read = (relativePath) => readFile(path.join(ROOT, relativePath), "utf8");
@@ -74,9 +75,11 @@ assert.ok(routeApi, "the page-transition controller must expose its private rout
 
 const cases = [
   ["/", "/collections/all", false, "none"],
-  ["/collections/all", "/collections/ss-tops", false, "forward"],
-  ["/collections/ss-tops", "/collections/all", false, "backward"],
-  ["/collections/ss-tops", "/collections/aw-tops", false, "peer"],
+  ["/collections/all", "/collections/tees", false, "forward"],
+  ["/collections/tees", "/collections/all", false, "backward"],
+  ["/collections/tees", "/collections/crewnecks", false, "peer"],
+  ["/collections/all", "/collections/hoodies", false, "forward"],
+  ["/collections/hoodies", "/collections/shorts", false, "peer"],
   ["/search", "/products/ED14001", false, "forward"],
   ["/products/ED14001", "/products/ED14024", false, "peer"],
   ["/teamwear", "/teamwear/customize", false, "forward"],
@@ -91,10 +94,30 @@ for (const [from, to, overlayOpen, expected] of cases) {
 assert.equal(routeApi.classifyPath("/search").depth, 1, "Search must be catalog depth 1");
 assert.equal(routeApi.classifyPath("/products/ED14001").depth, 2, "Products must be catalog depth 2");
 
+const abortedTransition = {
+  ready: Promise.reject(new Error("Page already revealed")),
+  finished: Promise.reject(new Error("Page already revealed")),
+  skipTransition() {}
+};
+listeners.get("pagereveal")({ viewTransition: abortedTransition });
+await new Promise((resolve) => setImmediate(resolve));
+assert.equal(context.document.documentElement.dataset.pageMotion, undefined, "a cancelled transition must settle and clear its temporary state without an unhandled rejection");
+let sameRouteSkipped = false;
+listeners.get("pageswap")({
+  activation: { entry: { url: "https://prdm.tw/collections/all" } },
+  viewTransition: {
+    ready: Promise.reject(new Error("Page already revealed")),
+    finished: Promise.reject(new Error("Page already revealed")),
+    skipTransition() { sameRouteSkipped = true; }
+  }
+});
+await new Promise((resolve) => setImmediate(resolve));
+assert.ok(sameRouteSkipped, "same-route transitions must skip animation and handle both cancelled promises");
+
 assert.match(pageTransitions, /addEventListener\("pageswap"[\s\S]*?addEventListener\("pagereveal"/, "page motion must use cross-document lifecycle events");
 assert.match(pageTransitions, /event\.viewTransition[\s\S]*?event\.activation\?\.entry\?\.url/, "outgoing motion must use the browser's View Transition activation record");
 assert.match(pageTransitions, /transition\?\.skipTransition\(\)/, "equivalent routes and reduced motion must skip the authored transition");
-assert.match(pageTransitions, /transition\?\.finished\.finally[\s\S]*?delete document\.documentElement\.dataset\.pageMotion/, "temporary route state must clear after each transition");
+assert.match(pageTransitions, /delete document\.documentElement\.dataset\.pageMotion[\s\S]*?transition\?\.finished\.then\(clearMotionState, clearMotionState\)/, "temporary route state must clear after both completed and cancelled transitions");
 assert.doesNotMatch(pageTransitions, /addEventListener\(["']click|preventDefault|pushState|replaceState|popstate/, "page motion must not intercept navigation or mutate history");
 
 assert.match(motion, /@view-transition\s*\{\s*navigation:\s*auto;/, "the shared stylesheet must progressively enable cross-document transitions");
@@ -155,9 +178,7 @@ assert.match(docs, /response 350ms and damping ratio 1; damping \.8 is reserved 
 const generatedPages = [
   "index.html",
   "collections/all/index.html",
-  "collections/ss-tops/index.html",
-  "collections/aw-tops/index.html",
-  "collections/bottoms/index.html",
+  ...productCategories.map(({ slug }) => `collections/${slug}/index.html`),
   "search/index.html",
   "teamwear/index.html",
   "teamwear/customize/index.html",
@@ -165,12 +186,13 @@ const generatedPages = [
 ];
 for (const relativePath of generatedPages) {
   const page = await read(relativePath);
-  const earlyController = page.search(/<script src="(?:\.\.\/)*assets\/js\/page-transitions\.js\?v=20260831a"><\/script>/);
+  const earlyController = page.search(/<script src="(?:\.\.\/)*assets\/js\/page-transitions\.js\?v=20261003d"><\/script>/);
   const deferredApp = page.search(/<script defer src="(?:\.\.\/)*assets\/js\/app\.js\?v=20261001a"><\/script>/);
   assert.ok(earlyController >= 0 && deferredApp > earlyController, `${relativePath} must load the route controller early and before deferred behavior`);
+  assert.ok(page.indexOf('assets/css/motion.css') < earlyController, `${relativePath} must parse its view-transition stylesheet before the controller can query media and flush styles`);
   assert.match(page, /assets\/css\/motion\.css\?v=20260831a/, `${relativePath} must load the cache-busted global motion stylesheet`);
-  assert.match(page, /assets\/css\/components\.css\?v=20261002a/, `${relativePath} must load the cache-busted shared component styles and motion`);
-  assert.match(page, /assets\/js\/choices\.js\?v=20261001a/, `${relativePath} must load the cache-busted floating-action state controller`);
+  assert.match(page, /assets\/css\/components\.css\?v=20261003d/, `${relativePath} must load the cache-busted shared component styles and motion`);
+  assert.match(page, /assets\/js\/choices\.js\?v=20261003c/, `${relativePath} must load the cache-busted floating-action state controller`);
 }
 
 console.log(`MOTION_SYSTEM_OK routes=${cases.length} pages=${generatedPages.length}`);

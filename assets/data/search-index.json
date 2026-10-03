@@ -19,23 +19,24 @@
     "全部商品",
     "服飾",
     "目錄",
-    "SS Tops",
-    "tees",
+    "Tees",
+    "t shirt",
     "football jersey",
     "jersey",
     "tops",
     "短Ｔ",
     "球衣",
     "上衣",
-    "AW Tops",
+    "Crewnecks",
     "crewneck",
-    "crewnecks",
-    "hoodies",
+    "sweatshirt",
     "大學Ｔ",
+    "Hoodies",
     "帽Ｔ",
-    "Bottoms",
-    "shorts",
+    "連帽",
+    "Shorts",
     "training shorts",
+    "bottoms",
     "短褲",
     "褲裝",
     "PE Basketball Teamwear",
@@ -117,14 +118,14 @@
       "external": false
     },
     {
-      "title": "SS Tops",
+      "title": "Tees",
       "interfaceLabel": true,
-      "url": "/collections/ss-tops",
+      "url": "/collections/tees",
       "summary": "Explore Paradigm tees and football jerseys.",
       "keywords": [
-        "ss tops",
         "tee",
         "tees",
+        "t shirt",
         "football jersey",
         "jersey",
         "tops",
@@ -135,32 +136,44 @@
       "external": false
     },
     {
-      "title": "AW Tops",
+      "title": "Crewnecks",
       "interfaceLabel": true,
-      "url": "/collections/aw-tops",
-      "summary": "Explore Paradigm crewnecks and hoodies.",
+      "url": "/collections/crewnecks",
+      "summary": "Explore Paradigm crewnecks.",
       "keywords": [
-        "aw tops",
         "crewneck",
         "crewnecks",
-        "hoodie",
-        "hoodies",
+        "sweatshirt",
         "tops",
         "大學Ｔ",
-        "帽Ｔ",
         "上衣"
       ],
       "external": false
     },
     {
-      "title": "Bottoms",
+      "title": "Hoodies",
       "interfaceLabel": true,
-      "url": "/collections/bottoms",
+      "url": "/collections/hoodies",
+      "summary": "Explore Paradigm hoodies.",
+      "keywords": [
+        "hoodie",
+        "hoodies",
+        "tops",
+        "帽Ｔ",
+        "連帽",
+        "上衣"
+      ],
+      "external": false
+    },
+    {
+      "title": "Shorts",
+      "interfaceLabel": true,
+      "url": "/collections/shorts",
       "summary": "Explore Paradigm shorts.",
       "keywords": [
-        "bottoms",
         "shorts",
         "training shorts",
+        "bottoms",
         "短褲",
         "褲裝"
       ],
@@ -248,6 +261,8 @@
       "hem",
       "kornit",
       "dtg",
+      "charcoal",
+      "dove",
       "nicolaus",
       "copernicus",
       "revolutions",
@@ -347,9 +362,7 @@
       "的橢",
       "橢圓",
       "由於",
-      "於太",
-      "太陽",
-      "陽也"
+      "於太"
     ],
     "TL14027": [
       "derived",
@@ -371,6 +384,8 @@
       "timeless",
       "kornit",
       "dtg",
+      "charcoal",
+      "dove",
       "m",
       "l",
       "xl",
@@ -426,8 +441,6 @@
       "刷製",
       "製程",
       "其中",
-      "03charcoal",
-      "06dove",
       "兩色",
       "為了",
       "了重",
@@ -493,6 +506,8 @@
       "aesthetics",
       "kornit",
       "dtg",
+      "charcoal",
+      "dove",
       "m",
       "l",
       "xl",
@@ -545,8 +560,6 @@
       "刷製",
       "製程",
       "其中",
-      "03charcoal",
-      "06dove",
       "兩色",
       "為了",
       "了重",
@@ -615,6 +628,8 @@
       "paradigm",
       "kornit",
       "dtg",
+      "charcoal",
+      "dove",
       "m",
       "l",
       "xl",
@@ -679,8 +694,6 @@
       "刷製",
       "製程",
       "其中",
-      "03charcoal",
-      "06dove",
       "兩色",
       "為了",
       "了重",
@@ -3042,7 +3055,7 @@
       "sku": "BD14028-C03-S5",
       "name": "PRDM Cosmos Tee",
       "cardName": "Cosmos Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "Charcoal"
       ],
@@ -3084,7 +3097,7 @@
       "sku": "BD14028-C06-S5",
       "name": "PRDM Cosmos Tee",
       "cardName": "Cosmos Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "Dove"
       ],
@@ -3126,7 +3139,7 @@
       "sku": "BD14028-C09-S5",
       "name": "PRDM Cosmos Tee",
       "cardName": "Cosmos Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "White"
       ],
@@ -3168,7 +3181,7 @@
       "sku": "TL14027-C03-S5",
       "name": "PRDM Timeless Tee",
       "cardName": "Timeless Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "Charcoal"
       ],
@@ -3210,7 +3223,7 @@
       "sku": "TL14027-C06-S5",
       "name": "PRDM Timeless Tee",
       "cardName": "Timeless Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "Dove"
       ],
@@ -3252,7 +3265,7 @@
       "sku": "TL14027-C09-S5",
       "name": "PRDM Timeless Tee",
       "cardName": "Timeless Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "White"
       ],
@@ -3294,7 +3307,7 @@
       "sku": "AE14026-C03-S5",
       "name": "PRDM Aesthetics Tee",
       "cardName": "Aesthetics Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "Charcoal"
       ],
@@ -3336,7 +3349,7 @@
       "sku": "AE14026-C06-S5",
       "name": "PRDM Aesthetics Tee",
       "cardName": "Aesthetics Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "Dove"
       ],
@@ -3378,7 +3391,7 @@
       "sku": "AE14026-C09-S5",
       "name": "PRDM Aesthetics Tee",
       "cardName": "Aesthetics Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "White"
       ],
@@ -3420,7 +3433,7 @@
       "sku": "PD14025-C03-S5",
       "name": "PRDM Paradigm Tee",
       "cardName": "Paradigm Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "Charcoal"
       ],
@@ -3462,7 +3475,7 @@
       "sku": "PD14025-C06-S5",
       "name": "PRDM Paradigm Tee",
       "cardName": "Paradigm Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "Dove"
       ],
@@ -3504,7 +3517,7 @@
       "sku": "PD14025-C09-S5",
       "name": "PRDM Paradigm Tee",
       "cardName": "Paradigm Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "White"
       ],
@@ -3546,7 +3559,7 @@
       "sku": "ED14024-C03-S5",
       "name": "PRDM Everyday Tee",
       "cardName": "Everyday Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "Charcoal"
       ],
@@ -3588,7 +3601,7 @@
       "sku": "ED14024-C06-S5",
       "name": "PRDM Everyday Tee",
       "cardName": "Everyday Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "Dove"
       ],
@@ -3630,7 +3643,7 @@
       "sku": "ED14024-C09-S5",
       "name": "PRDM Everyday Tee",
       "cardName": "Everyday Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "White"
       ],
@@ -3672,7 +3685,7 @@
       "sku": "",
       "name": "PRDM Training Shorts",
       "cardName": "Training Shorts",
-      "category": "Bottoms",
+      "category": "Shorts",
       "colors": [
         "Mud"
       ],
@@ -3714,7 +3727,7 @@
       "sku": "",
       "name": "PRDM Training Shorts",
       "cardName": "Training Shorts",
-      "category": "Bottoms",
+      "category": "Shorts",
       "colors": [
         "Mocha"
       ],
@@ -3756,7 +3769,7 @@
       "sku": "BD24021-C01-S4",
       "name": "PRDM Cosmos Hoodie",
       "cardName": "Cosmos Hoodie",
-      "category": "AW Tops",
+      "category": "Hoodies",
       "colors": [
         "Black"
       ],
@@ -3798,7 +3811,7 @@
       "sku": "BD24021-C61-S4",
       "name": "PRDM Cosmos Hoodie",
       "cardName": "Cosmos Hoodie",
-      "category": "AW Tops",
+      "category": "Hoodies",
       "colors": [
         "Midnight"
       ],
@@ -3840,7 +3853,7 @@
       "sku": "BT24020-C01-S4",
       "name": "PRDM Intelligence Hoodie",
       "cardName": "Intelligence Hoodie",
-      "category": "AW Tops",
+      "category": "Hoodies",
       "colors": [
         "Black"
       ],
@@ -3882,7 +3895,7 @@
       "sku": "BT24020-C61-S4",
       "name": "PRDM Intelligence Hoodie",
       "cardName": "Intelligence Hoodie",
-      "category": "AW Tops",
+      "category": "Hoodies",
       "colors": [
         "Midnight"
       ],
@@ -3924,7 +3937,7 @@
       "sku": "TL24019-C01-S4",
       "name": "PRDM Timeless Hoodie",
       "cardName": "Timeless Hoodie",
-      "category": "AW Tops",
+      "category": "Hoodies",
       "colors": [
         "Black"
       ],
@@ -3966,7 +3979,7 @@
       "sku": "TL24019-C61-S4",
       "name": "PRDM Timeless Hoodie",
       "cardName": "Timeless Hoodie",
-      "category": "AW Tops",
+      "category": "Hoodies",
       "colors": [
         "Midnight"
       ],
@@ -4008,7 +4021,7 @@
       "sku": "TL23018-C01-S1",
       "name": "PRDM Timeless Crewneck",
       "cardName": "Timeless Crewneck",
-      "category": "AW Tops",
+      "category": "Crewnecks",
       "colors": [
         "Black"
       ],
@@ -4050,7 +4063,7 @@
       "sku": "TL23018-C05-S1",
       "name": "PRDM Timeless Crewneck",
       "cardName": "Timeless Crewneck",
-      "category": "AW Tops",
+      "category": "Crewnecks",
       "colors": [
         "Grey"
       ],
@@ -4092,7 +4105,7 @@
       "sku": "AE24017-C01-S4",
       "name": "PRDM Aesthetics Hoodie",
       "cardName": "Aesthetics Hoodie",
-      "category": "AW Tops",
+      "category": "Hoodies",
       "colors": [
         "Black"
       ],
@@ -4134,7 +4147,7 @@
       "sku": "AE24017-C61-S4",
       "name": "PRDM Aesthetics Hoodie",
       "cardName": "Aesthetics Hoodie",
-      "category": "AW Tops",
+      "category": "Hoodies",
       "colors": [
         "Midnight"
       ],
@@ -4176,7 +4189,7 @@
       "sku": "AE23016-C01-S4",
       "name": "PRDM Aesthetics Crewneck",
       "cardName": "Aesthetics Crewneck",
-      "category": "AW Tops",
+      "category": "Crewnecks",
       "colors": [
         "Black"
       ],
@@ -4218,7 +4231,7 @@
       "sku": "AE23016-C05-S1",
       "name": "PRDM Aesthetics Crewneck",
       "cardName": "Aesthetics Crewneck",
-      "category": "AW Tops",
+      "category": "Crewnecks",
       "colors": [
         "Grey"
       ],
@@ -4260,7 +4273,7 @@
       "sku": "PD24015-C01-S4",
       "name": "PRDM Paradigm Hoodie",
       "cardName": "Paradigm Hoodie",
-      "category": "AW Tops",
+      "category": "Hoodies",
       "colors": [
         "Black"
       ],
@@ -4302,7 +4315,7 @@
       "sku": "PD24015-C61-S4",
       "name": "PRDM Paradigm Hoodie",
       "cardName": "Paradigm Hoodie",
-      "category": "AW Tops",
+      "category": "Hoodies",
       "colors": [
         "Midnight"
       ],
@@ -4344,7 +4357,7 @@
       "sku": "ED24014-C01-S4",
       "name": "PRDM Everyday Hoodie",
       "cardName": "Everyday Hoodie",
-      "category": "AW Tops",
+      "category": "Hoodies",
       "colors": [
         "Black"
       ],
@@ -4386,7 +4399,7 @@
       "sku": "ED24014-C61-S4",
       "name": "PRDM Everyday Hoodie",
       "cardName": "Everyday Hoodie",
-      "category": "AW Tops",
+      "category": "Hoodies",
       "colors": [
         "Midnight"
       ],
@@ -4428,7 +4441,7 @@
       "sku": "PH14011-C01-S4",
       "name": "PRDM Sponsorship Football Jersey",
       "cardName": "Sponsorship Football Jersey",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "Black"
       ],
@@ -4470,7 +4483,7 @@
       "sku": "PH14011-C09-S4",
       "name": "PRDM Sponsorship Football Jersey",
       "cardName": "Sponsorship Football Jersey",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "White"
       ],
@@ -4512,7 +4525,7 @@
       "sku": "PH14011-C13-S4",
       "name": "PRDM Sponsorship Football Jersey",
       "cardName": "Sponsorship Football Jersey",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "Cardinal"
       ],
@@ -4554,7 +4567,7 @@
       "sku": "PH14010-C01-S4",
       "name": "PRDM Partnership Football Jersey",
       "cardName": "Partnership Football Jersey",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "Black"
       ],
@@ -4596,7 +4609,7 @@
       "sku": "PH14010-C09-S4",
       "name": "PRDM Partnership Football Jersey",
       "cardName": "Partnership Football Jersey",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "White"
       ],
@@ -4638,7 +4651,7 @@
       "sku": "PH14010-C13-S5",
       "name": "PRDM Partnership Football Jersey",
       "cardName": "Partnership Football Jersey",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "Cardinal"
       ],
@@ -4680,7 +4693,7 @@
       "sku": "TL14009-C01-S2",
       "name": "PRDM Timeless Tee",
       "cardName": "Timeless Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "Black"
       ],
@@ -4722,7 +4735,7 @@
       "sku": "TL14009-C09-S1",
       "name": "PRDM Timeless Tee",
       "cardName": "Timeless Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "White"
       ],
@@ -4764,7 +4777,7 @@
       "sku": "AE14008-C01-S4",
       "name": "PRDM Aesthetics Tee",
       "cardName": "Aesthetics Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "Black"
       ],
@@ -4806,7 +4819,7 @@
       "sku": "AE14008-C09-S2",
       "name": "PRDM Aesthetics Tee",
       "cardName": "Aesthetics Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "White"
       ],
@@ -4848,7 +4861,7 @@
       "sku": "PD14007-C01-S1",
       "name": "PRDM Paradigm Tee",
       "cardName": "Paradigm Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "Black"
       ],
@@ -4890,7 +4903,7 @@
       "sku": "PD14007-C05-S2",
       "name": "PRDM Paradigm Tee",
       "cardName": "Paradigm Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "Grey"
       ],
@@ -4932,7 +4945,7 @@
       "sku": "PD14007-C09-S1",
       "name": "PRDM Paradigm Tee",
       "cardName": "Paradigm Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "White"
       ],
@@ -4974,7 +4987,7 @@
       "sku": "PD23006-C01-S1",
       "name": "PRDM Paradigm Crewneck",
       "cardName": "Paradigm Crewneck",
-      "category": "AW Tops",
+      "category": "Crewnecks",
       "colors": [
         "Black"
       ],
@@ -5016,7 +5029,7 @@
       "sku": "PD23006-C05-S1",
       "name": "PRDM Paradigm Crewneck",
       "cardName": "Paradigm Crewneck",
-      "category": "AW Tops",
+      "category": "Crewnecks",
       "colors": [
         "Grey"
       ],
@@ -5058,7 +5071,7 @@
       "sku": "ED23002-C01-S1",
       "name": "PRDM Everyday Crewneck",
       "cardName": "Everyday Crewneck",
-      "category": "AW Tops",
+      "category": "Crewnecks",
       "colors": [
         "Black"
       ],
@@ -5100,7 +5113,7 @@
       "sku": "ED23002-C05-S1",
       "name": "PRDM Everyday Crewneck",
       "cardName": "Everyday Crewneck",
-      "category": "AW Tops",
+      "category": "Crewnecks",
       "colors": [
         "Grey"
       ],
@@ -5142,7 +5155,7 @@
       "sku": "ED14001-C01-S1",
       "name": "PRDM Everyday Tee",
       "cardName": "Everyday Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "Black"
       ],
@@ -5184,7 +5197,7 @@
       "sku": "ED14001-C05-S1",
       "name": "PRDM Everyday Tee",
       "cardName": "Everyday Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "Grey"
       ],
@@ -5226,7 +5239,7 @@
       "sku": "ED14001-C09-S2",
       "name": "PRDM Everyday Tee",
       "cardName": "Everyday Tee",
-      "category": "SS Tops",
+      "category": "Tees",
       "colors": [
         "White"
       ],

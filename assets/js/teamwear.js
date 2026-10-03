@@ -300,24 +300,26 @@
     return form.querySelector('[name="teamwear-quantity"]:checked')?.closest("[data-choice-option]") || null;
   }
 
-  function priceLabel(value) {
-    return window.PARADIGM_PRICING.format(value);
+  function priceLabel() {
+    return window.PARADIGM_PRICING.format(model.price, surchargePrice());
   }
 
-  function totalPrice() {
+  function surchargePrice() {
     const selectedIds = new Set(selectedAddOns().map((option) => option.dataset.choiceId));
     const addOnAdjustment = (model.addOns || []).reduce((total, addOn) => total + (selectedIds.has(addOn.id) ? addOn.priceAdjustment : 0), 0);
     const quantityId = selectedQuantity()?.dataset.choiceId;
     const quantityAdjustment = (model.quantities || []).find((quantity) => quantity.id === quantityId)?.priceAdjustment || 0;
-    return model.price + quantityAdjustment + addOnAdjustment;
+    return quantityAdjustment + addOnAdjustment;
   }
 
   function updateBuilderPrice() {
     const price = form.querySelector("[data-teamwear-price]");
     if (price) {
-      const total = totalPrice();
-      price.dataset.priceTwd = total;
-      price.textContent = priceLabel(total);
+      const surcharge = surchargePrice();
+      price.dataset.priceTwd = model.price + surcharge;
+      price.dataset.priceBaseTwd = model.price;
+      price.dataset.priceSurchargeTwd = surcharge;
+      price.textContent = window.PARADIGM_PRICING.format(model.price, surcharge);
     }
   }
 
@@ -349,7 +351,7 @@
       `Color: ${color?.dataset.choiceLabel || colorNameById.get(colorByOptionId.get(color?.dataset.choiceId)?.id) || ""}`,
       `Quantity: ${quantity?.dataset.choiceLabel || ""}`,
       `Add-on: ${addOns.length ? addOns.map((option) => option.dataset.choiceLabel).join(", ") : "None"}`,
-      `Price: ${priceLabel(totalPrice())}`,
+      `Price: ${priceLabel()}`,
       `Selection code: ${model.code}-${pattern?.dataset.choiceId || ""}-${color?.dataset.choiceId || ""}`
     ].join("\n");
   }

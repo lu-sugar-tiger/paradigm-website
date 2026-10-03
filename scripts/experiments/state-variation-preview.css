@@ -1,0 +1,29 @@
+.state-variation-preview { padding: calc(var(--header-height) + var(--space-7)) var(--layout-shell-gutter-inline) var(--space-8); }
+.state-preview-intro, .state-preview-copy { display: grid; gap: var(--space-3); }
+.state-preview-intro { margin-bottom: var(--space-8); }
+.state-variation-preview p { margin: 0; }
+.state-preview-note { color: var(--color-on-surface-low); }
+.state-preview-row { display: grid; gap: var(--space-6); padding-block: var(--space-7); border-top: var(--stroke-width-thin) solid var(--color-outline-low); }
+.state-preview-copy, .state-preview-surface { min-width: 0; }
+.state-preview-copy .dropdown { justify-self: start; margin-top: var(--space-3); }
+.state-preview-surface { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-6); padding: var(--space-7); min-height: calc(var(--control-size-large) * 2); }
+.state-preview-white { background: var(--color-surface-high); }
+.state-preview-surface .site-logo { flex: 0 0 auto; margin: 0; }
+.state-preview-surface .primary-action-mount { display: contents; }
+.state-preview-surface .primary-action { position: static; width: auto; }
+.state-preview-headline { padding: 0; }
+.state-preview-headline .page-headline { width: 100%; }
+.state-preview-headline .page-headline__row { padding-inline: var(--space-5); }
+.state-preview-image { padding: 0; }
+.state-preview-image-control { display: grid; width: 100%; gap: var(--space-5); text-align: left; }
+.state-preview-image-control img { width: 100%; height: auto; }
+.state-preview-image-control > span { padding: var(--space-5); }
+.state-preview-photo { position: relative; padding: 0; min-height: 0; overflow: hidden; }
+.state-preview-photo > img { display: block; width: 100%; height: auto; object-fit: cover; }
+.state-preview-photo .teamwear-rail-controls { position: absolute; display: flex; justify-content: space-between; align-items: center; inset: 0; height: auto; padding: var(--space-5); pointer-events: none; }
+.state-preview-photo .teamwear-rail-button { pointer-events: auto; }
+.state-variation-preview .dropdown__trigger .material-icon { width: var(--icon-size-small); flex: 0 0 var(--icon-size-small); overflow: hidden; pointer-events: none; }
+.state-variation-preview .page-headline__action-icon { overflow: hidden; }
+@media (min-width: 48rem) {
+  .state-preview-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
+}

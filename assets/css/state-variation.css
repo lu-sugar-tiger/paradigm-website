@@ -1,0 +1,102 @@
+/*
+ * State variation: one hover/press family, four interchangeable treatments.
+ * Component collection and default mode live here. Geometry and semantic rest
+ * colors remain in components.css. Explicit data-state-variation overrides a
+ * default without adding another visual treatment.
+ */
+:where(.site-logo, .icon-button, .page-headline__action--icon, .button, .teamwear-rail-button, [data-state-variation]) {
+  --state-screen-fill: color-mix(in srgb, var(--control-rest-fill), var(--state-variation-lighten) var(--state-variation-strength));
+  --state-multiply-fill: color-mix(in srgb, var(--control-rest-fill), var(--state-variation-darken) var(--state-variation-strength));
+  --state-alpha-fill: color-mix(in srgb, var(--control-rest-fill) var(--state-variation-opacity), transparent);
+  --state-opacity-fill: var(--control-rest-fill);
+  --state-transparency-fill: var(--state-alpha-fill);
+  --state-screen-filter: invert(1) brightness(calc(100% - var(--state-variation-strength))) invert(1);
+  --state-multiply-filter: brightness(calc(100% - var(--state-variation-strength)));
+  --state-alpha-filter: opacity(var(--state-variation-opacity));
+  --state-opacity-filter: none;
+  --state-transparency-filter: var(--state-alpha-filter);
+  --state-variation-rest-fill: var(--control-rest-fill);
+  --state-variation-rest-filter: none;
+}
+
+/* Collection: standalone artwork/outlined shapes reveal their backing surface. */
+:where(.site-logo, .icon-button, .page-headline__action--icon) {
+  --state-variation-mode: transparency;
+  --state-variation-filter: var(--state-transparency-filter);
+}
+
+/* Collection: filled actions. Keep labels and focus outlines opaque. */
+:where(.button) {
+  --state-variation-mode: screen;
+  --state-variation-fill: var(--state-screen-fill);
+}
+:where(.button--secondary) {
+  --state-variation-mode: screen;
+  --state-variation-fill: var(--state-screen-fill);
+}
+:where(.reference-page--detail .button--secondary) {
+  --state-variation-mode: multiply;
+  --state-variation-fill: var(--state-multiply-fill);
+}
+:where(.teamwear-rail-button) {
+  --state-variation-mode: opacity;
+  --state-variation-rest-fill: var(--state-alpha-fill);
+  --state-variation-fill: var(--state-opacity-fill);
+}
+
+/* Explicit image/outlined controls opt in here; browsing media do not. */
+/* Optional per-instance overrides, also used by the local comparison page. */
+[data-state-variation] {
+  --state-variation-rest-fill: var(--control-rest-fill);
+  --state-variation-rest-filter: none;
+}
+[data-state-variation="screen"] {
+  --state-variation-mode: screen;
+  --state-variation-fill: var(--state-screen-fill);
+  --state-variation-filter: var(--state-screen-filter);
+}
+[data-state-variation="multiply"] {
+  --state-variation-mode: multiply;
+  --state-variation-fill: var(--state-multiply-fill);
+  --state-variation-filter: var(--state-multiply-filter);
+}
+[data-state-variation="opacity"] {
+  --state-variation-mode: opacity;
+  --state-variation-rest-fill: var(--state-alpha-fill);
+  --state-variation-rest-filter: var(--state-alpha-filter);
+  --state-variation-fill: var(--state-opacity-fill);
+  --state-variation-filter: var(--state-opacity-filter);
+}
+[data-state-variation="transparency"] {
+  --state-variation-mode: transparency;
+  --state-variation-fill: var(--state-transparency-fill);
+  --state-variation-filter: var(--state-transparency-filter);
+}
+
+/* Rest and interaction target the same visual layer, keeping labels/rings out. */
+.site-logo .site-logo__image,
+.icon-button:not(:disabled, [aria-disabled="true"]) .material-icon,
+.page-headline__action--icon:not(:disabled, [aria-disabled="true"]) .page-headline__action-icon,
+[data-state-variation]:not(:disabled, [aria-disabled="true"]) [data-state-variation-artwork] {
+  filter: var(--state-variation-rest-filter);
+}
+.button:not(:disabled, [aria-disabled="true"]) {
+  background-color: var(--state-variation-rest-fill);
+}
+.teamwear-rail-button:not(:disabled, [aria-disabled="true"])::before {
+  background-color: var(--state-variation-rest-fill);
+}
+
+/* One momentary state: hover and press never compound. */
+.site-logo:is(:hover, :active) .site-logo__image,
+.icon-button:not(:disabled, [aria-disabled="true"]):is(:hover, :active) .material-icon,
+.page-headline__action--icon:not(:disabled, [aria-disabled="true"]):is(:hover, :active) .page-headline__action-icon,
+[data-state-variation]:not(:disabled, [aria-disabled="true"]):is(:hover, :active) [data-state-variation-artwork] {
+  filter: var(--state-variation-filter);
+}
+.button:not(:disabled, [aria-disabled="true"]):is(:hover, :active) {
+  background-color: var(--state-variation-fill);
+}
+.teamwear-rail-button:not(:disabled, [aria-disabled="true"]):is(:hover, :active)::before {
+  background-color: var(--state-variation-fill);
+}

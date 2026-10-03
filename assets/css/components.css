@@ -58,8 +58,6 @@
 }
 
 .site-logo {
-  /* Screen lifts dark raster fills while preserving the image's alpha. */
-  --logo-state-filter: invert(1) brightness(calc(100% - var(--state-variation-strength))) invert(1);
   position: relative;
   flex: 0 1 auto;
   display: flex;
@@ -74,15 +72,6 @@
   width: auto;
   max-width: 100%;
   height: 24px;
-}
-
-/* A light-fill logo uses the same strength in the opposite direction. */
-.site-logo[data-fill-tone="light"] {
-  --logo-state-filter: brightness(calc(100% - var(--state-variation-strength)));
-}
-
-.site-logo:is(:hover, :active) .site-logo__image {
-  filter: var(--logo-state-filter);
 }
 
 /* The logo is a pointer-only Home shortcut by explicit design choice. */
@@ -115,7 +104,6 @@ body.storefront-open .site-actions .icon-button:not([data-storefront-toggle]) {
 
 .icon-button {
   --control-rest-fill: var(--color-on-surface-high);
-  --control-state-tone: var(--state-variation-lighten);
   position: relative;
   flex: 0 0 auto;
   display: inline-flex;
@@ -218,15 +206,6 @@ body.storefront-open[data-overlay-state="closing"] [data-storefront-toggle] .tog
 
 .site-actions .icon-button:last-child::before {
   clip-path: inset(0 0 0 var(--header-control-target-crop));
-}
-
-html:has(body[data-overlay-state]) {
-  scrollbar-gutter: auto;
-}
-
-body[data-overlay-state] .site-header {
-  overflow-y: hidden;
-  scrollbar-gutter: stable;
 }
 
 .nav-drawer,
@@ -716,15 +695,8 @@ body[data-overlay-state] .site-header {
   align-self: stretch;
   display: flex;
   align-items: center;
-  margin-inline-start: calc(0px - var(--layout-shell-gutter-inline));
-  padding-inline-start: var(--layout-shell-gutter-inline);
-  overflow-x: auto;
+  overflow-x: clip;
   white-space: nowrap;
-  scrollbar-width: none;
-}
-
-.breadcrumb::-webkit-scrollbar {
-  display: none;
 }
 
 .breadcrumb__list,
@@ -825,7 +797,6 @@ body[data-overlay-state] .site-header {
 
 .page-headline__action--icon {
   --control-rest-fill: var(--color-on-surface-high);
-  --control-state-tone: var(--state-variation-lighten);
 }
 
 .product-grid {
@@ -860,6 +831,13 @@ body[data-overlay-state] .site-header {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+@supports (content-visibility: auto) {
+  /* The existing square aspect ratio reserves the exact media footprint. */
+  .product-grid[data-catalog-loading] .product-card__media:not([data-media-in-range]) {
+    content-visibility: auto;
+  }
 }
 
 .product-card__body {
@@ -899,12 +877,78 @@ body[data-overlay-state] .site-header {
   letter-spacing: 0;
 }
 
+.teamwear-rail-button {
+  --teamwear-rail-chevron-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cmask id='cut' maskUnits='userSpaceOnUse' x='0' y='0' width='32' height='32'%3E%3Crect width='32' height='32' fill='white'/%3E%3Csvg x='4' y='4' width='24' height='24' viewBox='0 -960 960 960'%3E%3Cpath d='M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z' fill='black'/%3E%3C/svg%3E%3C/mask%3E%3Crect width='32' height='32' fill='white' mask='url(%23cut)'/%3E%3C/svg%3E");
+  position: relative;
+  display: inline-grid;
+  width: var(--space-7);
+  height: var(--space-7);
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.teamwear-rail-button::before {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--color-container-low);
+  content: "";
+  -webkit-mask: var(--teamwear-rail-chevron-mask) center / 100% 100% no-repeat;
+  mask: var(--teamwear-rail-chevron-mask) center / 100% 100% no-repeat;
+}
+
+.teamwear-rail-button .material-icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  opacity: 0;
+  font-size: var(--icon-size);
+}
+
+.teamwear-rail-button--previous {
+  --teamwear-rail-chevron-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cmask id='cut' maskUnits='userSpaceOnUse' x='0' y='0' width='32' height='32'%3E%3Crect width='32' height='32' fill='white'/%3E%3Csvg x='4' y='4' width='24' height='24' viewBox='0 -960 960 960'%3E%3Cpath d='M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z' fill='black'/%3E%3C/svg%3E%3C/mask%3E%3Crect width='32' height='32' fill='white' mask='url(%23cut)'/%3E%3C/svg%3E");
+}
+
+.teamwear-rail-button:disabled {
+  cursor: default;
+}
+
+.teamwear-rail-button[hidden] {
+  display: none;
+}
+
+.teamwear-rail-button:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-outline-high);
+  outline-offset: var(--focus-ring-offset);
+}
+
 .product-detail {
   padding: 0;
 }
 
 .product-detail__panel {
   display: block;
+}
+
+.product-detail__media {
+  min-width: 0;
+}
+
+.product-detail__gallery img {
+  cursor: grab;
+}
+
+.product-detail__gallery.is-pointer-dragging {
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+.product-detail__gallery.is-pointer-dragging img {
+  cursor: grabbing;
 }
 
 .product-detail__gallery {
@@ -1115,6 +1159,69 @@ img.media-zoom-source-active {
   width: 100%;
   margin-top: 0;
 }
+
+/* Independent native rails at Base/Medium; every option wraps at Large. */
+.choice-group--rail { position: relative; }
+.choice-group--rail .choice-group__label { overflow-wrap: anywhere; }
+.choice-group--rail .choice-group__options {
+  display: block;
+  min-width: 0;
+  overflow-x: auto;
+  padding: calc(var(--focus-ring-width) + var(--focus-ring-offset));
+  scroll-padding-inline: calc(var(--focus-ring-width) + var(--focus-ring-offset));
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.choice-group--rail .choice-group__options::-webkit-scrollbar { display: none; }
+.choice-group__track {
+  display: flex;
+  width: max-content;
+  min-width: 100%;
+  align-items: stretch;
+  gap: inherit;
+}
+.choice-group--chip .choice-group__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+}
+.choice-group--rail .choice-option { scroll-snap-align: start; }
+.choice-group--rail .choice-option--swatch { flex: 0 0 var(--choice-size); }
+.choice-group--rail .choice-option--chip { width: auto; max-width: none; }
+.choice-group--rail .choice-option--chip:not(.choice-option--chip-add-on) {
+  height: auto;
+  min-height: var(--choice-size);
+  padding-block: var(--space-2);
+}
+.choice-group--rail .choice-option--chip > .choice-option__label {
+  overflow: visible;
+  text-overflow: clip;
+  white-space: nowrap;
+}
+.choice-group--rail .choice-group__options.is-grabbable,
+.choice-group--rail .choice-group__options.is-grabbable .choice-option { cursor: grab; }
+.choice-group--rail .choice-group__options.is-pointer-dragging,
+.choice-group--rail .choice-group__options.is-pointer-dragging .choice-option { cursor: grabbing; }
+.choice-group--rail .choice-group__options.is-pointer-dragging { scroll-snap-type: none; user-select: none; }
+.choice-group__sizer {
+  position: absolute;
+  inset: 0 auto auto 0;
+  display: grid;
+  visibility: hidden;
+  pointer-events: none;
+  width: max-content;
+  padding-inline: var(--space-3);
+  border: var(--stroke-width-thin) solid transparent;
+  font-size: var(--type-body-size);
+  --font-weight-base: var(--type-body-weight);
+  font-weight: min(var(--font-weight-black), calc(var(--font-weight-base) + var(--font-weight-strong-offset)));
+  line-height: var(--type-body-line-height);
+}
+.choice-group__sizer > span { grid-area: 1 / 1; white-space: nowrap; }
+.choice-group--chip-add-on .choice-group__sizer { padding-inline-end: calc(var(--space-3) + var(--choice-size)); }
+
+
 
 .choice-option {
   position: relative;
@@ -1467,7 +1574,6 @@ img.media-zoom-source-active {
 
 .button {
   --control-rest-fill: var(--color-container-high);
-  --control-state-tone: var(--state-variation-lighten);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1488,33 +1594,11 @@ img.media-zoom-source-active {
 
 .reference-page--detail .button--secondary {
   --control-rest-fill: var(--color-surface-mid);
-  --control-state-tone: var(--state-variation-darken);
   color: var(--color-on-surface-high);
 }
 
 .teamwear-rail-button {
   --control-rest-fill: var(--color-container-low);
-  --control-state-tone: var(--state-variation-darken);
-}
-
-.button,
-.icon-button,
-.page-headline__action--icon,
-.teamwear-rail-button {
-  --control-state-fill: color-mix(in srgb, var(--control-rest-fill), var(--control-state-tone) var(--state-variation-strength));
-}
-
-.button:not(:disabled, [aria-disabled="true"]):is(:hover, :active) {
-  background-color: var(--control-state-fill);
-}
-
-.icon-button:not(:disabled, [aria-disabled="true"]):is(:hover, :active),
-.page-headline__action--icon:not(:disabled, [aria-disabled="true"]):is(:hover, :active) {
-  color: var(--control-state-fill);
-}
-
-.teamwear-rail-button:not(:disabled, [aria-disabled="true"]):is(:hover, :active)::before {
-  background-color: var(--control-state-fill);
 }
 
 .primary-action__content,
@@ -1850,6 +1934,10 @@ body:has(.primary-action[data-action-behavior]) .site-footer__grid {
 }
 
 @media (min-width: 64rem) {
+  .product-detail__media {
+    grid-column: span 2;
+  }
+
   .product-detail__panel {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1976,4 +2064,19 @@ body:has(.primary-action[data-action-behavior]) .site-footer__grid {
   .external-link__indicator {
     transform: none !important;
   }
+}
+
+@media (min-width: 64rem) {
+  .choice-group--rail .choice-group__options { overflow: visible; padding: 0; scroll-snap-type: none; }
+  .choice-group__track { flex-wrap: wrap; width: 100%; min-width: 0; }
+  .choice-group--chip .choice-group__track {
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--choice-chip-min, var(--control-size-large))), 1fr));
+  }
+  .choice-group--rail .choice-option--chip > .choice-option__label { white-space: normal; overflow-wrap: anywhere; }
+  .choice-group--rail .choice-group__options.is-grabbable,
+  .choice-group--rail .choice-group__options.is-pointer-dragging { cursor: auto; }
+  .choice-group--rail .choice-group__options.is-grabbable .choice-option,
+  .choice-group--rail .choice-group__options.is-pointer-dragging .choice-option { cursor: pointer; }
 }

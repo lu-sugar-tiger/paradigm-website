@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { validateItemCatalog } from "./lib/item-schema.mjs";
 import { productCardDisplayName } from "./lib/site-renderers.mjs";
+import { categoryForTypeCode, collectionSearchPages } from "./lib/product-categories.mjs";
 import { readFile } from "node:fs/promises";
 import vm from "node:vm";
 import { fileURLToPath } from "node:url";
@@ -24,14 +25,15 @@ const [config, index, source, searchPage, searchCoreSource, searchClient, app, r
 ]);
 
 assert.deepEqual(config.popularKeywords, ["Teamwear", "Everyday", "Paradigm", "Hoodie", "Tee"], "popular searches must preserve the approved manual order");
-assert.equal(config.pages.length, 8, "search authoring data must contain six canonical pages and two controlled external links");
+const searchPages = [config.pages[0], ...collectionSearchPages, ...config.pages.slice(1)];
+assert.equal(searchPages.length, 9, "search authoring data and category registry must supply seven canonical pages and two controlled external links");
 assert.deepEqual(
-  config.pages.map((page) => page.url),
-  ["/collections/all", "/collections/ss-tops", "/collections/aw-tops", "/collections/bottoms", "/teamwear", "/teamwear/customize", "https://www.instagram.com/prdm.tw/", "https://shopee.tw/"],
+  searchPages.map((page) => page.url),
+  ["/collections/all", "/collections/tees", "/collections/crewnecks", "/collections/hoodies", "/collections/shorts", "/teamwear", "/teamwear/customize", "https://www.instagram.com/prdm.tw/", "https://shopee.tw/"],
   "search pages must exclude home, redirects, and Search itself while retaining the approved external links"
 );
-assert.equal(new Set(config.pages.map((page) => page.url)).size, config.pages.length, "search page URLs must be unique");
-for (const page of config.pages) {
+assert.equal(new Set(searchPages.map((page) => page.url)).size, searchPages.length, "search page URLs must be unique");
+for (const page of searchPages) {
   assert.equal(typeof page.title, "string", "page records require a title");
   assert.equal(typeof page.interfaceLabel, "boolean", "page records must explicitly declare whether their established title uses the interface-label casing role");
   assert.equal(typeof page.summary, "string", "page records require a summary");
@@ -39,8 +41,8 @@ for (const page of config.pages) {
 }
 assert.deepEqual(config.pages.filter((page) => page.external).map((page) => page.title), ["Instagram", "Shopee"], "only Instagram and Shopee must be authored as external page results");
 assert.deepEqual(
-  config.pages.filter((page) => page.interfaceLabel).map((page) => page.title),
-  ["All Products", "SS Tops", "AW Tops", "Bottoms", "Instagram", "Shopee"],
+  searchPages.filter((page) => page.interfaceLabel).map((page) => page.title),
+  ["All Products", "Tees", "Crewnecks", "Hoodies", "Shorts", "Instagram", "Shopee"],
   "Search page titles must reuse interface-label casing only where the established interface does"
 );
 
@@ -55,9 +57,10 @@ assert.equal(index.schemaVersion, 4, "the generated Search index schema must inc
 assert.deepEqual(Object.keys(index.descriptions).sort(), visibleItemCodes.slice().sort(), "description features must be stored once per visible item");
 assert.equal(Object.hasOwn(index, "products"), false, "Search must use items");
 assert.deepEqual(index.popularKeywords, config.popularKeywords, "the generated index must preserve popular-search order");
-assert.equal(index.pages.length, 8, "the generated index must contain every controlled page and external link");
+assert.equal(index.pages.length, searchPages.length, "the generated index must contain every controlled page and external link");
 assert.deepEqual(index.pages.filter((page) => page.external).map((page) => page.title), ["Instagram", "Shopee"], "the generated index must preserve the external-link contract");
-assert.deepEqual(index.pages.map((page) => page.interfaceLabel), config.pages.map((page) => page.interfaceLabel), "the generated index must preserve each page title's established casing role");
+assert.deepEqual(index.pages.map((page) => page.interfaceLabel), searchPages.map((page) => page.interfaceLabel), "the generated index must preserve each page title's established casing role");
+assert.deepEqual(index.pages.map((page) => page.url), searchPages.map((page) => page.url), "Search must use current category routes");
 assert.deepEqual(index.items.map((product) => product.url), catalogUrls, "the generated index must contain every catalog variant entry in display order");
 assert.deepEqual([...new Set(index.items.map((product) => product.code))], visibleItemCodes, "the generated index must cover every visible item in newest-first order");
 for (const product of index.items) {
@@ -69,6 +72,7 @@ for (const product of index.items) {
   }
   assert.equal(product.cardName, productCardDisplayName(product.name), `${product.code} search cards must use the shared display-name rule`);
   const sourceItem = source.items.find((item) => item.code === product.code);
+  assert.equal(product.category, categoryForTypeCode(sourceItem.typeCode), "Search categories must follow the imported type code");
   assert.equal(product.priceTwd, sourceItem.salePrice ?? sourceItem.listPrice, "Search must preserve numeric source prices");
   assert.ok(Array.isArray(product.colors), `${product.code} must include colors`);
   assert.equal(Object.hasOwn(product, "searchTerms"), false, `${product.code} must use structured fields without duplicated search terms`);
@@ -80,7 +84,7 @@ for (const product of index.items) {
   assert.equal("description" in product, false, `${product.code} must not include long descriptions`);
   assert.equal("link" in product, false, `${product.code} must not expose purchase data in Search`);
 }
-for (const label of ["Hoodie", "Tee", "Crewneck", "Everyday", "Black", "AW Tops"]) {
+for (const label of ["Hoodie", "Tee", "Crewneck", "Everyday", "Black", "Tees", "Crewnecks", "Hoodies", "Shorts"]) {
   assert.ok(index.vocabulary.some((entry) => entry.toLowerCase() === label.toLowerCase()), `Search vocabulary must include ${label}`);
 }
 
@@ -128,7 +132,7 @@ assert.match(searchPage, /data-search-page-title/, "the Search breadcrumb must e
 assert.match(searchPage, /data-search-page-results/, "the Search route must expose a generated-results mount");
 assert.match(searchClient, /assets\/data\/search-index\.json/, "the Search client must reference the generated local index");
 assert.match(searchClient, /if \(product\.media\?\.src\) \{[\s\S]*?media\.dataset\.mediaZoomTouch = "";/, "Search product-result photos must opt into the shared touch inspection contract");
-assert.match(searchPage, /assets\/js\/media-zoom\.js\?v=20261001a/, "the Search route must load the cache-busted touch inspection module");
+assert.match(searchPage, /assets\/js\/media-zoom\.js\?v=20261002d/, "the Search route must load the cache-busted touch inspection module");
 assert.match(renderer, /data-search-toggle/, "the shared header must expose the Search toggle");
 assert.match(renderer, /data-search-overlay/, "the shared header must render the Search overlay on every page");
 assert.match(searchPage, /data-search-toggle[\s\S]*?toggle-icon--resting[\s\S]*?>search<[\s\S]*?toggle-icon--close[\s\S]*?>close</, "the Search control must render separate stacked resting and close Material symbols");
@@ -136,7 +140,7 @@ assert.match(searchPage, /data-overlay-state="closed" data-search-overlay/, "the
 assert.doesNotMatch(searchPage, /data-search-(?:open|close)-symbol/, "Search must not replace icon text during state changes");
 assert.match(searchPage, /autocomplete="off"[^>]*data-search-input/, "the Search input must be ready for immediate user input");
 assert.match(searchPage, /placeholder="SEARCH PRDM\.TW"/, "the Search field must use the approved uppercase prompt");
-assert.match(searchClient, /fetch\("\/assets\/data\/search-index\.json\?v=20261001b"/, "the Search index must be lazy-loaded with a cache version");
+assert.match(searchClient, /fetch\("\/assets\/data\/search-index\.json\?v=20261003d"/, "the Search index must be lazy-loaded with a cache version");
 assert.match(searchClient, /new URLSearchParams\(\{ q: query\.trim\(\) \}\)/, "Search navigation must safely encode the query");
 assert.match(searchClient, /window\.location\.assign\(searchUrl\(query\)\)/, "Enter and the trailing action must navigate to the shareable Search route");
 assert.match(searchClient, /pageTitle\.textContent = label/, "the results breadcrumb must safely preserve query casing");

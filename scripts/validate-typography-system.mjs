@@ -155,9 +155,10 @@ for (const filePath of cssFiles) {
     if (
       value !== "var(--font-weight-base)" &&
       value !== "var(--material-icon-weight)" &&
-      !value.startsWith("min(")
+      !value.startsWith("min(") &&
+      !value.startsWith("max(")
     ) {
-      violations.push(`${relativePath}: font-weight must use the semantic base or Strong modifier, found ${value}`);
+      violations.push(`${relativePath}: font-weight must use the semantic base or Strong/Weak modifiers, found ${value}`);
     }
   }
 
@@ -185,6 +186,23 @@ for (const filePath of cssFiles) {
 }
 
 const base = await readFile(path.join(CSS_DIRECTORY, "base.css"), "utf8");
+const weakRule = collectRules(base).find(rule => rule.selector === ":where(.text-weak)")?.declarations || "";
+assert.equal(propertyValue(weakRule, "font-weight").replace(/\s+/g, " "), "max( var(--font-weight-thin), calc(var(--font-weight-base, var(--font-weight-regular)) - var(--font-weight-strong-offset)) )", "Weak must subtract the shared Strong offset and floor at Thin");
+assert.equal(weakRule.split(";").filter(part => part.trim()).length, 1, "Weak must change weight only");
+assert.doesNotMatch(tokens, /--font-weight-weak-offset/, "Strong and Weak must share one offset token");
+assert.equal(propertyValue(tokens, "--type-script-size"), "0.75em");
+assert.equal(propertyValue(tokens, "--type-sup-offset"), "-0.5em");
+assert.equal(propertyValue(tokens, "--type-sub-offset"), "0.25em");
+const scriptRule = collectRules(base).find(rule => rule.selector === ":where(sup, sub)")?.declarations || "";
+assert.equal(propertyValue(scriptRule, "font-size"), "var(--type-script-size)");
+assert.equal(propertyValue(scriptRule, "line-height"), "0", "Inline notation must not enlarge line boxes");
+assert.equal(propertyValue(scriptRule, "vertical-align"), "baseline");
+assert.equal(propertyValue(scriptRule, "position"), "relative");
+assert.doesNotMatch(scriptRule, /--type-small|font-family|font-weight|font-style|color\s*:/, "Script modifiers inherit typography and do not consume Small");
+for (const kind of ["sup", "sub"]) {
+  const rule = collectRules(base).find(rule => rule.selector === `:where(${kind})`)?.declarations || "";
+  assert.equal(propertyValue(rule, "top"), `var(--type-${kind}-offset)`);
+}
 assert.equal(propertyValue(tokens, "--type-heading-width-scale"), "0.9");
 assert.equal(propertyValue(tokens, "--type-heading-tracking"), "-0.05em");
 assert.equal(propertyValue(tokens, "--type-heading-transform"), "uppercase");

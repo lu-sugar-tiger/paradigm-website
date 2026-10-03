@@ -43,6 +43,8 @@
   --state-variation-strength: 6.27451%;
   --state-variation-lighten: #ffffff;
   --state-variation-darken: #000000;
+  /* Shared low endpoint: a 15 percentage-point opacity variation. */
+  --state-variation-opacity: 85%;
 
   /* No convenience color aliases: components consume the roles above directly. */
 
@@ -70,6 +72,9 @@
   --font-style-normal: normal;
   --font-style-italic: italic;
   --font-weight-strong-offset: 150;
+  --type-script-size: 0.75em;
+  --type-sup-offset: -0.5em;
+  --type-sub-offset: 0.25em;
 
   /* Markdown-style text roles use the Body 12/16 line-height ratio. */
   --type-small-size: 0.625rem;

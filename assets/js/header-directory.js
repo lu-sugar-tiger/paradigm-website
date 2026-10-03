@@ -37,6 +37,7 @@
     panel.dataset.open = 'true';
   }
   groups.forEach(group => {
+    let activationPointer = "";
     const parent = group.querySelector('[data-header-parent]');
     const panel = group.querySelector('ul');
     panel.hidden = true;
@@ -46,9 +47,14 @@
     group.addEventListener('pointerleave', () => {
       if (active === group && !pinned && !panel.contains(document.activeElement)) close();
     });
+    parent.addEventListener('pointerdown', event => { activationPointer = event.pointerType; });
+    parent.addEventListener('pointercancel', () => { activationPointer = ""; });
     parent.addEventListener('click', event => {
+      const pointerType = event.pointerType || (event.detail ? activationPointer : "");
+      activationPointer = "";
       // Preserve native link operations, including opening in a new tab.
       if (!large.matches || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
+      if (pointerType !== 'touch') return;
       if (active === group && pinned) return;
       event.preventDefault();
       open(group, true);

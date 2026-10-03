@@ -17,27 +17,6 @@
       "keywords": ["catalog", "all products", "clothing", "全部商品", "服飾", "目錄"]
     },
     {
-      "title": "SS Tops",
-      "interfaceLabel": true,
-      "url": "/collections/ss-tops",
-      "summary": "Explore Paradigm tees and football jerseys.",
-      "keywords": ["ss tops", "tee", "tees", "football jersey", "jersey", "tops", "短Ｔ", "球衣", "上衣"]
-    },
-    {
-      "title": "AW Tops",
-      "interfaceLabel": true,
-      "url": "/collections/aw-tops",
-      "summary": "Explore Paradigm crewnecks and hoodies.",
-      "keywords": ["aw tops", "crewneck", "crewnecks", "hoodie", "hoodies", "tops", "大學Ｔ", "帽Ｔ", "上衣"]
-    },
-    {
-      "title": "Bottoms",
-      "interfaceLabel": true,
-      "url": "/collections/bottoms",
-      "summary": "Explore Paradigm shorts.",
-      "keywords": ["bottoms", "shorts", "training shorts", "短褲", "褲裝"]
-    },
-    {
       "title": "PE Basketball Teamwear",
       "interfaceLabel": false,
       "url": "/teamwear",

@@ -27,8 +27,8 @@ These are shared English content for both language versions, not pending transla
 | Area | Shared English content |
 | --- | --- |
 | Main menu | Product, Teamwear |
-| Menu collections / categories | SS Tops, AW Tops, Bottoms, Basketball |
-| Breadcrumb paths and headings inside them | All, SS Tops, AW Tops, Bottoms, Teamwear, Search, product names |
+| Menu collections / categories | Tees, Crewnecks, Hoodies, Shorts, Basketball |
+| Breadcrumb paths and headings inside them | All, Tees, Crewnecks, Hoodies, Shorts, Teamwear, Search, product names |
 | Header controls | Search and navigation open/close labels |
 | Existing preference control | Region and language; 中文 · TWD, English · TWD, English · USD |
 | Footer links | Instagram, Shopee, Credits |
@@ -88,9 +88,10 @@ The page titles below are shown in Search. Summaries and keywords support rankin
 | Page | Proposed Chinese title | Proposed Chinese summary / search terms |
 | --- | --- | --- |
 | All Products | All Products | 瀏覽 Paradigm 全部商品與系列；全部商品、服飾、目錄 |
-| SS Tops | SS Tops | 瀏覽 Paradigm 短袖上衣與足球球衣；短Ｔ、球衣、上衣 |
-| AW Tops | AW Tops | 瀏覽 Paradigm 大學Ｔ與帽Ｔ；大學Ｔ、帽Ｔ、上衣 |
-| Bottoms | Bottoms | 瀏覽 Paradigm 短褲；短褲、褲裝 |
+| Tees | Tees | 瀏覽 Paradigm 短Ｔ與足球球衣；短Ｔ、球衣、上衣 |
+| Crewnecks | Crewnecks | 瀏覽 Paradigm 大學Ｔ；大學Ｔ、上衣 |
+| Hoodies | Hoodies | 瀏覽 Paradigm 帽Ｔ；帽Ｔ、連帽、上衣 |
+| Shorts | Shorts | 瀏覽 Paradigm 短褲；短褲、褲裝 |
 | PE Basketball Teamwear | PE Basketball Teamwear | 認識 Paradigm 籃球 Teamwear；Teamwear、籃球、球衣 |
 | Customize PE Basketball Teamwear | 訂製 PE Basketball Teamwear | 選擇圖樣、顏色、數量與加購項目；訂製、圖樣、數量、加購 |
 | Instagram | Instagram | 追蹤 Paradigm 的 Instagram |
@@ -212,9 +213,10 @@ Use the approved page-body copy in Chinese browser titles, meta descriptions, pr
 | Page | Proposed 中文 meta description |
 | --- | --- |
 | Home / All | 瀏覽 Paradigm 全部商品與系列。 |
-| SS Tops | 瀏覽 Paradigm 短袖上衣。 |
-| AW Tops | 瀏覽 Paradigm 長袖上衣。 |
-| Bottoms | 瀏覽 Paradigm 下身單品。 |
+| Tees | 瀏覽 Paradigm 短Ｔ與足球球衣。 |
+| Crewnecks | 瀏覽 Paradigm 大學Ｔ。 |
+| Hoodies | 瀏覽 Paradigm 帽Ｔ。 |
+| Shorts | 瀏覽 Paradigm 短褲。 |
 | Product detail | {product name}，由 Paradigm 呈現。 |
 | Search | 搜尋 Paradigm 頁面與商品。 |
 | Teamwear customize | 預覽 PE Basketball Teamwear 的三種圖樣與七種顏色，並查看正反面效果。 |

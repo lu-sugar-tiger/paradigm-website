@@ -1,0 +1,83 @@
+.product-detail-experiment .detail-thumbnails { display: none; }
+
+@media (min-width: 64rem) {
+  .product-detail-experiment .product-detail__panel {
+    --experiment-thumbnail-capacity: 9;
+    --experiment-sticky-top: var(--header-height);
+    --experiment-thumbnail-size: min(var(--space-9), calc((100dvh - var(--header-height) - var(--space-7)) / var(--experiment-thumbnail-capacity)));
+    --experiment-related-gap: var(--space-1);
+    /* The final column starts at the related grid's third card edge. */
+    grid-template-columns: var(--experiment-thumbnail-size) minmax(0, 1fr) calc((100% - var(--experiment-related-gap) - var(--experiment-related-gap)) / 3);
+  }
+
+  .product-detail-experiment .product-detail__media {
+    display: grid;
+    grid-column: 1 / 3;
+    grid-row: 1;
+    grid-template-columns: var(--experiment-thumbnail-size) minmax(0, 1fr);
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .product-detail-experiment .detail-thumbnails {
+    display: block;
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    align-self: stretch;
+  }
+
+  .product-detail-experiment .detail-thumbnails__rail {
+    position: sticky;
+    top: var(--experiment-sticky-top);
+    display: grid;
+    gap: 0;
+  }
+
+  .product-detail-experiment .detail-thumbnail {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-none);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .product-detail-experiment .detail-thumbnail img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1;
+  }
+
+  .product-detail-experiment .detail-thumbnail:is(:hover, :active) img {
+    opacity: var(--state-variation-opacity);
+  }
+
+  .product-detail-experiment .detail-thumbnail:focus-visible {
+    outline: var(--stroke-width-thin) solid var(--color-outline-high);
+    outline-offset: calc(-1 * var(--stroke-width-thin));
+  }
+
+  .product-detail-experiment .product-detail__gallery {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    margin-inline: var(--space-5) 0;
+    background: transparent;
+  }
+
+  .product-detail-experiment .product-detail__gallery > img {
+    scroll-margin-block-start: var(--experiment-sticky-top);
+  }
+
+  .product-detail-experiment .product-detail__summary {
+    grid-column: 3;
+    grid-row: 1;
+    padding-inline: var(--layout-shell-gutter-inline);
+  }
+}

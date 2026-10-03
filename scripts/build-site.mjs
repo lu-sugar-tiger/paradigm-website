@@ -1,16 +1,20 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
   normalizeDescriptionSource,
   transformDescription
 } from "./lib/rich-description.mjs";
-import { categoryForName, rankRelatedProducts } from "./lib/product-relations.mjs";
+import { relatedCatalogEntries } from "./lib/product-relations.mjs";
+import { categoryForTypeCode, collectionForTypeCode, productInCollection, productCategories, collectionSearchPages, legacyCollectionRedirects } from "./lib/product-categories.mjs";
+import { productRuntimeData } from "./lib/product-runtime.mjs";
 import searchCore from "../assets/js/search-core.js";
 import pricingCore from "../assets/js/pricing-core.js";
 import { pricingConfigSource } from "./lib/pricing-config.mjs";
 import { localizationSource, copyAttributes } from "./lib/localization.mjs";
 import { catalogEntriesForProduct } from "./lib/catalog-entries.mjs";
+import { itemColors } from "./lib/item-colors.mjs";
 import { resolveProductMedia, responsiveMediaFromSource } from "./lib/product-images.mjs";
 import { itemPriceLabel, validateItemCatalog } from "./lib/item-schema.mjs";
 import {
@@ -47,10 +51,6 @@ function priceLabel(price) {
   return pricingCore.formatPrice(price);
 }
 
-function categoryPath(category) {
-  return category.toLowerCase().replace(" ", "-");
-}
-
 function productType(title) {
   return title.match(/(Football Jersey|Crewneck|Hoodie|Shorts|Tee)$/i)?.[1] || "Apparel";
 }
@@ -75,7 +75,7 @@ function applyTemplate(template, values) {
 }
 
 function optionAvailability(product, field, value, selected) {
-  const otherField = field === "colorName" ? "sizeName" : "colorName";
+  const otherField = field === "colorCode" ? "sizeName" : "colorCode";
   return product.variants.some((variant) => (
     variant.visible &&
     !variant.soldOut &&
@@ -99,19 +99,20 @@ function renderProductMain(template, product, relatedProducts, itemCodes) {
   const selectedVariant = selectedProductVariant(product);
   const selectedImageId = selectedProductImageId(product, selectedVariant);
   const selectedMedia = product.variantMedia?.[selectedImageId];
-  const selected = { colorName: selectedVariant?.colorName || product.colors[0]?.label, sizeName: selectedVariant?.sizeName || product.sizes[0] };
+  const selected = { colorCode: selectedVariant?.colorCode || product.colors[0]?.colorCode, sizeName: selectedVariant?.sizeName || product.sizes[0] };
   const resolvedUnavailable = !selectedVariant || selectedVariant.soldOut;
   const colorChoices = renderChoiceGroup({
     kind: "swatch",
     title: "Color",
     inputName: `product-${product.code}-color`,
-    selectedValue: product.colors.find((color) => color.label === selected.colorName)?.id,
+    selectedValue: product.colors.find((color) => color.colorCode === selected.colorCode)?.id,
     primaryActionId: "product-primary-action",
     options: product.colors.map((color) => ({
       id: color.id,
       label: color.label,
       colorId: color.colorId,
-      availability: optionAvailability(product, "colorName", color.label, selected)
+      colorCode: color.colorCode,
+      availability: optionAvailability(product, "colorCode", color.colorCode, selected)
     }))
   });
   const sizeChoices = renderChoiceGroup({
@@ -149,7 +150,7 @@ function renderProductMain(template, product, relatedProducts, itemCodes) {
   }));
   if (selectedMedia) media.push(renderResponsiveProductImage({
     media: selectedMedia,
-    alt: `${product.name}, ${selectedVariant.colorName}`,
+    alt: `${product.name}, ${itemColors.name(selectedVariant.colorCode, selectedVariant.colorName)}`,
     root: "../..",
     sizes: "(min-width: 80rem) 768px, (min-width: 64rem) 60vw, 100vw",
     loading: "lazy",
@@ -163,7 +164,7 @@ function renderProductMain(template, product, relatedProducts, itemCodes) {
       variant: "hierarchy",
       items: [
         { label: "All", href: "/collections/all" },
-        { label: product.category, href: `/collections/${categoryPath(product.category)}`, dataAttribute: "data-product-breadcrumb-category" },
+        { label: collectionForTypeCode(product.typeCode).title, href: collectionForTypeCode(product.typeCode).path, dataAttribute: "data-product-breadcrumb-category" },
         { label: product.name, current: true, dataAttribute: "data-product-breadcrumb-title" }
       ]
     }
@@ -186,9 +187,9 @@ function renderProductMain(template, product, relatedProducts, itemCodes) {
   });
 }
 
-function renderCollectionPage({ title, category, pathName, root, products }) {
+function renderCollectionPage({ title, category, typeCode, pathName, root, products }) {
   const currentPath = pathName === "home" ? "/" : `/collections/${pathName}`;
-  const filtered = category === "all" ? products : products.filter((product) => product.category === category);
+  const filtered = category === "all" ? products : products.filter((product) => productInCollection(product, { typeCode }));
   const items = category === "all"
     ? [{ label: title, current: true, headingLevel: 1, interfaceLabel: true }]
     : [{ label: "All", href: "/collections/all" }, { label: title, current: true, headingLevel: 1, interfaceLabel: true }];
@@ -199,7 +200,7 @@ function renderCollectionPage({ title, category, pathName, root, products }) {
   const main = `  <main class="page" data-catalog>
 ${pageHeadline.split("\n").map((line) => `    ${line}`).join("\n")}
     <section class="section section--tight"><div class="container">
-${renderProductGrid(filtered, root).split("\n").map((line) => `      ${line}`).join("\n")}
+${renderProductGrid(filtered, root, { initialViewport: true }).split("\n").map((line) => `      ${line}`).join("\n")}
     </div></section>
   </main>`;
   return renderDocument({
@@ -211,7 +212,7 @@ ${renderProductGrid(filtered, root).split("\n").map((line) => `      ${line}`).j
     currentPath,
     bodyClass: "site-shell reference-page product-page",
     main,
-    scripts: ["catalog.js?v=20260924a", "media-zoom.js?v=20261001a"]
+    scripts: ["catalog-loading.js?v=20261003a", "media-zoom.js?v=20261002d"]
   });
 }
 
@@ -243,7 +244,7 @@ ${pageHeadline.split("\n").map((line) => `    ${line}`).join("\n")}
     bodyClass: "site-shell reference-page search-page",
     main,
     head: '  <meta name="robots" content="noindex,follow">',
-    scripts: ["media-zoom.js?v=20261001a"]
+    scripts: ["media-zoom.js?v=20261002d"]
   });
 }
 
@@ -259,7 +260,7 @@ function buildSearchIndex(searchConfig, products) {
     throw new Error("Every Search page requires an explicit interface-label casing contract.");
   }
 
-  const pages = searchConfig.pages.map((page) => ({
+  const pages = [searchConfig.pages[0], ...collectionSearchPages, ...searchConfig.pages.slice(1)].map((page) => ({
     title: page.title,
     interfaceLabel: Boolean(page.interfaceLabel),
     url: page.url,
@@ -402,8 +403,8 @@ ${[...heroVideo.variants].reverse().filter((variant) => variant.minWidth).map((v
     currentPath: "/teamwear",
     bodyClass: "site-shell reference-page teamwear-page teamwear-story-shell",
     main,
-    styles: ["teamwear.css?v=20260829c", "teamwear-story.css?v=20260927a"],
-    scripts: ["teamwear-options.js?v=20260917b", "teamwear.js?v=20261001b", "hero-video.js?v=20260924a", "media-zoom.js?v=20261001a"],
+    styles: ["teamwear.css?v=20260829c", "teamwear-story.css?v=20261002a"],
+    scripts: ["teamwear-options.js?v=20260917b", "teamwear.js?v=20261003a", "hero-video.js?v=20260924a", "media-zoom.js?v=20261002d"],
     head: `  <meta property="og:title" content="${html(model.name)} | Paradigm">\n  <meta property="og:description" content="${html(`${model.name} is a reversible basketball uniform system composed by Paradigm for the whole roster.`)}">\n  <meta property="og:image" content="https://prdm.tw/assets/images/teamwear/campaign/hero-desktop.webp">\n  <meta property="og:type" content="website">`
   });
 }
@@ -418,7 +419,7 @@ function renderTeamwearCustomize(template, model, colorById, instagramUrl, itemC
     inputName: "teamwear-color",
     selectedValue: selectedColor.id,
     primaryActionId: actionId,
-    options: model.colors.map((option) => ({ id: option.id, label: colorById.get(option.colorId).name, colorId: option.colorId, availability: option.availability }))
+    options: model.colors.map((option) => ({ id: option.id, label: colorById.get(option.colorId).name, colorId: option.colorId, colorCode: option.id, availability: option.availability }))
   });
   const patterns = renderChoiceGroup({
     kind: "chip",
@@ -500,8 +501,8 @@ function renderTeamwearCustomize(template, model, colorById, instagramUrl, itemC
     currentPath: "/teamwear/customize",
     bodyClass: "site-shell reference-page reference-page--detail teamwear-customize-page",
     main,
-    styles: ["teamwear.css?v=20260829c"],
-    scripts: ["teamwear-options.js?v=20260917b", "teamwear.js?v=20261001b", "media-zoom.js?v=20261001a"]
+    styles: ["teamwear.css?v=20260829c", "product-gallery.css?v=20261003c"],
+    scripts: ["teamwear-options.js?v=20260917b", "teamwear.js?v=20261003a", "media-zoom.js?v=20261002d", "product-gallery.js?v=20261003c"]
   });
 }
 
@@ -523,16 +524,16 @@ const colors = colorRegistry.colors.map((color) => {
   if (!value) throw new Error(`Missing item color value for ${color.code}.`);
   return { ...color, value };
 });
-const colorByName = new Map(colors.map((color) => [color.name, color]));
+const colorByCode = new Map(colors.map((color) => [color.code, color]));
 const colorById = new Map(colors.map((color) => [color.id, color]));
 // ItemSequence is stored as sequence; higher values represent newer products.
 const products = source.items.filter((entry) => entry.variants.some((variant) => variant.visible))
   .sort((left, right) => Number(right.sequence) - Number(left.sequence)).map((entry) => {
   const visibleVariants = entry.variants.filter((variant) => variant.visible);
-  const colors = unique(visibleVariants.map((variant) => variant.colorName)).map((label) => {
-    const color = colorByName.get(label);
-    if (!color) throw new Error(`Missing canonical color definition for "${label}".`);
-    return { id: color.id, colorId: color.id, label: color.name };
+  const colors = unique(visibleVariants.map((variant) => variant.colorCode)).map((code) => {
+    const color = colorByCode.get(code);
+    if (!color) throw new Error(`Missing canonical color definition for "${code}".`);
+    return { id: color.id, colorId: color.id, colorCode: code, label: color.name };
   });
   const media = resolveProductMedia(entry, productImageFallback.media);
   const mediaPaths = media.map((image) => image.src);
@@ -543,6 +544,8 @@ const products = source.items.filter((entry) => entry.variants.some((variant) =>
     documentId: entry.descriptionSource?.id || "",
     modifiedTime: entry.descriptionSource?.modifiedTime || ""
   }, `${entry.code} description`);
+  const description = transformDescription(descriptionSource.content);
+  const descriptionTerms = itemColors.descriptionTerms(description);
   return {
     slug: slugFor(entry.name),
     code: entry.code,
@@ -550,7 +553,7 @@ const products = source.items.filter((entry) => entry.variants.some((variant) =>
     lineCode: entry.lineCode,
     typeCode: entry.typeCode,
     sequence: entry.sequence,
-    category: categoryForName(entry.name),
+    category: categoryForTypeCode(entry.typeCode),
     listPrice: entry.listPrice,
     salePrice: entry.salePrice,
     priceLabel: itemPriceLabel(entry),
@@ -565,7 +568,8 @@ const products = source.items.filter((entry) => entry.variants.some((variant) =>
     sizes: unique(visibleVariants.map((variant) => variant.sizeName)),
     variants: entry.variants.map((variant) => ({ ...variant })),
     soldOut: visibleVariants.every((variant) => variant.soldOut),
-    description: transformDescription(descriptionSource.content),
+    description,
+    descriptionTerms,
     link: entry.link,
     source: {
       spreadsheetModifiedTime: source.source.spreadsheetModifiedTime,
@@ -581,7 +585,7 @@ const outputs = new Map();
 outputs.set("assets/js/pricing-config.js", pricingConfigSource);
 outputs.set("assets/js/localization-data.js", localizationSource);
 const catalogBanner = `// Generated by scripts/build-site.mjs.\n// Source: ${source.source.spreadsheetUrl} (${source.source.sheetName})\n// Spreadsheet modified: ${source.source.spreadsheetModifiedTime}\n// Edit centralized data sources and rerun the build; do not hand-edit this file.\n`;
-outputs.set("assets/js/catalog.js", `${catalogBanner}window.PARADIGM_CATALOG = ${JSON.stringify({ schemaVersion: source.schemaVersion, items: products }, null, 2)};\n`);
+outputs.set("assets/js/catalog.js", `${catalogBanner}window.PARADIGM_CATALOG = ${JSON.stringify({ schemaVersion: source.schemaVersion, items: products.map(({ descriptionTerms, ...product }) => product) }, null, 2)};\n`);
 outputs.set("assets/js/teamwear-options.js", `// Generated by scripts/build-site.mjs from data/teamwear-options.json.\nwindow.PARADIGM_TEAMWEAR = ${JSON.stringify(teamwearData, null, 2)};\n`);
 outputs.set("assets/css/color-options.css", renderColorOptionsCss(colors));
 outputs.set("assets/data/search-index.json", `${JSON.stringify(buildSearchIndex(searchConfig, catalogEntries), null, 2)}\n`);
@@ -589,11 +593,35 @@ outputs.set("assets/data/search-index.json", `${JSON.stringify(buildSearchIndex(
 const collectionPages = [
   { output: "index.html", title: "All", category: "all", pathName: "home", root: "" },
   { output: "collections/all/index.html", title: "All", category: "all", pathName: "all", root: "../.." },
-  { output: "collections/ss-tops/index.html", title: "SS Tops", category: "SS Tops", pathName: "ss-tops", root: "../.." },
-  { output: "collections/aw-tops/index.html", title: "AW Tops", category: "AW Tops", pathName: "aw-tops", root: "../.." },
-  { output: "collections/bottoms/index.html", title: "Bottoms", category: "Bottoms", pathName: "bottoms", root: "../.." }
+  ...productCategories.map(({ title, slug, typeCode }) => ({
+    output: `collections/${slug}/index.html`, title, category: title, typeCode, pathName: slug, root: "../.."
+  }))
 ];
 collectionPages.forEach((page) => outputs.set(page.output, renderCollectionPage({ ...page, products: catalogEntries })));
+for (const { from, to } of legacyCollectionRedirects) {
+  outputs.set(`${from.slice(1)}/index.html`, `<!doctype html>
+<!-- Generated by scripts/build-site.mjs. Do not edit this file directly. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="0;url=${html(to)}">
+  <link rel="canonical" href="https://prdm.tw${html(to)}">
+  <title>Paradigm | Product</title>
+</head>
+<body><a href="${html(to)}">Continue to Product</a></body>
+</html>
+`);
+}
+const collectionRedirectLines = [
+  ...productCategories.map(({ path }) => `${path}/index.html ${path} 301`),
+  ...legacyCollectionRedirects.flatMap(({ from, to }) => [from, `${from}/`, `${from}/index.html`].map((path) => `${path} ${to} 301`))
+];
+const managedRedirectPaths = new Set(collectionRedirectLines.map((line) => line.split(" ")[0]));
+const otherRedirects = (await readFile(path.join(ROOT, "_redirects"), "utf8"))
+  .replace(/# BEGIN COLLECTION REDIRECTS[\s\S]*?# END COLLECTION REDIRECTS\r?\n?/, "")
+  .split(/\r?\n/).filter((line) => line && !managedRedirectPaths.has(line.split(" ")[0])).join("\n");
+outputs.set("_redirects", `# BEGIN COLLECTION REDIRECTS\n${collectionRedirectLines.join("\n")}\n# END COLLECTION REDIRECTS\n${otherRedirects}\n`);
 outputs.set("search/index.html", renderSearchPage());
 outputs.set("font-credits/index.html", renderDocument({
   title: "Font credits | Paradigm",
@@ -606,7 +634,11 @@ outputs.set("font-credits/index.html", renderDocument({
 }));
 
 products.forEach((product) => {
-  const related = rankRelatedProducts(products, product).map((item) => catalogEntriesForProduct(item)[0]);
+  const related = relatedCatalogEntries(products, product);
+  const runtimeSource = `// Generated by scripts/build-site.mjs.\nwindow.PARADIGM_PRODUCT=${JSON.stringify(productRuntimeData(product))};\n`;
+  const runtimePath = `products/${product.code}.js`;
+  const runtimeVersion = createHash("sha256").update(runtimeSource).digest("hex").slice(0, 12);
+  outputs.set(`assets/js/${runtimePath}`, runtimeSource);
   const main = renderProductMain(productTemplate, product, related, products.map((item) => item.code));
   outputs.set(`products/${product.code}/index.html`, renderDocument({
     lang: "en",
@@ -617,7 +649,8 @@ products.forEach((product) => {
     currentPath: `/products/${product.code}`,
     bodyClass: "site-shell reference-page reference-page--detail",
     main,
-    scripts: ["catalog.js?v=20260924a", "media-zoom.js?v=20261001a"]
+    styles: ["product-gallery.css?v=20261003c"],
+    scripts: [`${runtimePath}?v=${runtimeVersion}`, "catalog-loading.js?v=20261003a", "media-zoom.js?v=20261002d", "product-gallery.js?v=20261003c"]
   }));
 });
 

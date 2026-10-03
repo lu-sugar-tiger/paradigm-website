@@ -9,6 +9,10 @@
     return checkedOption(group)?.dataset.choiceLabel || (group?.dataset.choiceVariant === "add-on" ? "None" : "");
   }
 
+  function optionDisplayLabel(option) {
+    return option?.dataset.choiceDisplayLabel || option?.dataset.choiceLabel || "";
+  }
+
   function syncChoiceStateSymbols(group) {
     group.querySelectorAll("[data-choice-option]").forEach((option) => {
       const input = option.querySelector("input");
@@ -20,13 +24,13 @@
 
   function announceSelection(group) {
     const option = checkedOption(group);
-    const selectionLabel = groupLabel(group);
+    const selectionLabel = optionDisplayLabel(option) || groupLabel(group);
     const labelValue = group.querySelector("[data-choice-label-value]");
     const status = group.querySelector("[data-choice-status]");
     syncChoiceStateSymbols(group);
-    if (labelValue && option) labelValue.textContent = option.dataset.choiceLabel;
+    if (labelValue && option) window.PARADIGM_INLINE_TYPE.set(labelValue, optionDisplayLabel(option));
     if (status && selectionLabel) {
-      status.textContent = `${translate(group.dataset.choiceTitle, group)}: ${translate(selectionLabel, group)}${option?.dataset.availability === "unavailable" ? `, ${translate("unavailable", group)}` : ""}`;
+      status.textContent = `${translate(group.dataset.choiceTitle, group)}: ${window.PARADIGM_INLINE_TYPE.plain(translate(selectionLabel, group))}${option?.dataset.availability === "unavailable" ? `, ${translate("unavailable", group)}` : ""}`;
     }
   }
 
@@ -53,8 +57,91 @@
   function productForGroup(group) {
     const detail = group.closest("[data-product-detail]");
     if (!detail) return null;
-    const catalog = window.PARADIGM_CATALOG || { items: [] };
-    return catalog.items.find((product) => product.code === detail.dataset.itemCode) || null;
+    const product = window.PARADIGM_PRODUCT;
+    return product?.code === detail.dataset.itemCode ? product : null;
+  }
+
+  function bindChoiceRail(group) {
+    if (!group.classList.contains("choice-group--rail")) return;
+    const options = group.querySelector(".choice-group__options");
+    const sizer = group.querySelector(".choice-group__sizer");
+    const large = matchMedia("(min-width: 64rem)");
+    let drag = null;
+    let suppressClick = false;
+    let refreshFrame = 0;
+    function syncRail() {
+      options.classList.toggle("is-grabbable", !large.matches && options.scrollWidth > options.clientWidth + 1);
+    }
+    function revealChoice(choice = checkedOption(group)) {
+      if (large.matches) { options.scrollLeft = 0; return; }
+      if (!choice) return;
+      const rail = options.getBoundingClientRect();
+      const target = choice.getBoundingClientRect();
+      const inset = parseFloat(getComputedStyle(options).paddingInlineStart) || 0;
+      const delta = target.left < rail.left + inset ? target.left - rail.left - inset
+        : target.right > rail.right - inset ? target.right - rail.right + inset : 0;
+      if (delta) options.scrollBy({ left: delta, behavior: "instant" });
+    }
+    function refresh() {
+      refreshFrame = 0;
+      if (sizer) {
+        const minimum = `${Math.ceil(sizer.getBoundingClientRect().width)}px`;
+        if (options.style.getPropertyValue("--choice-chip-min") !== minimum) options.style.setProperty("--choice-chip-min", minimum);
+      }
+      revealChoice(group.contains(document.activeElement) ? document.activeElement.closest("[data-choice-option]") : checkedOption(group));
+      syncRail();
+    }
+    function queueRefresh() {
+      if (!refreshFrame) refreshFrame = requestAnimationFrame(refresh);
+    }
+    options.addEventListener("pointerdown", (event) => {
+      suppressClick = false;
+      if (large.matches || !options.classList.contains("is-grabbable") || event.pointerType === "touch" || event.button !== 0) return;
+      drag = { id: event.pointerId, x: event.clientX, y: event.clientY, left: options.scrollLeft, active: false };
+    });
+    options.addEventListener("pointermove", (event) => {
+      if (!drag || event.pointerId !== drag.id) return;
+      const threshold = parseFloat(getComputedStyle(options).columnGap) / 2;
+      if (!drag.active && Math.abs(event.clientX - drag.x) < threshold) return;
+      if (!drag.active) {
+        if (Math.abs(event.clientY - drag.y) > Math.abs(event.clientX - drag.x)) { drag = null; return; }
+        drag.active = true;
+        options.classList.add("is-pointer-dragging");
+        options.setPointerCapture(event.pointerId);
+      }
+      event.preventDefault();
+      options.scrollLeft = drag.left + drag.x - event.clientX;
+    });
+    function finishDrag(event) {
+      if (!drag || (event && event.pointerId !== drag.id)) return;
+      const pointerId = drag.id;
+      suppressClick = drag.active;
+      drag = null;
+      options.classList.remove("is-pointer-dragging");
+      if (options.hasPointerCapture(pointerId)) options.releasePointerCapture(pointerId);
+    }
+    options.addEventListener("pointerup", finishDrag);
+    options.addEventListener("pointercancel", finishDrag);
+    options.addEventListener("lostpointercapture", finishDrag);
+    options.addEventListener("pointerleave", (event) => { if (!drag?.active) finishDrag(event); });
+    options.addEventListener("click", (event) => {
+      if (suppressClick && event.detail !== 0) {
+        suppressClick = false;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
+    }, true);
+    options.addEventListener("dragstart", (event) => event.preventDefault());
+    group.addEventListener("change", (event) => { revealChoice(event.target.closest("[data-choice-option]")); syncRail(); });
+    options.addEventListener("focusin", (event) => revealChoice(event.target.closest("[data-choice-option]")));
+    const observer = new ResizeObserver(queueRefresh);
+    observer.observe(options);
+    if (sizer) observer.observe(sizer);
+    large.addEventListener("change", () => { finishDrag(); queueRefresh(); });
+    document.addEventListener("paradigm:language-change", queueRefresh);
+    document.fonts.ready.then(queueRefresh);
+    document.fonts.addEventListener("loadingdone", queueRefresh);
+    refresh();
   }
 
   function selectedProductValues(detail) {
@@ -63,6 +150,7 @@
     const sizeGroup = groups.find((group) => group.dataset.choiceKind === "chip");
     return {
       colorId: checkedOption(colorGroup)?.dataset.choiceId || "",
+      colorCode: checkedOption(colorGroup)?.dataset.colorCode || "",
       colorName: groupLabel(colorGroup),
       sizeName: groupLabel(sizeGroup)
     };
@@ -74,12 +162,12 @@
     const sizeGroup = detail.querySelector('[data-choice-kind="chip"]');
 
     colorGroup?.querySelectorAll("[data-choice-option]").forEach((option) => {
-      const available = product.variants.some((variant) => variant.visible && !variant.soldOut && variant.colorName === option.dataset.choiceLabel && variant.sizeName === selected.sizeName);
+      const available = product.variants.some((variant) => variant.visible && !variant.soldOut && variant.colorCode === option.dataset.colorCode && variant.sizeName === selected.sizeName);
       option.dataset.availability = available ? "available" : "unavailable";
       updateAccessibleAvailability(option, !available);
     });
     sizeGroup?.querySelectorAll("[data-choice-option]").forEach((option) => {
-      const available = product.variants.some((variant) => variant.visible && !variant.soldOut && variant.sizeName === option.dataset.choiceLabel && variant.colorName === selected.colorName);
+      const available = product.variants.some((variant) => variant.visible && !variant.soldOut && variant.sizeName === option.dataset.choiceLabel && variant.colorCode === selected.colorCode);
       option.dataset.availability = available ? "available" : "unavailable";
       updateAccessibleAvailability(option, !available);
     });
@@ -127,7 +215,7 @@
 
   function syncProductSource(detail, product, revealImage = false) {
     const selected = selectedProductValues(detail);
-    const variant = product.variants.find((variant) => variant.visible && variant.colorName === selected.colorName && variant.sizeName === selected.sizeName);
+    const variant = product.variants.find((variant) => variant.visible && variant.colorCode === selected.colorCode && variant.sizeName === selected.sizeName);
     const action = detail.querySelector("[data-primary-action]");
     if (action) action.dataset.actionDefaultHref = variant?.link || product.link;
     if (revealImage) {
@@ -139,7 +227,7 @@
 
     const gallery = detail.querySelector("[data-product-gallery]");
     if (!gallery) return;
-    const colorImages = [...new Set(product.variants.filter((candidate) => candidate.visible && candidate.colorName === selected.colorName && candidate.imageId).map((candidate) => candidate.imageId))];
+    const colorImages = [...new Set(product.variants.filter((candidate) => candidate.visible && candidate.colorCode === selected.colorCode && candidate.imageId).map((candidate) => candidate.imageId))];
     const imageId = variant?.imageId || (colorImages.length === 1 ? colorImages[0] : "");
     const media = product.variantMedia?.[imageId];
     syncVariantImage(gallery, media, {
@@ -153,7 +241,7 @@
     const sku = new URLSearchParams(location.search).get("variant");
     const variant = product.variants.find((candidate) => candidate.visible && candidate.sku === sku);
     if (!variant) return;
-    const colorId = product.colors.find((color) => color.label === variant.colorName)?.id;
+    const colorId = product.colors.find((color) => color.colorCode === variant.colorCode)?.id;
     const color = Array.from(detail.querySelectorAll('[data-choice-kind="swatch"] [data-choice-option]')).find((option) => option.dataset.choiceId === colorId);
     const size = Array.from(detail.querySelectorAll('[data-choice-kind="chip"] [data-choice-option]')).find((option) => option.dataset.choiceLabel === variant.sizeName);
     if (!color || !size) return;
@@ -184,7 +272,7 @@
 
   function exactProductSelectionUnavailable(detail, product) {
     const selected = selectedProductValues(detail);
-    const variants = product.variants.filter((variant) => variant.visible && variant.colorName === selected.colorName && variant.sizeName === selected.sizeName);
+    const variants = product.variants.filter((variant) => variant.visible && variant.colorCode === selected.colorCode && variant.sizeName === selected.sizeName);
     return !variants.length || variants.every((variant) => variant.soldOut);
   }
 
@@ -413,6 +501,8 @@
       syncProductSource(detail, product);
     }
   });
+
+  groups.forEach(bindChoiceRail);
 
   document.querySelectorAll("[data-primary-action]").forEach((action) => {
     syncAction(action);

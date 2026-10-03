@@ -3,8 +3,10 @@ import { validateItemCatalog } from "./lib/item-schema.mjs";
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { categoryForName, productFamilyKey, rankRelatedProducts } from "./lib/product-relations.mjs";
+import { productFamilyKey, rankRelatedProducts } from "./lib/product-relations.mjs";
+import { categoryForTypeCode, productCategories } from "./lib/product-categories.mjs";
 import { normalizeDescriptionSource, transformDescription } from "./lib/rich-description.mjs";
+import { itemColors } from "./lib/item-colors.mjs";
 import { productCardDisplayName, renderBreadcrumb, renderChoiceGroup, renderDescription, renderPageHeadline, renderPrimaryAction, renderProductDetail, renderProductDetailPrice, renderProductGrid, renderRailControls, renderSiteFooter, renderSiteHeader } from "./lib/site-renderers.mjs";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
@@ -46,11 +48,20 @@ const [colors, teamwear, source, tokens, reset, components, teamwearStory, pages
 const colorIds = new Set(colors.colors.map((color) => color.id));
 const colorNames = new Set(colors.colors.map((color) => color.name));
 const colorById = new Map(colors.colors.map((color) => [color.id, color]));
+const colorCodes = new Set(colors.colors.map((color) => color.code));
 const visibleProducts = source.items
   .filter((product) => product.variants.some((variant) => variant.visible))
   .sort((left, right) => Number(right.sequence) - Number(left.sequence))
-  .map((product) => ({ ...product, category: categoryForName(product.name) }));
+  .map((product) => ({
+    ...product,
+    category: categoryForTypeCode(product.typeCode),
+    colors: [...new Set(product.variants.filter((variant) => variant.visible).map((variant) => variant.colorCode))]
+      .map((code) => ({ label: itemColors.name(code) })),
+    descriptionTerms: itemColors.descriptionTerms(transformDescription(product.descriptionSource.content))
+  }));
 const visibleItemByCode = new Map(visibleProducts.map((product) => [product.code, product]));
+const allCatalogCardUrls = [...(await read("collections/all/index.html")).matchAll(/<a class="product-card" href="([^"]+)">/g)].map((match) => match[1]);
+assert.equal(new Set(allCatalogCardUrls).size, allCatalogCardUrls.length, "Catalog cards must have distinct destinations");
 assert.equal(colorIds.size, colors.colors.length, "canonical color ids must be unique");
 assert.equal(colorNames.size, colors.colors.length, "canonical color names must be unique");
 
@@ -99,8 +110,7 @@ assert.throws(
 );
 
 source.items.flatMap((product) => product.variants.filter((variant) => variant.visible)).forEach((variant) => {
-  assert.ok(colorNames.has(variant.colorName), `product color ${variant.colorName} must resolve through colors.json`);
-  assert.equal(colors.colors.find((color) => color.name === variant.colorName)?.code, variant.colorCode, `product color ${variant.colorName} must use ${variant.colorCode}`);
+  assert.ok(colorCodes.has(variant.colorCode), `product color ${variant.colorCode} must resolve independently of its imported name`);
 });
 
 const fixture = renderChoiceGroup({
@@ -117,6 +127,9 @@ const fixture = renderChoiceGroup({
 assert.match(fixture, /type="radio"/, "choice groups must use native radios");
 assert.match(fixture, /<legend class="visually-hidden" data-l10n="Size">Size<\/legend>/, "choice groups must retain a localizable accessible native legend");
 assert.match(fixture, /class="choice-group__layout"/, "choice groups must use a normal-flow visual layout wrapper");
+assert.match(fixture, /choice-group--rail/, "choice groups default to the approved responsive rail");
+assert.match(fixture, /class="choice-group__track"/, "rail options must share one intrinsic-width track");
+assert.match(fixture, /class="choice-group__sizer" aria-hidden="true"/, "chip rails need a localizable intrinsic sizer outside the accessible options");
 assert.doesNotMatch(fixture, /\sdisabled(?:\s|>)/, "unavailable choices must remain enabled");
 assert.doesNotMatch(fixture, /aria-disabled/, "unavailable choices must not use aria-disabled");
 assert.match(fixture, /data-availability="unavailable"/, "unavailable state must be independent metadata");
@@ -133,6 +146,8 @@ const hiddenLabelFixture = renderChoiceGroup({
 });
 assert.match(hiddenLabelFixture, /<legend class="visually-hidden" data-l10n="Size">Size<\/legend>/, "hidden visual labels must retain their localizable accessible legend");
 assert.doesNotMatch(hiddenLabelFixture, /choice-group__label/, "showLabel false must omit the visual label from layout");
+const wrapFixture = renderChoiceGroup({ kind: "chip", overflow: "wrap", title: "Size", inputName: "fixture-wrap", primaryActionId: "fixture-action", options: [{ id: "M", label: "M" }] });
+assert.doesNotMatch(wrapFixture, /choice-group--rail|choice-group__track|choice-group__sizer/, "explicit wrap previews must not bind a second rail controller");
 
 const addOnFixture = renderChoiceGroup({
   kind: "chip",
@@ -198,13 +213,13 @@ const hierarchyBreadcrumb = renderBreadcrumb({
   root: "..",
   items: [
     { label: "All", href: "/collections/all" },
-    { label: "SS Tops", current: true, headingLevel: 1, interfaceLabel: true }
+    { label: "Tees", current: true, headingLevel: 1, interfaceLabel: true }
   ]
 });
 assert.match(hierarchyBreadcrumb, /data-generated-component="breadcrumb"/, "breadcrumbs must identify the shared renderer");
 assert.match(hierarchyBreadcrumb, /<ol class="breadcrumb__list" role="list">/, "hierarchy breadcrumbs must expose ordered-list semantics");
 assert.match(hierarchyBreadcrumb, /<a href="\/collections\/all"><span class="breadcrumb__link-label interface-label">All<\/span><\/a>/, "hierarchy breadcrumb links must use the shared interface-label role");
-assert.match(hierarchyBreadcrumb, /<h1 class="breadcrumb__current interface-label" aria-current="page">SS Tops<\/h1>/, "catalog breadcrumbs must support an interface-label semantic h1");
+assert.match(hierarchyBreadcrumb, /<h1 class="breadcrumb__current interface-label" aria-current="page">Tees<\/h1>/, "catalog breadcrumbs must support an interface-label semantic h1");
 assert.match(hierarchyBreadcrumb, />chevron_right<\//, "hierarchy breadcrumbs must use the Material chevron icon");
 assert.doesNotMatch(hierarchyBreadcrumb, /&gt;|&lt;/, "breadcrumbs must not render text direction signs");
 
@@ -253,11 +268,13 @@ assert.equal((headerFixture.match(/data-nav-toggle/g) || []).length, 1, "shared 
 assert.equal((headerFixture.match(/data-search-submit/g) || []).length, 1, "shared headers must render one Search submit control inside the overlay");
 assert.doesNotMatch(headerFixture, /Shopping bag|shopping_bag/, "shared headers must not render a shopping-bag control or glyph");
 assert.match(headerFixture, /<a class="drawer-nav__parent interface-label" href="\/collections\/all" aria-current="page">Product<\/a>/, "the clickable Product parent must own the all-products destination and interface-label casing");
-assert.match(headerFixture, /<a class="drawer-nav__child interface-label" href="\/collections\/ss-tops">SS Tops<\/a>[\s\S]*?<a class="drawer-nav__child interface-label" href="\/collections\/aw-tops">AW Tops<\/a>[\s\S]*?<a class="drawer-nav__child interface-label" href="\/collections\/bottoms">Bottoms<\/a>/, "Product children must render in their controlled directory order");
+assert.match(headerFixture, /<a class="drawer-nav__child interface-label" href="\/collections\/tees">Tees<\/a>[\s\S]*?<a class="drawer-nav__child interface-label" href="\/collections\/crewnecks">Crewnecks<\/a>[\s\S]*?<a class="drawer-nav__child interface-label" href="\/collections\/hoodies">Hoodies<\/a>[\s\S]*?<a class="drawer-nav__child interface-label" href="\/collections\/shorts">Shorts<\/a>/, "Product children must render their names in controlled directory order");
 assert.match(headerFixture, /<a class="drawer-nav__parent interface-label" href="\/teamwear">Teamwear<\/a>[\s\S]*?<a class="drawer-nav__child interface-label" href="\/teamwear">Basketball<\/a>/, "Teamwear and Basketball must both link to the Teamwear overview");
 assert.equal((headerFixture.match(/aria-current="page"/g) || []).length, 2, "the default all-products navigation must expose one current-page marker per responsive navigation");
-const subcollectionHeaderFixture = renderSiteHeader({ currentPath: "/collections/ss-tops" });
-assert.match(subcollectionHeaderFixture, /href="\/collections\/ss-tops" aria-current="page">SS Tops<\/a>/, "a product subcollection must own the current-page marker on its route");
+const subcollectionHeaderFixture = renderSiteHeader({ currentPath: "/collections/tees" });
+const drawerCollections = [...headerFixture.matchAll(/class="drawer-nav__child interface-label" href="(\/collections\/[^\"]+)">([^<]+)<\/a>/g)].map((match) => [match[1], match[2]]);
+assert.deepEqual(drawerCollections, productCategories.map(({ path, title }) => [path, title]), "the shared drawer must show exactly the four approved collections in order");
+assert.match(subcollectionHeaderFixture, /href="\/collections\/tees" aria-current="page">Tees<\/a>/, "a product subcollection must own the current-page marker on its route");
 assert.equal((subcollectionHeaderFixture.match(/aria-current="page"/g) || []).length, 2, "product subcollection navigation must expose one current-page marker per responsive navigation");
 const teamwearHeaderFixture = renderSiteHeader({ currentPath: "/teamwear/customize" });
 assert.match(teamwearHeaderFixture, /href="\/teamwear" data-current-section="true">Basketball<\/a>/, "Basketball must identify the parent section on Teamwear Customize");
@@ -272,8 +289,8 @@ assert.match(headerFixture, /class="search-overlay"[^>]*aria-hidden="true" inert
 assert.match(headerFixture, /class="nav-drawer"[^>]*aria-hidden="true" inert/, "navigation must start outside the focus order");
 assert.doesNotMatch(headerFixture, /drawer-nav__divider|role="separator"/, "the navigation directory must not render a divider element or hairline");
 assert.match(reset, /html\s*\{[\s\S]*?scrollbar-gutter:\s*stable;/, "the root scrollbar gutter must remain stable while navigation locks page scrolling");
-assert.match(components, /html:has\(body\[data-overlay-state\]\)\s*\{[^}]*scrollbar-gutter:\s*auto;/, "an open overlay must take ownership of the root scrollbar track instead of stacking a second gutter");
-assert.match(components, /body\[data-overlay-state\] \.site-header\s*\{[^}]*overflow-y:\s*hidden;[^}]*scrollbar-gutter:\s*stable;/, "the fixed header must retain the transferred stable gutter while an overlay owns scrolling");
+assert.doesNotMatch(components, /html:has\(body\[data-overlay-state\]\)[^}]*scrollbar-gutter:\s*auto;/, "overlays must not release the root gutter and resize the underlying page");
+assert.doesNotMatch(components, /body\[data-overlay-state\] \.site-header[^}]*scrollbar-gutter:\s*stable;/, "the header must not reserve a second gutter inside the stable root viewport");
 assert.match(components, /\.nav-drawer,\s*\.search-overlay\s*\{[^}]*inset-block:\s*0;[^}]*inset-inline-start:\s*0;[^}]*inline-size:\s*100vw;[^}]*overflow-y:\s*auto;[^}]*scrollbar-gutter:\s*stable;/, "each independently scrolling overlay must span the viewport and reserve its gutter in the root scrollbar track");
 assert.doesNotMatch(components, /(?:\.nav-drawer|\.search-overlay)[^}]*overflow-y:\s*scroll;/, "overlays must not force a visible scrollbar when their content fits");
 assert.match(tokens, /--type-interface-label-transform:\s*uppercase;/, "interface label casing must remain tokenized");
@@ -370,7 +387,8 @@ assert.doesNotMatch(components, /\.breadcrumb :where\([^)]*\bspan\b/, "breadcrum
 assert.match(components, /\.page-headline__row\s*\{[\s\S]*?min-height:\s*var\(--control-size-large\);[\s\S]*?padding-inline:\s*var\(--layout-shell-gutter-inline\);[\s\S]*?background:\s*var\(--color-surface-mid\);[\s\S]*?color:\s*var\(--color-on-surface-low\)/, "all page headlines must own the shared 48px Surface Mid row and responsive shell gutter");
 assert.match(components, /\.breadcrumb a:is\(:hover, :active, :focus-visible\) \.breadcrumb__link-label,[\s\S]*?\.page-headline__action--text:is\(:hover, :active, :focus-visible\) > span\s*\{[\s\S]*?text-decoration:\s*underline/, "hover, press, and keyboard focus must underline only the corresponding interactive headline text");
 assert.doesNotMatch(components, /\.breadcrumb a:is\([^)]*\)\s*,/, "breadcrumb interaction decoration must never target an anchor containing an icon glyph");
-assert.match(components, /\.breadcrumb\s*\{[\s\S]*?min-width:\s*0;[\s\S]*?min-height:\s*var\(--control-size-large\);[\s\S]*?flex:\s*1 1 auto;[\s\S]*?align-self:\s*stretch;[\s\S]*?margin-inline-start:\s*calc\(0px - var\(--layout-shell-gutter-inline\)\);[\s\S]*?padding-inline-start:\s*var\(--layout-shell-gutter-inline\);[\s\S]*?overflow-x:\s*auto/, "only the breadcrumb region may scroll, and its full-row scrollport must preserve expanded link targets without moving text");
+assert.match(components, /\.breadcrumb\s*\{[^}]*?min-width:\s*0;[^}]*?min-height:\s*var\(--control-size-large\);[^}]*?flex:\s*1 1 auto;[^}]*?align-self:\s*stretch;[^}]*?overflow-x:\s*clip;[^}]*?white-space:\s*nowrap/, "breadcrumbs must clip every item at the content edge without scrolling or wrapping");
+assert.doesNotMatch(components.match(/\.breadcrumb\s*\{[^}]*\}/)?.[0] || "", /margin-inline|padding-inline|overflow-x:\s*(?:auto|scroll|hidden)/, "breadcrumb clipping must preserve the headline's equal external gutters and prevent focus-driven scrolling");
 assert.match(components, /\.page-headline__action\s*\{[\s\S]*?flex:\s*0 0 auto/, "headline actions must remain intrinsic-width trailing controls");
 assert.doesNotMatch(components, /:where\([\s\S]*?\.site-logo,[\s\S]*?\.footer-link[\s\S]*?\)\s*\{[\s\S]*?min-height:\s*var\(--control-size-large\);/, "interaction guidance must not impose a shared min-height that changes established text-link layout");
 assert.match(components, /\.site-actions\s*\{[\s\S]*?gap:\s*var\(--space-5\);[\s\S]*?width:\s*var\(--header-actions-width\);/, "header glyphs must use the shared 16px visual gap without enlarging their layout boxes");
@@ -497,9 +515,7 @@ assert.doesNotMatch(`${components}\n${pages}`, /\.(?:product-copy|size-table|pro
 const generatedPages = [
   "index.html",
   "collections/all/index.html",
-  "collections/ss-tops/index.html",
-  "collections/aw-tops/index.html",
-  "collections/bottoms/index.html",
+  ...productCategories.map(({ slug }) => `collections/${slug}/index.html`),
   "teamwear/index.html",
   "teamwear/customize/index.html",
   "search/index.html",
@@ -519,25 +535,26 @@ for (const relativePath of generatedPages) {
   });
   assert.match(page, /Generated by scripts\/build-site\.mjs/, `${relativePath} must carry the generated banner`);
   assert.match(page, /assets\/css\/fonts\.css\?v=20260909b/, `${relativePath} must load the shared Reforma Negra font face`);
-  assert.match(page, /assets\/css\/tokens\.css\?v=20261001a/, `${relativePath} must cache-bust the shared typography, target, icon, safe-area, media-layer, and motion tokens`);
+  assert.match(page, /assets\/css\/tokens\.css\?v=20261003b/, `${relativePath} must cache-bust the shared typography, target, icon, safe-area, media-layer, and motion tokens`);
   assert.match(page, /assets\/css\/motion\.css\?v=20260831a/, `${relativePath} must load the shared motion layer`);
-  assert.match(page, /assets\/css\/base\.css\?v=20260916b/, `${relativePath} must cache-bust the shared visual-role font behavior`);
-  assert.match(page, /assets\/css\/components\.css\?v=20261002a/, `${relativePath} must load centralized detail component styles`);
-  assert.match(page, /assets\/css\/pages\.css\?v=20260927a/, `${relativePath} must load the updated related-product spacing`);
+  assert.match(page, /assets\/css\/base\.css\?v=20261003b/, `${relativePath} must cache-bust the shared visual-role font behavior and Weak modifier`);
+  assert.match(page, /assets\/css\/components\.css\?v=20261003d/, `${relativePath} must load centralized detail component styles`);
+  assert.match(page, /assets\/css\/state-variation\.css\?v=20261003b/, `${relativePath} must load the shared interchangeable state treatments`);
+  assert.match(page, /assets\/css\/pages\.css\?v=20261003a/, `${relativePath} must load the updated related-product spacing`);
   assert.match(page, /assets\/css\/color-options\.css\?v=20260929a/, `${relativePath} must cache-bust the canonical item color code palette`);
   assert.match(page, /assets\/css\/reset\.css\?v=20260829a/, `${relativePath} must cache-bust the stable scrollbar-gutter reset`);
-  assert.match(page, /assets\/js\/page-transitions\.js\?v=20260831a/, `${relativePath} must load the early route-motion controller`);
+  assert.match(page, /assets\/js\/page-transitions\.js\?v=20261003d/, `${relativePath} must load the early route-motion controller`);
   assert.match(page, /assets\/js\/app\.js\?v=20261001a/, `${relativePath} must cache-bust the shared overlay behavior`);
   assert.match(page, /assets\/js\/search-core\.js\?v=20260927b/, `${relativePath} must load the shared search matcher`);
-  assert.match(page, /assets\/js\/search\.js\?v=20261001b/, `${relativePath} must load the shared Search interface`);
-  assert.match(page, /assets\/js\/choices\.js\?v=20261001a/, `${relativePath} must cache-bust the shared choice and floating-action controller`);
+  assert.match(page, /assets\/js\/search\.js\?v=20261003d/, `${relativePath} must load the shared Search interface`);
+  assert.match(page, /assets\/js\/choices\.js\?v=20261003c/, `${relativePath} must cache-bust the shared coded color labels and choice rail controller`);
   if (/^(?:index\.html|collections\/|products\/|teamwear\/|search\/)/.test(relativePath)) {
-    assert.match(page, /assets\/js\/media-zoom\.js\?v=20261001a/, `${relativePath} must cache-bust the shared media inspection behavior`);
+    assert.match(page, /assets\/js\/media-zoom\.js\?v=20261002d/, `${relativePath} must cache-bust the shared media inspection behavior`);
   } else {
     assert.doesNotMatch(page, /media-zoom\.js/, `${relativePath} must not load media inspection outside opted-in page families`);
   }
   if (relativePath === "teamwear/index.html") {
-    assert.match(page, /assets\/css\/teamwear-story\.css\?v=20260927a/, `${relativePath} must load the current cache-busted Teamwear stylesheet`);
+    assert.match(page, /assets\/css\/teamwear-story\.css\?v=20261002a/, `${relativePath} must load the current cache-busted Teamwear stylesheet`);
   }
   assert.match(page, /rel="preconnect" href="https:\/\/fonts\.googleapis\.com"/, `${relativePath} must preconnect to Google Fonts CSS`);
   assert.match(page, /rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin/, `${relativePath} must preconnect to Google font files`);
@@ -580,13 +597,13 @@ for (const relativePath of generatedPages) {
     assert.doesNotMatch(page, /class="product-card__media" data-media-zoom-touch><img[^>]*data-product-image-fallback/, `${relativePath} fallback catalog media must not opt into touch inspection`);
   }
   if (relativePath === "search/index.html") {
-    assert.match(page, /assets\/js\/media-zoom\.js\?v=20261001a/, "Search must load touch inspection for dynamically rendered product-card photos");
+    assert.match(page, /assets\/js\/media-zoom\.js\?v=20261002d/, "Search must load touch inspection for dynamically rendered product-card photos");
   }
   if (relativePath === "teamwear/customize/index.html") {
-    assert.match(page, /assets\/js\/choices\.js\?v=20261001a/, "Teamwear Customize must cache-bust the current shared choice controller");
+    assert.match(page, /assets\/js\/choices\.js\?v=20261003c/, "Teamwear Customize must cache-bust the current shared choice controller");
     assert.match(page, /assets\/js\/teamwear-options\.js\?v=20260917b/, "Teamwear Customize must cache-bust centralized configuration and media data");
     assert.match(page, /<h1[^>]*>PE Basketball Teamwear<\/h1>/, "Teamwear Customize must render the approved product name");
-    assert.match(page, /assets\/js\/teamwear\.js\?v=20261001b/, "Teamwear Customize must cache-bust current shared Teamwear behavior");
+    assert.match(page, /assets\/js\/teamwear\.js\?v=20261003a/, "Teamwear Customize must cache-bust current shared Teamwear behavior");
     assert.match(page, /<p class="product-detail__price" data-teamwear-price data-price-twd="1580" data-generated-component="product-detail-price">NT\$1,580<\/p>/, "Teamwear Customize must expose its centralized numeric TWD price for controlled add-on updates");
     assert.match(page, /data-choice-kind="chip" data-choice-variant="add-on" data-choice-title="Add-On"/, "Teamwear Customize must render the centralized Add-On chip variation");
     assert.match(page, /data-choice-kind="chip" data-choice-title="Quantity"[\s\S]*?value="Q01"[\s\S]*?≤ 9[\s\S]*?value="Q02"[\s\S]*?10~19[\s\S]*?value="Q03" checked[\s\S]*?≥ 20/, "Teamwear Customize must render three quantity chips with ≥ 20 selected by default");
@@ -611,15 +628,16 @@ for (const relativePath of generatedPages) {
   if (relativePath.startsWith("products/")) {
     const currentProductNumber = relativePath.split("/")[1];
     const currentProduct = visibleItemByCode.get(currentProductNumber);
-    const expectedItemCodes = rankRelatedProducts(visibleProducts, currentProduct).map((product) => product.code);
-    const actualItemCodes = [...page.matchAll(/<a class="product-card" href="\/products\/([^"]+)">/g)].map((match) => match[1].split("?")[0]);
+    const expectedCardUrls = rankRelatedProducts(visibleProducts, currentProduct).flatMap((product) => allCatalogCardUrls.filter((url) => url.split("?")[0] === `/products/${product.code}`));
+    const actualCardUrls = [...page.matchAll(/<a class="product-card" href="([^"]+)">/g)].map((match) => match[1]);
     assert.match(page, /class="breadcrumb__current" aria-current="page" data-product-breadcrumb-title/, `${relativePath} product breadcrumb title must preserve authored casing`);
     assert.match(page, /<section class="section section--tight product-feed-section">[\s\S]*?<div class="auto-grid product-grid"/, `${relativePath} must place the shared feed after the product detail`);
     assert.match(page, /<div class="auto-grid product-grid" data-generated-component="product-grid">/, `${relativePath} must use the shared vertical product feed`);
     assert.doesNotMatch(page, /marquee-strip/, `${relativePath} must not render the removed product carousel`);
-    assert.equal(actualItemCodes.length, visibleProducts.length - 1, `${relativePath} must render every other visible product`);
-    assert.ok(!actualItemCodes.includes(currentProductNumber), `${relativePath} must exclude its current product`);
-    assert.deepEqual(actualItemCodes, expectedItemCodes, `${relativePath} must preserve the shared vector similarity order`);
+    assert.equal(actualCardUrls.length, expectedCardUrls.length, `${relativePath} must render all cards for every other visible product without a cap`);
+    assert.equal(new Set(actualCardUrls).size, actualCardUrls.length, `${relativePath} must not repeat cards`);
+    assert.ok(actualCardUrls.every((url) => url.split("?")[0] !== `/products/${currentProductNumber}`), `${relativePath} must exclude every card for its current product`);
+    assert.deepEqual(actualCardUrls, expectedCardUrls, `${relativePath} must preserve similarity order and each product's catalog card order`);
   }
   if (relativePath === "teamwear/index.html") {
     assert.match(page, /<body class="[^"]*teamwear-story-shell/, "Teamwear landing must own its page-positioned header behavior");

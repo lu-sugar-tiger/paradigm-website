@@ -6,6 +6,8 @@
 
 The default catalog order is newest to oldest: descending numeric `sequence` (the imported `itemSequence` / `ItemSequence`). Equal sequences retain source order. The home catalog and all subcollections inherit this order.
 
+Retail categories use only `typeCode`: `14` → Tees, `23` → Crewnecks, `24` → Hoodies, `42` → Shorts. Type `14` includes Football Jerseys. Titles have no leading codes, and line collections are not published. Collection configuration, URLs, and navigation order are centralized in `data/product-categories.json`; see [Product collections](product-categories.md).
+
 - JavaScript and JSON use lower camelCase: `name`, `salePrice`, `sku`, `colorCode`. Within an item, use `name` and `code`; within a lot, use `code` and `id`. The containing object supplies the context.
 - Use singular names for one value or object (`link`, `descriptionSource`) and plural names for arrays (`items`, `variants`, `lots`, `images`, `localImages`).
 - Flat import records and references to an item retain explicit `itemName`/`itemCode` names to avoid ambiguity. For example, a DOM reference uses `data-item-code`, whereas the referenced catalog item has `code`. Do not copy the flat names into nested catalog records.

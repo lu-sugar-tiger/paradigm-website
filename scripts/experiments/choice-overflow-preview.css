@@ -1,0 +1,90 @@
+.choice-overflow-preview {
+  padding: calc(var(--header-height) + var(--space-7)) var(--layout-shell-gutter-inline) var(--space-9);
+}
+
+.choice-overflow-intro,
+.choice-overflow-proposal-heading,
+.choice-overflow-scene > header {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.choice-overflow-intro { margin-bottom: var(--space-8); }
+.choice-overflow-intro > a { justify-self: start; text-underline-offset: var(--space-1); }
+.choice-overflow-proposal-links { display: flex; flex-wrap: wrap; gap: var(--space-5); }
+.choice-overflow-proposal-links a { text-underline-offset: var(--space-1); }
+.choice-overflow-proposal { display: grid; gap: var(--space-6); scroll-margin-top: calc(var(--header-height) + var(--space-5)); }
+.choice-overflow-proposal + .choice-overflow-proposal { margin-top: var(--space-9); }
+.choice-overflow-preview p { margin: 0; }
+.choice-overflow-note { color: var(--color-on-surface-low); }
+.choice-overflow-scenes { display: grid; gap: var(--space-7); align-items: start; }
+.choice-overflow-scene { display: grid; min-width: 0; gap: var(--space-5); }
+.choice-overflow-surface {
+  display: grid;
+  min-width: 0;
+  gap: var(--space-6);
+  padding: var(--space-5);
+  background: var(--color-surface-mid);
+}
+
+/* Preview-only extension: readable wrapping with an optional two-row disclosure. */
+.choice-overflow-preview [data-overflow-mode="disclosure"] .choice-group__options { min-width: 0; align-items: stretch; }
+.choice-overflow-preview .choice-option--swatch { flex: 0 0 var(--choice-size); }
+.choice-overflow-preview [data-overflow-mode="disclosure"] .choice-option--chip {
+  flex: 1 0 auto;
+  width: auto;
+  min-width: min(100%, var(--control-size-large));
+  max-width: 100%;
+  height: auto;
+  min-height: var(--choice-size);
+  padding-block: var(--space-2);
+}
+.choice-overflow-preview [data-overflow-mode="disclosure"] .choice-option--chip > .choice-option__label {
+  overflow: visible;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.choice-overflow-preview .choice-group__label { overflow-wrap: anywhere; }
+.choice-overflow-preview .choice-option[hidden] { display: none; }
+.choice-overflow-toggle {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--choice-size);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-on-surface-mid);
+  font: inherit;
+  cursor: pointer;
+}
+.choice-overflow-toggle[hidden] { display: none; }
+.choice-overflow-toggle__label {
+  text-decoration: underline;
+  text-decoration-thickness: var(--stroke-width-thin);
+  text-underline-offset: var(--space-1);
+}
+.choice-overflow-toggle:is(:hover, :active) { color: var(--color-on-surface-high); }
+.choice-overflow-toggle:focus-visible { outline: var(--focus-ring-width) solid var(--color-outline-high); outline-offset: var(--focus-ring-offset); }
+.choice-overflow-toggle .material-icon {
+  width: var(--icon-size-small);
+  height: var(--icon-size-small);
+  overflow: hidden;
+  pointer-events: none;
+  font-size: var(--icon-size-small);
+  transition: rotate var(--motion-duration-compact-enter) var(--motion-ease-compact-enter);
+}
+.choice-overflow-toggle[aria-expanded="true"] .material-icon { rotate: 180deg; }
+.choice-overflow-preview .choice-group:has(.choice-overflow-toggle:not([hidden])) .choice-group__layout { row-gap: var(--space-2); }
+@media (min-width: 48rem) {
+  .choice-overflow-scenes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 64rem) {
+  .choice-overflow-scenes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .choice-overflow-preview .choice-option[hidden] { display: inline-flex; }
+  .choice-overflow-toggle { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .choice-overflow-toggle .material-icon { transition: none; }
+}

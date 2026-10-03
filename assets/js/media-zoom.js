@@ -5,6 +5,7 @@
   const OVERLAY_GALLERY_RATIO = 2;
   const STATIONARY_CLICK_DISTANCE = 6;
   const largeView = window.matchMedia(LARGE_VIEW_QUERY);
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   let touchGesture = null;
   let touchFrame = 0;
@@ -18,6 +19,47 @@
   function clamp(value, minimum, maximum) {
     return Math.min(maximum, Math.max(minimum, value));
   }
+
+  document.querySelectorAll(".product-detail__gallery").forEach((gallery) => {
+    let drag = null;
+    const images = () => visibleGalleryImages(gallery);
+    function currentIndex(items) {
+      return items.reduce((nearest, image, index) => (
+        Math.abs(image.offsetLeft - gallery.scrollLeft) < Math.abs(items[nearest].offsetLeft - gallery.scrollLeft) ? index : nearest
+      ), 0);
+    }
+    gallery.addEventListener("pointerdown", (event) => {
+      if (largeView.matches || event.pointerType !== "mouse" || event.button !== 0 || !event.target.closest("img")) return;
+      event.preventDefault();
+      gallery.scrollTo({ left: gallery.scrollLeft, behavior: "instant" });
+      drag = { id: event.pointerId, x: event.clientX, left: gallery.scrollLeft };
+      gallery.classList.add("is-pointer-dragging");
+      gallery.setPointerCapture(event.pointerId);
+    });
+    gallery.addEventListener("pointermove", (event) => {
+      if (drag && event.pointerId === drag.id) gallery.scrollLeft = drag.left + drag.x - event.clientX;
+    });
+    function finishDrag(event) {
+      if (!drag || (event && event.pointerId !== drag.id)) return;
+      const pointerId = drag.id;
+      const items = images();
+      const target = items.length ? currentIndex(items) : 0;
+      drag = null;
+      gallery.classList.remove("is-pointer-dragging");
+      if (gallery.hasPointerCapture(pointerId)) gallery.releasePointerCapture(pointerId);
+      if (!largeView.matches && items.length) gallery.scrollTo({ left: items[target].offsetLeft, behavior: reducedMotion.matches ? "instant" : "smooth" });
+    }
+    gallery.addEventListener("pointerup", finishDrag);
+    gallery.addEventListener("pointercancel", finishDrag);
+    gallery.addEventListener("lostpointercapture", finishDrag);
+    gallery.addEventListener("dragstart", (event) => { if (!largeView.matches && event.target.closest("img")) event.preventDefault(); });
+    largeView.addEventListener("change", () => finishDrag());
+  });
+
+  // Route inspection by the interaction, not by a device-wide touch flag.
+  let activationPointer = "";
+  document.addEventListener("pointerdown", (event) => { activationPointer = event.pointerType; }, { capture: true, passive: true });
+  document.addEventListener("pointercancel", () => { activationPointer = ""; }, { capture: true, passive: true });
 
   function point(touch) {
     return { x: touch.clientX, y: touch.clientY };
@@ -297,7 +339,12 @@
   }
 
   function visibleGalleryImages(gallery) {
-    return Array.from(gallery.querySelectorAll("img")).filter((image) => !image.hidden && getComputedStyle(image).display !== "none");
+    // CSS can place the selected variant before the authored photographs.
+    // Stable sorting keeps equal-order photos (including duplicates) in source order.
+    return Array.from(gallery.querySelectorAll("img"))
+      .filter((image) => !image.hidden && getComputedStyle(image).display !== "none")
+      .sort((first, second) => (Number.parseInt(getComputedStyle(first).order, 10) || 0)
+        - (Number.parseInt(getComputedStyle(second).order, 10) || 0));
   }
 
   function storeLargeImageAttributes(image) {
@@ -451,6 +498,9 @@
   }
 
   document.addEventListener("click", (event) => {
+    const pointerType = event.pointerType || (event.detail ? activationPointer : "");
+    activationPointer = "";
+    if (pointerType === "touch") return;
     if (!largeView.matches || overlayState || event.defaultPrevented) return;
     const image = galleryImage(event.target);
     if (!image) return;
