@@ -139,14 +139,17 @@ function renderProductMain(template, product, relatedProducts, itemCodes) {
     external: true,
     root: "../.."
   });
-  const media = product.media.map((image, index) => renderResponsiveProductImage({
+  const galleryIds = selectedVariant?.images?.map((image) => image.id) || product.galleryImageIds;
+  const galleryMedia = selectedVariant?.images?.length
+    ? galleryIds.map((id) => product.galleryMedia[id]) : product.media;
+  const media = galleryMedia.map((image, index) => renderResponsiveProductImage({
     media: image,
     alt: index === 0 ? product.alt : `${product.name}, view ${index + 1}`,
     root: "../..",
     sizes: "(min-width: 80rem) 768px, (min-width: 64rem) 60vw, 100vw",
     loading: index ? "lazy" : "",
     touchZoom: !image.isFallback,
-    imageId: product.galleryImageIds[index]
+    imageId: galleryIds[index]
   }));
   if (selectedMedia) media.push(renderResponsiveProductImage({
     media: selectedMedia,
@@ -561,6 +564,10 @@ const products = source.items.filter((entry) => entry.variants.some((variant) =>
     images: mediaPaths,
     media,
     galleryImageIds: entry.images.length === media.length ? entry.images.map((image) => image.id) : [],
+    ...(visibleVariants.some((variant) => variant.images?.length) ? {
+      galleryMedia: Object.fromEntries([...entry.images, ...visibleVariants.flatMap((variant) => variant.images || [])]
+        .map((image) => [image.id, responsiveMediaFromSource(image)]))
+    } : {}),
     variantMedia: Object.fromEntries((entry.variantImages || []).map((image) => [image.id, responsiveMediaFromSource(image)])),
     imageSource: usesFallback ? "fallback" : entry.imageSource,
     alt: usesFallback ? "" : `${entry.name} product image`,

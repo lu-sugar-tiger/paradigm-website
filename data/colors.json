@@ -83,6 +83,8 @@
     { "id": "cardinal", "code": "C13", "name": "Cardinal" },
     { "id": "mocha", "code": "C21", "name": "Mocha" },
     { "id": "mud", "code": "C22", "name": "Mud" },
+    { "id": "taupe", "code": "C25", "name": "Taupe" },
+    { "id": "yellow", "code": "C36", "name": "Yellow" },
     { "id": "ivy", "code": "C41", "name": "Ivy" },
     { "id": "midnight", "code": "C61", "name": "Midnight" },
     { "id": "royalty", "code": "C63", "name": "Royalty" }

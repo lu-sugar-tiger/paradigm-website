@@ -4,10 +4,11 @@
     "spreadsheetId": "1vt4wTxgUujj6L_p_I-zqzcpWvWZwACp4O1JRQlf2t9M",
     "spreadsheetUrl": "https://docs.google.com/spreadsheets/d/1vt4wTxgUujj6L_p_I-zqzcpWvWZwACp4O1JRQlf2t9M/edit",
     "sheetName": "網站參照",
-    "spreadsheetModifiedTime": "2026-09-23T06:17:47.866Z",
-    "syncedAt": "2026-09-23T07:16:04.680Z",
+    "spreadsheetModifiedTime": "2026-10-03T03:36:54.341Z",
+    "syncedAt": "2026-10-03T07:57:08.390Z",
     "sheetId": 2112278065,
-    "range": "A1:U188"
+    "range": "A1:U200",
+    "imageLayout": "variant-zero"
   },
   "items": [
     {
@@ -57,7 +58,7 @@
               "sha256": "be4d4fb141f02df91ee67c8f37c31f60b7d35fda97233ce8f82c353758272bde"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/1qOH8ZPcR6D4sQsUR8zHWd9F-Te39_Ds0/view?usp=drive_link"
         },
         {
@@ -105,7 +106,7 @@
               "sha256": "afc722cec1e8b2219ad1cc795e32b03542aa5b37062755a7057c3e6c5b578654"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/1IPL1fMLFNgkyAB05c2LQElSQCuM-ogyz/view?usp=drive_link"
         },
         {
@@ -153,7 +154,7 @@
               "sha256": "50ce9506c8a00d6ff2e7fe891faa853244e316de53b05bdc07d5422cba40bb6d"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/17ASoDEQtWxlL_ZLVprhgYxB_xuh2hUNv/view?usp=drive_link"
         },
         {
@@ -201,7 +202,7 @@
               "sha256": "93e3ded0eac292abd785be685acf957dccb39b2051c8b9d5cede07fd0539c8dd"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/1RvFpyMX8VcIVVgbIRfOv1y51OZtGakhS/view?usp=drive_link"
         },
         {
@@ -249,7 +250,7 @@
               "sha256": "91576d382d1723459dbe5f6c9606d879cf51e144c2f8bb469717a45aefe311fc"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/1doLHdx1FtEc9Z22zQjtgp3LJRZ7pL5uo/view?usp=drive_link"
         },
         {
@@ -297,7 +298,7 @@
               "sha256": "46c8d7b45da6fc105db64bc5ec4856b6580b5bbd0043f858e19cf8c0026276de"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/1q80v8CZIb5CW2M9kJfWtRZvFgd2iFaZx/view?usp=drive_link"
         },
         {
@@ -345,7 +346,7 @@
               "sha256": "22c2d71d15683d7bf68ee6a96052d52089de28b2d6cab8eedb71d050e7aca903"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/1mguqWj1Cml3TBIlWDNMGD5vQ2WRA_mtk/view?usp=drive_link"
         },
         {
@@ -393,7 +394,7 @@
               "sha256": "a37856dd07593c7a6e91b14ded5898f2562adbdd67421a79b0e09444d76ba33e"
             }
           ],
-          "index": 7,
+          "index": 8,
           "link": "https://drive.google.com/file/d/1Lz28J0HMiTU9_SvmQpqao_YnsHpgrNTv/view?usp=drive_link"
         }
       ],
@@ -594,7 +595,7 @@
               "sha256": "afc722cec1e8b2219ad1cc795e32b03542aa5b37062755a7057c3e6c5b578654"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1IPL1fMLFNgkyAB05c2LQElSQCuM-ogyz/view?usp=drive_link"
         },
         {
@@ -642,7 +643,7 @@
               "sha256": "93e3ded0eac292abd785be685acf957dccb39b2051c8b9d5cede07fd0539c8dd"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1RvFpyMX8VcIVVgbIRfOv1y51OZtGakhS/view?usp=drive_link"
         },
         {
@@ -690,7 +691,7 @@
               "sha256": "46c8d7b45da6fc105db64bc5ec4856b6580b5bbd0043f858e19cf8c0026276de"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1q80v8CZIb5CW2M9kJfWtRZvFgd2iFaZx/view?usp=drive_link"
         }
       ]
@@ -742,7 +743,7 @@
               "sha256": "2ea61ee2b2bf6f8afa16cab0faf326c828362481575a2a5e51fdce2f38cd5d5e"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/1SIB5ZTl8X6S-MM3BcnVqUX0FVgeS90QY/view?usp=drive_link"
         },
         {
@@ -790,7 +791,7 @@
               "sha256": "e0de5d1566f0dda7c4dd39f7ff2c45f07d2bc0b1fa91da98201e42599dddad38"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/1u0QxoEOrrWjJrtUrM1ocY4V07hC2Oth3/view?usp=drive_link"
         },
         {
@@ -838,7 +839,7 @@
               "sha256": "b9b49efbf2516eda191a631c9e5ea28825a50d8b85aaaa1cdd097ce298a18162"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/1lt5MG8KHwEL1okTK2vBKUn5gakf2pR85/view?usp=drive_link"
         },
         {
@@ -886,7 +887,7 @@
               "sha256": "63c55ed82e0b523ba45d735af41443f553236ca6c9ddc76703fdd760c35099ab"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/1wFAE_lF0DA9d_BNTYuOrxxDxgNlOw71L/view?usp=drive_link"
         },
         {
@@ -934,7 +935,7 @@
               "sha256": "f1ad97e86052378a27a715a134ea79fc04cc609a58aae612d5290ed2c78b7713"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/1FA9Q4Cyaj2GehQyMnlOk8PFyGzogHVGk/view?usp=drive_link"
         },
         {
@@ -982,7 +983,7 @@
               "sha256": "1a0fc819db32d88720f68bf33614bd8b395a9f73585fbb887224962e2a723f72"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/1wXa0Z4YK0AZ5vgEc9QkxSNiUu20sDc10/view?usp=drive_link"
         },
         {
@@ -1030,7 +1031,7 @@
               "sha256": "6f39e6339e974ace485b7175b32787f182494b59531bc24f8c4cd911dee04d3d"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/1Xz_ZeULZoDNZzAVvdgUdUpRlGjCF9X5U/view?usp=drive_link"
         },
         {
@@ -1078,7 +1079,7 @@
               "sha256": "891d7504c582fb550bf29e3d7ec395946c31eba73b62aa295a534ce9bf5f0b3c"
             }
           ],
-          "index": 7,
+          "index": 8,
           "link": "https://drive.google.com/file/d/1sPibPC8C66TjrWp-ZjpeEtLLbS-a54H3/view?usp=drive_link"
         }
       ],
@@ -1235,7 +1236,7 @@
               "sha256": "e0de5d1566f0dda7c4dd39f7ff2c45f07d2bc0b1fa91da98201e42599dddad38"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1u0QxoEOrrWjJrtUrM1ocY4V07hC2Oth3/view?usp=drive_link"
         },
         {
@@ -1283,7 +1284,7 @@
               "sha256": "63c55ed82e0b523ba45d735af41443f553236ca6c9ddc76703fdd760c35099ab"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1wFAE_lF0DA9d_BNTYuOrxxDxgNlOw71L/view?usp=drive_link"
         }
       ]
@@ -1477,7 +1478,7 @@
               "sha256": "8679cfe701d040b63b9d30d4060aea8ac7f36765e783b066d09d9d8d92f0685c"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/1P4j2ghjshI6NU_59mNFk7X_dsyN4D0oe/view?usp=drive_link"
         },
         {
@@ -1525,7 +1526,7 @@
               "sha256": "755cef12df6d7dfe74affda7646f424161c73ea6099102c33490f7894f076aef"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/1wdX31cMPiuBYBOnByQig9TI_MQZVtkgv/view?usp=drive_link"
         },
         {
@@ -1573,7 +1574,7 @@
               "sha256": "5b9a9d8e9a029b2b53a78a4eac7e173d88e6d50cdca9044b6cdc05e848fcf3cb"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/1OmaJobWJh3lAHBK-G2mWr7Ar7vo-NdY9/view?usp=drive_link"
         },
         {
@@ -1621,7 +1622,7 @@
               "sha256": "5d93d94595e512f9f882e5dc3f52f5d5fc176964995ba3caca8ab8c6b7817dc4"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/1TP3VtRrySeVAalXmK-1zaF3ENBWMrOxb/view?usp=drive_link"
         },
         {
@@ -1669,7 +1670,7 @@
               "sha256": "807836a1951c236e06b8ca7aa1556d1be9597bedc9f69b2db3b3341b63f6d98a"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/1XBvuJtKZk_cwEwI0HZBUJltvfL2cVVk9/view?usp=drive_link"
         }
       ],
@@ -1826,7 +1827,7 @@
               "sha256": "5b9a9d8e9a029b2b53a78a4eac7e173d88e6d50cdca9044b6cdc05e848fcf3cb"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1OmaJobWJh3lAHBK-G2mWr7Ar7vo-NdY9/view?usp=drive_link"
         },
         {
@@ -1874,7 +1875,7 @@
               "sha256": "807836a1951c236e06b8ca7aa1556d1be9597bedc9f69b2db3b3341b63f6d98a"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1XBvuJtKZk_cwEwI0HZBUJltvfL2cVVk9/view?usp=drive_link"
         }
       ]
@@ -1926,7 +1927,7 @@
               "sha256": "e5f9bb71b9ff9c4d3726fb4e0d4bd986375c3b941ceee9a994e06d018f3ca981"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/1E8Qfw-XhlqvCgqH_xMhtcJAHqfyc3nne/view?usp=drive_link"
         },
         {
@@ -1974,7 +1975,7 @@
               "sha256": "43f8b562323ed48efe5ab7094b47b267132734241be1322fb648ee3f14aac5dc"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/1iOAxbpx2xHK12DTDDUpegxBFW-EVbf1z/view?usp=drive_link"
         },
         {
@@ -2022,7 +2023,7 @@
               "sha256": "12586fd19470e6a48d711e687aadfeadf3020ce05ea917c421e5182f641cc75f"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/13NPgtrSJRm1Z1-fuRuNJqURygU8d4EIU/view?usp=drive_link"
         },
         {
@@ -2070,7 +2071,7 @@
               "sha256": "3193cf5ca1b7c0e522a48611b080a5befe6f7462375bc9df8ae87220bf3937d9"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/1LnoZui0gN__kmITSelgXVZR9WLnDkL6S/view?usp=drive_link"
         },
         {
@@ -2118,7 +2119,7 @@
               "sha256": "75cfb111c723389f37658c0777b4436201af25ccba90d2ed5689a6aab98b389e"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/1CPWTykeqvX-EvVfy40aC9W099h2sseDX/view?usp=drive_link"
         },
         {
@@ -2166,7 +2167,7 @@
               "sha256": "cb96465d7dec72749544ce0f917b22cfcfae9263cb4dcc6ca8fd59ef6880f65f"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/1Q2KljU6a6iI-CKJ8_Vq0GjfRRuWMMbYm/view?usp=drive_link"
         },
         {
@@ -2214,7 +2215,7 @@
               "sha256": "2fdcb8b40b650ce04cdb93205b707ffe4f7f5d1afcb2a3eb851e3c6de1d5d593"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/1FUq4DXW8QxrUAu41_aCqTqGeIl9-9krO/view?usp=drive_link"
         }
       ],
@@ -2415,7 +2416,7 @@
               "sha256": "12586fd19470e6a48d711e687aadfeadf3020ce05ea917c421e5182f641cc75f"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/13NPgtrSJRm1Z1-fuRuNJqURygU8d4EIU/view?usp=drive_link"
         },
         {
@@ -2463,7 +2464,7 @@
               "sha256": "75cfb111c723389f37658c0777b4436201af25ccba90d2ed5689a6aab98b389e"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1CPWTykeqvX-EvVfy40aC9W099h2sseDX/view?usp=drive_link"
         },
         {
@@ -2511,7 +2512,7 @@
               "sha256": "2fdcb8b40b650ce04cdb93205b707ffe4f7f5d1afcb2a3eb851e3c6de1d5d593"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1FUq4DXW8QxrUAu41_aCqTqGeIl9-9krO/view?usp=drive_link"
         }
       ]
@@ -2563,7 +2564,7 @@
               "sha256": "f53a5bcb15d65dc1aa821ec9aec93886fc969e18beabb10da7cc3995b9639482"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/1kzlLmDU_UcTcGIHpKTTpJ4fmOLKKpaq2/view?usp=drive_link"
         },
         {
@@ -2611,7 +2612,7 @@
               "sha256": "b3bede813698955d8907cba7162f2d8e0b5fa58cb5c16434b3761d186eac569a"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/18ULOsG9YKVa1bdmSOrnRn4LDRt_opcE5/view?usp=drive_link"
         },
         {
@@ -2659,7 +2660,7 @@
               "sha256": "bd27b22da16a8df8c282926d42a27d27a327f5e520caf6796b7391b8f6472513"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/10QsMFUjrmvoqaIP-5s66by0QwpAygOp-/view?usp=drive_link"
         },
         {
@@ -2707,7 +2708,7 @@
               "sha256": "476c30d3d03ad4d13460f0b317d03543ac5ebea4c66cbb968ad25b3f11a65149"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/12Kp48NBwP4HTzHGAJ_bqW_-dmADX2bXl/view?usp=drive_link"
         },
         {
@@ -2755,7 +2756,7 @@
               "sha256": "ebdf5805657e4807eb4b876a38c5687aec405e3ac48cb705e74284b544284d27"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/1NyDgfcK7zMACwtv9wODBmLtOdMFL6fy7/view?usp=drive_link"
         },
         {
@@ -2803,7 +2804,7 @@
               "sha256": "68098611fe9f0a958652c896383495c82e3042681fab22a4019fa4fe5570c6b0"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/1bWCs96iDt2WEBXbjyuSf9Ul_MDAqY7Bt/view?usp=drive_link"
         },
         {
@@ -2851,7 +2852,7 @@
               "sha256": "7577c752c1a508b2503b5c9fc54de1ee221fedc97f5e3907775c3172c6ee7bb1"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/1eevX524l_ppGLszOQUkUTxbynkPJ8oo9/view?usp=drive_link"
         }
       ],
@@ -3008,7 +3009,7 @@
               "sha256": "bd27b22da16a8df8c282926d42a27d27a327f5e520caf6796b7391b8f6472513"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/10QsMFUjrmvoqaIP-5s66by0QwpAygOp-/view?usp=drive_link"
         },
         {
@@ -3056,7 +3057,7 @@
               "sha256": "ebdf5805657e4807eb4b876a38c5687aec405e3ac48cb705e74284b544284d27"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1NyDgfcK7zMACwtv9wODBmLtOdMFL6fy7/view?usp=drive_link"
         }
       ]
@@ -3108,7 +3109,7 @@
               "sha256": "c19c70a4a454f3fdc4a37485f03dad147079a41faebf75ec005e78d193f3a4b7"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/15Ai-Yv9I5F6oP8Lq12z41-9C_UN8YOMP/view?usp=drive_link"
         },
         {
@@ -3156,7 +3157,7 @@
               "sha256": "76cad5e6615f1f2627a28ad27647f0e0b1b884866c1a9c5a9716527a7e9c1b6f"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/1BSrt83wZpNnScbnD2yXW_TPIHUNlaYpK/view?usp=drive_link"
         },
         {
@@ -3204,7 +3205,7 @@
               "sha256": "a88ef4e6eb021b0fae1ac6f037f1fc45fd736d2ea8eb3876ab00cbc964dfcf01"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/1PWCN338o7bGZeC-pZL1e80qv5vTqFy0b/view?usp=drive_link"
         },
         {
@@ -3252,7 +3253,7 @@
               "sha256": "3a56d6648b2749d8b13d9a7876d8e4f14ab686f91c2fec0d50a0d815225aa303"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/1ORquM8kOtzJ64rR4LwJcuocecF_ReSo4/view?usp=drive_link"
         },
         {
@@ -3300,7 +3301,7 @@
               "sha256": "5d2ab1ff24d364a2b53a975a41af2addca39a477346348bfe9e607ee9a0b0575"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/1NjXkQlTQZC4CkFNUpZrTMSgj81Tc01_B/view?usp=drive_link"
         },
         {
@@ -3348,7 +3349,7 @@
               "sha256": "d8cbc8e83527d416cd34b48d01908bb11347959711dc32233d8cf7e4f7bbfe54"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/1C9A9l1REsfNsNhtccmFnfuc-v43eqlBw/view?usp=drive_link"
         },
         {
@@ -3396,7 +3397,7 @@
               "sha256": "5b0c1d89f036cddf2cf66bc601383cb1171301671638d86cd86ee52028fac89c"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/101xiHukiA_Ozqq6eUp74fB_LMoNHP5Wg/view?usp=drive_link"
         }
       ],
@@ -3553,7 +3554,7 @@
               "sha256": "a88ef4e6eb021b0fae1ac6f037f1fc45fd736d2ea8eb3876ab00cbc964dfcf01"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1PWCN338o7bGZeC-pZL1e80qv5vTqFy0b/view?usp=drive_link"
         },
         {
@@ -3601,7 +3602,7 @@
               "sha256": "5d2ab1ff24d364a2b53a975a41af2addca39a477346348bfe9e607ee9a0b0575"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1NjXkQlTQZC4CkFNUpZrTMSgj81Tc01_B/view?usp=drive_link"
         }
       ]
@@ -3653,7 +3654,7 @@
               "sha256": "6512649e5c8f360e174e489d34b548d8552338a3223204500e22082b51839f9e"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/1j94NzlNAMDFbZCM1G5KfFDsZ0qXvG2-d/view?usp=drive_link"
         },
         {
@@ -3701,7 +3702,7 @@
               "sha256": "28c8e99b95bb412e434a6e86c52bafb8a05dcfbd364ba50f054302adea9a3e09"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/1VXJkArHDTI8o663U7Fp8gtnFQ6W8sPjL/view?usp=drive_link"
         },
         {
@@ -3749,7 +3750,7 @@
               "sha256": "7ae411441117b980cba1487dab131c737d2d0cb15cb488e4e8d82f81be47e6f6"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/1V1p2aQ2R8z566RZuEjvW271ntyzEvFTd/view?usp=drive_link"
         },
         {
@@ -3797,7 +3798,7 @@
               "sha256": "6169875abac42ba2c47683c0dcfa0877cd3273cafc98575f643d4a01a22f0839"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/1IcR-0Dfhn0IMDp-ov9VgCMCMwzWBfn3e/view?usp=drive_link"
         },
         {
@@ -3845,7 +3846,7 @@
               "sha256": "4f3aa2837f792c1e3212dde624e0b3e3d5fb678abbd0ce697b2e617634b852da"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/1utcCBCv0AZ_QTFd8NEG7PkE6HmEtr-db/view?usp=drive_link"
         },
         {
@@ -3893,7 +3894,7 @@
               "sha256": "0ef652c1a3ae41a3b0dfb74eca56f9cdc4cd58e2bb6fdd13c67a2e8349050cbe"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/1NnaQGaQnffc0HFGjKnN--r22NoeQeBtg/view?usp=drive_link"
         },
         {
@@ -3941,7 +3942,7 @@
               "sha256": "eade91f9ece8428bb2b3b332a0a6cf276eba023a7b6971451373149d014b1736"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/1pW1TCneLALd69cGXsqe_DAx0iBlW7iGA/view?usp=drive_link"
         },
         {
@@ -3989,7 +3990,7 @@
               "sha256": "79325c882fcdf586f50ff3fb4c1da8773bc27d578271a84d8c9a8e3bf2f5ac65"
             }
           ],
-          "index": 7,
+          "index": 8,
           "link": "https://drive.google.com/file/d/1LsOlPcGaH0__zLrW4EpZjf0TWNW-Bvst/view?usp=drive_link"
         },
         {
@@ -4037,7 +4038,7 @@
               "sha256": "2922ebf60c128034e043b80d893d973cf957cd99969e06614025039f050b257c"
             }
           ],
-          "index": 8,
+          "index": 9,
           "link": "https://drive.google.com/file/d/1RQVWk3fvRzZh1KF9MdJ-13Un_SMxMV-H/view?usp=drive_link"
         }
       ],
@@ -4049,8 +4050,8 @@
       "descriptionSource": {
         "id": "1kMpoFwEuRWvOvXjbZ8zTKJgfyjytFuZtX6_W9lPle3Y",
         "title": "#PH14010_Description",
-        "modifiedTime": "2026-09-14T07:27:21.852Z",
-        "content": "• Printed graphics, embroidery and all-over pattern\n• 100% premium polyester\n• Wide silhouette and striped ribbing\n• Signature tab on sleeve\n• Made in Taiwan\n\n-\n\n這是一款全新的運動休閒短Ｔ\n為了結合運動服飾的機能與休閒服飾的質感\n我們選擇從足球衣的型態切入\n打造現代生活必備的運動休閒系列\n\n對於運動型態與休閒型態的權衡\n採用手感紮實的重磅面料來中和運動氣息\n同時加入特殊涼感纖維以維持必備機能\n\n為了兼顧不同穿著風格的需求\n正常尺寸的版型設定為歐美流行的合身輪廓\n拿大一號則可以穿出亞洲持續延燒的寬鬆風格\n\n因為要在休閒場合享受運動服飾的舒適\n也要在運動時追求休閒服飾的風格與魅力\n我們自各項賽事的復古球衣汲取靈感\n在領口及袖口都採用厚實的羅紋滾邊\n\nAthleisure、Blokecore、Clean Fit 的流行都有段時間了\n我們推出運動休閒系列不是要追逐潮流\n而是要結合時代中最單純的形式與機能\n這樣的美學曾是新潮的象徵\n也將成為永恆的趨勢\n\n-\n\n　　　 M　　L　　XL\n肩寬　𝟧𝟥.𝟢　𝟧𝟦.𝟧　𝟧𝟨.𝟢\n胸寬　𝟧𝟨.𝟧　𝟧𝟫.𝟢　𝟨𝟣.𝟧\n袖長　𝟤𝟥.𝟧　𝟤𝟦.𝟧　𝟤𝟧.𝟧\n衣長　𝟩𝟣.𝟢　𝟩𝟥.𝟢　𝟩𝟧.𝟢　(cm)\n\n建議身高 < 173 著用 M\n建議身高 173~178 著用 L\n建議身高 > 178 著用 XL　(cm)\n\n#PH14010",
+        "modifiedTime": "2026-10-02T13:56:56.764Z",
+        "content": "• Premium polyester and striped ribbing\n• Printed graphics, embroidery and all-over pattern\n• Moderately wide silhouette\n• Signature tab on sleeve\n• Made in Taiwan\n\n-\n\n這是一款全新的運動休閒短Ｔ\n為了結合運動服飾的機能與休閒服飾的質感\n我們選擇從足球衣的型態切入\n打造現代生活必備的運動休閒系列\n\n對於運動型態與休閒型態的權衡\n採用手感紮實的重磅面料來中和運動氣息\n同時加入特殊涼感纖維以維持必備機能\n\n為了兼顧不同穿著風格的需求\n正常尺寸的版型設定為歐美流行的合身輪廓\n拿大一號則可以穿出亞洲持續延燒的寬鬆風格\n\n因為要在休閒場合享受運動服飾的舒適\n也要在運動時追求休閒服飾的風格與魅力\n我們自各項賽事的復古球衣汲取靈感\n在領口及袖口都採用厚實的羅紋滾邊\n\nAthleisure、Blokecore、Clean Fit 的流行都有段時間了\n我們推出運動休閒系列不是要追逐潮流\n而是要結合時代中最單純的形式與機能\n這樣的美學曾是新潮的象徵\n也將成為永恆的趨勢\n\n-\n\n　　　 M　　L　　XL\n肩寬　𝟧𝟥.𝟢　𝟧𝟦.𝟧　𝟧𝟨.𝟢\n胸寬　𝟧𝟨.𝟧　𝟧𝟫.𝟢　𝟨𝟣.𝟧\n袖長　𝟤𝟥.𝟧　𝟤𝟦.𝟧　𝟤𝟧.𝟧\n衣長　𝟩𝟣.𝟢　𝟩𝟥.𝟢　𝟩𝟧.𝟢　(cm)\n\n建議身高 < 173 著用 M\n建議身高 173~178 著用 L\n建議身高 > 178 著用 XL　(cm)\n\n#PH14010",
         "link": "https://docs.google.com/document/d/1kMpoFwEuRWvOvXjbZ8zTKJgfyjytFuZtX6_W9lPle3Y/edit?usp=drive_link"
       },
       "variants": [
@@ -4205,7 +4206,7 @@
               "sha256": "28c8e99b95bb412e434a6e86c52bafb8a05dcfbd364ba50f054302adea9a3e09"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1VXJkArHDTI8o663U7Fp8gtnFQ6W8sPjL/view?usp=drive_link"
         },
         {
@@ -4253,7 +4254,7 @@
               "sha256": "6169875abac42ba2c47683c0dcfa0877cd3273cafc98575f643d4a01a22f0839"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1IcR-0Dfhn0IMDp-ov9VgCMCMwzWBfn3e/view?usp=drive_link"
         },
         {
@@ -4301,7 +4302,7 @@
               "sha256": "0ef652c1a3ae41a3b0dfb74eca56f9cdc4cd58e2bb6fdd13c67a2e8349050cbe"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1NnaQGaQnffc0HFGjKnN--r22NoeQeBtg/view?usp=drive_link"
         }
       ]
@@ -4353,7 +4354,7 @@
               "sha256": "e9dc986fd2b6688d16c2b0a1ddac2719f17951c3964c334990c47a84c03345cb"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/1zUbLk2kf9uETnCB5fVjn5ZzO63wyc2T_/view?usp=drive_link"
         },
         {
@@ -4401,7 +4402,7 @@
               "sha256": "f5a33b69f0420f0057b4f61bff874c0bb888f23571faa5408a3c14f572eca49d"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/1MEpHonb6nsEFG5UOuS30MeQmaevquZgm/view?usp=drive_link"
         },
         {
@@ -4449,7 +4450,7 @@
               "sha256": "7ae411441117b980cba1487dab131c737d2d0cb15cb488e4e8d82f81be47e6f6"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/19lysmscarA9hQX1qfohn3T8rqHD3sGIE/view?usp=drive_link"
         },
         {
@@ -4497,7 +4498,7 @@
               "sha256": "6d7daf57aeda44943257e2de6dc86cbc0b5f0f0207221047eda29c9141acae63"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/1UkntyVdBTo8Aa6HdK-RUrNpWc0OW7MsI/view?usp=drive_link"
         },
         {
@@ -4545,7 +4546,7 @@
               "sha256": "4f3aa2837f792c1e3212dde624e0b3e3d5fb678abbd0ce697b2e617634b852da"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/1Wt3tviBhFcz9bKJYPQIMAqwyKQzm6fy0/view?usp=drive_link"
         },
         {
@@ -4593,7 +4594,7 @@
               "sha256": "537a014d131ffca9fa1ac69448239aa414840639b0e9dd7e5173f7fb895954b8"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/16vt4yiR9Nb-rGcqIYmmW7yCd-kz2YuzV/view?usp=drive_link"
         },
         {
@@ -4641,7 +4642,7 @@
               "sha256": "eade91f9ece8428bb2b3b332a0a6cf276eba023a7b6971451373149d014b1736"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/1ElqDXbCxOrQT65Iwp2eonZE-kKfU6Lad/view?usp=drive_link"
         },
         {
@@ -4689,7 +4690,7 @@
               "sha256": "79325c882fcdf586f50ff3fb4c1da8773bc27d578271a84d8c9a8e3bf2f5ac65"
             }
           ],
-          "index": 7,
+          "index": 8,
           "link": "https://drive.google.com/file/d/1qVNqiJSQDec4_lTA1J97hQBy4F2UAHp4/view?usp=drive_link"
         },
         {
@@ -4737,7 +4738,7 @@
               "sha256": "c5aa6d1145c43d5485cd64baa3a996ace3e9c06ce4fcf2ecc314646d12fa930c"
             }
           ],
-          "index": 8,
+          "index": 9,
           "link": "https://drive.google.com/file/d/1SeUiuDymNkGaHJzFjaUoV94tI6htc-ck/view?usp=drive_link"
         }
       ],
@@ -4749,8 +4750,8 @@
       "descriptionSource": {
         "id": "1ZAaP4MaDIt0A9fR2qJm9PTLemTWdX_qLPXVR5KvmvNQ",
         "title": "#PH14011_Description",
-        "modifiedTime": "2026-09-14T07:27:30.828Z",
-        "content": "• Built alongside #PH14011\n• Printed graphics and all-over pattern\n• Premium polyester and striped ribbing\n• Moderately wide silhouette\n• Signature tab on sleeve\n• Made in Taiwan\n\n-\n\n這是一款全新的運動休閒短Ｔ\n為了結合運動服飾的機能與休閒服飾的質感\n我們選擇從足球衣的型態切入\n打造現代生活必備的運動休閒系列\n\n對於運動型態與休閒型態的權衡\n採用手感紮實的重磅面料來中和運動氣息\n同時加入特殊涼感纖維以維持必備機能\n\n為了兼顧不同穿著風格的需求\n正常尺寸的版型設定為歐美流行的合身輪廓\n拿大一號則可以穿出亞洲持續延燒的寬鬆風格\n\n因為要在休閒場合享受運動服飾的舒適\n也要在運動時追求休閒服飾的風格與魅力\n我們自各項賽事的復古球衣汲取靈感\n在領口及袖口都採用厚實的羅紋滾邊\n\nAthleisure、Blokecore、Clean Fit 的流行都有段時間了\n我們推出運動休閒系列不是要追逐潮流\n而是要結合時代中最單純的形式與機能\n這樣的美學曾是新潮的象徵\n也將成為永恆的趨勢\n\n-\n\n　　　 M　　L　　XL\n肩寬　𝟧𝟥.𝟢　𝟧𝟦.𝟧　𝟧𝟨.𝟢\n胸寬　𝟧𝟨.𝟧　𝟧𝟫.𝟢　𝟨𝟣.𝟧\n袖長　𝟤𝟥.𝟧　𝟤𝟦.𝟧　𝟤𝟧.𝟧\n衣長　𝟩𝟣.𝟢　𝟩𝟥.𝟢　𝟩𝟧.𝟢　(cm)\n\n建議身高 < 173 著用 M\n建議身高 173~178 著用 L\n建議身高 > 178 著用 XL　(cm)\n\n#PH14011",
+        "modifiedTime": "2026-10-02T13:56:51.664Z",
+        "content": "• Built alongside #PH14011\n• Premium polyester and striped ribbing\n• Printed graphics and all-over pattern\n• Moderately wide silhouette\n• Signature tab on sleeve\n• Made in Taiwan\n\n-\n\n這是一款全新的運動休閒短Ｔ\n為了結合運動服飾的機能與休閒服飾的質感\n我們選擇從足球衣的型態切入\n打造現代生活必備的運動休閒系列\n\n對於運動型態與休閒型態的權衡\n採用手感紮實的重磅面料來中和運動氣息\n同時加入特殊涼感纖維以維持必備機能\n\n為了兼顧不同穿著風格的需求\n正常尺寸的版型設定為歐美流行的合身輪廓\n拿大一號則可以穿出亞洲持續延燒的寬鬆風格\n\n因為要在休閒場合享受運動服飾的舒適\n也要在運動時追求休閒服飾的風格與魅力\n我們自各項賽事的復古球衣汲取靈感\n在領口及袖口都採用厚實的羅紋滾邊\n\nAthleisure、Blokecore、Clean Fit 的流行都有段時間了\n我們推出運動休閒系列不是要追逐潮流\n而是要結合時代中最單純的形式與機能\n這樣的美學曾是新潮的象徵\n也將成為永恆的趨勢\n\n-\n\n　　　 M　　L　　XL\n肩寬　𝟧𝟥.𝟢　𝟧𝟦.𝟧　𝟧𝟨.𝟢\n胸寬　𝟧𝟨.𝟧　𝟧𝟫.𝟢　𝟨𝟣.𝟧\n袖長　𝟤𝟥.𝟧　𝟤𝟦.𝟧　𝟤𝟧.𝟧\n衣長　𝟩𝟣.𝟢　𝟩𝟥.𝟢　𝟩𝟧.𝟢　(cm)\n\n建議身高 < 173 著用 M\n建議身高 173~178 著用 L\n建議身高 > 178 著用 XL　(cm)\n\n#PH14011",
         "link": "https://docs.google.com/document/d/1ZAaP4MaDIt0A9fR2qJm9PTLemTWdX_qLPXVR5KvmvNQ/edit?usp=drive_link"
       },
       "variants": [
@@ -4905,7 +4906,7 @@
               "sha256": "f5a33b69f0420f0057b4f61bff874c0bb888f23571faa5408a3c14f572eca49d"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1MEpHonb6nsEFG5UOuS30MeQmaevquZgm/view?usp=drive_link"
         },
         {
@@ -4953,7 +4954,7 @@
               "sha256": "6d7daf57aeda44943257e2de6dc86cbc0b5f0f0207221047eda29c9141acae63"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1UkntyVdBTo8Aa6HdK-RUrNpWc0OW7MsI/view?usp=drive_link"
         },
         {
@@ -5001,7 +5002,7 @@
               "sha256": "537a014d131ffca9fa1ac69448239aa414840639b0e9dd7e5173f7fb895954b8"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/16vt4yiR9Nb-rGcqIYmmW7yCd-kz2YuzV/view?usp=drive_link"
         }
       ]
@@ -5137,7 +5138,7 @@
               "sha256": "7267a91b81e4aedfe41e829d745aa4f18fae5ca59f243fdfa2a76f9a9b8ebef3"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/1dFjv08blH2rHKuGPrnVAg7oClDRHLV8C/view?usp=drive_link"
         },
         {
@@ -5185,7 +5186,7 @@
               "sha256": "ad97aa24f37d76d3b4f62e0e5a5b755364fbee3c45d9fb308347f94ed7ce4850"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/15MoY7d0pDPxYQ0eENpynkbviXaqiDBpD/view?usp=drive_link"
         },
         {
@@ -5233,7 +5234,7 @@
               "sha256": "7b3dcdb7aa7e5c2ca71d5e7d4ca217f8de8a2c35c187a82169ea5fbb55ebdcc5"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/1Em7Z-zRJxD6EuHCB4en-gn-mO7B-5nCv/view?usp=drive_link"
         },
         {
@@ -5281,7 +5282,7 @@
               "sha256": "ce0b3870a0abd2d672b460efb1f6dc54a82d1670b6cc36fbef9bbf9a88c0dc76"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/1qlBALRv6GgzocJWE6eUO0Knf65VInaON/view?usp=drive_link"
         },
         {
@@ -5329,7 +5330,7 @@
               "sha256": "6ef7d68c5fa4262aba4fcbd90c372a8654afb03ac2385d8e756c1b598f3a8093"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/1GTRoyOFGV-_xrKoK8tMxU_xyB28TX6SE/view?usp=drive_link"
         },
         {
@@ -5377,7 +5378,7 @@
               "sha256": "746717967546de82ee0adc1c6d0136e0e258c06a1b73415ce0fd623df61df63e"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/1y7-xT2IJK2JZIL1cwDoWyIvtrfIPC4vW/view?usp=drive_link"
         },
         {
@@ -5425,7 +5426,7 @@
               "sha256": "e93447f01f4830f2a7357cf2350fd34dd8bc62caa3bb96d53b9c60e5687717e0"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/1VF4-rimEg3R218mzJL9OHUvSnvBRRgEq/view?usp=drive_link"
         },
         {
@@ -5473,7 +5474,7 @@
               "sha256": "5b84cea9fc90febd7982d14cccb9eb7ec22b08a8bfb8ede76ab3e5b1c6776a33"
             }
           ],
-          "index": 7,
+          "index": 8,
           "link": "https://drive.google.com/file/d/1XYOZwqZ75ELpsytNtEDr4bGISHEanu0O/view?usp=drive_link"
         }
       ],
@@ -5608,7 +5609,7 @@
               "sha256": "ad97aa24f37d76d3b4f62e0e5a5b755364fbee3c45d9fb308347f94ed7ce4850"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/15MoY7d0pDPxYQ0eENpynkbviXaqiDBpD/view?usp=drive_link"
         },
         {
@@ -5656,7 +5657,7 @@
               "sha256": "ce0b3870a0abd2d672b460efb1f6dc54a82d1670b6cc36fbef9bbf9a88c0dc76"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1qlBALRv6GgzocJWE6eUO0Knf65VInaON/view?usp=drive_link"
         }
       ]
@@ -5708,7 +5709,7 @@
               "sha256": "b010730d456d8955a8cb3c824a3d6e35fcb657443705aab714bd65a528792fb4"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/1aD6_qQBfVxVT0wCviNyOmBUi8JZCQeXg/view?usp=drive_link"
         },
         {
@@ -5756,7 +5757,7 @@
               "sha256": "e1f3990eb5a7fc581e25f705706f10fad40120313224b9126f19d75ef8064d77"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/1sXfugcks7Tp_OGddB-odDAyMHD6p1342/view?usp=drive_link"
         },
         {
@@ -5804,7 +5805,7 @@
               "sha256": "eba3ad26750fe14fe557fadae4f28bae1df498f33112cb32b37430f6ebb97f12"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/1qNzbVIZyqY8CuJbNwSXRCLpDM_wgQT8b/view?usp=drive_link"
         },
         {
@@ -5852,7 +5853,7 @@
               "sha256": "f2ae2ca2494367313d57e080dbd80e0347c107e055b91e6c29f0145b38bc4184"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/1pPskDdCeO17RHJixaBf6ZtfD7X4dom_m/view?usp=drive_link"
         },
         {
@@ -5900,7 +5901,7 @@
               "sha256": "c721f060925a885d0802949f6b635d226321854969785e9c2d768a588f8dda18"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/1WiTxoIKxHwv6kzRE9IUeuxYXo01MxZWC/view?usp=drive_link"
         },
         {
@@ -5948,7 +5949,7 @@
               "sha256": "6a1dfd908014e17d67f8abed7888f80ef4d071d922ed7ccbd0dee93f89e27e97"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/1lZ5KaXc-zPof1M6WhXRxbHsaeWDXLbEZ/view?usp=drive_link"
         },
         {
@@ -5996,7 +5997,7 @@
               "sha256": "b7aa470e934c15d68ee454e387d71307abafeebc087d47ed7dc408187e4c0777"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/1sK02J6ERHliO3R_MO90UsVciauEPWVwp/view?usp=drive_link"
         }
       ],
@@ -6131,7 +6132,7 @@
               "sha256": "eba3ad26750fe14fe557fadae4f28bae1df498f33112cb32b37430f6ebb97f12"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1qNzbVIZyqY8CuJbNwSXRCLpDM_wgQT8b/view?usp=drive_link"
         },
         {
@@ -6179,7 +6180,7 @@
               "sha256": "c721f060925a885d0802949f6b635d226321854969785e9c2d768a588f8dda18"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1WiTxoIKxHwv6kzRE9IUeuxYXo01MxZWC/view?usp=drive_link"
         }
       ]
@@ -6231,7 +6232,7 @@
               "sha256": "714cb1554e80de31d6b12a39f41b15fc306b940a0a565cbf6a97b5291b4b44bc"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/1eVF3BjhYHuNOLDVQAHzTg35JbF-747tA/view?usp=drive_link"
         },
         {
@@ -6279,7 +6280,7 @@
               "sha256": "81ce0ff95d9af42e1b049c75fa7d85e26de663a8c6058cb959d3c0f027a331b3"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/1SBxGuCoosUQn780a4aTDjmFGQa6Mxqo_/view?usp=drive_link"
         },
         {
@@ -6327,7 +6328,7 @@
               "sha256": "c4b3f7a158c790578c91566fc4a70babd84d94884d51881d613252e11e554282"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/1-f0dgQP5wFV7QLmuYhfHtyG8zlqAza_8/view?usp=drive_link"
         },
         {
@@ -6375,7 +6376,7 @@
               "sha256": "101129cd98ace28417ec0ff75b5b9d6aba2e3b7e77fd10f95361229d027dd733"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/158Z3i28rRVwZ4-ELl1ab36MTIdbXtRr6/view?usp=drive_link"
         },
         {
@@ -6423,7 +6424,7 @@
               "sha256": "de4cf5a0b37487cbfa3e92c00ba3cf4a548989d9da3fcb50dea2d797749ed535"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/143AfNPkZG76TFJ4LLMdth8gQcX0XEmX-/view?usp=drive_link"
         },
         {
@@ -6471,7 +6472,7 @@
               "sha256": "9d4f953a323e0e1a32be448a14bb9d7c808ef2d655d13cf08f7718c37316f619"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/1UDlOA9PiC2pRk9juPeI6h0UvZxG0MJub/view?usp=drive_link"
         },
         {
@@ -6519,7 +6520,7 @@
               "sha256": "a9cb68624a1fba26cb0e5a37936915ec452c1bfcaed7895e8fb268594044fdc9"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/1hTVUqwUyVwrDE-KRxec4Nr0n4eaPmm80/view?usp=drive_link"
         }
       ],
@@ -6654,7 +6655,7 @@
               "sha256": "c4b3f7a158c790578c91566fc4a70babd84d94884d51881d613252e11e554282"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1-f0dgQP5wFV7QLmuYhfHtyG8zlqAza_8/view?usp=drive_link"
         },
         {
@@ -6702,7 +6703,7 @@
               "sha256": "de4cf5a0b37487cbfa3e92c00ba3cf4a548989d9da3fcb50dea2d797749ed535"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/143AfNPkZG76TFJ4LLMdth8gQcX0XEmX-/view?usp=drive_link"
         }
       ]
@@ -6754,7 +6755,7 @@
               "sha256": "96b25aa56b9a46d95d3a07030308ea3248c27e864ee8815090ed6a7dfcf7ff9f"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/1Nfv-Bci6bYfc7_PQCW87YtY_YBtTqQzN/view?usp=drive_link"
         },
         {
@@ -6802,7 +6803,7 @@
               "sha256": "f7a8fc896f7aad9d0b3bf9f97e43601072e53a72aa3ab8116eefc2120c467d1d"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/18zn7t0soAFMe1G2_f7O7-x8Z3MWJodnK/view?usp=drive_link"
         },
         {
@@ -6850,7 +6851,7 @@
               "sha256": "c3fc06bf08f96381a595b6b2393da6c17999c4c5aa81c704115a85a122d09b60"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/1f4ydq0DoWzaaGmu61VqFtQsHq6XxjTVZ/view?usp=drive_link"
         },
         {
@@ -6898,7 +6899,7 @@
               "sha256": "277e7b9312422ab6171c1b1d21eab97df72d9602b9f6ccc1ee85fa8d8d92ade1"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/1xQ5UAdCA1sEpOusv8ffr28c1qadaRIo4/view?usp=drive_link"
         },
         {
@@ -6946,7 +6947,7 @@
               "sha256": "50d6978376adf8dcfeaf4b3a03f74be17de36edc90e70ee36686bf450b05c292"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/1EgB9nZbJ6acw82vL7iw9Qs9Hw3z_7wBj/view?usp=drive_link"
         },
         {
@@ -6994,7 +6995,7 @@
               "sha256": "00cc6d68301248f585477fab9c1a45b63d7a8ed8896d5050cc7b11d6afa4c6e6"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/1m4pvY1jc3dsGxda03nR_f18Tf0Z6-XpS/view?usp=drive_link"
         },
         {
@@ -7042,7 +7043,7 @@
               "sha256": "b88ca5747414a946f856b9389a44c0182b9d06b694c62ea9ac8ff0ffd5cfc0ce"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/1GZwY4_dYtC8h_T9WeXnyPuedVQCsXCcV/view?usp=drive_link"
         }
       ],
@@ -7177,7 +7178,7 @@
               "sha256": "c3fc06bf08f96381a595b6b2393da6c17999c4c5aa81c704115a85a122d09b60"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1f4ydq0DoWzaaGmu61VqFtQsHq6XxjTVZ/view?usp=drive_link"
         },
         {
@@ -7225,7 +7226,7 @@
               "sha256": "50d6978376adf8dcfeaf4b3a03f74be17de36edc90e70ee36686bf450b05c292"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1EgB9nZbJ6acw82vL7iw9Qs9Hw3z_7wBj/view?usp=drive_link"
         }
       ]
@@ -7277,7 +7278,7 @@
               "sha256": "5394013a3021370fab2b9d37ec56f756cecbff7c0bd872bb474f11221631e9ac"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/1egte12On90XAA7qxrRieP8KQ1oPmkVu5/view?usp=drive_link"
         },
         {
@@ -7325,7 +7326,7 @@
               "sha256": "61fe8c2a2794b26c1b616df039cc7c09f4b0d1af0ce847dcb6d777b26334c759"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/1C0Il91ifCB9gdIb5zaL99C5YwcGEiuYy/view?usp=drive_link"
         },
         {
@@ -7373,7 +7374,7 @@
               "sha256": "a2e397b8a5f5b852912d228593da1ae7055515ff2faf04213193e9d1c788f22a"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/1v9p5lqI4ZSeV4G15uVToXKA6l0dtCR5r/view?usp=drive_link"
         },
         {
@@ -7421,7 +7422,7 @@
               "sha256": "1c9e366353da196620a24adf8532785c902a1aff9088d1b981883549098fe604"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/1dcUe6o92XCq7DamwFvJiDrrI2wqwObgt/view?usp=drive_link"
         },
         {
@@ -7469,7 +7470,7 @@
               "sha256": "f46fa576da03c94ff86bb2b7a3876fa0e3337d24ab7ea867e45c389e67c1a78f"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/1dHSKN9yNmzKSD6PC1fQUrOzpsH0Z-qAm/view?usp=drive_link"
         },
         {
@@ -7517,7 +7518,7 @@
               "sha256": "65c18c68b7c12b92e9fd35e4bcd8b42ef0bba61104f7db4a714337c16f4a7af8"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/1anIJ4hyOBEUj98KSZ2aE3K7IOlcR-Uvs/view?usp=drive_link"
         },
         {
@@ -7565,7 +7566,7 @@
               "sha256": "bb517c2f868620d9d5a815d453ebbbb807f4e4dd0bcd4136d8778056fec2bc77"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/1RCfDqCpJ4UsmNp9gKCWIw3DFBFwUHNFF/view?usp=drive_link"
         }
       ],
@@ -7700,7 +7701,7 @@
               "sha256": "a2e397b8a5f5b852912d228593da1ae7055515ff2faf04213193e9d1c788f22a"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1v9p5lqI4ZSeV4G15uVToXKA6l0dtCR5r/view?usp=drive_link"
         },
         {
@@ -7748,7 +7749,7 @@
               "sha256": "f46fa576da03c94ff86bb2b7a3876fa0e3337d24ab7ea867e45c389e67c1a78f"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1dHSKN9yNmzKSD6PC1fQUrOzpsH0Z-qAm/view?usp=drive_link"
         }
       ]
@@ -7800,7 +7801,7 @@
               "sha256": "2c9e18ccc5c7f16af3a5b145236a62308761526e4863c21809abb7823fe58c58"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/1-3agFcmnS6koIEDurxr3vhK77P6ULUgN/view?usp=drive_link"
         },
         {
@@ -7848,7 +7849,7 @@
               "sha256": "2d1fa94a040287388a049dccfb54138deb982dbbe57ae2edd9b6a3913d337e9f"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/1T0Rt0lRCgN9JSAihnHJMDH0856gO_UX-/view?usp=drive_link"
         },
         {
@@ -7896,7 +7897,7 @@
               "sha256": "1784ca98bf6a60d16f2bb76bc95224a3136254853652b6025b2c652c9ddb4b66"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/1F1YfUlzCzHI4bFxXECnxu--yc-HqVT41/view?usp=drive_link"
         },
         {
@@ -7944,7 +7945,7 @@
               "sha256": "02f0c0d7e7acb465fc418359ba55c8f38672736d92b1fc9ad46c93aed537d40c"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/17-5IcKzKREcribSc06vsXEJj41P9G835/view?usp=drive_link"
         },
         {
@@ -7992,7 +7993,7 @@
               "sha256": "8ba97a92877d89dad4c6eb446897011b1613eecc7580a7e42e29ab585e455a30"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/1VQqtBsJWOc9u2Db07v2Yi4t4X_xPHrD7/view?usp=drive_link"
         },
         {
@@ -8040,7 +8041,7 @@
               "sha256": "40f9e7c4518f185ab42aed6dd924261a8fcaa25d6cbd24fbb7978f904b9ef2e4"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/1Rdjf5UokoDhOVojPk27KiDBi0NpjYwTB/view?usp=drive_link"
         },
         {
@@ -8088,7 +8089,7 @@
               "sha256": "1c3cfbd6c1f8a351a9d31cc717f6b01d83d0a92168c1ef046e494dbf5a4c62b5"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/1a_nhQKFLzOpSdV3aTG9yBnsT2ibwNzOh/view?usp=drive_link"
         }
       ],
@@ -8223,7 +8224,7 @@
               "sha256": "1784ca98bf6a60d16f2bb76bc95224a3136254853652b6025b2c652c9ddb4b66"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1F1YfUlzCzHI4bFxXECnxu--yc-HqVT41/view?usp=drive_link"
         },
         {
@@ -8271,7 +8272,7 @@
               "sha256": "8ba97a92877d89dad4c6eb446897011b1613eecc7580a7e42e29ab585e455a30"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1VQqtBsJWOc9u2Db07v2Yi4t4X_xPHrD7/view?usp=drive_link"
         }
       ]
@@ -8323,7 +8324,7 @@
               "sha256": "e890691cebf23f6cc33c9019f54202514a833f42f8a98f33d45376710077e96b"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/1IZ4bIQMwxFoCsDYU5tIU4M-tz4tKXA4-/view?usp=drive_link"
         },
         {
@@ -8371,7 +8372,7 @@
               "sha256": "ce6cb82db70479979bad5fed622d7efe37d319a4e1a2745172bf892a17489cfc"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/1TOXLeToc-9r9eoWMwFrRa_LSY_-0-Mez/view?usp=drive_link"
         },
         {
@@ -8419,7 +8420,7 @@
               "sha256": "7264e3186c33173b2f534d60c63e2f71d186fd413c1e4a058cd7d728fde08002"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/1FBQPhl_SlMc6VZ-4S9RcFLUxWgdoYVsX/view?usp=drive_link"
         },
         {
@@ -8467,7 +8468,7 @@
               "sha256": "c692e666645300cb9f5e23f2ae75c54870d5c50db48d4e6b4bc9dccb77704a48"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/1UInKShaJBJXJONa3JA2opHi_GGR6aiSV/view?usp=drive_link"
         },
         {
@@ -8515,7 +8516,7 @@
               "sha256": "214a808e280a91e957b0ecc29cfe70aff6fc6beefe8469edd3ca10b7c2c7f0dd"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/10hSoE5B-2V-mCtNea_HUPPt_p6WOIS9Y/view?usp=drive_link"
         },
         {
@@ -8563,7 +8564,7 @@
               "sha256": "fc0131915a0a572820effeae00b4f0c9877436b7823668e3e22449681c3377f5"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/18KD25jTlnYDRbwrhRJsq3mq8RmireyXC/view?usp=drive_link"
         },
         {
@@ -8611,7 +8612,7 @@
               "sha256": "fef45633777eafd2b1b24a7f36883c87203d1df21a3cd7663afe758330acf052"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/1YrlbFeULWvcPLm6SfWGcRhV_y2v-w7Vv/view?usp=drive_link"
         }
       ],
@@ -8746,7 +8747,7 @@
               "sha256": "7264e3186c33173b2f534d60c63e2f71d186fd413c1e4a058cd7d728fde08002"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1FBQPhl_SlMc6VZ-4S9RcFLUxWgdoYVsX/view?usp=drive_link"
         },
         {
@@ -8794,7 +8795,7 @@
               "sha256": "214a808e280a91e957b0ecc29cfe70aff6fc6beefe8469edd3ca10b7c2c7f0dd"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/10hSoE5B-2V-mCtNea_HUPPt_p6WOIS9Y/view?usp=drive_link"
         }
       ]
@@ -8846,7 +8847,7 @@
               "sha256": "6685b84a051c93c3672302307ff37427ddcebd5732f44d089712431fd7bc5a34"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/1jfKdMWNuY5lbRm8R_B4t7GfBy4vHYvUk/view?usp=drive_link"
         },
         {
@@ -8894,7 +8895,7 @@
               "sha256": "19252813da329ad45772efa4789e0eab2e3629a5c1a7e43fd9c35832b94bfb19"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/1IIl656n7Wbh1GzMn_sNsdUzLwH81MoWr/view?usp=drive_link"
         },
         {
@@ -8942,7 +8943,7 @@
               "sha256": "c38b66dd6c347a29b6c2c05fa717582226966b6a1aef764dfeed9ff61195a485"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/1Zv4ygYRPjFESjsqtVrPWLHQIkRbiaMVy/view?usp=drive_link"
         },
         {
@@ -8990,7 +8991,7 @@
               "sha256": "6761bda8522b42a74859fca6200f48824c551b5ff4ac14dfa5e6df67743b4b7c"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/1gLtKz-ij6fnPCJbzinU4NHCVPii7xx8s/view?usp=drive_link"
         },
         {
@@ -9038,7 +9039,7 @@
               "sha256": "b4d7dda700767be432f3080e553425a15a6eef81421080e69fc90103d1cd00d9"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/1QrhGyaSfHd3MCgyaJyt4TivFmRah5NSC/view?usp=drive_link"
         },
         {
@@ -9086,7 +9087,7 @@
               "sha256": "be130a8884161dd24f0a88db8ca87de30132a67f134c89d131e70562c81f936d"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/1L1la16Qqz5cxUi47BFXXUe98ZsfCgixO/view?usp=drive_link"
         },
         {
@@ -9134,7 +9135,7 @@
               "sha256": "26aa3adf380466191b67dd5f3eef463691e28da32581bb1c3f7e3aec042a7595"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/1qXsQVQfwj6VWVH3k9OhUaUxqElOBB6KO/view?usp=drive_link"
         }
       ],
@@ -9269,7 +9270,7 @@
               "sha256": "c38b66dd6c347a29b6c2c05fa717582226966b6a1aef764dfeed9ff61195a485"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1Zv4ygYRPjFESjsqtVrPWLHQIkRbiaMVy/view?usp=drive_link"
         },
         {
@@ -9317,7 +9318,7 @@
               "sha256": "b4d7dda700767be432f3080e553425a15a6eef81421080e69fc90103d1cd00d9"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1QrhGyaSfHd3MCgyaJyt4TivFmRah5NSC/view?usp=drive_link"
         }
       ]
@@ -9369,7 +9370,7 @@
               "sha256": "8717043513133d4dd16e3e7bca11a197c1ae97239974d4db1c975877057081b8"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/1bncC_i3tlp1xBS98IMtIxdCcskdjRQqA/view?usp=drive_link"
         },
         {
@@ -9417,7 +9418,7 @@
               "sha256": "d7d791d3247c300355ed891054bd7bc412395381f2e647814d3c8e497aba8fc0"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/1e-jT5HoPLjCl19K71NlkT-nz2oFvmObp/view?usp=drive_link"
         },
         {
@@ -9465,7 +9466,7 @@
               "sha256": "20ada74504388256825690579b5470edd8f9bb3dab2fca78d5315dc5c6b03b72"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/1lJM7LFnIssZBD_DnBZL4Nnfc7IBH_FNp/view?usp=drive_link"
         },
         {
@@ -9513,7 +9514,7 @@
               "sha256": "b39684480e991c209f03ad11e415aa2bddf27a0e0beeaf4ce6c5f46241d916d1"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/1cTX-SRy89XfjVp4rUYYTuECgNQX9WplV/view?usp=drive_link"
         },
         {
@@ -9561,7 +9562,7 @@
               "sha256": "f27311e90d0dab4a55d1bdb87099d372b800ffad90a1f74b39a0aff7d9e56b3d"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/16u54LXSYKDHqVl-AoTE3XGhAB0XMc9c5/view?usp=drive_link"
         },
         {
@@ -9609,7 +9610,7 @@
               "sha256": "7851a43d9cd3df945229f26fea779a0374d957351d7f857231d8fc49dd841714"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/14lW7P1sisR9u2vwZtrmcTzu18tWNN2NS/view?usp=drive_link"
         },
         {
@@ -9657,7 +9658,7 @@
               "sha256": "139b2a3e7361e6be92d242ca185ae12e9d07e22949e80853168cb3b2ad3771ac"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/1XlvfY5NLdey1bX1ioM_krc-VTQIzxDfQ/view?usp=drive_link"
         },
         {
@@ -9705,7 +9706,7 @@
               "sha256": "5bfdc8effc8e88c3e84bbe88b6ea051321f9f375c47b31381c086f8bcc4e01d9"
             }
           ],
-          "index": 7,
+          "index": 8,
           "link": "https://drive.google.com/file/d/1UsOE5bwRpeZHgv7pgA7Ak-PpgbqADthk/view?usp=drive_link"
         }
       ],
@@ -9807,7 +9808,7 @@
               "sha256": "cbae527494089786166afa0d2887aa2cb3e3d92b71eaf43d87970a594e5aaef3"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/10qZPlB9h2hE1ZdbJ0YDG3jc-vE1YQV4I/view?usp=drive_link"
         },
         {
@@ -9855,7 +9856,7 @@
               "sha256": "5707f8ccf20f571a843a040f015fa3d362f1951b58c359a87f056cddbdb20c35"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/1cdtL5EWKKTnE3-Wj20Au1R_wMCIAFhvj/view?usp=drive_link"
         },
         {
@@ -9903,7 +9904,7 @@
               "sha256": "bcf1ee7a9e38b27fb0408f285cebc15f53d28c460ee843709462290d21f0900c"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/1vDMJjfHLbYZ8fPHfHc9OWlL6NiI6BBo4/view?usp=drive_link"
         },
         {
@@ -9951,7 +9952,7 @@
               "sha256": "82dd86014044d4e2f660b1387c9c7e512368ae9332b6c95ae165c1b12c84f05b"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/1zwtsHOcaOo_atyzWCMNpXOSHY3BJzx9J/view?usp=drive_link"
         },
         {
@@ -9999,7 +10000,7 @@
               "sha256": "a31134988e7e421b8dd1fc9957359d007d624ab7066aeff9094201355eddec6c"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/14INC1RjPtNwfmYG42_Uonz04EKOFjSuX/view?usp=drive_link"
         },
         {
@@ -10047,7 +10048,7 @@
               "sha256": "7851a43d9cd3df945229f26fea779a0374d957351d7f857231d8fc49dd841714"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/1rdzhH9qIixmVb4NnrkPM17yW5RSW2Gq4/view?usp=drive_link"
         },
         {
@@ -10095,7 +10096,7 @@
               "sha256": "5f40ee465bbda81a80d80dd6360ec5e8f8e22ee61184df9262a36ad9afda26bf"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/15V6kJH-mDUtOeuBKRyMjwM4zfdlrvveU/view?usp=drive_link"
         },
         {
@@ -10143,7 +10144,7 @@
               "sha256": "5311fc3625b3145d0defa4fcd596474e21f8dfd8e3a25b75fb732804f6e1d10a"
             }
           ],
-          "index": 7,
+          "index": 8,
           "link": "https://drive.google.com/file/d/1dOMPDs8G3R_TNwJeKYPNDl29nRalGN15/view?usp=drive_link"
         }
       ],
@@ -10245,7 +10246,7 @@
               "sha256": "f92c9f5bad97b8b8a5d2ffeaeebe1db9adae84b6df13595051e0d7c5d5a23f69"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/1BEn3v6PK9e-t_hgDh0Zo6fW-_9q15VCA/view?usp=drive_link"
         },
         {
@@ -10293,7 +10294,7 @@
               "sha256": "d4ac2c7de7cc60f78279f27567c2beb4d433e5b7a3c08d393be324d77261d2b9"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/1DfkwWIhRE22_vYevG8WhwwpYPcRWFaSz/view?usp=drive_link"
         },
         {
@@ -10341,7 +10342,7 @@
               "sha256": "0185cc8b4d8348cf4eb729975454139d903a1b60f0edc4f13daeb73de9a0d101"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/1KNJ0YDEKQOmj5IILfF2bvr0s3rfsg_WO/view?usp=drive_link"
         },
         {
@@ -10389,7 +10390,7 @@
               "sha256": "dceb7b05be894a73a473d691015499ac1196c1c937836397c23ee6c1b745ef26"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/1mzrCQhG45qrK9a0jok0V-8F_OA5Q57Y2/view?usp=drive_link"
         },
         {
@@ -10437,7 +10438,7 @@
               "sha256": "c931ab8e11bbb1469b7e3d102640c13baab588c2d595c0a9fd4e6738abfd1498"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/1O5gLFZrU97X5Ew_b_65f3U6iYoAEQ6yL/view?usp=drive_link"
         },
         {
@@ -10485,7 +10486,7 @@
               "sha256": "81614e090e1717b0f448a31cb58fdb74f03dac2836db6dd4d7b79623d412b6c3"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/1L2DiixDnJ4ZOGlW6Al0_7QlaBrP91fCZ/view?usp=drive_link"
         },
         {
@@ -10533,7 +10534,7 @@
               "sha256": "424c8cd6171609980ee6d73561c0f2d6ee80361023929a9d420b26ff6193a4d1"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/1kmrR6D5CT3ubhZqTnyhpydq4rn6ibEc6/view?usp=drive_link"
         }
       ],
@@ -10701,7 +10702,7 @@
               "sha256": "d4ac2c7de7cc60f78279f27567c2beb4d433e5b7a3c08d393be324d77261d2b9"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1DfkwWIhRE22_vYevG8WhwwpYPcRWFaSz/view?usp=drive_link"
         },
         {
@@ -10749,7 +10750,7 @@
               "sha256": "0185cc8b4d8348cf4eb729975454139d903a1b60f0edc4f13daeb73de9a0d101"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1KNJ0YDEKQOmj5IILfF2bvr0s3rfsg_WO/view?usp=drive_link"
         },
         {
@@ -10797,7 +10798,7 @@
               "sha256": "dceb7b05be894a73a473d691015499ac1196c1c937836397c23ee6c1b745ef26"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1mzrCQhG45qrK9a0jok0V-8F_OA5Q57Y2/view?usp=drive_link"
         }
       ]
@@ -10810,7 +10811,7 @@
       "sequence": "025",
       "listPrice": 790,
       "salePrice": null,
-      "link": "https://shopee.tw/sugar.tiger",
+      "link": "https://shopee.tw/product/74187402/45867884416",
       "descriptionSource": {
         "id": "1Mb0VU2NZIKryEx_0LHF-ZdBZhJ-yTf1jEf1hQ5yfsKw",
         "title": "#PD14025_Description",
@@ -10864,7 +10865,7 @@
               "sha256": "57f544a9c02364bf94537d83f4f493518ec19d59bdb4069ecd7fd6e7b39d13de"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/17rizCCuoL573KbtziQ4g6WOO-cp_hpDx/view?usp=drive_link"
         },
         {
@@ -10912,7 +10913,7 @@
               "sha256": "fa579c4ac24632e384a9bb34139e7af55d380e4e352067d036f031f147e6510e"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/1Tkl8r6qPIWzQqKr3_56ZnUHYdnrCvqez/view?usp=drive_link"
         },
         {
@@ -10960,7 +10961,7 @@
               "sha256": "8965c256e385e08ca4bde5969d270654213f5d4afb154e4187a860420d88148d"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/1r-ddL3IWDHwpB4UHbrYs1YICGvDLUWNw/view?usp=drive_link"
         },
         {
@@ -11008,7 +11009,7 @@
               "sha256": "7eae59b5ac9bb7ff1984f66bd9d19a6d39d54c1d0f0d45515b86f4e8060953d7"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/1APjIz1NG75t8CJ1QLunz7sq2lMOLvWCg/view?usp=drive_link"
         },
         {
@@ -11056,7 +11057,7 @@
               "sha256": "6cb6b59de013b792ed6c83a4165e5e0f30c42a89bfc7b637b915b9f865f6238c"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/154h8EU4rPSIDSNE1oVEF85Rvu0Fdc1d7/view?usp=drive_link"
         },
         {
@@ -11104,7 +11105,7 @@
               "sha256": "4d2c6d1d38926ee20dac1846156473706ee71c1b38ce50977c73705f9a0a2918"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/1dRjrwMaHscyqsLWWKEIX3tSrilSOeGxZ/view?usp=drive_link"
         },
         {
@@ -11152,7 +11153,7 @@
               "sha256": "ecf5817f0bcd616f8c7fa4d97646a9b291641d9c180aeb74a396df67d00bb474"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/1RLtAPc7k3oC1Lb1hUQLaaTf91Jla9qbl/view?usp=drive_link"
         }
       ],
@@ -11204,7 +11205,7 @@
               "sha256": "8965c256e385e08ca4bde5969d270654213f5d4afb154e4187a860420d88148d"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1r-ddL3IWDHwpB4UHbrYs1YICGvDLUWNw/view?usp=drive_link"
         },
         {
@@ -11252,7 +11253,7 @@
               "sha256": "6cb6b59de013b792ed6c83a4165e5e0f30c42a89bfc7b637b915b9f865f6238c"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/154h8EU4rPSIDSNE1oVEF85Rvu0Fdc1d7/view?usp=drive_link"
         },
         {
@@ -11300,7 +11301,7 @@
               "sha256": "ecf5817f0bcd616f8c7fa4d97646a9b291641d9c180aeb74a396df67d00bb474"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1RLtAPc7k3oC1Lb1hUQLaaTf91Jla9qbl/view?usp=drive_link"
         }
       ],
@@ -11414,7 +11415,7 @@
       "sequence": "026",
       "listPrice": 790,
       "salePrice": null,
-      "link": "https://shopee.tw/sugar.tiger",
+      "link": "https://shopee.tw/product/74187402/49967884448",
       "descriptionSource": {
         "id": "1jF7FabxSwPmdOFgkJiHAnL1bNZxNJ4PhWtyHNxVb5ag",
         "title": "#AE14026_Description",
@@ -11468,7 +11469,7 @@
               "sha256": "4ebbf14dcac46fa9ef4ea2ce28b476689fa8d345b71c0ebeb8b7a0e3bf299285"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/1b_fVwUhShLkybd4xif2RNwQ-LUK0hdov/view?usp=drive_link"
         },
         {
@@ -11516,7 +11517,7 @@
               "sha256": "89c99571ebd7a353ad06d862acfce3c05eaaf9aa57f61753f987747fcb16442b"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/1GyxZC_CQI2rGiW2uaWeiaBURkrCFaMbF/view?usp=drive_link"
         },
         {
@@ -11564,7 +11565,7 @@
               "sha256": "ec97172f7ae3485fc50b941f0d9db1682b32d88dd339190fff3cb8a35b0d8f8f"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/16P5iw_BbhUCOJjz6X8KM7WV73xLhHJjc/view?usp=drive_link"
         },
         {
@@ -11612,7 +11613,7 @@
               "sha256": "c779c4c86fcfb954d4de5b4bf7dadfb61e6f54d31a148be3955c7e7232be4e98"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/1YouFvUWWHPQKFrnbvYjodjdiKlzhJ6vw/view?usp=drive_link"
         },
         {
@@ -11660,7 +11661,7 @@
               "sha256": "935b65b0e12b9c890284550a25362c5f97636356c6465741cd926f1c6003e89f"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/1vHlqacOf-SRlTWuNdwYuqKbhWDjNJ1qq/view?usp=drive_link"
         },
         {
@@ -11708,7 +11709,7 @@
               "sha256": "71b3a202fb0452bbfa47a8d06e2fc5d7789c2888097102ed288fbd6ce3c863d7"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/1pY8gXoTZAgdvXKge4WqZmW2EbfpXgj1U/view?usp=drive_link"
         },
         {
@@ -11756,7 +11757,7 @@
               "sha256": "baa223eeb04b73543279f5d07368958b72c733124303696845fd631eff6742a3"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/1QqrmPtq4_UFHpALSdJDPIXC3l3KCA0a0/view?usp=drive_link"
         }
       ],
@@ -11808,7 +11809,7 @@
               "sha256": "ec97172f7ae3485fc50b941f0d9db1682b32d88dd339190fff3cb8a35b0d8f8f"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/16P5iw_BbhUCOJjz6X8KM7WV73xLhHJjc/view?usp=drive_link"
         },
         {
@@ -11856,7 +11857,7 @@
               "sha256": "935b65b0e12b9c890284550a25362c5f97636356c6465741cd926f1c6003e89f"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1vHlqacOf-SRlTWuNdwYuqKbhWDjNJ1qq/view?usp=drive_link"
         },
         {
@@ -11904,7 +11905,7 @@
               "sha256": "baa223eeb04b73543279f5d07368958b72c733124303696845fd631eff6742a3"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1QqrmPtq4_UFHpALSdJDPIXC3l3KCA0a0/view?usp=drive_link"
         }
       ],
@@ -12018,7 +12019,7 @@
       "sequence": "027",
       "listPrice": 790,
       "salePrice": null,
-      "link": "https://shopee.tw/sugar.tiger",
+      "link": "https://shopee.tw/product/74187402/51267875336",
       "descriptionSource": {
         "id": "1CocE0NYEGPlIg85V9lvyR3vrvfmnmXTJRBWZhKz8FEM",
         "title": "#TL14027_Description",
@@ -12072,7 +12073,7 @@
               "sha256": "fdc65d9fc1240256cd0cea46f644db8efa4c6a98bfd8d742082525b944a74920"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/14lf3j0DtKMbijHKVWxhN4X7OaY2P8sgB/view?usp=drive_link"
         },
         {
@@ -12120,7 +12121,7 @@
               "sha256": "9122b806efad18bd65d5f8748d067a21c971969e354d3c87ef74292b984daede"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/1Yop4ejsfnESlmnqeloELIe7y9IFCF_Et/view?usp=drive_link"
         },
         {
@@ -12168,7 +12169,7 @@
               "sha256": "ea0fea3bb494d17ee528c66451bf7cc7a1c55176a8182f9ea3cfd540baec4638"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/1WtjWnWtOy_0vTS_1nRXwk27_7DA9WuxP/view?usp=drive_link"
         },
         {
@@ -12216,7 +12217,7 @@
               "sha256": "03847ffc69be6d4d47ca9a7b0c8646f9a3bc944feddc3b726392c4ebf95d98a8"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/1cO2JcUF6Cm_v_pbvWjqOtCz_s1XnGyGG/view?usp=drive_link"
         },
         {
@@ -12264,7 +12265,7 @@
               "sha256": "597f1fb29ae834d440a2f91b9471d6aaf2fbce6fa72945401bde971154bb6388"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/1PixstDOIdKCybZMqHHC6-lfeyiyNwwJq/view?usp=drive_link"
         },
         {
@@ -12312,7 +12313,7 @@
               "sha256": "c6a39045079716256385271b1297fcf1b8930b48ac1c52c6e8efba8881ccf2e5"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/1jRwaRmY465jKZBTw5IAiStNIJO-mbqB-/view?usp=drive_link"
         },
         {
@@ -12360,7 +12361,7 @@
               "sha256": "9bbac3bec1043fb87a516d0410990018f06cbe39ec454fff798893a47e5400d6"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/178ARLQ8KBmKHqvB6ZIaOpP7cY2VacPO1/view?usp=drive_link"
         }
       ],
@@ -12412,7 +12413,7 @@
               "sha256": "ea0fea3bb494d17ee528c66451bf7cc7a1c55176a8182f9ea3cfd540baec4638"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1WtjWnWtOy_0vTS_1nRXwk27_7DA9WuxP/view?usp=drive_link"
         },
         {
@@ -12460,7 +12461,7 @@
               "sha256": "597f1fb29ae834d440a2f91b9471d6aaf2fbce6fa72945401bde971154bb6388"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1PixstDOIdKCybZMqHHC6-lfeyiyNwwJq/view?usp=drive_link"
         },
         {
@@ -12508,7 +12509,7 @@
               "sha256": "9bbac3bec1043fb87a516d0410990018f06cbe39ec454fff798893a47e5400d6"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/178ARLQ8KBmKHqvB6ZIaOpP7cY2VacPO1/view?usp=drive_link"
         }
       ],
@@ -12622,7 +12623,7 @@
       "sequence": "028",
       "listPrice": 790,
       "salePrice": null,
-      "link": "https://shopee.tw/sugar.tiger",
+      "link": "https://shopee.tw/product/74187402/58018094103",
       "descriptionSource": {
         "id": "1zvZj59F2gW2kmkb8zz2QSsK_aBBPPYStoQY1W2BOZBg",
         "title": "#BD14028_Description",
@@ -12676,7 +12677,7 @@
               "sha256": "68b710958cf38f7e157eecdcba1bb0da93fe627ba71d1e1d819223f80e4d620d"
             }
           ],
-          "index": 0,
+          "index": 1,
           "link": "https://drive.google.com/file/d/1X9oLZhKHL-GBt-Kvq-A9FSKn52IjE46l/view?usp=drive_link"
         },
         {
@@ -12724,7 +12725,7 @@
               "sha256": "21123f39b2bb3055a26eea64185ce6e91e42cdf5eb6a164ca951bea874899924"
             }
           ],
-          "index": 1,
+          "index": 2,
           "link": "https://drive.google.com/file/d/1rOm65gmz59BffT-TqxBUCIrscE4ZJm6n/view?usp=drive_link"
         },
         {
@@ -12772,7 +12773,7 @@
               "sha256": "1e80b903e033e2b48f47dc34749ae81d1f15572a9a5dbc182cc3b97bbf281092"
             }
           ],
-          "index": 2,
+          "index": 3,
           "link": "https://drive.google.com/file/d/1e95pivuIjHqDIKESJaDRkIbV2gleygl_/view?usp=drive_link"
         },
         {
@@ -12820,7 +12821,7 @@
               "sha256": "c611522b851772ef95b7addc5e01552275b8dcf78777e412ea89beedffc45b8f"
             }
           ],
-          "index": 3,
+          "index": 4,
           "link": "https://drive.google.com/file/d/114j6Ecy3hKWLwTlw2yGGPGL8RNt-Q0at/view?usp=drive_link"
         },
         {
@@ -12868,7 +12869,7 @@
               "sha256": "0e59fe9a4a47544e36a15167d89e5a7c49207abfe637c564ea839b906d5e0f04"
             }
           ],
-          "index": 4,
+          "index": 5,
           "link": "https://drive.google.com/file/d/1wczthMmhciFgcVp-_t3CAxikndUy-fnh/view?usp=drive_link"
         },
         {
@@ -12916,7 +12917,7 @@
               "sha256": "01bca97634d257686cd44741070d7e579f3c10ecb819e71f820553aa6ad2bded"
             }
           ],
-          "index": 5,
+          "index": 6,
           "link": "https://drive.google.com/file/d/1o5YDcJs0f9WJiJKahsDPH8m3S0qvUVXL/view?usp=drive_link"
         },
         {
@@ -12964,7 +12965,7 @@
               "sha256": "b5430887ed6eaf9c8c5fd1be9be9a38e8960b2a09e09f05ccdfd60ab625f988d"
             }
           ],
-          "index": 6,
+          "index": 7,
           "link": "https://drive.google.com/file/d/1KowWgXXhQhnNKQrRxRtRJtiN0xeffUpC/view?usp=drive_link"
         }
       ],
@@ -13016,7 +13017,7 @@
               "sha256": "1e80b903e033e2b48f47dc34749ae81d1f15572a9a5dbc182cc3b97bbf281092"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1e95pivuIjHqDIKESJaDRkIbV2gleygl_/view?usp=drive_link"
         },
         {
@@ -13064,7 +13065,7 @@
               "sha256": "0e59fe9a4a47544e36a15167d89e5a7c49207abfe637c564ea839b906d5e0f04"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1wczthMmhciFgcVp-_t3CAxikndUy-fnh/view?usp=drive_link"
         },
         {
@@ -13112,7 +13113,7 @@
               "sha256": "b5430887ed6eaf9c8c5fd1be9be9a38e8960b2a09e09f05ccdfd60ab625f988d"
             }
           ],
-          "index": 9,
+          "index": 0,
           "link": "https://drive.google.com/file/d/1KowWgXXhQhnNKQrRxRtRJtiN0xeffUpC/view?usp=drive_link"
         }
       ],
@@ -13215,6 +13216,2043 @@
           "sizeCode": "S7",
           "sizeName": "XL",
           "imageId": "1KowWgXXhQhnNKQrRxRtRJtiN0xeffUpC"
+        }
+      ]
+    },
+    {
+      "code": "GM42029",
+      "name": "PRDM Training Shorts",
+      "lineCode": "GM",
+      "typeCode": "42",
+      "sequence": "029",
+      "listPrice": 1180,
+      "salePrice": null,
+      "link": "https://shopee.tw/product/74187402/41405643937",
+      "descriptionSource": {
+        "id": "1tlfz0EuTizpBmS2wgeb_OwsYBrzNx05LR6fzMfzHAgU",
+        "title": "#GM42029_Description",
+        "modifiedTime": "2026-10-01T14:10:25.411Z",
+        "content": "• Modeled after #GM42022\n• 100% polyester fabric\n• 100% polyester drawstring with coated ends\n• Watch pocket & key ring inside front pocket\n• No-drop openings within front pockets\n• Signature tab on hem\n\n-\n\n我們回到經典的網眼短褲\n將熟悉的運動單品融入日常穿著\n\n外層以經典的網眼面料呈現復古氛圍\n內層則改用更加輕薄的裡布\n褲頭及褲腳的車縫收邊乾淨工整\n就算是看不見的每一處細節都很講究\n\n為了拉長腿部比例來修飾身形\n我們反覆雕琢較短的褲長\n並且選用與肌膚相近的黃棕色系\n維持下半身的視覺連貫性\n即使是較矮小的身形也能輕鬆駕馭\n\n致力於融合極簡外觀與日常機能\n我們在口袋內側額外縫製機能小袋\n並且設計了隱藏式的鑰匙扣環\n更獨創「防噴袋口」設計以防物品掉落\n\n考量到 Mono-Material 原則\n褲頭採用精心訂製的聚酯纖維抽繩\n搭配繩頭別富質感的浸膠做法\n\n這款短褲不只為運動場合而設計\n也能成為日常生活的一部分\n\n-\n\n　　　　 M　　L　　XL\n褲頭寬　𝟥𝟦.𝟢　𝟥𝟩.𝟢　𝟦𝟣.𝟢\n褲腳寬　𝟥𝟤.𝟢　𝟥𝟦.𝟧　𝟥𝟪.𝟢\n內側長　𝟣𝟤.𝟢　𝟣𝟥.𝟢　𝟣𝟦.𝟢\n外側長　𝟥𝟪.𝟢　𝟦𝟣.𝟢　𝟦𝟥.𝟢　(cm)\n\n建議腰圍 < 80 著用 M\n建議腰圍 80~90 著用 L\n建議腰圍 > 90 著用 XL　(cm)\n\n#GM42029",
+        "link": "https://docs.google.com/document/u/0/d/1tlfz0EuTizpBmS2wgeb_OwsYBrzNx05LR6fzMfzHAgU/edit"
+      },
+      "images": [
+        {
+          "id": "19jDu2jKh0NybBuy6zn4gRMkEskcfP70b",
+          "name": "#GM42029-C2136_ProductPhoto.jpg",
+          "modifiedTime": "2026-10-01T13:15:04.272Z",
+          "localPath": "assets/images/catalog/6b/6bf66925826b28368d01-1080x1080.webp",
+          "sourceWidth": 4500,
+          "sourceHeight": 4500,
+          "sourceBytes": 4568879,
+          "sourceSha256": "78ac28f17fb4af2d4e4e36307a7f1dfe7881a917cb6ef5b945d8526f5e37d020",
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          },
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/14/1488883c4c7a0d0ba40e-540x540.webp",
+              "bytes": 34914,
+              "sha256": "1488883c4c7a0d0ba40e5e9bcae82315462a029a2f9d193609c0a01ba70a835c"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/6b/6bf66925826b28368d01-1080x1080.webp",
+              "bytes": 127856,
+              "sha256": "6bf66925826b28368d011f9ede07523b0c51e390a3d3968a47c40942e45fc2f6"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/68/684bea1d3700955764b5-2160x2160.webp",
+              "bytes": 548356,
+              "sha256": "684bea1d3700955764b50cd2ada5f1481a9b70a9b63afd059f8a7ce6a52c51f6"
+            }
+          ],
+          "index": 1,
+          "link": "https://drive.google.com/file/d/19jDu2jKh0NybBuy6zn4gRMkEskcfP70b/view?usp=drive_link"
+        },
+        {
+          "id": "1CyURaAJqCiVwYWtptsicXb4IlrvJ2bTa",
+          "name": "#GM42029-C21_ProductPhoto_Front.jpg",
+          "modifiedTime": "2026-10-01T11:58:28.251Z",
+          "localPath": "assets/images/catalog/31/3152f38f260fe2d60cdf-1080x1080.webp",
+          "sourceWidth": 4500,
+          "sourceHeight": 4500,
+          "sourceBytes": 3064512,
+          "sourceSha256": "bff8458c425f348a2e525a807ece53f8314b3453773188a8b05f3c60c1642b44",
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          },
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/6e/6e5fe866334d0224c580-540x540.webp",
+              "bytes": 23988,
+              "sha256": "6e5fe866334d0224c5807ff4e77e74b21a2703b8e10f6d9813b26d1e1d30a9d6"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/31/3152f38f260fe2d60cdf-1080x1080.webp",
+              "bytes": 89870,
+              "sha256": "3152f38f260fe2d60cdfac19f685ea598c4e8b58d6da8b84bb126359ddd497f4"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/f3/f3fa72a3558be2f1bb23-2160x2160.webp",
+              "bytes": 412786,
+              "sha256": "f3fa72a3558be2f1bb2358be9284a8a9c4614ca4d5a82e5d5c622df8ef8c10d5"
+            }
+          ],
+          "index": 2,
+          "link": "https://drive.google.com/file/d/1CyURaAJqCiVwYWtptsicXb4IlrvJ2bTa/view?usp=drive_link"
+        },
+        {
+          "id": "1C-swXcQO-LgFNwUuLRYQsxJg74v1Xqcv",
+          "name": "#GM42029-C21_ProductPhoto_Back.jpg",
+          "modifiedTime": "2026-10-01T11:58:58.703Z",
+          "localPath": "assets/images/catalog/3e/3ef541f592084bc96f4a-1080x1080.webp",
+          "sourceWidth": 4500,
+          "sourceHeight": 4500,
+          "sourceBytes": 2814398,
+          "sourceSha256": "08226c1bcbdf6bbff685ad559272ffc6990df850f357734ae4f7fb45f12c5f0d",
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          },
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/14/14ceafe59ab22ab98f28-540x540.webp",
+              "bytes": 22872,
+              "sha256": "14ceafe59ab22ab98f2868e50f6ff189b2912698918dbc2406f78329822d663f"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/3e/3ef541f592084bc96f4a-1080x1080.webp",
+              "bytes": 89196,
+              "sha256": "3ef541f592084bc96f4af96d419f08abbc6d478674a9f982052f5f2233055031"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/ad/ad060f241f23e7b7f4dc-2160x2160.webp",
+              "bytes": 408412,
+              "sha256": "ad060f241f23e7b7f4dcbb269c76db3aaf614efcd50a0b52d60e679d2b78e5de"
+            }
+          ],
+          "index": 3,
+          "link": "https://drive.google.com/file/d/1C-swXcQO-LgFNwUuLRYQsxJg74v1Xqcv/view?usp=drive_link"
+        },
+        {
+          "id": "1l4m7KyNEjKvMW_aCeSjV3hw1QaDwLknv",
+          "name": "#GM42029-C21_ProductPhoto_Detail-1.jpg",
+          "modifiedTime": "2026-10-01T13:11:12.626Z",
+          "localPath": "assets/images/catalog/a2/a299e22baa07c1cd889d-1080x1080.webp",
+          "sourceWidth": 4500,
+          "sourceHeight": 4500,
+          "sourceBytes": 7073801,
+          "sourceSha256": "17d0994fe6e6691a935b774e238ee495ecd1a16cb89824ae156e5c18fcbc7554",
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          },
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/03/038b59df0bfc863248cf-540x540.webp",
+              "bytes": 96782,
+              "sha256": "038b59df0bfc863248cf737535150f38052b14c6b60d121af84df58fd2840dae"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/a2/a299e22baa07c1cd889d-1080x1080.webp",
+              "bytes": 318158,
+              "sha256": "a299e22baa07c1cd889d93a08dc98cd5e5c2aa068366f0c159d68038fa9e6324"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/8f/8fc04f3fe28bbaeecf07-2160x2160.webp",
+              "bytes": 1071638,
+              "sha256": "8fc04f3fe28bbaeecf07bd7ed4a48dc1496555171eadf922e47b43a61f636111"
+            }
+          ],
+          "index": 4,
+          "link": "https://drive.google.com/file/d/1l4m7KyNEjKvMW_aCeSjV3hw1QaDwLknv/view?usp=drive_link"
+        },
+        {
+          "id": "1o5SKv3IC-CB4SgIFYz7hrl1JJ-vNBZTN",
+          "name": "#GM42029-C21_ProductPhoto_Detail-2.jpg",
+          "modifiedTime": "2026-10-01T12:03:19.347Z",
+          "localPath": "assets/images/catalog/50/5027bf393cab06cdb254-1080x1080.webp",
+          "sourceWidth": 4500,
+          "sourceHeight": 4500,
+          "sourceBytes": 7234422,
+          "sourceSha256": "b426a0e28045c8b72125607df224ac5474b167300b0346ffd845c18b11c85d03",
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          },
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/24/2487843aef152717c35a-540x540.webp",
+              "bytes": 69914,
+              "sha256": "2487843aef152717c35a7bbe7991cba888714867a0472811065c5b416c2d2150"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/50/5027bf393cab06cdb254-1080x1080.webp",
+              "bytes": 229936,
+              "sha256": "5027bf393cab06cdb254a78064b8c74ffbf8448537b68dc2a79be92ffb1840fa"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/9a/9a49dd360e7cd8a78a53-2160x2160.webp",
+              "bytes": 934628,
+              "sha256": "9a49dd360e7cd8a78a53e09c8532584d4a9dbee85c55b3347a8904665ee84c41"
+            }
+          ],
+          "index": 5,
+          "link": "https://drive.google.com/file/d/1o5SKv3IC-CB4SgIFYz7hrl1JJ-vNBZTN/view?usp=drive_link"
+        },
+        {
+          "id": "1i_9r1Z8Dg5UQM5NiETEWZStWvWmteO_o",
+          "name": "#GM42029-C21_ProductPhoto_Detail-3.jpg",
+          "modifiedTime": "2026-10-01T12:03:27.581Z",
+          "localPath": "assets/images/catalog/84/840fe9cd752aaf24f16e-1080x1080.webp",
+          "sourceWidth": 4500,
+          "sourceHeight": 4500,
+          "sourceBytes": 7117469,
+          "sourceSha256": "48ccc644d7d084371f9736faae033fb99b0761873cc984f677ea766938ca4505",
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          },
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/9f/9f29ac0a92a7e90365a9-540x540.webp",
+              "bytes": 106982,
+              "sha256": "9f29ac0a92a7e90365a9f331a5826a605342dbb50213415a4d4ba631cd55ceb8"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/84/840fe9cd752aaf24f16e-1080x1080.webp",
+              "bytes": 360342,
+              "sha256": "840fe9cd752aaf24f16e0c424cf997a65bb17f6578e9ab4d5748a9be6b1af964"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/a0/a0ffd47c01f4caefb9af-2160x2160.webp",
+              "bytes": 1224454,
+              "sha256": "a0ffd47c01f4caefb9afe74edfb58865cb5de36ed07bdd01223e986b9253c8be"
+            }
+          ],
+          "index": 6,
+          "link": "https://drive.google.com/file/d/1i_9r1Z8Dg5UQM5NiETEWZStWvWmteO_o/view?usp=drive_link"
+        }
+      ],
+      "localImages": [],
+      "imageSource": "google-drive",
+      "variantImages": [
+        {
+          "id": "1CyURaAJqCiVwYWtptsicXb4IlrvJ2bTa",
+          "name": "#GM42029-C21_ProductPhoto_Front.jpg",
+          "modifiedTime": "2026-10-01T11:58:28.251Z",
+          "localPath": "assets/images/catalog/31/3152f38f260fe2d60cdf-1080x1080.webp",
+          "sourceWidth": 4500,
+          "sourceHeight": 4500,
+          "sourceBytes": 3064512,
+          "sourceSha256": "bff8458c425f348a2e525a807ece53f8314b3453773188a8b05f3c60c1642b44",
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          },
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/6e/6e5fe866334d0224c580-540x540.webp",
+              "bytes": 23988,
+              "sha256": "6e5fe866334d0224c5807ff4e77e74b21a2703b8e10f6d9813b26d1e1d30a9d6"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/31/3152f38f260fe2d60cdf-1080x1080.webp",
+              "bytes": 89870,
+              "sha256": "3152f38f260fe2d60cdfac19f685ea598c4e8b58d6da8b84bb126359ddd497f4"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/f3/f3fa72a3558be2f1bb23-2160x2160.webp",
+              "bytes": 412786,
+              "sha256": "f3fa72a3558be2f1bb2358be9284a8a9c4614ca4d5a82e5d5c622df8ef8c10d5"
+            }
+          ],
+          "index": 0,
+          "link": "https://drive.google.com/file/d/1CyURaAJqCiVwYWtptsicXb4IlrvJ2bTa/view?usp=drive_link"
+        },
+        {
+          "id": "1SZg5TpfKv5hz-yDHwP_lXnD97Sg3CbWr",
+          "name": "#GM42029-C36_ProductPhoto_Front.jpg",
+          "modifiedTime": "2026-10-01T11:58:17.460Z",
+          "localPath": "assets/images/catalog/b9/b95122a2387e644bceb3-1080x1080.webp",
+          "sourceWidth": 4500,
+          "sourceHeight": 4500,
+          "sourceBytes": 3853434,
+          "sourceSha256": "5dd0ca3babf102bd39cd73eacbf7021d2c23f7cf84fb7966176aa88115de1d98",
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          },
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/30/30b802c6722017b7b5bf-540x540.webp",
+              "bytes": 28454,
+              "sha256": "30b802c6722017b7b5bf9f205bfb90a57afe6dfd1f696f7849b2ac07487a603f"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/b9/b95122a2387e644bceb3-1080x1080.webp",
+              "bytes": 103292,
+              "sha256": "b95122a2387e644bceb328d1c53f3332ff13ccd402123adf3a0207007d1ab9a0"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/e9/e96073fc822df3992122-2160x2160.webp",
+              "bytes": 442508,
+              "sha256": "e96073fc822df3992122a170d4ff69ffd036480a5386426969928a55aac2181d"
+            }
+          ],
+          "index": 0,
+          "link": "https://drive.google.com/file/d/1SZg5TpfKv5hz-yDHwP_lXnD97Sg3CbWr/view?usp=drive_link"
+        }
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "GM42029-C21-S5",
+          "lots": [],
+          "colorCode": "C21",
+          "colorName": "Mocha",
+          "sizeCode": "S5",
+          "sizeName": "M",
+          "imageId": "1CyURaAJqCiVwYWtptsicXb4IlrvJ2bTa"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "GM42029-C21-S6",
+          "lots": [],
+          "colorCode": "C21",
+          "colorName": "Mocha",
+          "sizeCode": "S6",
+          "sizeName": "L",
+          "imageId": "1CyURaAJqCiVwYWtptsicXb4IlrvJ2bTa"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "GM42029-C21-S7",
+          "lots": [],
+          "colorCode": "C21",
+          "colorName": "Mocha",
+          "sizeCode": "S7",
+          "sizeName": "XL",
+          "imageId": "1CyURaAJqCiVwYWtptsicXb4IlrvJ2bTa"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "GM42029-C36-S5",
+          "lots": [],
+          "colorCode": "C36",
+          "colorName": "Yellow",
+          "sizeCode": "S5",
+          "sizeName": "M",
+          "imageId": "1SZg5TpfKv5hz-yDHwP_lXnD97Sg3CbWr",
+          "images": [
+            {
+              "id": "19jDu2jKh0NybBuy6zn4gRMkEskcfP70b",
+              "name": "#GM42029-C2136_ProductPhoto.jpg",
+              "modifiedTime": "2026-10-01T13:15:04.272Z",
+              "localPath": "assets/images/catalog/6b/6bf66925826b28368d01-1080x1080.webp",
+              "sourceWidth": 4500,
+              "sourceHeight": 4500,
+              "sourceBytes": 4568879,
+              "sourceSha256": "78ac28f17fb4af2d4e4e36307a7f1dfe7881a917cb6ef5b945d8526f5e37d020",
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/catalog/14/1488883c4c7a0d0ba40e-540x540.webp",
+                  "bytes": 34914,
+                  "sha256": "1488883c4c7a0d0ba40e5e9bcae82315462a029a2f9d193609c0a01ba70a835c"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/catalog/6b/6bf66925826b28368d01-1080x1080.webp",
+                  "bytes": 127856,
+                  "sha256": "6bf66925826b28368d011f9ede07523b0c51e390a3d3968a47c40942e45fc2f6"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/catalog/68/684bea1d3700955764b5-2160x2160.webp",
+                  "bytes": 548356,
+                  "sha256": "684bea1d3700955764b50cd2ada5f1481a9b70a9b63afd059f8a7ce6a52c51f6"
+                }
+              ],
+              "index": 1,
+              "link": "https://drive.google.com/file/d/19jDu2jKh0NybBuy6zn4gRMkEskcfP70b/view?usp=drive_link"
+            },
+            {
+              "id": "1SZg5TpfKv5hz-yDHwP_lXnD97Sg3CbWr",
+              "name": "#GM42029-C36_ProductPhoto_Front.jpg",
+              "modifiedTime": "2026-10-01T11:58:17.460Z",
+              "localPath": "assets/images/catalog/b9/b95122a2387e644bceb3-1080x1080.webp",
+              "sourceWidth": 4500,
+              "sourceHeight": 4500,
+              "sourceBytes": 3853434,
+              "sourceSha256": "5dd0ca3babf102bd39cd73eacbf7021d2c23f7cf84fb7966176aa88115de1d98",
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/catalog/30/30b802c6722017b7b5bf-540x540.webp",
+                  "bytes": 28454,
+                  "sha256": "30b802c6722017b7b5bf9f205bfb90a57afe6dfd1f696f7849b2ac07487a603f"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/catalog/b9/b95122a2387e644bceb3-1080x1080.webp",
+                  "bytes": 103292,
+                  "sha256": "b95122a2387e644bceb328d1c53f3332ff13ccd402123adf3a0207007d1ab9a0"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/catalog/e9/e96073fc822df3992122-2160x2160.webp",
+                  "bytes": 442508,
+                  "sha256": "e96073fc822df3992122a170d4ff69ffd036480a5386426969928a55aac2181d"
+                }
+              ],
+              "index": 2,
+              "link": "https://drive.google.com/file/d/1SZg5TpfKv5hz-yDHwP_lXnD97Sg3CbWr/view?usp=drive_link"
+            },
+            {
+              "id": "1NsrhoiMqPnT-XGJA3wHj0AlrAmRxzBxG",
+              "name": "#GM42029-C36_ProductPhoto_Back.jpg",
+              "modifiedTime": "2026-10-01T11:59:09.705Z",
+              "localPath": "assets/images/catalog/33/331932d27d5a67c0bb61-1080x1080.webp",
+              "sourceWidth": 4500,
+              "sourceHeight": 4500,
+              "sourceBytes": 2983174,
+              "sourceSha256": "3a37a5061d3fcb802295ddd17491fb3bd5eb41274c3fd0b309e0e5c96fd2c678",
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/catalog/73/7366bb973e94c6568a80-540x540.webp",
+                  "bytes": 26418,
+                  "sha256": "7366bb973e94c6568a80f2e31b0cd2065684c5b7528d61180e9966e2ec440948"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/catalog/33/331932d27d5a67c0bb61-1080x1080.webp",
+                  "bytes": 98824,
+                  "sha256": "331932d27d5a67c0bb61fcf083cde542ada80ee892c4e21d5ef8f3358d79a19f"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/catalog/37/373bb4fd01837db7d867-2160x2160.webp",
+                  "bytes": 416102,
+                  "sha256": "373bb4fd01837db7d8675e56de86fa78a293e7c9967adf6e82202ad7f4157663"
+                }
+              ],
+              "index": 3,
+              "link": "https://drive.google.com/file/d/1NsrhoiMqPnT-XGJA3wHj0AlrAmRxzBxG/view?usp=drive_link"
+            },
+            {
+              "id": "1jJGdyBRDrYBS6EDt5NqRpTyBHZz144a5",
+              "name": "#GM42029-C36_ProductPhoto_Detail-1.jpg",
+              "modifiedTime": "2026-10-01T13:11:04.161Z",
+              "localPath": "assets/images/catalog/4a/4a1095125efbf0fcb940-1080x1080.webp",
+              "sourceWidth": 4500,
+              "sourceHeight": 4500,
+              "sourceBytes": 6815363,
+              "sourceSha256": "698b606bf1980dcbdd70e752c4dd3f45fb5f3a39f060face2c8be248de7d1b6c",
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/catalog/5e/5e53dd33f34326741e47-540x540.webp",
+                  "bytes": 95430,
+                  "sha256": "5e53dd33f34326741e47dd6e2b52399025b1fc745fd3608c49a53957a55b2f4e"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/catalog/4a/4a1095125efbf0fcb940-1080x1080.webp",
+                  "bytes": 296224,
+                  "sha256": "4a1095125efbf0fcb940f6ad8310c0b833e50604ad641a0e4e41597bcddc9a35"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/catalog/34/34257259643d75cfadc8-2160x2160.webp",
+                  "bytes": 974336,
+                  "sha256": "34257259643d75cfadc83b3c853859382b4a6440607edcc3c7dc462f8b9ac661"
+                }
+              ],
+              "index": 4,
+              "link": "https://drive.google.com/file/d/1jJGdyBRDrYBS6EDt5NqRpTyBHZz144a5/view?usp=drive_link"
+            },
+            {
+              "id": "1xH5576X5c9_Fydg3sZy4rFZ6_mIZSVdt",
+              "name": "#GM42029-C36_ProductPhoto_Detail-2.jpg",
+              "modifiedTime": "2026-10-01T12:01:28.927Z",
+              "localPath": "assets/images/catalog/0d/0de2417bee52d0c3792f-1080x1080.webp",
+              "sourceWidth": 4500,
+              "sourceHeight": 4500,
+              "sourceBytes": 6590824,
+              "sourceSha256": "16952fafbc850b0445f77d4718781307a8fa449dee7ccc9d885eedba89fac4d5",
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/catalog/e1/e117c8ef1c62192fa8d1-540x540.webp",
+                  "bytes": 93372,
+                  "sha256": "e117c8ef1c62192fa8d125c516c7abdfdc21ae0fe1fd9d9e8551bc04c1abe519"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/catalog/0d/0de2417bee52d0c3792f-1080x1080.webp",
+                  "bytes": 278648,
+                  "sha256": "0de2417bee52d0c3792f24df3b48de4bcd83d3cc8025f7573293f0f13910e301"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/catalog/11/11ea0cc3de66e4b364c1-2160x2160.webp",
+                  "bytes": 847452,
+                  "sha256": "11ea0cc3de66e4b364c1d040953517e8555c4c0982dab5e4d2f11ac814a55fbd"
+                }
+              ],
+              "index": 5,
+              "link": "https://drive.google.com/file/d/1xH5576X5c9_Fydg3sZy4rFZ6_mIZSVdt/view?usp=drive_link"
+            },
+            {
+              "id": "1krWFrCzwCwMf64fWxpduB-_KTxCSn-wV",
+              "name": "#GM42029-C36_ProductPhoto_Detail-3.jpg",
+              "modifiedTime": "2026-10-01T12:01:19.322Z",
+              "localPath": "assets/images/catalog/be/beb495e0d103c43b3ba3-1080x1080.webp",
+              "sourceWidth": 4500,
+              "sourceHeight": 4500,
+              "sourceBytes": 4381704,
+              "sourceSha256": "1e6f46900d07782ee0fc73366aeee27d87831ec0c1949d180764bb6548717322",
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/catalog/3d/3db3e071e041780cb437-540x540.webp",
+                  "bytes": 71006,
+                  "sha256": "3db3e071e041780cb437a6220aa31b23d7f6f726fcf38d9ae15a8898b02802cb"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/catalog/be/beb495e0d103c43b3ba3-1080x1080.webp",
+                  "bytes": 232500,
+                  "sha256": "beb495e0d103c43b3ba3c9478a604bcd6d181b9e0389a736b2857a9d951f3c6b"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/catalog/3e/3e09b0f7398c507e5e4b-2160x2160.webp",
+                  "bytes": 706202,
+                  "sha256": "3e09b0f7398c507e5e4b996d56acdff669c22c06383225d61f398a5f4658e198"
+                }
+              ],
+              "index": 6,
+              "link": "https://drive.google.com/file/d/1krWFrCzwCwMf64fWxpduB-_KTxCSn-wV/view?usp=drive_link"
+            }
+          ]
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "GM42029-C36-S6",
+          "lots": [],
+          "colorCode": "C36",
+          "colorName": "Yellow",
+          "sizeCode": "S6",
+          "sizeName": "L",
+          "imageId": "1SZg5TpfKv5hz-yDHwP_lXnD97Sg3CbWr",
+          "images": [
+            {
+              "id": "19jDu2jKh0NybBuy6zn4gRMkEskcfP70b",
+              "name": "#GM42029-C2136_ProductPhoto.jpg",
+              "modifiedTime": "2026-10-01T13:15:04.272Z",
+              "localPath": "assets/images/catalog/6b/6bf66925826b28368d01-1080x1080.webp",
+              "sourceWidth": 4500,
+              "sourceHeight": 4500,
+              "sourceBytes": 4568879,
+              "sourceSha256": "78ac28f17fb4af2d4e4e36307a7f1dfe7881a917cb6ef5b945d8526f5e37d020",
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/catalog/14/1488883c4c7a0d0ba40e-540x540.webp",
+                  "bytes": 34914,
+                  "sha256": "1488883c4c7a0d0ba40e5e9bcae82315462a029a2f9d193609c0a01ba70a835c"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/catalog/6b/6bf66925826b28368d01-1080x1080.webp",
+                  "bytes": 127856,
+                  "sha256": "6bf66925826b28368d011f9ede07523b0c51e390a3d3968a47c40942e45fc2f6"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/catalog/68/684bea1d3700955764b5-2160x2160.webp",
+                  "bytes": 548356,
+                  "sha256": "684bea1d3700955764b50cd2ada5f1481a9b70a9b63afd059f8a7ce6a52c51f6"
+                }
+              ],
+              "index": 1,
+              "link": "https://drive.google.com/file/d/19jDu2jKh0NybBuy6zn4gRMkEskcfP70b/view?usp=drive_link"
+            },
+            {
+              "id": "1SZg5TpfKv5hz-yDHwP_lXnD97Sg3CbWr",
+              "name": "#GM42029-C36_ProductPhoto_Front.jpg",
+              "modifiedTime": "2026-10-01T11:58:17.460Z",
+              "localPath": "assets/images/catalog/b9/b95122a2387e644bceb3-1080x1080.webp",
+              "sourceWidth": 4500,
+              "sourceHeight": 4500,
+              "sourceBytes": 3853434,
+              "sourceSha256": "5dd0ca3babf102bd39cd73eacbf7021d2c23f7cf84fb7966176aa88115de1d98",
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/catalog/30/30b802c6722017b7b5bf-540x540.webp",
+                  "bytes": 28454,
+                  "sha256": "30b802c6722017b7b5bf9f205bfb90a57afe6dfd1f696f7849b2ac07487a603f"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/catalog/b9/b95122a2387e644bceb3-1080x1080.webp",
+                  "bytes": 103292,
+                  "sha256": "b95122a2387e644bceb328d1c53f3332ff13ccd402123adf3a0207007d1ab9a0"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/catalog/e9/e96073fc822df3992122-2160x2160.webp",
+                  "bytes": 442508,
+                  "sha256": "e96073fc822df3992122a170d4ff69ffd036480a5386426969928a55aac2181d"
+                }
+              ],
+              "index": 2,
+              "link": "https://drive.google.com/file/d/1SZg5TpfKv5hz-yDHwP_lXnD97Sg3CbWr/view?usp=drive_link"
+            },
+            {
+              "id": "1NsrhoiMqPnT-XGJA3wHj0AlrAmRxzBxG",
+              "name": "#GM42029-C36_ProductPhoto_Back.jpg",
+              "modifiedTime": "2026-10-01T11:59:09.705Z",
+              "localPath": "assets/images/catalog/33/331932d27d5a67c0bb61-1080x1080.webp",
+              "sourceWidth": 4500,
+              "sourceHeight": 4500,
+              "sourceBytes": 2983174,
+              "sourceSha256": "3a37a5061d3fcb802295ddd17491fb3bd5eb41274c3fd0b309e0e5c96fd2c678",
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/catalog/73/7366bb973e94c6568a80-540x540.webp",
+                  "bytes": 26418,
+                  "sha256": "7366bb973e94c6568a80f2e31b0cd2065684c5b7528d61180e9966e2ec440948"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/catalog/33/331932d27d5a67c0bb61-1080x1080.webp",
+                  "bytes": 98824,
+                  "sha256": "331932d27d5a67c0bb61fcf083cde542ada80ee892c4e21d5ef8f3358d79a19f"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/catalog/37/373bb4fd01837db7d867-2160x2160.webp",
+                  "bytes": 416102,
+                  "sha256": "373bb4fd01837db7d8675e56de86fa78a293e7c9967adf6e82202ad7f4157663"
+                }
+              ],
+              "index": 3,
+              "link": "https://drive.google.com/file/d/1NsrhoiMqPnT-XGJA3wHj0AlrAmRxzBxG/view?usp=drive_link"
+            },
+            {
+              "id": "1jJGdyBRDrYBS6EDt5NqRpTyBHZz144a5",
+              "name": "#GM42029-C36_ProductPhoto_Detail-1.jpg",
+              "modifiedTime": "2026-10-01T13:11:04.161Z",
+              "localPath": "assets/images/catalog/4a/4a1095125efbf0fcb940-1080x1080.webp",
+              "sourceWidth": 4500,
+              "sourceHeight": 4500,
+              "sourceBytes": 6815363,
+              "sourceSha256": "698b606bf1980dcbdd70e752c4dd3f45fb5f3a39f060face2c8be248de7d1b6c",
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/catalog/5e/5e53dd33f34326741e47-540x540.webp",
+                  "bytes": 95430,
+                  "sha256": "5e53dd33f34326741e47dd6e2b52399025b1fc745fd3608c49a53957a55b2f4e"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/catalog/4a/4a1095125efbf0fcb940-1080x1080.webp",
+                  "bytes": 296224,
+                  "sha256": "4a1095125efbf0fcb940f6ad8310c0b833e50604ad641a0e4e41597bcddc9a35"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/catalog/34/34257259643d75cfadc8-2160x2160.webp",
+                  "bytes": 974336,
+                  "sha256": "34257259643d75cfadc83b3c853859382b4a6440607edcc3c7dc462f8b9ac661"
+                }
+              ],
+              "index": 4,
+              "link": "https://drive.google.com/file/d/1jJGdyBRDrYBS6EDt5NqRpTyBHZz144a5/view?usp=drive_link"
+            },
+            {
+              "id": "1xH5576X5c9_Fydg3sZy4rFZ6_mIZSVdt",
+              "name": "#GM42029-C36_ProductPhoto_Detail-2.jpg",
+              "modifiedTime": "2026-10-01T12:01:28.927Z",
+              "localPath": "assets/images/catalog/0d/0de2417bee52d0c3792f-1080x1080.webp",
+              "sourceWidth": 4500,
+              "sourceHeight": 4500,
+              "sourceBytes": 6590824,
+              "sourceSha256": "16952fafbc850b0445f77d4718781307a8fa449dee7ccc9d885eedba89fac4d5",
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/catalog/e1/e117c8ef1c62192fa8d1-540x540.webp",
+                  "bytes": 93372,
+                  "sha256": "e117c8ef1c62192fa8d125c516c7abdfdc21ae0fe1fd9d9e8551bc04c1abe519"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/catalog/0d/0de2417bee52d0c3792f-1080x1080.webp",
+                  "bytes": 278648,
+                  "sha256": "0de2417bee52d0c3792f24df3b48de4bcd83d3cc8025f7573293f0f13910e301"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/catalog/11/11ea0cc3de66e4b364c1-2160x2160.webp",
+                  "bytes": 847452,
+                  "sha256": "11ea0cc3de66e4b364c1d040953517e8555c4c0982dab5e4d2f11ac814a55fbd"
+                }
+              ],
+              "index": 5,
+              "link": "https://drive.google.com/file/d/1xH5576X5c9_Fydg3sZy4rFZ6_mIZSVdt/view?usp=drive_link"
+            },
+            {
+              "id": "1krWFrCzwCwMf64fWxpduB-_KTxCSn-wV",
+              "name": "#GM42029-C36_ProductPhoto_Detail-3.jpg",
+              "modifiedTime": "2026-10-01T12:01:19.322Z",
+              "localPath": "assets/images/catalog/be/beb495e0d103c43b3ba3-1080x1080.webp",
+              "sourceWidth": 4500,
+              "sourceHeight": 4500,
+              "sourceBytes": 4381704,
+              "sourceSha256": "1e6f46900d07782ee0fc73366aeee27d87831ec0c1949d180764bb6548717322",
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/catalog/3d/3db3e071e041780cb437-540x540.webp",
+                  "bytes": 71006,
+                  "sha256": "3db3e071e041780cb437a6220aa31b23d7f6f726fcf38d9ae15a8898b02802cb"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/catalog/be/beb495e0d103c43b3ba3-1080x1080.webp",
+                  "bytes": 232500,
+                  "sha256": "beb495e0d103c43b3ba3c9478a604bcd6d181b9e0389a736b2857a9d951f3c6b"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/catalog/3e/3e09b0f7398c507e5e4b-2160x2160.webp",
+                  "bytes": 706202,
+                  "sha256": "3e09b0f7398c507e5e4b996d56acdff669c22c06383225d61f398a5f4658e198"
+                }
+              ],
+              "index": 6,
+              "link": "https://drive.google.com/file/d/1krWFrCzwCwMf64fWxpduB-_KTxCSn-wV/view?usp=drive_link"
+            }
+          ]
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "GM42029-C36-S7",
+          "lots": [],
+          "colorCode": "C36",
+          "colorName": "Yellow",
+          "sizeCode": "S7",
+          "sizeName": "XL",
+          "imageId": "1SZg5TpfKv5hz-yDHwP_lXnD97Sg3CbWr",
+          "images": [
+            {
+              "id": "19jDu2jKh0NybBuy6zn4gRMkEskcfP70b",
+              "name": "#GM42029-C2136_ProductPhoto.jpg",
+              "modifiedTime": "2026-10-01T13:15:04.272Z",
+              "localPath": "assets/images/catalog/6b/6bf66925826b28368d01-1080x1080.webp",
+              "sourceWidth": 4500,
+              "sourceHeight": 4500,
+              "sourceBytes": 4568879,
+              "sourceSha256": "78ac28f17fb4af2d4e4e36307a7f1dfe7881a917cb6ef5b945d8526f5e37d020",
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/catalog/14/1488883c4c7a0d0ba40e-540x540.webp",
+                  "bytes": 34914,
+                  "sha256": "1488883c4c7a0d0ba40e5e9bcae82315462a029a2f9d193609c0a01ba70a835c"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/catalog/6b/6bf66925826b28368d01-1080x1080.webp",
+                  "bytes": 127856,
+                  "sha256": "6bf66925826b28368d011f9ede07523b0c51e390a3d3968a47c40942e45fc2f6"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/catalog/68/684bea1d3700955764b5-2160x2160.webp",
+                  "bytes": 548356,
+                  "sha256": "684bea1d3700955764b50cd2ada5f1481a9b70a9b63afd059f8a7ce6a52c51f6"
+                }
+              ],
+              "index": 1,
+              "link": "https://drive.google.com/file/d/19jDu2jKh0NybBuy6zn4gRMkEskcfP70b/view?usp=drive_link"
+            },
+            {
+              "id": "1SZg5TpfKv5hz-yDHwP_lXnD97Sg3CbWr",
+              "name": "#GM42029-C36_ProductPhoto_Front.jpg",
+              "modifiedTime": "2026-10-01T11:58:17.460Z",
+              "localPath": "assets/images/catalog/b9/b95122a2387e644bceb3-1080x1080.webp",
+              "sourceWidth": 4500,
+              "sourceHeight": 4500,
+              "sourceBytes": 3853434,
+              "sourceSha256": "5dd0ca3babf102bd39cd73eacbf7021d2c23f7cf84fb7966176aa88115de1d98",
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/catalog/30/30b802c6722017b7b5bf-540x540.webp",
+                  "bytes": 28454,
+                  "sha256": "30b802c6722017b7b5bf9f205bfb90a57afe6dfd1f696f7849b2ac07487a603f"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/catalog/b9/b95122a2387e644bceb3-1080x1080.webp",
+                  "bytes": 103292,
+                  "sha256": "b95122a2387e644bceb328d1c53f3332ff13ccd402123adf3a0207007d1ab9a0"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/catalog/e9/e96073fc822df3992122-2160x2160.webp",
+                  "bytes": 442508,
+                  "sha256": "e96073fc822df3992122a170d4ff69ffd036480a5386426969928a55aac2181d"
+                }
+              ],
+              "index": 2,
+              "link": "https://drive.google.com/file/d/1SZg5TpfKv5hz-yDHwP_lXnD97Sg3CbWr/view?usp=drive_link"
+            },
+            {
+              "id": "1NsrhoiMqPnT-XGJA3wHj0AlrAmRxzBxG",
+              "name": "#GM42029-C36_ProductPhoto_Back.jpg",
+              "modifiedTime": "2026-10-01T11:59:09.705Z",
+              "localPath": "assets/images/catalog/33/331932d27d5a67c0bb61-1080x1080.webp",
+              "sourceWidth": 4500,
+              "sourceHeight": 4500,
+              "sourceBytes": 2983174,
+              "sourceSha256": "3a37a5061d3fcb802295ddd17491fb3bd5eb41274c3fd0b309e0e5c96fd2c678",
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/catalog/73/7366bb973e94c6568a80-540x540.webp",
+                  "bytes": 26418,
+                  "sha256": "7366bb973e94c6568a80f2e31b0cd2065684c5b7528d61180e9966e2ec440948"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/catalog/33/331932d27d5a67c0bb61-1080x1080.webp",
+                  "bytes": 98824,
+                  "sha256": "331932d27d5a67c0bb61fcf083cde542ada80ee892c4e21d5ef8f3358d79a19f"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/catalog/37/373bb4fd01837db7d867-2160x2160.webp",
+                  "bytes": 416102,
+                  "sha256": "373bb4fd01837db7d8675e56de86fa78a293e7c9967adf6e82202ad7f4157663"
+                }
+              ],
+              "index": 3,
+              "link": "https://drive.google.com/file/d/1NsrhoiMqPnT-XGJA3wHj0AlrAmRxzBxG/view?usp=drive_link"
+            },
+            {
+              "id": "1jJGdyBRDrYBS6EDt5NqRpTyBHZz144a5",
+              "name": "#GM42029-C36_ProductPhoto_Detail-1.jpg",
+              "modifiedTime": "2026-10-01T13:11:04.161Z",
+              "localPath": "assets/images/catalog/4a/4a1095125efbf0fcb940-1080x1080.webp",
+              "sourceWidth": 4500,
+              "sourceHeight": 4500,
+              "sourceBytes": 6815363,
+              "sourceSha256": "698b606bf1980dcbdd70e752c4dd3f45fb5f3a39f060face2c8be248de7d1b6c",
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/catalog/5e/5e53dd33f34326741e47-540x540.webp",
+                  "bytes": 95430,
+                  "sha256": "5e53dd33f34326741e47dd6e2b52399025b1fc745fd3608c49a53957a55b2f4e"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/catalog/4a/4a1095125efbf0fcb940-1080x1080.webp",
+                  "bytes": 296224,
+                  "sha256": "4a1095125efbf0fcb940f6ad8310c0b833e50604ad641a0e4e41597bcddc9a35"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/catalog/34/34257259643d75cfadc8-2160x2160.webp",
+                  "bytes": 974336,
+                  "sha256": "34257259643d75cfadc83b3c853859382b4a6440607edcc3c7dc462f8b9ac661"
+                }
+              ],
+              "index": 4,
+              "link": "https://drive.google.com/file/d/1jJGdyBRDrYBS6EDt5NqRpTyBHZz144a5/view?usp=drive_link"
+            },
+            {
+              "id": "1xH5576X5c9_Fydg3sZy4rFZ6_mIZSVdt",
+              "name": "#GM42029-C36_ProductPhoto_Detail-2.jpg",
+              "modifiedTime": "2026-10-01T12:01:28.927Z",
+              "localPath": "assets/images/catalog/0d/0de2417bee52d0c3792f-1080x1080.webp",
+              "sourceWidth": 4500,
+              "sourceHeight": 4500,
+              "sourceBytes": 6590824,
+              "sourceSha256": "16952fafbc850b0445f77d4718781307a8fa449dee7ccc9d885eedba89fac4d5",
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/catalog/e1/e117c8ef1c62192fa8d1-540x540.webp",
+                  "bytes": 93372,
+                  "sha256": "e117c8ef1c62192fa8d125c516c7abdfdc21ae0fe1fd9d9e8551bc04c1abe519"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/catalog/0d/0de2417bee52d0c3792f-1080x1080.webp",
+                  "bytes": 278648,
+                  "sha256": "0de2417bee52d0c3792f24df3b48de4bcd83d3cc8025f7573293f0f13910e301"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/catalog/11/11ea0cc3de66e4b364c1-2160x2160.webp",
+                  "bytes": 847452,
+                  "sha256": "11ea0cc3de66e4b364c1d040953517e8555c4c0982dab5e4d2f11ac814a55fbd"
+                }
+              ],
+              "index": 5,
+              "link": "https://drive.google.com/file/d/1xH5576X5c9_Fydg3sZy4rFZ6_mIZSVdt/view?usp=drive_link"
+            },
+            {
+              "id": "1krWFrCzwCwMf64fWxpduB-_KTxCSn-wV",
+              "name": "#GM42029-C36_ProductPhoto_Detail-3.jpg",
+              "modifiedTime": "2026-10-01T12:01:19.322Z",
+              "localPath": "assets/images/catalog/be/beb495e0d103c43b3ba3-1080x1080.webp",
+              "sourceWidth": 4500,
+              "sourceHeight": 4500,
+              "sourceBytes": 4381704,
+              "sourceSha256": "1e6f46900d07782ee0fc73366aeee27d87831ec0c1949d180764bb6548717322",
+              "transform": {
+                "format": "webp",
+                "quality": 100,
+                "resize": "short-edge",
+                "shortEdges": [
+                  540,
+                  1080,
+                  2160
+                ]
+              },
+              "derivatives": [
+                {
+                  "shortEdge": 540,
+                  "width": 540,
+                  "height": 540,
+                  "path": "assets/images/catalog/3d/3db3e071e041780cb437-540x540.webp",
+                  "bytes": 71006,
+                  "sha256": "3db3e071e041780cb437a6220aa31b23d7f6f726fcf38d9ae15a8898b02802cb"
+                },
+                {
+                  "shortEdge": 1080,
+                  "width": 1080,
+                  "height": 1080,
+                  "path": "assets/images/catalog/be/beb495e0d103c43b3ba3-1080x1080.webp",
+                  "bytes": 232500,
+                  "sha256": "beb495e0d103c43b3ba3c9478a604bcd6d181b9e0389a736b2857a9d951f3c6b"
+                },
+                {
+                  "shortEdge": 2160,
+                  "width": 2160,
+                  "height": 2160,
+                  "path": "assets/images/catalog/3e/3e09b0f7398c507e5e4b-2160x2160.webp",
+                  "bytes": 706202,
+                  "sha256": "3e09b0f7398c507e5e4b996d56acdff669c22c06383225d61f398a5f4658e198"
+                }
+              ],
+              "index": 6,
+              "link": "https://drive.google.com/file/d/1krWFrCzwCwMf64fWxpduB-_KTxCSn-wV/view?usp=drive_link"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "GM42030",
+      "name": "PRDM Training Shorts",
+      "lineCode": "GM",
+      "typeCode": "42",
+      "sequence": "030",
+      "listPrice": 1180,
+      "salePrice": null,
+      "link": "https://shopee.tw/product/74187402/40105649000",
+      "descriptionSource": {
+        "id": "1j5_Fa2bCKnkgZfA-NgQSDbPOqUy6y0ZmjrKxIbSFeYY",
+        "title": "#GM42030_Description",
+        "modifiedTime": "2026-10-02T14:20:04.192Z",
+        "content": "• Built alongside #GM42029\n• 100% polyester fabric\n• 100% polyester drawstring with coated ends\n• Desert camouflage all-over pattern\n• Watch pocket & key ring inside front pocket\n• No-drop openings within front pockets\n• Signature tab on hem\n\n-\n\n我們回到經典的網眼短褲\n將熟悉的運動單品融入日常穿著\n\n外層以經典的網眼面料呈現復古氛圍\n內層則改用更加輕薄的裡布\n褲頭及褲腳的車縫收邊乾淨工整\n就算是看不見的每一處細節都很講究\n\n六色沙漠迷彩的開發始於 1960 年代\n取材自南加州乾燥多岩石的地貌\n白色碎石與黑色陰影散布其中\n因此得到 Chocolate Chip 的暱稱\n1980 年代成為 DBDU 的標誌性外觀\n歷經「沙漠之盾」及「沙漠風暴」行動\n成為波斯灣戰爭中最經典的美軍制服\n\n這次我們考究歷史版本的迷彩設計\n盡可能還原當時的配色、形狀及尺度\n並設法在前後左右接縫處達成循環連續\n\n致力於融合極簡外觀與日常機能\n我們在口袋內側額外縫製機能小袋\n並且設計了隱藏式的鑰匙扣環\n更獨創「防噴袋口」設計以防物品掉落\n\n考量到 Mono-Material 原則\n褲頭採用精心訂製的聚酯纖維抽繩\n搭配繩頭別富質感的浸膠做法\n\n這款短褲不只為運動場合而設計\n也能成為日常生活的一部分\n\n-\n\n　　　　 M　　L　　XL\n褲頭寬　𝟥𝟦.𝟢　𝟥𝟩.𝟢　𝟦𝟣.𝟢\n褲腳寬　𝟥𝟤.𝟢　𝟥𝟦.𝟧　𝟥𝟪.𝟢\n內側長　𝟣𝟤.𝟢　𝟣𝟥.𝟢　𝟣𝟦.𝟢\n外側長　𝟥𝟪.𝟢　𝟦𝟣.𝟢　𝟦𝟥.𝟢　(cm)\n\n建議腰圍 < 80 著用 M\n建議腰圍 80~90 著用 L\n建議腰圍 > 90 著用 XL　(cm)\n\n#GM42030",
+        "link": "https://docs.google.com/document/u/0/d/1j5_Fa2bCKnkgZfA-NgQSDbPOqUy6y0ZmjrKxIbSFeYY/edit"
+      },
+      "images": [
+        {
+          "id": "1xNqBSm0ycOMigVQsdDrOsshvQ0TFHiOX",
+          "name": "#GM42030-C25_ProductPhoto_Front.jpg",
+          "modifiedTime": "2026-10-01T16:46:41.985Z",
+          "localPath": "assets/images/catalog/98/983b8bee82931b3b5443-1080x1080.webp",
+          "sourceWidth": 4500,
+          "sourceHeight": 4500,
+          "sourceBytes": 3087397,
+          "sourceSha256": "f34b73d5e9163a35c198cf7c64ae0ec6864db5265df70185095d54d2b947b175",
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          },
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/6d/6d8dda812e6dba3b1f03-540x540.webp",
+              "bytes": 36656,
+              "sha256": "6d8dda812e6dba3b1f03f516ff86bbd392e92efed917e273472385c63c546175"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/98/983b8bee82931b3b5443-1080x1080.webp",
+              "bytes": 126488,
+              "sha256": "983b8bee82931b3b54437dd9921735daec8e9eb233ea98be7cae30110da74f5c"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/f1/f1e8bf47c852973eb317-2160x2160.webp",
+              "bytes": 493796,
+              "sha256": "f1e8bf47c852973eb31786419660fe02e0c8ee5f4acc724cf8f8b61b405f6951"
+            }
+          ],
+          "index": 1,
+          "link": "https://drive.google.com/file/d/1xNqBSm0ycOMigVQsdDrOsshvQ0TFHiOX/view?usp=drive_link"
+        },
+        {
+          "id": "13Rk7JDNKJYAQj-iadQ9CIZNe274dNFdK",
+          "name": "#GM42030-C25_ProductPhoto_Back.jpg",
+          "modifiedTime": "2026-10-01T16:46:53.750Z",
+          "localPath": "assets/images/catalog/e9/e988accde24e4bef37fa-1080x1080.webp",
+          "sourceWidth": 4500,
+          "sourceHeight": 4500,
+          "sourceBytes": 3142809,
+          "sourceSha256": "af6488ac3c8dce39a55974cf94431dc536174f795c8ca942015dde9e6c29d53e",
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          },
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/8e/8ebe55c3e01f808852fd-540x540.webp",
+              "bytes": 35818,
+              "sha256": "8ebe55c3e01f808852fdd0bbe8db984d548c77dda4eda2685355c26011d2a096"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/e9/e988accde24e4bef37fa-1080x1080.webp",
+              "bytes": 125304,
+              "sha256": "e988accde24e4bef37fa75281904518e66eacb0d086f90aa0b8e7365893863f3"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/d5/d5df3f7703ca1e1cab49-2160x2160.webp",
+              "bytes": 496632,
+              "sha256": "d5df3f7703ca1e1cab49ee7b28ebb61c24a7a1b668a808301a478ecf5b8f05a1"
+            }
+          ],
+          "index": 2,
+          "link": "https://drive.google.com/file/d/13Rk7JDNKJYAQj-iadQ9CIZNe274dNFdK/view?usp=drive_link"
+        },
+        {
+          "id": "1EuX5tk129w8UohW6ClkTGhSGLt2Ws_Tf",
+          "name": "#GM42030-C25_ProductPhoto_Detail-1.jpg",
+          "modifiedTime": "2026-10-01T17:01:19.531Z",
+          "localPath": "assets/images/catalog/4f/4fba1fb64c42f8ae399f-1080x1080.webp",
+          "sourceWidth": 4500,
+          "sourceHeight": 4500,
+          "sourceBytes": 7308390,
+          "sourceSha256": "81829f14f3aea4f5669b0d55b1c276f577eb1c0face83fe9419605f05bf425f8",
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          },
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/ff/ff6a3a11d3695efa2d9d-540x540.webp",
+              "bytes": 119760,
+              "sha256": "ff6a3a11d3695efa2d9dba6e3beaba6bcd4efd23f3c1df54ab101df263668c98"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/4f/4fba1fb64c42f8ae399f-1080x1080.webp",
+              "bytes": 388318,
+              "sha256": "4fba1fb64c42f8ae399f928205846b90c88e3ce578b8307274894d4364f2301e"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/07/07d3f2b6c5efb22d7ff8-2160x2160.webp",
+              "bytes": 1233376,
+              "sha256": "07d3f2b6c5efb22d7ff81ef7890c007685e641cc881fc2f37e4d8afa76210e81"
+            }
+          ],
+          "index": 3,
+          "link": "https://drive.google.com/file/d/1EuX5tk129w8UohW6ClkTGhSGLt2Ws_Tf/view?usp=drive_link"
+        },
+        {
+          "id": "1CESksOIvpDpZxRrttS3JchrCRNvzp48S",
+          "name": "#GM42030-C25_ProductPhoto_Detail-2.jpg",
+          "modifiedTime": "2026-10-01T16:58:20.239Z",
+          "localPath": "assets/images/catalog/62/626fd6af54c35f5efdef-1080x1080.webp",
+          "sourceWidth": 4500,
+          "sourceHeight": 4500,
+          "sourceBytes": 6730626,
+          "sourceSha256": "31da15d994a2aaeb9c2ebced28ce5f8a94c2ab3f0b1ad8ce4c3faa65e8a1e2e0",
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          },
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/8a/8a57f5de2796bb82de2d-540x540.webp",
+              "bytes": 84328,
+              "sha256": "8a57f5de2796bb82de2d24a7229062d75ddaa349ec53334b7cd7a60543d1d942"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/62/626fd6af54c35f5efdef-1080x1080.webp",
+              "bytes": 249536,
+              "sha256": "626fd6af54c35f5efdef629c16b0773cd9ffbed8123f21a04a60aaca32dedfee"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/f4/f4e0099b147ef143dfe3-2160x2160.webp",
+              "bytes": 875332,
+              "sha256": "f4e0099b147ef143dfe376eeb2646746c991ebae404764b4effcb0cb1291f0cb"
+            }
+          ],
+          "index": 4,
+          "link": "https://drive.google.com/file/d/1CESksOIvpDpZxRrttS3JchrCRNvzp48S/view?usp=drive_link"
+        },
+        {
+          "id": "1jRwhy_Ri-cON4dtaBhpYjVJ--ZHigEtL",
+          "name": "#GM42030-C25_ProductPhoto_Detail-3.jpg",
+          "modifiedTime": "2026-10-01T16:58:29.750Z",
+          "localPath": "assets/images/catalog/96/965ebd8ba309efefa0f5-1080x1080.webp",
+          "sourceWidth": 4500,
+          "sourceHeight": 4500,
+          "sourceBytes": 5695563,
+          "sourceSha256": "55999a8d37a8161111039641e6eccae549fc6abde0ef3fe1627e755883f47540",
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          },
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/92/925f7c5d1cd57b3b0272-540x540.webp",
+              "bytes": 88844,
+              "sha256": "925f7c5d1cd57b3b027216be9c8a83bc74d04ee92ec6ae95a8577dbf68580c21"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/96/965ebd8ba309efefa0f5-1080x1080.webp",
+              "bytes": 280140,
+              "sha256": "965ebd8ba309efefa0f506a3abeb601786a03400d0af7a5cc06e805dc33689cf"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/63/63002a364afec57b7dcb-2160x2160.webp",
+              "bytes": 949876,
+              "sha256": "63002a364afec57b7dcb2bab7eb696644009639ccd7bf1528ea25db7d53a39d8"
+            }
+          ],
+          "index": 5,
+          "link": "https://drive.google.com/file/d/1jRwhy_Ri-cON4dtaBhpYjVJ--ZHigEtL/view?usp=drive_link"
+        }
+      ],
+      "localImages": [],
+      "imageSource": "google-drive",
+      "variantImages": [
+        {
+          "id": "1xNqBSm0ycOMigVQsdDrOsshvQ0TFHiOX",
+          "name": "#GM42030-C25_ProductPhoto_Front.jpg",
+          "modifiedTime": "2026-10-01T16:46:41.985Z",
+          "localPath": "assets/images/catalog/98/983b8bee82931b3b5443-1080x1080.webp",
+          "sourceWidth": 4500,
+          "sourceHeight": 4500,
+          "sourceBytes": 3087397,
+          "sourceSha256": "f34b73d5e9163a35c198cf7c64ae0ec6864db5265df70185095d54d2b947b175",
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          },
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/6d/6d8dda812e6dba3b1f03-540x540.webp",
+              "bytes": 36656,
+              "sha256": "6d8dda812e6dba3b1f03f516ff86bbd392e92efed917e273472385c63c546175"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/98/983b8bee82931b3b5443-1080x1080.webp",
+              "bytes": 126488,
+              "sha256": "983b8bee82931b3b54437dd9921735daec8e9eb233ea98be7cae30110da74f5c"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/f1/f1e8bf47c852973eb317-2160x2160.webp",
+              "bytes": 493796,
+              "sha256": "f1e8bf47c852973eb31786419660fe02e0c8ee5f4acc724cf8f8b61b405f6951"
+            }
+          ],
+          "index": 0,
+          "link": "https://drive.google.com/file/d/1xNqBSm0ycOMigVQsdDrOsshvQ0TFHiOX/view?usp=drive_link"
+        }
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "GM42030-C25-S5",
+          "lots": [],
+          "colorCode": "C25",
+          "colorName": "Taupe",
+          "sizeCode": "S5",
+          "sizeName": "M",
+          "imageId": "1xNqBSm0ycOMigVQsdDrOsshvQ0TFHiOX"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "GM42030-C25-S6",
+          "lots": [],
+          "colorCode": "C25",
+          "colorName": "Taupe",
+          "sizeCode": "S6",
+          "sizeName": "L",
+          "imageId": "1xNqBSm0ycOMigVQsdDrOsshvQ0TFHiOX"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "GM42030-C25-S7",
+          "lots": [],
+          "colorCode": "C25",
+          "colorName": "Taupe",
+          "sizeCode": "S7",
+          "sizeName": "XL",
+          "imageId": "1xNqBSm0ycOMigVQsdDrOsshvQ0TFHiOX"
+        }
+      ]
+    },
+    {
+      "code": "GM42031",
+      "name": "PRDM Training Shorts",
+      "lineCode": "GM",
+      "typeCode": "42",
+      "sequence": "031",
+      "listPrice": 1180,
+      "salePrice": null,
+      "link": "https://shopee.tw/product/74187402/40105649000",
+      "descriptionSource": {
+        "id": "1YR24tg8ziDRUABr4Y8yibocR7_SjbniuYg1YsBO9Qkg",
+        "title": "#GM42031_Description",
+        "modifiedTime": "2026-10-02T17:51:45.294Z",
+        "content": "• Built alongside #GM42029\n• 100% polyester fabric\n• 100% polyester drawstring with coated ends\n• Watch pocket & key ring inside front pocket\n• No-drop openings within front pockets\n• Signature tab on hem\n\n-\n\n我們回到經典的網眼短褲\n將熟悉的運動單品融入日常穿著\n\n外層以經典的網眼面料呈現復古氛圍\n內層則改用更加輕薄的裡布\n褲頭及褲腳的車縫收邊乾淨工整\n就算是看不見的每一處細節都很講究\n\n為了拉長腿部比例來修飾身形\n我們反覆雕琢較短的褲長\n並且選用與肌膚相近的黃棕色系\n維持下半身的視覺連貫性\n即使是較矮小的身形也能輕鬆駕馭\n\n致力於融合極簡外觀與日常機能\n我們在口袋內側額外縫製機能小袋\n並且設計了隱藏式的鑰匙扣環\n更獨創「防噴袋口」設計以防物品掉落\n\n考量到 Mono-Material 原則\n褲頭採用精心訂製的聚酯纖維抽繩\n搭配繩頭別富質感的浸膠做法\n\n這款短褲不只為運動場合而設計\n也能成為日常生活的一部分\n\n-\n\n　　　　 M　　L　　XL\n褲頭寬　𝟥𝟦.𝟢　𝟥𝟩.𝟢　𝟦𝟣.𝟢\n褲腳寬　𝟥𝟤.𝟢　𝟥𝟦.𝟧　𝟥𝟪.𝟢\n內側長　𝟣𝟤.𝟢　𝟣𝟥.𝟢　𝟣𝟦.𝟢\n外側長　𝟥𝟪.𝟢　𝟦𝟣.𝟢　𝟦𝟥.𝟢　(cm)\n\n建議腰圍 < 80 著用 M\n建議腰圍 80~90 著用 L\n建議腰圍 > 90 著用 XL　(cm)\n\n#GM42031",
+        "link": "https://docs.google.com/document/u/0/d/1YR24tg8ziDRUABr4Y8yibocR7_SjbniuYg1YsBO9Qkg/edit"
+      },
+      "images": [
+        {
+          "id": "1uyQB2UTxto95ByO-iK-jQDlKrQc79OLl",
+          "name": "#GM42031-C22_ProductPhoto_Front.jpg",
+          "modifiedTime": "2026-10-01T16:47:06.137Z",
+          "localPath": "assets/images/catalog/f6/f62b0cc13210167f8e59-1080x1080.webp",
+          "sourceWidth": 4500,
+          "sourceHeight": 4500,
+          "sourceBytes": 2984070,
+          "sourceSha256": "6a20602df54e94dc289c08f6ee3668534d3952e680ee4621fbc623577afe5a26",
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          },
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/20/20192cfc62d513e0b6ce-540x540.webp",
+              "bytes": 36312,
+              "sha256": "20192cfc62d513e0b6ce1090564acadfe93232f076d2650fb8906a1389352c31"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/f6/f62b0cc13210167f8e59-1080x1080.webp",
+              "bytes": 127680,
+              "sha256": "f62b0cc13210167f8e59f452bd6c6ddc49cfe00d05f711c8b80682ee81b97b51"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/95/9532a2efc9d771228886-2160x2160.webp",
+              "bytes": 492492,
+              "sha256": "9532a2efc9d7712288868a165497c2b9b7fb48ea48d4e829d789b8de14f4c1ac"
+            }
+          ],
+          "index": 1,
+          "link": "https://drive.google.com/file/d/1uyQB2UTxto95ByO-iK-jQDlKrQc79OLl/view?usp=drive_link"
+        },
+        {
+          "id": "1MHvQtVL51qoGplL-pVOmm2q9_GoKEhjB",
+          "name": "#GM42031-C22_ProductPhoto_Back.jpg",
+          "modifiedTime": "2026-10-01T16:47:25.096Z",
+          "localPath": "assets/images/catalog/7b/7b66debb3d745b619fa1-1080x1080.webp",
+          "sourceWidth": 4500,
+          "sourceHeight": 4500,
+          "sourceBytes": 2866862,
+          "sourceSha256": "350903a3befca50a06bb681c8c670d3ce2e7a0a4ef12d00838294fe814cafdb9",
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          },
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/ff/ffa07eba32d159633c4c-540x540.webp",
+              "bytes": 35836,
+              "sha256": "ffa07eba32d159633c4ca7948bf158495873eba4b235866ede78e677e6c5e028"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/7b/7b66debb3d745b619fa1-1080x1080.webp",
+              "bytes": 127428,
+              "sha256": "7b66debb3d745b619fa1c757b631bbec02f8de91760b7272b83f9db07f6f2ab6"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/48/489bd695d6ab67c0fc11-2160x2160.webp",
+              "bytes": 489846,
+              "sha256": "489bd695d6ab67c0fc11023dc026155ce83dad2c38801ffa473efc73a5203976"
+            }
+          ],
+          "index": 2,
+          "link": "https://drive.google.com/file/d/1MHvQtVL51qoGplL-pVOmm2q9_GoKEhjB/view?usp=drive_link"
+        },
+        {
+          "id": "14ayR_KH9fjjis4SkX4TNA03B4G9PKqgK",
+          "name": "#GM42031-C22_ProductPhoto_Detail-1.jpg",
+          "modifiedTime": "2026-10-01T17:01:08.895Z",
+          "localPath": "assets/images/catalog/58/584678c2f4d3c20d0cea-1080x1080.webp",
+          "sourceWidth": 4500,
+          "sourceHeight": 4500,
+          "sourceBytes": 6887101,
+          "sourceSha256": "720834ea0b3ba45cea7f0ca2a608060c2151c2974ff1ac080de46b2d90b6c10e",
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          },
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/05/0502117f5c85dad2b836-540x540.webp",
+              "bytes": 80926,
+              "sha256": "0502117f5c85dad2b836756b5ebb759b4023083507720f7934b2b94fa9de87d1"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/58/584678c2f4d3c20d0cea-1080x1080.webp",
+              "bytes": 258080,
+              "sha256": "584678c2f4d3c20d0cea52c8c2e3313a6ce203b55304a1707f8d3591b696d4fc"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/61/61af75c34e38105d66c1-2160x2160.webp",
+              "bytes": 1031614,
+              "sha256": "61af75c34e38105d66c1e1f1117ee533bc5157d36f2912794a539f61dd28a6de"
+            }
+          ],
+          "index": 3,
+          "link": "https://drive.google.com/file/d/14ayR_KH9fjjis4SkX4TNA03B4G9PKqgK/view?usp=drive_link"
+        },
+        {
+          "id": "1-yC5kvDw5QI63uuUnNGqhE6fsYLF4JOw",
+          "name": "#GM42031-C22_ProductPhoto_Detail-2.jpg",
+          "modifiedTime": "2026-10-01T16:58:38.545Z",
+          "localPath": "assets/images/catalog/52/529cc1c276ac1afac8a1-1080x1080.webp",
+          "sourceWidth": 4500,
+          "sourceHeight": 4500,
+          "sourceBytes": 9047266,
+          "sourceSha256": "555511e99cbc1541248b5f80f599991c9e48794720038bc778fd24be46581aa4",
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          },
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/32/32a5f594216b4907b86a-540x540.webp",
+              "bytes": 129858,
+              "sha256": "32a5f594216b4907b86af1b9623b027da2dc5b8c76448235756214589e47b84b"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/52/529cc1c276ac1afac8a1-1080x1080.webp",
+              "bytes": 420156,
+              "sha256": "529cc1c276ac1afac8a1a80f46fcc5677ff186c551aca95502305a6f11b40695"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/8e/8ea15184c5494367e108-2160x2160.webp",
+              "bytes": 1505330,
+              "sha256": "8ea15184c5494367e108f6870c00560c16f7aa219bdd0a1c847099c6f753d259"
+            }
+          ],
+          "index": 4,
+          "link": "https://drive.google.com/file/d/1-yC5kvDw5QI63uuUnNGqhE6fsYLF4JOw/view?usp=drive_link"
+        },
+        {
+          "id": "1nPlxTt4knAwV-FQQYfL5Brn9txsV3gZc",
+          "name": "#GM42031-C22_ProductPhoto_Detail-3.jpg",
+          "modifiedTime": "2026-10-01T16:58:46.723Z",
+          "localPath": "assets/images/catalog/04/049db9db853c86412bbd-1080x1080.webp",
+          "sourceWidth": 4500,
+          "sourceHeight": 4500,
+          "sourceBytes": 6312307,
+          "sourceSha256": "8e372c9fad655e3898113b873c7126b1a3e587a03eb66c0a4a45966f3b215f44",
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          },
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/23/236b33f47d20002a6df7-540x540.webp",
+              "bytes": 95838,
+              "sha256": "236b33f47d20002a6df7582cbdacba77332dcaa36e8b1d0c32f89020886f4510"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/04/049db9db853c86412bbd-1080x1080.webp",
+              "bytes": 315378,
+              "sha256": "049db9db853c86412bbd77121f94cc4a56336fb98797cb2014f334dbc79dcb83"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/fd/fdec483d1693423b10f3-2160x2160.webp",
+              "bytes": 1066748,
+              "sha256": "fdec483d1693423b10f39528b3eec65f12b0701982f0944f7ee4db7e569deb64"
+            }
+          ],
+          "index": 5,
+          "link": "https://drive.google.com/file/d/1nPlxTt4knAwV-FQQYfL5Brn9txsV3gZc/view?usp=drive_link"
+        }
+      ],
+      "localImages": [],
+      "imageSource": "google-drive",
+      "variantImages": [
+        {
+          "id": "1uyQB2UTxto95ByO-iK-jQDlKrQc79OLl",
+          "name": "#GM42031-C22_ProductPhoto_Front.jpg",
+          "modifiedTime": "2026-10-01T16:47:06.137Z",
+          "localPath": "assets/images/catalog/f6/f62b0cc13210167f8e59-1080x1080.webp",
+          "sourceWidth": 4500,
+          "sourceHeight": 4500,
+          "sourceBytes": 2984070,
+          "sourceSha256": "6a20602df54e94dc289c08f6ee3668534d3952e680ee4621fbc623577afe5a26",
+          "transform": {
+            "format": "webp",
+            "quality": 100,
+            "resize": "short-edge",
+            "shortEdges": [
+              540,
+              1080,
+              2160
+            ]
+          },
+          "derivatives": [
+            {
+              "shortEdge": 540,
+              "width": 540,
+              "height": 540,
+              "path": "assets/images/catalog/20/20192cfc62d513e0b6ce-540x540.webp",
+              "bytes": 36312,
+              "sha256": "20192cfc62d513e0b6ce1090564acadfe93232f076d2650fb8906a1389352c31"
+            },
+            {
+              "shortEdge": 1080,
+              "width": 1080,
+              "height": 1080,
+              "path": "assets/images/catalog/f6/f62b0cc13210167f8e59-1080x1080.webp",
+              "bytes": 127680,
+              "sha256": "f62b0cc13210167f8e59f452bd6c6ddc49cfe00d05f711c8b80682ee81b97b51"
+            },
+            {
+              "shortEdge": 2160,
+              "width": 2160,
+              "height": 2160,
+              "path": "assets/images/catalog/95/9532a2efc9d771228886-2160x2160.webp",
+              "bytes": 492492,
+              "sha256": "9532a2efc9d7712288868a165497c2b9b7fb48ea48d4e829d789b8de14f4c1ac"
+            }
+          ],
+          "index": 0,
+          "link": "https://drive.google.com/file/d/1uyQB2UTxto95ByO-iK-jQDlKrQc79OLl/view?usp=drive_link"
+        }
+      ],
+      "variants": [
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "GM42031-C22-S5",
+          "lots": [],
+          "colorCode": "C22",
+          "colorName": "Mud",
+          "sizeCode": "S5",
+          "sizeName": "M",
+          "imageId": "1uyQB2UTxto95ByO-iK-jQDlKrQc79OLl"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "GM42031-C22-S6",
+          "lots": [],
+          "colorCode": "C22",
+          "colorName": "Mud",
+          "sizeCode": "S6",
+          "sizeName": "L",
+          "imageId": "1uyQB2UTxto95ByO-iK-jQDlKrQc79OLl"
+        },
+        {
+          "visible": true,
+          "soldOut": true,
+          "sku": "GM42031-C22-S7",
+          "lots": [],
+          "colorCode": "C22",
+          "colorName": "Mud",
+          "sizeCode": "S7",
+          "sizeName": "XL",
+          "imageId": "1uyQB2UTxto95ByO-iK-jQDlKrQc79OLl"
         }
       ]
     }

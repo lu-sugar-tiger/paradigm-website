@@ -541,13 +541,13 @@ for (const relativePath of generatedPages) {
   assert.match(page, /assets\/css\/components\.css\?v=20261003d/, `${relativePath} must load centralized detail component styles`);
   assert.match(page, /assets\/css\/state-variation\.css\?v=20261003b/, `${relativePath} must load the shared interchangeable state treatments`);
   assert.match(page, /assets\/css\/pages\.css\?v=20261003a/, `${relativePath} must load the updated related-product spacing`);
-  assert.match(page, /assets\/css\/color-options\.css\?v=20260929a/, `${relativePath} must cache-bust the canonical item color code palette`);
+  assert.match(page, /assets\/css\/color-options\.css\?v=20261003a/, `${relativePath} must cache-bust the canonical item color code palette`);
   assert.match(page, /assets\/css\/reset\.css\?v=20260829a/, `${relativePath} must cache-bust the stable scrollbar-gutter reset`);
   assert.match(page, /assets\/js\/page-transitions\.js\?v=20261003d/, `${relativePath} must load the early route-motion controller`);
   assert.match(page, /assets\/js\/app\.js\?v=20261001a/, `${relativePath} must cache-bust the shared overlay behavior`);
   assert.match(page, /assets\/js\/search-core\.js\?v=20260927b/, `${relativePath} must load the shared search matcher`);
   assert.match(page, /assets\/js\/search\.js\?v=20261003d/, `${relativePath} must load the shared Search interface`);
-  assert.match(page, /assets\/js\/choices\.js\?v=20261003c/, `${relativePath} must cache-bust the shared coded color labels and choice rail controller`);
+  assert.match(page, /assets\/js\/choices\.js\?v=20261003e/, `${relativePath} must cache-bust the shared coded color labels and choice rail controller`);
   if (/^(?:index\.html|collections\/|products\/|teamwear\/|search\/)/.test(relativePath)) {
     assert.match(page, /assets\/js\/media-zoom\.js\?v=20261002d/, `${relativePath} must cache-bust the shared media inspection behavior`);
   } else {
@@ -600,7 +600,7 @@ for (const relativePath of generatedPages) {
     assert.match(page, /assets\/js\/media-zoom\.js\?v=20261002d/, "Search must load touch inspection for dynamically rendered product-card photos");
   }
   if (relativePath === "teamwear/customize/index.html") {
-    assert.match(page, /assets\/js\/choices\.js\?v=20261003c/, "Teamwear Customize must cache-bust the current shared choice controller");
+    assert.match(page, /assets\/js\/choices\.js\?v=20261003e/, "Teamwear Customize must cache-bust the current shared choice controller");
     assert.match(page, /assets\/js\/teamwear-options\.js\?v=20260917b/, "Teamwear Customize must cache-bust centralized configuration and media data");
     assert.match(page, /<h1[^>]*>PE Basketball Teamwear<\/h1>/, "Teamwear Customize must render the approved product name");
     assert.match(page, /assets\/js\/teamwear\.js\?v=20261003a/, "Teamwear Customize must cache-bust current shared Teamwear behavior");

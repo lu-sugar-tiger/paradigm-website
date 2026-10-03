@@ -299,15 +299,17 @@ for (const product of products) {
   const colorImages = [...new Set(product.variants.filter((variant) => variant.visible && variant.colorCode === selectedVariant?.colorCode && variant.imageId).map((variant) => variant.imageId))];
   const selectedImageId = selectedVariant?.imageId || (colorImages.length === 1 ? colorImages[0] : null);
   const hasVariantSlide = Boolean(product.variantMedia?.[selectedImageId]);
-  assert.equal(occurrences(galleryMarkup, /<img src="\.\.\/\.\.\/assets\/images\/(?:catalog|products)\//g), product.images.length + Number(hasVariantSlide), `${product.code} route must render its authored gallery plus the selected variant slot`);
+  const selectedGalleryIds = selectedVariant?.images?.map((image) => image.id) || product.galleryImageIds;
+  const selectedGallery = selectedVariant?.images?.length ? selectedGalleryIds.map((id) => product.galleryMedia[id]) : product.media;
+  assert.equal(occurrences(galleryMarkup, /<img src="\.\.\/\.\.\/assets\/images\/(?:catalog|products)\//g), selectedGallery.length + Number(hasVariantSlide), `${product.code} route must render its authored gallery plus the selected variant slot`);
   assert.equal(occurrences(galleryMarkup, /data-product-variant-image/g), Number(hasVariantSlide), `${product.code} route must have at most one variant slot`);
-  assert.equal(occurrences(galleryMarkup, / data-product-image-id=/g), product.galleryImageIds.length + Number(hasVariantSlide), `${product.code} route must preserve each authored gallery image and the separate variant slot`);
+  assert.equal(occurrences(galleryMarkup, / data-product-image-id=/g), selectedGalleryIds.length + Number(hasVariantSlide), `${product.code} route must preserve each authored gallery image and the separate variant slot`);
   if (!sourceHasPhotography) {
     assert.equal(occurrences(galleryMarkup, /data-product-image-fallback/g), 1, `${product.code} detail route must mark its fallback image`);
     assert.doesNotMatch(galleryMarkup, /data-media-zoom-gallery|data-media-zoom-touch/, `${product.code} fallback must not enable image zoom`);
   }
   if (product.media.some((image) => image.derivatives.length)) {
-    const responsiveCount = product.media.filter((image) => image.derivatives.length).length + Number(Boolean(hasVariantSlide && product.variantMedia[selectedImageId].derivatives.length));
+    const responsiveCount = selectedGallery.filter((image) => image.derivatives.length).length + Number(Boolean(hasVariantSlide && product.variantMedia[selectedImageId].derivatives.length));
     assert.equal(occurrences(galleryMarkup, / srcset="/g), responsiveCount, `${product.code} responsive gallery images must expose srcset`);
     assert.equal(occurrences(galleryMarkup, / sizes="\(min-width: 80rem\) 768px, \(min-width: 64rem\) 60vw, 100vw"/g), responsiveCount, `${product.code} responsive gallery images must expose the detail slot sizes`);
   }
@@ -347,6 +349,11 @@ for (const product of products) {
     const original = product.variants.find((entry) => entry.sku === variant.sku);
     for (const field of ["visible", "soldOut", "colorCode", "sizeName", "link", "imageId"]) assert.equal(variant[field], original[field]);
     if (variant.imageId && product.variantMedia[variant.imageId]) assert.deepEqual(runtime.variantMedia[variant.imageId], JSON.parse(JSON.stringify(product.variantMedia[variant.imageId])));
+    assert.deepEqual(variant.imageIds, original.images ? Array.from(original.images, (image) => image.id) : undefined, `${product.code} must retain each variant's gallery order`);
+  }
+  if (product.galleryMedia) {
+    assert.deepEqual(runtime.galleryImageIds, JSON.parse(JSON.stringify(product.galleryImageIds)));
+    assert.deepEqual(runtime.galleryMedia, JSON.parse(JSON.stringify(product.galleryMedia)));
   }
   assert.equal(Object.hasOwn(runtime, "description"), false, "Rendered prose must not be repeated in runtime choice data");
   assert.equal(Object.hasOwn(runtime, "media"), false, "Authored gallery records must remain in the HTML instead of runtime choice data");

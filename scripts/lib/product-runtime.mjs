@@ -7,7 +7,8 @@ export function productRuntimeData(product) {
     visible: variant.visible,
     soldOut: variant.soldOut,
     link: variant.link,
-    imageId: variant.imageId
+    imageId: variant.imageId,
+    ...(variant.images?.length ? { imageIds: variant.images.map((image) => image.id) } : {})
   }));
   const imageIds = new Set(variants.map((variant) => variant.imageId).filter(Boolean));
   return {
@@ -16,6 +17,7 @@ export function productRuntimeData(product) {
     link: product.link,
     colors: product.colors.map(({ id, colorCode }) => ({ id, colorCode })),
     variants,
-    variantMedia: Object.fromEntries(Object.entries(product.variantMedia || {}).filter(([id]) => imageIds.has(id)))
+    variantMedia: Object.fromEntries(Object.entries(product.variantMedia || {}).filter(([id]) => imageIds.has(id))),
+    ...(product.galleryMedia ? { galleryImageIds: product.galleryImageIds, galleryMedia: product.galleryMedia } : {})
   };
 }

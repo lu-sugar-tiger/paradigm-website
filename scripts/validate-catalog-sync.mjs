@@ -78,6 +78,6 @@ const capturedSheet = JSON.parse(await readFile(new URL("../data/products-sheet.
 const storeLinks = JSON.parse(await readFile(new URL("../data/store-links.json", import.meta.url), "utf8"));
 const capturedDocs = Object.fromEntries(current.items.flatMap((item) => [item.descriptionSource, ...item.variants.map((variant) => variant.descriptionSource)]).filter(Boolean).map((doc) => [doc.id, doc]));
 const capturedImages = Object.fromEntries(current.items.flatMap((item) => [...item.images, ...(item.variantImages || []), ...item.variants.flatMap((variant) => variant.images || [])]).map((image) => [image.id, image]));
-const replayed = syncCatalog({ previous: current, sheet: capturedSheet, documents: capturedDocs, images: capturedImages, storeLink: storeLinks.shopee, syncedAt: current.source.syncedAt, imageLayout: "legacy" });
+const replayed = syncCatalog({ previous: current, sheet: capturedSheet, documents: capturedDocs, images: capturedImages, storeLink: storeLinks.shopee, syncedAt: current.source.syncedAt, imageLayout: current.source.imageLayout || "legacy" });
 assert.deepEqual(replayed.items, current.items, "Captured Sheet rows must reproduce every current item, variant, flag, link and inherited relationship");
 console.log("CATALOG_SYNC_OK hidden=true sparseInheritance=true replaceOrPreserve=true colorIsolation=true copyExact=true atomic=true");

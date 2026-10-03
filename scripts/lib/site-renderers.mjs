@@ -641,13 +641,13 @@ export function renderDocument({
   scripts = [],
   head = ""
 }) {
-const baseStyles = ["fonts.css?v=20260909b", "tokens.css?v=20261003b", "motion.css?v=20260831a", "reset.css?v=20260829a", "base.css?v=20261003b", "layout.css", "components.css?v=20261003d", "state-variation.css?v=20261003b", "header-directory.css?v=20261001b", "pages.css?v=20261003a", "color-options.css?v=20260929a"];
+  const baseStyles = ["fonts.css?v=20260909b", "tokens.css?v=20261003b", "motion.css?v=20260831a", "reset.css?v=20260829a", "base.css?v=20261003b", "layout.css", "components.css?v=20261003d", "state-variation.css?v=20261003b", "header-directory.css?v=20261001b", "pages.css?v=20261003a", "color-options.css?v=20261003a"];
   const styleMarkup = [...baseStyles, ...styles].map((file) => `  <link rel="stylesheet" href="${html(asset(root, `assets/css/${file}`))}">`).join("\n");
   const isDataScript = (file) => ["catalog.js", "teamwear-options.js"].includes(file.split("?")[0]) || /^products\/[^/]+\.js(?:\?|$)/.test(file);
   const dataScripts = scripts.filter(isDataScript);
   const interactionScripts = scripts.filter((file) => !isDataScript(file));
   const earlyMotionScript = `  <script src="${html(asset(root, "assets/js/page-transitions.js?v=20261003d"))}"></script>`;
-  const scriptMarkup = ["app.js?v=20261001a", "dropdown.js?v=20261001b", `pricing-config.js?v=${pricingConfigVersion}`, "pricing-core.js?v=20261003a", `localization-data.js?v=${localizationVersion}`, "inline-type.js?v=20261003a", "localization.js?v=20261003a", "language-preference.js?v=20261001b", "pricing.js?v=20261003a", "header-directory.js?v=20261002a", "search-core.js?v=20260927b", "search.js?v=20261003d", ...dataScripts, "choices.js?v=20261003c", ...interactionScripts].map((file) => `  <script defer src="${html(asset(root, `assets/js/${file}`))}"></script>`).join("\n");
+  const scriptMarkup = ["app.js?v=20261001a", "dropdown.js?v=20261001b", `pricing-config.js?v=${pricingConfigVersion}`, "pricing-core.js?v=20261003a", `localization-data.js?v=${localizationVersion}`, "inline-type.js?v=20261003a", "localization.js?v=20261003a", "language-preference.js?v=20261001b", "pricing.js?v=20261003a", "header-directory.js?v=20261002a", "search-core.js?v=20260927b", "search.js?v=20261003d", ...dataScripts, "choices.js?v=20261003e", ...interactionScripts].map((file) => `  <script defer src="${html(asset(root, `assets/js/${file}`))}"></script>`).join("\n");
   const mainMarkup = main.replace(/<main\b[^>]*>/, (openingTag) => {
     let result = openingTag;
     if (!result.includes('id="main-content"')) result = result.replace(/>$/, ' id="main-content">');

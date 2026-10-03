@@ -1,5 +1,7 @@
 # Motion and efficiency audit
 
+This is a recorded audit snapshot. Counts, measurements, and screenshots below describe that run, not the current catalog size or a new browser verification. Use the commands below to remeasure later source changes; current interface decisions are maintained in `docs/design-system.md`.
+
 ## Corrections
 
 | Issue | Shared correction |

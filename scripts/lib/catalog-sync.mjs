@@ -130,7 +130,7 @@ export function syncCatalog({ previous, sheet, documents, images, storeLink, syn
   return validateItemCatalog({
     ...previous,
     source: { ...previous.source, spreadsheetId: sheet.spreadsheetId, sheetName: sheet.sheetName,
-      sheetId: sheet.sheetId, range: sheet.range, spreadsheetModifiedTime: sheet.spreadsheetModifiedTime, syncedAt },
+      sheetId: sheet.sheetId, range: sheet.range, imageLayout, spreadsheetModifiedTime: sheet.spreadsheetModifiedTime, syncedAt },
     items
   });
 }

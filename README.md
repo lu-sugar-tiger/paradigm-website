@@ -5,13 +5,13 @@ Paradigm 是一個純靜態的品牌商品網站，使用 HTML、CSS 與 Vanilla
 目前網站以商品瀏覽為核心：
 
 - 根網址 `/` 直接顯示與 `/collections/all` 相同的全部商品頁，不改寫瀏覽器網址
-- Collection 頁面展示全部商品或指定系列
-- `All` 是商品目錄的上層；`SS Tops`、`AW Tops`、`Bottoms` 均提供直接返回 `All` 的導覽
+- Collection 頁面展示全部商品或指定商品類型
+- `All` 是商品目錄的上層；`Tees`、`Crewnecks`、`Hoodies`、`Shorts` 均提供直接返回 `All` 的導覽
 - Product 頁面以商品編號作為穩定網址
 - Teamwear 頁面介紹團隊服服務並導向外部詢問管道
 - 購買按鈕導向 Shopee，不在網站內處理交易
 
-專案沒有前端框架、build tool、後端、購物車、結帳、會員或庫存系統。
+專案沒有前端框架、打包工具、後端、購物車、結帳、會員或庫存系統；使用既有 Node 腳本從集中來源產生靜態 HTML/CSS/JS。
 
 ## 網址結構
 
@@ -20,15 +20,16 @@ Paradigm 是一個純靜態的品牌商品網站，使用 HTML、CSS 與 Vanilla
 ```text
 https://prdm.tw/                         （全部商品首頁）
 https://prdm.tw/collections/all
-https://prdm.tw/collections/ss-tops
-https://prdm.tw/collections/aw-tops
-https://prdm.tw/collections/bottoms
+https://prdm.tw/collections/tees
+https://prdm.tw/collections/crewnecks
+https://prdm.tw/collections/hoodies
+https://prdm.tw/collections/shorts
 https://prdm.tw/products/BD24021
-https://prdm.tw/products/PL-002
+https://prdm.tw/products/ED14024
 https://prdm.tw/teamwear
 ```
 
-Collection 使用系列名稱，Product 使用不含 `#` 的商品編號。`#` 在網址中代表 fragment，因此只保留在畫面顯示的商品代碼中。
+Collection 使用 `data/product-categories.json` 的商品類型名稱，只依 `typeCode` 分類：14 → Tees、23 → Crewnecks、24 → Hoodies、42 → Shorts。不發布產品線分類。舊 SS Tops、AW Tops、Bottoms 網址分別轉址至 Tees、All、Shorts。Product 使用不含 `#` 的商品編號；`#` 在網址中代表 fragment，因此只保留在畫面顯示的商品代碼中。詳見 [商品分類](docs/product-categories.md)。
 
 每個資料夾內的 `index.html` 是靜態 hosting 的實作方式，不應出現在網站導覽、canonical URL 或對外分享連結中。根網址會直接提供全部商品內容。`_redirects` 是供 Cloudflare Pages 使用的舊網址與 `index.html` 轉址設定；目前 GitHub Pages 不會讀取這份規則，經過 Cloudflare proxy 也不會自動啟用它。
 
@@ -50,9 +51,10 @@ python -m http.server 8000
 打開 `http://localhost:8000/` 後即可看到商品列表，且根網址會保持不變。常用頁面：
 
 - 全部商品：`http://localhost:8000/collections/all/`
-- SS Tops：`http://localhost:8000/collections/ss-tops/`
-- AW Tops：`http://localhost:8000/collections/aw-tops/`
-- Bottoms：`http://localhost:8000/collections/bottoms/`
+- Tees：`http://localhost:8000/collections/tees/`
+- Crewnecks：`http://localhost:8000/collections/crewnecks/`
+- Hoodies：`http://localhost:8000/collections/hoodies/`
+- Shorts：`http://localhost:8000/collections/shorts/`
 - 商品詳情：`http://localhost:8000/products/BD24021/`
 - Teamwear：`http://localhost:8000/teamwear/`
 
@@ -66,12 +68,14 @@ python -m http.server 8000
 ├── _redirects                 # Cloudflare Pages 用；目前 GitHub Pages 不套用
 ├── collections/
 │   ├── all/index.html
-│   ├── ss-tops/index.html
-│   ├── aw-tops/index.html
-│   └── bottoms/index.html
+│   ├── tees/index.html
+│   ├── crewnecks/index.html
+│   ├── hoodies/index.html
+│   ├── shorts/index.html
+│   └── ...                     # 舊 collection URL 的相容轉址
 ├── products/
 │   ├── BD24021/index.html
-│   ├── PL-002/index.html
+│   ├── ED14024/index.html
 │   └── ...
 ├── teamwear/index.html
 ├── assets/
@@ -92,13 +96,13 @@ python -m http.server 8000
   slug: "everyday-tee",
   code: "ED14001",
   name: "PRDM Everyday Tee",
-  category: "SS Tops",
+  category: "Tees",
   listPrice: 590,
   salePrice: null,
   priceLabel: "NT$590",
   image: "assets/images/everyday-tee.webp",
   images: ["assets/images/everyday-tee.webp"],
-  colors: [{ label: "Black", colorId: "black" }],
+  colors: [{ id: "black", colorCode: "C01", label: "Black" }],
   sizes: ["M", "L", "XL"],
   variants: [{ sku: "ED14001-C01-S1", colorCode: "C01", colorName: "Black", sizeCode: "S1", sizeName: "M", visible: true, soldOut: false, lots: [] }],
   description: [
@@ -138,19 +142,19 @@ python -m http.server 8000
 image: "assets/images/cosmos-hoodie-front.webp"
 ```
 
-Teamwear 頁面位於 `teamwear/index.html`，可調整服務說明、流程、FAQ 與詢問連結。從該檔案引用共用圖片時使用 `../assets/...`。
+`teamwear/index.html` 是產生檔。服務說明、流程與靜態 FAQ 的來源是 `scripts/templates/teamwear-page.html`；選項、攝影與影片資料分別維護在 `data/teamwear-options.json`、`data/teamwear-photography.json` 與 `data/teamwear-video.json`。共用 renderer 和 build adapter 處理資產路徑與詢問操作，請勿直接修改產生頁面。
 
-Shopee、Instagram、Discord 等外部連結目前直接寫在各主要 HTML 頁面的 footer 或 CTA 中，可用以下指令查找：
+頁尾由 `scripts/lib/site-renderers.mjs` 的 `renderSiteFooter()` 產生；Shopee 商店連結維護在 `data/store-links.json`，商品購買連結來自商品及 variant 的 `link`，詢問操作由 build adapter 與共享操作 renderer 組成。請在來源中查找並修改連結，再重新產生頁面：
 
 ```bash
-rg "shopee|instagram|discord|https://" collections products teamwear
+rg "shopee|instagram|discord|https://" data scripts/lib/site-renderers.mjs scripts/build-site.mjs
 ```
 
 ## 部署
 
 截至 2026-09-22 實際查核，正式站使用 `main` → GitHub Pages → Cloudflare proxy → `prdm.tw`。GitHub Pages 的 source 是 `main` 的根目錄 `/`；正式站回應同時帶有 Cloudflare 與 GitHub origin headers。Cloudflare proxy 與 Cloudflare Pages 是不同的服務。
 
-截至 2026-09-23，使用者尚未決定是否遷移；保留兩個方案：A. 留在 GitHub Pages、不遷移；B. 另行核准後遷移至 Cloudflare Pages。不以商業用途限制作為本次選擇依據，也不預設未來一定遷移。最新本機公開檔案（含尚未發布的進度）約 243.33 MB、736 個檔案，容量目前沒有迫切遷移需求。量測範圍、兩個方案與手動設定項目見 [部署指南](docs/cloudflare-pages-deployment.md)。
+截至 2026-09-23 的部署記錄保留兩個方案：A. 留在 GitHub Pages、不遷移；B. 另行核准後遷移至 Cloudflare Pages。不以商業用途限制作為本次選擇依據，也不預設未來一定遷移。當日的本機公開檔案快照（含尚未發布的進度）約 243.33 MB、736 個檔案；這是歷史量測，不代表目前容量或最新線上部署。量測範圍、兩個方案與手動設定項目見 [部署指南](docs/cloudflare-pages-deployment.md)。
 
 商品資料由 Google Sheet 的 `網站參照` 分頁定期同步；欄位規則、Google Docs 文案截取、圖片保留策略、修改時間追蹤與驗證流程請見 `docs/product-sync.md`。
 
@@ -174,9 +178,9 @@ Catalog Refine 與 Teamwear fabric section 的開發來源保留在 [`_archive/`
 
 - `/` 與 `/collections/all` 會顯示相同的全部商品內容，且 `/` 不會重新導向
 - Collection、每個 Product 與 Teamwear 頁面都可正常開啟
-- 網站內沒有導向 `index.html`、舊 `/pages/...` 或 query-string 商品網址的連結
+- 網站內沒有導向 `index.html`、舊 `/pages/...` 或舊 collection URL 的導覽連結；`/products/{code}?variant={sku}` 是目前合法的款式連結，產品 canonical 仍為 `/products/{code}`
 - 手機與桌面寬度沒有水平捲動
-- 行動導覽與 FAQ 可使用鍵盤操作
+- 行動導覽、搜尋、偏好選單、商品選項與互動連結可使用鍵盤操作；FAQ 是靜態問答內容
 - 圖片沒有 404，瀏覽器 console 沒有錯誤
 - Shopee 連結清楚表示使用者將離開本站
 - 缺少商品圖片的媒體區保持空白，且沒有提示標籤

@@ -6,7 +6,7 @@ Paradigm's product source is the Google Sheet [商品列表](https://docs.google
 
 The local snapshot uses schema version 4 and canonical lower-camelCase item fields. See [the complete item schema](item-schema.md) for all identifier components, color/size codes, lots, aliases, normalization rules, and the source-to-website generation. Sheet labels are import aliases, not JSON keys.
 
-The saved `data/products-sheet.json` and `data/products-source.json` still represent the previous 0–8 gallery / 9 variant capture. The next Sheet sync uses the mapping below. The catalog-sync validator replays the saved capture in explicit `legacy` mode so this pending media migration does not rewrite the current snapshot.
+The saved `data/products-sheet.json` and `data/products-source.json` use the image-0 cover/variant and images-1–9 gallery mapping as of the 2026-10-03 sync. `source.imageLayout` records `variant-zero`; the catalog-sync validator uses this value for capture replay. Older snapshots without it replay in `legacy` mode (0–8 gallery / 9 variant).
 
 | Sheet field | Website behavior |
 | --- | --- |
@@ -48,11 +48,11 @@ Category is derived only from the imported `typeCode`, using `data/product-categ
 4. Image 0 is independent of gallery replacement. Inherit it within the same item and color regardless of which size row supplies it. Image 0 alone never clears the gallery. Missing image 0 retains that color's previous image when available, never another color's photo.
 5. Missing purchase links use the shared store URL, never a stale previous product link. Missing Doc links retain previous copy when present. A new visible item still requires a valid description before the site builds.
 6. Catalog cards use image 0 without an option label and link to `/products/{code}?variant={sku}`. The linked option is selected on the detail page; direct item links select the first available combination. The horizontal detail gallery starts with images 1–9 and places the selected image 0 last. The stacked gallery shows images 1–9 initially, then places the selected image 0 first after an option click. Image 0 is separate from images 1–9, so the same photo appears in both authored positions when supplied in both places. Changing options replaces that slot without reordering other photos. Missing image 0 removes the variant slot without changing the selection or action.
-7. Purchase actions honor variant link overrides. This capture has no differing per-color descriptions/galleries; review their presentation if a future source introduces them rather than silently assuming one description fits all colors.
+7. Purchase actions honor variant link overrides. Color-specific regular galleries are stored in `variants[].images` and follow the selected variant in the shared detail gallery; blank siblings inherit them. Media records are sent once per file ID in the current product's choice payload. The initial selected gallery remains in static HTML. This capture has no differing per-color descriptions; review their presentation if a future source introduces them.
 
 ## Refresh workflow
 
-1. Read spreadsheet metadata first and record its `modifiedTime`. `商品列表` is the file title; `網站參照` is the website tab (currently ID `2112278065`). Inspect bounded headers and key columns before reading data. The 2026-09-22 capture is `A1:U188`; do not use the separate inventory tab named `商品列表`.
+1. Read spreadsheet metadata first and record its `modifiedTime`. `商品列表` is the file title; `網站參照` is the website tab (currently ID `2112278065`). Inspect bounded headers and key columns before reading data. The 2026-10-03 capture is `A1:U200`; do not use the separate inventory tab named `商品列表`.
 2. Read rich-link chip metadata for `商品文案` and `商品圖片` cells. Plain cell values contain chip labels, not the underlying Drive URLs.
 3. Map resolved rows with `mapSheetItemRow()` and group by flat `itemCode`, then map to nested `items[].code` and the schema paths documented above. Trim alignment whitespace only at the Sheet scalar/header boundary, never in fetched Doc text. Carry item-level values from whichever row contains them; resolve conflicts explicitly. Retain variant SKU, color/size codes and names, visibility, sold-out flags, and any supplied lot records. Review unmapped headers. Do not silently deduplicate source rows.
 4. For every linked Google Doc, read the current file and record its file ID and `modifiedTime`. Copy from the first bullet through the last non-empty line, then apply the complete product-description contract below.
@@ -163,8 +163,8 @@ This avoids missing in-place edits to Docs and photos while keeping unchanged im
 ## Improvement notes
 
 - Add a small authenticated exporter when a stable Google service credential is available; until then, the Drive/Sheets connector plus the signed-in browser is the supported capture path.
-- If category becomes a sheet column, replace title inference with that explicit field.
-- Variant image associations use explicit row item/color codes, not filenames. Review future differing per-color descriptions/galleries before publication.
+- Collection membership already uses imported `typeCode` through `data/product-categories.json`; do not infer it from product titles or line codes.
+- Variant images and per-color regular galleries use explicit row item/color codes, not filenames. Per-color gallery presentation is implemented; differing per-color descriptions still require review before publication.
 - Keep this document's sync record and edge cases current after each import.
 
 ## Sync record: 2026-09-22
@@ -192,3 +192,13 @@ This avoids missing in-place edits to Docs and photos while keeping unchanged im
 
 - The Sheet now uses `商品圖片 0` as the cover/variant image and `商品圖片 1`–`商品圖片 9` as regular gallery images. The image content itself was not changed.
 - This is a mapping note only. No Sheet capture, catalog replacement, derivative generation, or site rebuild was performed. The saved catalog still reflects the previous `0`–`8` gallery / `9` variant mapping until the next requested sync.
+
+## Sync record: 2026-10-03
+
+- Spreadsheet modified `2026-10-03T03:36:54.341Z`; captured `網站參照!A1:U200` after resolving native rich-link chips. The catalog has 31 item codes, 26 visible items, and 199 SKU rows. The source modification time was unchanged at the final pre-apply read.
+- Added `GM42029`, `GM42030`, and `GM42031` Training Shorts with 12 SKU rows, their descriptions, and their Sheet-supplied sold-out flags. Added Taupe (`C25`) and Yellow (`C36`) display names using the existing code-to-Hex palette.
+- Updated purchase links for `PD14025`, `AE14026`, `TL14027`, and `BD14028`; refreshed the changed opening bullets in the `PH14010` and `PH14011` Docs. Existing item prices and SKU fields are unchanged. Read all 26 native Docs and checked all 189 linked image file modification times.
+- Imported 21 new 4500×4500 JPEG originals, verified their byte counts, and generated 63 quality-100 WebPs with 540/1080/2160-pixel short edges. Reused the 168 existing photo families; all current image relationships retain three derivatives and all visible items have photography.
+- Applied the previously documented image-column migration: image 0 supplies cover/variant photos, and images 1–9 supply regular galleries. Existing regular gallery file IDs and order are unchanged; only their indices shift. `GM42029` supplies distinct Mocha and Yellow regular galleries, which now follow color selection and direct variant links.
+- Recorded the image layout in source metadata so future validation replays the correct mapping. Updated shared gallery choices, generated search/catalog data, and product routes locally. The archived Refine validator still references the retired collection routes; current collection membership is verified with `validate-product-categories.mjs`.
+- Verification passed for capture replay, schema, exact descriptions and tables, product images, canonical colors, search, type-collection membership, shared components, variant-image choices, generated-output freshness, and whitespace checks. HTTP browser checks at 390/768/1440px covered all 26 product routes, all five catalog views, Mocha/Yellow gallery switching and linked variants, keyboard image enlargement and navigation, selectable blank lines, and horizontal overflow. No page errors, failed local assets, or failed external requests occurred. Changes remain local.

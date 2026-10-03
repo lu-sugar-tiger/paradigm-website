@@ -9,6 +9,8 @@
   --color-option-cardinal: #AD0000;
   --color-option-mocha: #572400;
   --color-option-mud: #564539;
+  --color-option-taupe: #AA9C8D;
+  --color-option-yellow: #FFD500;
   --color-option-ivy: #00571D;
   --color-option-midnight: #000E57;
   --color-option-royalty: #002BAD;
@@ -57,6 +59,16 @@
 .choice-option--color-mud,
 .teamwear-colorway--mud {
   --choice-color: var(--color-option-mud);
+}
+
+.choice-option--color-taupe,
+.teamwear-colorway--taupe {
+  --choice-color: var(--color-option-taupe);
+}
+
+.choice-option--color-yellow,
+.teamwear-colorway--yellow {
+  --choice-color: var(--color-option-yellow);
 }
 
 .choice-option--color-ivy,

@@ -2,7 +2,7 @@
 
 Edit `data/product-categories.json` to configure retail collections. Collection membership uses only the imported `typeCode`. Product names and line codes never determine membership.
 
-Display the plain collection titles without codes: `Tees`, `Crewnecks`, `Hoodies`, `Shorts`. Navigation, collection headings, browser titles, product category breadcrumbs, and search page titles reuse these labels. URLs and product data remain unchanged.
+Display the plain collection titles without codes: `Tees`, `Crewnecks`, `Hoodies`, `Shorts`. Navigation, collection headings, browser titles, product category breadcrumbs, and search page titles reuse these labels. The current collection routes are listed below; former collection routes are compatibility redirects. Canonical product URLs and raw product data remain unchanged.
 
 | Membership field | Code | Collection | Public route |
 | --- | --- | --- | --- |

@@ -23,4 +23,4 @@ node scripts/build-site.mjs --check
 
 Normal site builds use the committed derivatives and manifest, not the staging folder. The importer processes only explicitly listed photos, ignores the supplied `10.mp4`, and preserves unrelated files. Reruns reuse matching content-hashed derivatives.
 
-This update replaces the imagery in the highlights, athletes, and custom-page gallery only. Hero and fabric-section images remain unchanged. Older unused photo files remain available on disk but are not rendered in the replaced sections.
+The photography import replaces imagery in the highlights, athletes, and custom-page gallery only. It does not replace hero assets. The fabric section and its image are archived under `_archive/teamwear-fabric/` and are absent from the public landing page. Older unused photo files remain available on disk but are not rendered in the replaced sections.

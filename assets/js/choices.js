@@ -173,6 +173,28 @@
     });
   }
 
+  function hasVariantImageChoices(gallery) {
+    const panel = gallery.closest(".product-detail__panel");
+    if (!panel) return false;
+    const displayedOptions = (selector) => Array.from(panel.querySelectorAll(selector))
+      .filter((option) => option.getClientRects().length > 0);
+    const colors = displayedOptions('[data-choice-kind="swatch"] [data-choice-option]');
+    if (colors.length > 1) return true;
+    if (panel.querySelector("[data-teamwear-form]")) {
+      return displayedOptions('[data-choice-title="Pattern"] [data-choice-option]').length > 1;
+    }
+    // Sizes only provide an image choice when their variant photographs differ.
+    const product = window.PARADIGM_PRODUCT;
+    if (product?.code !== panel.dataset.itemCode) return false;
+    const sizes = displayedOptions('[data-choice-kind="chip"] [data-choice-option]');
+    if (sizes.length < 2) return false;
+    const colorCodes = new Set(colors.map((option) => option.dataset.colorCode));
+    const sizeNames = new Set(sizes.map((option) => option.dataset.choiceLabel));
+    return new Set(product.variants.filter((variant) => variant.visible
+      && colorCodes.has(variant.colorCode) && sizeNames.has(variant.sizeName))
+      .map((variant) => variant.imageId).filter(Boolean)).size > 1;
+  }
+
   function syncVariantImage(gallery, media, { imageId = "", alt = "", reveal = false, root = "../.." } = {}) {
     if (!gallery) return;
     const resolve = (path) => new URL(`${root}/${path}`, document.baseURI).href;
@@ -203,7 +225,7 @@
     image.dataset.sourceAlt = alt;
     image.alt = window.PARADIGM_LANGUAGE.imageText(alt, image);
     gallery.setAttribute("data-media-zoom-gallery", "");
-    if (reveal) {
+    if (reveal && hasVariantImageChoices(gallery)) {
       gallery.setAttribute("data-variant-revealed", "");
       image.loading = "eager";
       if (!window.matchMedia("(min-width: 64rem)").matches) gallery.scrollTo({ left: image.offsetLeft, behavior: "instant" });
@@ -212,6 +234,35 @@
   }
 
   window.PARADIGM_VARIANT_GALLERY = { sync: syncVariantImage };
+
+  function syncProductGallery(gallery, product, variant) {
+    if (!product.galleryMedia) return;
+    const ids = variant?.imageIds || product.galleryImageIds;
+    const slides = Array.from(gallery.querySelectorAll("img:not([data-product-variant-image])"));
+    if (JSON.stringify(slides.map((image) => image.dataset.productImageId)) === JSON.stringify(ids)) return;
+    const template = slides[0];
+    if (!template) return;
+    const variantSlide = gallery.querySelector("[data-product-variant-image]");
+    ids.forEach((id, index) => {
+      const media = product.galleryMedia[id];
+      const image = slides[index] || template.cloneNode();
+      const resolve = (path) => new URL(`../../${path}`, document.baseURI).href;
+      image.src = resolve(media.src);
+      if (media.derivatives?.length) image.srcset = media.derivatives.map((entry) => `${resolve(entry.path)} ${entry.width}w`).join(", ");
+      else image.removeAttribute("srcset");
+      image.width = media.width || 1;
+      image.height = media.height || 1;
+      image.dataset.productImageId = id;
+      image.loading = index ? "lazy" : "eager";
+      image.removeAttribute("data-l10n-alt");
+      image.removeAttribute("data-l10n-params");
+      const alt = index ? `${product.name}, view ${index + 1}` : `${product.name} product image`;
+      image.dataset.sourceAlt = alt;
+      image.alt = window.PARADIGM_LANGUAGE.imageText(alt, image);
+      if (!slides[index]) gallery.insertBefore(image, variantSlide);
+    });
+    slides.slice(ids.length).forEach((image) => image.remove());
+  }
 
   function syncProductSource(detail, product, revealImage = false) {
     const selected = selectedProductValues(detail);
@@ -227,6 +278,7 @@
 
     const gallery = detail.querySelector("[data-product-gallery]");
     if (!gallery) return;
+    syncProductGallery(gallery, product, variant);
     const colorImages = [...new Set(product.variants.filter((candidate) => candidate.visible && candidate.colorCode === selected.colorCode && candidate.imageId).map((candidate) => candidate.imageId))];
     const imageId = variant?.imageId || (colorImages.length === 1 ? colorImages[0] : "");
     const media = product.variantMedia?.[imageId];
